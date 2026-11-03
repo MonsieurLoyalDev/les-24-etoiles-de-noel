@@ -1,5 +1,19 @@
 import "fake-indexeddb/auto";
-import { it, expect } from "vitest";
+import { it, expect, vi } from "vitest";
+import { uuid } from "../src/advent/id";
+it("crée des identifiants de manche sur un téléphone en HTTP local", () => {
+  const real = globalThis.crypto;
+  vi.stubGlobal("crypto", { getRandomValues: real.getRandomValues.bind(real) });
+  try {
+    const first = uuid();
+    expect(first).toMatch(
+      /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/,
+    );
+    expect(uuid()).not.toBe(first);
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});
 import { demoDays } from "../src/advent/demo";
 import { createDemoAPI } from "../src/advent/demoApi";
 import {

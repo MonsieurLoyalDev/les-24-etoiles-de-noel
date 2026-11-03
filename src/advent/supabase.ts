@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import type { AdventAPI } from "./api";
+import { uuid } from "./id";
 import {
   validateEditable,
   type Day,
@@ -117,7 +118,7 @@ export async function createPrivateAPI(): Promise<AdventAPI> {
       if (file.size > 52428800 || !allowed.includes(file.type))
         throw Error("Type de fichier ou taille non autorisés");
       const extension = file.type.split("/")[1].replace("jpeg", "jpg");
-      const path = `${day}/${crypto.randomUUID()}.${extension}`;
+      const path = `${day}/${uuid()}.${extension}`;
       const { error } = await sb.storage
         .from("advent-media")
         .upload(path, file, { contentType: file.type, upsert: false });

@@ -1,4 +1,5 @@
 import type { Room } from "../rpg/world";
+import { uuid } from "./id";
 export type Value =
   null | boolean | number | string | Value[] | { [key: string]: Value };
 export type StepKind =
@@ -225,7 +226,7 @@ export function validateEditable(input: unknown): EditableDay {
 export function newRun(day: number, previous?: Run | null): Run {
   return {
     day,
-    runId: crypto.randomUUID(),
+    runId: uuid(),
     checked: [],
     complete: !!previous?.complete,
     completedAt: previous?.completedAt ?? null,

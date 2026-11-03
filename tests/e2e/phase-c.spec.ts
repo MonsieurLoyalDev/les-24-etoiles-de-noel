@@ -53,6 +53,13 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
   page,
 }, info) => {
   test.setTimeout(600000);
+  // Même disponibilité crypto qu'un téléphone connecté en HTTP au Wi-Fi.
+  await page.addInitScript(() =>
+    Object.defineProperty(crypto, "randomUUID", {
+      value: undefined,
+      configurable: true,
+    }),
+  );
   mkdirSync("docs/screenshots", { recursive: true });
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));

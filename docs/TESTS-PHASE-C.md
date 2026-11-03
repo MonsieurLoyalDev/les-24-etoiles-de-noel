@@ -8,11 +8,13 @@ Windows, Node.js 24.14.0, Chrome headless. Les écrans mobiles utilisent une ém
 |---|---|
 | ESLint | Réussi, aucune erreur |
 | TypeScript strict | Réussi via les deux builds |
-| Tests unitaires et PostgreSQL | 98 tests réussis, 6 fichiers |
+| Tests unitaires et PostgreSQL | 99 tests réussis, 6 fichiers |
 | `npm run build` | Build de démonstration réussi |
 | `npm run build:private` | Build Supabase réussi ; absence des modules et médias fictifs vérifiée automatiquement |
 | Playwright | 10 tests réussis, PC et mobile ; suite complète locale ~4 min 12 s |
 | Audit npm production | 0 vulnérabilité signalée |
+| HTTP Wi-Fi sans contexte sécurisé | Journée 1 démarrée, terminée et sauvegardée via l'adresse réseau |
+| SwiftShader local (rendu logiciel) | Les 24 journées terminées sur PC, 2 tests ciblés réussis |
 | Erreurs JavaScript dans les parcours complets | Aucune |
 
 ## Ce que les parcours vérifient
@@ -28,7 +30,7 @@ Les tests d'activités chargent une **fixture de sauvegarde A/B déjà arrivée 
 
 La migration SQL livrée est exécutée sur PostgreSQL embarqué PGlite. Les schémas Auth et Storage sont simulés pour tester les privilèges : anonymes et comptes non invités refusés ; minuit Paris exact ; lecture directe de contenu futur bloquée ; médias futurs invisibles ; réponses privées illisibles ; usurpation de rôle, écriture directe de progression et aperçu joueur refusés ; progression isolée par compte et mode ; ordre des objectifs, preuves invalides/NULL et versions contrôlés ; récompenses conservées lors d'une modification. Chacune des 24 journées est aussi terminée via les RPC PostgreSQL avec ses preuves valides.
 
-Les tests du client refusent configuration absente, clé secrète, JWT service_role et endpoint distant sans HTTPS. Aucun vrai secret n'est utilisé. Le build privé exclut les modules de définition de démonstration et le film local.
+Un test couvre aussi les identifiants de manche sur HTTP local, et les parcours des 24 jours simulent cette disponibilité des API crypto. Les tests du client refusent configuration absente, clé secrète, JWT service_role et endpoint distant sans HTTPS. Aucun vrai secret n'est utilisé. Le build privé exclut les modules de définition de démonstration et le film local.
 
 ## Limites
 
@@ -36,4 +38,4 @@ L'instance Supabase réelle n'est pas configurée dans cet environnement. Connex
 
 Safari iOS, téléphone physique et performances sur appareil peu puissant ne sont pas validés ici. Phaser reste un chunk d'environ 1,21 Mo brut / 332 Ko gzip et Vite émet un avertissement de taille, sans erreur de build. Les graphismes et le film restent fictifs. Aucun déploiement Vercel ni fusion de branche n'est effectué.
 
-La CI GitHub réexécute lint, les 98 tests, les deux builds et les 10 tests navigateur sous Linux/Chromium avec rendu logiciel. Son état distant est consultable dans la Pull Request ; il est distinct des résultats locaux ci-dessus. Les captures sont dans `docs/screenshots/phase-c-*.png`, également publiées comme artefact CI.
+La CI GitHub réexécute lint, les 99 tests, les deux builds et les 10 tests navigateur sous Linux/Chromium avec rendu logiciel. Son état distant est consultable dans la Pull Request ; il est distinct des résultats locaux ci-dessus. Les captures sont dans `docs/screenshots/phase-c-*.png`, également publiées comme artefact CI.
