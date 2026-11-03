@@ -150,7 +150,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await enter(page, /Maison de Loyal/, "house");
   await exit(page);
   // Travel along the southern route, then north to the library door.
-  await walk(page, "x", 760);
+  await walk(page, "x", 736);
   await walk(page, "y", 608);
   await walk(page, "x", 208);
   await walk(page, "y", 326);
@@ -279,8 +279,8 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Alma");
   await expect(page.locator(".quest")).toContainText("4 / 24");
   await exit(page);
-  await walk(page, "y", 400);
-  await walk(page, "x", 695);
+  await walk(page, "y", 420);
+  await walk(page, "x", 740);
   await walk(page, "y", 515);
   await approachNPC(page, "noe", "Noé");
   await page.getByRole("button", { name: "À bientôt", exact: true }).click();
@@ -306,3 +306,4 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   });
   expect(errors).toEqual([]);
 });
+
