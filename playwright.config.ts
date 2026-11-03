@@ -6,6 +6,9 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:5173",
     headless: true,
+    actionTimeout: 10000,
+    screenshot: "only-on-failure",
+    trace: "retain-on-failure",
     channel: process.env.CI ? undefined : "chrome",
   },
   webServer: {

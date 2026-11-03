@@ -43,7 +43,7 @@ describe("collisions", () => {
 });
 describe("sauvegarde", () => {
   it("rejette versions et données invalides", () => {
-    expect(decode({ ...initial, version: 2 })).toBeNull();
+    expect(decode({ ...initial, version: 99 })).toBeNull();
     expect(decode({ ...initial, stage: 24 })).toBeNull();
     expect(decode({ ...initial, position: { x: NaN, y: 1 } })).toBeNull();
     expect(decode(initial)).toEqual(initial);
