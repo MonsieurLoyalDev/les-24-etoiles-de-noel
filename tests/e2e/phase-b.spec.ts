@@ -164,11 +164,11 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
     .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
     .click();
   await page.getByRole("button", { name: "C’est parti !" }).click();
+  await walk(page, "y", 650);
   const npcBefore = await page.locator("canvas").getAttribute("data-npcs");
   await expect
     .poll(() => page.locator("canvas").getAttribute("data-npcs"))
     .not.toBe(npcBefore);
-  await walk(page, "y", 650);
   await walk(page, "x", 800);
   await enter(page, /Maison de Loyal/, "house");
   await exit(page);

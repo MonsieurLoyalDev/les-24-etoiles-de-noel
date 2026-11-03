@@ -28,7 +28,7 @@ Les commandes utilisent des boutons accessibles au clavier et au toucher. Les je
 
 ## Monde vivant
 
-Quatre PNJ humains suivent des trajets simples sans traverser le mobilier. Leurs déplacements et vitesses changent à la nuit ; Noé inspecte la place puis entretient les lanternes. Le cycle visuel fictif dure trois minutes (aurore, jour, crépuscule, nuit) et sa position est sauvegardée. Les conversations, le journal et les jeux arrêtent ce temps de jeu. Cela ne représente pas le calendrier réel.
+Quatre PNJ humains suivent des trajets simples sans traverser le mobilier. Ils attendent lorsque Debby est à portée de conversation et reprennent leur trajet quand elle s’éloigne. Leurs déplacements et vitesses changent à la nuit ; Noé inspecte la place puis entretient les lanternes. Le cycle visuel fictif dure trois minutes (aurore, jour, crépuscule, nuit) et sa position est sauvegardée. Les conversations, le journal et les jeux arrêtent ce temps de jeu. Cela ne représente pas le calendrier réel.
 
 Neige limitée à 36 particules, halos de lanternes, oscillations simples des PNJ, réactions de Loyal et ornements du sapin selon les étoiles. Le sol du village est précalculé dans une texture, en un lot de dessins groupés, plutôt qu’affiché au moyen de 3 072 objets distincts. Aucune nouvelle ressource artistique définitive.
 

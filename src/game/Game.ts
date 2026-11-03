@@ -652,7 +652,10 @@ export class Village extends Phaser.Scene {
     }
     this.player.setDepth(this.player.y);
     for (const npc of this.npcs) {
-      if (!controls.paused && !this.dialogue) {
+      const waitingForDebby =
+        Math.hypot(npc.image.x - this.player.x, npc.image.y - this.player.y) <
+          43 && visible(this.player, npc.image, this.rects);
+      if (!controls.paused && !this.dialogue && !waitingForDebby) {
         const target = npc.path[npc.step],
           d = Math.hypot(target.x - npc.image.x, target.y - npc.image.y);
         const night = period(this.state.clock) === 3;
