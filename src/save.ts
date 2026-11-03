@@ -9,7 +9,10 @@ const database = () =>
 export async function loadSave() {
   const db = await database();
   try {
-    return decode(await db.get("saves", "phase-a"));
+    return (
+      decode(await db.get("saves", "phase-b")) ??
+      decode(await db.get("saves", "phase-a"))
+    );
   } finally {
     db.close();
   }
@@ -17,7 +20,7 @@ export async function loadSave() {
 export async function writeSave(save: Save) {
   const db = await database();
   try {
-    await db.put("saves", structuredClone(save), "phase-a");
+    await db.put("saves", structuredClone(save), "phase-b");
   } finally {
     db.close();
   }

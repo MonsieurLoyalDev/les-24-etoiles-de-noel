@@ -6,6 +6,19 @@ export default defineConfig({
   use: {
     baseURL: "http://127.0.0.1:5173",
     headless: true,
+    actionTimeout: 10000,
+    screenshot: "only-on-failure",
+    trace: "retain-on-failure",
+    launchOptions:
+      process.env.SOFTWARE_GL || process.env.CI
+        ? {
+            args: [
+              "--use-gl=angle",
+              "--use-angle=swiftshader",
+              "--enable-unsafe-swiftshader",
+            ],
+          }
+        : undefined,
     channel: process.env.CI ? undefined : "chrome",
   },
   webServer: {
