@@ -164,7 +164,7 @@ export class Village extends Phaser.Scene {
         if (p.sprite === "lantern")
           this.lamps.push(
             this.add
-              .circle(p.tileX * 16, p.tileY * 16 - 30, 24, 0xffce72, 0.12)
+              .circle(p.tileX * 16, p.tileY * 16 - 30, 24, 0xffce72, 1)
               .setDepth(p.tileY * 16 + 1),
           );
       });
@@ -301,7 +301,7 @@ export class Village extends Phaser.Scene {
       });
     }
     this.shade = this.add
-      .rectangle(0, 0, 1, 1, 0x102348, 0)
+      .rectangle(0, 0, 1, 1, 0x102348, 1)
       .setOrigin(0)
       .setScrollFactor(0)
       .setDepth(9000);
@@ -704,3 +704,4 @@ export class Village extends Phaser.Scene {
     this.emit();
   }
 }
+
