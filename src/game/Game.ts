@@ -394,6 +394,10 @@ export class Village extends Phaser.Scene {
       label.setPosition(p.x, p.y - 46).setDepth(p.y + 80);
     }
     this.target = this.dialogue ? "Continuer" : (this.nearest()?.name ?? "");
+    // Read-only diagnostics let browser tests observe real movement without
+    // changing positions or bypassing gameplay, regardless of rendering speed.
+    this.game.canvas.dataset.playerX = String(this.player.x);
+    this.game.canvas.dataset.playerY = String(this.player.y);
     this.emit();
   }
 }
