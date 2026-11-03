@@ -12,6 +12,7 @@ Version 0.2.0, Windows, Node.js 24.14.0, Chrome headless. La Phase A n’a pas �
 | PC 1280 × 800 | Phase A, joystick, parcours Phase B complet réussis |
 | Mobile simulé 390 × 844 | Phase A, joystick, parcours Phase B complet réussis |
 | Erreurs JavaScript des parcours complets | Aucune |
+| Audit npm | 0 vulnérabilité signalée |
 
 ### Ce qui est couvert
 
@@ -31,6 +32,8 @@ Le parcours Phase B part d’une **sauvegarde Phase A terminée**, puis se dépl
 ## Corrections et limites
 
 Les premiers essais ont ajusté le trajet de test pour contourner les arbres et le sapin solides. Le sélecteur d’une carte réunie a été corrigé pour tenir compte de son nom accessible changeant ; le test observait une carte qui avait déjà trouvé sa paire.
+
+Le contrôle visuel a également corrigé une opacité de remplissage nulle qui masquait le voile de nuit. Le voile et les halos utilisent maintenant un remplissage opaque modulé par leur alpha ; les captures sont régénérées après cette correction.
 
 La simulation mobile utilise Chrome, pas Safari ni un téléphone physique. Aucun test de batterie, de FPS sur téléphone modeste ou de quota IndexedDB n’est revendiqué. Le rendu du sol est regroupé dans une texture et la neige limitée à 36 particules pour réduire le coût de rendu. Vite signale encore le poids du chunk Phaser (~1,21 Mo brut / 332 Ko gzip), sans empêcher le build.
 
