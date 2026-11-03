@@ -1,6 +1,6 @@
-# Les 24 Étoiles de Noël
+# Les 24 Étoiles de Noël — Phase B
 
-RPG 2D romantique pour Debby. Phase A jouable à Étoilebois, React 19 + TypeScript + Vite 7 + **Phaser 3.90**. Le calendrier est une démonstration libre, sans dépendance à la date du téléphone.
+Petit RPG d’exploration romantique pour Debby, poursuivant la Phase A existante. React, TypeScript, Vite et Phaser 3. Les personnages et bâtiments restent volontairement provisoires.
 
 ## Lancer
 
@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Ouvrir l’adresse affichée par Vite. Sur téléphone, utiliser l’adresse réseau affichée, sur le même Wi-Fi (le pare-feu doit autoriser le serveur). Pour une utilisation distante, déployer ultérieurement sur Vercel.
+Ouvrir l’adresse affichée. Pour un téléphone sur le même Wi-Fi, utiliser l’adresse réseau affichée et autoriser le serveur dans le pare-feu si nécessaire. Pour un accès distant, Vercel est préparé (`vercel.json`), sans déploiement effectué.
 
 ```sh
 npm test
@@ -19,43 +19,35 @@ npm run build
 npm run test:e2e
 ```
 
-Les tests navigateur utilisent Chrome installé sous Windows. En CI Linux, Chromium est installé par le workflow. Pour tester Chromium localement : `npx playwright install chromium`, puis adapter `channel` dans la configuration Playwright.
+Les E2E utilisent Chrome installé localement sous Windows et Chromium dans la CI Linux. Le workflow installe Chromium. Les commandes, captures et limites de validation sont détaillées dans la documentation.
 
 ## Jouer
 
-- Flèches, ZQSD ou WASD : déplacement. Le joystick à gauche fonctionne aussi à la souris et au toucher.
-- E ou bouton contextuel : parler, lire, entrer, sortir. Espace permet de fermer un dialogue.
-- Fermer l’accueil, puis parler à Loyal. Suivre la route vers sa maison au sud-est, approcher la porte par le sud et entrer.
-- Lire la lettre sur la table. Sortir par la porte au sud, revenir au grand sapin au centre, puis interagir pour placer l’étoile.
-- Le journal affiche les 24 jours ; seule la première étoile de démonstration est disponible.
-- Sauvegarde locale IndexedDB toutes les quatre secondes, aux interactions et à la perte de visibilité. Elle est propre au navigateur et à l’origine. Pas de synchronisation entre appareils. Une panne de stockage est signalée sans empêcher le jeu en mémoire.
+Flèches / ZQSD / WASD ou joystick : déplacement. E ou bouton contextuel : interaction. Les dialogues proposent des boutons de réponse utilisables au clavier et au toucher. Le journal regroupe les quêtes, le sac et les 24 emplacements du calendrier fictif.
 
-## Ce qui est livré
+La quête de Loyal est conservée. Acceptez aussi les propositions de Mira à la bibliothèque (ouest), Oscar à l’atelier (nord-est), Alma à l’auberge (nord) et Noé sur la place (sud-est). Les portes se trouvent au sud des bâtiments. Les quêtes indiquent leur prochain objectif dans le journal. Les mini-jeux se trouvent sur les tables et pupitres : photographie, mémoire, emballage. Revenez parler aux habitants après les activités.
 
-Carte 64 × 48 de 16 px du ZIP, props ancrés selon le manifeste, caméra suivie à zoom entier, tri de profondeur, collisions des bâtiments et des objets solides, Loyal compagnon avec historique de déplacement et récupération, intérieur accessible, dialogues, quête complète et sauvegarde versionnée. Aucun son automatique.
+## Phase B
 
-**Direction artistique :** Debby et Loyal sont humains, en tenues hivernales et lunettes rondes. Les PNG du pack sont des silhouettes non animées ; un petit tracé Phaser provisoire arrondit leurs lunettes. Les façades et l’intérieur sont dessinés dans le code et explicitement provisoires. Le rendu est un prototype technique, pas le rendu artistique final validé. Le renard figurant sur la planche de référence ne définit pas Loyal.
+- Les quatre bâtiments ont un intérieur, du mobilier solide, des interactions et une sortie.
+- Quatre PNJ se déplacent et réagissent à la progression ; comportements différents selon le cycle fictif jour/nuit.
+- Moteurs de dialogues conditionnels et de quêtes pilotés par les données ; cinq quêtes de démonstration au total, dont la Phase A.
+- Trois mini-jeux complets, rejouables, avec validation des réussites, meilleurs résultats et aucune récompense répétée.
+- Sauvegardes Phase A migrées sans écraser l’original ; quêtes, objets, choix, dialogue courant, étoiles et temps du monde enregistrés.
+- Cycle visuel, neige, halos, mouvements simples des PNJ, réactions de Loyal et décorations du sapin selon les étoiles.
+- Les 24 jours sont préparés ; cinq souvenirs sont fictifs. Aucune surprise réelle future n’est incluse. Le client de la future API respecte les refus du serveur ; l’horloge et les autorisations réelles devront être gérées côté serveur en Europe/Paris.
 
-Voir [l’analyse du pack](docs/ANALYSE.md), [le pipeline artistique](docs/ASSETS.md) et [le rapport de validation](docs/TESTS.md).
+Debby et Loyal restent humains, en tenues hivernales, avec lunettes rondes. Aucun chantier de graphismes définitifs n’est entrepris.
 
-## Architecture
+## Documentation
 
-- `src/main.tsx` : interface React, journal, joystick, cycle de vie et sérialisation des sauvegardes.
-- `src/game/Game.ts` : rendu et scènes village/maison Phaser, collisions, interactions et compagnon.
-- `src/domain.ts` : géométrie et progression déterministes, indépendantes du moteur.
-- `src/save.ts` : IndexedDB, schéma 1 et validation à la lecture.
-- `src/calendar.ts` : contrat de la future API. Le serveur devra décider des jours débloqués en Europe/Paris. Aucun contenu des jours futurs n’est embarqué.
-- `src/game/maps` et `assets-manifest.json` : données du pack conservées.
+- [Guide et architecture Phase B](docs/PHASE-B.md)
+- [Résultats des tests Phase B](docs/TESTS-PHASE-B.md)
+- [Analyse du pack original](docs/ANALYSE.md)
+- [Pipeline artistique futur](docs/ASSETS.md)
+- [Rapport historique Phase A](docs/TESTS.md)
+- Captures Phase B : `docs/screenshots/phase-b-*`
 
-## Git et livraison
+## Livraison et suite
 
-`main` conserve la base initiale ; `develop` prépare l’intégration ; `feature/phase-a` porte la livraison vérifiée. La Pull Request de livraison cible `main` ; `develop` sera alignée sur cette version après intégration. Le workflow GitHub Actions exécute installation verrouillée, tests unitaires, build et E2E PC/mobile. Les captures et résultats sont publiés comme artefacts de CI. Les protections de branche doivent être configurées selon les possibilités du compte GitHub ; elles ne sont pas supposées activées.
-
-## Vercel, prochaine étape
-
-Importer le dépôt privé dans Vercel, sélectionner Vite, commande `npm run build`, sortie `dist`, Node.js 24. Le fichier `vercel.json` est prêt. Aucun déploiement Vercel n’est effectué par cette livraison. Pas de secret nécessaire pour la démo. La future API calendrier devra garder les surprises côté serveur et utiliser une heure fiable Europe/Paris.
-
-## Suite
-
-Produire et faire valider les sprites directionnels humains, les façades et l’intérieur ; tester sur de vrais appareils iOS/Android ; ajouter le backend du calendrier et les contenus privés, puis préparer le déploiement. La simulation mobile ne remplace pas une validation Safari sur iPhone. Les autres bâtiments restent fermés.
-
+La Phase B est développée sur `feature/phase-b`, avec une PR vers `main`. Ne pas fusionner sans l’accord explicite de l’utilisateur. GitHub Actions vérifie tests unitaires, TypeScript, build et parcours navigateur PC/mobile. Les graphismes définitifs, le backend du calendrier privé, les tests sur appareils physiques et la publication Vercel sont des étapes futures. La sauvegarde reste locale à chaque navigateur, sans synchronisation entre appareils.

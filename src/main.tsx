@@ -5,11 +5,15 @@ import { Village, controls, type View } from "./game/Game";
 import { initial, objectives, type Save } from "./domain";
 import { loadSave, writeSave } from "./save";
 import "./style.css";
+import { activeGoals, quests } from "./rpg/quests";
+import { MiniGame } from "./ui/MiniGame";
 function App() {
   const host = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<View>();
   const [started, setStarted] = useState(false);
   const [journal, setJournal] = useState(false);
+  const [tab, setTab] = useState("calendar");
+  const [day, setDay] = useState(1);
   const [status, setStatus] = useState("Chargement de la sauvegarde…");
   const scene = useRef<Village | undefined>(undefined);
   const stick = useRef<HTMLDivElement>(null);
@@ -87,6 +91,8 @@ function App() {
     controls.y = 0;
     setKnob({ x: 0, y: 0 });
   };
+  const goals = view ? activeGoals(view.save) : [];
+  const stars = view?.save.stars ?? [];
   return (
     <main>
       <header>
@@ -97,7 +103,10 @@ function App() {
           </span>
         </a>
         <span className="dedication">Une aventure pour Debby</span>
-        <button onClick={toggleJournal} disabled={!started}>
+        <button
+          onClick={toggleJournal}
+          disabled={!started || !!view?.miniGame || !!view?.dialogue}
+        >
           ✧ Journal <span>24</span>
         </button>
       </header>
@@ -118,7 +127,7 @@ function App() {
             Entrer dans le village <span>→</span>
           </button>
           <p className="note">
-            Phase A · Démonstration jouable
+            Phase B · Village et activités jouables
             <br />
             Personnages et façades provisoires · deux personnages humains
           </p>
@@ -134,14 +143,22 @@ function App() {
             <div className="location">
               <span>ÉTOILEBOIS</span>
               <strong>{view?.location ?? "Préparation du village…"}</strong>
-              <small>Nuit d’hiver · Démo libre</small>
+              <small>{view?.period ?? "Nuit d’hiver"} · Démo libre</small>
             </div>
             <aside className="quest">
-              <span>✦ {view?.save.stage === 4 ? "1" : "0"} / 24 ÉTOILES</span>
-              <strong>La première lumière</strong>
-              <p>{objectives[view?.save.stage ?? 0]}</p>
+              <span>✦ {stars.length} / 24 ÉTOILES</span>
+              <strong>{goals[0]?.title ?? "Le village vous attend"}</strong>
+              <p>
+                {goals[0]?.label ??
+                  "Rencontrez Mira à la bibliothèque, Oscar à l’atelier, Alma à l’auberge et Noé sur la place."}
+              </p>
+              {goals.length > 1 && (
+                <small>
+                  {goals.length - 1} autre(s) quête(s) dans le journal
+                </small>
+              )}
             </aside>
-            <div className="prototype">PHASE A · ASSETS PROVISOIRES</div>
+            <div className="prototype">PHASE B · ASSETS PROVISOIRES</div>
             <div
               ref={stick}
               className="joystick"
@@ -178,23 +195,39 @@ function App() {
               <div className="dialogue" role="dialog" aria-label="Dialogue">
                 <span>✧ UN MOMENT ENSEMBLE</span>
                 <p>{view.dialogue}</p>
-                <button
-                  onClick={() => {
-                    controls.interact = true;
-                  }}
-                >
-                  Continuer <kbd>E</kbd>
-                </button>
+                {view.choices.length ? (
+                  <div className="dialogue-choices">
+                    {view.choices.map((choice, i) => (
+                      <button
+                        key={choice}
+                        onClick={() => scene.current?.selectChoice(i)}
+                      >
+                        {choice}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      controls.interact = true;
+                    }}
+                  >
+                    Continuer <kbd>E</kbd>
+                  </button>
+                )}
               </div>
             ) : (
               <button
                 className="interaction"
-                disabled={!view?.target}
+                disabled={!view?.target || view?.transitioning}
                 onClick={() => {
                   controls.interact = true;
                 }}
               >
-                <kbd>E</kbd> {view?.target || "Approchez-vous pour interagir"}
+                <kbd>E</kbd>{" "}
+                {view?.transitioning
+                  ? "Un instant…"
+                  : view?.target || "Approchez-vous pour interagir"}
               </button>
             )}
             {journal && (
@@ -209,25 +242,117 @@ function App() {
                 <p className="eyebrow">VOTRE JOURNAL</p>
                 <h2>24 jours, autant de souvenirs.</h2>
                 <p>
-                  Démo libre · le calendrier réel n’est pas encore connecté.
+                  Souvenirs fictifs de démonstration · calendrier réel non
+                  connecté.
                 </p>
-                <div className="days">
-                  {Array.from({ length: 24 }, (_, i) => (
-                    <div
-                      key={i}
-                      className={
-                        i === 0 && view?.save.stage === 4 ? "earned" : ""
-                      }
+                <nav className="journal-tabs" aria-label="Rubriques du journal">
+                  {[
+                    ["calendar", "Calendrier"],
+                    ["quests", "Quêtes"],
+                    ["inventory", "Sac"],
+                  ].map(([id, label]) => (
+                    <button
+                      key={id}
+                      aria-pressed={tab === id}
+                      onClick={() => setTab(id)}
                     >
-                      {i + 1}
-                      <small>
-                        {i === 0 && view?.save.stage === 4 ? "✦" : "·"}
-                      </small>
-                    </div>
+                      {label}
+                    </button>
                   ))}
-                </div>
-                <p>{objectives[view?.save.stage ?? 0]}</p>
+                </nav>
+                {tab === "calendar" ? (
+                  <>
+                    <div className="days">
+                      {Array.from({ length: 24 }, (_, i) => (
+                        <div
+                          key={i}
+                          className={stars.includes(i + 1) ? "earned" : ""}
+                        >
+                          <button
+                            aria-label={`Jour ${i + 1}`}
+                            aria-pressed={day === i + 1}
+                            onClick={() => setDay(i + 1)}
+                          >
+                            {i + 1}
+                            <small>{stars.includes(i + 1) ? "✦" : "·"}</small>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <p aria-live="polite">
+                      Jour {day} ·{" "}
+                      {stars.includes(day)
+                        ? `Souvenir de démonstration gagné : ${quests.find((q) => q.day === day)?.title}`
+                        : day <= 5
+                          ? "Un souvenir fictif se gagne auprès des habitants. Consultez vos quêtes."
+                          : "Emplacement réservé. Aucune surprise future n’est livrée dans cette démo."}
+                    </p>
+                  </>
+                ) : tab === "quests" ? (
+                  <div className="quest-list">
+                    {quests.map((q) => {
+                      const progress = view?.save.quests[q.id];
+                      return (
+                        <article key={q.id}>
+                          <h3>
+                            {q.title} {progress?.done ? "✦" : ""}
+                          </h3>
+                          <p>
+                            {!progress
+                              ? "À découvrir auprès des habitants"
+                              : progress.done
+                                ? "Souvenir gagné"
+                                : q.objectives[progress.step]?.label}
+                          </p>
+                          <small>
+                            {progress?.step ?? 0} / {q.objectives.length}{" "}
+                            objectifs
+                          </small>
+                        </article>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <section>
+                    <h3>Votre sac</h3>
+                    <ul>
+                      {(view?.save.inventory ?? []).map((item) => (
+                        <li key={item}>
+                          {{
+                            bookmark: "Marque-page brodé",
+                            ribbon: "Ruban de l’atelier",
+                            letter: "Lettre de Loyal",
+                          }[item] ?? item}
+                        </li>
+                      ))}
+                    </ul>
+                    {!view?.save.inventory.length && (
+                      <p>Votre sac est encore vide.</p>
+                    )}
+                    <h3>Meilleurs résultats</h3>
+                    {Object.entries(view?.save.scores ?? {}).map(
+                      ([game, score]) => (
+                        <p key={game}>
+                          {{
+                            photo: "Photographie",
+                            memory: "Mémoire",
+                            wrap: "Emballage",
+                          }[game] ?? game}{" "}
+                          : {score} essais
+                        </p>
+                      ),
+                    )}
+                  </section>
+                )}
               </div>
+            )}
+            {view?.miniGame && (
+              <MiniGame
+                key={view.miniGame}
+                kind={view.miniGame}
+                onClose={() => scene.current?.closeMini()}
+                onWin={(score) => scene.current?.finishMini(score)}
+              />
             )}
           </section>
           <footer>

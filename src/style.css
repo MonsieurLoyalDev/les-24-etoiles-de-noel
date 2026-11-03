@@ -379,3 +379,214 @@ footer {
     right: -60%;
   }
 }
+/* Phase B: interaction-first panels, shared pointer/keyboard controls. */
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  background: #071122c9;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow: auto;
+  touch-action: pan-y;
+}
+.mini-modal {
+  width: min(650px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  background: #142239;
+  border: 1px solid #d4b57988;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 20px 80px #0009;
+}
+.mini-modal h2 {
+  font-weight: normal;
+  font-size: 27px;
+  margin: 15px 0;
+}
+.mini-modal p {
+  font-size: 14px;
+}
+.mini-modal .close {
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.mini-modal .gold {
+  margin: 10px 0;
+}
+.mini-modal .note {
+  font-size: 10px;
+}
+.photo-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: min(300px, 100%);
+  margin: 15px auto;
+  gap: 4px;
+}
+.photo-board button {
+  padding: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #687c96;
+}
+.photo-board svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.photo-board small {
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  background: #142239cc;
+  padding: 2px 5px;
+  color: #fff;
+}
+.photo-board button[aria-pressed="true"] {
+  border-color: #ffd382;
+  box-shadow: 0 0 12px #ffd38288;
+}
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+}
+.memory-board button {
+  height: 85px;
+  font-size: 30px;
+  background: #334860;
+  border: 1px solid #d4b57977;
+}
+.memory-board button:disabled {
+  opacity: 0.8;
+  background: #496452;
+}
+.order {
+  padding: 18px;
+  background: #233749;
+  border-radius: 6px;
+  line-height: 1.6;
+}
+fieldset {
+  border: 1px solid #71839a55;
+  margin: 15px 0;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+legend {
+  color: #e4c589;
+  font-size: 13px;
+}
+button[aria-pressed="true"] {
+  border-color: #f3d18b;
+  background: #7d684044;
+}
+.dialogue-choices {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.dialogue-choices button {
+  margin: 0;
+  font-size: 12px;
+  flex: 1 1 160px;
+  padding: 10px;
+}
+.journal-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+.quest-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  max-width: 950px;
+}
+.quest-list article {
+  border: 1px solid #8292a855;
+  padding: 16px;
+  background: #1d2b3e;
+}
+.quest-list h3 {
+  margin: 0;
+  color: #efcf92;
+  font-weight: normal;
+}
+.quest-list p {
+  font-size: 14px;
+}
+.quest-list small {
+  font: 11px system-ui;
+  color: #afbed2;
+}
+.days div {
+  padding: 0;
+}
+.days button {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: none;
+  border-radius: 0;
+  padding: 14px;
+}
+.days button[aria-pressed="true"] {
+  outline: 2px solid #e3c581;
+  outline-offset: -2px;
+}
+.quest > small {
+  display: block;
+  margin-top: 8px;
+  color: #bccbde;
+  font: 10px system-ui;
+}
+@media (max-width: 650px) {
+  .mini-modal {
+    padding: 16px;
+  }
+  .mini-modal h2 {
+    font-size: 22px;
+    clear: both;
+  }
+  .mini-modal p {
+    font-size: 12px;
+  }
+  .memory-board button {
+    height: 66px;
+  }
+  .quest-list {
+    grid-template-columns: 1fr;
+  }
+  .dialogue-choices button {
+    flex: 1 1 110px;
+  }
+  .photo-board {
+    max-width: 260px;
+  }
+  .modal-backdrop {
+    padding: 8px;
+  }
+  .dialogue {
+    max-height: 55%;
+    overflow: auto;
+  }
+  .quest {
+    top: 94px;
+    width: 175px;
+  }
+  .journal h2 {
+    font-size: 25px;
+  }
+  .journal-tabs button {
+    padding: 10px 14px;
+  }
+}

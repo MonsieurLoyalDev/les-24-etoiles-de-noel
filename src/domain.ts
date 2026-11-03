@@ -2,16 +2,32 @@ export type Point = { x: number; y: number };
 export type Rect = Point & { w: number; h: number };
 export type Stage = 0 | 1 | 2 | 3 | 4;
 export type Save = {
-  version: 1;
+  version: 2;
   stage: Stage;
-  room: "village" | "house";
+  room: "village" | "house" | "library" | "workshop" | "inn";
   position: Point;
+  quests: Record<string, { step: number; done: boolean }>;
+  flags: string[];
+  inventory: string[];
+  stars: number[];
+  clock: number;
+  dialogueHistory: string[];
+  conversation: { key: string; node: string } | null;
+  scores: Record<string, number>;
 };
 export const initial: Save = {
-  version: 1,
+  version: 2,
   stage: 0,
   room: "village",
   position: { x: 512, y: 608 },
+  quests: { "first-light": { step: 0, done: false } },
+  flags: [],
+  inventory: [],
+  stars: [],
+  clock: 90000,
+  dialogueHistory: [],
+  conversation: null,
+  scores: {},
 };
 export const objectives = [
   "Parler à Loyal · E près de lui",
@@ -52,9 +68,22 @@ export function move(
   h: number,
 ): Point {
   let n = { x: p.x, y: p.y };
-  if (!blocked({ x: n.x + dx, y: n.y }, rects, w, h)) n.x += dx;
-  if (!blocked({ x: n.x, y: n.y + dy }, rects, w, h)) n.y += dy;
+  const steps = Math.max(
+    1,
+    Math.ceil(Math.max(Math.abs(dx), Math.abs(dy)) / 3),
+  );
+  for (let i = 0; i < steps; i++) {
+    if (!blocked({ x: n.x + dx / steps, y: n.y }, rects, w, h))
+      n.x += dx / steps;
+    if (!blocked({ x: n.x, y: n.y + dy / steps }, rects, w, h))
+      n.y += dy / steps;
+  }
   return n;
+}
+// Keep speed at 105 world pixels/second even at 5 FPS. Substeps in move()
+// prevent large frames from jumping through furniture or narrow walls.
+export function movementDistance(deltaMs: number) {
+  return Math.max(0, Math.min(deltaMs, 200)) * 0.105;
 }
 export function visible(a: Point, b: Point, rects: Rect[]) {
   const d = Math.hypot(a.x - b.x, a.y - b.y);
@@ -77,14 +106,61 @@ export function decode(value: unknown): Save | null {
   const s = value as Save;
   if (
     !s ||
-    s.version !== 1 ||
+    ![1, 2].includes(s.version) ||
     !Number.isInteger(s.stage) ||
     s.stage < 0 ||
     s.stage > 4 ||
-    !["village", "house"].includes(s.room) ||
+    !["village", "house", "library", "workshop", "inn"].includes(s.room) ||
     !Number.isFinite(s.position?.x) ||
     !Number.isFinite(s.position?.y)
   )
     return null;
-  return s;
+  if ((value as { version: number }).version === 1) {
+    if (!["village", "house"].includes(s.room)) return null;
+    return {
+      ...structuredClone(initial),
+      stage: s.stage,
+      room: s.room,
+      position: { x: s.position.x, y: s.position.y },
+      quests: { "first-light": { step: s.stage, done: s.stage === 4 } },
+      stars: s.stage === 4 ? [1] : [],
+    };
+  }
+  const strings = (a: unknown): a is string[] =>
+    Array.isArray(a) &&
+    a.length <= 500 &&
+    a.every((x) => typeof x === "string" && x.length <= 100);
+  if (
+    !s.quests ||
+    typeof s.quests !== "object" ||
+    Object.values(s.quests).some(
+      (q) =>
+        !q ||
+        !Number.isInteger(q.step) ||
+        q.step < 0 ||
+        q.step > 100 ||
+        typeof q.done !== "boolean",
+    ) ||
+    !strings(s.flags) ||
+    !strings(s.inventory) ||
+    !strings(s.dialogueHistory) ||
+    !Array.isArray(s.stars) ||
+    s.stars.some((n) => !Number.isInteger(n) || n < 1 || n > 24) ||
+    !Number.isFinite(s.clock) ||
+    s.clock < 0 ||
+    !s.scores ||
+    Object.values(s.scores).some((n) => !Number.isFinite(n) || n < 0)
+  )
+    return null;
+  if (
+    s.conversation != null &&
+    (typeof s.conversation.key !== "string" ||
+      typeof s.conversation.node !== "string")
+  )
+    return null;
+  return {
+    ...structuredClone(s),
+    conversation: s.conversation ?? null,
+    stars: [...new Set(s.stars)],
+  };
 }
