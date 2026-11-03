@@ -1,0 +1,165 @@
+{
+  "version": "0.1.0",
+  "tileSize": 16,
+  "ground": {
+    "path": "/assets/ground/ground.png",
+    "frameWidth": 16,
+    "frameHeight": 16,
+    "columns": 8,
+    "rows": 4
+  },
+  "props": {
+    "logs": {
+      "path": "/assets/props/logs.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "fence": {
+      "path": "/assets/props/fence.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "lantern": {
+      "path": "/assets/props/lantern.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "bench": {
+      "path": "/assets/props/bench.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "signpost": {
+      "path": "/assets/props/signpost.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "bush_snow": {
+      "path": "/assets/props/bush_snow.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "snowman": {
+      "path": "/assets/props/snowman.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "campfire": {
+      "path": "/assets/props/campfire.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "bush_berries": {
+      "path": "/assets/props/bush_berries.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "gift": {
+      "path": "/assets/props/gift.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "pine_large": {
+      "path": "/assets/props/pine_large.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "quest_star": {
+      "path": "/assets/props/quest_star.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    },
+    "pine_festive": {
+      "path": "/assets/props/pine_festive.png",
+      "frameWidth": 80,
+      "frameHeight": 80,
+      "origin": {
+        "x": 0.5,
+        "y": 0.85
+      },
+      "collision": "manual"
+    }
+  },
+  "characters": {
+    "debby": {
+      "path": "/assets/characters/debby_placeholder.png",
+      "size": [
+        32,
+        48
+      ],
+      "status": "placeholder, no animations"
+    },
+    "loyal": {
+      "path": "/assets/characters/loyal_placeholder.png",
+      "size": [
+        32,
+        48
+      ],
+      "status": "placeholder, no animations"
+    }
+  },
+  "references": {
+    "place": "/assets/references/place_lanternes_concept.png",
+    "status": "concept art only; not a spritesheet"
+  }
+}
