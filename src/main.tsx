@@ -109,7 +109,11 @@ function App() {
         <div className="header-actions">
           <button
             disabled={
-              !started || adventBusy || !!view?.dialogue || !!view?.miniGame
+              !started ||
+              journal ||
+              adventBusy ||
+              !!view?.dialogue ||
+              !!view?.miniGame
             }
             onClick={() => setAdventOpen((n) => n + 1)}
           >

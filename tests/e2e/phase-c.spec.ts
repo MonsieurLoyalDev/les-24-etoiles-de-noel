@@ -333,6 +333,13 @@ test("calendrier daté fermé en novembre et éditeur fictif persistant", async 
   page,
 }) => {
   await startAt(page, "house");
+  await page.getByRole("button", { name: "Retour au village ×" }).click();
+  await page.getByRole("button", { name: /✧ Journal/ }).click();
+  await expect(
+    page.getByRole("button", { name: "✦ Avent 2026" }),
+  ).toBeDisabled();
+  await page.getByRole("button", { name: "Fermer ×", exact: true }).click();
+  await page.getByRole("button", { name: "✦ Avent 2026" }).click();
   await page
     .getByRole("button", { name: "Revenir au calendrier daté" })
     .click();
