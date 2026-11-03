@@ -70,10 +70,37 @@ async function startMigrated(page: Page) {
   });
   await expect(page.locator(".quest")).toContainText("1 / 24");
 }
+async function approachNPC(page: Page, id: string, name: string) {
+  const button = page.getByRole("button", {
+    name: new RegExp("Parler à " + name),
+  });
+  for (let attempt = 0; attempt < 6; attempt++) {
+    if (await button.isVisible()) {
+      await button.click();
+      return;
+    }
+    for (const axis of ["x", "y"] as const) {
+      const people = JSON.parse(
+        (await page.locator("canvas").getAttribute("data-npcs")) ?? "[]",
+      ) as { id: string; x: number; y: number }[];
+      const person = people.find((n) => n.id === id)!;
+      await walk(page, axis, person[axis]);
+      if (await button.isVisible()) {
+        await button.click();
+        return;
+      }
+    }
+  }
+  await interact(page, new RegExp("Parler à " + name));
+}
 async function resident(page: Page, name: string, accept = false) {
-  await walk(page, "x", 125);
-  await walk(page, "y", 205);
-  await interact(page, new RegExp(`Parler à ${name}`));
+  await approachNPC(
+    page,
+    ({ Mira: "mira", Oscar: "oscar", Alma: "alma" } as Record<string, string>)[
+      name
+    ],
+    name,
+  );
   if (accept) {
     await page
       .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
@@ -132,7 +159,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   // Noé is in the open south-east square. His entire patrol remains in reach.
   await walk(page, "x", 695);
   await walk(page, "y", 515);
-  await interact(page, /Parler à Noé/);
+  await approachNPC(page, "noe", "Noé");
   await page
     .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
     .click();
@@ -278,7 +305,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await walk(page, "y", 400);
   await walk(page, "x", 695);
   await walk(page, "y", 515);
-  await interact(page, /Parler à Noé/);
+  await approachNPC(page, "noe", "Noé");
   await page.getByRole("button", { name: "À bientôt", exact: true }).click();
   await expect(page.locator(".quest")).toContainText("5 / 24");
   await page.getByRole("button", { name: /Journal/ }).click();

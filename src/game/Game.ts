@@ -571,6 +571,9 @@ export class Village extends Phaser.Scene {
   }
   update(_time: number, delta: number) {
     if (!this.player) return;
+    // Phaser's smoothed delta can reuse a 60 FPS sample when frames exceed
+    // its minimum FPS threshold. Use actual elapsed time for simulation.
+    delta = Math.min(this.game.loop.rawDelta, 200);
     if (controls.interact) {
       controls.interact = false;
       this.interact();
