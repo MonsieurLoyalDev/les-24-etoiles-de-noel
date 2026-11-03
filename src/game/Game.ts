@@ -37,6 +37,7 @@ export type View = {
   miniGame: MiniKind | null;
   period: string;
   activity: string;
+  transitioning: boolean;
 };
 export const controls = { x: 0, y: 0, interact: false, paused: false };
 export class Village extends Phaser.Scene {
@@ -560,6 +561,7 @@ export class Village extends Phaser.Scene {
       activity: this.npcs
         .map((n) => `${n.name} ${npcActivity(n.id, this.state.clock)}`)
         .join(" · "),
+      transitioning: performance.now() - this.lastPortalAt < 450,
     };
     const key = JSON.stringify([
       v.save.stage,
@@ -572,6 +574,7 @@ export class Village extends Phaser.Scene {
       v.choices,
       v.miniGame,
       v.period,
+      v.transitioning,
     ]);
     if (key !== this.lastView) {
       this.lastView = key;

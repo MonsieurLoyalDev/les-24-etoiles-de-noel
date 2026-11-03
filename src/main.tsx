@@ -219,12 +219,15 @@ function App() {
             ) : (
               <button
                 className="interaction"
-                disabled={!view?.target}
+                disabled={!view?.target || view?.transitioning}
                 onClick={() => {
                   controls.interact = true;
                 }}
               >
-                <kbd>E</kbd> {view?.target || "Approchez-vous pour interagir"}
+                <kbd>E</kbd>{" "}
+                {view?.transitioning
+                  ? "Un instant…"
+                  : view?.target || "Approchez-vous pour interagir"}
               </button>
             )}
             {journal && (
