@@ -4,6 +4,8 @@ import { demoDays } from "../../src/advent/demo";
 import { walkTo } from "./navigation";
 import { mkdirSync } from "node:fs";
 async function startAt(page: Page, room: string) {
+  // Date de simulation déterministe, sans modifier les horloges Phaser.
+  await page.clock.setFixedTime(new Date("2026-11-03T12:00:00+01:00"));
   await page.goto("/");
   // Fixture d'une partie déjà arrivée dans la pièce. Aucun objectif ni étoile
   // de l'Avent n'est modifié : les 24 activités sont jouées dans leur interface.
