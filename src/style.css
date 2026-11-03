@@ -590,3 +590,380 @@ button[aria-pressed="true"] {
     padding: 10px 14px;
   }
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.advent-backdrop {
+  z-index: 45;
+}
+.advent-modal {
+  width: min(850px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  background: #142239;
+  border: 1px solid #cfae75;
+  border-radius: 12px;
+  padding: 26px;
+  box-shadow: 0 20px 80px #0009;
+}
+.advent-modal h2 {
+  font-size: 29px;
+  font-weight: normal;
+  clear: both;
+}
+.advent-modal h3 {
+  font-weight: normal;
+  color: #efd295;
+}
+.advent-modal p {
+  font-size: 14px;
+}
+.mode-banner {
+  clear: both;
+  padding: 12px;
+  border: 1px solid #cda76b77;
+  border-radius: 5px;
+  font: 12px/1.6 system-ui !important;
+}
+.mode-banner.demo {
+  background: #685b2433;
+  color: #f7d99d;
+}
+.mode-banner.private {
+  background: #245a4a33;
+  color: #bce3d5;
+}
+.advent-error {
+  border-left: 3px solid #f2a4a4;
+  background: #863b3b33;
+  padding: 10px;
+  color: #ffcaca;
+}
+.advent-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.advent-toolbar button {
+  font-size: 12px;
+}
+.advent-calendar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 9px;
+  margin: 20px 0;
+}
+.advent-calendar button {
+  padding: 12px 6px;
+  min-height: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.advent-calendar strong {
+  font-size: 25px;
+  font-weight: normal;
+  color: #eac789;
+}
+.advent-calendar span {
+  font: 9px system-ui;
+}
+.memory-journal {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.memory-journal article {
+  padding: 12px;
+  border: 1px solid #74869b77;
+}
+.memory-journal strong {
+  display: block;
+}
+.memory-journal button {
+  margin-top: 10px;
+  font-size: 11px;
+  padding: 8px;
+}
+.advent-modal label {
+  display: block;
+  font: 13px/1.7 system-ui;
+  color: #d3dce7;
+  margin: 12px 0;
+}
+.advent-modal input:not([type="radio"]),
+.advent-modal textarea,
+.advent-modal select {
+  display: block;
+  width: 100%;
+  border: 1px solid #7988a5;
+  background: #0f192b;
+  border-radius: 5px;
+  color: #f2e8d5;
+  padding: 12px;
+  font: 14px/1.5 system-ui;
+  margin-top: 5px;
+}
+.advent-modal input[type="radio"] {
+  margin-right: 8px;
+}
+.advent-modal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.advent-modal .json-editor {
+  font: 12px/1.5 monospace;
+  min-height: 340px;
+}
+.advent-modal summary {
+  cursor: pointer;
+  color: #e6c68c;
+  padding: 12px;
+}
+.advent-progress {
+  font: 12px/1.5 system-ui !important;
+  color: #c2d1e2 !important;
+  padding: 10px;
+  background: #23344c;
+}
+.advent-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 15px 0;
+}
+.advent-items button {
+  padding: 15px 10px;
+  min-height: 90px;
+}
+.advent-items span {
+  display: block;
+  font-size: 25px;
+  color: #ebc77e;
+  margin-bottom: 9px;
+}
+.advent-items strong {
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.advent-items.garden button[aria-pressed="true"] {
+  background: #45674c;
+}
+.advent-items.tree {
+  background: linear-gradient(120deg, #253d35, #142239);
+  padding: 15px;
+  border-radius: 50% 50% 10% 10%;
+}
+.advent-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.advent-options button {
+  flex: 1 1 180px;
+  min-height: 50px;
+}
+.sequence-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.sequence-result {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: decimal;
+  min-height: 40px;
+  margin-left: 20px;
+}
+.sequence-result li {
+  margin: 6px 12px;
+  color: #ead49b;
+}
+.advent-task button {
+  margin: 5px;
+}
+.advent-task .photo-board button,
+.advent-task .memory-board button {
+  margin: 0;
+}
+.advent-task video,
+.advent-task > img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  background: #090f1c;
+  margin: 15px 0;
+}
+.photo-fragment {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.constellation {
+  position: relative;
+  height: 270px;
+  background: radial-gradient(ellipse at 50% 50%, #30335b, #0b1425);
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.constellation button {
+  position: absolute;
+  font-size: 12px;
+  padding: 9px;
+  transform: translate(-20%, -20%);
+}
+.story-text {
+  font-size: 20px !important;
+  background: #293952;
+  padding: 25px;
+  line-height: 1.7;
+}
+.advent-reward {
+  padding: 22px;
+  background: #6d5b2433;
+  text-align: center;
+}
+.advent-reward > span {
+  font-size: 65px;
+  color: #ffda88;
+}
+.advent-reward button {
+  margin: 8px;
+}
+.advent-tracker {
+  position: absolute;
+  left: 150px;
+  bottom: 25px;
+  z-index: 5;
+  background: #142239ed;
+  border: 1px solid #d6bb7a77;
+  border-radius: 6px;
+  padding: 12px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.advent-tracker strong {
+  font: 11px system-ui;
+  color: #f0d096;
+}
+.advent-tracker span {
+  font-size: 14px;
+}
+.advent-tracker small {
+  font: 11px/1.5 system-ui;
+  color: #c5d3e7;
+}
+.advent-tracker button {
+  font-size: 10px;
+  padding: 6px;
+}
+.file-button {
+  border: 1px solid #b6a07570;
+  border-radius: 6px;
+  padding: 8px !important;
+  margin: 0 !important;
+  cursor: pointer;
+}
+.file-button input {
+  max-width: 180px;
+  font-size: 10px !important;
+}
+@media (max-width: 650px) {
+  .header-actions {
+    gap: 5px;
+  }
+  header button {
+    padding: 8px;
+    font-size: 10px;
+  }
+  header button span {
+    padding-left: 5px;
+  }
+  .brand span {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .brand small {
+    letter-spacing: 3px;
+  }
+  .brand {
+    gap: 7px;
+  }
+  .advent-modal {
+    padding: 15px;
+  }
+  .advent-modal h2 {
+    font-size: 23px;
+  }
+  .advent-calendar {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .advent-calendar button {
+    min-height: 73px;
+    padding: 8px 2px;
+  }
+  .advent-calendar span {
+    font-size: 8px;
+  }
+  .memory-journal {
+    grid-template-columns: 1fr 1fr;
+  }
+  .advent-items {
+    grid-template-columns: 1fr 1fr;
+  }
+  .advent-items button {
+    min-height: 90px;
+  }
+  .advent-modal p {
+    font-size: 12px;
+  }
+  .advent-tracker {
+    left: 135px;
+    right: 12px;
+    bottom: 100px;
+    padding: 9px;
+    max-width: none;
+  }
+  .advent-tracker span {
+    font-size: 12px;
+  }
+  .advent-tracker small {
+    font-size: 10px;
+  }
+  .advent-tracker strong {
+    font-size: 9px;
+  }
+  .sequence-result {
+    padding-left: 0;
+    gap: 4px;
+  }
+  .constellation button {
+    font-size: 10px;
+    padding: 7px;
+  }
+  .story-text {
+    font-size: 16px !important;
+  }
+  .advent-modal .close {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .advent-modal label {
+    font-size: 12px;
+  }
+}
+.game-shell:has(.advent-session) .quest {
+  display: none;
+}

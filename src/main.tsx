@@ -2,16 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Phaser from "phaser";
 import { Village, controls, type View } from "./game/Game";
-import { initial, objectives, type Save } from "./domain";
+import { initial, type Save } from "./domain";
 import { loadSave, writeSave } from "./save";
 import "./style.css";
 import { activeGoals, quests } from "./rpg/quests";
 import { MiniGame } from "./ui/MiniGame";
+import { AdventHub } from "./advent/Hub";
 function App() {
   const host = useRef<HTMLDivElement>(null);
   const [view, setView] = useState<View>();
   const [started, setStarted] = useState(false);
   const [journal, setJournal] = useState(false);
+  const [adventOpen, setAdventOpen] = useState(0),
+    [adventBusy, setAdventBusy] = useState(false);
   const [tab, setTab] = useState("calendar");
   const [day, setDay] = useState(1);
   const [status, setStatus] = useState("Chargement de la sauvegarde…");
@@ -103,12 +106,24 @@ function App() {
           </span>
         </a>
         <span className="dedication">Une aventure pour Debby</span>
-        <button
-          onClick={toggleJournal}
-          disabled={!started || !!view?.miniGame || !!view?.dialogue}
-        >
-          ✧ Journal <span>24</span>
-        </button>
+        <div className="header-actions">
+          <button
+            disabled={
+              !started || adventBusy || !!view?.dialogue || !!view?.miniGame
+            }
+            onClick={() => setAdventOpen((n) => n + 1)}
+          >
+            ✦ Avent 2026
+          </button>
+          <button
+            onClick={toggleJournal}
+            disabled={
+              !started || adventBusy || !!view?.miniGame || !!view?.dialogue
+            }
+          >
+            ✧ Journal <span>24</span>
+          </button>
+        </div>
       </header>
       {!started ? (
         <section className="welcome">
@@ -127,7 +142,7 @@ function App() {
             Entrer dans le village <span>→</span>
           </button>
           <p className="note">
-            Phase B · Village et activités jouables
+            Phase C · Calendrier interactif 2026
             <br />
             Personnages et façades provisoires · deux personnages humains
           </p>
@@ -158,7 +173,7 @@ function App() {
                 </small>
               )}
             </aside>
-            <div className="prototype">PHASE B · ASSETS PROVISOIRES</div>
+            <div className="prototype">PHASE C · ASSETS PROVISOIRES</div>
             <div
               ref={stick}
               className="joystick"
@@ -242,8 +257,8 @@ function App() {
                 <p className="eyebrow">VOTRE JOURNAL</p>
                 <h2>24 jours, autant de souvenirs.</h2>
                 <p>
-                  Souvenirs fictifs de démonstration · calendrier réel non
-                  connecté.
+                  Archives fictives du village · Phase B. Le calendrier 2026 est
+                  accessible avec le bouton « Avent 2026 ».
                 </p>
                 <nav className="journal-tabs" aria-label="Rubriques du journal">
                   {[
@@ -352,6 +367,14 @@ function App() {
                 kind={view.miniGame}
                 onClose={() => scene.current?.closeMini()}
                 onWin={(score) => scene.current?.finishMini(score)}
+              />
+            )}
+            {view && scene.current && (
+              <AdventHub
+                scene={scene.current}
+                view={view}
+                openRequest={adventOpen}
+                onBusy={setAdventBusy}
               />
             )}
           </section>

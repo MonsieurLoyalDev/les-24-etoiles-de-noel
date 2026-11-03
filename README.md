@@ -1,4 +1,18 @@
-# Les 24 Étoiles de Noël — Phase B
+# Les 24 Étoiles de Noël — Phase C
+
+La Phase C ajoute les **24 journées interactives**, le calendrier daté de décembre 2026, la personnalisation administrateur et un backend privé compatible Supabase. Les Phases A/B restent jouables avec leurs sauvegardes existantes. Les graphismes restent provisoires.
+
+Pour tester immédiatement : `npm ci`, `npm run dev`, entrer dans le village, ouvrir **✦ Avent 2026**, puis **Mode développeur : tester les 24 journées**. Sélectionner un jour, suivre la quête dans le lieu indiqué et interagir avec la lueur « Jour N ». Les 24 activités ont des conditions de réussite et une étoile unique ; le final du 24 se déroule dans le RPG et peut être revu.
+
+Le mode fourni est une **démonstration fictive non sécurisée**. Aucun vrai souvenir n'est inclus. Le calendrier daté est normalement fermé en novembre. Pour de vraies surprises, utiliser le mode Supabase : contrôle serveur Europe/Paris, authentification sur invitation, RLS, règles privées et médias privés. L'instance distante reste à configurer.
+
+- [Configuration Supabase et Vercel](docs/CONFIGURATION-SUPABASE.md)
+- [Personnalisation des 24 activités](docs/PERSONNALISATION-24-JOURS.md)
+- Migration : `supabase/migrations/202611030001_advent.sql` ; données **fictives** : `supabase/seed.sql`.
+- Vérifications : `npm run lint`, `npm test`, `npm run build:private`, `npm run build`, `npm run test:e2e`.
+- `build:private` exclut également les modules et médias de démonstration du navigateur ; aucune vraie surprise future n'est stockée dans le dépôt.
+
+## Fonctionnalités conservées
 
 Petit RPG d’exploration romantique pour Debby, poursuivant la Phase A existante. React, TypeScript, Vite et Phaser 3. Les personnages et bâtiments restent volontairement provisoires.
 
@@ -23,7 +37,7 @@ Les E2E utilisent Chrome installé localement sous Windows et Chromium dans la C
 
 ## Jouer
 
-Flèches / ZQSD / WASD ou joystick : déplacement. E ou bouton contextuel : interaction. Les dialogues proposent des boutons de réponse utilisables au clavier et au toucher. Le journal regroupe les quêtes, le sac et les 24 emplacements du calendrier fictif.
+Flèches / ZQSD / WASD ou joystick : déplacement. E ou bouton contextuel : interaction. Les dialogues proposent des boutons de réponse utilisables au clavier et au toucher. Le Journal 24 conserve les quêtes, le sac et les archives fictives Phase B ; le bouton Avent 2026 ouvre le nouveau calendrier.
 
 La quête de Loyal est conservée. Acceptez aussi les propositions de Mira à la bibliothèque (ouest), Oscar à l’atelier (nord-est), Alma à l’auberge (nord) et Noé sur la place (sud-est). Les portes se trouvent au sud des bâtiments. Les quêtes indiquent leur prochain objectif dans le journal. Les mini-jeux se trouvent sur les tables et pupitres : photographie, mémoire, emballage. Revenez parler aux habitants après les activités.
 
@@ -35,7 +49,7 @@ La quête de Loyal est conservée. Acceptez aussi les propositions de Mira à la
 - Trois mini-jeux complets, rejouables, avec validation des réussites, meilleurs résultats et aucune récompense répétée.
 - Sauvegardes Phase A migrées sans écraser l’original ; quêtes, objets, choix, dialogue courant, étoiles et temps du monde enregistrés.
 - Cycle visuel, neige, halos, mouvements simples des PNJ, réactions de Loyal et décorations du sapin selon les étoiles.
-- Les 24 jours sont préparés ; cinq souvenirs sont fictifs. Aucune surprise réelle future n’est incluse. Le client de la future API respecte les refus du serveur ; l’horloge et les autorisations réelles devront être gérées côté serveur en Europe/Paris.
+- Les archives Phase B contiennent cinq souvenirs fictifs. Le calendrier Avent 2026 utilise désormais les autorisations et dates serveur décrites dans le guide Phase C.
 
 Debby et Loyal restent humains, en tenues hivernales, avec lunettes rondes. Aucun chantier de graphismes définitifs n’est entrepris.
 

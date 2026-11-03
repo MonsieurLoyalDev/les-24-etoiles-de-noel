@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
-import { sendEvent, activeGoals } from "../rpg/quests";
+import { sendEvent } from "../rpg/quests";
 import {
   dialogues,
   choicesFor,
@@ -18,6 +18,7 @@ import {
   npcActivity,
 } from "../rpg/world";
 import type { MiniKind } from "../ui/MiniGame";
+import type { Day, Step } from "../advent/model";
 import {
   blocked,
   move,
@@ -38,6 +39,10 @@ export type View = {
   period: string;
   activity: string;
   transitioning: boolean;
+  adventRequested: number;
+  huntFound: string[];
+  finalCompleted: number;
+  cinematic: boolean;
 };
 export const controls = { x: 0, y: 0, interact: false, paused: false };
 export class Village extends Phaser.Scene {
@@ -74,6 +79,15 @@ export class Village extends Phaser.Scene {
   frame = 0;
   lastEEvent = -1;
   lastPortalAt = -Infinity;
+  adventDay: Day | null = null;
+  adventRequested = 0;
+  adventLights: number[] = [];
+  adventMarker?: Phaser.GameObjects.Container;
+  adventDecor: Phaser.GameObjects.Arc[] = [];
+  hunt: { step: Step; found: string[] } | null = null;
+  huntMarker?: Phaser.GameObjects.Container;
+  finalSequence: { beat: number; message: string } | null = null;
+  finalCompleted = 0;
   constructor(
     save: Save,
     publish: (v: View) => void,
@@ -137,6 +151,9 @@ export class Village extends Phaser.Scene {
   }
   renderRoom() {
     this.children.removeAll(true);
+    this.adventMarker = undefined;
+    this.huntMarker = undefined;
+    this.adventDecor = [];
     this.star = undefined;
     this.npcs = [];
     this.lamps = [];
@@ -330,6 +347,110 @@ export class Village extends Phaser.Scene {
               .setDepth(9010),
           )
         : [];
+    this.refreshAdvent();
+  }
+  setAdventDay(day: Day | null) {
+    this.adventDay = day;
+    if (this.player) this.refreshAdvent();
+  }
+  setAdventLights(days: number[]) {
+    this.adventLights = [...new Set(days)];
+    if (this.player) this.refreshAdvent();
+  }
+  adventAnchor() {
+    return this.state.room === "village"
+      ? { x: 512, y: 430 }
+      : { x: 300, y: 270 };
+  }
+  refreshAdvent() {
+    this.adventMarker?.destroy();
+    this.adventMarker = undefined;
+    if (this.adventDay?.room === this.state.room) {
+      const p = this.adventAnchor();
+      const glow = this.add.circle(0, 0, 12, 0xffce72, 0.35),
+        label = this.label(0, -15, `✦ Jour ${this.adventDay.day}`, 9);
+      this.adventMarker = this.add
+        .container(p.x, p.y, [glow, label])
+        .setDepth(p.y + 100);
+    }
+    this.adventDecor.forEach((x) => x.destroy());
+    this.adventDecor = [];
+    if (this.state.room === "village")
+      for (const day of this.finalSequence
+        ? Array.from({ length: 24 }, (_, i) => i + 1)
+        : this.adventLights) {
+        const i = day - 1;
+        this.adventDecor.push(
+          this.add
+            .circle(
+              476 + (i % 6) * 14,
+              326 + Math.floor(i / 6) * 15,
+              2.6,
+              [0xffd57d, 0xf4a4bc, 0x9cdcd6][i % 3],
+            )
+            .setDepth(406),
+        );
+      }
+    this.huntMarker?.destroy();
+    this.huntMarker = undefined;
+    if (
+      this.hunt &&
+      this.state.room === "village" &&
+      this.hunt.found.length < (this.hunt.step.items?.length ?? 0)
+    ) {
+      const p = this.huntPoint();
+      if (this.hunt.step.style === "loyal") this.loyal.setPosition(p.x, p.y);
+      else
+        this.huntMarker = this.add
+          .container(p.x, p.y, [
+            this.add.image(0, -12, "quest_star").setScale(0.4),
+            this.label(0, -40, "Petit bonheur", 8),
+          ])
+          .setDepth(p.y + 1);
+    }
+  }
+  huntPoint() {
+    return [
+      { x: 560, y: 500 },
+      { x: 440, y: 460 },
+      { x: 700, y: 500 },
+    ][(this.hunt?.found.length ?? 0) % 3];
+  }
+  startHunt(step: Step, found: string[]) {
+    this.hunt = { step, found: [...found] };
+    this.trail = [];
+    this.refreshAdvent();
+    this.emit();
+  }
+  clearHunt() {
+    this.hunt = null;
+    this.trail = [];
+    this.lastTrail = { ...this.state.position };
+    this.refreshAdvent();
+  }
+  startFinal(message: string) {
+    this.activeDialogue = null;
+    this.state.conversation = null;
+    this.clearHunt();
+    this.state.room = "village";
+    this.state.position = { x: 512, y: 450 };
+    this.finalSequence = { beat: 0, message };
+    this.renderRoom();
+    this.loyal.setPosition(486, 455);
+    this.star?.setVisible(true);
+    controls.paused = true;
+    this.finalLine();
+    this.persist(this.state);
+  }
+  finalLine() {
+    if (!this.finalSequence) return;
+    this.dialogue = [
+      "La Place des Lanternes vous accueille. Les vingt-quatre lumières se réveillent.",
+      "Debby — Tous ces petits souvenirs… Ils dessinent notre chemin.",
+      "Loyal — Et chaque lumière me donne envie d’inventer la suite avec toi. ♥",
+      this.finalSequence.message,
+    ][this.finalSequence.beat];
+    this.emit();
   }
   candidates() {
     const residents = this.npcs.map((n) => ({
@@ -338,6 +459,25 @@ export class Village extends Phaser.Scene {
       y: n.image.y,
       name: `Parler à ${n.name}`,
     }));
+    if (this.adventDay?.room === this.state.room)
+      residents.push({
+        id: "advent",
+        ...this.adventAnchor(),
+        name: `Surprise du jour ${this.adventDay.day}`,
+      });
+    if (
+      this.hunt &&
+      this.state.room === "village" &&
+      this.hunt.found.length < (this.hunt.step.items?.length ?? 0)
+    )
+      residents.push({
+        id: "advent-hunt",
+        ...this.huntPoint(),
+        name:
+          this.hunt.step.style === "loyal"
+            ? "Trouver Loyal"
+            : "Recueillir le petit bonheur",
+      });
     if (this.state.room !== "village")
       return [
         ...residents,
@@ -423,6 +563,18 @@ export class Village extends Phaser.Scene {
       )[0];
   }
   interact() {
+    if (this.finalSequence) {
+      this.finalSequence.beat++;
+      if (this.finalSequence.beat >= 4) {
+        this.finalSequence = null;
+        this.dialogue = "";
+        this.finalCompleted++;
+        controls.paused = false;
+        this.renderRoom();
+        this.emit();
+      } else this.finalLine();
+      return;
+    }
     if (controls.paused) return;
     if (this.dialogue) {
       if (this.activeDialogue) {
@@ -435,6 +587,20 @@ export class Village extends Phaser.Scene {
     }
     const t = this.nearest();
     if (!t) return;
+    if (t.id === "advent") {
+      this.adventRequested++;
+      this.emit();
+      return;
+    }
+    if (t.id === "advent-hunt" && this.hunt) {
+      const item = this.hunt.step.items?.[this.hunt.found.length];
+      if (item) this.hunt.found.push(item.id);
+      if (this.hunt.found.length === (this.hunt.step.items?.length ?? 0))
+        this.adventRequested++;
+      this.refreshAdvent();
+      this.emit();
+      return;
+    }
     const old = this.state.stage;
     if (t.id === "enter" || t.id.startsWith("enter:") || t.id === "exit") {
       const now = performance.now();
@@ -562,6 +728,10 @@ export class Village extends Phaser.Scene {
         .map((n) => `${n.name} ${npcActivity(n.id, this.state.clock)}`)
         .join(" · "),
       transitioning: performance.now() - this.lastPortalAt < 450,
+      adventRequested: this.adventRequested,
+      huntFound: this.hunt?.found ?? [],
+      finalCompleted: this.finalCompleted,
+      cinematic: !!this.finalSequence,
     };
     const key = JSON.stringify([
       v.save.stage,
@@ -575,6 +745,10 @@ export class Village extends Phaser.Scene {
       v.miniGame,
       v.period,
       v.transitioning,
+      v.adventRequested,
+      v.huntFound,
+      v.finalCompleted,
+      v.cinematic,
     ]);
     if (key !== this.lastView) {
       this.lastView = key;
@@ -613,56 +787,66 @@ export class Village extends Phaser.Scene {
       );
       this.player.setPosition(this.state.position.x, this.state.position.y);
 
-      const segment = Math.hypot(
-        this.player.x - this.lastTrail.x,
-        this.player.y - this.lastTrail.y,
-      );
-      if (segment >= 4) {
-        const origin = { ...this.lastTrail };
-        for (let distance = 4; distance <= segment; distance += 4) {
-          const point = {
-            x: origin.x + ((this.player.x - origin.x) * distance) / segment,
-            y: origin.y + ((this.player.y - origin.y) * distance) / segment,
-          };
-          if (!blocked(point, this.rects, w, h)) this.trail.push(point);
-          this.lastTrail = point;
-        }
-      }
-      let budget = speed * 1.2;
-      while (this.trail.length > 8 && budget > 0) {
-        const target = this.trail[0],
-          d = Math.hypot(target.x - this.loyal.x, target.y - this.loyal.y);
-        if (d < 1) {
-          this.trail.shift();
-          continue;
-        }
-        const distance = Math.min(d, budget);
-        const n = move(
-          this.loyal,
-          ((target.x - this.loyal.x) / d) * distance,
-          ((target.y - this.loyal.y) / d) * distance,
-          this.rects,
-          w,
-          h,
+      if (this.hunt?.step.style !== "loyal") {
+        const segment = Math.hypot(
+          this.player.x - this.lastTrail.x,
+          this.player.y - this.lastTrail.y,
         );
-        const covered = Math.hypot(n.x - this.loyal.x, n.y - this.loyal.y);
-        if (covered < 0.1) {
-          this.timer += delta;
-          if (this.timer > 1200) {
-            this.loyal.setPosition(target.x, target.y);
-            this.trail.shift();
-            this.timer = 0;
+        if (segment >= 4) {
+          const origin = { ...this.lastTrail };
+          for (let distance = 4; distance <= segment; distance += 4) {
+            const point = {
+              x: origin.x + ((this.player.x - origin.x) * distance) / segment,
+              y: origin.y + ((this.player.y - origin.y) * distance) / segment,
+            };
+            if (!blocked(point, this.rects, w, h)) this.trail.push(point);
+            this.lastTrail = point;
           }
-          break;
         }
-        this.loyal.setPosition(n.x, n.y);
-        budget -= covered;
-        this.timer = 0;
-        if (Math.hypot(target.x - n.x, target.y - n.y) < 1) this.trail.shift();
+        let budget = speed * 1.2;
+        while (this.trail.length > 8 && budget > 0) {
+          const target = this.trail[0],
+            d = Math.hypot(target.x - this.loyal.x, target.y - this.loyal.y);
+          if (d < 1) {
+            this.trail.shift();
+            continue;
+          }
+          const distance = Math.min(d, budget);
+          const n = move(
+            this.loyal,
+            ((target.x - this.loyal.x) / d) * distance,
+            ((target.y - this.loyal.y) / d) * distance,
+            this.rects,
+            w,
+            h,
+          );
+          const covered = Math.hypot(n.x - this.loyal.x, n.y - this.loyal.y);
+          if (covered < 0.1) {
+            this.timer += delta;
+            if (this.timer > 1200) {
+              this.loyal.setPosition(target.x, target.y);
+              this.trail.shift();
+              this.timer = 0;
+            }
+            break;
+          }
+          this.loyal.setPosition(n.x, n.y);
+          budget -= covered;
+          this.timer = 0;
+          if (Math.hypot(target.x - n.x, target.y - n.y) < 1)
+            this.trail.shift();
+        }
+        if (this.trail.length > 100) this.trail.shift();
       }
-      if (this.trail.length > 100) this.trail.shift();
     }
     this.player.setDepth(this.player.y);
+    if (this.finalSequence) {
+      this.loyal.setPosition(this.player.x - 26, this.player.y + 5);
+      this.adventDecor.forEach((light, i) =>
+        light.setAlpha(0.45 + 0.55 * Math.abs(Math.sin(_time / 350 + i))),
+      );
+      this.star?.setScale(1 + Math.sin(_time / 300) * 0.08);
+    }
     for (const npc of this.npcs) {
       const waitingForDebby =
         Math.hypot(npc.image.x - this.player.x, npc.image.y - this.player.y) <

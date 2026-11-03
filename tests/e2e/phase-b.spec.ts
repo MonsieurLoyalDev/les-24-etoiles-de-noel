@@ -1,10 +1,5 @@
 import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
-async function coord(page: Page, axis: "x" | "y") {
-  return Number(
-    await page.locator("canvas").getAttribute(`data-player-${axis}`),
-  );
-}
 const walk = walkTo;
 async function interact(page: Page, name: RegExp) {
   const button = page.getByRole("button", { name });
@@ -306,4 +301,3 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   });
   expect(errors).toEqual([]);
 });
-

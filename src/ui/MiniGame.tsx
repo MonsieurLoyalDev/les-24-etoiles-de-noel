@@ -1,3 +1,4 @@
+import { readGame, writeGame, isBoard, validMemory } from "./miniStorage";
 import { useEffect, useState } from "react";
 import {
   photoStart,
@@ -35,10 +36,28 @@ function Picture({ tile }: { tile: number }) {
     </svg>
   );
 }
-function Photo({ win }: { win: (n: number) => void }) {
-  const [board, setBoard] = useState(photoStart);
+export function Photo({
+  win,
+  storageKey,
+  pictureUrl,
+}: {
+  win: (score: number, evidence?: number[]) => void;
+  storageKey?: string;
+  pictureUrl?: string;
+}) {
+  const cached = readGame(storageKey);
+
+  const [board, setBoard] = useState<number[]>(() =>
+    isBoard(cached?.board) ? cached.board : photoStart,
+  );
   const [selected, setSelected] = useState<number>();
-  const [moves, setMoves] = useState(0);
+  const [moves, setMoves] = useState(() =>
+    typeof cached?.moves === "number" ? cached.moves : 0,
+  );
+  useEffect(
+    () => writeGame(storageKey, { board, moves }),
+    [storageKey, board, moves],
+  );
   const solved = photoSolved(board);
   return (
     <>
@@ -62,7 +81,18 @@ function Photo({ win }: { win: (n: number) => void }) {
               }
             }}
           >
-            <Picture tile={tile} />
+            {pictureUrl ? (
+              <span
+                className="photo-fragment"
+                style={{
+                  backgroundImage: `url("${pictureUrl}")`,
+                  backgroundSize: "300% 300%",
+                  backgroundPosition: `${(tile % 3) * 50}% ${Math.floor(tile / 3) * 50}%`,
+                }}
+              />
+            ) : (
+              <Picture tile={tile} />
+            )}
             <small>{tile + 1}</small>
           </button>
         ))}
@@ -74,20 +104,30 @@ function Photo({ win }: { win: (n: number) => void }) {
           : "Retrouvez le paysage hivernal."}
       </p>
       {solved && (
-        <button className="gold" onClick={() => win(moves)}>
+        <button className="gold" onClick={() => win(moves, board)}>
           Recevoir le souvenir
         </button>
       )}
     </>
   );
 }
-function MemoryGame({ win }: { win: (n: number) => void }) {
-  const [state, setState] = useState<Memory>(() => ({
-    deck: shuffle([0, 0, 1, 1, 2, 2, 3, 3]),
-    open: [],
-    matched: [],
-    moves: 0,
-  }));
+export function MemoryGame({
+  win,
+  storageKey,
+}: {
+  win: (score: number, evidence?: number[]) => void;
+  storageKey?: string;
+}) {
+  const [state, setState] = useState<Memory>(
+    () =>
+      validMemory(readGame(storageKey)) ?? {
+        deck: shuffle([0, 0, 1, 1, 2, 2, 3, 3]),
+        open: [],
+        matched: [],
+        moves: 0,
+      },
+  );
+  useEffect(() => writeGame(storageKey, state), [storageKey, state]);
   useEffect(() => {
     if (state.open.length !== 2) return;
     const timer = setTimeout(() => setState((s) => ({ ...s, open: [] })), 700);
@@ -121,19 +161,42 @@ function MemoryGame({ win }: { win: (n: number) => void }) {
         {state.matched.length / 2} / 4 paires · {state.moves} essais
       </p>
       {solved && (
-        <button className="gold" onClick={() => win(state.moves)}>
+        <button
+          className="gold"
+          onClick={() => win(state.moves, state.matched)}
+        >
           Recevoir le souvenir
         </button>
       )}
     </>
   );
 }
-function Wrapping({ win }: { win: (n: number) => void }) {
-  const [index, setIndex] = useState(0),
+export function Wrapping({
+  win,
+  storageKey,
+}: {
+  win: (score: number, evidence?: number[]) => void;
+  storageKey?: string;
+}) {
+  const cached = readGame(storageKey);
+  const [index, setIndex] = useState(() =>
+      typeof cached?.index === "number" &&
+      Number.isInteger(cached.index) &&
+      cached.index >= 0 &&
+      cached.index <= 3
+        ? cached.index
+        : 0,
+    ),
     [paper, setPaper] = useState(""),
     [ribbon, setRibbon] = useState(""),
     [feedback, setFeedback] = useState(""),
-    [attempts, setAttempts] = useState(0);
+    [attempts, setAttempts] = useState(() =>
+      typeof cached?.attempts === "number" ? cached.attempts : 0,
+    );
+  useEffect(
+    () => writeGame(storageKey, { index, attempts }),
+    [storageKey, index, attempts],
+  );
   const order = orders[index];
   return (
     <>
@@ -196,7 +259,7 @@ function Wrapping({ win }: { win: (n: number) => void }) {
             Les trois cadeaux sont prêts ! {attempts} essais. Oscar attend de
             vos nouvelles.
           </p>
-          <button className="gold" onClick={() => win(attempts)}>
+          <button className="gold" onClick={() => win(attempts, [0, 1, 2])}>
             Recevoir le souvenir
           </button>
         </>

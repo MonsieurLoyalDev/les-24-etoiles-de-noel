@@ -67,7 +67,7 @@ export function move(
   w: number,
   h: number,
 ): Point {
-  let n = { x: p.x, y: p.y };
+  const n = { x: p.x, y: p.y };
   const steps = Math.max(
     1,
     Math.ceil(Math.max(Math.abs(dx), Math.abs(dy)) / 3),

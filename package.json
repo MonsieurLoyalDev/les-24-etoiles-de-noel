@@ -1,30 +1,40 @@
 {
   "name": "les-24-etoiles-de-noel",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lint": "eslint src tests *.ts scripts",
+    "seed:demo": "tsx scripts/generate-seed.ts",
+    "test:security": "vitest run tests/security.test.ts",
+    "build:private": "tsc --noEmit && vite build --mode private && tsx scripts/check-private-build.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "idb": "^8.0.0",
     "phaser": "^3.90.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.15",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.56.0",
     "@types/node": "^26.6.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^10.14.0",
     "fake-indexeddb": "^6.0.0",
     "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.0",
+    "typescript-eslint": "^8.72.1",
     "vite": "^7.0.0",
     "vitest": "^5.1.0"
   }
