@@ -65,7 +65,9 @@ async function startMigrated(page: Page) {
     });
   });
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
-  await expect(page.locator("canvas")).toHaveAttribute("data-room", "village");
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", "village", {
+    timeout: 20000,
+  });
   await expect(page.locator(".quest")).toContainText("1 / 24");
 }
 async function resident(page: Page, name: string, accept = false) {

@@ -35,6 +35,8 @@ Les premiers essais ont ajusté le trajet de test pour contourner les arbres et 
 
 Le contrôle visuel a également corrigé une opacité de remplissage nulle qui masquait le voile de nuit. Le voile et les halos utilisent maintenant un remplissage opaque modulé par leur alpha ; les captures sont régénérées après cette correction.
 
+La CI initiale a aussi révélé un démarrage trop coûteux sur un moteur WebGL logiciel : la construction du sol lançait un dessin séparé pour chaque tuile. Elle utilise maintenant `beginDraw` / `batchDrawFrame` / `endDraw`, avec un seul lot de construction. Les tests autorisent jusqu’à 20 secondes pour le premier chargement. La CI force SwiftShader ; la variable `SOFTWARE_GL=1` permet de reproduire ce mode localement. Ces options ne changent pas le navigateur utilisé par le joueur.
+
 La simulation mobile utilise Chrome, pas Safari ni un téléphone physique. Aucun test de batterie, de FPS sur téléphone modeste ou de quota IndexedDB n’est revendiqué. Le rendu du sol est regroupé dans une texture et la neige limitée à 36 particules pour réduire le coût de rendu. Vite signale encore le poids du chunk Phaser (~1,21 Mo brut / 332 Ko gzip), sans empêcher le build.
 
 La position et les choix d’une conversation sont repris ; une manche de mini-jeu inachevée recommence si elle est quittée ou si la page est rechargée. Les habitants suivent des trajets et comportements simples selon un cycle fictif de trois minutes ; ce n’est pas une simulation quotidienne réelle. Le backend et l’authentification du calendrier restent futurs. La sauvegarde est locale, sans synchronisation entre appareils.

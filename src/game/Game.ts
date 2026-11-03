@@ -142,11 +142,13 @@ export class Village extends Phaser.Scene {
         .renderTexture(0, 0, 1024, 768)
         .setOrigin(0)
         .setTint(0xbcc8ef);
+      floor.beginDraw();
       map.ground.forEach((row, y) =>
         row.forEach((frame, x) =>
-          floor.drawFrame("ground", frame, x * 16, y * 16),
+          floor.batchDrawFrame("ground", frame, x * 16, y * 16),
         ),
       );
+      floor.endDraw();
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
@@ -704,4 +706,3 @@ export class Village extends Phaser.Scene {
     this.emit();
   }
 }
-

@@ -4,7 +4,9 @@ async function start(page: Page) {
   await page.goto("/");
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
   await expect(page.locator("canvas")).toBeVisible();
-  await expect(page.getByRole("dialog", { name: "Dialogue" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Dialogue" })).toBeVisible({
+    timeout: 20000,
+  });
   await page.getByRole("button", { name: /Continuer/ }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(
