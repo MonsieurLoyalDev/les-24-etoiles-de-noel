@@ -143,18 +143,12 @@
   "characters": {
     "debby": {
       "path": "/assets/characters/debby_placeholder.png",
-      "size": [
-        32,
-        48
-      ],
+      "size": [32, 48],
       "status": "placeholder, no animations"
     },
     "loyal": {
       "path": "/assets/characters/loyal_placeholder.png",
-      "size": [
-        32,
-        48
-      ],
+      "size": [32, 48],
       "status": "placeholder, no animations"
     }
   },
