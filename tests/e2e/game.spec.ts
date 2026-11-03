@@ -1,3 +1,4 @@
+import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
 async function start(page: Page) {
   page.on("pageerror", (e) => console.log("BROWSER ERROR", e.message));
@@ -18,20 +19,8 @@ async function coordinate(page: Page, axis: "x" | "y") {
     await page.locator("canvas").getAttribute(`data-player-${axis}`),
   );
 }
-async function walk(page: Page, key: string, axis: "x" | "y", target: number) {
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  const direction = ["ArrowDown", "ArrowRight"].includes(key) ? 1 : -1;
-  await page.keyboard.down(key);
-  try {
-    await expect
-      .poll(async () => direction * ((await coordinate(page, axis)) - target), {
-        timeout: 15000,
-        intervals: [25],
-      })
-      .toBeGreaterThanOrEqual(0);
-  } finally {
-    await page.keyboard.up(key);
-  }
+async function walk(page: Page, _key: string, axis: "x" | "y", target: number) {
+  await walkTo(page, axis, target);
 }
 test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   const errors: string[] = [];

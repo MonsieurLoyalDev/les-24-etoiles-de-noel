@@ -8,7 +8,7 @@ Version 0.2.0, Windows, Node.js 24.14.0, Chrome headless. La Phase A n’a pas �
 |---|---|
 | `npm test` | **33 tests réussis**, 3 fichiers |
 | `npm run build` | **TypeScript strict et build Vite réussis** |
-| `npm run test:e2e` | **6 tests réussis**, environ 3 min 12 s |
+| `npm run test:e2e` | **6 tests réussis**, durée variable selon le mode de rendu |
 | PC 1280 × 800 | Phase A, joystick, parcours Phase B complet réussis |
 | Mobile simulé 390 × 844 | Phase A, joystick, parcours Phase B complet réussis |
 | Erreurs JavaScript des parcours complets | Aucune |
@@ -38,6 +38,8 @@ Le contrôle visuel a également corrigé une opacité de remplissage nulle qui 
 La CI initiale a aussi révélé un démarrage trop coûteux sur un moteur WebGL logiciel : la construction du sol lançait un dessin séparé pour chaque tuile. Elle utilise maintenant `beginDraw` / `batchDrawFrame` / `endDraw`, avec un seul lot de construction. Les tests autorisent jusqu’à 20 secondes pour le premier chargement. La CI force SwiftShader ; la variable `SOFTWARE_GL=1` permet de reproduire ce mode localement. Ces options ne changent pas le navigateur utilisé par le joueur.
 
 Une deuxième vérification Linux a montré que le plafonnement du temps de déplacement ralentissait Debby sur les grands écrans rendus très lentement. Les déplacements utilisent maintenant le temps écoulé jusqu’à 200 ms, avec des sous-pas de 3 px pour ne pas traverser les murs. Deux tests vérifient un déplacement rapide face à une paroi fine et une distance identique en une seconde à 5 et 60 images/seconde. Le trajet de Loyal est échantillonné par distance et consommé selon son budget de déplacement ; le parcours vérifie aussi qu’il reste près de Debby.
+
+Les commandes de test relâchent désormais les flèches dans le navigateur à l’image où le repère est atteint, pour éviter qu’un délai de communication garde une touche appuyée après un virage. Cela utilise les événements clavier du jeu, sans modifier ses coordonnées. Les habitants attendent à portée de conversation, ce qui stabilise également les interactions du joueur.
 
 La simulation mobile utilise Chrome, pas Safari ni un téléphone physique. Aucun test de batterie, de FPS sur téléphone modeste ou de quota IndexedDB n’est revendiqué. Le rendu du sol est regroupé dans une texture et la neige limitée à 36 particules pour réduire le coût de rendu. Vite signale encore le poids du chunk Phaser (~1,21 Mo brut / 332 Ko gzip), sans empêcher le build.
 

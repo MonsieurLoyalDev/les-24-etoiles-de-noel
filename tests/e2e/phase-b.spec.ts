@@ -1,34 +1,11 @@
+import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
 async function coord(page: Page, axis: "x" | "y") {
   return Number(
     await page.locator("canvas").getAttribute(`data-player-${axis}`),
   );
 }
-async function walk(page: Page, axis: "x" | "y", target: number) {
-  await expect(page.locator(".dialogue")).toHaveCount(0);
-  const start = await coord(page, axis);
-  if (Math.abs(start - target) < 3) return;
-  const direction = target > start ? 1 : -1;
-  const key =
-    axis === "x"
-      ? direction > 0
-        ? "ArrowRight"
-        : "ArrowLeft"
-      : direction > 0
-        ? "ArrowDown"
-        : "ArrowUp";
-  await page.keyboard.down(key);
-  try {
-    await expect
-      .poll(async () => direction * ((await coord(page, axis)) - target), {
-        timeout: 20000,
-        intervals: [25],
-      })
-      .toBeGreaterThanOrEqual(0);
-  } finally {
-    await page.keyboard.up(key);
-  }
-}
+const walk = walkTo;
 async function interact(page: Page, name: RegExp) {
   const button = page.getByRole("button", { name });
   await expect(button).toBeEnabled({ timeout: 10000 });
