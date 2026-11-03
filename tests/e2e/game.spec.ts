@@ -48,6 +48,9 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   ).toBeEnabled();
   await page.keyboard.press("e");
   await expect(page.locator(".location")).toContainText("Maison de Loyal");
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", "house");
+  await page.waitForTimeout(500);
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", "house");
   await walk(page, "ArrowUp", "y", 158);
   await page.keyboard.press("e");
   await expect(page.getByRole("dialog")).toContainText("tu rends même");

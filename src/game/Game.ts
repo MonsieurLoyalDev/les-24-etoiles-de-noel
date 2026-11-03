@@ -71,6 +71,8 @@ export class Village extends Phaser.Scene {
   lamps: Phaser.GameObjects.Arc[] = [];
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
+  lastEEvent = -1;
+  lastPortalAt = -Infinity;
   constructor(
     save: Save,
     publish: (v: View) => void,
@@ -98,7 +100,11 @@ export class Village extends Phaser.Scene {
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
     ) as typeof this.keys;
     this.input.keyboard!.addCapture(["UP", "DOWN", "LEFT", "RIGHT", "SPACE"]);
-    this.input.keyboard!.on("keydown-E", () => this.interact());
+    this.input.keyboard!.on("keydown-E", (event: KeyboardEvent) => {
+      if (event.repeat || event.timeStamp === this.lastEEvent) return;
+      this.lastEEvent = event.timeStamp;
+      this.interact();
+    });
     this.input.keyboard!.on("keydown-SPACE", () => {
       if (this.dialogue) this.interact();
     });
@@ -430,6 +436,9 @@ export class Village extends Phaser.Scene {
     if (!t) return;
     const old = this.state.stage;
     if (t.id === "enter" || t.id.startsWith("enter:") || t.id === "exit") {
+      const now = performance.now();
+      if (now - this.lastPortalAt < 450) return;
+      this.lastPortalAt = now;
       if (t.id === "exit") {
         const building = map.buildings.find(
           (b) => (b.id === "loyal_house" ? "house" : b.id) === this.state.room,

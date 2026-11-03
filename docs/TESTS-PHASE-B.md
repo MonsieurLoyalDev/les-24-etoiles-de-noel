@@ -41,6 +41,8 @@ Une deuxième vérification Linux a montré que le plafonnement du temps de dép
 
 Les commandes de test relâchent désormais les flèches dans le navigateur à l’image où le repère est atteint, pour éviter qu’un délai de communication garde une touche appuyée après un virage. Cela utilise les événements clavier du jeu, sans modifier ses coordonnées. Les habitants attendent à portée de conversation, ce qui stabilise également les interactions du joueur.
 
+Le parcours de non-régression contrôle que l’entrée au clavier reste dans la maison après la transition. Le jeu ignore les répétitions de la touche E et les doubles événements de même horodatage ; une courte protection des portails empêche un rebond entrée/sortie involontaire.
+
 La simulation mobile utilise Chrome, pas Safari ni un téléphone physique. Aucun test de batterie, de FPS sur téléphone modeste ou de quota IndexedDB n’est revendiqué. Le rendu du sol est regroupé dans une texture et la neige limitée à 36 particules pour réduire le coût de rendu. Vite signale encore le poids du chunk Phaser (~1,21 Mo brut / 332 Ko gzip), sans empêcher le build.
 
 La position et les choix d’une conversation sont repris ; une manche de mini-jeu inachevée recommence si elle est quittée ou si la page est rechargée. Les habitants suivent des trajets et comportements simples selon un cycle fictif de trois minutes ; ce n’est pas une simulation quotidienne réelle. Le backend et l’authentification du calendrier restent futurs. La sauvegarde est locale, sans synchronisation entre appareils.
