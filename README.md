@@ -42,6 +42,7 @@ Debby et Loyal restent humains, en tenues hivernales, avec lunettes rondes. Aucu
 ## Documentation
 
 - [Guide et architecture Phase B](docs/PHASE-B.md)
+- [Résultats des tests Phase B](docs/TESTS-PHASE-B.md)
 - [Analyse du pack original](docs/ANALYSE.md)
 - [Pipeline artistique futur](docs/ASSETS.md)
 - [Rapport historique Phase A](docs/TESTS.md)
