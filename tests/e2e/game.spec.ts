@@ -43,6 +43,17 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   // From (512,608): avoid pine at (800,624), approach doorway from below.
   await walk(page, "ArrowDown", "y", 646);
   await walk(page, "ArrowRight", "x", 800);
+  await expect
+    .poll(() =>
+      page.locator("canvas").evaluate((el) => {
+        const s = (el as HTMLElement).dataset;
+        return Math.hypot(
+          Number(s.playerX) - Number(s.loyalX),
+          Number(s.playerY) - Number(s.loyalY),
+        );
+      }),
+    )
+    .toBeLessThan(96);
   await expect(
     page.getByRole("button", { name: /Maison de Loyal/ }),
   ).toBeEnabled();

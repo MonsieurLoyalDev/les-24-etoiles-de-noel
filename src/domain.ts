@@ -68,9 +68,22 @@ export function move(
   h: number,
 ): Point {
   let n = { x: p.x, y: p.y };
-  if (!blocked({ x: n.x + dx, y: n.y }, rects, w, h)) n.x += dx;
-  if (!blocked({ x: n.x, y: n.y + dy }, rects, w, h)) n.y += dy;
+  const steps = Math.max(
+    1,
+    Math.ceil(Math.max(Math.abs(dx), Math.abs(dy)) / 3),
+  );
+  for (let i = 0; i < steps; i++) {
+    if (!blocked({ x: n.x + dx / steps, y: n.y }, rects, w, h))
+      n.x += dx / steps;
+    if (!blocked({ x: n.x, y: n.y + dy / steps }, rects, w, h))
+      n.y += dy / steps;
+  }
   return n;
+}
+// Keep speed at 105 world pixels/second even at 5 FPS. Substeps in move()
+// prevent large frames from jumping through furniture or narrow walls.
+export function movementDistance(deltaMs: number) {
+  return Math.max(0, Math.min(deltaMs, 200)) * 0.105;
 }
 export function visible(a: Point, b: Point, rects: Rect[]) {
   const d = Math.hypot(a.x - b.x, a.y - b.y);

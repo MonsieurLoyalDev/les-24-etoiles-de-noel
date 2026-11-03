@@ -21,6 +21,7 @@ import type { MiniKind } from "../ui/MiniGame";
 import {
   blocked,
   move,
+  movementDistance,
   visible,
   objectives,
   type Point,
@@ -584,9 +585,9 @@ export class Village extends Phaser.Scene {
     if (down("UP") || down("W") || down("Z")) y--;
     if (down("DOWN") || down("S")) y++;
     if (!this.dialogue && !controls.paused) {
-      this.state.clock = (this.state.clock + Math.min(delta, 100)) % 180000;
+      this.state.clock = (this.state.clock + Math.min(delta, 200)) % 180000;
       const len = Math.hypot(x, y) || 1,
-        speed = Math.min(delta, 40) * 0.105;
+        speed = movementDistance(delta);
       this.state.position = move(
         this.player,
         (x / len) * speed,
@@ -596,40 +597,53 @@ export class Village extends Phaser.Scene {
         h,
       );
       this.player.setPosition(this.state.position.x, this.state.position.y);
-      if (
-        Math.hypot(
-          this.player.x - this.lastTrail.x,
-          this.player.y - this.lastTrail.y,
-        ) > 4
-      ) {
-        this.trail.push({ ...this.state.position });
-        this.lastTrail = { ...this.state.position };
+
+      const segment = Math.hypot(
+        this.player.x - this.lastTrail.x,
+        this.player.y - this.lastTrail.y,
+      );
+      if (segment >= 4) {
+        const origin = { ...this.lastTrail };
+        for (let distance = 4; distance <= segment; distance += 4) {
+          const point = {
+            x: origin.x + ((this.player.x - origin.x) * distance) / segment,
+            y: origin.y + ((this.player.y - origin.y) * distance) / segment,
+          };
+          if (!blocked(point, this.rects, w, h)) this.trail.push(point);
+          this.lastTrail = point;
+        }
       }
-      if (this.trail.length > 8) {
-        const p = this.trail[0],
-          d = Math.hypot(p.x - this.loyal.x, p.y - this.loyal.y);
+      let budget = speed * 1.2;
+      while (this.trail.length > 8 && budget > 0) {
+        const target = this.trail[0],
+          d = Math.hypot(target.x - this.loyal.x, target.y - this.loyal.y);
+        if (d < 1) {
+          this.trail.shift();
+          continue;
+        }
+        const distance = Math.min(d, budget);
         const n = move(
           this.loyal,
-          ((p.x - this.loyal.x) / Math.max(1, d)) * Math.min(d, speed * 1.2),
-          ((p.y - this.loyal.y) / Math.max(1, d)) * Math.min(d, speed * 1.2),
+          ((target.x - this.loyal.x) / d) * distance,
+          ((target.y - this.loyal.y) / d) * distance,
           this.rects,
           w,
           h,
         );
-        if (
-          Math.hypot(n.x - this.loyal.x, n.y - this.loyal.y) < 0.1 &&
-          d > 10
-        ) {
+        const covered = Math.hypot(n.x - this.loyal.x, n.y - this.loyal.y);
+        if (covered < 0.1) {
           this.timer += delta;
           if (this.timer > 1200) {
-            this.loyal.setPosition(p.x, p.y);
+            this.loyal.setPosition(target.x, target.y);
+            this.trail.shift();
             this.timer = 0;
           }
-        } else {
-          this.loyal.setPosition(n.x, n.y);
-          this.timer = 0;
+          break;
         }
-        if (d < 6) this.trail.shift();
+        this.loyal.setPosition(n.x, n.y);
+        budget -= covered;
+        this.timer = 0;
+        if (Math.hypot(target.x - n.x, target.y - n.y) < 1) this.trail.shift();
       }
       if (this.trail.length > 100) this.trail.shift();
     }
@@ -639,7 +653,7 @@ export class Village extends Phaser.Scene {
         const target = npc.path[npc.step],
           d = Math.hypot(target.x - npc.image.x, target.y - npc.image.y);
         const night = period(this.state.clock) === 3;
-        const speed = Math.min(delta, 40) * (night ? 0.012 : 0.023);
+        const speed = Math.min(delta, 200) * (night ? 0.012 : 0.023);
         const n = move(
           npc.image,
           ((target.x - npc.image.x) / Math.max(1, d)) * Math.min(d, speed),
@@ -699,6 +713,8 @@ export class Village extends Phaser.Scene {
     // changing positions or bypassing gameplay, regardless of rendering speed.
     this.game.canvas.dataset.playerX = String(this.player.x);
     this.game.canvas.dataset.playerY = String(this.player.y);
+    this.game.canvas.dataset.loyalX = String(this.loyal.x);
+    this.game.canvas.dataset.loyalY = String(this.loyal.y);
     this.game.canvas.dataset.room = this.state.room;
     this.game.canvas.dataset.npcs = JSON.stringify(
       this.npcs.map((n) => ({ id: n.id, x: n.image.x, y: n.image.y })),

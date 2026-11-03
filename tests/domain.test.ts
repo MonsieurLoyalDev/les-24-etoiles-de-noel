@@ -6,6 +6,7 @@ import {
   visible,
   decode,
   initial,
+  movementDistance,
 } from "../src/domain";
 import map from "../src/game/maps/place-des-lanternes.json";
 describe("progression", () => {
@@ -24,7 +25,7 @@ describe("collisions", () => {
     expect(blocked({ x: 25, y: 25 }, walls, 100, 100)).toBe(true);
     expect(blocked({ x: 0, y: 10 }, walls, 100, 100)).toBe(true);
     expect(move({ x: 10, y: 30 }, 10, 3, walls, 100, 100)).toEqual({
-      x: 10,
+      x: 12.5,
       y: 33,
     });
   });
@@ -53,4 +54,21 @@ it("ne copie jamais les objets du moteur dans les coordonnées sauvegardées", (
   const actor = { x: 10, y: 10, scene: { callback: () => {} } };
   expect(move(actor, 1, 1, [], 100, 100)).toEqual({ x: 11, y: 11 });
   expect(() => structuredClone(move(actor, 1, 1, [], 100, 100))).not.toThrow();
+});
+it("ne traverse pas un mur lors d’une grande image de déplacement", () => {
+  const walls = [{ x: 30, y: 0, w: 2, h: 100 }];
+  const p = move({ x: 10, y: 50 }, 90, 0, walls, 200, 100);
+  expect(p.x).toBeLessThanOrEqual(24);
+  const reverse = move({ x: 90, y: 50 }, -80, 0, walls, 200, 100);
+  expect(reverse.x).toBeGreaterThanOrEqual(38);
+});
+it("conserve la même distance par seconde à 5 et à 60 images par seconde", () => {
+  function simulate(frames: number) {
+    let p = { x: 10, y: 50 };
+    for (let i = 0; i < frames; i++)
+      p = move(p, movementDistance(1000 / frames), 0, [], 500, 100);
+    return p.x;
+  }
+  expect(simulate(5)).toBeCloseTo(115, 8);
+  expect(simulate(60)).toBeCloseTo(simulate(5), 8);
 });
