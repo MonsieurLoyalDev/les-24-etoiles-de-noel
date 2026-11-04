@@ -1,0 +1,42 @@
+name: Prepare approved VPS artifact
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        description: Exact reviewed 40-character commit SHA
+        required: true
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Manual build only. VPS activation remains a separate human action.
+    # No paid GitHub environment protection feature is assumed.
+    env:
+      APPROVED_COMMIT: ${{ inputs.commit }}
+      VITE_APP_MODE: supabase
+      VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+      VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
+    steps:
+      - name: Validate exact commit
+        run: node -e 'if(!/^[a-f0-9]{40}$/.test(process.env.APPROVED_COMMIT))process.exit(1)'
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.commit }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build:private
+      - run: npm run package:vps
+      - uses: actions/upload-artifact@v4
+        with:
+          name: etoilebois-private-${{ inputs.commit }}
+          path: artifacts/etoilebois-private/
+          retention-days: 7
+      # No SSH key, SSH step, Nginx reload or PM2 operation in this workflow.

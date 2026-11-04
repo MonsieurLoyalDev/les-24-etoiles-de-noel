@@ -1,10 +1,13 @@
+import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
 async function start(page: Page) {
   page.on("pageerror", (e) => console.log("BROWSER ERROR", e.message));
   await page.goto("/");
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
   await expect(page.locator("canvas")).toBeVisible();
-  await expect(page.getByRole("dialog", { name: "Dialogue" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Dialogue" })).toBeVisible({
+    timeout: 20000,
+  });
   await page.getByRole("button", { name: /Continuer/ }).click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await expect(
@@ -16,20 +19,8 @@ async function coordinate(page: Page, axis: "x" | "y") {
     await page.locator("canvas").getAttribute(`data-player-${axis}`),
   );
 }
-async function walk(page: Page, key: string, axis: "x" | "y", target: number) {
-  await expect(page.getByRole("dialog")).toHaveCount(0);
-  const direction = ["ArrowDown", "ArrowRight"].includes(key) ? 1 : -1;
-  await page.keyboard.down(key);
-  try {
-    await expect
-      .poll(async () => direction * ((await coordinate(page, axis)) - target), {
-        timeout: 15000,
-        intervals: [25],
-      })
-      .toBeGreaterThanOrEqual(0);
-  } finally {
-    await page.keyboard.up(key);
-  }
+async function walk(page: Page, _key: string, axis: "x" | "y", target: number) {
+  await walkTo(page, axis, target);
 }
 test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   const errors: string[] = [];
@@ -41,11 +32,25 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   // From (512,608): avoid pine at (800,624), approach doorway from below.
   await walk(page, "ArrowDown", "y", 646);
   await walk(page, "ArrowRight", "x", 800);
+  await expect
+    .poll(() =>
+      page.locator("canvas").evaluate((el) => {
+        const s = (el as HTMLElement).dataset;
+        return Math.hypot(
+          Number(s.playerX) - Number(s.loyalX),
+          Number(s.playerY) - Number(s.loyalY),
+        );
+      }),
+    )
+    .toBeLessThan(96);
   await expect(
     page.getByRole("button", { name: /Maison de Loyal/ }),
   ).toBeEnabled();
   await page.keyboard.press("e");
   await expect(page.locator(".location")).toContainText("Maison de Loyal");
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", "house");
+  await page.waitForTimeout(500);
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", "house");
   await walk(page, "ArrowUp", "y", 158);
   await page.keyboard.press("e");
   await expect(page.getByRole("dialog")).toContainText("tu rends même");

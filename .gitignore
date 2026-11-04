@@ -4,3 +4,13 @@ test-results/
 playwright-report/
 .env*
 !.env.example
+artifacts/
+*.enc
+*.dump
+*.key
+*.pem
+*.pgpass
+audit-vps*.txt
+*.env
+pg_service.conf
+pgpass
