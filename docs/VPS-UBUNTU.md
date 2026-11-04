@@ -49,30 +49,24 @@ Les paramètres VOTRE_UTILISATEUR_PUTTY (ici ubuntu), PROJECT_REF, RUN_ID, SHA e
 
 ### Dossiers dédiés
 
-Les noms doivent être libres ; si `etoilebois` ou les dossiers existent déjà, les auditer avant ces commandes.
+Les noms doivent être libres. Le script de préparation contrôle tous les chemins, le compte, les outils et la version Node avant toute création. Il refuse un dossier existant, un lien ou un utilisateur/groupe déjà présent ; il ne les répare pas par écrasement.
+
+Après validation, transférer avec WinSCP le dossier ops complet dans votre dossier personnel sous le nom etoilebois-ops (avec son sous-dossier lib). Exécuter ensuite uniquement :
 
 ```bash
-ETB_SSH_USER=ubuntu
-sudo useradd --system --user-group --create-home --home-dir /var/lib/etoilebois --shell /usr/sbin/nologin etoilebois
-sudo install -d -m 0755 -o etoilebois -g etoilebois /var/lib/etoilebois
-sudo install -d -m 0755 -o etoilebois -g etoilebois /var/www/etoilebois
-sudo install -d -m 2750 -o "$ETB_SSH_USER" -g etoilebois /var/lib/etoilebois/inbox
-sudo install -d -m 0700 -o etoilebois -g etoilebois /etc/etoilebois /var/backups/etoilebois
+sudo bash "$HOME/etoilebois-ops/bootstrap-vps.sh" --apply-approved --ssh-user ubuntu
 ```
 
-Dans WinSCP, transférer le dossier `ops` du code approuvé vers `/var/lib/etoilebois/inbox/tools/ops`. Conserver les fichiers lisibles par le groupe `etoilebois`, sans ajouter de droit d'écriture au groupe sur les outils. Ne transférer aucun fichier dans un dossier de bot. Après contrôle des sources, installer les seuls outils de déploiement dans un répertoire root afin que le compte du site ne puisse pas les modifier :
+Ce script crée le compte système sans connexion interactive, les nouveaux dossiers et les seuls outils de déploiement root en lecture seule. Il n'installe aucun paquet, ne modifie aucun service et ne contacte aucune base de données. En cas d'erreur, arrêter et examiner ; aucun nettoyage ou retrait de compte n'est lancé automatiquement.
+
+Pour les étapes suivantes :
 
 ```bash
 ETB_NODE=/usr/bin/node
-ETB_UPLOADED_OPS=/var/lib/etoilebois/inbox/tools/ops
-sudo install -d -m 0755 /usr/local/lib/etoilebois/ops/lib
-sudo install -m 0644 "$ETB_UPLOADED_OPS/release.mjs" "$ETB_UPLOADED_OPS/nginx.mjs" "$ETB_UPLOADED_OPS/cert-renew-hook.sh" /usr/local/lib/etoilebois/ops/
-sudo install -m 0644 "$ETB_UPLOADED_OPS/lib/artifact.mjs" /usr/local/lib/etoilebois/ops/lib/
 ETB_OPS=/usr/local/lib/etoilebois/ops
-sudo -u etoilebois "$ETB_NODE" "$ETB_OPS/release.mjs" init /var/www/etoilebois --confirm-init
 ```
 
-Le marqueur protège ce dossier. L'initialisation refuse un dossier non vide, un lien symbolique ou un chemin inattendu. Aucun `chmod -R`, `chown -R` ou nettoyage global n'est requis.
+Les paquets de versions seront transférés dans /var/lib/etoilebois/inbox. Aucun dossier de bot ou checkout modifié n'est utilisé. Les vrais secrets restent hors de ces paquets.
 
 ## 4. Configurer Supabase avant le vrai calendrier
 
@@ -133,7 +127,8 @@ Le générateur écrit seulement de nouveaux fichiers et refuse d'écraser un fi
 sudo test ! -e /etc/nginx/sites-available/etoilebois.conf
 sudo test ! -e /etc/nginx/sites-enabled/etoilebois.conf
 # S'arrêter si l'un des tests échoue ; ne pas remplacer une configuration existante.
-sudo install -m 0644 "$HOME/etoilebois.http.conf" /etc/nginx/sites-available/etoilebois.conf
+sudo "$ETB_NODE" "$ETB_OPS/nginx.mjs" etoilebois.loyaldev.fr https://PROJECT_REF.supabase.co /etc/nginx/sites-available/etoilebois.conf http
+sudo cmp "$HOME/etoilebois.http.conf" /etc/nginx/sites-available/etoilebois.conf
 sudo ln -s /etc/nginx/sites-available/etoilebois.conf /etc/nginx/sites-enabled/etoilebois.conf
 sudo nginx -t && sudo systemctl reload nginx
 ```
@@ -154,8 +149,7 @@ La méthode webroot ne coupe pas le serveur et ne réécrit pas ses autres confi
 
 ```bash
 sudo cp --no-clobber /etc/nginx/sites-available/etoilebois.conf /root/etoilebois-nginx-http.conf
-sudo install -m 0644 "$HOME/etoilebois.https.conf" /etc/nginx/sites-available/etoilebois.conf
-sudo nginx -t && sudo systemctl reload nginx
+sudo cmp "$HOME/etoilebois.http.conf" /etc/nginx/sites-available/etoilebois.conf && sudo install -m 0644 "$HOME/etoilebois.https.conf" /etc/nginx/sites-available/etoilebois.conf && sudo nginx -t && sudo systemctl reload nginx
 ```
 
 Confirmer le timer Certbot existant et la procédure de renouvellement, sans modifier les autres certificats :

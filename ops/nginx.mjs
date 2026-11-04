@@ -62,7 +62,7 @@ export function nginxConfig(
  location = /build-info.json { return 404; }
  location = /release-manifest.json { return 404; }
  location = /index.html { expires -1; etag off; if_modified_since off; try_files $uri =404; }
- location ~* ^/assets/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{8,}\\.(js|css|woff2?|png|webp)$ { expires 1y; try_files $uri @historic_asset; }
+ location ~* "^/assets/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{8,}\\.(js|css|woff2?|png|webp)$" { expires 1y; try_files $uri @historic_asset; }
  location /assets/ { expires 5m; try_files $uri =404; }
  location @historic_asset { internal; root ${root}/historic; expires 1y; try_files $uri =404; }
  location / { try_files $uri $uri/ /index.html; }
