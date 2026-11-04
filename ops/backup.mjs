@@ -11,9 +11,10 @@ import { tmpdir } from "node:os";
 import { Readable } from "node:stream";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { randomUUID } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 import { encrypt, decrypt, loadBackupKey, fileHash } from "./lib/crypto.mjs";
-const aad = (n) => `etoilebois-backup-v1:${n}`;
+const aad = (n, id) => `etoilebois-backup-v1:${id ? `${id}:` : ""}${n}`;
 const tables = [
   "public.app_members",
   "public.advent_days",
@@ -62,6 +63,7 @@ export async function backupData({
   mkdirSync(directory, { mode: 0o700 });
   const manifest = {
     format: 1,
+    backupId: randomUUID(),
     scope: "application-data-and-media; Auth users excluded",
     projectOrigin,
     createdAt: new Date().toISOString(),
@@ -71,7 +73,7 @@ export async function backupData({
     dump.stream,
     join(directory, "database.enc"),
     key,
-    aad("database.enc"),
+    aad("database.enc", manifest.backupId),
   );
   await dump.done;
   const bucket = client.storage.from("advent-media");
@@ -84,7 +86,7 @@ export async function backupData({
       Readable.fromWeb(data.stream()),
       join(directory, file),
       key,
-      aad(file),
+      aad(file, manifest.backupId),
     );
     manifest.media.push({ ...item, file });
   }
@@ -119,6 +121,9 @@ export async function verifyBackup(directory, key) {
   const m = JSON.parse(readFileSync(manifestPath, "utf8"));
   if (
     m.format !== 1 ||
+    !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(
+      m.backupId ?? "",
+    ) ||
     !Array.isArray(m.media) ||
     m.media.length > 100000 ||
     new URL(m.projectOrigin).protocol !== "https:"
@@ -137,14 +142,14 @@ export async function verifyBackup(directory, key) {
       join(directory, item.file),
       join(temp, item.file + ".plain"),
       key,
-      aad(item.file),
+      aad(item.file, m.backupId),
     );
   }
   await decrypt(
     join(directory, "database.enc"),
     join(temp, "database.dump"),
     key,
-    aad("database.enc"),
+    aad("database.enc", m.backupId),
   );
   return { temp, manifest: m };
 }

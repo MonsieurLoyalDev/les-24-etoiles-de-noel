@@ -29,7 +29,7 @@ Les tests unitaires couvrent l'absence de jeton et la réponse 429 ; cela **ne p
 
 ## Périmètre des sauvegardes
 
-`ops/backup.mjs` exporte les données de `app_members`, `advent_days`, `private.advent_rules`, `advent_progress` via `pg_dump`, puis télécharge les octets de tous les médias du bucket privé `advent-media`. Chaque fichier est chiffré en flux avec AES-256-GCM, IV aléatoire et authentification liée à son identifiant. Un marqueur `COMPLETE` n'est écrit qu'après succès complet. Une mauvaise clé, un échange de fichiers, une corruption ou une sauvegarde incomplète bloque la restauration.
+`ops/backup.mjs` exporte les données de `app_members`, `advent_days`, `private.advent_rules`, `advent_progress` via `pg_dump`, puis télécharge les octets de tous les médias du bucket privé `advent-media`. Chaque fichier est chiffré en flux avec AES-256-GCM, IV aléatoire et authentification liée à son identifiant et à un identifiant unique de sauvegarde. Un marqueur `COMPLETE` n'est écrit qu'après succès complet. Une mauvaise clé, un mélange de fichiers de sauvegardes différentes, une corruption ou une sauvegarde incomplète bloque la restauration.
 
 **Cet export applicatif exclut les identités Auth et les paramètres du service.** Conserver aussi les sauvegardes complètes Supabase adaptées à votre plan (ou une procédure officielle d'export/restauration de la plateforme). Les UUID Auth doivent être préservés avant de restaurer les lignes applicatives : les clés étrangères refusent des utilisateurs manquants. Les sauvegardes de base de données Supabase n'incluent pas les octets Storage : notre export des médias est complémentaire. [Source officielle](https://supabase.com/docs/guides/platform/backups).
 

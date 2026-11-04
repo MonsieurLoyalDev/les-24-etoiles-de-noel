@@ -78,3 +78,5 @@ Inventaire PM2 en direct transmis sous le propriétaire `ubuntu` :
 Les quatre utilisent `/usr/bin/node` version 22.22.3. Ces valeurs constituent un état de référence à comparer après une éventuelle intervention validée, pas une garantie d'absence de redémarrages autonomes à l'avenir. Aucune commande de modification PM2 n'a été demandée.
 
 L'audit permet désormais de préparer le vhost isolé. Les commandes de contrôle et la recette sur le serveur réel restent à effectuer après validation ; **le jeu n'est pas déclaré déployé**. Supabase n'a pas été provisionné dans cette session.
+
+Un contrôle HTTP HEAD supplémentaire a obtenu 200 sans redirection sur le domaine. Le contrôle HTTPS avec validation normale du certificat échoue avec `ERR_TLS_CERT_ALTNAME_INVALID` : le certificat présenté ne couvre pas ce nom. Ces réponses de l'infrastructure existante ne constituent pas un déploiement du jeu. Aucun contournement de validation TLS n'est prévu en production.

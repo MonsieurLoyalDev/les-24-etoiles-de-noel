@@ -95,7 +95,7 @@ const body = nginxConfig(domain, "https://example.supabase.co", {
 const config = join(temp, "nginx.conf");
 writeFileSync(
   config,
-  `pid ${temp}/nginx.pid;\nerror_log ${temp}/main-error.log;\nevents {}\nhttp { client_body_temp_path ${temp}/body; proxy_temp_path ${temp}/proxy; fastcgi_temp_path ${temp}/fastcgi; uwsgi_temp_path ${temp}/uwsgi; scgi_temp_path ${temp}/scgi; include /etc/nginx/mime.types; ${body} }\n`,
+  `pid ${temp}/nginx.pid;\nerror_log ${temp}/main-error.log;\nevents {}\nhttp { access_log ${temp}/http-access.log; client_body_temp_path ${temp}/body; proxy_temp_path ${temp}/proxy; fastcgi_temp_path ${temp}/fastcgi; uwsgi_temp_path ${temp}/uwsgi; scgi_temp_path ${temp}/scgi; include /etc/nginx/mime.types; ${body} }\n`,
 );
 execFileSync("nginx", ["-t", "-p", temp, "-c", config], { stdio: "inherit" });
 const ownedNginx = spawn(

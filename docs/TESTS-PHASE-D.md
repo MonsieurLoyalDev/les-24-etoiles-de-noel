@@ -8,13 +8,14 @@ Version 0.4.0. Les constats VPS proviennent des deux audits en lecture seule ex�
 |---|---|
 | ESLint | Réussi |
 | TypeScript strict / build Vite | Builds privé et démonstration réussis |
-| Tests unitaires/SQL et infrastructure | 110 réussis, 2 tests POSIX réservés à Linux, 8 fichiers |
+| Tests unitaires/SQL et infrastructure | 111 réussis, 2 tests POSIX réservés à Linux, 8 fichiers |
 | Playwright Phases A/B/C | 10 tests réussis, PC 1280×800 et mobile 390×844, ~4 min 6 s |
 | 24 journées | Terminées dans les deux formats ; progression/rejeu/éditeur fictif conservés |
 | Scripts Bash d'audit et de renouvellement | Syntaxe vérifiée par Git Bash ; scripts d'audit exécutés réellement dans PuTTY par l'utilisateur |
 | DNS | A confirmé vers 51.210.40.92 ; aucun AAAA retourné au dernier contrôle |
+| HTTPS actuel du domaine | Refusé par la validation du nom de certificat ; certificat dédié à créer après accord |
 
-Les nouveaux tests couvrent : refus des fichiers supplémentaires/altérés, des clés serveur et variables publiques inattendues, absence de configuration Auth/CAPTCHA, isolation des versions, absence d'activation implicite, validation des chemins, génération du vhost, chiffrement/restauration des médias et données, refus de mauvaise clé/corruption/média existant différent, jeton CAPTCHA obligatoire et refus serveur 429. Les tests SQL de Phase C continuent de vérifier les dates Paris, les rôles, RLS et les preuves des 24 journées.
+Les nouveaux tests couvrent : refus des fichiers supplémentaires/altérés, des clés serveur et variables publiques inattendues, absence de configuration Auth/CAPTCHA, isolation des versions, absence d'activation implicite, validation des chemins, génération du vhost, chiffrement/restauration des médias et données, refus de mauvaise clé/corruption/mélange de sauvegardes/média existant différent, jeton CAPTCHA obligatoire et refus serveur 429. Les tests SQL de Phase C continuent de vérifier les dates Paris, les rôles, RLS et les preuves des 24 journées. Les 24 journées ont aussi été rejouées après l'ajustement qui demande une URL média signée seulement à l'ouverture réelle de l'activité, et la renouvelle à sa réouverture.
 
 ## Vérifications Linux CI
 

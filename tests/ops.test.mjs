@@ -6,6 +6,7 @@ import {
   readFileSync,
   existsSync,
   symlinkSync,
+  copyFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -244,4 +245,22 @@ it("ne remplace pas un média existant différent et ne restaure pas la DB ensui
       },
     }),
   ).rejects.toThrow("no overwrite");
+});
+it("refuse de mélanger les fichiers valides de deux sauvegardes ayant la même clé", async () => {
+  const key = randomBytes(32),
+    first = join(temp(), "backup"),
+    second = join(temp(), "backup");
+  for (const [directory, text] of [
+    [first, "first"],
+    [second, "second"],
+  ])
+    await backupData({
+      directory,
+      key,
+      client: storage().client,
+      projectOrigin: "https://example.supabase.co",
+      dump: { stream: Readable.from([text]), done: Promise.resolve() },
+    });
+  copyFileSync(join(first, "database.enc"), join(second, "database.enc"));
+  await expect(verifyBackup(second, key)).rejects.toThrow();
 });

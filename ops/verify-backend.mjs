@@ -87,6 +87,17 @@ try {
   if (future) {
     if (!path?.startsWith(`${future.day}/`))
       throw Error("Provide a real private media path for the first locked day");
+    const control = await admin.storage
+      .from("advent-media")
+      .createSignedUrl(path, 60);
+    if (control.error || !control.data?.signedUrl)
+      throw Error("Admin cannot access the private media fixture");
+    const response = await fetch(control.data.signedUrl, {
+      headers: { Range: "bytes=0-0" },
+    });
+    if (!response.ok)
+      throw Error("Private media fixture missing or unreadable");
+    await response.body?.cancel();
     if (
       !(await player.storage.from("advent-media").createSignedUrl(path, 60))
         .error

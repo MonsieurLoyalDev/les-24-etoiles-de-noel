@@ -171,7 +171,9 @@ export function AdventHub({
           setRun(null);
         }
       })
-      .catch((e) => setError(message(e)));
+      .catch((e) => {
+        if (live) setError(message(e));
+      });
     return () => {
       live = false;
     };
@@ -212,7 +214,7 @@ export function AdventHub({
   }, [view.finalCompleted]);
   useEffect(() => {
     setMediaUrl(undefined);
-    if (!step?.mediaPath || !api) return;
+    if (!step?.mediaPath || !api || panel !== "activity" || !arrived) return;
     let live = true;
     void api
       .media(step.mediaPath, definition!.day)
@@ -223,7 +225,7 @@ export function AdventHub({
     return () => {
       live = false;
     };
-  }, [api, definition?.day, step?.id, step?.mediaPath]);
+  }, [api, definition?.day, step?.id, step?.mediaPath, panel, arrived]);
   function saveDraft(value: Value, id = step?.id) {
     if (!storage || !id) return;
     setDrafts((previous) => {
