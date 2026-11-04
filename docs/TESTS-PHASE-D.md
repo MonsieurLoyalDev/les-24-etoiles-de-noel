@@ -27,7 +27,7 @@ Les intégrations préparées utilisent exclusivement le runner jetable :
 - Vrai frontend compilé privé servi par ce Nginx : deux tests PC/mobile avec CSP, reprise d'une sauvegarde A/B et formulaire CAPTCHA/réponse 429. Auth et Turnstile sont simulés pour cette fixture ; aucune authentification distante n'est prétendue testée.
 - Conteneur PostgreSQL 17 créé par le test : migration, `pg_dump`, chiffrement, déchiffrement, `pg_restore` transactionnel et conservation d'une progression. Les octets Storage utilisent un double ; les identités Auth sont des fixtures, pas des comptes réels.
 
-Consulter les jobs de la Pull Request pour leur conclusion distante. Les cas Windows sautés ne sont pas considérés réussis avant le résultat Linux. Les certificats locaux de test ne prouvent pas un certificat Let's Encrypt pour le domaine réel.
+Le job infrastructure GitHub Actions du commit ff3293b a réussi : les 113 tests passent sur Linux, ainsi que Nginx réel, les deux parcours privés HTTPS PC/mobile et la restauration PostgreSQL chiffrée. Le test navigateur de mémoire utilise désormais une attente sur l’état réel des cartes, plutôt qu’une temporisation supposée suffisante sur un rendu logiciel lent. Consulter la Pull Request pour le résultat du dernier commit et du job complet de régression. Les certificats locaux de test ne prouvent pas un certificat Let's Encrypt pour le domaine réel.
 
 ## Encore à vérifier avant mise en service
 

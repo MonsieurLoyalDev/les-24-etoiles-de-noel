@@ -272,21 +272,41 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
             break;
           case "memory": {
             const known = new Map<number, string>();
-            for (let i = 0; i < 8; i++) {
-              const b = page.locator(".memory-board button").nth(i);
-              if (await b.isDisabled()) continue;
-              await b.click();
-              known.set(i, (await b.innerText()).trim());
-              if (i % 2 === 1) await page.waitForTimeout(800);
+            const cards = page.locator(".memory-board button");
+            // Learn the first card only: the second can close before a slow
+            // software renderer delivers its text to the test process.
+            for (let turn = 0; turn < 40; turn++) {
+              const remaining = await cards.evaluateAll((buttons) =>
+                buttons.flatMap((b, i) =>
+                  b.getAttribute("aria-label")?.includes("réunie") ? [] : [i],
+                ),
+              );
+              if (!remaining.length) break;
+              const first =
+                remaining.find((i) => !known.has(i)) ?? remaining[0];
+              await cards.nth(first).click();
+              await expect(cards.nth(first)).not.toHaveText("?");
+              const symbol = (await cards.nth(first).innerText()).trim();
+              known.set(first, symbol);
+              const second =
+                remaining.find((i) => i !== first && known.get(i) === symbol) ??
+                remaining.find((i) => i !== first && !known.has(i)) ??
+                remaining.find((i) => i !== first)!;
+              await cards.nth(second).click();
+              // Wait for the actual mismatch reset or matched state, never
+              // assume that a fixed 800 ms sleep implies interactive cards.
+              await expect
+                .poll(async () => {
+                  const label = await cards
+                    .nth(first)
+                    .getAttribute("aria-label");
+                  return (
+                    label?.includes("réunie") ||
+                    (await cards.nth(first).innerText()).trim() === "?"
+                  );
+                })
+                .toBeTruthy();
             }
-            const pairs = new Map<string, number[]>();
-            for (const [i, s] of known)
-              pairs.set(s, [...(pairs.get(s) ?? []), i]);
-            for (const pair of pairs.values())
-              for (const i of pair) {
-                const b = page.locator(".memory-board button").nth(i);
-                if ((await b.count()) && (await b.isEnabled())) await b.click();
-              }
             await page
               .getByRole("button", {
                 name: "Recevoir le souvenir",
