@@ -14,6 +14,8 @@ import {
 import { draftKey, getLocal, putLocal, type Drafts } from "./local";
 import { Task, downloadText } from "./Task";
 import { createPrivateAPI, supabaseClient } from "./supabase";
+import { privateLogin } from "./auth";
+import { Captcha } from "./Captcha";
 type Panel = "calendar" | "activity" | "admin" | "auth" | null;
 export function AdventHub({
   scene,
@@ -27,6 +29,9 @@ export function AdventHub({
   onBusy: (b: boolean) => void;
 }) {
   const privateMode = import.meta.env.VITE_APP_MODE === "supabase";
+  const captchaKey = import.meta.env.VITE_TURNSTILE_SITE_KEY ?? "";
+  const [captchaToken, setCaptchaToken] = useState(""),
+    [captchaAttempt, setCaptchaAttempt] = useState(0);
   const [api, setApi] = useState<AdventAPI>();
   const [panel, setPanel] = useState<Panel>(null),
     [preview, setPreview] = useState(false),
@@ -389,18 +394,21 @@ export function AdventHub({
                     e.preventDefault();
                     setBusy(true);
                     try {
-                      const result =
-                        await supabaseClient().auth.signInWithPassword({
-                          email,
-                          password,
-                        });
-                      if (result.error) throw result.error;
+                      await privateLogin(
+                        supabaseClient(),
+                        email,
+                        password,
+                        captchaToken,
+                        !!captchaKey,
+                      );
                       setPassword("");
                       await initialize();
                     } catch (e) {
                       setError(message(e));
                     } finally {
                       setBusy(false);
+                      setCaptchaToken("");
+                      setCaptchaAttempt((n) => n + 1);
                     }
                   }}
                 >
@@ -424,7 +432,16 @@ export function AdventHub({
                       required
                     />
                   </label>
-                  <button disabled={busy}>Se connecter</button>
+                  {captchaKey && (
+                    <Captcha
+                      key={captchaAttempt}
+                      siteKey={captchaKey}
+                      onToken={setCaptchaToken}
+                    />
+                  )}
+                  <button disabled={busy || (!!captchaKey && !captchaToken)}>
+                    Se connecter
+                  </button>
                 </form>
               </>
             ) : !api ? (

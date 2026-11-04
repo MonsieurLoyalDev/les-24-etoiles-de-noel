@@ -27,6 +27,10 @@ export default ts.config(
     },
   },
   {
+    files: ["**/*.cjs"],
+    languageOptions: { globals: { module: "readonly", require: "readonly" } },
+  },
+  {
     files: ["**/*.mjs"],
     languageOptions: {
       globals: {
@@ -34,6 +38,8 @@ export default ts.config(
         console: "readonly",
         Buffer: "readonly",
         URL: "readonly",
+        fetch: "readonly",
+        AbortSignal: "readonly",
       },
     },
   },

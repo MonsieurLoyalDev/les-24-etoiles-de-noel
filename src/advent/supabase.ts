@@ -21,7 +21,9 @@ export function supabaseClient() {
   )
     throw Error("URL Supabase invalide");
   try {
-    const payload = JSON.parse(atob(key.split(".")[1] ?? ""));
+    const payload = JSON.parse(
+      atob((key.split(".")[1] ?? "").replaceAll("-", "+").replaceAll("_", "/")),
+    );
     if (payload.role === "service_role")
       throw Error("Clé service_role interdite dans le navigateur");
   } catch (error) {

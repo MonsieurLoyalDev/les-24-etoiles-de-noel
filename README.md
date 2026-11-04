@@ -1,4 +1,13 @@
-# Les 24 Étoiles de Noël — Phase C
+# Les 24 Étoiles de Noël — Phase D
+
+La Phase D prépare **etoilebois.loyaldev.fr** sur VPS Ubuntu : Nginx statique, Supabase hébergé séparément, déploiement par versions et sauvegardes chiffrées. **Aucun VPS modifié ni déploiement réel revendiqué.** L'installation attend l'audit PuTTY et la validation du plan. Aucun nouveau processus PM2 n'est nécessaire.
+
+- [Commencer avec WinSCP/PuTTY](docs/VPS-UBUNTU.md)
+- [Audit du code et état réel](docs/AUDIT-PHASE-D.md)
+- [Changements proposés à valider](docs/PLAN-VALIDATION-VPS.md)
+- [Secrets, limites Auth et sauvegardes](docs/SECRETS-ET-SAUVEGARDES.md)
+
+Outils dans `ops/` : audit en lecture seule, versions/rollback, génération Nginx, vérification HTTPS/backend et export/restauration chiffrés. Le workflow manuel GitHub produit seulement un artefact privé d'un SHA revu ; il ne se connecte pas au serveur. `npm run package:vps` exige un build privé avec Auth/CAPTCHA configurés. Les anciennes fonctionnalités restent disponibles ci-dessous.
 
 La Phase C ajoute les **24 journées interactives**, le calendrier daté de décembre 2026, la personnalisation administrateur et un backend privé compatible Supabase. Les Phases A/B restent jouables avec leurs sauvegardes existantes. Les graphismes restent provisoires.
 

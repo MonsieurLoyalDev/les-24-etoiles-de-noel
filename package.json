@@ -1,7 +1,7 @@
 {
   "name": "les-24-etoiles-de-noel",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -9,10 +9,12 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "lint": "eslint src tests *.ts scripts",
+    "lint": "eslint src tests *.ts scripts ops",
     "seed:demo": "tsx scripts/generate-seed.ts",
     "test:security": "vitest run tests/security.test.ts",
-    "build:private": "tsc --noEmit && vite build --mode private && tsx scripts/check-private-build.ts"
+    "build:private": "tsc --noEmit && vite build --mode private && tsx scripts/check-private-build.ts",
+    "package:vps": "node scripts/package-vps.mjs",
+    "test:nginx": "node ops/test-nginx.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
