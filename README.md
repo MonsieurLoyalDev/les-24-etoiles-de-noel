@@ -1,4 +1,17 @@
-# Les 24 Étoiles de Noël — Phase D
+# Les 24 Étoiles de Noël — Phase D graphique, D1 à D9
+
+Version 0.5.0 : intégration du pack graphique validé du 7 novembre 2026, sans nouvelle mission ou mécanique. Terrains et bâtiments, décorations, ambiance, personnages animés, HUD à portraits, sapin à 25 états et calendrier à 24 étoiles poursuivent le jeu existant. Les identifiants de sauvegarde A/B/C et les règles de déverrouillage privées sont conservés.
+
+- [Bilan par étape et défauts des sources](docs/graphismes/BILAN-D1-D9.md)
+- [Inventaire des 630 fichiers du pack, intégrés et non utilisés](docs/graphismes/INVENTAIRE.json)
+- [Audio : points d'insertion silencieux et ressources manquantes](docs/graphismes/AUDIO.md)
+- Captures PC/mobile/paysage et contrôle des portraits dans `docs/screenshots/graphismes/`.
+
+Les façades V10 conservent les défauts de détourage acceptés par l'utilisateur. Les PNG restent identiques aux sources validées. Aucun son autorisé n'étant fourni, D8 prépare seulement les points d'insertion et le contrôle volume/muet. Marcellus et Nunito sont hébergées localement avec leurs licences SIL OFL.
+
+La préparation VPS antérieure reste conservée ci-dessous. Cette livraison graphique ne déploie rien et ne fusionne aucune branche.
+
+## Infrastructure VPS préparée précédemment
 
 La Phase D prépare **etoilebois.loyaldev.fr** sur VPS Ubuntu : Nginx statique, Supabase hébergé séparément, déploiement par versions et sauvegardes chiffrées. **Aucun VPS modifié ni déploiement réel revendiqué.** L'installation attend l'audit PuTTY et la validation du plan. Aucun nouveau processus PM2 n'est nécessaire.
 
@@ -9,7 +22,7 @@ La Phase D prépare **etoilebois.loyaldev.fr** sur VPS Ubuntu : Nginx statique, 
 
 Outils dans `ops/` : audit en lecture seule, versions/rollback, génération Nginx, vérification HTTPS/backend et export/restauration chiffrés. Le workflow manuel GitHub produit seulement un artefact privé d'un SHA revu ; il ne se connecte pas au serveur. `npm run package:vps` exige un build privé avec Auth/CAPTCHA configurés. Les anciennes fonctionnalités restent disponibles ci-dessous.
 
-La Phase C ajoute les **24 journées interactives**, le calendrier daté de décembre 2026, la personnalisation administrateur et un backend privé compatible Supabase. Les Phases A/B restent jouables avec leurs sauvegardes existantes. Les graphismes restent provisoires.
+La Phase C ajoute les **24 journées interactives**, le calendrier daté de décembre 2026, la personnalisation administrateur et un backend privé compatible Supabase. Les Phases A/B restent jouables avec leurs sauvegardes existantes. La refonte D remplace les visuels disponibles et documente les éléments encore provisoires, notamment les intérieurs sans ressources dédiées.
 
 Pour tester immédiatement : `npm ci`, `npm run dev`, entrer dans le village, ouvrir **✦ Avent 2026**, puis **Mode développeur : tester les 24 journées**. Sélectionner un jour, suivre la quête dans le lieu indiqué et interagir avec la lueur « Jour N ». Les 24 activités ont des conditions de réussite et une étoile unique ; le final du 24 se déroule dans le RPG et peut être revu.
 
@@ -23,7 +36,7 @@ Le mode fourni est une **démonstration fictive non sécurisée**. Aucun vrai so
 
 ## Fonctionnalités conservées
 
-Petit RPG d’exploration romantique pour Debby, poursuivant la Phase A existante. React, TypeScript, Vite et Phaser 3. Les personnages et bâtiments restent volontairement provisoires.
+Petit RPG d’exploration romantique pour Debby, poursuivant la Phase A existante. React, TypeScript, Vite et Phaser 3. Les personnages et façades utilisent désormais le pack validé.
 
 ## Lancer
 

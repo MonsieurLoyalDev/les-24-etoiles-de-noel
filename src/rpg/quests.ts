@@ -87,7 +87,11 @@ export const quests: Quest[] = [
         target: "memory",
         label: "Réunir toutes les paires sur la table de jeux",
       },
-      { kind: "talk", target: "alma", label: "Retrouver Madeleine après la partie" },
+      {
+        kind: "talk",
+        target: "alma",
+        label: "Retrouver Madeleine après la partie",
+      },
     ],
   },
   {

@@ -22,9 +22,11 @@ export default defineConfig({
     channel: process.env.CI ? undefined : "chrome",
   },
   webServer: {
-    command: "npm run dev -- --port 5173",
+    command: process.env.ETB_E2E_BUILT
+      ? "npm run preview -- --port 5173 --strictPort"
+      : "npm run dev -- --port 5173",
     url: "http://127.0.0.1:5173",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !process.env.CI && !process.env.ETB_E2E_BUILT,
   },
   projects: [
     { name: "desktop", use: { viewport: { width: 1280, height: 800 } } },

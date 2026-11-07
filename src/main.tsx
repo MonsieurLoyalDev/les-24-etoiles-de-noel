@@ -1,5 +1,5 @@
-import {Dialogue} from "./art/Dialogue";
-import {readAudio,setAudio,playSound,stopAmbience} from "./art/audio";
+import { Dialogue } from "./art/Dialogue";
+import { readAudio, setAudio, playSound, stopAmbience } from "./art/audio";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Phaser from "phaser";
@@ -16,8 +16,8 @@ function App() {
   const [view, setView] = useState<View>();
   const [started, setStarted] = useState(false);
   const [journal, setJournal] = useState(false);
-  const [settings,setSettings]=useState(false);
-  const [audioPreferences,setAudioPreferences]=useState(readAudio);
+  const [settings, setSettings] = useState(false);
+  const [audioPreferences, setAudioPreferences] = useState(readAudio);
   const [adventOpen, setAdventOpen] = useState(0),
     [adventBusy, setAdventBusy] = useState(false);
   const [tab, setTab] = useState("calendar");
@@ -26,12 +26,29 @@ function App() {
   const scene = useRef<Village | undefined>(undefined);
   const stick = useRef<HTMLDivElement>(null);
   const [knob, setKnob] = useState({ x: 0, y: 0 });
-  useEffect(()=>{setAudio(audioPreferences);},[audioPreferences]);
-  useEffect(()=>{
-    const click=(event:MouseEvent)=>{if((event.target as Element)?.closest("button"))playSound("click");};
-    document.addEventListener("click",click);
-    return()=>{document.removeEventListener("click",click);stopAmbience();};
-  },[]);
+  const keyboardBlocked =
+    journal || settings || !!view?.miniGame || (adventBusy && !view?.cinematic);
+  useEffect(() => {
+    const keyboard = scene.current?.input.keyboard;
+    if (!keyboard) return;
+    keyboard.resetKeys();
+    keyboard.enabled = !keyboardBlocked;
+    if (keyboardBlocked) keyboard.disableGlobalCapture();
+    else keyboard.enableGlobalCapture();
+  }, [keyboardBlocked, !!view]);
+  useEffect(() => {
+    setAudio(audioPreferences);
+  }, [audioPreferences]);
+  useEffect(() => {
+    const click = (event: MouseEvent) => {
+      if ((event.target as Element)?.closest("button")) playSound("click");
+    };
+    document.addEventListener("click", click);
+    return () => {
+      document.removeEventListener("click", click);
+      stopAmbience();
+    };
+  }, []);
   useEffect(() => {
     if (!started) return;
     let game: Phaser.Game | undefined,
@@ -110,16 +127,31 @@ function App() {
   return (
     <main>
       <header>
-        <a className="brand" href="#" aria-label="Étoilebois">Étoilebois</a>
+        <a className="brand" href="#" aria-label="Étoilebois">
+          Étoilebois
+        </a>
         <div className="hud-status">
-          <time className="hud-date" dateTime={new Date().toISOString()} aria-label="Date à Paris">{new Intl.DateTimeFormat("fr-FR",{timeZone:"Europe/Paris",day:"numeric",month:"short"}).format(new Date())}</time>
-          <span className="hud-stars" aria-label="Étoiles récupérées">{Math.max(stars.length,view?.adventStars??0)} / 24</span>
+          <time
+            className="hud-date"
+            dateTime={new Date().toISOString()}
+            aria-label="Date à Paris"
+          >
+            {new Intl.DateTimeFormat("fr-FR", {
+              timeZone: "Europe/Paris",
+              day: "numeric",
+              month: "short",
+            }).format(new Date())}
+          </time>
+          <span className="hud-stars" aria-label="Étoiles récupérées">
+            {Math.max(stars.length, view?.adventStars ?? 0)} / 24
+          </span>
         </div>
         <div className="header-actions">
           <button
             aria-label="✦ Avent 2026"
             disabled={
               !started ||
+              settings ||
               journal ||
               adventBusy ||
               !!view?.dialogue ||
@@ -127,18 +159,41 @@ function App() {
             }
             onClick={() => setAdventOpen((n) => n + 1)}
           >
-            <span className="hud-icon calendar-icon" aria-hidden="true"/> <span>Avent 2026</span>
+            <span className="hud-icon calendar-icon" aria-hidden="true" />{" "}
+            <span>Avent 2026</span>
           </button>
           <button
             aria-label="✧ Journal"
             onClick={toggleJournal}
             disabled={
-              !started || adventBusy || !!view?.miniGame || !!view?.dialogue
+              !started ||
+              settings ||
+              adventBusy ||
+              !!view?.miniGame ||
+              !!view?.dialogue
             }
           >
-            <span className="hud-icon journal-icon" aria-hidden="true"/> <span>Journal</span>
+            <span className="hud-icon journal-icon" aria-hidden="true" />{" "}
+            <span>Journal</span>
           </button>
-          <button disabled={!started||journal||adventBusy||!!view?.dialogue||!!view?.miniGame} onClick={()=>{setSettings(true);controls.paused=true;}} aria-label="Paramètres"><span className="hud-icon settings-icon" aria-hidden="true"/><span>Paramètres</span></button>
+          <button
+            disabled={
+              !started ||
+              settings ||
+              journal ||
+              adventBusy ||
+              !!view?.dialogue ||
+              !!view?.miniGame
+            }
+            onClick={() => {
+              setSettings(true);
+              controls.paused = true;
+            }}
+            aria-label="Paramètres"
+          >
+            <span className="hud-icon settings-icon" aria-hidden="true" />
+            <span>Paramètres</span>
+          </button>
         </div>
       </header>
       {!started ? (
@@ -163,8 +218,8 @@ function App() {
             Une promenade sous la neige, vingt-quatre étoiles à découvrir.
           </p>
           <img
-            src="/assets/references/place_lanternes_concept.png"
-            alt="Planche artistique du village, référence uniquement"
+            src="/assets/validated/calendar/calendrier_art.png"
+            alt="Illustration validée du calendrier d’Étoilebois"
           />
         </section>
       ) : (
@@ -223,7 +278,14 @@ function App() {
               </i>
             </div>
             {view?.dialogue ? (
-              <Dialogue line={view.dialogue} choices={view.choices} choose={i=>scene.current?.selectChoice(i)} advance={()=>{controls.interact=true;}} />
+              <Dialogue
+                line={view.dialogue}
+                choices={view.choices}
+                choose={(i) => scene.current?.selectChoice(i)}
+                advance={() => {
+                  controls.interact = true;
+                }}
+              />
             ) : (
               <button
                 className="interaction"
@@ -238,16 +300,70 @@ function App() {
                   : view?.target || "Approchez-vous pour interagir"}
               </button>
             )}
-            {settings && <div className="settings-panel" role="dialog" aria-label="Paramètres">
-              <button className="close" onClick={()=>{setSettings(false);controls.paused=false;}}>Fermer ×</button>
-              <h2>Un hiver à votre rythme</h2>
-              <p>Les animations respectent la préférence de réduction des mouvements de votre appareil.</p>
-              <p>Flèches, ZQSD ou WASD pour marcher. E pour interagir. Sur téléphone, utilisez le joystick.</p>
-              <p>Votre progression est enregistrée automatiquement. Les paramètres n'effacent aucun souvenir.</p>
-              <p>Ambiance sonore : emplacements préparés, aucun son autorisé fourni.</p>
-              <label><input type="checkbox" checked={audioPreferences.muted} onChange={e=>setAudioPreferences(p=>({...p,muted:e.target.checked}))}/> Muet</label>
-              <label>Volume <input aria-label="Volume" type="range" min="0" max="1" step=".05" value={audioPreferences.volume} onChange={e=>setAudioPreferences(p=>({...p,volume:Number(e.target.value)}))}/></label>
-            </div>}
+            {settings && (
+              <div
+                className="settings-panel"
+                role="dialog"
+                aria-label="Paramètres"
+              >
+                <button
+                  className="close"
+                  onClick={() => {
+                    setSettings(false);
+                    controls.paused = false;
+                  }}
+                >
+                  Fermer ×
+                </button>
+                <h2>Un hiver à votre rythme</h2>
+                <p>
+                  Les animations respectent la préférence de réduction des
+                  mouvements de votre appareil.
+                </p>
+                <p>
+                  Flèches, ZQSD ou WASD pour marcher. E pour interagir. Sur
+                  téléphone, utilisez le joystick.
+                </p>
+                <p>
+                  Votre progression est enregistrée automatiquement. Les
+                  paramètres n'effacent aucun souvenir.
+                </p>
+                <p>
+                  Ambiance sonore : emplacements préparés, aucun son autorisé
+                  fourni.
+                </p>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={audioPreferences.muted}
+                    onChange={(e) =>
+                      setAudioPreferences((p) => ({
+                        ...p,
+                        muted: e.target.checked,
+                      }))
+                    }
+                  />{" "}
+                  Muet
+                </label>
+                <label>
+                  Volume{" "}
+                  <input
+                    aria-label="Volume"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step=".05"
+                    value={audioPreferences.volume}
+                    onChange={(e) =>
+                      setAudioPreferences((p) => ({
+                        ...p,
+                        volume: Number(e.target.value),
+                      }))
+                    }
+                  />
+                </label>
+              </div>
+            )}
             {journal && (
               <div
                 className="journal"

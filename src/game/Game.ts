@@ -1,8 +1,20 @@
 import catalog from "../art/catalog.json";
-import {playSound,stopAmbience} from "../art/audio";
-import {preloadActors,createActorAnimations,actor,animateActor,residentActors} from "../art/actors";
+import { playSound, stopAmbience } from "../art/audio";
+import {
+  preloadActors,
+  createActorAnimations,
+  actor,
+  animateActor,
+  residentActors,
+} from "../art/actors";
 import { reaction } from "../art/reactions";
-import { preloadWorld, drawGround, buildingArt, propArt, decorate } from "../art/world";
+import {
+  preloadWorld,
+  drawGround,
+  buildingArt,
+  propArt,
+  decorate,
+} from "../art/world";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -82,7 +94,12 @@ export class Village extends Phaser.Scene {
   shade!: Phaser.GameObjects.Rectangle;
   snow: Phaser.GameObjects.Arc[] = [];
   lamps: Phaser.GameObjects.Arc[] = [];
-  smoke: { puff: Phaser.GameObjects.Arc; x: number; y: number; phase: number }[] = [];
+  smoke: {
+    puff: Phaser.GameObjects.Arc;
+    x: number;
+    y: number;
+    phase: number;
+  }[] = [];
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -110,16 +127,13 @@ export class Village extends Phaser.Scene {
   preload() {
     preloadWorld(this);
     preloadActors(this);
-    const tree=catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
-    this.load.atlas("art-tree",tree.image,tree.data);
+    const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
+    this.load.atlas("art-tree", tree.image, tree.data);
     this.load.spritesheet("ground", manifest.ground.path, {
       frameWidth: 16,
       frameHeight: 16,
     });
     Object.entries(manifest.props).forEach(([k, v]) =>
-      this.load.image(k, v.path),
-    );
-    Object.entries(manifest.characters).forEach(([k, v]) =>
       this.load.image(k, v.path),
     );
   }
@@ -165,7 +179,7 @@ export class Village extends Phaser.Scene {
   }
   renderRoom() {
     stopAmbience();
-    playSound(this.state.room==="village"?"wind":"fire",true);
+    playSound(this.state.room === "village" ? "wind" : "fire", true);
     this.children.removeAll(true);
     this.adventMarker = undefined;
     this.huntMarker = undefined;
@@ -186,17 +200,26 @@ export class Village extends Phaser.Scene {
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
         if (p.sprite === "pine_festive") {
-          this.tree=this.add.image(512,394,"art-tree","sapin_00").setOrigin(.5,1).setDepth(384).setScale(.9);
-          this.rects.push({x:498,y:375,w:28,h:15});
+          this.tree = this.add
+            .image(512, 394, "art-tree", "sapin_00")
+            .setOrigin(0.5, 1)
+            .setDepth(384)
+            .setScale(0.9);
+          this.rects.push({ x: 498, y: 375, w: 28, h: 15 });
           return;
         }
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
         const replacement = propArt[p.sprite];
         const prop = this.add
-          .image(p.tileX * 16, p.tileY * 16, replacement ? "art-" + replacement.key : p.sprite)
+          .image(
+            p.tileX * 16,
+            p.tileY * 16,
+            replacement ? "art-" + replacement.key : p.sprite,
+          )
           .setOrigin(conf.origin.x, conf.origin.y)
           .setDepth(p.tileY * 16);
-        if (replacement) prop.setScale(replacement.width / prop.width).setOrigin(.5, 1);
+        if (replacement)
+          prop.setScale(replacement.width / prop.width).setOrigin(0.5, 1);
         if (p.solid)
           this.rects.push({
             x: p.tileX * 16 - 14,
@@ -217,15 +240,24 @@ export class Village extends Phaser.Scene {
           bw = b.widthTiles * 16,
           bh = b.heightTiles * 16;
         this.rects.push({ x, y, w: bw, h: bh });
-        const facade = this.add.image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
-          .setOrigin(0.5, 1).setDepth(y + bh - 12);
+        const facade = this.add
+          .image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
+          .setOrigin(0.5, 1)
+          .setDepth(y + bh - 12);
         facade.setScale((bw + 32) / facade.width);
-        for (let i=0;i<3;i++) {
-          const sx=b.entrance.x*16-bw*.3, sy=y+bh-facade.displayHeight*.8;
-          this.smoke.push({puff:this.add.circle(sx,sy,3,0xd6d9e4,.1).setDepth(y+bh+1),x:sx,y:sy,phase:i/3});
+        for (let i = 0; i < 3; i++) {
+          const sx = b.entrance.x * 16 - bw * 0.3,
+            sy = y + bh - facade.displayHeight * 0.8;
+          this.smoke.push({
+            puff: this.add
+              .circle(sx, sy, 3, 0xd6d9e4, 0.1)
+              .setDepth(y + bh + 1),
+            x: sx,
+            y: sy,
+            phase: i / 3,
+          });
         }
         this.label(x + bw / 2, y + bh + 10, b.name);
-
       });
       this.star = this.add
         .image(512, 304, "quest_star")
@@ -278,8 +310,8 @@ export class Village extends Phaser.Scene {
       this.state.position =
         this.state.room === "village" ? { x: 512, y: 608 } : { x: 240, y: 280 };
     const p = this.state.position;
-    this.player = actor(this,"debby",p.x,p.y);
-    this.loyal = actor(this,"loyal",p.x-28,p.y+12);
+    this.player = actor(this, "debby", p.x, p.y);
+    this.loyal = actor(this, "loyal", p.x - 28, p.y + 12);
     if (blocked(this.loyal, this.rects, w, h)) this.loyal.setPosition(p.x, p.y);
     this.label(p.x, p.y - 68, "Debby", 8).setName("debby-label");
     this.label(this.loyal.x, this.loyal.y - 68, "Loyal", 8).setName(
@@ -296,7 +328,7 @@ export class Village extends Phaser.Scene {
     this.timer = 0;
     for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
       const p = citizen.path[0];
-      const image = actor(this,residentActors[citizen.id],p.x,p.y);
+      const image = actor(this, residentActors[citizen.id], p.x, p.y);
       this.npcs.push({
         id: citizen.id,
         name: citizen.name,
@@ -307,8 +339,8 @@ export class Village extends Phaser.Scene {
       });
     }
     if (this.state.room === "village") {
-      actor(this,"emile",240,430).setDepth(430).play("emile-attente");
-      actor(this,"flocon",850,440).setDepth(440).play("flocon-attente");
+      actor(this, "emile", 240, 430).setDepth(430).play("emile-attente");
+      actor(this, "flocon", 850, 440).setDepth(440).play("flocon-attente");
     }
     this.shade = this.add
       .rectangle(0, 0, 1, 1, 0x102348, 1)
@@ -337,7 +369,7 @@ export class Village extends Phaser.Scene {
     if (this.player) this.refreshAdvent();
   }
   setAdventLights(days: number[]) {
-    if(days.length>this.adventLights.length)playSound("star");
+    if (days.length > this.adventLights.length) playSound("star");
     this.adventLights = [...new Set(days)];
     if (this.player) this.refreshAdvent();
     this.emit();
@@ -360,8 +392,13 @@ export class Village extends Phaser.Scene {
     }
     this.adventDecor.forEach((x) => x.destroy());
     this.adventDecor = [];
-    const count=this.finalSequence?24:Math.min(24,Math.max(this.adventLights.length,this.state.stars.length));
-    this.tree?.setFrame('sapin_'+String(count).padStart(2,'0'));
+    const count = this.finalSequence
+      ? 24
+      : Math.min(
+          24,
+          Math.max(this.adventLights.length, this.state.stars.length),
+        );
+    this.tree?.setFrame("sapin_" + String(count).padStart(2, "0"));
     this.huntMarker?.destroy();
     this.huntMarker = undefined;
     if (
@@ -421,7 +458,13 @@ export class Village extends Phaser.Scene {
       "Loyal — Et chaque lumière me donne envie d’inventer la suite avec toi. ♥",
       this.finalSequence.message,
     ][this.finalSequence.beat];
-    reaction(this,["mains","coeur","calin","bisou"][this.finalSequence.beat] as "mains"|"coeur"|"calin"|"bisou",this.player,this.loyal);
+    reaction(
+      this,
+      ["mains", "coeur", "calin", "bisou"][this.finalSequence.beat] as
+        "mains" | "coeur" | "calin" | "bisou",
+      this.player,
+      this.loyal,
+    );
     this.emit();
   }
   candidates() {
@@ -594,7 +637,8 @@ export class Village extends Phaser.Scene {
         sendEvent(this.state, { kind: "explore", target: this.state.room });
       }
       this.renderRoom();
-      if(this.state.room === "inn") reaction(this,"rechauffe",this.player,this.loyal);
+      if (this.state.room === "inn")
+        reaction(this, "rechauffe", this.player, this.loyal);
     } else if (t.id.startsWith("npc:")) {
       const id = t.id.slice(4) as keyof typeof dialogues;
       sendEvent(this.state, { kind: "talk", target: id });
@@ -641,11 +685,20 @@ export class Village extends Phaser.Scene {
           ? "Un cadeau attend son jour. Aucune surprise future n’est disponible dans cette démo."
           : "Ce lieu ouvrira dans une prochaine phase.";
     this.star?.setVisible(this.state.stage === 4);
-    if(t.id === "letter") reaction(this,"lettre",this.player,this.loyal);
-    else if(t.id === "tree") reaction(this,this.state.stage===4?"etoile":"froid",this.player,this.loyal);
-    else if(t.id === "riddle") reaction(this,"lecture",this.player,this.loyal);
-    else if(t.id === "loyal") reaction(this,"coeur",this.player,this.loyal);
-    else if(t.id.startsWith("npc:")) reaction(this,"coucou",this.player,this.loyal);
+    this.refreshAdvent();
+    if (t.id === "letter") reaction(this, "lettre", this.player, this.loyal);
+    else if (t.id === "tree")
+      reaction(
+        this,
+        this.state.stage === 4 ? "etoile" : "froid",
+        this.player,
+        this.loyal,
+      );
+    else if (t.id === "riddle")
+      reaction(this, "lecture", this.player, this.loyal);
+    else if (t.id === "loyal") reaction(this, "coeur", this.player, this.loyal);
+    else if (t.id.startsWith("npc:"))
+      reaction(this, "coucou", this.player, this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -665,7 +718,13 @@ export class Village extends Phaser.Scene {
       this.state.conversation = null;
       this.dialogue = "";
     }
-    if(active.key==="riddle")reaction(this,next?.includes("wrong")?"boude":"joie",this.player,this.loyal);
+    if (active.key === "riddle")
+      reaction(
+        this,
+        next?.includes("wrong") ? "boude" : "joie",
+        this.player,
+        this.loyal,
+      );
     this.persist(this.state);
     this.emit();
   }
@@ -686,7 +745,7 @@ export class Village extends Phaser.Scene {
     controls.paused = false;
     this.dialogue =
       "Loyal — Un souvenir de plus ! Retrouvons la personne qui nous a confié cette activité. ♥";
-    reaction(this,"joie",this.player,this.loyal);
+    reaction(this, "joie", this.player, this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -756,7 +815,7 @@ export class Village extends Phaser.Scene {
     if (down("UP") || down("W") || down("Z")) y--;
     if (down("DOWN") || down("S")) y++;
     if (!this.dialogue && !controls.paused) {
-      const before={x:this.player.x,y:this.player.y};
+      const before = { x: this.player.x, y: this.player.y };
       this.state.clock = (this.state.clock + Math.min(delta, 200)) % 180000;
       const len = Math.hypot(x, y) || 1,
         speed = movementDistance(delta);
@@ -769,7 +828,13 @@ export class Village extends Phaser.Scene {
         h,
       );
       this.player.setPosition(this.state.position.x, this.state.position.y);
-      if(Math.hypot(before.x-this.player.x,before.y-this.player.y)>.5&&_time-this.lastFootstep>320){playSound("step");this.lastFootstep=_time;}
+      if (
+        Math.hypot(before.x - this.player.x, before.y - this.player.y) > 0.5 &&
+        _time - this.lastFootstep > 320
+      ) {
+        playSound("step");
+        this.lastFootstep = _time;
+      }
 
       if (this.hunt?.step.style !== "loyal") {
         const segment = Math.hypot(
@@ -827,8 +892,8 @@ export class Village extends Phaser.Scene {
     animateActor(this.player);
     animateActor(this.loyal);
     if (this.finalSequence) {
-      if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-        this.tree?.setScale(.9 + Math.sin(_time/550)*.008);
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        this.tree?.setScale(0.9 + Math.sin(_time / 550) * 0.008);
       this.loyal.setPosition(this.player.x - 26, this.player.y + 5);
       this.adventDecor.forEach((light, i) =>
         light.setAlpha(0.45 + 0.55 * Math.abs(Math.sin(_time / 350 + i))),
@@ -880,11 +945,15 @@ export class Village extends Phaser.Scene {
           Math.sin(_time / 600 + i) * 0.035,
       ),
     );
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    for (const {puff,x,y,phase} of this.smoke) {
-      const life=(_time/4200+phase)%1;
-      puff.setPosition(x+Math.sin(life*4)*5,y-life*24)
-        .setScale(1+life).setAlpha(reduced?0:Math.sin(life*Math.PI)*.15);
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    for (const { puff, x, y, phase } of this.smoke) {
+      const life = (_time / 4200 + phase) % 1;
+      puff
+        .setPosition(x + Math.sin(life * 4) * 5, y - life * 24)
+        .setScale(1 + life)
+        .setAlpha(reduced ? 0 : Math.sin(life * Math.PI) * 0.15);
     }
     this.snow.forEach((flake, i) => {
       flake.setVisible(!reduced);
@@ -920,4 +989,3 @@ export class Village extends Phaser.Scene {
     this.emit();
   }
 }
-
