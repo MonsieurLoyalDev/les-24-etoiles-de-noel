@@ -46,6 +46,7 @@ export type View = {
   huntFound: string[];
   finalCompleted: number;
   cinematic: boolean;
+  adventStars: number;
 };
 export const controls = { x: 0, y: 0, interact: false, paused: false };
 export class Village extends Phaser.Scene {
@@ -333,6 +334,7 @@ export class Village extends Phaser.Scene {
   setAdventLights(days: number[]) {
     this.adventLights = [...new Set(days)];
     if (this.player) this.refreshAdvent();
+    this.emit();
   }
   adventAnchor() {
     return this.state.room === "village"
@@ -699,6 +701,7 @@ export class Village extends Phaser.Scene {
   emit() {
     const v = {
       save: structuredClone(this.state),
+      adventStars: this.adventLights.length,
       dialogue: this.dialogue,
       target: this.target,
       location: roomNames[this.state.room],
@@ -735,6 +738,7 @@ export class Village extends Phaser.Scene {
       v.huntFound,
       v.finalCompleted,
       v.cinematic,
+      v.adventStars,
     ]);
     if (key !== this.lastView) {
       this.lastView = key;

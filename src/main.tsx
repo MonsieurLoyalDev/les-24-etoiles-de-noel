@@ -1,3 +1,4 @@
+import {Dialogue} from "./art/Dialogue";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Phaser from "phaser";
@@ -5,6 +6,7 @@ import { Village, controls, type View } from "./game/Game";
 import { initial, type Save } from "./domain";
 import { loadSave, writeSave } from "./save";
 import "./style.css";
+import "./art/style.css";
 import { activeGoals, quests } from "./rpg/quests";
 import { MiniGame } from "./ui/MiniGame";
 import { AdventHub } from "./advent/Hub";
@@ -13,6 +15,7 @@ function App() {
   const [view, setView] = useState<View>();
   const [started, setStarted] = useState(false);
   const [journal, setJournal] = useState(false);
+  const [settings,setSettings]=useState(false);
   const [adventOpen, setAdventOpen] = useState(0),
     [adventBusy, setAdventBusy] = useState(false);
   const [tab, setTab] = useState("calendar");
@@ -99,15 +102,14 @@ function App() {
   return (
     <main>
       <header>
-        <a className="brand" href="#">
-          ✦{" "}
-          <span>
-            LES 24 ÉTOILES <small>DE NOËL</small>
-          </span>
-        </a>
-        <span className="dedication">Une aventure pour Debby</span>
+        <a className="brand" href="#" aria-label="Étoilebois">Étoilebois</a>
+        <div className="hud-status">
+          <time className="hud-date" dateTime={new Date().toISOString()} aria-label="Date à Paris">{new Intl.DateTimeFormat("fr-FR",{timeZone:"Europe/Paris",day:"numeric",month:"short"}).format(new Date())}</time>
+          <span className="hud-stars" aria-label="Étoiles récupérées">{Math.max(stars.length,view?.adventStars??0)} / 24</span>
+        </div>
         <div className="header-actions">
           <button
+            aria-label="✦ Avent 2026"
             disabled={
               !started ||
               journal ||
@@ -117,16 +119,18 @@ function App() {
             }
             onClick={() => setAdventOpen((n) => n + 1)}
           >
-            ✦ Avent 2026
+            <span className="hud-icon calendar-icon" aria-hidden="true"/> <span>Avent 2026</span>
           </button>
           <button
+            aria-label="✧ Journal"
             onClick={toggleJournal}
             disabled={
               !started || adventBusy || !!view?.miniGame || !!view?.dialogue
             }
           >
-            ✧ Journal <span>24</span>
+            <span className="hud-icon journal-icon" aria-hidden="true"/> <span>Journal</span>
           </button>
+          <button disabled={!started||journal||adventBusy||!!view?.dialogue||!!view?.miniGame} onClick={()=>{setSettings(true);controls.paused=true;}} aria-label="Paramètres"><span className="hud-icon settings-icon" aria-hidden="true"/><span>Paramètres</span></button>
         </div>
       </header>
       {!started ? (
@@ -146,9 +150,9 @@ function App() {
             Entrer dans le village <span>→</span>
           </button>
           <p className="note">
-            Phase C · Calendrier interactif 2026
+            Étoilebois · Calendrier interactif 2026
             <br />
-            Personnages et façades provisoires · deux personnages humains
+            Une promenade sous la neige, vingt-quatre étoiles à découvrir.
           </p>
           <img
             src="/assets/references/place_lanternes_concept.png"
@@ -177,7 +181,7 @@ function App() {
                 </small>
               )}
             </aside>
-            <div className="prototype">PHASE C · ASSETS PROVISOIRES</div>
+            <div className="prototype"></div>
             <div
               ref={stick}
               className="joystick"
@@ -211,30 +215,7 @@ function App() {
               </i>
             </div>
             {view?.dialogue ? (
-              <div className="dialogue" role="dialog" aria-label="Dialogue">
-                <span>✧ UN MOMENT ENSEMBLE</span>
-                <p>{view.dialogue}</p>
-                {view.choices.length ? (
-                  <div className="dialogue-choices">
-                    {view.choices.map((choice, i) => (
-                      <button
-                        key={choice}
-                        onClick={() => scene.current?.selectChoice(i)}
-                      >
-                        {choice}
-                      </button>
-                    ))}
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => {
-                      controls.interact = true;
-                    }}
-                  >
-                    Continuer <kbd>E</kbd>
-                  </button>
-                )}
-              </div>
+              <Dialogue line={view.dialogue} choices={view.choices} choose={i=>scene.current?.selectChoice(i)} advance={()=>{controls.interact=true;}} />
             ) : (
               <button
                 className="interaction"
@@ -249,6 +230,14 @@ function App() {
                   : view?.target || "Approchez-vous pour interagir"}
               </button>
             )}
+            {settings && <div className="settings-panel" role="dialog" aria-label="Paramètres">
+              <button className="close" onClick={()=>{setSettings(false);controls.paused=false;}}>Fermer ×</button>
+              <h2>Un hiver à votre rythme</h2>
+              <p>Les animations respectent la préférence de réduction des mouvements de votre appareil.</p>
+              <p>Flèches, ZQSD ou WASD pour marcher. E pour interagir. Sur téléphone, utilisez le joystick.</p>
+              <p>Votre progression est enregistrée automatiquement. Les paramètres n'effacent aucun souvenir.</p>
+              <p>Ambiance sonore : emplacements préparés, aucun son autorisé fourni.</p>
+            </div>}
             {journal && (
               <div
                 className="journal"

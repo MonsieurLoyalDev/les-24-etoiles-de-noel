@@ -1,0 +1,57 @@
+@font-face{font-family:Marcellus;src:url('/assets/validated/fonts/Marcellus-Regular.ttf') format('truetype');font-display:swap}
+@font-face{font-family:Nunito;src:url('/assets/validated/fonts/Nunito-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Nunito;src:url('/assets/validated/fonts/Nunito-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{font-family:Nunito,sans-serif;color:#f8ecd6;background:#17232c}
+h1,h2,h3,.brand,.speaker,.location strong{font-family:Marcellus,serif}
+button,input,textarea,select{font-family:Nunito,sans-serif}
+header{height:112px;padding:6px 24px;gap:20px;background:linear-gradient(180deg,#13232c,#20323a);border-bottom:2px solid #c59650;position:relative;z-index:15}
+.brand{width:240px;height:100px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:url('/assets/validated/hud/enseigne.png') center/100% 100% no-repeat;font-size:27px;letter-spacing:.5px;color:#ffdf9b;text-shadow:0 2px 2px #26170a}
+.hud-status{display:flex;align-items:center;gap:12px;margin-right:auto;font-weight:700}
+.hud-date{width:94px;height:80px;display:grid;place-items:center;padding-top:12px;background:url('/assets/validated/hud/calendrier.png') center/contain no-repeat;color:#513016;font-size:15px;text-align:center}
+.hud-stars{width:142px;height:75px;display:grid;place-items:center;padding-left:31px;background:url('/assets/validated/hud/compteur_etoiles.png') center/100% 100% no-repeat;color:#ffe3a3;text-shadow:0 1px 3px #100;font-size:19px}
+.header-actions{display:flex;gap:10px;height:98px;align-items:center}
+.header-actions button{background:transparent;border:0;padding:0;width:82px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px}
+.header-actions button span{padding:0}
+.hud-icon{display:block;width:64px;height:64px;background:center/contain no-repeat}
+.calendar-icon{background-image:url('/assets/validated/hud/bouton_calendrier.png')}
+.journal-icon{background-image:url('/assets/validated/hud/bouton_souvenirs.png')}
+.settings-icon{background-image:url('/assets/validated/hud/bouton_parametres.png')}
+.header-actions button:hover .hud-icon{filter:brightness(1.12)}
+.game-shell{height:calc(100svh - 152px);min-height:430px}
+.location{top:16px;left:18px;background:#18303bd9;padding:10px 15px;border-radius:4px}
+.location strong{font-size:17px}.location>span{display:none}
+.quest{top:16px;right:18px;padding:10px 14px;width:235px;background:#18303bd9}
+.quest strong{font-family:Marcellus;font-size:16px;margin:6px 0}.quest p{font-family:Nunito;font-size:12px;margin:0}
+.dialogue{width:min(1100px,95%);padding:0;border:0;background:transparent;box-shadow:none;bottom:20px;z-index:8;max-height:85%;overflow:auto}
+.dialogue-frame{position:relative;min-height:260px;aspect-ratio:1180/470;background:url('/assets/validated/hud/dialogue_narratif.png') center/100% 100% no-repeat;color:#492e1a}
+.portrait{position:absolute;left:4%;bottom:19%;width:24%;height:72%;object-fit:contain;object-position:bottom;filter:none}
+.speaker{position:absolute;left:35%;top:14%;color:#ffdf9c;font-size:clamp(16px,2vw,23px);max-width:55%}
+.dialogue .dialogue-frame p{position:absolute;left:35%;top:30%;right:8%;bottom:17%;margin:0;color:#482c19;font:400 clamp(14px,1.4vw,18px)/1.5 Nunito;overflow:auto;white-space:pre-line}
+.dialogue-choices{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:6px;padding:4px 3%;background:transparent}
+.dialogue .dialogue-choices button{background:url('/assets/validated/hud/bouton_choix_neutre.png') center/100% 100% no-repeat;color:#472b18;text-shadow:none;min-height:52px;min-width:180px;max-width:100%;border:0;padding:12px 24px;margin:0;font:700 14px Nunito}
+.dialogue .dialogue-choices button:hover{background-image:url('/assets/validated/hud/bouton_choix_selection.png')}
+.dialogue kbd{color:inherit;border-color:#ebc476}
+.interaction{color:#ffe6ad;background:#283b3aef;border-color:#c39a59;max-width:90%;white-space:normal}
+.settings-panel{position:absolute;z-index:20;inset:8% max(4%,calc((100% - 760px)/2));background:#1b3039fa;border:2px solid #ad874e;border-radius:12px;padding:24px;overflow:auto;box-shadow:0 10px 50px #0007}
+.journal,.advent-panel,.mini-modal{background-color:#172a33f8}
+.prototype{display:none}
+.welcome{min-height:calc(100svh - 112px)}
+@media(max-width:700px){
+  header{height:132px;padding:4px 10px;gap:4px;flex-wrap:wrap;justify-content:space-between}
+  .brand{width:158px;height:66px;font-size:21px}
+  .hud-status{margin:0;gap:2px}.hud-date{width:64px;height:58px;font-size:11px;padding-top:9px}.hud-stars{width:100px;height:54px;font-size:16px;padding-left:22px}
+  .header-actions{width:100%;height:54px;justify-content:center;gap:30px}.header-actions button{width:72px;font-size:10px;gap:0;flex-direction:row}.hud-icon{width:40px;height:44px;flex-shrink:0}.header-actions button span:last-child{max-width:38px}
+  .game-shell{height:calc(100svh - 166px);min-height:390px}
+  .location{left:8px;top:8px;padding:7px 9px;max-width:58%}.location strong{font-size:13px}.location small{font-size:9px}
+  .quest{right:8px;top:8px;width:36%;padding:7px 8px}.quest>span{font-size:8px;letter-spacing:0}.quest strong{font-size:11px}.quest p,.quest small{display:none}
+  .dialogue{width:98%;bottom:10px;max-height:84%;overflow:auto}
+  .dialogue-frame{min-height:240px;aspect-ratio:auto;background-size:100% 100%}
+  .portrait{left:3%;bottom:25%;width:27%;height:51%}
+  .speaker{left:34%;top:15%;font-size:15px;max-width:57%}
+  .dialogue .dialogue-frame p{left:34%;top:30%;right:8%;bottom:16%;font-size:13px;line-height:1.4}
+  .dialogue-choices{display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:2px 6px}
+  .dialogue .dialogue-choices button{min-width:0;width:100%;min-height:52px;font-size:12px;padding:9px 15px}
+  .dialogue-choices button:only-child{grid-column:1/-1;width:auto;justify-self:end;min-width:160px}
+  .settings-panel{inset:4% 3%;padding:18px}
+  .welcome{min-height:calc(100svh - 132px)}
+}

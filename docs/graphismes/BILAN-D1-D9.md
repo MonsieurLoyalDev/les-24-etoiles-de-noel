@@ -28,7 +28,11 @@ Sprites marche/attente fournis pour les huit personnages. Loyal utilise le profi
 Limites source conservées : poses répétées de Debby, contours de Madeleine issus d'un détourage blanc, limites biomécaniques du profil de Loyal et effets parfois coupés des réactions. Ces défauts ne sont pas corrigés par génération de nouveaux dessins.
 
 ## D5 — HUD et dialogues
-À réaliser.
+HUD V3 avec titre dynamique Étoilebois, date Europe/Paris, compteur, calendrier, journal/souvenirs et paramètres. Dialogue narratif à portrait correspondant au locuteur et expression choisie selon la réplique, 0–4 réponses séparées et bouton Continuer. Aucun dialogue affiché pendant la promenade. Les 32 portraits sont disponibles ; pas de portrait attribué à tort au narrateur ou aux objets. Texte HTML dynamique, aucune inscription ajoutée aux textures. Écran PC/mobile inspecté et deux tests navigateur réussis.
+
+Marcellus et Nunito proviennent de Google Fonts (fonts.googleapis.com / fonts.gstatic.com), sont hébergées localement et accompagnées de leurs licences SIL OFL officielles issues de github.com/google/fonts (ofl/marcellus et ofl/nunito). Aucun appel externe de police pendant le jeu. La liste des fichiers publics et le validateur d'artefact autorisent uniquement les fichiers de police TTF ajoutés.
+
+Défauts graphiques source : le PNG de dialogue narratif présente une jonction verticale et un fragment doré dans son angle supérieur droit ; certains autres éléments HUD ont des pixels résiduels sur leurs bords. Ils restent visibles, sans retouche ni fond artificiel. Le portrait est aligné en bas du médaillon, sans cacher son détourage par un aplat.
 
 ## D6 — Sapin et calendrier
 À réaliser.

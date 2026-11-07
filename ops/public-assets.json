@@ -123,5 +123,8 @@
   "public/assets/validated/vegetation/pine_large.png",
   "public/assets/validated/vegetation/quest_star.png",
   "public/assets/validated/vegetation/signpost.png",
-  "public/assets/validated/vegetation/snowman.png"
+  "public/assets/validated/vegetation/snowman.png",
+  "public/assets/validated/fonts/Marcellus-Regular.ttf",
+  "public/assets/validated/fonts/Nunito-Regular.ttf",
+  "public/assets/validated/fonts/Nunito-Bold.ttf"
 ]
