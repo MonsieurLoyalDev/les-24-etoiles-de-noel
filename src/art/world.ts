@@ -7,11 +7,28 @@ export const buildingArt: Record<string, string> = {
   loyal_house: "maison_loyal", library: "bibliotheque_etoilebois",
   workshop: "atelier_cadeaux", inn: "auberge_etoiles",
 };
+export const propArt: Record<string, {key:string;width:number}> = {
+  lantern:{key:"lampadaire",width:38}, bench:{key:"banc_plaid",width:68},
+  signpost:{key:"panneau_direction",width:58}, gift:{key:"stand_cadeaux",width:70},
+  pine_large:{key:"vegetation_pine_large",width:80},
+};
 export function preloadWorld(scene: Phaser.Scene) {
   for (const key of ["snow", "stone", "dirt"] as const)
     scene.load.spritesheet(`art-${key}`, art[key], { frameWidth: 32, frameHeight: 32 });
   for (const key of Object.values(buildingArt))
     scene.load.image(`art-${key}`, art[key as keyof typeof art]);
+  for (const key of [...Object.values(propArt).map(p=>p.key),"bonhomme_neige","jardiniere","cloture_guirlande","brasero"])
+    scene.load.image(`art-${key}`, art[key as keyof typeof art]);
+}
+export function decorate(scene: Phaser.Scene) {
+  const placements: [string,number,number,number][] = [
+    ["bonhomme_neige",90,600,56], ["jardiniere",152,345,46],
+    ["cloture_guirlande",880,290,100], ["brasero",360,160,48],
+  ];
+  for (const [key,x,y,width] of placements) {
+    const obj=scene.add.image(x,y,`art-${key}`).setOrigin(.5,1).setDepth(y);
+    obj.setScale(width/obj.width);
+  }
 }
 /** Continuous macrotextures retain their spatial neighbours, without random tile indices. */
 export function drawGround(scene: Phaser.Scene) {

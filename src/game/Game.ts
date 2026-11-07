@@ -1,4 +1,4 @@
-import { preloadWorld, drawGround, buildingArt } from "../art/world";
+import { preloadWorld, drawGround, buildingArt, propArt, decorate } from "../art/world";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -166,13 +166,16 @@ export class Village extends Phaser.Scene {
       h = 768;
     if (this.state.room === "village") {
       drawGround(this);
+      decorate(this);
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
-        this.add
-          .image(p.tileX * 16, p.tileY * 16, p.sprite)
+        const replacement = propArt[p.sprite];
+        const prop = this.add
+          .image(p.tileX * 16, p.tileY * 16, replacement ? "art-" + replacement.key : p.sprite)
           .setOrigin(conf.origin.x, conf.origin.y)
           .setDepth(p.tileY * 16);
+        if (replacement) prop.setScale(replacement.width / prop.width).setOrigin(.5, 1);
         if (p.solid)
           this.rects.push({
             x: p.tileX * 16 - 14,

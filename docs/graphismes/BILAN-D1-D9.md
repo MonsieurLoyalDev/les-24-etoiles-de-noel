@@ -17,7 +17,7 @@ Défauts connus : les façades V10 contiennent des résidus gris semi-opaques ; 
 Vérification D1 : build TypeScript/Vite réussi, test navigateur desktop réussi et capture inspectée. Emplacements, collisions et entrées conservés ; façades visibles sans substitution du code de référence.
 
 ## D2 — Décorations
-À réaliser.
+Lanternes, bancs, panneaux, cadeaux V11 et végétation du pack intégrés aux positions existantes, avec bonhomme de neige, jardinière, clôture et brasero aux bords de la place. Les décorations ajoutées ne bloquent aucun chemin et ne créent aucune interaction. Les découpes V11 peuvent conserver halos et fragments voisins, conformément à leur README.
 
 ## D3 — Ambiance
 À réaliser.
