@@ -76,6 +76,7 @@ export class Village extends Phaser.Scene {
   shade!: Phaser.GameObjects.Rectangle;
   snow: Phaser.GameObjects.Arc[] = [];
   lamps: Phaser.GameObjects.Arc[] = [];
+  smoke: { puff: Phaser.GameObjects.Arc; x: number; y: number; phase: number }[] = [];
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -159,6 +160,7 @@ export class Village extends Phaser.Scene {
     this.star = undefined;
     this.npcs = [];
     this.lamps = [];
+    this.smoke = [];
     this.decorations = [];
     this.rects = [];
     this.trail = [];
@@ -186,7 +188,7 @@ export class Village extends Phaser.Scene {
         if (p.sprite === "lantern")
           this.lamps.push(
             this.add
-              .circle(p.tileX * 16, p.tileY * 16 - 30, 24, 0xffce72, 1)
+              .circle(p.tileX * 16, p.tileY * 16 - 30, 14, 0xffce72, 1)
               .setDepth(p.tileY * 16 + 1),
           );
       });
@@ -199,6 +201,10 @@ export class Village extends Phaser.Scene {
         const facade = this.add.image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
           .setOrigin(0.5, 1).setDepth(y + bh - 12);
         facade.setScale((bw + 32) / facade.width);
+        for (let i=0;i<3;i++) {
+          const sx=b.entrance.x*16-bw*.3, sy=y+bh-facade.displayHeight*.8;
+          this.smoke.push({puff:this.add.circle(sx,sy,3,0xd6d9e4,.1).setDepth(y+bh+1),x:sx,y:sy,phase:i/3});
+        }
         this.label(x + bw / 2, y + bh + 10, b.name);
 
       });
@@ -868,7 +874,14 @@ export class Village extends Phaser.Scene {
           Math.sin(_time / 600 + i) * 0.035,
       ),
     );
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    for (const {puff,x,y,phase} of this.smoke) {
+      const life=(_time/4200+phase)%1;
+      puff.setPosition(x+Math.sin(life*4)*5,y-life*24)
+        .setScale(1+life).setAlpha(reduced?0:Math.sin(life*Math.PI)*.15);
+    }
     this.snow.forEach((flake, i) => {
+      flake.setVisible(!reduced);
       const span = cam.width / 2,
         height = cam.height / 2;
       flake.setPosition(

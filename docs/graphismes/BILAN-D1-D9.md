@@ -20,7 +20,7 @@ Vérification D1 : build TypeScript/Vite réussi, test navigateur desktop réuss
 Lanternes, bancs, panneaux, cadeaux V11 et végétation du pack intégrés aux positions existantes, avec bonhomme de neige, jardinière, clôture et brasero aux bords de la place. Les décorations ajoutées ne bloquent aucun chemin et ne créent aucune interaction. Les découpes V11 peuvent conserver halos et fragments voisins, conformément à leur README.
 
 ## D3 — Ambiance
-À réaliser.
+Cycle existant aurore/jour/crépuscule/nuit conservé, neige légère (36 particules maximum), halo des lanternes réduit et fumée de cheminée (12 formes réutilisées, aucun objet créé par frame). Neige et fumée respectent la réduction des animations du système. Aucun halo ajouté aux personnages, notamment Flocon. Vérification TypeScript et navigateur PC/mobile.
 
 ## D4 — Personnages
 À réaliser.
