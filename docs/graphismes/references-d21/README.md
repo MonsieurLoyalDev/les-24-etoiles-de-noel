@@ -1,0 +1,1 @@
+Pack D2.1 : 2 planches de direction artistique (non directement intégrables), 4 textures de neige répétables 64×64 et prompt Codex. Les sprites de végétation transparents restent à produire/valider individuellement.

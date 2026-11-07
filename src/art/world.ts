@@ -2,6 +2,13 @@ import Phaser from "phaser";
 import catalog from "./catalog.json";
 import { decorations } from "./village-design";
 import { landscape } from "./landscape";
+import { snowAssets } from "./snow-detail";
+import {
+  refinedAssets,
+  vegetationKey,
+  prepareVegetation,
+  fittedVegetationWidth,
+} from "./vegetation";
 import { prepareSprite, prepareSnow, cleanKey } from "./prepare";
 
 export const art = catalog.images;
@@ -25,6 +32,7 @@ export const buildingWidths: Record<string, number> = {
   inn: 224,
 };
 export function prepareWorld(scene: Phaser.Scene) {
+  prepareVegetation(scene);
   for (const key of Object.values(buildingArt)) prepareSprite(scene, key, true);
   for (const key of [
     "lampadaire",
@@ -42,6 +50,10 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
+  for (const [key, url] of Object.entries(refinedAssets))
+    scene.load.image(`raw-${vegetationKey(key)}`, url);
+  for (const [key, url] of Object.entries(snowAssets))
+    scene.load.image(key, url);
   for (const key of ["snow", "stone", "dirt"] as const)
     scene.load.spritesheet(`art-${key}`, art[key], {
       frameWidth: 32,
@@ -65,17 +77,22 @@ export function preloadWorld(scene: Phaser.Scene) {
 }
 export function decorate(scene: Phaser.Scene) {
   for (const d of decorations) {
-    const key = scene.textures.exists(cleanKey(d.key))
-      ? cleanKey(d.key)
-      : "art-" + d.key;
+    const key =
+      vegetationKey(d.key) ??
+      (scene.textures.exists(cleanKey(d.key))
+        ? cleanKey(d.key)
+        : "art-" + d.key);
     const image = scene.add
       .image(d.x, d.y, key)
       .setOrigin(0.5, 1)
       .setDepth(d.back ? -10 : d.y)
       .setFlipX(!!d.flip)
       .setName("scenery:" + d.id);
-    image.setScale(d.width / image.width);
-    if (d.back) image.setTint(0xd9e6e4);
+    const width = vegetationKey(d.key)
+      ? fittedVegetationWidth(d.width, d.x, d.y, image.width / image.height)
+      : d.width;
+    image.setScale(width / image.width);
+    if (d.back) image.setTint(0xe9f0f0);
     if (d.key === "panneau_direction") {
       const text =
         d.district === "post"

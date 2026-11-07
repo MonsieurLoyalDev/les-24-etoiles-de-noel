@@ -1,4 +1,13 @@
-# Les 24 Étoiles de Noël — Phase D.2, embellissement
+# Les 24 Étoiles de Noël — Phase D.2.1, finitions
+
+Version 0.6.1 : neige subtile du pack D.2.1, petites congères et traces fixes, trois nouveaux sprites transparents de végétation créés avec l'autorisation donnée, enseignes contextuelles à texte dynamique et plaques de noms pour les huit personnages. Les personnages, façades, HUD, dialogues et systèmes de jeu sont conservés. Les nouveaux végétaux restent soumis à validation artistique.
+
+- [Comparatif D.2 / D.2.1, PC, mobile et vue globale](docs/graphismes/comparatif-d21.html)
+- [Rapport des finitions et vérifications](docs/graphismes/FINITIONS-D21.md)
+- [Inventaire des ressources remplacées](docs/graphismes/INVENTAIRE-D21.json)
+- [Provenance et prompts de création](docs/graphismes/D21-GENERATION.md)
+
+## Phase D.2 — historique 0.6.0
 
 Version 0.6.0 : place du sapin, chemins plus étroits, parvis des quatre bâtiments, coins lecture et terrasse, abords de l'atelier, lisières et arche d'entrée. 77 ornements supplémentaires réutilisent les ressources validées. Les corrections D.1, le HUD, les dialogues, sauvegardes et activités restent conservés. Aucune façade de mairie, boulangerie ou poste n'est inventée : leurs abords sont aménagés selon l'accord donné.
 
