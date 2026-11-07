@@ -9,6 +9,8 @@ export const crops: Record<string, [number, number, number, number]> = {
   cloture_guirlande: [42, 24, 331, 74],
   stand_cadeaux: [10, 8, 207, 228],
   brasero: [10, 0, 113, 129],
+  banc_neige: [0, 0, 171, 111],
+  guirlande_lanternes: [132, 38, 220, 148],
 };
 export const cleanKey = (key: string) => `clean-${key}`;
 export function prepareSprite(
@@ -25,7 +27,94 @@ export function prepareSprite(
   const texture = scene.textures.createCanvas(target, w, h)!;
   const ctx = texture.context;
   ctx.imageSmoothingEnabled = false;
-  if (key === "lampadaire" || key === "brasero") {
+  if (key === "arche_etoilebois") {
+    // Existing approved gateway, following its outside contour and open centre; no new drawing.
+    const outline = [
+      [10, 316],
+      [66, 298],
+      [66, 270],
+      [38, 263],
+      [29, 244],
+      [32, 220],
+      [36, 210],
+      [33, 170],
+      [41, 140],
+      [65, 110],
+      [73, 87],
+      [86, 83],
+      [90, 41],
+      [104, 24],
+      [126, 24],
+      [139, 39],
+      [139, 62],
+      [184, 43],
+      [203, 17],
+      [224, 24],
+      [242, 34],
+      [262, 20],
+      [281, 22],
+      [287, 51],
+      [330, 60],
+      [350, 33],
+      [366, 20],
+      [389, 25],
+      [398, 43],
+      [394, 72],
+      [415, 100],
+      [432, 97],
+      [438, 107],
+      [438, 135],
+      [450, 153],
+      [448, 184],
+      [463, 215],
+      [461, 246],
+      [451, 266],
+      [438, 266],
+      [416, 247],
+      [412, 290],
+      [433, 305],
+      [469, 322],
+      [472, 342],
+      [451, 351],
+      [308, 352],
+      [263, 342],
+      [265, 329],
+      [287, 317],
+      [321, 306],
+      [338, 283],
+      [339, 228],
+      [328, 214],
+      [317, 215],
+      [306, 199],
+      [305, 183],
+      [294, 182],
+      [284, 203],
+      [262, 216],
+      [225, 207],
+      [197, 204],
+      [169, 187],
+      [160, 192],
+      [161, 214],
+      [149, 224],
+      [141, 222],
+      [137, 283],
+      [159, 306],
+      [192, 322],
+      [207, 338],
+      [181, 351],
+      [30, 351],
+      [9, 343],
+    ];
+    ctx.save();
+    ctx.beginPath();
+    outline.forEach(([px, py], i) =>
+      i ? ctx.lineTo(px, py) : ctx.moveTo(px, py),
+    );
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(source, 0, 0);
+    ctx.restore();
+  } else if (key === "lampadaire" || key === "brasero") {
     // Follow the original lantern silhouette, excluding its opaque baked brown halo.
     const outline =
       key === "lampadaire"

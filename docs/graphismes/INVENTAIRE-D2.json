@@ -1,0 +1,1040 @@
+{
+  "base": "423d12c0038dd91fec56fc87bc33dc25260bb017",
+  "version": "0.6.0",
+  "extraDecorations": 77,
+  "resources": [
+    {
+      "key": "arche_etoilebois",
+      "url": "/assets/validated/decor/arche_etoilebois.png",
+      "count": 1,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/arche_etoilebois.png",
+      "sha256": "7ea80edae97d53fa76a6246e3f686ee6d299787d2177d3628ca84f580353461b"
+    },
+    {
+      "key": "banc_neige",
+      "url": "/assets/validated/decor/banc_neige.png",
+      "count": 5,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/banc_neige.png",
+      "sha256": "a9678dcedc99aeb76ca978cc995fdd7b0d0f6e66791d42e1fc0762e0c15d5b4c"
+    },
+    {
+      "key": "banc_plaid",
+      "url": "/assets/validated/decor/banc_plaid.png",
+      "count": 2,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/banc_plaid.png",
+      "sha256": "40703de17b7d1f85106e2392d7ac53ac3644aeca019fcc482b64881ac8469d4f"
+    },
+    {
+      "key": "cloture_guirlande",
+      "url": "/assets/validated/decor/cloture_guirlande.png",
+      "count": 3,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/cloture_guirlande.png",
+      "sha256": "328c2533a65ccb2c6adb3cc44e0a87caff9c2f0b342269546e8c8ed05ef42326"
+    },
+    {
+      "key": "guirlande_lanternes",
+      "url": "/assets/validated/decor/guirlande_lanternes.png",
+      "count": 2,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/guirlande_lanternes.png",
+      "sha256": "e859930f32afd978bd21d988feefaeb001a404f33eefdbc30e94a633e9a37671"
+    },
+    {
+      "key": "jardiniere",
+      "url": "/assets/validated/decor/jardiniere.png",
+      "count": 10,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/jardiniere.png",
+      "sha256": "483dc9dd4038616075aac5c57d9ea341ed9c70309478e9138966b963b2d8cd99"
+    },
+    {
+      "key": "lampadaire",
+      "url": "/assets/validated/decor/lampadaire.png",
+      "count": 2,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/lampadaire.png",
+      "sha256": "1439cfffd222fe430c72e742bc27a5c8eade4fe8064e5b5ab3b332125b50bf50"
+    },
+    {
+      "key": "panneau_direction",
+      "url": "/assets/validated/decor/panneau_direction.png",
+      "count": 3,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/panneau_direction.png",
+      "sha256": "0068cbae1337dccf6edd63d4cac2aca9c019b0f9a09d2ea29b7d2d2b1f4182a5"
+    },
+    {
+      "key": "stand_cadeaux",
+      "url": "/assets/validated/decor/stand_cadeaux.png",
+      "count": 1,
+      "source": "04_TERRAINS_DECORS/Etoilebois_Place_Lanternes_V11/sprites/stand_cadeaux.png",
+      "sha256": "7421657262d5cf461687549508fb4330b1c08a0329363707996592cd02913814"
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "url": "/assets/validated/vegetation/bush_berries.png",
+      "count": 5,
+      "source": "04_TERRAINS_DECORS/etoilebois_vegetation_v1/bush_berries.png",
+      "sha256": "4b7fafee0b989c959a06837106b9f5f864413b2e512c1091c0342fae2bca00a1"
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "url": "/assets/validated/vegetation/bush_snow.png",
+      "count": 16,
+      "source": "04_TERRAINS_DECORS/etoilebois_vegetation_v1/bush_snow.png",
+      "sha256": "4499d7f15a40927c0215b2653a7b73bc6b75ce9e225b898322e17ef54c5d0d57"
+    },
+    {
+      "key": "vegetation_gift",
+      "url": "/assets/validated/vegetation/gift.png",
+      "count": 4,
+      "source": "04_TERRAINS_DECORS/etoilebois_vegetation_v1/gift.png",
+      "sha256": "3ec7609972fbffc5af6b7a3163d570b8867429acd576b7365869e313ba86e544"
+    },
+    {
+      "key": "vegetation_logs",
+      "url": "/assets/validated/vegetation/logs.png",
+      "count": 3,
+      "source": "04_TERRAINS_DECORS/etoilebois_vegetation_v1/logs.png",
+      "sha256": "300f7c8a6b9fff7cc630d570f12252f02f1cb87f1a60c10374e166429bd560ba"
+    },
+    {
+      "key": "vegetation_pine_large",
+      "url": "/assets/validated/vegetation/pine_large.png",
+      "count": 20,
+      "source": "04_TERRAINS_DECORS/etoilebois_vegetation_v1/pine_large.png",
+      "sha256": "d91c0c4c8f2a6e5b05d02d3239a68534ca1d45c481d6d8d79f7f62bda987ca9e"
+    }
+  ],
+  "decorations": [
+    {
+      "id": "place-banc_neige-0",
+      "district": "place",
+      "key": "banc_neige",
+      "x": 374,
+      "y": 480,
+      "width": 62
+    },
+    {
+      "id": "place-lampadaire-1",
+      "district": "place",
+      "key": "lampadaire",
+      "x": 388,
+      "y": 383,
+      "width": 26
+    },
+    {
+      "id": "place-lampadaire-2",
+      "district": "place",
+      "key": "lampadaire",
+      "x": 637,
+      "y": 389,
+      "width": 26
+    },
+    {
+      "id": "place-jardiniere-3",
+      "district": "place",
+      "key": "jardiniere",
+      "x": 376,
+      "y": 346,
+      "width": 32
+    },
+    {
+      "id": "place-jardiniere-4",
+      "district": "place",
+      "key": "jardiniere",
+      "x": 642,
+      "y": 441,
+      "width": 31
+    },
+    {
+      "id": "place-vegetation_bush_snow-5",
+      "district": "place",
+      "key": "vegetation_bush_snow",
+      "x": 382,
+      "y": 358,
+      "width": 31
+    },
+    {
+      "id": "place-vegetation_bush_berries-6",
+      "district": "place",
+      "key": "vegetation_bush_berries",
+      "x": 367,
+      "y": 454,
+      "width": 28
+    },
+    {
+      "id": "place-vegetation_gift-7",
+      "district": "place",
+      "key": "vegetation_gift",
+      "x": 589,
+      "y": 369,
+      "width": 24
+    },
+    {
+      "id": "library-banc_neige-8",
+      "district": "library",
+      "key": "banc_neige",
+      "x": 144,
+      "y": 345,
+      "width": 58
+    },
+    {
+      "id": "library-jardiniere-9",
+      "district": "library",
+      "key": "jardiniere",
+      "x": 281,
+      "y": 321,
+      "width": 37
+    },
+    {
+      "id": "library-vegetation_bush_snow-10",
+      "district": "library",
+      "key": "vegetation_bush_snow",
+      "x": 291,
+      "y": 357,
+      "width": 28
+    },
+    {
+      "id": "library-vegetation_bush_snow-11",
+      "district": "library",
+      "key": "vegetation_bush_snow",
+      "x": 114,
+      "y": 315,
+      "width": 36
+    },
+    {
+      "id": "library-vegetation_bush_berries-12",
+      "district": "library",
+      "key": "vegetation_bush_berries",
+      "x": 300,
+      "y": 365,
+      "width": 29
+    },
+    {
+      "id": "library-guirlande_lanternes-13",
+      "district": "library",
+      "key": "guirlande_lanternes",
+      "x": 185,
+      "y": 301,
+      "width": 103,
+      "overhead": true
+    },
+    {
+      "id": "library-cloture_guirlande-14",
+      "district": "library",
+      "key": "cloture_guirlande",
+      "x": 113,
+      "y": 367,
+      "width": 74
+    },
+    {
+      "id": "inn-banc_plaid-15",
+      "district": "inn",
+      "key": "banc_plaid",
+      "x": 383,
+      "y": 225,
+      "width": 61
+    },
+    {
+      "id": "inn-banc_neige-16",
+      "district": "inn",
+      "key": "banc_neige",
+      "x": 550,
+      "y": 225,
+      "width": 57
+    },
+    {
+      "id": "inn-jardiniere-17",
+      "district": "inn",
+      "key": "jardiniere",
+      "x": 345,
+      "y": 264,
+      "width": 35
+    },
+    {
+      "id": "inn-jardiniere-18",
+      "district": "inn",
+      "key": "jardiniere",
+      "x": 590,
+      "y": 236,
+      "width": 35
+    },
+    {
+      "id": "inn-guirlande_lanternes-19",
+      "district": "inn",
+      "key": "guirlande_lanternes",
+      "x": 463,
+      "y": 190,
+      "width": 103,
+      "overhead": true
+    },
+    {
+      "id": "inn-vegetation_bush_snow-20",
+      "district": "inn",
+      "key": "vegetation_bush_snow",
+      "x": 613,
+      "y": 258,
+      "width": 29
+    },
+    {
+      "id": "inn-vegetation_bush_berries-21",
+      "district": "inn",
+      "key": "vegetation_bush_berries",
+      "x": 348,
+      "y": 240,
+      "width": 26
+    },
+    {
+      "id": "workshop-stand_cadeaux-22",
+      "district": "workshop",
+      "key": "stand_cadeaux",
+      "x": 863,
+      "y": 305,
+      "width": 65
+    },
+    {
+      "id": "workshop-vegetation_logs-23",
+      "district": "workshop",
+      "key": "vegetation_logs",
+      "x": 710,
+      "y": 294,
+      "width": 22
+    },
+    {
+      "id": "workshop-vegetation_logs-24",
+      "district": "workshop",
+      "key": "vegetation_logs",
+      "x": 720,
+      "y": 308,
+      "width": 16,
+      "flip": true
+    },
+    {
+      "id": "workshop-vegetation_gift-25",
+      "district": "workshop",
+      "key": "vegetation_gift",
+      "x": 839,
+      "y": 276,
+      "width": 25
+    },
+    {
+      "id": "workshop-vegetation_gift-26",
+      "district": "workshop",
+      "key": "vegetation_gift",
+      "x": 880,
+      "y": 314,
+      "width": 20,
+      "flip": true
+    },
+    {
+      "id": "workshop-jardiniere-27",
+      "district": "workshop",
+      "key": "jardiniere",
+      "x": 927,
+      "y": 293,
+      "width": 32
+    },
+    {
+      "id": "workshop-banc_neige-28",
+      "district": "workshop",
+      "key": "banc_neige",
+      "x": 668,
+      "y": 300,
+      "width": 58
+    },
+    {
+      "id": "workshop-cloture_guirlande-29",
+      "district": "workshop",
+      "key": "cloture_guirlande",
+      "x": 908,
+      "y": 326,
+      "width": 91
+    },
+    {
+      "id": "house-banc_plaid-30",
+      "district": "house",
+      "key": "banc_plaid",
+      "x": 859,
+      "y": 668,
+      "width": 58
+    },
+    {
+      "id": "house-jardiniere-31",
+      "district": "house",
+      "key": "jardiniere",
+      "x": 715,
+      "y": 636,
+      "width": 35
+    },
+    {
+      "id": "house-jardiniere-32",
+      "district": "house",
+      "key": "jardiniere",
+      "x": 899,
+      "y": 633,
+      "width": 33
+    },
+    {
+      "id": "house-vegetation_logs-33",
+      "district": "house",
+      "key": "vegetation_logs",
+      "x": 888,
+      "y": 612,
+      "width": 20
+    },
+    {
+      "id": "house-cloture_guirlande-34",
+      "district": "house",
+      "key": "cloture_guirlande",
+      "x": 903,
+      "y": 697,
+      "width": 91
+    },
+    {
+      "id": "house-vegetation_bush_berries-35",
+      "district": "house",
+      "key": "vegetation_bush_berries",
+      "x": 713,
+      "y": 676,
+      "width": 27
+    },
+    {
+      "id": "house-vegetation_bush_snow-36",
+      "district": "house",
+      "key": "vegetation_bush_snow",
+      "x": 889,
+      "y": 676,
+      "width": 35
+    },
+    {
+      "id": "civic-panneau_direction-37",
+      "district": "civic",
+      "key": "panneau_direction",
+      "x": 793,
+      "y": 486,
+      "width": 36
+    },
+    {
+      "id": "civic-jardiniere-38",
+      "district": "civic",
+      "key": "jardiniere",
+      "x": 837,
+      "y": 486,
+      "width": 30
+    },
+    {
+      "id": "post-panneau_direction-39",
+      "district": "post",
+      "key": "panneau_direction",
+      "x": 278,
+      "y": 393,
+      "width": 36
+    },
+    {
+      "id": "post-vegetation_gift-40",
+      "district": "post",
+      "key": "vegetation_gift",
+      "x": 284,
+      "y": 405,
+      "width": 23
+    },
+    {
+      "id": "post-jardiniere-41",
+      "district": "post",
+      "key": "jardiniere",
+      "x": 300,
+      "y": 402,
+      "width": 30
+    },
+    {
+      "id": "forest-banc_neige-42",
+      "district": "forest",
+      "key": "banc_neige",
+      "x": 885,
+      "y": 392,
+      "width": 57
+    },
+    {
+      "id": "forest-panneau_direction-43",
+      "district": "forest",
+      "key": "panneau_direction",
+      "x": 932,
+      "y": 515,
+      "width": 35
+    },
+    {
+      "id": "forest-vegetation_bush_berries-44",
+      "district": "forest",
+      "key": "vegetation_bush_berries",
+      "x": 904,
+      "y": 430,
+      "width": 28
+    },
+    {
+      "id": "forest-vegetation_bush_snow-45",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 940,
+      "y": 444,
+      "width": 35
+    },
+    {
+      "id": "forest-vegetation_pine_large-46",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 40,
+      "y": 115,
+      "width": 65,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-47",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 73,
+      "y": 94,
+      "width": 72,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-48",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 100,
+      "y": 132,
+      "width": 54,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-49",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 35,
+      "y": 192,
+      "width": 58,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-50",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 69,
+      "y": 216,
+      "width": 69,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-51",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 958,
+      "y": 85,
+      "width": 72,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-52",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 990,
+      "y": 128,
+      "width": 60,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-53",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 913,
+      "y": 101,
+      "width": 63,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-54",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 979,
+      "y": 337,
+      "width": 70,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-55",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 988,
+      "y": 412,
+      "width": 63,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-56",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 48,
+      "y": 685,
+      "width": 72,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-57",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 94,
+      "y": 751,
+      "width": 67,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-58",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 160,
+      "y": 723,
+      "width": 62,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-59",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 35,
+      "y": 620,
+      "width": 58,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-60",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 966,
+      "y": 750,
+      "width": 72,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-61",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 918,
+      "y": 721,
+      "width": 61,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-62",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 980,
+      "y": 652,
+      "width": 77,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-63",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 937,
+      "y": 666,
+      "width": 56,
+      "back": true,
+      "flip": true
+    },
+    {
+      "id": "forest-vegetation_pine_large-64",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 625,
+      "y": 91,
+      "width": 64,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_pine_large-65",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 655,
+      "y": 135,
+      "width": 58,
+      "back": true,
+      "flip": false
+    },
+    {
+      "id": "forest-vegetation_bush_snow-66",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 55,
+      "y": 134,
+      "width": 33,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-67",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 109,
+      "y": 139,
+      "width": 26,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-68",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 48,
+      "y": 254,
+      "width": 35,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-69",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 957,
+      "y": 147,
+      "width": 33,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-70",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 992,
+      "y": 437,
+      "width": 28,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-71",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 44,
+      "y": 706,
+      "width": 32,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-72",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 143,
+      "y": 750,
+      "width": 31,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-73",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 929,
+      "y": 744,
+      "width": 33,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-74",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 979,
+      "y": 678,
+      "width": 30,
+      "back": true
+    },
+    {
+      "id": "forest-vegetation_bush_snow-75",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 636,
+      "y": 153,
+      "width": 32,
+      "back": true
+    },
+    {
+      "id": "forest-arche_etoilebois-76",
+      "district": "forest",
+      "key": "arche_etoilebois",
+      "x": 512,
+      "y": 767,
+      "width": 164
+    }
+  ],
+  "lanes": [
+    {
+      "id": "main",
+      "material": "stone",
+      "width": 48,
+      "points": [
+        {
+          "x": 512,
+          "y": 752
+        },
+        {
+          "x": 512,
+          "y": 480
+        },
+        {
+          "x": 512,
+          "y": 434
+        }
+      ]
+    },
+    {
+      "id": "library",
+      "material": "stone",
+      "width": 40,
+      "points": [
+        {
+          "x": 208,
+          "y": 314
+        },
+        {
+          "x": 208,
+          "y": 420
+        },
+        {
+          "x": 398,
+          "y": 420
+        },
+        {
+          "x": 454,
+          "y": 432
+        }
+      ]
+    },
+    {
+      "id": "inn",
+      "material": "stone",
+      "width": 40,
+      "points": [
+        {
+          "x": 464,
+          "y": 204
+        },
+        {
+          "x": 464,
+          "y": 274
+        },
+        {
+          "x": 448,
+          "y": 330
+        }
+      ]
+    },
+    {
+      "id": "workshop",
+      "material": "stone",
+      "width": 40,
+      "points": [
+        {
+          "x": 784,
+          "y": 266
+        },
+        {
+          "x": 784,
+          "y": 348
+        },
+        {
+          "x": 654,
+          "y": 348
+        },
+        {
+          "x": 594,
+          "y": 382
+        }
+      ]
+    },
+    {
+      "id": "house",
+      "material": "stone",
+      "width": 40,
+      "points": [
+        {
+          "x": 800,
+          "y": 644
+        },
+        {
+          "x": 736,
+          "y": 644
+        },
+        {
+          "x": 736,
+          "y": 584
+        },
+        {
+          "x": 638,
+          "y": 584
+        },
+        {
+          "x": 558,
+          "y": 548
+        },
+        {
+          "x": 512,
+          "y": 548
+        }
+      ]
+    },
+    {
+      "id": "civic",
+      "material": "stone",
+      "width": 36,
+      "points": [
+        {
+          "x": 590,
+          "y": 458
+        },
+        {
+          "x": 646,
+          "y": 486
+        },
+        {
+          "x": 740,
+          "y": 515
+        }
+      ]
+    },
+    {
+      "id": "reading-garden",
+      "material": "stone",
+      "width": 28,
+      "points": [
+        {
+          "x": 208,
+          "y": 326
+        },
+        {
+          "x": 284,
+          "y": 326
+        },
+        {
+          "x": 336,
+          "y": 336
+        },
+        {
+          "x": 374,
+          "y": 376
+        },
+        {
+          "x": 415,
+          "y": 396
+        }
+      ]
+    },
+    {
+      "id": "west-forest",
+      "material": "dirt",
+      "width": 28,
+      "points": [
+        {
+          "x": 208,
+          "y": 452
+        },
+        {
+          "x": 154,
+          "y": 490
+        },
+        {
+          "x": 102,
+          "y": 528
+        },
+        {
+          "x": -24,
+          "y": 572
+        }
+      ]
+    },
+    {
+      "id": "flocon",
+      "material": "dirt",
+      "width": 28,
+      "points": [
+        {
+          "x": 818,
+          "y": 376
+        },
+        {
+          "x": 878,
+          "y": 421
+        },
+        {
+          "x": 932,
+          "y": 464
+        },
+        {
+          "x": 1048,
+          "y": 488
+        }
+      ]
+    }
+  ],
+  "courts": [
+    {
+      "id": "place",
+      "x": 512,
+      "y": 394,
+      "rx": 118,
+      "ry": 77
+    },
+    {
+      "id": "library",
+      "x": 208,
+      "y": 326,
+      "rx": 75,
+      "ry": 30
+    },
+    {
+      "id": "inn",
+      "x": 464,
+      "y": 209,
+      "rx": 86,
+      "ry": 25
+    },
+    {
+      "id": "workshop",
+      "x": 784,
+      "y": 278,
+      "rx": 77,
+      "ry": 29
+    },
+    {
+      "id": "house",
+      "x": 800,
+      "y": 640,
+      "rx": 78,
+      "ry": 27
+    },
+    {
+      "id": "reading",
+      "x": 336,
+      "y": 334,
+      "rx": 46,
+      "ry": 20
+    }
+  ],
+  "absentFacades": [
+    "mairie",
+    "boulangerie",
+    "bureau de poste"
+  ],
+  "omitted": [
+    "fontaine_etoile : fragments voisins et concurrence avec le sapin",
+    "panneau_affichage : base coupée et fragment de lampadaire",
+    "caisse_fleurs : fragments voisins"
+  ]
+}
