@@ -1,4 +1,5 @@
 import {Dialogue} from "./art/Dialogue";
+import {readAudio,setAudio,playSound,stopAmbience} from "./art/audio";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Phaser from "phaser";
@@ -16,6 +17,7 @@ function App() {
   const [started, setStarted] = useState(false);
   const [journal, setJournal] = useState(false);
   const [settings,setSettings]=useState(false);
+  const [audioPreferences,setAudioPreferences]=useState(readAudio);
   const [adventOpen, setAdventOpen] = useState(0),
     [adventBusy, setAdventBusy] = useState(false);
   const [tab, setTab] = useState("calendar");
@@ -24,6 +26,12 @@ function App() {
   const scene = useRef<Village | undefined>(undefined);
   const stick = useRef<HTMLDivElement>(null);
   const [knob, setKnob] = useState({ x: 0, y: 0 });
+  useEffect(()=>{setAudio(audioPreferences);},[audioPreferences]);
+  useEffect(()=>{
+    const click=(event:MouseEvent)=>{if((event.target as Element)?.closest("button"))playSound("click");};
+    document.addEventListener("click",click);
+    return()=>{document.removeEventListener("click",click);stopAmbience();};
+  },[]);
   useEffect(() => {
     if (!started) return;
     let game: Phaser.Game | undefined,
@@ -237,6 +245,8 @@ function App() {
               <p>Flèches, ZQSD ou WASD pour marcher. E pour interagir. Sur téléphone, utilisez le joystick.</p>
               <p>Votre progression est enregistrée automatiquement. Les paramètres n'effacent aucun souvenir.</p>
               <p>Ambiance sonore : emplacements préparés, aucun son autorisé fourni.</p>
+              <label><input type="checkbox" checked={audioPreferences.muted} onChange={e=>setAudioPreferences(p=>({...p,muted:e.target.checked}))}/> Muet</label>
+              <label>Volume <input aria-label="Volume" type="range" min="0" max="1" step=".05" value={audioPreferences.volume} onChange={e=>setAudioPreferences(p=>({...p,volume:Number(e.target.value)}))}/></label>
             </div>}
             {journal && (
               <div

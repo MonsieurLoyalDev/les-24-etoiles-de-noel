@@ -1,4 +1,5 @@
 import catalog from "../art/catalog.json";
+import {playSound,stopAmbience} from "../art/audio";
 import {preloadActors,createActorAnimations,actor,animateActor,residentActors} from "../art/actors";
 import { reaction } from "../art/reactions";
 import { preloadWorld, drawGround, buildingArt, propArt, decorate } from "../art/world";
@@ -86,6 +87,7 @@ export class Village extends Phaser.Scene {
   frame = 0;
   lastEEvent = -1;
   lastPortalAt = -Infinity;
+  lastFootstep = 0;
   adventDay: Day | null = null;
   adventRequested = 0;
   adventLights: number[] = [];
@@ -162,6 +164,8 @@ export class Village extends Phaser.Scene {
       .setDepth(y + 80);
   }
   renderRoom() {
+    stopAmbience();
+    playSound(this.state.room==="village"?"wind":"fire",true);
     this.children.removeAll(true);
     this.adventMarker = undefined;
     this.huntMarker = undefined;
@@ -333,6 +337,7 @@ export class Village extends Phaser.Scene {
     if (this.player) this.refreshAdvent();
   }
   setAdventLights(days: number[]) {
+    if(days.length>this.adventLights.length)playSound("star");
     this.adventLights = [...new Set(days)];
     if (this.player) this.refreshAdvent();
     this.emit();
@@ -751,6 +756,7 @@ export class Village extends Phaser.Scene {
     if (down("UP") || down("W") || down("Z")) y--;
     if (down("DOWN") || down("S")) y++;
     if (!this.dialogue && !controls.paused) {
+      const before={x:this.player.x,y:this.player.y};
       this.state.clock = (this.state.clock + Math.min(delta, 200)) % 180000;
       const len = Math.hypot(x, y) || 1,
         speed = movementDistance(delta);
@@ -763,6 +769,7 @@ export class Village extends Phaser.Scene {
         h,
       );
       this.player.setPosition(this.state.position.x, this.state.position.y);
+      if(Math.hypot(before.x-this.player.x,before.y-this.player.y)>.5&&_time-this.lastFootstep>320){playSound("step");this.lastFootstep=_time;}
 
       if (this.hunt?.step.style !== "loyal") {
         const segment = Math.hypot(

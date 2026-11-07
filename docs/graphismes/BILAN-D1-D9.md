@@ -43,7 +43,7 @@ Une régression de clic entre étoiles adjacentes a été détectée puis corrig
 Fondu court de caméra (180 ms) à l'entrée des bâtiments/zones existants ; apparition de dialogue, journal, calendrier et paramètres en 150 ms. Les commandes et la temporisation anti-double-portail existantes restent inchangées. Pas de nouvel écran ou déplacement forcé. Animations d'interface désactivées avec prefers-reduced-motion. L'illumination du sapin final est accompagnée d'une pulsation douce, sans modifier la progression.
 
 ## D8 — Audio
-À réaliser. Aucun son ni fichier de police n'est inclus dans le pack.
+Points d'insertion pas/vent/cheminée/clic/étoile reliés, avec arrêt des boucles au changement de pièce et réglages volume/muet séparés de la sauvegarde RPG. Aucun son autorisé n'est fourni : tous les emplacements restent silencieux et le panneau l'indique. Aucune synthèse ni ressource externe ajoutée. Voir AUDIO.md pour les cinq sons manquants et leur intégration future. TypeScript vérifié ; préférences et stockage vérifiés en D9.
 
 ## D9 — Vérification
 À réaliser. Ne pas assimiler les défauts connus des sources à une validation artistique finale.
