@@ -35,8 +35,21 @@ header{height:112px;padding:6px 24px;gap:20px;background:linear-gradient(180deg,
 .settings-panel{position:absolute;z-index:20;inset:8% max(4%,calc((100% - 760px)/2));background:#1b3039fa;border:2px solid #ad874e;border-radius:12px;padding:24px;overflow:auto;box-shadow:0 10px 50px #0007}
 .journal,.advent-panel,.mini-modal{background-color:#172a33f8}
 .prototype{display:none}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.calendar-scroll{width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #a98a51;border-radius:8px;margin:18px 0;background:#0d1728}
+.calendar-artboard.advent-calendar{--calendar-width:1536;position:relative;display:block;width:100%;min-width:860px;aspect-ratio:1536/1024;background:url('/assets/validated/calendar/calendrier_art.png') left top/100% 100% no-repeat;margin:0}
+.advent-calendar .calendar-star{position:absolute;left:calc(var(--x)*100%/var(--calendar-width));top:calc(var(--y)*100%/1024);transform:translate(-50%,-50%);width:46px;height:46px;min-height:46px;min-width:46px;padding:0;display:grid;place-items:center;border:0;border-radius:0;background:none;opacity:1;isolation:isolate}
+.calendar-star .star-shape{position:absolute;inset:0;display:block;width:100%;height:100%;font-size:0;line-height:0;color:#6c4228;background:currentColor;clip-path:polygon(50% 0,61% 34%,98% 35%,68% 57%,79% 93%,50% 72%,21% 93%,32% 57%,2% 35%,39% 34%);z-index:-1}
+.calendar-star.available .star-shape{color:#e7b234;filter:drop-shadow(0 0 5px #ffcd63)}
+.calendar-star.complete .star-shape{color:#eec65e;filter:drop-shadow(0 0 3px #bbdc9e)}
+.advent-calendar .calendar-star strong{font:700 16px Nunito;color:#fff5d2;text-shadow:0 1px 3px #321b09}
+.calendar-star i{position:absolute;bottom:-3px;right:-3px;font:bold 16px Nunito;color:#c5f4ac;background:#244932;border-radius:50%;width:20px;height:20px}
+.calendar-star>*{pointer-events:none}
+.advent-calendar .calendar-star:focus-visible{outline:3px solid white;border-radius:50%}
+.advent-calendar .calendar-star.top-star{width:80px;height:80px}
 .welcome{min-height:calc(100svh - 112px)}
 @media(max-width:700px){
+  .calendar-artboard.advent-calendar{--calendar-width:850;min-width:560px;aspect-ratio:850/1024;background-size:180.706% 100%}
   header{height:132px;padding:4px 10px;gap:4px;flex-wrap:wrap;justify-content:space-between}
   .brand{width:158px;height:66px;font-size:21px}
   .hud-status{margin:0;gap:2px}.hud-date{width:64px;height:58px;font-size:11px;padding-top:9px}.hud-stars{width:100px;height:54px;font-size:16px;padding-left:22px}

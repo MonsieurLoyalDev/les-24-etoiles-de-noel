@@ -1,3 +1,4 @@
+import catalog from "../art/catalog.json";
 import {preloadActors,createActorAnimations,actor,animateActor,residentActors} from "../art/actors";
 import { reaction } from "../art/reactions";
 import { preloadWorld, drawGround, buildingArt, propArt, decorate } from "../art/world";
@@ -56,6 +57,7 @@ export class Village extends Phaser.Scene {
   player!: Phaser.GameObjects.Sprite;
   loyal!: Phaser.GameObjects.Sprite;
   star?: Phaser.GameObjects.Image;
+  tree?: Phaser.GameObjects.Image;
   glasses: Phaser.GameObjects.Graphics[] = [];
   rects: Rect[] = [];
   trail: Point[] = [];
@@ -106,6 +108,8 @@ export class Village extends Phaser.Scene {
   preload() {
     preloadWorld(this);
     preloadActors(this);
+    const tree=catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
+    this.load.atlas("art-tree",tree.image,tree.data);
     this.load.spritesheet("ground", manifest.ground.path, {
       frameWidth: 16,
       frameHeight: 16,
@@ -163,6 +167,7 @@ export class Village extends Phaser.Scene {
     this.huntMarker = undefined;
     this.adventDecor = [];
     this.star = undefined;
+    this.tree = undefined;
     this.npcs = [];
     this.lamps = [];
     this.smoke = [];
@@ -176,6 +181,11 @@ export class Village extends Phaser.Scene {
       decorate(this);
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
+        if (p.sprite === "pine_festive") {
+          this.tree=this.add.image(512,394,"art-tree","sapin_00").setOrigin(.5,1).setDepth(384).setScale(.9);
+          this.rects.push({x:498,y:375,w:28,h:15});
+          return;
+        }
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
         const replacement = propArt[p.sprite];
         const prop = this.add
@@ -218,17 +228,6 @@ export class Village extends Phaser.Scene {
         .setOrigin(0.5, 0.85)
         .setDepth(410)
         .setVisible(this.state.stage === 4);
-      for (let i = 0; i < this.state.stars.length; i++)
-        this.decorations.push(
-          this.add
-            .circle(
-              492 + (i % 3) * 19,
-              344 + Math.floor(i / 3) * 13,
-              3,
-              [0xffcf65, 0xe997bb, 0xa3d9ce][i % 3],
-            )
-            .setDepth(405),
-        );
     } else {
       w = 480;
       h = 352;
@@ -354,22 +353,8 @@ export class Village extends Phaser.Scene {
     }
     this.adventDecor.forEach((x) => x.destroy());
     this.adventDecor = [];
-    if (this.state.room === "village")
-      for (const day of this.finalSequence
-        ? Array.from({ length: 24 }, (_, i) => i + 1)
-        : this.adventLights) {
-        const i = day - 1;
-        this.adventDecor.push(
-          this.add
-            .circle(
-              476 + (i % 6) * 14,
-              326 + Math.floor(i / 6) * 15,
-              2.6,
-              [0xffd57d, 0xf4a4bc, 0x9cdcd6][i % 3],
-            )
-            .setDepth(406),
-        );
-      }
+    const count=this.finalSequence?24:Math.min(24,Math.max(this.adventLights.length,this.state.stars.length));
+    this.tree?.setFrame('sapin_'+String(count).padStart(2,'0'));
     this.huntMarker?.destroy();
     this.huntMarker = undefined;
     if (

@@ -35,7 +35,9 @@ Marcellus et Nunito proviennent de Google Fonts (fonts.googleapis.com / fonts.gs
 Défauts graphiques source : le PNG de dialogue narratif présente une jonction verticale et un fragment doré dans son angle supérieur droit ; certains autres éléments HUD ont des pixels résiduels sur leurs bords. Ils restent visibles, sans retouche ni fond artificiel. Le portrait est aligné en bas du médaillon, sans cacher son détourage par un aplat.
 
 ## D6 — Sapin et calendrier
-À réaliser.
+Sapin V11.4 à 25 états (0–24) et calendrier V12.0 avec exactement 24 boutons indépendants aux positions fournies. Le sapin évolue selon les étoiles gagnées, le final utilise l'état 24 et reste rejouable. Les cercles lumineux de remplacement ont été retirés du sapin. Les jours futurs sont toujours bloqués par l'API existante ; aucune logique de date du HTML de démonstration fourni n'a été copiée. Le fond graphique est public, pas les contenus de surprises. Sur téléphone, le panneau du sapin défile horizontalement pour garder des cibles tactiles de 46 px.
+
+Une régression de clic entre étoiles adjacentes a été détectée puis corrigée : les ornements ne capturent plus les événements des boutons voisins. Un test parcourt les 24 sélections sur PC et mobile. Le fond fourni conserve une étoile et des guirlandes déjà lumineuses : un halo du sommet subsiste en état verrouillé, limite signalée par le pack.
 
 ## D7 — Transitions
 À réaliser.

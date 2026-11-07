@@ -1,3 +1,4 @@
+import {CalendarArt} from "../art/Calendar";
 import { useEffect, useRef, useState } from "react";
 import type { Village, View } from "../game/Game";
 import { controls } from "../game/Game";
@@ -127,7 +128,7 @@ export function AdventHub({
     if (panel)
       root.current
         ?.querySelector<HTMLElement>("button,input,textarea")
-        ?.focus();
+        ?.focus({preventScroll:true});
   }, [panel, view.cinematic, scene, onBusy]);
   useEffect(() => {
     if (!openRequest) return;
@@ -542,28 +543,7 @@ export function AdventHub({
                     </form>
                   </details>
                 )}
-                <div className="advent-calendar">
-                  {Array.from({ length: 24 }, (_, i) => {
-                    const status = statuses.find((s) => s.day === i + 1);
-                    return (
-                      <button
-                        key={i}
-                        aria-label={`Ouvrir le jour ${i + 1}`}
-                        disabled={busy || !status?.unlocked}
-                        onClick={() => void selectDay(i + 1)}
-                      >
-                        <strong>{i + 1}</strong>
-                        <span>
-                          {status?.complete
-                            ? "✦ Souvenir gagné"
-                            : status?.unlocked
-                              ? "Découvrir"
-                              : "Verrouillé"}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                <CalendarArt statuses={statuses} busy={busy} select={day=>void selectDay(day)} />
                 <h3>Journal des souvenirs · {earned.length}/24</h3>
                 <div className="memory-journal">
                   {statuses
