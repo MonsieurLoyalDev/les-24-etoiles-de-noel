@@ -23,7 +23,9 @@ Lanternes, bancs, panneaux, cadeaux V11 et végétation du pack intégrés aux p
 Cycle existant aurore/jour/crépuscule/nuit conservé, neige légère (36 particules maximum), halo des lanternes réduit et fumée de cheminée (12 formes réutilisées, aucun objet créé par frame). Neige et fumée respectent la réduction des animations du système. Aucun halo ajouté aux personnages, notamment Flocon. Vérification TypeScript et navigateur PC/mobile.
 
 ## D4 — Personnages
-À réaliser.
+Sprites marche/attente fournis pour les huit personnages. Loyal utilise le profil V19.1 (miroir à gauche) et V9 pour face/dos/attente ; Augustin utilise l'attente V5. Les lunettes et tenues sont celles des images, sans surimpression de visage. Animations 6 FPS, profil 10 FPS, attente 2 FPS ; alignement au sol constant et profondeur selon les pieds. Émile et Flocon restent purement visuels. Les quatre animations de couple et les huit réactions de Debby sont reliées aux dialogues/interactions existants, chargées à la demande, sans effet sur les quêtes ; elles s'arrêtent dès la reprise de la marche. Aucun personnage redessiné. TypeScript et deux tests navigateur PC/mobile réussis.
+
+Limites source conservées : poses répétées de Debby, contours de Madeleine issus d'un détourage blanc, limites biomécaniques du profil de Loyal et effets parfois coupés des réactions. Ces défauts ne sont pas corrigés par génération de nouveaux dessins.
 
 ## D5 — HUD et dialogues
 À réaliser.

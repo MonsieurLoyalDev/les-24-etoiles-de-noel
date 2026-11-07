@@ -105,25 +105,25 @@ const resident = (
 });
 export const dialogues = {
   mira: resident(
-    "Mira · Bibliothécaire",
+    "Célestine · Bibliothécaire",
     "album",
     "library",
     "J’ai égaré mon marque-page dans le rayon de droite. Le livre sur la table cache ensuite une énigme ; au pupitre, une photographie attend d’être reconstituée. Tu m’aides ?",
   ),
   oscar: resident(
-    "Oscar · Artisan",
+    "Basile · Artisan",
     "parcels",
     "workshop",
     "Le ruban est sur le meuble à droite. Retrouve-le, puis prépare trois commandes sur mon établi. On fera une surprise aux habitants !",
   ),
   alma: resident(
-    "Alma · Aubergiste",
+    "Madeleine · Aubergiste",
     "memories",
     "inn",
     "Une veillée commence à la table de jeux. Retrouve toutes les paires de souvenirs, puis viens me raconter ta partie.",
   ),
   noe: resident(
-    "Noé · Gardien des lanternes",
+    "Augustin · Gardien des lanternes",
     "tour",
     "village",
     "Bienvenue Debby ! Visite la maison de Loyal, la bibliothèque, l’atelier puis l’auberge, dans cet ordre. Reviens me raconter ta promenade.",

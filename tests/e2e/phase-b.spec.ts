@@ -68,7 +68,7 @@ async function approachNPC(page: Page, id: string, name: string) {
 async function resident(page: Page, name: string, accept = false) {
   await approachNPC(
     page,
-    ({ Mira: "mira", Oscar: "oscar", Alma: "alma" } as Record<string, string>)[
+    ({ Célestine: "mira", Basile: "oscar", Madeleine: "alma" } as Record<string, string>)[
       name
     ],
     name,
@@ -77,7 +77,7 @@ async function resident(page: Page, name: string, accept = false) {
     await page
       .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
       .click();
-    if (name === "Mira") {
+    if (name === "Célestine") {
       await expect
         .poll(() =>
           page.evaluate(
@@ -128,10 +128,10 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await startMigrated(page);
-  // Noé is in the open south-east square. His entire patrol remains in reach.
+  // Augustin is in the open south-east square. His entire patrol remains in reach.
   await walk(page, "x", 695);
   await walk(page, "y", 515);
-  await approachNPC(page, "noe", "Noé");
+  await approachNPC(page, "noe", "Augustin");
   await page
     .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
     .click();
@@ -150,7 +150,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await walk(page, "x", 208);
   await walk(page, "y", 326);
   await enter(page, /Bibliothèque/, "library");
-  await resident(page, "Mira", true);
+  await resident(page, "Célestine", true);
   await walk(page, "y", 170);
   await walk(page, "x", 385);
   await walk(page, "y", 145);
@@ -191,14 +191,14 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   }
   await photo.getByRole("button", { name: "Recevoir le souvenir" }).click();
   await dismiss(page);
-  await resident(page, "Mira");
+  await resident(page, "Célestine");
   await expect(page.locator(".quest")).toContainText("2 / 24");
   await exit(page);
   await walk(page, "y", 420);
   await walk(page, "x", 784);
   await walk(page, "y", 278);
   await enter(page, /Atelier des Cadeaux/, "workshop");
-  await resident(page, "Oscar", true);
+  await resident(page, "Basile", true);
   await walk(page, "y", 170);
   await walk(page, "x", 385);
   await walk(page, "y", 145);
@@ -227,14 +227,14 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   }
   await wrap.getByRole("button", { name: "Recevoir le souvenir" }).click();
   await dismiss(page);
-  await resident(page, "Oscar");
+  await resident(page, "Basile");
   await expect(page.locator(".quest")).toContainText("3 / 24");
   await exit(page);
   await walk(page, "y", 420);
   await walk(page, "x", 464);
   await walk(page, "y", 215);
   await enter(page, /Auberge des Étoiles/, "inn");
-  await resident(page, "Alma", true);
+  await resident(page, "Madeleine", true);
   await walk(page, "y", 255);
   await walk(page, "x", 370);
   await interact(page, /Jouer aux cartes/);
@@ -271,13 +271,13 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   });
   await memory.getByRole("button", { name: "Recevoir le souvenir" }).click();
   await dismiss(page);
-  await resident(page, "Alma");
+  await resident(page, "Madeleine");
   await expect(page.locator(".quest")).toContainText("4 / 24");
   await exit(page);
   await walk(page, "y", 420);
   await walk(page, "x", 740);
   await walk(page, "y", 515);
-  await approachNPC(page, "noe", "Noé");
+  await approachNPC(page, "noe", "Augustin");
   await page.getByRole("button", { name: "À bientôt", exact: true }).click();
   await expect(page.locator(".quest")).toContainText("5 / 24");
   await page.getByRole("button", { name: /Journal/ }).click();

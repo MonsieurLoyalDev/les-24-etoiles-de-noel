@@ -169,7 +169,7 @@ function App() {
               <strong>{goals[0]?.title ?? "Le village vous attend"}</strong>
               <p>
                 {goals[0]?.label ??
-                  "Rencontrez Mira à la bibliothèque, Oscar à l’atelier, Alma à l’auberge et Noé sur la place."}
+                  "Rencontrez Célestine à la bibliothèque, Basile à l’atelier, Madeleine à l’auberge et Augustin sur la place."}
               </p>
               {goals.length > 1 && (
                 <small>

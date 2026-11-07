@@ -1,3 +1,5 @@
+import {preloadActors,createActorAnimations,actor,animateActor,residentActors} from "../art/actors";
+import { reaction } from "../art/reactions";
 import { preloadWorld, drawGround, buildingArt, propArt, decorate } from "../art/world";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
@@ -50,8 +52,8 @@ export class Village extends Phaser.Scene {
   state: Save;
   publish: (view: View) => void;
   persist: (s: Save) => void;
-  player!: Phaser.GameObjects.Image;
-  loyal!: Phaser.GameObjects.Image;
+  player!: Phaser.GameObjects.Sprite;
+  loyal!: Phaser.GameObjects.Sprite;
   star?: Phaser.GameObjects.Image;
   glasses: Phaser.GameObjects.Graphics[] = [];
   rects: Rect[] = [];
@@ -68,7 +70,7 @@ export class Village extends Phaser.Scene {
   npcs: {
     id: string;
     name: string;
-    image: Phaser.GameObjects.Image;
+    image: Phaser.GameObjects.Sprite;
     label: Phaser.GameObjects.Text;
     path: Point[];
     step: number;
@@ -102,6 +104,7 @@ export class Village extends Phaser.Scene {
   }
   preload() {
     preloadWorld(this);
+    preloadActors(this);
     this.load.spritesheet("ground", manifest.ground.path, {
       frameWidth: 16,
       frameHeight: 16,
@@ -114,6 +117,7 @@ export class Village extends Phaser.Scene {
     );
   }
   create() {
+    createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
     ) as typeof this.keys;
@@ -270,25 +274,14 @@ export class Village extends Phaser.Scene {
       this.state.position =
         this.state.room === "village" ? { x: 512, y: 608 } : { x: 240, y: 280 };
     const p = this.state.position;
-    this.player = this.add.image(p.x, p.y, "debby").setOrigin(0.5, 0.9);
-    this.loyal = this.add
-      .image(p.x - 28, p.y + 12, "loyal")
-      .setOrigin(0.5, 0.9);
+    this.player = actor(this,"debby",p.x,p.y);
+    this.loyal = actor(this,"loyal",p.x-28,p.y+12);
     if (blocked(this.loyal, this.rects, w, h)) this.loyal.setPosition(p.x, p.y);
-    this.label(p.x, p.y - 46, "Debby", 8).setName("debby-label");
-    this.label(this.loyal.x, this.loyal.y - 46, "Loyal", 8).setName(
+    this.label(p.x, p.y - 68, "Debby", 8).setName("debby-label");
+    this.label(this.loyal.x, this.loyal.y - 68, "Loyal", 8).setName(
       "loyal-label",
     );
-    // Code-native temporary face overlay: human characters with round glasses.
-    this.glasses = [this.player, this.loyal].map((actor) => {
-      const g = this.add.graphics();
-      g.fillStyle(0xe3b28a).fillRect(-6, -31, 12, 7);
-      g.lineStyle(1, 0x392f34)
-        .strokeCircle(-3, -28, 2.5)
-        .strokeCircle(3, -28, 2.5)
-        .lineBetween(-0.5, -28, 0.5, -28);
-      return g.setPosition(actor.x, actor.y).setDepth(actor.y + 0.1);
-    });
+    this.glasses = [];
     this.cameras.main
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
@@ -297,18 +290,19 @@ export class Village extends Phaser.Scene {
     this.timer = 0;
     for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
       const p = citizen.path[0];
-      const image = this.add
-        .image(p.x, p.y, "loyal")
-        .setOrigin(0.5, 0.9)
-        .setTint(citizen.color);
+      const image = actor(this,residentActors[citizen.id],p.x,p.y);
       this.npcs.push({
         id: citizen.id,
         name: citizen.name,
         image,
-        label: this.label(p.x, p.y - 46, citizen.name, 8),
+        label: this.label(p.x, p.y - 68, citizen.name, 8),
         path: citizen.path,
         step: 1,
       });
+    }
+    if (this.state.room === "village") {
+      actor(this,"emile",240,430).setDepth(430).play("emile-attente");
+      actor(this,"flocon",850,440).setDepth(440).play("flocon-attente");
     }
     this.shade = this.add
       .rectangle(0, 0, 1, 1, 0x102348, 1)
@@ -433,6 +427,7 @@ export class Village extends Phaser.Scene {
       "Loyal — Et chaque lumière me donne envie d’inventer la suite avec toi. ♥",
       this.finalSequence.message,
     ][this.finalSequence.beat];
+    reaction(this,["mains","coeur","calin","bisou"][this.finalSequence.beat] as "mains"|"coeur"|"calin"|"bisou",this.player,this.loyal);
     this.emit();
   }
   candidates() {
@@ -605,6 +600,7 @@ export class Village extends Phaser.Scene {
         sendEvent(this.state, { kind: "explore", target: this.state.room });
       }
       this.renderRoom();
+      if(this.state.room === "inn") reaction(this,"rechauffe",this.player,this.loyal);
     } else if (t.id.startsWith("npc:")) {
       const id = t.id.slice(4) as keyof typeof dialogues;
       sendEvent(this.state, { kind: "talk", target: id });
@@ -618,7 +614,7 @@ export class Village extends Phaser.Scene {
       this.dialogue =
         item === "bookmark"
           ? "Un marque-page brodé ! Le livre sur la table semble vous appeler."
-          : "Le ruban est retrouvé. Oscar — Les commandes t’attendent sur l’établi !";
+          : "Le ruban est retrouvé. Basile — Les commandes t’attendent sur l’établi !";
     } else if (t.id.startsWith("mini:")) {
       this.miniGame = t.id.slice(5) as MiniKind;
       controls.paused = true;
@@ -628,7 +624,7 @@ export class Village extends Phaser.Scene {
       sendEvent(this.state, { kind: "talk", target: "loyal" });
       this.dialogue =
         this.state.stage === 4
-          ? `Loyal — ${this.state.stars.length} étoile${this.state.stars.length > 1 ? "s" : ""}, autant de souvenirs à nous. Mira, Oscar et Alma ont encore des histoires à partager. Je reste avec toi. ♥`
+          ? `Loyal — ${this.state.stars.length} étoile${this.state.stars.length > 1 ? "s" : ""}, autant de souvenirs à nous. Célestine, Basile et Madeleine ont encore des histoires à partager. Je reste avec toi. ♥`
           : "Loyal — Debby, chaque étoile sera un souvenir à nous. La première t’attend dans une lettre, sur la table de ma maison au sud-est. Je viens avec toi. ♥";
     } else if (t.id === "letter") {
       sendEvent(this.state, { kind: "find", target: "letter" });
@@ -651,6 +647,11 @@ export class Village extends Phaser.Scene {
           ? "Un cadeau attend son jour. Aucune surprise future n’est disponible dans cette démo."
           : "Ce lieu ouvrira dans une prochaine phase.";
     this.star?.setVisible(this.state.stage === 4);
+    if(t.id === "letter") reaction(this,"lettre",this.player,this.loyal);
+    else if(t.id === "tree") reaction(this,this.state.stage===4?"etoile":"froid",this.player,this.loyal);
+    else if(t.id === "riddle") reaction(this,"lecture",this.player,this.loyal);
+    else if(t.id === "loyal") reaction(this,"coeur",this.player,this.loyal);
+    else if(t.id.startsWith("npc:")) reaction(this,"coucou",this.player,this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -670,6 +671,7 @@ export class Village extends Phaser.Scene {
       this.state.conversation = null;
       this.dialogue = "";
     }
+    if(active.key==="riddle")reaction(this,next?.includes("wrong")?"boude":"joie",this.player,this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -690,6 +692,7 @@ export class Village extends Phaser.Scene {
     controls.paused = false;
     this.dialogue =
       "Loyal — Un souvenir de plus ! Retrouvons la personne qui nous a confié cette activité. ♥";
+    reaction(this,"joie",this.player,this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -823,6 +826,8 @@ export class Village extends Phaser.Scene {
       }
     }
     this.player.setDepth(this.player.y);
+    animateActor(this.player);
+    animateActor(this.loyal);
     if (this.finalSequence) {
       this.loyal.setPosition(this.player.x - 26, this.player.y + 5);
       this.adventDecor.forEach((light, i) =>
@@ -852,9 +857,10 @@ export class Village extends Phaser.Scene {
           npc.step =
             (npc.step + (night ? npc.path.length - 1 : 1)) % npc.path.length;
       }
-      npc.image.setDepth(npc.image.y).setAngle(Math.sin(_time / 160) * 1.5);
+      npc.image.setDepth(npc.image.y);
+      animateActor(npc.image);
       npc.label
-        .setPosition(npc.image.x, npc.image.y - 46)
+        .setPosition(npc.image.x, npc.image.y - 68)
         .setDepth(npc.image.y + 80);
     }
     const cam = this.cameras.main,
@@ -898,7 +904,7 @@ export class Village extends Phaser.Scene {
       ["loyal-label", this.loyal],
     ] as const) {
       const label = this.children.getByName(name) as Phaser.GameObjects.Text;
-      label.setPosition(p.x, p.y - 46).setDepth(p.y + 80);
+      label.setPosition(p.x, p.y - 68).setDepth(p.y + 80);
     }
     this.target = this.dialogue ? "Continuer" : (this.nearest()?.name ?? "");
     // Read-only diagnostics let browser tests observe real movement without
@@ -914,3 +920,4 @@ export class Village extends Phaser.Scene {
     this.emit();
   }
 }
+
