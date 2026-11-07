@@ -18,6 +18,9 @@ import {
   buildingWidths,
 } from "../art/world";
 import { cleanKey } from "../art/prepare";
+import { plaque, updateTags, type ActorTag, type SignTag } from "../art/tags";
+import { signNames } from "../art/tag-layout";
+import { vegetationKey } from "../art/vegetation";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -90,10 +93,11 @@ export class Village extends Phaser.Scene {
     id: string;
     name: string;
     image: Phaser.GameObjects.Sprite;
-    label: Phaser.GameObjects.Text;
     path: Point[];
     step: number;
   }[] = [];
+  actorTags: ActorTag[] = [];
+  signTags: SignTag[] = [];
   shade!: Phaser.GameObjects.Rectangle;
   snow: Phaser.GameObjects.Arc[] = [];
   lamps: Phaser.GameObjects.Arc[] = [];
@@ -142,6 +146,15 @@ export class Village extends Phaser.Scene {
   }
   create() {
     prepareWorld(this);
+    this.cameras.main.on(Phaser.Cameras.Scene2D.Events.FOLLOW_UPDATE, () =>
+      updateTags(
+        this,
+        this.actorTags,
+        this.signTags,
+        this.player,
+        !!this.dialogue || controls.paused,
+      ),
+    );
     this.scale.on(Phaser.Scale.Events.RESIZE, () =>
       this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2),
     );
@@ -194,6 +207,8 @@ export class Village extends Phaser.Scene {
     this.star = undefined;
     this.tree = undefined;
     this.npcs = [];
+    this.actorTags = [];
+    this.signTags = [];
     this.lamps = [];
     this.smoke = [];
     this.decorations = [];
@@ -222,9 +237,10 @@ export class Village extends Phaser.Scene {
             p.tileX * 16,
             p.tileY * 16,
             replacement
-              ? this.textures.exists(cleanKey(replacement.key))
-                ? cleanKey(replacement.key)
-                : "art-" + replacement.key
+              ? (vegetationKey(replacement.key) ??
+                  (this.textures.exists(cleanKey(replacement.key))
+                    ? cleanKey(replacement.key)
+                    : "art-" + replacement.key))
               : p.sprite,
           )
           .setOrigin(conf.origin.x, conf.origin.y)
@@ -278,7 +294,19 @@ export class Village extends Phaser.Scene {
             phase: i / 3,
           });
         }
-        this.label(x + bw / 2, y + bh + 10, b.name);
+        const plate = plaque(
+          this,
+          signNames[b.id as keyof typeof signNames],
+          true,
+        )
+          .setPosition(b.entrance.x * 16, y + bh - facade.displayHeight - 4)
+          .setDepth(y + bh + 1);
+        this.signTags.push({
+          plate,
+          x: b.entrance.x * 16,
+          y: y + bh,
+          roofY: y + bh - facade.displayHeight - 4,
+        });
       });
       this.star = this.add
         .image(512, 304, "quest_star")
@@ -334,9 +362,9 @@ export class Village extends Phaser.Scene {
     this.player = actor(this, "debby", p.x, p.y);
     this.loyal = actor(this, "loyal", p.x - 28, p.y + 12);
     if (blocked(this.loyal, this.rects, w, h)) this.loyal.setPosition(p.x, p.y);
-    this.label(p.x, p.y - 58, "Debby", 8).setName("debby-label");
-    this.label(this.loyal.x, this.loyal.y - 58, "Loyal", 8).setName(
-      "loyal-label",
+    this.actorTags.push(
+      { actor: this.player, plate: plaque(this, "Debby"), name: "Debby" },
+      { actor: this.loyal, plate: plaque(this, "Loyal"), name: "Loyal" },
     );
     this.glasses = [];
     this.cameras.main
@@ -354,14 +382,23 @@ export class Village extends Phaser.Scene {
         id: citizen.id,
         name: citizen.name,
         image,
-        label: this.label(p.x, p.y - 58, citizen.name, 8),
         path: citizen.path,
         step: 1,
       });
+      this.actorTags.push({
+        actor: image,
+        plate: plaque(this, citizen.name),
+        name: citizen.name,
+      });
     }
     if (this.state.room === "village") {
-      actor(this, "emile", 240, 430).setDepth(430).play("emile-attente");
-      actor(this, "flocon", 850, 440).setDepth(440).play("flocon-attente");
+      for (const [id, name, x, y] of [
+        ["emile", "Émile", 240, 430],
+        ["flocon", "Flocon", 850, 440],
+      ] as const) {
+        const image = actor(this, id, x, y).setDepth(y).play(`${id}-attente`);
+        this.actorTags.push({ actor: image, plate: plaque(this, name), name });
+      }
     }
     this.shade = this.add
       .rectangle(0, 0, 1, 1, 0x102348, 1)
@@ -945,9 +982,6 @@ export class Village extends Phaser.Scene {
       }
       npc.image.setDepth(npc.image.y);
       animateActor(npc.image);
-      npc.label
-        .setPosition(npc.image.x, npc.image.y - 58)
-        .setDepth(npc.image.y + 80);
     }
     const cam = this.cameras.main,
       sx = (cam.width - cam.width / cam.zoom) / 2,
@@ -989,13 +1023,6 @@ export class Village extends Phaser.Scene {
     [this.player, this.loyal].forEach((p, i) =>
       this.glasses[i]?.setPosition(p.x, p.y).setDepth(p.y + 0.1),
     );
-    for (const [name, p] of [
-      ["debby-label", this.player],
-      ["loyal-label", this.loyal],
-    ] as const) {
-      const label = this.children.getByName(name) as Phaser.GameObjects.Text;
-      label.setPosition(p.x, p.y - 58).setDepth(p.y + 80);
-    }
     this.target = this.dialogue ? "Continuer" : (this.nearest()?.name ?? "");
     // Read-only diagnostics let browser tests observe real movement without
     // changing positions or bypassing gameplay, regardless of rendering speed.

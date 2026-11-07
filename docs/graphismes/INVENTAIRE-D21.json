@@ -1,0 +1,93 @@
+{
+  "version": "0.6.1",
+  "base": "4afaf6b67ea00121e1b8bf53a874570a7774eb56",
+  "assets": [
+    {
+      "key": "vegetation_pine_large",
+      "path": "public/assets/refinements-d21/fir-source.png",
+      "sha256": "8b7a73c0bbc9cbe8f7a1a23259f800d218d5017b2ed3aa4dd6a972554204cbad",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1790735,
+      "instances": 30,
+      "source": "Création imagegen autorisée, référence planche_reference_1.png",
+      "status": "nouveau sprite intégré, validation artistique utilisateur attendue"
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "path": "public/assets/refinements-d21/bush-source.png",
+      "sha256": "e15b13b76d5e4ca5720734fd7190cb45c37007baf2405e9b864677a22291d597",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 979459,
+      "instances": 16,
+      "source": "Création imagegen autorisée, référence planche_reference_1.png",
+      "status": "nouveau sprite intégré, validation artistique utilisateur attendue"
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "path": "public/assets/refinements-d21/berries-source.png",
+      "sha256": "7b28606e8f84076f0b7fbe8248efddd64e42f58cf106c9c41f85a8d752df3ded",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1100213,
+      "instances": 5,
+      "source": "Création imagegen autorisée, référence planche_reference_1.png",
+      "status": "nouveau sprite intégré, validation artistique utilisateur attendue"
+    },
+    {
+      "key": "snow-d21-1",
+      "path": "public/assets/refinements-d21/neige_subtile_1_64.png",
+      "sha256": "311d6fdc59f9aa5d66d67d0441e2efb25e5fbf67139fb749dd9ff481e21b2421",
+      "width": 64,
+      "height": 64,
+      "bytes": 2603,
+      "instances": "texture de sol",
+      "source": "Pack D.2.1, PNG 64 × 64 inchangé",
+      "status": "fourni"
+    },
+    {
+      "key": "snow-d21-2",
+      "path": "public/assets/refinements-d21/neige_subtile_2_64.png",
+      "sha256": "1115aed97c50745a8b2c1e4a67aaba3d6b98e993b654d8c18807233417ed7b6c",
+      "width": 64,
+      "height": 64,
+      "bytes": 2592,
+      "instances": "texture de sol",
+      "source": "Pack D.2.1, PNG 64 × 64 inchangé",
+      "status": "fourni"
+    },
+    {
+      "key": "snow-d21-3",
+      "path": "public/assets/refinements-d21/neige_subtile_3_64.png",
+      "sha256": "0383911c7bc4a519a00b5d2a95c4e13aa455607ec13aaf4568661f9af8655ac6",
+      "width": 64,
+      "height": 64,
+      "bytes": 2607,
+      "instances": "texture de sol",
+      "source": "Pack D.2.1, PNG 64 × 64 inchangé",
+      "status": "fourni"
+    },
+    {
+      "key": "snow-d21-4",
+      "path": "public/assets/refinements-d21/neige_subtile_4_64.png",
+      "sha256": "eac6273ad50950be4649148ef6dbe094001e08d75584dbe44933810b491e8e29",
+      "width": 64,
+      "height": 64,
+      "bytes": 2591,
+      "instances": "texture de sol",
+      "source": "Pack D.2.1, PNG 64 × 64 inchangé",
+      "status": "fourni"
+    }
+  ],
+  "referenceOnly": [
+    "planche_reference_1.png",
+    "planche_reference_2.png"
+  ],
+  "missingFacades": [
+    "mairie",
+    "boulangerie",
+    "poste"
+  ],
+  "preserved": "Les anciens fichiers restent intacts, seules les textures de rendu sont substituées."
+}

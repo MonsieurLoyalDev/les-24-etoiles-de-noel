@@ -126,5 +126,12 @@
   "public/assets/validated/vegetation/snowman.png",
   "public/assets/validated/fonts/Marcellus-Regular.ttf",
   "public/assets/validated/fonts/Nunito-Regular.ttf",
-  "public/assets/validated/fonts/Nunito-Bold.ttf"
+  "public/assets/validated/fonts/Nunito-Bold.ttf",
+  "public/assets/refinements-d21/berries-source.png",
+  "public/assets/refinements-d21/bush-source.png",
+  "public/assets/refinements-d21/fir-source.png",
+  "public/assets/refinements-d21/neige_subtile_1_64.png",
+  "public/assets/refinements-d21/neige_subtile_2_64.png",
+  "public/assets/refinements-d21/neige_subtile_3_64.png",
+  "public/assets/refinements-d21/neige_subtile_4_64.png"
 ]
