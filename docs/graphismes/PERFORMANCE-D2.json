@@ -1,0 +1,23 @@
+{
+  "note": "Chromium headless local, cadence requestAnimationFrame au point de départ ; ne mesure ni un téléphone physique ni le temps GPU Phaser.",
+  "results": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800,
+      "medianMs": 4.199999999999818,
+      "p95Ms": 4.300000000000182,
+      "meanMs": 4.168067226890757,
+      "samples": 119
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "medianMs": 4.199999999999818,
+      "p95Ms": 4.200000000000273,
+      "meanMs": 4.167226890756304,
+      "samples": 119
+    }
+  ]
+}

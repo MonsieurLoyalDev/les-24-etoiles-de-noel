@@ -142,6 +142,9 @@ export class Village extends Phaser.Scene {
   }
   create() {
     prepareWorld(this);
+    this.scale.on(Phaser.Scale.Events.RESIZE, () =>
+      this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2),
+    );
     createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
@@ -339,7 +342,7 @@ export class Village extends Phaser.Scene {
     this.cameras.main
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
-    this.cameras.main.setZoom(2);
+    this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2);
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
@@ -947,11 +950,11 @@ export class Village extends Phaser.Scene {
         .setDepth(npc.image.y + 80);
     }
     const cam = this.cameras.main,
-      sx = (cam.width - cam.width / 2) / 2,
-      sy = (cam.height - cam.height / 2) / 2;
+      sx = (cam.width - cam.width / cam.zoom) / 2,
+      sy = (cam.height - cam.height / cam.zoom) / 2;
     this.shade
       .setPosition(sx, sy)
-      .setSize(cam.width / 2, cam.height / 2)
+      .setSize(cam.width / cam.zoom, cam.height / cam.zoom)
       .setAlpha(
         this.state.room === "village"
           ? [0.1, 0, 0.18, 0.32][period(this.state.clock)]
@@ -975,8 +978,8 @@ export class Village extends Phaser.Scene {
     }
     this.snow.forEach((flake, i) => {
       flake.setVisible(!reduced);
-      const span = cam.width / 2,
-        height = cam.height / 2;
+      const span = cam.width / cam.zoom,
+        height = cam.height / cam.zoom;
       flake.setPosition(
         sx + ((i * 73 + _time * (0.003 + (i % 3) * 0.001)) % span),
         sy + ((i * 47 + _time * (0.008 + (i % 3) * 0.003)) % height),

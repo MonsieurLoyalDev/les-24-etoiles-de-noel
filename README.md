@@ -1,4 +1,12 @@
-# Les 24 Étoiles de Noël — Phase D.1, correction visuelle
+# Les 24 Étoiles de Noël — Phase D.2, embellissement
+
+Version 0.6.0 : place du sapin, chemins plus étroits, parvis des quatre bâtiments, coins lecture et terrasse, abords de l'atelier, lisières et arche d'entrée. 77 ornements supplémentaires réutilisent les ressources validées. Les corrections D.1, le HUD, les dialogues, sauvegardes et activités restent conservés. Aucune façade de mairie, boulangerie ou poste n'est inventée : leurs abords sont aménagés selon l'accord donné.
+
+- [Comparatif D.1 / D.2, PC, mobile et vue globale](docs/graphismes/comparatif-d2.html)
+- [Rapport D.2, vérifications et limites](docs/graphismes/EMBELLISSEMENT-D2.md)
+- [Inventaire des ressources et placements D.2](docs/graphismes/INVENTAIRE-D2.json)
+
+## Phase D.1 — historique 0.5.1
 
 Version 0.5.1 : dialogue compact, neige débarrassée de ses trous alpha et du bruit sombre, pavés plus fins, recadrages de décors, façades dégagées, échelles des personnages fondées sur leurs pixels visibles et HUD réduit. Les PNG validés sont conservés ; les corrections de détourage et de texture sont calculées à l'intégration, une fois et mises en cache. Aucun changement de quête, de sauvegarde ou de logique du calendrier.
 
