@@ -8,6 +8,7 @@ import { initial, type Save } from "./domain";
 import { loadSave, writeSave } from "./save";
 import "./style.css";
 import "./art/style.css";
+import "./art/correction-d1.css";
 import { activeGoals, quests } from "./rpg/quests";
 import { MiniGame } from "./ui/MiniGame";
 import { AdventHub } from "./advent/Hub";

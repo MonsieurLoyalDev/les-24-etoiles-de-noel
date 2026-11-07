@@ -44,29 +44,33 @@ export function Dialogue({
   const { name, text, portrait, emotion } = dialoguePresentation(line);
   return (
     <div className="dialogue" role="dialog" aria-label="Dialogue">
-      <div className="dialogue-frame">
+      <div className={`dialogue-frame${portrait ? "" : " without-portrait"}`}>
         {portrait && (
-          <img
-            className="portrait"
-            src={portrait}
-            alt={`${name}, ${emotion}`}
-          />
+          <div className="portrait-slot">
+            <img
+              className="portrait"
+              src={portrait}
+              alt={`${name}, ${emotion}`}
+            />
+          </div>
         )}
-        <strong className="speaker">{name}</strong>
-        <p>{text}</p>
-      </div>
-      <div className="dialogue-choices">
-        {choices.length ? (
-          choices.slice(0, 4).map((choice, i) => (
-            <button key={choice} onClick={() => choose(i)}>
-              {choice}
-            </button>
-          ))
-        ) : (
-          <button onClick={advance}>
-            Continuer <kbd>E</kbd>
-          </button>
-        )}
+        <div className="dialogue-content">
+          <strong className="speaker">{name}</strong>
+          <p>{text}</p>
+          <div className="dialogue-choices">
+            {choices.length ? (
+              choices.slice(0, 4).map((choice, i) => (
+                <button key={choice} onClick={() => choose(i)}>
+                  {choice}
+                </button>
+              ))
+            ) : (
+              <button onClick={advance}>
+                Continuer <kbd>E</kbd>
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

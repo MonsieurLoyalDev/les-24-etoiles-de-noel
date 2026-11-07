@@ -1,0 +1,432 @@
+/* D.1: use the validated parchment/button border as a compact nine-slice.
+   The damaged composite dialogue_narratif.png is no longer rendered. */
+header {
+  height: 72px;
+  padding: 2px 18px;
+  gap: 16px;
+}
+.brand {
+  width: 166px;
+  height: 68px;
+  font-size: 22px;
+  background-size: 100% 100%;
+}
+.hud-status {
+  gap: 8px;
+}
+.hud-date {
+  width: 48px;
+  height: 55px;
+  padding-top: 9px;
+  font-size: 11px;
+}
+.hud-stars {
+  width: 100px;
+  height: 53px;
+  padding-left: 22px;
+  font-size: 17px;
+  background-image: url("/assets/validated/hud/compteur_etoiles.png");
+  background-size: 106% 100%;
+  background-position: right center;
+}
+.header-actions {
+  height: 64px;
+  gap: 8px;
+}
+.header-actions button {
+  width: 62px;
+  font-size: 10px;
+  gap: 0;
+  min-height: 48px;
+}
+.hud-icon {
+  width: 38px;
+  height: 38px;
+}
+.game-shell {
+  height: calc(100svh - 98px);
+  min-height: 0;
+}
+footer {
+  height: 26px;
+  padding: 0 16px;
+}
+.location {
+  top: 10px;
+  left: 12px;
+  padding: 6px 10px;
+  background: #18303bbf;
+}
+.location strong {
+  font-size: 14px;
+  margin-top: 0;
+}
+.location small {
+  margin-top: 3px;
+  font-size: 10px;
+}
+.quest {
+  top: 10px;
+  right: 12px;
+  width: 190px;
+  padding: 7px 10px;
+  background: #18303bbf;
+}
+.quest strong {
+  font-size: 13px;
+  margin: 3px 0;
+}
+.quest > span {
+  font-size: 9px;
+  letter-spacing: 0.7px;
+}
+.quest p,
+.quest small {
+  display: none;
+}
+.dialogue {
+  width: min(740px, calc(100% - 28px));
+  bottom: 12px;
+  max-height: 45%;
+  overflow: auto;
+  border: 0;
+  border-radius: 8px;
+  filter: drop-shadow(0 3px 8px #10252b77);
+}
+.dialogue-frame {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  aspect-ratio: auto;
+  min-height: 0;
+  background: none;
+  border: 14px solid transparent;
+  border-image: url("/assets/validated/hud/bouton_choix_neutre.png") 17 38
+    fill / 12px 24px / 0 stretch;
+  padding: 2px 12px;
+  color: #472c18;
+}
+.portrait-slot {
+  width: 76px;
+  height: 100px;
+  align-self: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: #493322;
+  border: 2px solid #ba9557;
+  border-radius: 45% 45% 30% 30%;
+  overflow: hidden;
+}
+.portrait {
+  position: static;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  max-width: none;
+}
+.dialogue-content {
+  min-width: 0;
+}
+.speaker {
+  position: static;
+  display: block;
+  max-width: 100%;
+  font: 400 18px Marcellus;
+  color: #563318;
+  line-height: 1.2;
+}
+.dialogue .dialogue-frame p {
+  position: static;
+  margin: 6px 0 8px;
+  color: #402c1b;
+  font: 400 15px/1.45 Nunito;
+  max-height: 78px;
+  overflow: auto;
+  white-space: pre-line;
+  overscroll-behavior: contain;
+}
+.dialogue-choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0;
+  background: none;
+}
+.dialogue .dialogue-choices button {
+  background: #654427;
+  color: #fff2cd;
+  text-shadow: none;
+  border: 1px solid #886036;
+  border-radius: 5px;
+  min-width: 112px;
+  min-height: 40px;
+  width: auto;
+  flex: 0 1 auto;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 12px;
+  font: 700 13px/1.25 Nunito;
+}
+.dialogue .dialogue-choices button:hover {
+  background: #805735;
+  color: #fff7df;
+  text-shadow: none;
+}
+.dialogue kbd {
+  font-size: 10px;
+  padding: 1px 4px;
+  margin-left: 6px;
+}
+.dialogue-frame.without-portrait {
+  grid-template-columns: 1fr;
+}
+.welcome {
+  min-height: calc(100svh - 72px);
+}
+@media (max-width: 700px) {
+  header {
+    height: 64px;
+    padding: 2px 6px;
+    gap: 5px;
+    flex-wrap: nowrap;
+  }
+  .brand {
+    width: 112px;
+    height: 58px;
+    font-size: 17px;
+  }
+  .hud-status {
+    gap: 2px;
+    margin-right: auto;
+  }
+  .hud-date {
+    width: 38px;
+    height: 45px;
+    font-size: 9px;
+    padding-top: 7px;
+  }
+  .hud-stars {
+    width: 70px;
+    height: 42px;
+    padding-left: 15px;
+    font-size: 14px;
+  }
+  .header-actions {
+    width: auto;
+    height: 54px;
+    gap: 0;
+  }
+  .header-actions button {
+    width: 44px;
+    min-height: 44px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+  .header-actions button span:last-child {
+    display: none;
+  }
+  .hud-icon {
+    width: 34px;
+    height: 36px;
+  }
+  .game-shell {
+    height: calc(100svh - 90px);
+    min-height: 0;
+  }
+  .location {
+    left: 7px;
+    top: 7px;
+    max-width: 56%;
+    padding: 5px 7px;
+  }
+  .location strong {
+    font-size: 12px;
+  }
+  .location small {
+    font-size: 9px;
+  }
+  .quest {
+    right: 7px;
+    top: 7px;
+    width: 34%;
+    padding: 5px 6px;
+  }
+  .quest strong {
+    font-size: 11px;
+  }
+  .quest > span {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .dialogue {
+    width: calc(100% - 14px);
+    bottom: 8px;
+    max-height: 48%;
+  }
+  .dialogue-frame {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 9px;
+    border-width: 10px;
+    padding: 4px 7px;
+    border-image-width: 10px 17px;
+  }
+  .portrait-slot {
+    width: 54px;
+    height: 78px;
+  }
+  .portrait {
+    width: 100%;
+    height: 100%;
+  }
+  .speaker {
+    font-size: 15px;
+  }
+  .dialogue .dialogue-frame p {
+    font-size: 13px;
+    line-height: 1.4;
+    max-height: 100px;
+    margin: 5px 0 7px;
+  }
+  .dialogue-choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .dialogue .dialogue-choices button {
+    min-height: 44px;
+    min-width: 0;
+    padding: 6px 8px;
+    width: 100%;
+    font-size: 12px;
+  }
+  .dialogue-choices button:only-child {
+    grid-column: 1/-1;
+    justify-self: end;
+    min-width: 118px;
+    width: auto;
+  }
+  .joystick {
+    width: 82px;
+    height: 82px;
+    left: 12px;
+    bottom: 68px;
+  }
+  .interaction {
+    font-size: 12px;
+    bottom: 16px;
+    max-width: 64%;
+  }
+  .welcome {
+    min-height: calc(100svh - 64px);
+  }
+}
+@media (max-width: 360px) {
+  .brand {
+    width: 90px;
+    font-size: 15px;
+  }
+  .hud-stars {
+    width: 64px;
+    font-size: 13px;
+  }
+  .header-actions button {
+    width: 44px;
+  }
+  .hud-icon {
+    width: 32px;
+  }
+  .hud-date {
+    width: 34px;
+  }
+}
+@media (max-width: 340px) {
+  .brand {
+    width: 80px;
+    font-size: 14px;
+  }
+  .hud-date {
+    width: 30px;
+    font-size: 8px;
+  }
+  .hud-stars {
+    width: 52px;
+    padding-left: 12px;
+    font-size: 12px;
+  }
+}
+@media (max-height: 550px) {
+  header {
+    height: 58px;
+    flex-wrap: nowrap;
+  }
+  .brand {
+    width: 130px;
+    height: 54px;
+    font-size: 19px;
+  }
+  .hud-date {
+    height: 44px;
+    width: 38px;
+    font-size: 10px;
+  }
+  .hud-stars {
+    height: 42px;
+    width: 82px;
+    font-size: 14px;
+  }
+  .header-actions {
+    height: 50px;
+    width: auto;
+  }
+  .header-actions button {
+    width: 48px;
+    min-height: 44px;
+  }
+  .hud-icon {
+    height: 30px;
+    width: 30px;
+  }
+  .game-shell {
+    height: calc(100svh - 84px);
+    min-height: 0;
+  }
+  .dialogue {
+    bottom: 4px;
+    max-height: 68%;
+    width: min(660px, calc(100% - 20px));
+  }
+  .dialogue-frame {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 10px;
+    border-width: 9px;
+    padding: 1px 8px;
+  }
+  .portrait-slot {
+    width: 48px;
+    height: 64px;
+  }
+  .speaker {
+    font-size: 14px;
+  }
+  .dialogue .dialogue-frame p {
+    font-size: 12px;
+    max-height: 52px;
+    margin: 3px 0 4px;
+  }
+  .dialogue .dialogue-choices button {
+    min-height: 36px;
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  .joystick {
+    bottom: 20px;
+    width: 70px;
+    height: 70px;
+  }
+}

@@ -1,4 +1,11 @@
-# Les 24 Étoiles de Noël — Phase D graphique, D1 à D9
+# Les 24 Étoiles de Noël — Phase D.1, correction visuelle
+
+Version 0.5.1 : dialogue compact, neige débarrassée de ses trous alpha et du bruit sombre, pavés plus fins, recadrages de décors, façades dégagées, échelles des personnages fondées sur leurs pixels visibles et HUD réduit. Les PNG validés sont conservés ; les corrections de détourage et de texture sont calculées à l'intégration, une fois et mises en cache. Aucun changement de quête, de sauvegarde ou de logique du calendrier.
+
+- [Comparatif visuel PC/mobile avant–après](docs/graphismes/comparatif-d1.html)
+- [Bilan des corrections D.1 et fichiers modifiés](docs/graphismes/CORRECTIONS-D1.md)
+
+## Livraison graphique initiale D1 à D9 — historique 0.5.0
 
 Version 0.5.0 : intégration du pack graphique validé du 7 novembre 2026, sans nouvelle mission ou mécanique. Terrains et bâtiments, décorations, ambiance, personnages animés, HUD à portraits, sapin à 25 états et calendrier à 24 étoiles poursuivent le jeu existant. Les identifiants de sauvegarde A/B/C et les règles de déverrouillage privées sont conservés.
 

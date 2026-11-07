@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import catalog from "./catalog.json";
+import { actorMetric } from "./prepare";
 
 export const actorKeys = {
   debby: "debby_atlas-Etoilebois_Debby_V3_Propre",
@@ -106,6 +107,9 @@ export function animateActor(sprite: Phaser.GameObjects.Sprite) {
     .setFlipX(profile && direction === "gauche")
     .setAngle(0);
   // Uniform perceived height; origin is shared across all frames, never re-trimmed per pose.
-  sprite.setScale((name === "flocon" ? 42 : 64) / sprite.height);
+  const metric = actorMetric(sprite.scene, sprite.texture.key);
+  sprite
+    .setOrigin(0.5, metric.foot)
+    .setScale((name === "flocon" ? 31 : 52) / metric.height);
   previous.set(sprite, { x: sprite.x, y: sprite.y, direction });
 }
