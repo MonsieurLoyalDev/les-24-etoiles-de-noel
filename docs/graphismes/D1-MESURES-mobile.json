@@ -1,0 +1,31 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "dialogue": {
+    "x": 7,
+    "y": 653.4375,
+    "width": 376,
+    "height": 156.5625
+  },
+  "monde": {
+    "x": 0,
+    "y": 64,
+    "width": 390,
+    "height": 754
+  },
+  "portrait": {
+    "x": 26,
+    "y": 694.71875,
+    "width": 50,
+    "height": 74
+  },
+  "header": {
+    "x": 0,
+    "y": 0,
+    "width": 390,
+    "height": 64
+  },
+  "occupationDialogue": 0.20764257294429708
+}

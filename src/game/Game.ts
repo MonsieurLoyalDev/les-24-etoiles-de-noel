@@ -14,7 +14,10 @@ import {
   buildingArt,
   propArt,
   decorate,
+  prepareWorld,
+  buildingWidths,
 } from "../art/world";
+import { cleanKey } from "../art/prepare";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -138,6 +141,7 @@ export class Village extends Phaser.Scene {
     );
   }
   create() {
+    prepareWorld(this);
     createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
@@ -214,12 +218,26 @@ export class Village extends Phaser.Scene {
           .image(
             p.tileX * 16,
             p.tileY * 16,
-            replacement ? "art-" + replacement.key : p.sprite,
+            replacement
+              ? this.textures.exists(cleanKey(replacement.key))
+                ? cleanKey(replacement.key)
+                : "art-" + replacement.key
+              : p.sprite,
           )
           .setOrigin(conf.origin.x, conf.origin.y)
           .setDepth(p.tileY * 16);
         if (replacement)
           prop.setScale(replacement.width / prop.width).setOrigin(0.5, 1);
+        if (p.sprite === "pine_large") {
+          const facade = map.buildings.find(
+            (b) =>
+              p.tileX >= b.tileX &&
+              p.tileX <= b.tileX + b.widthTiles &&
+              p.tileY >= b.tileY &&
+              p.tileY <= b.tileY + b.heightTiles,
+          );
+          if (facade) prop.setDepth(facade.tileY * 16 - 1);
+        }
         if (p.solid)
           this.rects.push({
             x: p.tileX * 16 - 14,
@@ -230,7 +248,7 @@ export class Village extends Phaser.Scene {
         if (p.sprite === "lantern")
           this.lamps.push(
             this.add
-              .circle(p.tileX * 16, p.tileY * 16 - 30, 14, 0xffce72, 1)
+              .circle(p.tileX * 16, p.tileY * 16 - 46, 11, 0xffce72, 1)
               .setDepth(p.tileY * 16 + 1),
           );
       });
@@ -241,10 +259,10 @@ export class Village extends Phaser.Scene {
           bh = b.heightTiles * 16;
         this.rects.push({ x, y, w: bw, h: bh });
         const facade = this.add
-          .image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
+          .image(b.entrance.x * 16, y + bh, cleanKey(buildingArt[b.id]))
           .setOrigin(0.5, 1)
           .setDepth(y + bh - 12);
-        facade.setScale((bw + 32) / facade.width);
+        facade.setScale(buildingWidths[b.id] / facade.width);
         for (let i = 0; i < 3; i++) {
           const sx = b.entrance.x * 16 - bw * 0.3,
             sy = y + bh - facade.displayHeight * 0.8;
@@ -313,8 +331,8 @@ export class Village extends Phaser.Scene {
     this.player = actor(this, "debby", p.x, p.y);
     this.loyal = actor(this, "loyal", p.x - 28, p.y + 12);
     if (blocked(this.loyal, this.rects, w, h)) this.loyal.setPosition(p.x, p.y);
-    this.label(p.x, p.y - 68, "Debby", 8).setName("debby-label");
-    this.label(this.loyal.x, this.loyal.y - 68, "Loyal", 8).setName(
+    this.label(p.x, p.y - 58, "Debby", 8).setName("debby-label");
+    this.label(this.loyal.x, this.loyal.y - 58, "Loyal", 8).setName(
       "loyal-label",
     );
     this.glasses = [];
@@ -333,7 +351,7 @@ export class Village extends Phaser.Scene {
         id: citizen.id,
         name: citizen.name,
         image,
-        label: this.label(p.x, p.y - 68, citizen.name, 8),
+        label: this.label(p.x, p.y - 58, citizen.name, 8),
         path: citizen.path,
         step: 1,
       });
@@ -925,7 +943,7 @@ export class Village extends Phaser.Scene {
       npc.image.setDepth(npc.image.y);
       animateActor(npc.image);
       npc.label
-        .setPosition(npc.image.x, npc.image.y - 68)
+        .setPosition(npc.image.x, npc.image.y - 58)
         .setDepth(npc.image.y + 80);
     }
     const cam = this.cameras.main,
@@ -973,7 +991,7 @@ export class Village extends Phaser.Scene {
       ["loyal-label", this.loyal],
     ] as const) {
       const label = this.children.getByName(name) as Phaser.GameObjects.Text;
-      label.setPosition(p.x, p.y - 68).setDepth(p.y + 80);
+      label.setPosition(p.x, p.y - 58).setDepth(p.y + 80);
     }
     this.target = this.dialogue ? "Continuer" : (this.nearest()?.name ?? "");
     // Read-only diagnostics let browser tests observe real movement without
