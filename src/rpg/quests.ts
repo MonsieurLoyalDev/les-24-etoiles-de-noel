@@ -53,7 +53,7 @@ export const quests: Quest[] = [
       {
         kind: "talk",
         target: "mira",
-        label: "Rapporter votre découverte à Mira",
+        label: "Rapporter votre découverte à Célestine",
       },
     ],
   },
@@ -73,7 +73,7 @@ export const quests: Quest[] = [
         target: "wrap",
         label: "Emballer trois commandes à l’établi",
       },
-      { kind: "talk", target: "oscar", label: "Montrer les cadeaux à Oscar" },
+      { kind: "talk", target: "oscar", label: "Montrer les cadeaux à Basile" },
     ],
   },
   {
@@ -87,7 +87,11 @@ export const quests: Quest[] = [
         target: "memory",
         label: "Réunir toutes les paires sur la table de jeux",
       },
-      { kind: "talk", target: "alma", label: "Retrouver Alma après la partie" },
+      {
+        kind: "talk",
+        target: "alma",
+        label: "Retrouver Madeleine après la partie",
+      },
     ],
   },
   {
@@ -102,7 +106,7 @@ export const quests: Quest[] = [
       {
         kind: "talk",
         target: "noe",
-        label: "Raconter votre promenade à Noé sur la place",
+        label: "Raconter votre promenade à Augustin sur la place",
       },
     ],
   },

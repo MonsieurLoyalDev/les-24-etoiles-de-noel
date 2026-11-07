@@ -33,7 +33,7 @@ export function allowedPublic(name) {
   return (
     name === "index.html" ||
     name === "build-info.json" ||
-    (/^assets\/[A-Za-z0-9_./-]+\.(js|css|png|webp|jpg|jpeg|woff2?)$/.test(
+    (/^assets\/[A-Za-z0-9_./-]+\.(js|css|png|webp|jpg|jpeg|woff2?|ttf)$/.test(
       name,
     ) &&
       safeName(name))

@@ -45,7 +45,7 @@ export const interiorRects: Rect[] = [
 export const citizens = [
   {
     id: "mira",
-    name: "Mira",
+    name: "Célestine",
     room: "library",
     color: 0xb9a3e8,
     path: [
@@ -57,7 +57,7 @@ export const citizens = [
   },
   {
     id: "oscar",
-    name: "Oscar",
+    name: "Basile",
     room: "workshop",
     color: 0x9fd5af,
     path: [
@@ -69,7 +69,7 @@ export const citizens = [
   },
   {
     id: "alma",
-    name: "Alma",
+    name: "Madeleine",
     room: "inn",
     color: 0xffc299,
     path: [
@@ -81,7 +81,7 @@ export const citizens = [
   },
   {
     id: "noe",
-    name: "Noé",
+    name: "Augustin",
     room: "village",
     color: 0x96d3e1,
     path: [

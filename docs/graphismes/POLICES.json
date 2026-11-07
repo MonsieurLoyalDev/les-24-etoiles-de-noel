@@ -1,0 +1,20 @@
+[
+  {
+    "path": "public/assets/validated/fonts/Marcellus-Regular.ttf",
+    "bytes": 43288,
+    "sha256": "2f6fa616f76102d81c4a935c3a8cd547a8db9de679ad9fda9cfd42f16e7f0743",
+    "source": "Google Fonts officiel ; licences SIL OFL incluses"
+  },
+  {
+    "path": "public/assets/validated/fonts/Nunito-Regular.ttf",
+    "bytes": 125528,
+    "sha256": "9ecbdba35fa74f10a1a916c31649b802a12deb9e66c7b1fe4650afcfd4d16971",
+    "source": "Google Fonts officiel ; licences SIL OFL incluses"
+  },
+  {
+    "path": "public/assets/validated/fonts/Nunito-Bold.ttf",
+    "bytes": 125464,
+    "sha256": "1a025dfce6e6e03bbe31ba82277ec5ed96df8b8dd58b3df6267269490b90b1dc",
+    "source": "Google Fonts officiel ; licences SIL OFL incluses"
+  }
+]

@@ -175,7 +175,7 @@ const definitions: {
     title: "Fabrication de cadeau",
     room: "workshop",
     intro:
-      "Oscar te prête son établi. Prépare les trois commandes, en réutilisant le jeu d’emballage du village.",
+      "Basile te prête son établi. Prépare les trois commandes, en réutilisant le jeu d’emballage du village.",
     steps: [
       {
         id: "cadeaux",

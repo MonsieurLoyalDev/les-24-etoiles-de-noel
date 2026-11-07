@@ -14,6 +14,7 @@ export default defineConfig(({ command, mode }) => {
     command === "build" ? publicConfig({ ...env, ...process.env }) : null;
   return {
     define: {
+      ...(mode === "e2e" && !secure ? {"import.meta.env.DEV":"true"} : {}),
       "import.meta.env.VITE_APP_MODE": JSON.stringify(
         secure ? "supabase" : (env.VITE_APP_MODE ?? "demo"),
       ),
@@ -30,7 +31,10 @@ export default defineConfig(({ command, mode }) => {
                 ) as string[];
                 for (const asset of assets) {
                   if (
-                    !/^public\/assets\/[a-zA-Z0-9_./-]+\.png$/.test(asset) ||
+                    (!/^public\/assets\/[a-zA-Z0-9_./-]+\.png$/.test(asset) &&
+                      !/^public\/assets\/validated\/fonts\/(Marcellus-Regular|Nunito-Regular|Nunito-Bold)\.ttf$/.test(
+                        asset,
+                      )) ||
                     asset.includes("..")
                   )
                     throw Error("Invalid public asset allowlist");

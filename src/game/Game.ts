@@ -1,3 +1,20 @@
+import catalog from "../art/catalog.json";
+import { playSound, stopAmbience } from "../art/audio";
+import {
+  preloadActors,
+  createActorAnimations,
+  actor,
+  animateActor,
+  residentActors,
+} from "../art/actors";
+import { reaction } from "../art/reactions";
+import {
+  preloadWorld,
+  drawGround,
+  buildingArt,
+  propArt,
+  decorate,
+} from "../art/world";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -43,15 +60,17 @@ export type View = {
   huntFound: string[];
   finalCompleted: number;
   cinematic: boolean;
+  adventStars: number;
 };
 export const controls = { x: 0, y: 0, interact: false, paused: false };
 export class Village extends Phaser.Scene {
   state: Save;
   publish: (view: View) => void;
   persist: (s: Save) => void;
-  player!: Phaser.GameObjects.Image;
-  loyal!: Phaser.GameObjects.Image;
+  player!: Phaser.GameObjects.Sprite;
+  loyal!: Phaser.GameObjects.Sprite;
   star?: Phaser.GameObjects.Image;
+  tree?: Phaser.GameObjects.Image;
   glasses: Phaser.GameObjects.Graphics[] = [];
   rects: Rect[] = [];
   trail: Point[] = [];
@@ -67,7 +86,7 @@ export class Village extends Phaser.Scene {
   npcs: {
     id: string;
     name: string;
-    image: Phaser.GameObjects.Image;
+    image: Phaser.GameObjects.Sprite;
     label: Phaser.GameObjects.Text;
     path: Point[];
     step: number;
@@ -75,10 +94,17 @@ export class Village extends Phaser.Scene {
   shade!: Phaser.GameObjects.Rectangle;
   snow: Phaser.GameObjects.Arc[] = [];
   lamps: Phaser.GameObjects.Arc[] = [];
+  smoke: {
+    puff: Phaser.GameObjects.Arc;
+    x: number;
+    y: number;
+    phase: number;
+  }[] = [];
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
   lastPortalAt = -Infinity;
+  lastFootstep = 0;
   adventDay: Day | null = null;
   adventRequested = 0;
   adventLights: number[] = [];
@@ -99,6 +125,10 @@ export class Village extends Phaser.Scene {
     this.persist = persist;
   }
   preload() {
+    preloadWorld(this);
+    preloadActors(this);
+    const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
+    this.load.atlas("art-tree", tree.image, tree.data);
     this.load.spritesheet("ground", manifest.ground.path, {
       frameWidth: 16,
       frameHeight: 16,
@@ -106,11 +136,9 @@ export class Village extends Phaser.Scene {
     Object.entries(manifest.props).forEach(([k, v]) =>
       this.load.image(k, v.path),
     );
-    Object.entries(manifest.characters).forEach(([k, v]) =>
-      this.load.image(k, v.path),
-    );
   }
   create() {
+    createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
     ) as typeof this.keys;
@@ -150,37 +178,48 @@ export class Village extends Phaser.Scene {
       .setDepth(y + 80);
   }
   renderRoom() {
+    stopAmbience();
+    playSound(this.state.room === "village" ? "wind" : "fire", true);
     this.children.removeAll(true);
     this.adventMarker = undefined;
     this.huntMarker = undefined;
     this.adventDecor = [];
     this.star = undefined;
+    this.tree = undefined;
     this.npcs = [];
     this.lamps = [];
+    this.smoke = [];
     this.decorations = [];
     this.rects = [];
     this.trail = [];
     let w = 1024,
       h = 768;
     if (this.state.room === "village") {
-      const floor = this.add
-        .renderTexture(0, 0, 1024, 768)
-        .setOrigin(0)
-        .setTint(0xbcc8ef);
-      floor.beginDraw();
-      map.ground.forEach((row, y) =>
-        row.forEach((frame, x) =>
-          floor.batchDrawFrame("ground", frame, x * 16, y * 16),
-        ),
-      );
-      floor.endDraw();
+      drawGround(this);
+      decorate(this);
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
+        if (p.sprite === "pine_festive") {
+          this.tree = this.add
+            .image(512, 394, "art-tree", "sapin_00")
+            .setOrigin(0.5, 1)
+            .setDepth(384)
+            .setScale(0.9);
+          this.rects.push({ x: 498, y: 375, w: 28, h: 15 });
+          return;
+        }
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
-        this.add
-          .image(p.tileX * 16, p.tileY * 16, p.sprite)
+        const replacement = propArt[p.sprite];
+        const prop = this.add
+          .image(
+            p.tileX * 16,
+            p.tileY * 16,
+            replacement ? "art-" + replacement.key : p.sprite,
+          )
           .setOrigin(conf.origin.x, conf.origin.y)
           .setDepth(p.tileY * 16);
+        if (replacement)
+          prop.setScale(replacement.width / prop.width).setOrigin(0.5, 1);
         if (p.solid)
           this.rects.push({
             x: p.tileX * 16 - 14,
@@ -191,7 +230,7 @@ export class Village extends Phaser.Scene {
         if (p.sprite === "lantern")
           this.lamps.push(
             this.add
-              .circle(p.tileX * 16, p.tileY * 16 - 30, 24, 0xffce72, 1)
+              .circle(p.tileX * 16, p.tileY * 16 - 30, 14, 0xffce72, 1)
               .setDepth(p.tileY * 16 + 1),
           );
       });
@@ -201,46 +240,30 @@ export class Village extends Phaser.Scene {
           bw = b.widthTiles * 16,
           bh = b.heightTiles * 16;
         this.rects.push({ x, y, w: bw, h: bh });
-        const g = this.add.graphics().setDepth(y + bh - 12);
-        g.fillStyle(0x68494b).fillRect(x, y + 24, bw, bh - 24);
-        g.fillStyle(0x39364b).fillTriangle(
-          x - 8,
-          y + 30,
-          x + bw / 2,
-          y - 10,
-          x + bw + 8,
-          y + 30,
-        );
-        g.lineStyle(7, 0xd4e5f5)
-          .lineBetween(x - 8, y + 27, x + bw / 2, y - 12)
-          .lineBetween(x + bw / 2, y - 12, x + bw + 8, y + 27);
-        g.fillStyle(0xe7b85e);
-        for (let wx = x + 20; wx < x + bw - 10; wx += 40)
-          g.fillRect(wx, y + 48, 15, 20);
-        g.fillStyle(0x312b39).fillRect(
-          b.entrance.x * 16 - 9,
-          y + bh - 28,
-          18,
-          28,
-        );
-        this.label(x + bw / 2, y + 36, b.name + "\nfaçade provisoire");
+        const facade = this.add
+          .image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
+          .setOrigin(0.5, 1)
+          .setDepth(y + bh - 12);
+        facade.setScale((bw + 32) / facade.width);
+        for (let i = 0; i < 3; i++) {
+          const sx = b.entrance.x * 16 - bw * 0.3,
+            sy = y + bh - facade.displayHeight * 0.8;
+          this.smoke.push({
+            puff: this.add
+              .circle(sx, sy, 3, 0xd6d9e4, 0.1)
+              .setDepth(y + bh + 1),
+            x: sx,
+            y: sy,
+            phase: i / 3,
+          });
+        }
+        this.label(x + bw / 2, y + bh + 10, b.name);
       });
       this.star = this.add
         .image(512, 304, "quest_star")
         .setOrigin(0.5, 0.85)
         .setDepth(410)
         .setVisible(this.state.stage === 4);
-      for (let i = 0; i < this.state.stars.length; i++)
-        this.decorations.push(
-          this.add
-            .circle(
-              492 + (i % 3) * 19,
-              344 + Math.floor(i / 3) * 13,
-              3,
-              [0xffcf65, 0xe997bb, 0xa3d9ce][i % 3],
-            )
-            .setDepth(405),
-        );
     } else {
       w = 480;
       h = 352;
@@ -287,45 +310,37 @@ export class Village extends Phaser.Scene {
       this.state.position =
         this.state.room === "village" ? { x: 512, y: 608 } : { x: 240, y: 280 };
     const p = this.state.position;
-    this.player = this.add.image(p.x, p.y, "debby").setOrigin(0.5, 0.9);
-    this.loyal = this.add
-      .image(p.x - 28, p.y + 12, "loyal")
-      .setOrigin(0.5, 0.9);
+    this.player = actor(this, "debby", p.x, p.y);
+    this.loyal = actor(this, "loyal", p.x - 28, p.y + 12);
     if (blocked(this.loyal, this.rects, w, h)) this.loyal.setPosition(p.x, p.y);
-    this.label(p.x, p.y - 46, "Debby", 8).setName("debby-label");
-    this.label(this.loyal.x, this.loyal.y - 46, "Loyal", 8).setName(
+    this.label(p.x, p.y - 68, "Debby", 8).setName("debby-label");
+    this.label(this.loyal.x, this.loyal.y - 68, "Loyal", 8).setName(
       "loyal-label",
     );
-    // Code-native temporary face overlay: human characters with round glasses.
-    this.glasses = [this.player, this.loyal].map((actor) => {
-      const g = this.add.graphics();
-      g.fillStyle(0xe3b28a).fillRect(-6, -31, 12, 7);
-      g.lineStyle(1, 0x392f34)
-        .strokeCircle(-3, -28, 2.5)
-        .strokeCircle(3, -28, 2.5)
-        .lineBetween(-0.5, -28, 0.5, -28);
-      return g.setPosition(actor.x, actor.y).setDepth(actor.y + 0.1);
-    });
+    this.glasses = [];
     this.cameras.main
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
     this.cameras.main.setZoom(2);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
     this.timer = 0;
     for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
       const p = citizen.path[0];
-      const image = this.add
-        .image(p.x, p.y, "loyal")
-        .setOrigin(0.5, 0.9)
-        .setTint(citizen.color);
+      const image = actor(this, residentActors[citizen.id], p.x, p.y);
       this.npcs.push({
         id: citizen.id,
         name: citizen.name,
         image,
-        label: this.label(p.x, p.y - 46, citizen.name, 8),
+        label: this.label(p.x, p.y - 68, citizen.name, 8),
         path: citizen.path,
         step: 1,
       });
+    }
+    if (this.state.room === "village") {
+      actor(this, "emile", 240, 430).setDepth(430).play("emile-attente");
+      actor(this, "flocon", 850, 440).setDepth(440).play("flocon-attente");
     }
     this.shade = this.add
       .rectangle(0, 0, 1, 1, 0x102348, 1)
@@ -354,8 +369,10 @@ export class Village extends Phaser.Scene {
     if (this.player) this.refreshAdvent();
   }
   setAdventLights(days: number[]) {
+    if (days.length > this.adventLights.length) playSound("star");
     this.adventLights = [...new Set(days)];
     if (this.player) this.refreshAdvent();
+    this.emit();
   }
   adventAnchor() {
     return this.state.room === "village"
@@ -375,22 +392,13 @@ export class Village extends Phaser.Scene {
     }
     this.adventDecor.forEach((x) => x.destroy());
     this.adventDecor = [];
-    if (this.state.room === "village")
-      for (const day of this.finalSequence
-        ? Array.from({ length: 24 }, (_, i) => i + 1)
-        : this.adventLights) {
-        const i = day - 1;
-        this.adventDecor.push(
-          this.add
-            .circle(
-              476 + (i % 6) * 14,
-              326 + Math.floor(i / 6) * 15,
-              2.6,
-              [0xffd57d, 0xf4a4bc, 0x9cdcd6][i % 3],
-            )
-            .setDepth(406),
+    const count = this.finalSequence
+      ? 24
+      : Math.min(
+          24,
+          Math.max(this.adventLights.length, this.state.stars.length),
         );
-      }
+    this.tree?.setFrame("sapin_" + String(count).padStart(2, "0"));
     this.huntMarker?.destroy();
     this.huntMarker = undefined;
     if (
@@ -450,6 +458,13 @@ export class Village extends Phaser.Scene {
       "Loyal — Et chaque lumière me donne envie d’inventer la suite avec toi. ♥",
       this.finalSequence.message,
     ][this.finalSequence.beat];
+    reaction(
+      this,
+      ["mains", "coeur", "calin", "bisou"][this.finalSequence.beat] as
+        "mains" | "coeur" | "calin" | "bisou",
+      this.player,
+      this.loyal,
+    );
     this.emit();
   }
   candidates() {
@@ -622,6 +637,8 @@ export class Village extends Phaser.Scene {
         sendEvent(this.state, { kind: "explore", target: this.state.room });
       }
       this.renderRoom();
+      if (this.state.room === "inn")
+        reaction(this, "rechauffe", this.player, this.loyal);
     } else if (t.id.startsWith("npc:")) {
       const id = t.id.slice(4) as keyof typeof dialogues;
       sendEvent(this.state, { kind: "talk", target: id });
@@ -635,7 +652,7 @@ export class Village extends Phaser.Scene {
       this.dialogue =
         item === "bookmark"
           ? "Un marque-page brodé ! Le livre sur la table semble vous appeler."
-          : "Le ruban est retrouvé. Oscar — Les commandes t’attendent sur l’établi !";
+          : "Le ruban est retrouvé. Basile — Les commandes t’attendent sur l’établi !";
     } else if (t.id.startsWith("mini:")) {
       this.miniGame = t.id.slice(5) as MiniKind;
       controls.paused = true;
@@ -645,7 +662,7 @@ export class Village extends Phaser.Scene {
       sendEvent(this.state, { kind: "talk", target: "loyal" });
       this.dialogue =
         this.state.stage === 4
-          ? `Loyal — ${this.state.stars.length} étoile${this.state.stars.length > 1 ? "s" : ""}, autant de souvenirs à nous. Mira, Oscar et Alma ont encore des histoires à partager. Je reste avec toi. ♥`
+          ? `Loyal — ${this.state.stars.length} étoile${this.state.stars.length > 1 ? "s" : ""}, autant de souvenirs à nous. Célestine, Basile et Madeleine ont encore des histoires à partager. Je reste avec toi. ♥`
           : "Loyal — Debby, chaque étoile sera un souvenir à nous. La première t’attend dans une lettre, sur la table de ma maison au sud-est. Je viens avec toi. ♥";
     } else if (t.id === "letter") {
       sendEvent(this.state, { kind: "find", target: "letter" });
@@ -668,6 +685,20 @@ export class Village extends Phaser.Scene {
           ? "Un cadeau attend son jour. Aucune surprise future n’est disponible dans cette démo."
           : "Ce lieu ouvrira dans une prochaine phase.";
     this.star?.setVisible(this.state.stage === 4);
+    this.refreshAdvent();
+    if (t.id === "letter") reaction(this, "lettre", this.player, this.loyal);
+    else if (t.id === "tree")
+      reaction(
+        this,
+        this.state.stage === 4 ? "etoile" : "froid",
+        this.player,
+        this.loyal,
+      );
+    else if (t.id === "riddle")
+      reaction(this, "lecture", this.player, this.loyal);
+    else if (t.id === "loyal") reaction(this, "coeur", this.player, this.loyal);
+    else if (t.id.startsWith("npc:"))
+      reaction(this, "coucou", this.player, this.loyal);
     this.persist(this.state);
     this.emit();
   }
@@ -687,6 +718,13 @@ export class Village extends Phaser.Scene {
       this.state.conversation = null;
       this.dialogue = "";
     }
+    if (active.key === "riddle")
+      reaction(
+        this,
+        next?.includes("wrong") ? "boude" : "joie",
+        this.player,
+        this.loyal,
+      );
     this.persist(this.state);
     this.emit();
   }
@@ -707,12 +745,14 @@ export class Village extends Phaser.Scene {
     controls.paused = false;
     this.dialogue =
       "Loyal — Un souvenir de plus ! Retrouvons la personne qui nous a confié cette activité. ♥";
+    reaction(this, "joie", this.player, this.loyal);
     this.persist(this.state);
     this.emit();
   }
   emit() {
     const v = {
       save: structuredClone(this.state),
+      adventStars: this.adventLights.length,
       dialogue: this.dialogue,
       target: this.target,
       location: roomNames[this.state.room],
@@ -749,6 +789,7 @@ export class Village extends Phaser.Scene {
       v.huntFound,
       v.finalCompleted,
       v.cinematic,
+      v.adventStars,
     ]);
     if (key !== this.lastView) {
       this.lastView = key;
@@ -774,6 +815,7 @@ export class Village extends Phaser.Scene {
     if (down("UP") || down("W") || down("Z")) y--;
     if (down("DOWN") || down("S")) y++;
     if (!this.dialogue && !controls.paused) {
+      const before = { x: this.player.x, y: this.player.y };
       this.state.clock = (this.state.clock + Math.min(delta, 200)) % 180000;
       const len = Math.hypot(x, y) || 1,
         speed = movementDistance(delta);
@@ -786,6 +828,13 @@ export class Village extends Phaser.Scene {
         h,
       );
       this.player.setPosition(this.state.position.x, this.state.position.y);
+      if (
+        Math.hypot(before.x - this.player.x, before.y - this.player.y) > 0.5 &&
+        _time - this.lastFootstep > 320
+      ) {
+        playSound("step");
+        this.lastFootstep = _time;
+      }
 
       if (this.hunt?.step.style !== "loyal") {
         const segment = Math.hypot(
@@ -840,7 +889,11 @@ export class Village extends Phaser.Scene {
       }
     }
     this.player.setDepth(this.player.y);
+    animateActor(this.player);
+    animateActor(this.loyal);
     if (this.finalSequence) {
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        this.tree?.setScale(0.9 + Math.sin(_time / 550) * 0.008);
       this.loyal.setPosition(this.player.x - 26, this.player.y + 5);
       this.adventDecor.forEach((light, i) =>
         light.setAlpha(0.45 + 0.55 * Math.abs(Math.sin(_time / 350 + i))),
@@ -869,9 +922,10 @@ export class Village extends Phaser.Scene {
           npc.step =
             (npc.step + (night ? npc.path.length - 1 : 1)) % npc.path.length;
       }
-      npc.image.setDepth(npc.image.y).setAngle(Math.sin(_time / 160) * 1.5);
+      npc.image.setDepth(npc.image.y);
+      animateActor(npc.image);
       npc.label
-        .setPosition(npc.image.x, npc.image.y - 46)
+        .setPosition(npc.image.x, npc.image.y - 68)
         .setDepth(npc.image.y + 80);
     }
     const cam = this.cameras.main,
@@ -891,7 +945,18 @@ export class Village extends Phaser.Scene {
           Math.sin(_time / 600 + i) * 0.035,
       ),
     );
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    for (const { puff, x, y, phase } of this.smoke) {
+      const life = (_time / 4200 + phase) % 1;
+      puff
+        .setPosition(x + Math.sin(life * 4) * 5, y - life * 24)
+        .setScale(1 + life)
+        .setAlpha(reduced ? 0 : Math.sin(life * Math.PI) * 0.15);
+    }
     this.snow.forEach((flake, i) => {
+      flake.setVisible(!reduced);
       const span = cam.width / 2,
         height = cam.height / 2;
       flake.setPosition(
@@ -908,7 +973,7 @@ export class Village extends Phaser.Scene {
       ["loyal-label", this.loyal],
     ] as const) {
       const label = this.children.getByName(name) as Phaser.GameObjects.Text;
-      label.setPosition(p.x, p.y - 46).setDepth(p.y + 80);
+      label.setPosition(p.x, p.y - 68).setDepth(p.y + 80);
     }
     this.target = this.dialogue ? "Continuer" : (this.nearest()?.name ?? "");
     // Read-only diagnostics let browser tests observe real movement without

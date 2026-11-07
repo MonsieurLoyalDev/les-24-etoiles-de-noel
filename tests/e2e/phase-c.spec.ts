@@ -121,7 +121,7 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
             if (d.content.day === 17) {
               await page
                 .getByRole("textbox", { name: "Votre texte" })
-                .fill("Brouillon de notre futur");
+                .pressSequentially("Brouillon de notre futur", { delay: 5 });
               await page
                 .getByRole("button", { name: "Retour au village ×" })
                 .click();
