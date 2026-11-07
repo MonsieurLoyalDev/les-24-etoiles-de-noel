@@ -1,0 +1,240 @@
+{
+  "archives_selectionnees": 39,
+  "fichiers": 627,
+  "details": [
+    {
+      "archive_source": "Etoilebois_Loyal_V19_1.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 15,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Loyal_V9_Attente.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 27,
+      "previsualisations_exclues": 7
+    },
+    {
+      "archive_source": "Etoilebois_Loyal_Profil_V18_1_Fluide.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 11,
+      "previsualisations_exclues": 3
+    },
+    {
+      "archive_source": "Etoilebois_Debby_V3_Propre.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 7
+    },
+    {
+      "archive_source": "Etoilebois_Augustin_V4_Entier.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 28,
+      "previsualisations_exclues": 12
+    },
+    {
+      "archive_source": "Etoilebois_Augustin_Idle_V5.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 8,
+      "previsualisations_exclues": 2
+    },
+    {
+      "archive_source": "Etoilebois_Madeleine_V7.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 7
+    },
+    {
+      "archive_source": "Etoilebois_Emile_V1.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 12
+    },
+    {
+      "archive_source": "Etoilebois_Celestine_V1.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 12
+    },
+    {
+      "archive_source": "Etoilebois_Basile_V1.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 12
+    },
+    {
+      "archive_source": "Etoilebois_Flocon_V4_Transparent.zip",
+      "categorie": "01_PERSONNAGES",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 8
+    },
+    {
+      "archive_source": "Etoilebois_Calin_V4_Coeur_Alignement.zip",
+      "categorie": "02_ANIMATIONS_COUPLE",
+      "fichiers_conserves": 11,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Bisou_V1_Sprites.zip",
+      "categorie": "02_ANIMATIONS_COUPLE",
+      "fichiers_conserves": 11,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Mains_Dans_La_Main_V2_Contours.zip",
+      "categorie": "02_ANIMATIONS_COUPLE",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 5
+    },
+    {
+      "archive_source": "Etoilebois_Loyal_Rechauffe_Debby_V1.zip",
+      "categorie": "02_ANIMATIONS_COUPLE",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Boude_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Coeur_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Coucou_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Etoile_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Froid_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Joie_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Lecture_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Debby_Lettre_V1.zip",
+      "categorie": "03_ANIMATIONS_DEBBY",
+      "fichiers_conserves": 12,
+      "previsualisations_exclues": 4
+    },
+    {
+      "archive_source": "Etoilebois_Terrain_Final_V1.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 3,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Neige_V7.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 4,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Terre_V7.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 4,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Paves_V7.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 4,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Raccords_V8.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 8,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Autotile_V6.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 3,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Place_Lanternes_V11.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 23,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "etoilebois_vegetation_v1.zip",
+      "categorie": "04_TERRAINS_DECORS",
+      "fichiers_conserves": 16,
+      "previsualisations_exclues": 0
+    },
+    {
+      "archive_source": "Etoilebois_Batiments_V10.zip",
+      "categorie": "05_BATIMENTS",
+      "fichiers_conserves": 8,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Assets_Integration_V2.zip",
+      "categorie": "05_BATIMENTS",
+      "fichiers_conserves": 8,
+      "previsualisations_exclues": 0
+    },
+    {
+      "archive_source": "Etoilebois_Sapin_V11_4.zip",
+      "categorie": "06_SAPIN_CALENDRIER",
+      "fichiers_conserves": 28,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Calendrier_V12_0.zip",
+      "categorie": "06_SAPIN_CALENDRIER",
+      "fichiers_conserves": 4,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_HUD_Codex_V3.zip",
+      "categorie": "07_HUD",
+      "fichiers_conserves": 13,
+      "previsualisations_exclues": 1
+    },
+    {
+      "archive_source": "Etoilebois_Portraits_Loyal_Debby_V1.zip",
+      "categorie": "08_PORTRAITS",
+      "fichiers_conserves": 10,
+      "previsualisations_exclues": 2
+    },
+    {
+      "archive_source": "Etoilebois_Portraits_PNJ_V2_Transparents.zip",
+      "categorie": "08_PORTRAITS",
+      "fichiers_conserves": 25,
+      "previsualisations_exclues": 3
+    },
+    {
+      "archive_source": "les-24-etoiles-de-noel-phase-c.zip",
+      "categorie": "09_BASE_CODE_REFERENCE",
+      "fichiers_conserves": 97,
+      "previsualisations_exclues": 1
+    }
+  ]
+}

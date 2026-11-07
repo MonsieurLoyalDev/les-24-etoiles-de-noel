@@ -1,3 +1,4 @@
+import { preloadWorld, drawGround, buildingArt } from "../art/world";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -99,6 +100,7 @@ export class Village extends Phaser.Scene {
     this.persist = persist;
   }
   preload() {
+    preloadWorld(this);
     this.load.spritesheet("ground", manifest.ground.path, {
       frameWidth: 16,
       frameHeight: 16,
@@ -163,17 +165,7 @@ export class Village extends Phaser.Scene {
     let w = 1024,
       h = 768;
     if (this.state.room === "village") {
-      const floor = this.add
-        .renderTexture(0, 0, 1024, 768)
-        .setOrigin(0)
-        .setTint(0xbcc8ef);
-      floor.beginDraw();
-      map.ground.forEach((row, y) =>
-        row.forEach((frame, x) =>
-          floor.batchDrawFrame("ground", frame, x * 16, y * 16),
-        ),
-      );
-      floor.endDraw();
+      drawGround(this);
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
@@ -201,29 +193,11 @@ export class Village extends Phaser.Scene {
           bw = b.widthTiles * 16,
           bh = b.heightTiles * 16;
         this.rects.push({ x, y, w: bw, h: bh });
-        const g = this.add.graphics().setDepth(y + bh - 12);
-        g.fillStyle(0x68494b).fillRect(x, y + 24, bw, bh - 24);
-        g.fillStyle(0x39364b).fillTriangle(
-          x - 8,
-          y + 30,
-          x + bw / 2,
-          y - 10,
-          x + bw + 8,
-          y + 30,
-        );
-        g.lineStyle(7, 0xd4e5f5)
-          .lineBetween(x - 8, y + 27, x + bw / 2, y - 12)
-          .lineBetween(x + bw / 2, y - 12, x + bw + 8, y + 27);
-        g.fillStyle(0xe7b85e);
-        for (let wx = x + 20; wx < x + bw - 10; wx += 40)
-          g.fillRect(wx, y + 48, 15, 20);
-        g.fillStyle(0x312b39).fillRect(
-          b.entrance.x * 16 - 9,
-          y + bh - 28,
-          18,
-          28,
-        );
-        this.label(x + bw / 2, y + 36, b.name + "\nfaçade provisoire");
+        const facade = this.add.image(b.entrance.x * 16, y + bh, "art-" + buildingArt[b.id])
+          .setOrigin(0.5, 1).setDepth(y + bh - 12);
+        facade.setScale((bw + 32) / facade.width);
+        this.label(x + bw / 2, y + bh + 10, b.name);
+
       });
       this.star = this.add
         .image(512, 304, "quest_star")
