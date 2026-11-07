@@ -286,6 +286,8 @@ export class Village extends Phaser.Scene {
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
     this.cameras.main.setZoom(2);
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
     this.timer = 0;
     for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
@@ -818,6 +820,8 @@ export class Village extends Phaser.Scene {
     animateActor(this.player);
     animateActor(this.loyal);
     if (this.finalSequence) {
+      if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        this.tree?.setScale(.9 + Math.sin(_time/550)*.008);
       this.loyal.setPosition(this.player.x - 26, this.player.y + 5);
       this.adventDecor.forEach((light, i) =>
         light.setAlpha(0.45 + 0.55 * Math.abs(Math.sin(_time / 350 + i))),

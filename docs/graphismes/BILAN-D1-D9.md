@@ -40,7 +40,7 @@ Sapin V11.4 à 25 états (0–24) et calendrier V12.0 avec exactement 24 boutons
 Une régression de clic entre étoiles adjacentes a été détectée puis corrigée : les ornements ne capturent plus les événements des boutons voisins. Un test parcourt les 24 sélections sur PC et mobile. Le fond fourni conserve une étoile et des guirlandes déjà lumineuses : un halo du sommet subsiste en état verrouillé, limite signalée par le pack.
 
 ## D7 — Transitions
-À réaliser.
+Fondu court de caméra (180 ms) à l'entrée des bâtiments/zones existants ; apparition de dialogue, journal, calendrier et paramètres en 150 ms. Les commandes et la temporisation anti-double-portail existantes restent inchangées. Pas de nouvel écran ou déplacement forcé. Animations d'interface désactivées avec prefers-reduced-motion. L'illumination du sapin final est accompagnée d'une pulsation douce, sans modifier la progression.
 
 ## D8 — Audio
 À réaliser. Aucun son ni fichier de police n'est inclus dans le pack.

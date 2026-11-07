@@ -35,6 +35,11 @@ header{height:112px;padding:6px 24px;gap:20px;background:linear-gradient(180deg,
 .settings-panel{position:absolute;z-index:20;inset:8% max(4%,calc((100% - 760px)/2));background:#1b3039fa;border:2px solid #ad874e;border-radius:12px;padding:24px;overflow:auto;box-shadow:0 10px 50px #0007}
 .journal,.advent-panel,.mini-modal{background-color:#172a33f8}
 .prototype{display:none}
+@keyframes winter-reveal{from{opacity:0;translate:0 5px}to{opacity:1;translate:0 0}}
+.dialogue,.advent-modal,.journal,.settings-panel{animation:winter-reveal 150ms ease-out}
+.header-actions button,.interaction,.dialogue-choices button{transition:filter 120ms ease-out,background-color 120ms ease-out}
+.calendar-star .star-shape{transition:color 180ms ease-out,filter 180ms ease-out}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .calendar-scroll{width:100%;overflow-x:auto;overscroll-behavior-x:contain;border:1px solid #a98a51;border-radius:8px;margin:18px 0;background:#0d1728}
 .calendar-artboard.advent-calendar{--calendar-width:1536;position:relative;display:block;width:100%;min-width:860px;aspect-ratio:1536/1024;background:url('/assets/validated/calendar/calendrier_art.png') left top/100% 100% no-repeat;margin:0}
