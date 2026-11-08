@@ -1,0 +1,23 @@
+[
+  {
+    "file": "comparatif-d33.html",
+    "images": 35,
+    "broken": 0,
+    "videos": [
+      {
+        "seconds": 18.72,
+        "ready": 4
+      },
+      {
+        "seconds": 18.52,
+        "ready": 4
+      }
+    ]
+  },
+  {
+    "file": "ressources-d33.html",
+    "images": 48,
+    "broken": 0,
+    "videos": []
+  }
+]

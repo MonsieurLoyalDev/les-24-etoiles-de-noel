@@ -1,0 +1,23 @@
+[WebServer] (node:16648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 11 tests using 1 worker
+
+(node:18880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/11] [mobile] › tests\e2e\phase-b.spec.ts:127:1 › Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux
+[2/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:46:1 › D.3.1 : intérieurs, neige et sapin avant/après
+[3/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:112:1 › D.3.1 : collisions du mobilier et sorties des quatre pièces
+[4/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:158:1 › D.3.1 : lumière intérieure, performances et réduction des mouvements
+[5/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:202:1 › D.3.1 : petit ordinateur et tablette
+[6/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:223:1 › D.3.1 : contrôle des ressources sur fonds clair et sombre
+[7/11] [mobile] › tests\e2e\phase-d3-1.spec.ts:279:1 › D.3.1 : terrain blanc et conservation des matières D.3
+[8/11] [mobile] › tests\e2e\phase-d3-3.spec.ts:67:1 › D33 carte, quartiers et seize façades lisibles
+[9/11] [mobile] › tests\e2e\phase-d3-3.spec.ts:103:1 › D33 plans, annexes accessibles et mobilier jour/nuit
+[10/11] [mobile] › tests\e2e\phase-d3-3.spec.ts:206:1 › D33 performances en quartier habité et effets réduits
+[11/11] [mobile] › tests\e2e\phase-d3-3.spec.ts:241:1 › D33 ancienne position désormais occupée : progression préservée
+  3 skipped
+  8 passed (6.7m)

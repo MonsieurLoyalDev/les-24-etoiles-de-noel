@@ -1,11 +1,11 @@
 import type Phaser from "phaser";
 import type { Save } from "../domain";
+import { lanterns33 } from "./rooms33";
 import {
   furnitureByRoom,
   furnitureSlots,
   floorDecorByRoom,
   interiorDecorSizes,
-  interiorLanterns,
 } from "./interior-layout";
 export type InteriorRoom = Exclude<Save["room"], "village">;
 export const interiorAssets = Object.fromEntries(
@@ -58,7 +58,7 @@ export function drawRoomDecor(scene: Phaser.Scene, room: InteriorRoom) {
       .setName("interior:floor:" + p.key);
   }
   const lamp = "d31-wall-lantern";
-  for (const p of interiorLanterns)
+  for (const p of lanterns33(room))
     scene.add
       .image(p.x, p.y, lamp)
       .setScale(0.5)

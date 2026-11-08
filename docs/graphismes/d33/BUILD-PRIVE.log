@@ -1,0 +1,46 @@
+
+> les-24-etoiles-de-noel@0.7.3 build:private
+> tsc --noEmit && vite build --mode private && tsx scripts/check-private-build.ts
+
+vite v7.3.7 building client environment for private...
+transforming...
+
+/assets/validated/fonts/Marcellus-Regular.ttf referenced in /assets/validated/fonts/Marcellus-Regular.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/fonts/Nunito-Regular.ttf referenced in /assets/validated/fonts/Nunito-Regular.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/fonts/Nunito-Bold.ttf referenced in /assets/validated/fonts/Nunito-Bold.ttf didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/enseigne.png referenced in /assets/validated/hud/enseigne.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/calendrier.png referenced in /assets/validated/hud/calendrier.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/compteur_etoiles.png referenced in /assets/validated/hud/compteur_etoiles.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/bouton_calendrier.png referenced in /assets/validated/hud/bouton_calendrier.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/bouton_souvenirs.png referenced in /assets/validated/hud/bouton_souvenirs.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/bouton_parametres.png referenced in /assets/validated/hud/bouton_parametres.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/dialogue_narratif.png referenced in /assets/validated/hud/dialogue_narratif.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/bouton_choix_neutre.png referenced in /assets/validated/hud/bouton_choix_neutre.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/hud/bouton_choix_selection.png referenced in /assets/validated/hud/bouton_choix_selection.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+
+/assets/validated/calendar/calendrier_art.png referenced in /assets/validated/calendar/calendrier_art.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+✓ 133 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.52 kB │ gzip:   0.34 kB
+dist/assets/index-CjMWmy-V.css     27.57 kB │ gzip:   7.01 kB
+dist/assets/index-C22VbLUu.js     437.44 kB │ gzip: 127.74 kB
+dist/assets/phaser-DFK5Ua9d.js  1,208.06 kB │ gzip: 332.17 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 4.44s
+Build privé : aucun paquet de surprises fictives ni média de démonstration.

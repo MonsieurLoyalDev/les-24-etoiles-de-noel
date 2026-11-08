@@ -61,9 +61,9 @@ export class InteriorLife {
       const fire = image(
         "flame-a",
         room === "house" ? 385 : 395,
-        room === "house" ? 101 : 106,
+        room === "house" ? 135 : 139,
       ).setScale(1.1);
-      fire.setDepth(120.1);
+      fire.setDepth(160.1);
       this.flames.push({ image: fire });
     }
     for (

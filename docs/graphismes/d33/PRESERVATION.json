@@ -1,0 +1,790 @@
+{
+  "base": "a7827c8e9df7595888cdb9b44c91db7714e0a48e",
+  "protectedDiff": "aucun",
+  "assets": [
+    {
+      "path": "public/assets/ambience-d3/earth-a.png",
+      "sha256": "e79110cbbebf2e94bdb3c18fbb8c7aaad87e89d7292f8f8c19e67f9e3fada5f4"
+    },
+    {
+      "path": "public/assets/ambience-d3/earth-b.png",
+      "sha256": "23d7df39c4f2a77f20c54529f3fd3323c70e98e9a0ac241914d571dada043696"
+    },
+    {
+      "path": "public/assets/ambience-d3/grass-rocks.png",
+      "sha256": "fed9c0885abac5a48873c5df354bd48b5bbf1c9c2179862123ee150dd99627d5"
+    },
+    {
+      "path": "public/assets/ambience-d3/packed-a.png",
+      "sha256": "8f143193591a6a805b29272845bc0662260bb3ec86808c5a0b8ffe80828febe0"
+    },
+    {
+      "path": "public/assets/ambience-d3/packed-b.png",
+      "sha256": "da4588dc00095d4f7fdba22f0e04dd739e3041cab587a1b7ba59998d99ddf570"
+    },
+    {
+      "path": "public/assets/ambience-d3/paw-trail.png",
+      "sha256": "c9b4ce760fc36cf7066ae8235368536c9477e8d87117e1419d07a16bac7005a4"
+    },
+    {
+      "path": "public/assets/ambience-d3/snowbank-small.png",
+      "sha256": "33af5b9748c2c73ca98d487045a9cb9d0cd4f77646734716fd09a04ddedc882e"
+    },
+    {
+      "path": "public/assets/ambience-d3/snowbank-wide.png",
+      "sha256": "362b03ac13aab0583e9257ec653f6af6eed94fb1988119a494d0525f01d74355"
+    },
+    {
+      "path": "public/assets/ambience-d3/thaw-a.png",
+      "sha256": "a3be7b60209e491b4cd62057331a72c56c0849d2d636ba9fd5fa449410f90090"
+    },
+    {
+      "path": "public/assets/ambience-d3/thaw-b.png",
+      "sha256": "949b21b962bea7996b088d2f21f75b917e32d5a033f5b566b680ed8fac733502"
+    },
+    {
+      "path": "public/assets/characters/debby_placeholder.png",
+      "sha256": "eed06d1ce9b67c63f922a7ffca81dc41fc3e39722ceba439964e4f2fa3576894"
+    },
+    {
+      "path": "public/assets/characters/loyal_placeholder.png",
+      "sha256": "4e8b8ca208d869e83c02dd499ca79426fc10bad0895ea5ec6884b379854ab03e"
+    },
+    {
+      "path": "public/assets/ground/ground.png",
+      "sha256": "a77a97d601088371c7b62816538e1e05b520b36267c85a9ef3f5f574dfdc6b54"
+    },
+    {
+      "path": "public/assets/interiors-d31/cards-keepsakes.png",
+      "sha256": "475da69bfb846a42007154ae09d53d036257154e12a948b45befc5e6fed7262a"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-hearth.png",
+      "sha256": "d38bb4deba0adbee64922e862f3363c22092152d7cd9bd41d2603cfb685a50ee"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-lounge.png",
+      "sha256": "ee128ea316f41e3708e61786e5ce72c4912d08f2e7be0ae173fe1593550a0f08"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-shell.png",
+      "sha256": "c4ac381387c8ebe4ae5e8a168a37f5fdde235f3ab99eeffb76e1552ca86da304"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-table.png",
+      "sha256": "60eba5f671ad9e24b5ed9220a4995c16faf8ae046b77e334b34167c44457bf17"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-counter.png",
+      "sha256": "9ed10a3fb49b89be32eb52f69f7971dc6de1ec3c2fbc589af680ccf5611e603d"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-hearth.png",
+      "sha256": "be40542c55e36357968e929aab4ec059d23e42daf04fefd6804b8fc820a02e6f"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-shell.png",
+      "sha256": "efa609fb368782c674a9e2fc801611e8ebe40c1bf06f0bb34a182feec454c974"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-table.png",
+      "sha256": "8f8e6b61dbccbd7d7452e348030a6a2a1c17543501e383f58c74e2f4882d3d29"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-desk.png",
+      "sha256": "2ccfe4d99638e9637fcf11fd7da10d6749ba3c4c71745a5f238a5c366ce5413d"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-nook.png",
+      "sha256": "1a34779350897dc5164d17d7cd7011382c7914e12f470dffa6087e8858d97d0b"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-shell.png",
+      "sha256": "2884b7b4ef0a18bfd805c767aa492d9a711c5ac5d1d0a83a2cfdaf8da1b7c155"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-shelves.png",
+      "sha256": "b5415788cdb0dc32818e020763dbadb69da542b5e33e594a5b31cb85ce6c9622"
+    },
+    {
+      "path": "public/assets/interiors-d31/photo-keepsakes.png",
+      "sha256": "2db6280a63c03b1429c84196bcd04e19736a2807fbe6db37ea4a4af14a65c7f1"
+    },
+    {
+      "path": "public/assets/interiors-d31/rug-oval.png",
+      "sha256": "42528637891568febc6beabdebac077ebde3e17433d3c8c901a08019d5302572"
+    },
+    {
+      "path": "public/assets/interiors-d31/rug-woven.png",
+      "sha256": "b7618df33ba756b4586eb5c17bba2b188176c782a17d65f7d565a0fae83b1968"
+    },
+    {
+      "path": "public/assets/interiors-d31/snow-powder.png",
+      "sha256": "06b837a541fec74bffd60577b2bfdedc1bbfee905e435269a042b28053e1f173"
+    },
+    {
+      "path": "public/assets/interiors-d31/snow-soft.png",
+      "sha256": "d906fcf14498e13cfc8cb98096565d46615c623c5b51879521b896e955b7e344"
+    },
+    {
+      "path": "public/assets/interiors-d31/wall-lantern.png",
+      "sha256": "dd04d32cb577d9f4c04124ac9387e5f58a1fcd5129a66b1b20d3d8ed99ee95c8"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-bench.png",
+      "sha256": "53d117e13e4132ac917a065d8b7ed76b4dba9832496aff94a212e60b320f8480"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-shell.png",
+      "sha256": "832171b163498bd8135c43cdab0c0754f70abbb7fab668b0babdcfad0b0330ac"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-storage.png",
+      "sha256": "fc4be426f11c71cc50408ca090fe3cedf3583d7c379e1767a066b7505bf5937c"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-tools.png",
+      "sha256": "29b905a1facceabfe60d55db3f4ed9a9098154298ea213ebcf1387176af45577"
+    },
+    {
+      "path": "public/assets/interiors-d31/wrapping-plans.png",
+      "sha256": "2e2aff86dba8a345655de908f4c497d6c99e49cd4032e376fd71ca70f8f1903e"
+    },
+    {
+      "path": "public/assets/life-d32/candle-off.png",
+      "sha256": "2573fa33f6e3bd4877816855461bd8fc5b75320f4de049054d3ddbb9d2979cf9"
+    },
+    {
+      "path": "public/assets/life-d32/cat-awake.png",
+      "sha256": "453cfaccbce53b699e76d045b6e34a67f3ced3b6a4d727fc5370731717fbed4a"
+    },
+    {
+      "path": "public/assets/life-d32/cat-sleep.png",
+      "sha256": "cba8c1d1dad5e40a9ce4056c29ff48fccda55244e29efb81b0d80f31f11e8bbd"
+    },
+    {
+      "path": "public/assets/life-d32/flame-a.png",
+      "sha256": "797e4f0da7550babc6e7d5efa393101cb6b56289ac75e40c6239c1b11158c05c"
+    },
+    {
+      "path": "public/assets/life-d32/flame-b.png",
+      "sha256": "a8154200a3d15a3d39fa9e3750462795575cb1f8c48d5f70c867d970469c16e3"
+    },
+    {
+      "path": "public/assets/life-d32/home-garden.png",
+      "sha256": "5094711b592f0d93d6d67025829195075e3c631f4baf10d70909413de73caaa8"
+    },
+    {
+      "path": "public/assets/life-d32/home-oriel.png",
+      "sha256": "b7663f31bd925d160c2839fbdc7049287246e9372f25621faaf2ae154eb46aef"
+    },
+    {
+      "path": "public/assets/life-d32/home-porch.png",
+      "sha256": "dffda0d1190b34ddc7a93735a91a8fd58cec649bfd669862660625ddc5edeafb"
+    },
+    {
+      "path": "public/assets/life-d32/home-tall.png",
+      "sha256": "8eb56909f5f7de4220c07a07ed33f252ca71b8ba25427510c6225abc1f15f1ad"
+    },
+    {
+      "path": "public/assets/life-d32/house-console.png",
+      "sha256": "2a00bb642eb13f8871773d4bcb8ce529952862b7cba02a45828d59bb2b21b90c"
+    },
+    {
+      "path": "public/assets/life-d32/house-nook.png",
+      "sha256": "56d77e6d1ea8a39483c02341a32ba3aa028edc2adc55a2a0916e7a3ca7f7664f"
+    },
+    {
+      "path": "public/assets/life-d32/inn-console.png",
+      "sha256": "961ec63f66a777a7063d4207c7c0a65903c3ee5d9ef7baa0d536641d15563477"
+    },
+    {
+      "path": "public/assets/life-d32/inn-nook.png",
+      "sha256": "49b96787d718ef44d5d198dcb4223515f86536beff0e1dd634573d367c34cb28"
+    },
+    {
+      "path": "public/assets/life-d32/lamp-off.png",
+      "sha256": "325c134208ff34b2da8cbb3d5f944591d2578628a757687c79f92a724938d16f"
+    },
+    {
+      "path": "public/assets/life-d32/library-console.png",
+      "sha256": "0d245c53a7f1d3eeffd5da2fbea7116d4e9aa81ac82c65780ec74eb1fc4a0830"
+    },
+    {
+      "path": "public/assets/life-d32/library-nook.png",
+      "sha256": "8537ccae65ab486e20ee18bc96acf384e15930c99c17aa46aa54af927010fc17"
+    },
+    {
+      "path": "public/assets/life-d32/steam.png",
+      "sha256": "fbd5ee2982a6cb3cb12fa283c548e7227bd28d534580dc12073e34c94d3d8528"
+    },
+    {
+      "path": "public/assets/life-d32/toy-train.png",
+      "sha256": "9392d1474861e459147e72a61db32681c046ad14f69a8e3e791867e87ea23ffa"
+    },
+    {
+      "path": "public/assets/life-d32/workshop-console.png",
+      "sha256": "46b63832e2d02211b9f92fa30494f772329a253b159e973d0372c78b9a993d97"
+    },
+    {
+      "path": "public/assets/life-d32/workshop-nook.png",
+      "sha256": "41ac619404d175d15d89c180fefa6f693a768d5c99f1dc7a7e0069811bed2f8a"
+    },
+    {
+      "path": "public/assets/props/bench.png",
+      "sha256": "1299a005d87952a1b507f92d2a670a80babba83f78e005f67cb3d9e4ed6dc418"
+    },
+    {
+      "path": "public/assets/props/bush_berries.png",
+      "sha256": "4b7fafee0b989c959a06837106b9f5f864413b2e512c1091c0342fae2bca00a1"
+    },
+    {
+      "path": "public/assets/props/bush_snow.png",
+      "sha256": "4499d7f15a40927c0215b2653a7b73bc6b75ce9e225b898322e17ef54c5d0d57"
+    },
+    {
+      "path": "public/assets/props/campfire.png",
+      "sha256": "b4a409d05b6a03400475ebf4ee63b1bf4fd83809f52eeaade32599e1425333b9"
+    },
+    {
+      "path": "public/assets/props/fence.png",
+      "sha256": "4ae7cbf17789738fd0214001aa6ecdd4a5a285ee863472cb86b2b07bf6a50511"
+    },
+    {
+      "path": "public/assets/props/gift.png",
+      "sha256": "3ec7609972fbffc5af6b7a3163d570b8867429acd576b7365869e313ba86e544"
+    },
+    {
+      "path": "public/assets/props/lantern.png",
+      "sha256": "b18783017089e3a8c5939b8ccd3868a67e24a417b0ab89868b7a0736e69b2436"
+    },
+    {
+      "path": "public/assets/props/logs.png",
+      "sha256": "300f7c8a6b9fff7cc630d570f12252f02f1cb87f1a60c10374e166429bd560ba"
+    },
+    {
+      "path": "public/assets/props/pine_festive.png",
+      "sha256": "7646f3f1503678895929c6bbf485887a5095d97ad05acd6e65e5aa9698408f6d"
+    },
+    {
+      "path": "public/assets/props/pine_large.png",
+      "sha256": "d91c0c4c8f2a6e5b05d02d3239a68534ca1d45c481d6d8d79f7f62bda987ca9e"
+    },
+    {
+      "path": "public/assets/props/quest_star.png",
+      "sha256": "e09755a2a15bfb89140ffe85ff5dfcc35f2a20242562b4583953fab059181f5e"
+    },
+    {
+      "path": "public/assets/props/signpost.png",
+      "sha256": "c988767c84dc01b7cd9d3e89f40ad9e3c32674bc464221740180dd2f73e8de7b"
+    },
+    {
+      "path": "public/assets/props/snowman.png",
+      "sha256": "f15d154d8aca6745d0fe7caea0b70fa8e5b9e3aaade9f3e13da08acdd9982c72"
+    },
+    {
+      "path": "public/assets/references/place_lanternes_concept.png",
+      "sha256": "262473f770401dd6d19ec38eeaf295c33ef9236b0202ba31b21a5360aefa33bf"
+    },
+    {
+      "path": "public/assets/refinements-d21/berries-source.png",
+      "sha256": "7b28606e8f84076f0b7fbe8248efddd64e42f58cf106c9c41f85a8d752df3ded"
+    },
+    {
+      "path": "public/assets/refinements-d21/bush-source.png",
+      "sha256": "e15b13b76d5e4ca5720734fd7190cb45c37007baf2405e9b864677a22291d597"
+    },
+    {
+      "path": "public/assets/refinements-d21/fir-source.png",
+      "sha256": "8b7a73c0bbc9cbe8f7a1a23259f800d218d5017b2ed3aa4dd6a972554204cbad"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_1_64.png",
+      "sha256": "311d6fdc59f9aa5d66d67d0441e2efb25e5fbf67139fb749dd9ff481e21b2421"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_2_64.png",
+      "sha256": "1115aed97c50745a8b2c1e4a67aaba3d6b98e993b654d8c18807233417ed7b6c"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_3_64.png",
+      "sha256": "0383911c7bc4a519a00b5d2a95c4e13aa455607ec13aaf4568661f9af8655ac6"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_4_64.png",
+      "sha256": "eac6273ad50950be4649148ef6dbe094001e08d75584dbe44933810b491e8e29"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-berries-low.png",
+      "sha256": "c6f5caba39da68a806aac24176532ce304c38d0d8ea9de298977186ac6a516c6"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-low.png",
+      "sha256": "41f863d8e7d2ebd300436507018ca4bb4a6832d0af22e78bfe12992d40aec187"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-snowy.png",
+      "sha256": "03b2c6a67ed34b07351a62e2152340fc0ace1d32d99a722af2d5af72bf5d88b3"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-broad.png",
+      "sha256": "e826e91350bca899009f9a63eb813d67fbd84c058373476b12ddef948dd6e8fa"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-slim.png",
+      "sha256": "9d3d70a7322a73cad64745c5a9cd01bbfa9b2936229e03999405a46fe2cf342c"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-windswept.png",
+      "sha256": "b38f95d57684b130baefbf71d60b82bad1f51a0f7a8d140de4a682e8d420281b"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-young.png",
+      "sha256": "44a57e9545a611df4402ea674d5f1dcc9ccfd353563ae14d2b0c2ed7175a684e"
+    },
+    {
+      "path": "public/assets/validated/atlases/atlas-Etoilebois_Loyal_Profil_V18_1_Fluide.png",
+      "sha256": "560f12203e2e9669f85f8988665e67fb618aee771b92036477047db9d5583fc3"
+    },
+    {
+      "path": "public/assets/validated/atlases/atlas-Etoilebois_Loyal_V19_1.png",
+      "sha256": "0ddca8a112beefd001a55f4db4aab63b187992595519e73113f57fc6e7d4a405"
+    },
+    {
+      "path": "public/assets/validated/atlases/augustin_atlas-Etoilebois_Augustin_V4_Entier.png",
+      "sha256": "868743ace9c6a4caf84dcd94aa3a23d6a5d62e0ceef50be588eb970115481d75"
+    },
+    {
+      "path": "public/assets/validated/atlases/augustin_idle_atlas-Etoilebois_Augustin_Idle_V5.png",
+      "sha256": "bd2ada9238727e68cbc45b04c8cacfa7a97c8110d2ab441d690c3ade38742a0d"
+    },
+    {
+      "path": "public/assets/validated/atlases/basile_atlas-Etoilebois_Basile_V1.png",
+      "sha256": "308a5a10984265e2e2df1d7ddfd7443b6af0c09b7a25ff47c3b0186dcb71d8c1"
+    },
+    {
+      "path": "public/assets/validated/atlases/bisou_atlas-Etoilebois_Bisou_V1_Sprites.png",
+      "sha256": "5e59abace9027fcde8dcd96a88b062d322b7d62fd958c20e8232e581c06044ef"
+    },
+    {
+      "path": "public/assets/validated/atlases/calin_atlas-Etoilebois_Calin_V4_Coeur_Alignement.png",
+      "sha256": "e173c07653a672c96097ee20a793651ec3951e37cab5df418e109343cb0e6331"
+    },
+    {
+      "path": "public/assets/validated/atlases/celestine_atlas-Etoilebois_Celestine_V1.png",
+      "sha256": "42b35d86abf0c059b1f27c358ce6519a27d3fa8b15e41172d9a67ee120bdff74"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_atlas-Etoilebois_Debby_V3_Propre.png",
+      "sha256": "bd6448c664a0155204adc3aa0bec09d9c493d95292b6d98d57b678f54d0a2735"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_boude_atlas-Etoilebois_Debby_Boude_V1.png",
+      "sha256": "49a4f57bc8ea12bc7978b3e4a499275039f9f513f0a422ac8e89c3fe27d5027c"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_coeur_atlas-Etoilebois_Debby_Coeur_V1.png",
+      "sha256": "bf157dd88eeeb51b5eb6950415786143fbd522478d78cf8be937797aa0e6f163"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_coucou_atlas-Etoilebois_Debby_Coucou_V1.png",
+      "sha256": "d56d058cd5d482325e0262b452f636141e303187ebaaa4e20ec3974d9ee6e65f"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_etoile_atlas-Etoilebois_Debby_Etoile_V1.png",
+      "sha256": "91157bb8b4661b999e5e7d34b58a2e5a3addfe98d52afbc243a1ff5f1a9e3928"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_froid_atlas-Etoilebois_Debby_Froid_V1.png",
+      "sha256": "65c9cd0570610627026666b4c33b8dbee30b3e11fb4fa20a54008fed7b18dabe"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_joie_atlas-Etoilebois_Debby_Joie_V1.png",
+      "sha256": "68b2641e042e86ba346a3be2963b9d4873c4e4d4dad6d61aecee149825936aa6"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_lecture_atlas-Etoilebois_Debby_Lecture_V1.png",
+      "sha256": "494abcf230b7075473540067866558288cad69734bc4d7f8177ae563e360ac65"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_lettre_atlas-Etoilebois_Debby_Lettre_V1.png",
+      "sha256": "af17a87142d3e8719788be0450270e5ccf97bfacf90a5cbb3eee00ba5ae0f50f"
+    },
+    {
+      "path": "public/assets/validated/atlases/emile_atlas-Etoilebois_Emile_V1.png",
+      "sha256": "a120fee8af9b29534c3e25fae5bb643bfee88efa1604e98cac1807baf4bcb066"
+    },
+    {
+      "path": "public/assets/validated/atlases/flocon_atlas-Etoilebois_Flocon_V4_Transparent.png",
+      "sha256": "9a21cfc49ed19cec37b1c065a90c6b3cbdf135e3de4bdaf559c472bf82649808"
+    },
+    {
+      "path": "public/assets/validated/atlases/loyal_atlas-Etoilebois_Loyal_V9_Attente.png",
+      "sha256": "130556c905c946c5b66ccc280734feffee8e87224669e208ff59eaa6c14603b3"
+    },
+    {
+      "path": "public/assets/validated/atlases/madeleine_atlas-Etoilebois_Madeleine_V7.png",
+      "sha256": "6bc5507a6c94465071c9637e8178d9886cf32eeb6cf1f885c1f4bed84527ada1"
+    },
+    {
+      "path": "public/assets/validated/atlases/mains_atlas-Etoilebois_Mains_Dans_La_Main_V2_Contours.png",
+      "sha256": "783158cc3510b981da10f3e2113a5bb9858954def3a5e3bff29a9ab644308bc2"
+    },
+    {
+      "path": "public/assets/validated/atlases/rechauffe_atlas-Etoilebois_Loyal_Rechauffe_Debby_V1.png",
+      "sha256": "802610a040d4008b32fa0a22204774ebe932bf5e7d71fbf8cfe42d9abe428b14"
+    },
+    {
+      "path": "public/assets/validated/atlases/sapin_atlas-Etoilebois_Sapin_V11_4.png",
+      "sha256": "fd619a501ab1978ef142412550d2b9f5c5e4b3fcde9aa64ab2f4d087f0ac9cf4"
+    },
+    {
+      "path": "public/assets/validated/buildings/atelier_cadeaux.png",
+      "sha256": "561c8a38856c3fa87e2da2ed085b2ade8365a9cf32eb2b11add2a2d6dd579fbc"
+    },
+    {
+      "path": "public/assets/validated/buildings/auberge_etoiles.png",
+      "sha256": "88f003a43491aff943b79e645aae7f59e04fafc3188c4810f0caae0606701bb6"
+    },
+    {
+      "path": "public/assets/validated/buildings/bibliotheque_etoilebois.png",
+      "sha256": "0eaf6732e3ce84fd50337e5654b34ac62fe57a1380d96b2a5955be7d486df628"
+    },
+    {
+      "path": "public/assets/validated/buildings/maison_loyal.png",
+      "sha256": "1b566718cca9bd8437a20c9f5e6006ad9157cc2b9894368a25e26faa38f58bd5"
+    },
+    {
+      "path": "public/assets/validated/calendar/calendrier_art.png",
+      "sha256": "f215056ff71553e80b1664966c168a60dfa5335bc87b45638c1aaad90e965724"
+    },
+    {
+      "path": "public/assets/validated/decor/arche_etoilebois.png",
+      "sha256": "7ea80edae97d53fa76a6246e3f686ee6d299787d2177d3628ca84f580353461b"
+    },
+    {
+      "path": "public/assets/validated/decor/banc_neige.png",
+      "sha256": "a9678dcedc99aeb76ca978cc995fdd7b0d0f6e66791d42e1fc0762e0c15d5b4c"
+    },
+    {
+      "path": "public/assets/validated/decor/banc_plaid.png",
+      "sha256": "40703de17b7d1f85106e2392d7ac53ac3644aeca019fcc482b64881ac8469d4f"
+    },
+    {
+      "path": "public/assets/validated/decor/bonhomme_neige.png",
+      "sha256": "3816b0ed1955bf238bd4b7b14e25045f98d0a7417d6f5579ab889adfbd1707b3"
+    },
+    {
+      "path": "public/assets/validated/decor/brasero.png",
+      "sha256": "64be91524c41c641b1976964ef8ee7fb2d62829f6d3b9fbe66515c27d69b756d"
+    },
+    {
+      "path": "public/assets/validated/decor/caisse_fleurs.png",
+      "sha256": "c535a5b6995d6aa768fc6c3523c585614757fbaabcbb0677d39200e0f4dbb158"
+    },
+    {
+      "path": "public/assets/validated/decor/cloture_guirlande.png",
+      "sha256": "328c2533a65ccb2c6adb3cc44e0a87caff9c2f0b342269546e8c8ed05ef42326"
+    },
+    {
+      "path": "public/assets/validated/decor/etoile_allumee.png",
+      "sha256": "1468c9ef97646563e9f5311895d4ee9ddb7890cb0eb18a8f936c28bf945bec0e"
+    },
+    {
+      "path": "public/assets/validated/decor/etoile_eteinte.png",
+      "sha256": "6b4c2733c4622d199a53fee2f00c014a5ed4306cb6b63c6a785e80954d63c6c9"
+    },
+    {
+      "path": "public/assets/validated/decor/fontaine_etoile.png",
+      "sha256": "a4f10a8e40406066e7769417e4273fb8e0b091f3534263b409826cd5f27bc97d"
+    },
+    {
+      "path": "public/assets/validated/decor/guirlande_lanternes.png",
+      "sha256": "e859930f32afd978bd21d988feefaeb001a404f33eefdbc30e94a633e9a37671"
+    },
+    {
+      "path": "public/assets/validated/decor/jardiniere.png",
+      "sha256": "483dc9dd4038616075aac5c57d9ea341ed9c70309478e9138966b963b2d8cd99"
+    },
+    {
+      "path": "public/assets/validated/decor/lampadaire.png",
+      "sha256": "1439cfffd222fe430c72e742bc27a5c8eade4fe8064e5b5ab3b332125b50bf50"
+    },
+    {
+      "path": "public/assets/validated/decor/lanterne_banniere.png",
+      "sha256": "e16e39b56a467c43b16933fa06b28c3fc75759de59eb28dd593c3abb60ea1f5e"
+    },
+    {
+      "path": "public/assets/validated/decor/panneau_affichage.png",
+      "sha256": "e6140972cb5d822f8626843117ff49e3c94f61110eeaad75d070c6e392185d41"
+    },
+    {
+      "path": "public/assets/validated/decor/panneau_direction.png",
+      "sha256": "0068cbae1337dccf6edd63d4cac2aca9c019b0f9a09d2ea29b7d2d2b1f4182a5"
+    },
+    {
+      "path": "public/assets/validated/decor/sapin_place.png",
+      "sha256": "309992732c43e8c409df47924e7acd9d24b78e21437635fa974d717bd5473348"
+    },
+    {
+      "path": "public/assets/validated/decor/stand_cadeaux.png",
+      "sha256": "7421657262d5cf461687549508fb4330b1c08a0329363707996592cd02913814"
+    },
+    {
+      "path": "public/assets/validated/fonts/Marcellus-Regular.ttf",
+      "sha256": "2f6fa616f76102d81c4a935c3a8cd547a8db9de679ad9fda9cfd42f16e7f0743"
+    },
+    {
+      "path": "public/assets/validated/fonts/Nunito-Bold.ttf",
+      "sha256": "1a025dfce6e6e03bbe31ba82277ec5ed96df8b8dd58b3df6267269490b90b1dc"
+    },
+    {
+      "path": "public/assets/validated/fonts/Nunito-Regular.ttf",
+      "sha256": "9ecbdba35fa74f10a1a916c31649b802a12deb9e66c7b1fe4650afcfd4d16971"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_calendrier.png",
+      "sha256": "043234be91d1f3e24dc9e9273766b8b08ad09f81f66bf60a935e67e81a448572"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre.png",
+      "sha256": "c0631ed81b31e00dd7cb2dab02901cb97324d7df861b03d92f106fe911ba721b"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre_2.png",
+      "sha256": "70d60e7b95d4b856cfdc41bfef4cec9cb92ebe04402b4e6462156066b7ff9b55"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre_3.png",
+      "sha256": "cbf9e8491dd07b6adb521e605a046ec6e429d101ca6687342594ead2e681bf4d"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_selection.png",
+      "sha256": "e9895d121d1635ce8c9823da9a1844fcca97bf0aeb71b70b0def3251e99f4cec"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_parametres.png",
+      "sha256": "713785019cb6dee5e320622434c1b51cdf8bab10ab3624758a12b13bad84d3a9"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_souvenirs.png",
+      "sha256": "77081101d4d97fbd632d8624b5ac7543fd440ebf012f1e32be9f271f2906ca3a"
+    },
+    {
+      "path": "public/assets/validated/hud/calendrier.png",
+      "sha256": "6676c7cef76d87a0e2efcb29d7c0f45e4e5d0a06433eeeb5bd0b8f48fc045413"
+    },
+    {
+      "path": "public/assets/validated/hud/compteur_etoiles.png",
+      "sha256": "52eb37f0e65ded2cbc5c385fe138adc27daf83f4d36f8440aba7d69c6b916f01"
+    },
+    {
+      "path": "public/assets/validated/hud/dialogue_complet_4_choix.png",
+      "sha256": "ff5078b8ac6a8127f7f9a0551b6a94a573d2e98106ef1e58a1d82fdbdeec35d6"
+    },
+    {
+      "path": "public/assets/validated/hud/dialogue_narratif.png",
+      "sha256": "35fe4b034c45280de1e072c5d35def078dcec02625cb8e7347751bbb51d6faf9"
+    },
+    {
+      "path": "public/assets/validated/hud/enseigne.png",
+      "sha256": "3959cac6cac87288c632bf4a0d7e95d7d18829e6980f44637484bd34e61f2527"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_joyeux.png",
+      "sha256": "0d87e41c0d4c48691c2af20b7db03b7587ec11b77b1d54737fdc82920af3790c"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_neutre.png",
+      "sha256": "741a9a6e2059ed0f203fda891f5dfd1d87c9246d9c2bb69238d24bdbb99b13fe"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_surpris.png",
+      "sha256": "7120a59277264f4d6cf6b97f5c36a44a0fb10c42c66b90c85231c64d690d3601"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_triste.png",
+      "sha256": "5502df178da413750eb6d7fe4a4f4c62d5f00e28d21241d84f7a99303355b177"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_joyeux.png",
+      "sha256": "93d44dd0c431be3ae839fb825f908b92e9f36b65402c027bd5dcea631d4a4644"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_neutre.png",
+      "sha256": "85d846e98e63443cc2f2ca0252fa7e71965bd6d18a63437b0bc3a326c5f58fdb"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_surpris.png",
+      "sha256": "9a6d7857e825d1f446c9eff8a9aa150f0665daa658d41b9fa4cf00f22442ecb2"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_triste.png",
+      "sha256": "96a7b3eb44340e5bdb7956a1df2cccdf24cee6257fe4ae0e9077362555c9be2f"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_joyeux.png",
+      "sha256": "a31a33d64a01f56395e5d8a16d24a506c11fb1bad0d88429c62a6bd0cee8a09c"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_neutre.png",
+      "sha256": "6c74f1bc1d747a722b1926edb733a323b960761320b07035fdff433282969b62"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_surpris.png",
+      "sha256": "c6a9a80d79006683f638a8077392d68aaf8ad753d4e74cdc9bad96f3361200f1"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_triste.png",
+      "sha256": "3d72a09c628a482a7f7d2669d2a4c3f0fa45a09f0d2eba2ecafa199d2554a807"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_joyeux.png",
+      "sha256": "a7b3e69c8a36e123ffe2ec3a772befd95ee059851ca49508ea8829344913c53c"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_neutre.png",
+      "sha256": "1a85b30ab32c7ea05e0be304445f42092ee446cdcf0ace868cbd15b60019c122"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_surpris.png",
+      "sha256": "300b2fdb5e890ceab02bb2d7b5ba84d9237b4df62e1305a233885669f7657330"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_triste.png",
+      "sha256": "fe1d2f9e17247dd91a6a5065b9a76a3fe6c034e7c0d6395e3e20986a8b04e010"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_joyeux.png",
+      "sha256": "7e9f49a631517793e45ba974bc1e59567eb94699132b1721016de9aadf0b6e0d"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_neutre.png",
+      "sha256": "c81e18d55e6ccefa751a5ef9e7241998bb41934c9b168fceff7406dd2417cca7"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_surpris.png",
+      "sha256": "28f96e4bf570a22f7c67d3478b8ea6e13d7cd5557744c8948f86bfa1e485ae65"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_triste.png",
+      "sha256": "4e293eb943d52f97e0b19f6e7d92611f5dc27df9b74aac1604a36f2c8c544ad1"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_joyeux.png",
+      "sha256": "f30a2439205d4c51ce8567ac6760e22c0b6332c42950768365ea53556f05305e"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_neutre.png",
+      "sha256": "3a87ea2c89f8b615f0e17e08cea752737eacde0f2624d809c0348f368293f3e1"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_surpris.png",
+      "sha256": "cb7928bd4b8a5cfa2b5424b33c7790b31d0f29460b7636ad6fae0dcd71b92d55"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_triste.png",
+      "sha256": "afe71e0fa25411a92494a6f43d325e1d209fff92d67103ec8876027962ed1918"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_joyeux.png",
+      "sha256": "f9dd33b52e2130456c398af355951bb5fefb21981a3f6aabe8cfd68908882c0a"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_neutre.png",
+      "sha256": "2e3e51d206fdde8bccb29184b15b3dd23c26b2b01a9a4bb318d28ca7e0932bee"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_surpris.png",
+      "sha256": "bc9530f61bf8293a43c061d63b20bafbee845d53d86e358875799f98e3c5f184"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_triste.png",
+      "sha256": "b9b19357b5548fe0217e13af3a205ae3cbe26dafbc8c95517a169658e2fd792e"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_joyeux.png",
+      "sha256": "4a0f21db33ee60e4c804986bec3da172ce9f7e92287802a48e33772d6e5dbc63"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_neutre.png",
+      "sha256": "e74d3b7ee8e8c8873155a9e4afc474f584d2ae910d3b5faef94847f93c214906"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_surpris.png",
+      "sha256": "54effa3ae5f81449d1eb80bd083931c021793a0f2128a1a191da8b464b09bcb7"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_triste.png",
+      "sha256": "d8aae9370dc53459f99ff82ee9bccea9cb6998b53b60dc4c27f41167cb08bb9e"
+    },
+    {
+      "path": "public/assets/validated/terrain/autotile.png",
+      "sha256": "5fd52b2a43e1a324c686904bcf2528f46fb6f6a5889429ba35c1eb2df84d0724"
+    },
+    {
+      "path": "public/assets/validated/terrain/dirt.png",
+      "sha256": "5e3e7c2ffcfa5b23f9773f3c01153329a254b4182a7dfa1865030bdf71ced096"
+    },
+    {
+      "path": "public/assets/validated/terrain/snow.png",
+      "sha256": "c129f90f4589284b723df3bc301c52020eff9fc39c47503e72522efd0d1f1506"
+    },
+    {
+      "path": "public/assets/validated/terrain/stone.png",
+      "sha256": "b8c848c54a69aca76c2db1970f8041fc05513a127ba536f938662bbca7805ab6"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bench.png",
+      "sha256": "1299a005d87952a1b507f92d2a670a80babba83f78e005f67cb3d9e4ed6dc418"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bush_berries.png",
+      "sha256": "4b7fafee0b989c959a06837106b9f5f864413b2e512c1091c0342fae2bca00a1"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bush_snow.png",
+      "sha256": "4499d7f15a40927c0215b2653a7b73bc6b75ce9e225b898322e17ef54c5d0d57"
+    },
+    {
+      "path": "public/assets/validated/vegetation/campfire.png",
+      "sha256": "b4a409d05b6a03400475ebf4ee63b1bf4fd83809f52eeaade32599e1425333b9"
+    },
+    {
+      "path": "public/assets/validated/vegetation/fence.png",
+      "sha256": "4ae7cbf17789738fd0214001aa6ecdd4a5a285ee863472cb86b2b07bf6a50511"
+    },
+    {
+      "path": "public/assets/validated/vegetation/gift.png",
+      "sha256": "3ec7609972fbffc5af6b7a3163d570b8867429acd576b7365869e313ba86e544"
+    },
+    {
+      "path": "public/assets/validated/vegetation/lantern.png",
+      "sha256": "b18783017089e3a8c5939b8ccd3868a67e24a417b0ab89868b7a0736e69b2436"
+    },
+    {
+      "path": "public/assets/validated/vegetation/logs.png",
+      "sha256": "300f7c8a6b9fff7cc630d570f12252f02f1cb87f1a60c10374e166429bd560ba"
+    },
+    {
+      "path": "public/assets/validated/vegetation/pine_festive.png",
+      "sha256": "7646f3f1503678895929c6bbf485887a5095d97ad05acd6e65e5aa9698408f6d"
+    },
+    {
+      "path": "public/assets/validated/vegetation/pine_large.png",
+      "sha256": "d91c0c4c8f2a6e5b05d02d3239a68534ca1d45c481d6d8d79f7f62bda987ca9e"
+    },
+    {
+      "path": "public/assets/validated/vegetation/quest_star.png",
+      "sha256": "e09755a2a15bfb89140ffe85ff5dfcc35f2a20242562b4583953fab059181f5e"
+    },
+    {
+      "path": "public/assets/validated/vegetation/signpost.png",
+      "sha256": "c988767c84dc01b7cd9d3e89f40ad9e3c32674bc464221740180dd2f73e8de7b"
+    },
+    {
+      "path": "public/assets/validated/vegetation/snowman.png",
+      "sha256": "f15d154d8aca6745d0fe7caea0b70fa8e5b9e3aaade9f3e13da08acdd9982c72"
+    }
+  ]
+}

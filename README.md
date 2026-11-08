@@ -1,4 +1,16 @@
-# Les 24 Étoiles de Noël — Phase D.3.2, le village habité
+# Les 24 Étoiles de Noël — D.3.3, le grand village chaleureux
+
+Version 0.7.3 : seize habitations décoratives, quatre quartiers reliés et quatre intérieurs aux plans distincts. Les dix-sept interactions décoratives, les personnages, la neige D.3.1 et la progression sont conservés.
+
+- [Visite et comparatifs PC/mobile](docs/graphismes/comparatif-d33.html)
+- [Ressources sur fonds clair et sombre](docs/graphismes/ressources-d33.html)
+- [Rapport D.3.3, tests et limites](docs/graphismes/d33/RAPPORT.md)
+- [Plan du village](docs/graphismes/d33/PLAN-VILLAGE.svg)
+- [Audit avant aménagement](docs/graphismes/d33/AUDIT-ET-PLAN.md)
+
+Les seize habitations sont décoratives. Les quatre bâtiments jouables conservent leurs accès ; les intérieurs offrent de nouvelles annexes. Les anciennes sauvegardes gardent leur schéma et leur progression ; une position occupée est ramenée au point sûr existant. Aucune fusion, aucun déploiement et aucune D.4.
+
+## D.3.2 — historique 0.7.2
 
 Version 0.7.2 : quatre intérieurs enrichis, 17 interactions décoratives, un chat dans son panier, quatre sources lumineuses commutables, un petit train mécanique et quatre maisons décoratives de silhouettes distinctes. Les états des interrupteurs restent séparés de la progression. Les ressources et fonctionnalités D.3.1 sont conservées ; aucune D.4 commencée.
 

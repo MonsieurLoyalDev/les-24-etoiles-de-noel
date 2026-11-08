@@ -1,0 +1,171 @@
+
+> les-24-etoiles-de-noel@0.7.3 test
+> vitest run --reporter=verbose
+
+
+ RUN  v5.1.0 C:/Users/arthu/Documents/Codex/2026-11-03/je-souhaite-lancer-d-s-maintenant/outputs/les-24-etoiles-de-noel
+
+ ✓ tests/ambience-d3.test.ts > le budget de mouvement garde les branches visibles même si leur pied est hors écran 2ms
+ ✓ tests/ambience-d3.test.ts > la réduction des mouvements reste prioritaire sur la qualité complète 0ms
+ ✓ tests/ambience-d3.test.ts > les budgets restent bornés avec un vrai mode sans particules 0ms
+ ✓ tests/ambience-d3.test.ts > le cycle horaire existant se raccorde sans saut de teinte ni de luminosité 1ms
+ ✓ tests/ambience-d3.test.ts > les dix nouveaux terrains et détails sont distincts et réellement utilisés 17ms
+ ✓ tests/private-client.test.ts > refuse une configuration privée absente sans revenir en démonstration 226ms
+ ✓ tests/private-client.test.ts > refuse une clé serveur moderne dans le client 2ms
+ ✓ tests/private-client.test.ts > refuse un ancien JWT service_role dans le client 1ms
+ ✓ tests/private-client.test.ts > refuse un endpoint distant sans HTTPS 1ms
+ ✓ tests/decor-d32.test.ts > les 20 nouveaux sprites sont isolés, natifs et traçables, avec des collisions adaptées à leur silhouette 194ms
+ ✓ tests/decor-d32.test.ts > les quatre nouvelles emprises laissent tous les chemins et accès existants libres 18ms
+ ✓ tests/decor-d32.test.ts > les 17 objets ont des identifiants stables uniques et chaque pièce dispose de quatre actions au moins 1ms
+ ✓ tests/decor-d32.test.ts > les interrupteurs persistent dans une clé indépendante, sans modifier le RPG 1ms
+ ✓ tests/decor-d32.test.ts > stockage corrompu, champs inconnus et interdiction de stockage ne cassent pas les objets 1ms
+ ✓ tests/refinements-d22.test.ts > les cinq silhouettes de sapins sont réellement réparties dans le village 5ms
+ ✓ tests/refinements-d22.test.ts > les sept nouvelles silhouettes sont des fichiers alpha distincts et autorisés 10ms
+ ✓ tests/refinements-d22.test.ts > les douze nouveaux buissons dégagent les interactions, portes et passages 4ms
+ ✓ tests/furniture-d33.test.ts > les emprises ne dépassent pas la largeur réellement affichée du meuble 40ms
+ ✓ tests/village-design.test.ts > tous les ornements ont une source validée et restent dans le monde 15ms
+ ✓ tests/village-design.test.ts > les nouvelles bases décoratives dégagent les points d'interaction 6ms
+ ✓ tests/village-design.test.ts > les allées gardent une largeur adaptée et les destinations d'origine 2ms
+ ✓ tests/village-design.test.ts > les bancs ne se chevauchent pas et la patrouille d'Augustin reste dégagée 1ms
+ ✓ tests/village-design.test.ts > tous les accès et zones de quêtes restent reliés avec les collisions existantes 15ms
+ ✓ tests/refinements-d21.test.ts > les quatre variantes de neige participent réellement au sol 3ms
+ ✓ tests/refinements-d21.test.ts > les étiquettes restent dans le champ et se séparent sans déplacer les acteurs 1ms
+ ✓ tests/refinements-d21.test.ts > les nouvelles images sont explicitement autorisées et possèdent un canal alpha 15ms
+ ✓ tests/refinements-d21.test.ts > un sapin placé près du bord reste entièrement dans le monde 1ms
+ ✓ tests/refinements-d21.test.ts > les noms des enseignes sont des données, y compris les lieux futurs absents 0ms
+ ✓ tests/village-d33.test.ts > seize silhouettes, portes calibrées et exports alpha traçables 248ms
+ ✓ tests/rpg.test.ts > migration Phase A > préserve l’étape 0, la salle et les coordonnées 4ms
+ ✓ tests/rpg.test.ts > migration Phase A > préserve l’étape 1, la salle et les coordonnées 0ms
+ ✓ tests/rpg.test.ts > migration Phase A > préserve l’étape 2, la salle et les coordonnées 0ms
+ ✓ tests/rpg.test.ts > migration Phase A > préserve l’étape 3, la salle et les coordonnées 0ms
+ ✓ tests/rpg.test.ts > migration Phase A > préserve l’étape 4, la salle et les coordonnées 0ms
+ ✓ tests/rpg.test.ts > migration Phase A > refuse une sauvegarde v2 malformée 0ms
+ ✓ tests/rpg.test.ts > quêtes génériques > accomplit first-light sans double récompense 2ms
+ ✓ tests/rpg.test.ts > quêtes génériques > accomplit album sans double récompense 0ms
+ ✓ tests/rpg.test.ts > quêtes génériques > accomplit parcels sans double récompense 0ms
+ ✓ tests/rpg.test.ts > quêtes génériques > accomplit memories sans double récompense 0ms
+ ✓ tests/rpg.test.ts > quêtes génériques > accomplit tour sans double récompense 0ms
+ ✓ tests/rpg.test.ts > quêtes génériques > ne progresse pas avant acceptation et ne réinitialise pas une quête 0ms
+ ✓ tests/rpg.test.ts > dialogues et conditions > sépare les historiques des habitants et conserve le nœud en sauvegarde 1ms
+ ✓ tests/rpg.test.ts > dialogues et conditions > exécute les événements de choix et mémorise le choix 0ms
+ ✓ tests/rpg.test.ts > dialogues et conditions > une réponse incorrecte ne résout pas l’énigme 0ms
+ ✓ tests/rpg.test.ts > dialogues et conditions > combine drapeau, objet et négation 0ms
+ ✓ tests/rpg.test.ts > mini-jeux > la photo exige réellement les neuf fragments dans l’ordre 0ms
+ ✓ tests/rpg.test.ts > mini-jeux > le mélange conserve les paires 0ms
+ ✓ tests/rpg.test.ts > mini-jeux > verrouille deux cartes différentes et interdit les doubles clics 0ms
+ ✓ tests/rpg.test.ts > mini-jeux > vérifie les deux matériaux et la commande courante 0ms
+ ✓ tests/rpg.test.ts > monde > garde les chemins PNJ libres de mobilier et la sortie accessible 1ms
+ ✓ tests/rpg.test.ts > monde > change les comportements à la nuit et boucle le cycle 0ms
+ ✓ tests/rpg.test.ts > frontière calendrier serveur > ne demande jamais un jour invalide et respecte les refus du serveur 2ms
+ ✓ tests/art.test.ts > les 24 positions correspondent exactement aux jours 1–24 sans doublons 3ms
+ ✓ tests/art.test.ts > le sapin possède 25 états complets sans ajouter une 25e journée 0ms
+ ✓ tests/art.test.ts > les 32 portraits correspondent aux huit personnages et quatre émotions 0ms
+ ✓ tests/art.test.ts > aucune réinterprétation du portrait et du locuteur 1ms
+ ✓ tests/art.test.ts > les images copiées conservent les octets du pack validé 217ms
+ ✓ tests/art.test.ts > les atlas restent dans les dimensions de leurs textures 5ms
+ ✓ tests/art.test.ts > l'audio absent reste silencieux et les réglages corrompus sont bornés 0ms
+ ✓ tests/interiors-d31.test.ts > préserve exactement les PNG, coordonnées et tailles du terrain D.3 validé 18ms
+ ✓ tests/interiors-d31.test.ts > les meubles hauts restent liés aux trois emprises physiques existantes 1ms
+ ✓ tests/interiors-d31.test.ts > le cadrage ajoute seulement une marge visuelle lorsque la pièce tient dans l’écran 0ms
+ ✓ tests/interiors-d31.test.ts > la lumière intérieure se raccorde doucement au cycle existant et reste chaude près des lampes 1ms
+ ✓ tests/interiors-d31.test.ts > les 24 exports natifs restent petits, transparents et conformes aux originaux conservés 218ms
+ ✓ tests/village-d33.test.ts > les axes et les allées évitent les emprises des seize maisons 21ms
+ ✓ tests/village-d33.test.ts > les quatre plans sont distincts, reliés et tous les objets restent accessibles 40ms
+ ✓ tests/village-d33.test.ts > le centre historique et le détour Phase B restent libres 2ms
+ ✓ tests/ops.test.mjs > refuse les fichiers publics supplémentaires et les modifications du paquet 23ms
+ ✓ tests/ops.test.mjs > refuse les secrets Vite, y compris JWT base64url et variables inattendues 2ms
+ ✓ tests/ops.test.mjs > ne rend pas déployable un build sans Auth/CAPTCHA configurés 17ms
+ ✓ tests/ops.test.mjs > prépare des versions isolées sans activation implicite ni écrasement 67ms
+ ✓ tests/advent.test.ts > crée des identifiants de manche sur un téléphone en HTTP local 7ms
+ ✓ tests/advent.test.ts > la journée 1 possède un objectif réellement validable 1ms
+ ✓ tests/advent.test.ts > la journée 2 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 3 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 4 possède un objectif réellement validable 1ms
+ ✓ tests/advent.test.ts > la journée 5 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 6 possède un objectif réellement validable 1ms
+ ✓ tests/advent.test.ts > la journée 7 possède un objectif réellement validable 1ms
+ ✓ tests/advent.test.ts > la journée 8 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 9 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 10 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 11 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 12 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 13 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 14 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 15 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 16 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 17 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 18 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 19 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 20 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 21 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 22 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 23 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > la journée 24 possède un objectif réellement validable 0ms
+ ✓ tests/advent.test.ts > teste toutes les frontières des 24 minuits parisiens 1ms
+ ✓ tests/advent.test.ts > ne publie pas les réponses dans les définitions des étapes 1ms
+ ✓ tests/advent.test.ts > rejette les objectifs incomplets, les doublons et les chemins inventés 0ms
+ ✓ tests/advent.test.ts > garde les récompenses, reprend les manches et isole le développeur 15ms
+ ✓ tests/save.test.ts > enregistre et relit une progression versionnée dans IndexedDB 5ms
+ ✓ tests/save.test.ts > migre la clé Phase A sans l’écraser et préfère ensuite Phase B 3ms
+ ↓ tests/ops.test.mjs > activation et restauration atomiques, anciens assets conservés
+ ↓ tests/ops.test.mjs > refuse les symlinks et la sortie du dossier dédié
+ ✓ tests/ops.test.mjs > génère seulement un vhost dédié, HTTPS et refus des fichiers privés 2ms
+ ✓ tests/ops.test.mjs > sauvegarde et restaure données et médias sans révéler le contenu 38ms
+ ✓ tests/ops.test.mjs > refuse mauvaise clé, altération et sauvegarde incomplète 26ms
+ ✓ tests/ops.test.mjs > ne remplace pas un média existant différent et ne restaure pas la DB ensuite 20ms
+ ✓ tests/ops.test.mjs > refuse de mélanger les fichiers valides de deux sauvegardes ayant la même clé 16ms
+ ✓ tests/domain.test.ts > progression > exige les quatre étapes dans l’ordre 2ms
+ ✓ tests/domain.test.ts > collisions > bloque murs et limites 1ms
+ ✓ tests/domain.test.ts > collisions > interdit les interactions à travers un mur 0ms
+ ✓ tests/domain.test.ts > collisions > valide les 3072 cellules du pack 1ms
+ ✓ tests/domain.test.ts > sauvegarde > rejette versions et données invalides 1ms
+ ✓ tests/domain.test.ts > ne copie jamais les objets du moteur dans les coordonnées sauvegardées 1ms
+ ✓ tests/domain.test.ts > ne traverse pas un mur lors d’une grande image de déplacement 0ms
+ ✓ tests/domain.test.ts > conserve la même distance par seconde à 5 et à 60 images par seconde 0ms
+ ✓ tests/auth.test.ts > refuse la connexion sans CAPTCHA si le site le requiert 3ms
+ ✓ tests/auth.test.ts > transmet le jeton à Supabase pour vérification serveur 1ms
+ ✓ tests/auth.test.ts > respecte le refus de limitation serveur 429 1ms
+ ✓ tests/pixels.test.ts > la neige rebouche les trous alpha sans modifier le PNG source 3ms
+ ✓ tests/pixels.test.ts > les motifs continus restent légèrement variables sans pixels noirs 1ms
+ ✓ tests/pixels.test.ts > un fragment détaché est retiré, la silhouette sombre reste intacte 0ms
+ ✓ tests/pixels.test.ts > le détourage ne retire pas un élément opaque relié au bâtiment 0ms
+ ✓ tests/pixels.test.ts > le repère des pieds utilise les pixels visibles du cadre, sans rogner la texture 0ms
+ ✓ tests/security.test.ts > refuse les visiteurs anonymes et les comptes non invités 13ms
+ ✓ tests/security.test.ts > ouvre exactement à minuit Europe/Paris les jours 1 et 24 8ms
+ ✓ tests/security.test.ts > empêche de lire les contenus et médias futurs via des requêtes directes 6ms
+ ✓ tests/security.test.ts > ne livre aucune métadonnée secrète des jours verrouillés 5ms
+ ✓ tests/security.test.ts > refuse le mode développeur et l’éditeur à un joueur 6ms
+ ✓ tests/security.test.ts > valide les objectifs côté serveur et conserve les étoiles lors des relectures 11ms
+ ✓ tests/security.test.ts > isole l’aperçu administrateur des étoiles réelles et des autres joueurs 5ms
+ ✓ tests/security.test.ts > ne perd pas une récompense lors d’une mise à jour du contenu 10ms
+ ✓ tests/security.test.ts > valide les preuves du jour 1 dans PostgreSQL et refuse SQL NULL 5ms
+ ✓ tests/security.test.ts > valide les preuves du jour 2 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 3 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 4 dans PostgreSQL et refuse SQL NULL 5ms
+ ✓ tests/security.test.ts > valide les preuves du jour 5 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > valide les preuves du jour 6 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 7 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 8 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 9 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > valide les preuves du jour 10 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 11 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 12 dans PostgreSQL et refuse SQL NULL 5ms
+ ✓ tests/security.test.ts > valide les preuves du jour 13 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 14 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > valide les preuves du jour 15 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > valide les preuves du jour 16 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 17 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 18 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > valide les preuves du jour 19 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 20 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 21 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 22 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 23 dans PostgreSQL et refuse SQL NULL 4ms
+ ✓ tests/security.test.ts > valide les preuves du jour 24 dans PostgreSQL et refuse SQL NULL 3ms
+ ✓ tests/security.test.ts > refuse une édition incomplète et le remplacement concurrent 3ms
+
+ Test Files  18 passed (18)
+      Tests  156 passed | 2 skipped (158)
+   Start at  17:19:41
+   Duration  1.94s (tests 62%, import 23%, transform 11%, worker 5%)
+

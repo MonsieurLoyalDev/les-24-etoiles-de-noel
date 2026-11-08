@@ -1,0 +1,450 @@
+[
+  {
+    "key": "home-porch",
+    "width": 173,
+    "height": 297,
+    "bounds": {
+      "l": 137,
+      "t": 140,
+      "r": 887,
+      "b": 1443
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.5457503000895182,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-porch.png",
+      "sha256": "09244debfabf2c70fb57f9d3458c51b2d27d2e8fc9ad5410b7c9db2b2a242d87"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-porch.png",
+      "bytes": 111490,
+      "sha256": "8626ec751b867885c3b0923d28b9f69c026a90cb73061db86f8a963928bf6fdc"
+    }
+  },
+  {
+    "key": "home-garden",
+    "width": 408,
+    "height": 279,
+    "bounds": {
+      "l": 44,
+      "t": 12,
+      "r": 1490,
+      "b": 995
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3498942057291667,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-garden.png",
+      "sha256": "58dd0773367ab11ac28d0896d2239d0e5e38c704225cda98c91c2b4811ad1afc"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-garden.png",
+      "bytes": 246983,
+      "sha256": "8cf1d218360f2db14637a2499c2f5fc8322f1982e827b6088970061575a0fb3c"
+    }
+  },
+  {
+    "key": "home-tall",
+    "width": 227,
+    "height": 356,
+    "bounds": {
+      "l": 128,
+      "t": 16,
+      "r": 984,
+      "b": 1368
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.4819473754151134,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-tall.png",
+      "sha256": "8330cda71ab1d3f7015bb0505296a42a69a1810375f32e0b77e6f5b178072e7d"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-tall.png",
+      "bytes": 172979,
+      "sha256": "e7f8b18fbd3bc9e62cfcd15783fa16a76f2333d42c6041d576bc611fd1781724"
+    }
+  },
+  {
+    "key": "home-oriel",
+    "width": 283,
+    "height": 288,
+    "bounds": {
+      "l": 91,
+      "t": 31,
+      "r": 1219,
+      "b": 1179
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3997653023861348,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-oriel.png",
+      "sha256": "6166f909b17c827feae71e9e8320a261669b9e5502a9be8d3917327c8449a12c"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-oriel.png",
+      "bytes": 174395,
+      "sha256": "8ee5f854ab97b4c9ad308689434a135c891f6bea515fa5fe589b48c84b906b4e"
+    }
+  },
+  {
+    "key": "home-family",
+    "width": 480,
+    "height": 279,
+    "bounds": {
+      "l": 60,
+      "t": 115,
+      "r": 1475,
+      "b": 932
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.44946924845377606,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-family.png",
+      "sha256": "d0b0c93a4fc113be241a5337ae94f95d3aabb939dd9cdd1098dfb182d08ace9a"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-family.png",
+      "bytes": 288955,
+      "sha256": "2d02a257404f4eda3f98191cb5e32ce795915550fa027af0750c0317d2f06dc1"
+    }
+  },
+  {
+    "key": "home-chalet",
+    "width": 296,
+    "height": 263,
+    "bounds": {
+      "l": 74,
+      "t": 92,
+      "r": 1236,
+      "b": 1123
+    },
+    "corners": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "zero": 0.43676386826420394,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-chalet.png",
+      "sha256": "28f6c901078b0dcb7022085473fa496dfe872753216f84df484fe93c78d1c171"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-chalet.png",
+      "bytes": 172848,
+      "sha256": "81e2d36f21846f3434d5ee1cf5a381094a206141de4b9df504850787ddb1f4ec"
+    }
+  },
+  {
+    "key": "home-narrow",
+    "width": 192,
+    "height": 467,
+    "bounds": {
+      "l": 196,
+      "t": 10,
+      "r": 799,
+      "b": 1495
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.6075865427652994,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-narrow.png",
+      "sha256": "7bfc601359ace37e5efde476fce92c9ac29091fcac758fe1b79a67257bd74eb7"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-narrow.png",
+      "bytes": 182593,
+      "sha256": "5b014c6366915c1129c3f9e162fb63106f76b9e890f97396dd8536e3ad5aa5d0"
+    }
+  },
+  {
+    "key": "home-shutters",
+    "width": 371,
+    "height": 230,
+    "bounds": {
+      "l": 14,
+      "t": 41,
+      "r": 1522,
+      "b": 968
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3079611460367839,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d32/originals/home-shutters.png",
+      "sha256": "fc28a0dd51dd959f792e1eb354ef869f615165e9f8d625dd90ac7aecbae93f99"
+    },
+    "public": {
+      "path": "public/assets/village-d33/home-shutters.png",
+      "bytes": 194633,
+      "sha256": "5686d5441f567580f302be9893cc12c1e7f6a8285f87eb265ef544c90ffbebf7"
+    }
+  },
+  {
+    "key": "cottage-stone",
+    "width": 353,
+    "height": 236,
+    "bounds": {
+      "l": 29,
+      "t": 27,
+      "r": 1493,
+      "b": 999
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3297882080078125,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-stone.png",
+      "sha256": "10da921fe3814d08ed4e63c1ab2b9a7046b347d1ed3cbb9d9be95c20a9fac6cb"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-stone.png",
+      "bytes": 187415,
+      "sha256": "2055bf3c3b0b538f45bb1d201f48f3f6edda5eab763c7371db9ce1513fa1bddf"
+    }
+  },
+  {
+    "key": "cottage-twin",
+    "width": 376,
+    "height": 307,
+    "bounds": {
+      "l": 30,
+      "t": 12,
+      "r": 1351,
+      "b": 1089
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3568850148834779,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-twin.png",
+      "sha256": "eb59f7f9799d9cdcc9a61f302c189c37c096f33d1056e66460c5a33fdccb97dc"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-twin.png",
+      "bytes": 248619,
+      "sha256": "2d6fb7199e77f531a1cfce2dbd659ac9757542b116fd4aa33b6f8f6db8dbac72"
+    }
+  },
+  {
+    "key": "cottage-gable",
+    "width": 200,
+    "height": 271,
+    "bounds": {
+      "l": 147,
+      "t": 14,
+      "r": 1052,
+      "b": 1248
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.5024261973391898,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-gable.png",
+      "sha256": "d25b1cfc0e102273f93ebe3c992a4f541aed0cda1b0115514de16368e3366bb5"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-gable.png",
+      "bytes": 115799,
+      "sha256": "c11337bee8b2fa736397d5672ce0f57c158aa4c831374941d845f09e2c07dca0"
+    }
+  },
+  {
+    "key": "cottage-humble",
+    "width": 259,
+    "height": 227,
+    "bounds": {
+      "l": 44,
+      "t": 55,
+      "r": 1267,
+      "b": 1124
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.36381626457006855,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-humble.png",
+      "sha256": "b480d0d102f8bd378eb3365cbb9542bbc8a661260353b209f8821174d3606df9"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-humble.png",
+      "bytes": 134138,
+      "sha256": "7c0274df14b278ff4bc7d120a78f44d64345d2c985c488ea4f0fb59b96c59ef2"
+    }
+  },
+  {
+    "key": "cottage-annex",
+    "width": 361,
+    "height": 255,
+    "bounds": {
+      "l": 55,
+      "t": 8,
+      "r": 1471,
+      "b": 1004
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3758354187011719,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-annex.png",
+      "sha256": "1b00d9416533cdfe6bfc7f1ee4c9c8f8cd48e36ea48b12791c18d962dd7dad16"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-annex.png",
+      "bytes": 196583,
+      "sha256": "d2ad09930d158eaa51db6b3d114ac9ab2bba84f6333b0fe56d1b8ca817c0b9aa"
+    }
+  },
+  {
+    "key": "cottage-porchwide",
+    "width": 313,
+    "height": 224,
+    "bounds": {
+      "l": 70,
+      "t": 5,
+      "r": 1465,
+      "b": 997
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.30309613545735675,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-porchwide.png",
+      "sha256": "60a9122f98395e4ac9502e42f31345a369aa7a745a3b99e4f8d8e586b2d78079"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-porchwide.png",
+      "bytes": 166220,
+      "sha256": "6f2e0d18e6b021e9f1a4445c36255e53ecedf8a109537513506071145941bba2"
+    }
+  },
+  {
+    "key": "cottage-terrace",
+    "width": 335,
+    "height": 242,
+    "bounds": {
+      "l": 73,
+      "t": 4,
+      "r": 1463,
+      "b": 1001
+    },
+    "corners": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3444843292236328,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-terrace.png",
+      "sha256": "a892ac2932d376b225d60d155eca8a52c864ea6d3fd38ac5299c026006d2adce"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-terrace.png",
+      "bytes": 185407,
+      "sha256": "07ac0e5f6e5802f82690470470e625bbaaf0c541704d04fec93e8cc137dae4c6"
+    }
+  },
+  {
+    "key": "cottage-garden",
+    "width": 347,
+    "height": 236,
+    "bounds": {
+      "l": 26,
+      "t": 6,
+      "r": 1507,
+      "b": 1006
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "zero": 0.3205089569091797,
+    "doorHeight": 44,
+    "original": {
+      "path": "docs/artwork-d33/originals/cottage-garden.png",
+      "sha256": "ef1e603d367ed8a01e57347902429e43a9eb888f9e75747cceed4600980bc6f4"
+    },
+    "public": {
+      "path": "public/assets/village-d33/cottage-garden.png",
+      "bytes": 184464,
+      "sha256": "cb5fb7395a86c359a52467c4f183f9e6ecff50ef9dafe3146ae89e1e9df13362"
+    }
+  }
+]
