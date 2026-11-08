@@ -1,0 +1,881 @@
+{
+  "complete": true,
+  "expected": 104,
+  "passed": 92,
+  "skipped": 12,
+  "missing": [],
+  "failed": [],
+  "batches": [
+    {
+      "path": "outputs/d34-desktop-partie2.json",
+      "stats": {
+        "startTime": "2026-11-08T21:49:37.402Z",
+        "duration": 939694.987,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "path": "outputs/d34-mobile.json",
+      "stats": {
+        "startTime": "2026-11-08T22:05:19.632Z",
+        "duration": 1293595.567,
+        "expected": 42,
+        "skipped": 10,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "path": "outputs/d34-source-desktop-partie1.json",
+      "stats": {
+        "startTime": "2026-11-08T22:27:03.646Z",
+        "duration": 588952.713,
+        "expected": 30,
+        "skipped": 2,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  ],
+  "tests": [
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : terrain blanc et conservation des matières D.3",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : terrain blanc et conservation des matières D.3",
+      "status": "passed",
+      "duration": 16754
+    },
+    {
+      "key": "desktop:phase-d3-2-compat.spec.ts:D32 anciennes positions sous un décor et performance dans un quartier visible",
+      "project": "desktop",
+      "file": "phase-d3-2-compat.spec.ts",
+      "title": "D32 anciennes positions sous un décor et performance dans un quartier visible",
+      "status": "passed",
+      "duration": 23297
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 effets des quartiers, culling et performance extérieure",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 effets des quartiers, culling et performance extérieure",
+      "status": "passed",
+      "duration": 5907
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 habitations, collisions et carte du village",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 habitations, collisions et carte du village",
+      "status": "passed",
+      "duration": 97424
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 démonstration enregistrée des interactions et animations",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 démonstration enregistrée des interactions et animations",
+      "status": "passed",
+      "duration": 25839
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 chaque objet décoratif fonctionne au clavier et au toucher",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+      "status": "passed",
+      "duration": 79274
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 sauvegarde décorative séparée et réduction des mouvements",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 sauvegarde décorative séparée et réduction des mouvements",
+      "status": "passed",
+      "duration": 17368
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 quatre intérieurs jour/nuit et circulation",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 quatre intérieurs jour/nuit et circulation",
+      "status": "passed",
+      "duration": 39103
+    },
+    {
+      "key": "desktop:phase-d3-2.spec.ts:D32 performances intérieures mesurées",
+      "project": "desktop",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 performances intérieures mesurées",
+      "status": "passed",
+      "duration": 6018
+    },
+    {
+      "key": "desktop:phase-d3-3.spec.ts:D33 carte, quartiers et seize façades lisibles",
+      "project": "desktop",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 carte, quartiers et seize façades lisibles",
+      "status": "passed",
+      "duration": 118126
+    },
+    {
+      "key": "desktop:phase-d3-3.spec.ts:D33 plans, annexes accessibles et mobilier jour/nuit",
+      "project": "desktop",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 plans, annexes accessibles et mobilier jour/nuit",
+      "status": "passed",
+      "duration": 131273
+    },
+    {
+      "key": "desktop:phase-d3-3.spec.ts:D33 performances en quartier habité et effets réduits",
+      "project": "desktop",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 performances en quartier habité et effets réduits",
+      "status": "passed",
+      "duration": 5682
+    },
+    {
+      "key": "desktop:phase-d3-3.spec.ts:D33 ancienne position désormais occupée : progression préservée",
+      "project": "desktop",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 ancienne position désormais occupée : progression préservée",
+      "status": "passed",
+      "duration": 8944
+    },
+    {
+      "key": "desktop:phase-d3-4.spec.ts:D34 intégration réelle, quartiers et transparences",
+      "project": "desktop",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 intégration réelle, quartiers et transparences",
+      "status": "passed",
+      "duration": 37373
+    },
+    {
+      "key": "desktop:phase-d3-4.spec.ts:D34 toutes les portes, les portillons et les sorties restent praticables",
+      "project": "desktop",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 toutes les portes, les portillons et les sorties restent praticables",
+      "status": "passed",
+      "duration": 221598
+    },
+    {
+      "key": "desktop:phase-d3-4.spec.ts:D34 sauvegarde ancienne, progression et position libre préservées",
+      "project": "desktop",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 sauvegarde ancienne, progression et position libre préservées",
+      "status": "passed",
+      "duration": 14554
+    },
+    {
+      "key": "desktop:phase-d3.spec.ts:D.3 : terrains, jour, crépuscule, nuit et façades",
+      "project": "desktop",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : terrains, jour, crépuscule, nuit et façades",
+      "status": "passed",
+      "duration": 33625
+    },
+    {
+      "key": "desktop:phase-d3.spec.ts:D.3 : vue globale du terrain",
+      "project": "desktop",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : vue globale du terrain",
+      "status": "passed",
+      "duration": 15058
+    },
+    {
+      "key": "desktop:phase-d3.spec.ts:D.3 : qualité, réduction des mouvements et reprise",
+      "project": "desktop",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : qualité, réduction des mouvements et reprise",
+      "status": "passed",
+      "duration": 13699
+    },
+    {
+      "key": "desktop:phase-d3.spec.ts:D.3 : démonstration réelle des effets animés",
+      "project": "desktop",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : démonstration réelle des effets animés",
+      "status": "passed",
+      "duration": 22199
+    },
+    {
+      "key": "mobile:correction-d1.spec.ts:D.1 : dialogue compact et monde lisible",
+      "project": "mobile",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : dialogue compact et monde lisible",
+      "status": "passed",
+      "duration": 6586
+    },
+    {
+      "key": "mobile:correction-d1.spec.ts:D.1 : petit téléphone 320 px",
+      "project": "mobile",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : petit téléphone 320 px",
+      "status": "passed",
+      "duration": 5259
+    },
+    {
+      "key": "mobile:correction-d1.spec.ts:D.1 : vue d'ensemble des façades et décors",
+      "project": "mobile",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : vue d'ensemble des façades et décors",
+      "status": "skipped",
+      "duration": 208
+    },
+    {
+      "key": "mobile:game.spec.ts:parcours complet, sauvegarde et journal",
+      "project": "mobile",
+      "file": "game.spec.ts",
+      "title": "parcours complet, sauvegarde et journal",
+      "status": "passed",
+      "duration": 26840
+    },
+    {
+      "key": "mobile:game.spec.ts:joystick tactile et absence de débordement",
+      "project": "mobile",
+      "file": "game.spec.ts",
+      "title": "joystick tactile et absence de débordement",
+      "status": "passed",
+      "duration": 5678
+    },
+    {
+      "key": "mobile:graphics.spec.ts:village graphique, dialogue et affichage responsive",
+      "project": "mobile",
+      "file": "graphics.spec.ts",
+      "title": "village graphique, dialogue et affichage responsive",
+      "status": "passed",
+      "duration": 5651
+    },
+    {
+      "key": "mobile:graphics.spec.ts:paramètres séparés de la progression et absence de sons non autorisés",
+      "project": "mobile",
+      "file": "graphics.spec.ts",
+      "title": "paramètres séparés de la progression et absence de sons non autorisés",
+      "status": "passed",
+      "duration": 10715
+    },
+    {
+      "key": "mobile:graphics.spec.ts:téléphone paysage et réduction des animations",
+      "project": "mobile",
+      "file": "graphics.spec.ts",
+      "title": "téléphone paysage et réduction des animations",
+      "status": "passed",
+      "duration": 5545
+    },
+    {
+      "key": "mobile:graphics.spec.ts:contrôle des 32 portraits sur fonds clair et sombre",
+      "project": "mobile",
+      "file": "graphics.spec.ts",
+      "title": "contrôle des 32 portraits sur fonds clair et sombre",
+      "status": "skipped",
+      "duration": 212
+    },
+    {
+      "key": "mobile:graphics.spec.ts:chaque étoile ouvre la journée sélectionnée",
+      "project": "mobile",
+      "file": "graphics.spec.ts",
+      "title": "chaque étoile ouvre la journée sélectionnée",
+      "status": "passed",
+      "duration": 7657
+    },
+    {
+      "key": "mobile:phase-b.spec.ts:Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+      "project": "mobile",
+      "file": "phase-b.spec.ts",
+      "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+      "status": "passed",
+      "duration": 84113
+    },
+    {
+      "key": "mobile:phase-c.spec.ts:les 24 journées : activités, reprise, récompenses et scène finale",
+      "project": "mobile",
+      "file": "phase-c.spec.ts",
+      "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+      "status": "passed",
+      "duration": 122884
+    },
+    {
+      "key": "mobile:phase-c.spec.ts:calendrier daté fermé en novembre et éditeur fictif persistant",
+      "project": "mobile",
+      "file": "phase-c.spec.ts",
+      "title": "calendrier daté fermé en novembre et éditeur fictif persistant",
+      "status": "passed",
+      "duration": 7275
+    },
+    {
+      "key": "mobile:phase-d2-1.spec.ts:D.2.1 : promenade et place centrale",
+      "project": "mobile",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : promenade et place centrale",
+      "status": "passed",
+      "duration": 7600
+    },
+    {
+      "key": "mobile:phase-d2-1.spec.ts:D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+      "project": "mobile",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+      "status": "passed",
+      "duration": 9686
+    },
+    {
+      "key": "mobile:phase-d2-1.spec.ts:D.2.1 : les huit noms conservent leur identité dans les pièces",
+      "project": "mobile",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : les huit noms conservent leur identité dans les pièces",
+      "status": "passed",
+      "duration": 11921
+    },
+    {
+      "key": "mobile:phase-d2-1.spec.ts:D.2.1 : cadrage des quatre façades sur PC et mobile",
+      "project": "mobile",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 12970
+    },
+    {
+      "key": "mobile:phase-d2-1.spec.ts:D.2.1 : vue globale et abords des quatre bâtiments",
+      "project": "mobile",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : vue globale et abords des quatre bâtiments",
+      "status": "skipped",
+      "duration": 136
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : promenade et place centrale",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : promenade et place centrale",
+      "status": "passed",
+      "duration": 6680
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : présentation des dix silhouettes",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : présentation des dix silhouettes",
+      "status": "skipped",
+      "duration": 136
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+      "status": "passed",
+      "duration": 10046
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : les huit noms conservent leur identité dans les pièces",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : les huit noms conservent leur identité dans les pièces",
+      "status": "passed",
+      "duration": 12352
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : cadrage des quatre façades sur PC et mobile",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 11754
+    },
+    {
+      "key": "mobile:phase-d2-2.spec.ts:D.2.2 : vue globale et abords des quatre bâtiments",
+      "project": "mobile",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : vue globale et abords des quatre bâtiments",
+      "status": "skipped",
+      "duration": 122
+    },
+    {
+      "key": "mobile:phase-d2.spec.ts:D.2 : promenade et place centrale",
+      "project": "mobile",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : promenade et place centrale",
+      "status": "passed",
+      "duration": 6037
+    },
+    {
+      "key": "mobile:phase-d2.spec.ts:D.2 : cadrage des quatre façades sur PC et mobile",
+      "project": "mobile",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 11634
+    },
+    {
+      "key": "mobile:phase-d2.spec.ts:D.2 : vue globale et abords des quatre bâtiments",
+      "project": "mobile",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : vue globale et abords des quatre bâtiments",
+      "status": "skipped",
+      "duration": 112
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : intérieurs, neige et sapin avant/après",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : intérieurs, neige et sapin avant/après",
+      "status": "passed",
+      "duration": 49724
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : collisions du mobilier et sorties des quatre pièces",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : collisions du mobilier et sorties des quatre pièces",
+      "status": "passed",
+      "duration": 54434
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : lumière intérieure, performances et réduction des mouvements",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : lumière intérieure, performances et réduction des mouvements",
+      "status": "passed",
+      "duration": 14193
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : petit ordinateur et tablette",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : petit ordinateur et tablette",
+      "status": "skipped",
+      "duration": 137
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : contrôle des ressources sur fonds clair et sombre",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : contrôle des ressources sur fonds clair et sombre",
+      "status": "skipped",
+      "duration": 133
+    },
+    {
+      "key": "mobile:phase-d3-1.spec.ts:D.3.1 : terrain blanc et conservation des matières D.3",
+      "project": "mobile",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : terrain blanc et conservation des matières D.3",
+      "status": "skipped",
+      "duration": 145
+    },
+    {
+      "key": "mobile:phase-d3-2-compat.spec.ts:D32 anciennes positions sous un décor et performance dans un quartier visible",
+      "project": "mobile",
+      "file": "phase-d3-2-compat.spec.ts",
+      "title": "D32 anciennes positions sous un décor et performance dans un quartier visible",
+      "status": "passed",
+      "duration": 22320
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 effets des quartiers, culling et performance extérieure",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 effets des quartiers, culling et performance extérieure",
+      "status": "passed",
+      "duration": 6495
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 habitations, collisions et carte du village",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 habitations, collisions et carte du village",
+      "status": "passed",
+      "duration": 66376
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 démonstration enregistrée des interactions et animations",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 démonstration enregistrée des interactions et animations",
+      "status": "passed",
+      "duration": 19073
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 chaque objet décoratif fonctionne au clavier et au toucher",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+      "status": "passed",
+      "duration": 58325
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 sauvegarde décorative séparée et réduction des mouvements",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 sauvegarde décorative séparée et réduction des mouvements",
+      "status": "passed",
+      "duration": 13911
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 quatre intérieurs jour/nuit et circulation",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 quatre intérieurs jour/nuit et circulation",
+      "status": "passed",
+      "duration": 54722
+    },
+    {
+      "key": "mobile:phase-d3-2.spec.ts:D32 performances intérieures mesurées",
+      "project": "mobile",
+      "file": "phase-d3-2.spec.ts",
+      "title": "D32 performances intérieures mesurées",
+      "status": "passed",
+      "duration": 4267
+    },
+    {
+      "key": "mobile:phase-d3-3.spec.ts:D33 carte, quartiers et seize façades lisibles",
+      "project": "mobile",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 carte, quartiers et seize façades lisibles",
+      "status": "passed",
+      "duration": 85723
+    },
+    {
+      "key": "mobile:phase-d3-3.spec.ts:D33 plans, annexes accessibles et mobilier jour/nuit",
+      "project": "mobile",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 plans, annexes accessibles et mobilier jour/nuit",
+      "status": "passed",
+      "duration": 126550
+    },
+    {
+      "key": "mobile:phase-d3-3.spec.ts:D33 performances en quartier habité et effets réduits",
+      "project": "mobile",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 performances en quartier habité et effets réduits",
+      "status": "passed",
+      "duration": 5636
+    },
+    {
+      "key": "mobile:phase-d3-3.spec.ts:D33 ancienne position désormais occupée : progression préservée",
+      "project": "mobile",
+      "file": "phase-d3-3.spec.ts",
+      "title": "D33 ancienne position désormais occupée : progression préservée",
+      "status": "passed",
+      "duration": 8489
+    },
+    {
+      "key": "mobile:phase-d3-4.spec.ts:D34 intégration réelle, quartiers et transparences",
+      "project": "mobile",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 intégration réelle, quartiers et transparences",
+      "status": "passed",
+      "duration": 15962
+    },
+    {
+      "key": "mobile:phase-d3-4.spec.ts:D34 toutes les portes, les portillons et les sorties restent praticables",
+      "project": "mobile",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 toutes les portes, les portillons et les sorties restent praticables",
+      "status": "passed",
+      "duration": 218940
+    },
+    {
+      "key": "mobile:phase-d3-4.spec.ts:D34 sauvegarde ancienne, progression et position libre préservées",
+      "project": "mobile",
+      "file": "phase-d3-4.spec.ts",
+      "title": "D34 sauvegarde ancienne, progression et position libre préservées",
+      "status": "passed",
+      "duration": 12388
+    },
+    {
+      "key": "mobile:phase-d3.spec.ts:D.3 : terrains, jour, crépuscule, nuit et façades",
+      "project": "mobile",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : terrains, jour, crépuscule, nuit et façades",
+      "status": "passed",
+      "duration": 26775
+    },
+    {
+      "key": "mobile:phase-d3.spec.ts:D.3 : vue globale du terrain",
+      "project": "mobile",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : vue globale du terrain",
+      "status": "skipped",
+      "duration": 159
+    },
+    {
+      "key": "mobile:phase-d3.spec.ts:D.3 : qualité, réduction des mouvements et reprise",
+      "project": "mobile",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : qualité, réduction des mouvements et reprise",
+      "status": "passed",
+      "duration": 11952
+    },
+    {
+      "key": "mobile:phase-d3.spec.ts:D.3 : démonstration réelle des effets animés",
+      "project": "mobile",
+      "file": "phase-d3.spec.ts",
+      "title": "D.3 : démonstration réelle des effets animés",
+      "status": "passed",
+      "duration": 19476
+    },
+    {
+      "key": "desktop:correction-d1.spec.ts:D.1 : dialogue compact et monde lisible",
+      "project": "desktop",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : dialogue compact et monde lisible",
+      "status": "passed",
+      "duration": 5454
+    },
+    {
+      "key": "desktop:correction-d1.spec.ts:D.1 : petit téléphone 320 px",
+      "project": "desktop",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : petit téléphone 320 px",
+      "status": "skipped",
+      "duration": 173
+    },
+    {
+      "key": "desktop:correction-d1.spec.ts:D.1 : vue d'ensemble des façades et décors",
+      "project": "desktop",
+      "file": "correction-d1.spec.ts",
+      "title": "D.1 : vue d'ensemble des façades et décors",
+      "status": "passed",
+      "duration": 5033
+    },
+    {
+      "key": "desktop:game.spec.ts:parcours complet, sauvegarde et journal",
+      "project": "desktop",
+      "file": "game.spec.ts",
+      "title": "parcours complet, sauvegarde et journal",
+      "status": "passed",
+      "duration": 24958
+    },
+    {
+      "key": "desktop:game.spec.ts:joystick tactile et absence de débordement",
+      "project": "desktop",
+      "file": "game.spec.ts",
+      "title": "joystick tactile et absence de débordement",
+      "status": "passed",
+      "duration": 4577
+    },
+    {
+      "key": "desktop:graphics.spec.ts:village graphique, dialogue et affichage responsive",
+      "project": "desktop",
+      "file": "graphics.spec.ts",
+      "title": "village graphique, dialogue et affichage responsive",
+      "status": "passed",
+      "duration": 5170
+    },
+    {
+      "key": "desktop:graphics.spec.ts:paramètres séparés de la progression et absence de sons non autorisés",
+      "project": "desktop",
+      "file": "graphics.spec.ts",
+      "title": "paramètres séparés de la progression et absence de sons non autorisés",
+      "status": "passed",
+      "duration": 8505
+    },
+    {
+      "key": "desktop:graphics.spec.ts:téléphone paysage et réduction des animations",
+      "project": "desktop",
+      "file": "graphics.spec.ts",
+      "title": "téléphone paysage et réduction des animations",
+      "status": "skipped",
+      "duration": 187
+    },
+    {
+      "key": "desktop:graphics.spec.ts:contrôle des 32 portraits sur fonds clair et sombre",
+      "project": "desktop",
+      "file": "graphics.spec.ts",
+      "title": "contrôle des 32 portraits sur fonds clair et sombre",
+      "status": "passed",
+      "duration": 660
+    },
+    {
+      "key": "desktop:graphics.spec.ts:chaque étoile ouvre la journée sélectionnée",
+      "project": "desktop",
+      "file": "graphics.spec.ts",
+      "title": "chaque étoile ouvre la journée sélectionnée",
+      "status": "passed",
+      "duration": 6456
+    },
+    {
+      "key": "desktop:phase-b.spec.ts:Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+      "project": "desktop",
+      "file": "phase-b.spec.ts",
+      "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+      "status": "passed",
+      "duration": 80990
+    },
+    {
+      "key": "desktop:phase-c.spec.ts:les 24 journées : activités, reprise, récompenses et scène finale",
+      "project": "desktop",
+      "file": "phase-c.spec.ts",
+      "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+      "status": "passed",
+      "duration": 124888
+    },
+    {
+      "key": "desktop:phase-c.spec.ts:calendrier daté fermé en novembre et éditeur fictif persistant",
+      "project": "desktop",
+      "file": "phase-c.spec.ts",
+      "title": "calendrier daté fermé en novembre et éditeur fictif persistant",
+      "status": "passed",
+      "duration": 7998
+    },
+    {
+      "key": "desktop:phase-d2-1.spec.ts:D.2.1 : promenade et place centrale",
+      "project": "desktop",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : promenade et place centrale",
+      "status": "passed",
+      "duration": 9518
+    },
+    {
+      "key": "desktop:phase-d2-1.spec.ts:D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+      "project": "desktop",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+      "status": "passed",
+      "duration": 20166
+    },
+    {
+      "key": "desktop:phase-d2-1.spec.ts:D.2.1 : les huit noms conservent leur identité dans les pièces",
+      "project": "desktop",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : les huit noms conservent leur identité dans les pièces",
+      "status": "passed",
+      "duration": 16827
+    },
+    {
+      "key": "desktop:phase-d2-1.spec.ts:D.2.1 : cadrage des quatre façades sur PC et mobile",
+      "project": "desktop",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 17332
+    },
+    {
+      "key": "desktop:phase-d2-1.spec.ts:D.2.1 : vue globale et abords des quatre bâtiments",
+      "project": "desktop",
+      "file": "phase-d2-1.spec.ts",
+      "title": "D.2.1 : vue globale et abords des quatre bâtiments",
+      "status": "passed",
+      "duration": 4882
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : promenade et place centrale",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : promenade et place centrale",
+      "status": "passed",
+      "duration": 9503
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : présentation des dix silhouettes",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : présentation des dix silhouettes",
+      "status": "passed",
+      "duration": 517
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+      "status": "passed",
+      "duration": 16719
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : les huit noms conservent leur identité dans les pièces",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : les huit noms conservent leur identité dans les pièces",
+      "status": "passed",
+      "duration": 15568
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : cadrage des quatre façades sur PC et mobile",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 17588
+    },
+    {
+      "key": "desktop:phase-d2-2.spec.ts:D.2.2 : vue globale et abords des quatre bâtiments",
+      "project": "desktop",
+      "file": "phase-d2-2.spec.ts",
+      "title": "D.2.2 : vue globale et abords des quatre bâtiments",
+      "status": "passed",
+      "duration": 4996
+    },
+    {
+      "key": "desktop:phase-d2.spec.ts:D.2 : promenade et place centrale",
+      "project": "desktop",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : promenade et place centrale",
+      "status": "passed",
+      "duration": 8974
+    },
+    {
+      "key": "desktop:phase-d2.spec.ts:D.2 : cadrage des quatre façades sur PC et mobile",
+      "project": "desktop",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : cadrage des quatre façades sur PC et mobile",
+      "status": "passed",
+      "duration": 17186
+    },
+    {
+      "key": "desktop:phase-d2.spec.ts:D.2 : vue globale et abords des quatre bâtiments",
+      "project": "desktop",
+      "file": "phase-d2.spec.ts",
+      "title": "D.2 : vue globale et abords des quatre bâtiments",
+      "status": "passed",
+      "duration": 5383
+    },
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : intérieurs, neige et sapin avant/après",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : intérieurs, neige et sapin avant/après",
+      "status": "passed",
+      "duration": 42942
+    },
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : collisions du mobilier et sorties des quatre pièces",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : collisions du mobilier et sorties des quatre pièces",
+      "status": "passed",
+      "duration": 59247
+    },
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : lumière intérieure, performances et réduction des mouvements",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : lumière intérieure, performances et réduction des mouvements",
+      "status": "passed",
+      "duration": 14722
+    },
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : petit ordinateur et tablette",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : petit ordinateur et tablette",
+      "status": "passed",
+      "duration": 27112
+    },
+    {
+      "key": "desktop:phase-d3-1.spec.ts:D.3.1 : contrôle des ressources sur fonds clair et sombre",
+      "project": "desktop",
+      "file": "phase-d3-1.spec.ts",
+      "title": "D.3.1 : contrôle des ressources sur fonds clair et sombre",
+      "status": "passed",
+      "duration": 613
+    }
+  ],
+  "note": "Union de trois lots disjoints : 20 scénarios PC, 52 mobile, 32 PC depuis le ZIP source extrait. Les essais historiques interrompus ne sont pas comptés."
+}
