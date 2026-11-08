@@ -300,7 +300,8 @@ test("D.3.1 : terrain blanc et conservation des matières D.3", async ({
     );
     expect(audit.regions).toBe(24);
     expect(audit.details).toBe(14);
-    expect(audit.earthFraction).toBeGreaterThan(0.09);
+    expect([audit.width, audit.height]).toEqual([1920, 1408]);
+    expect(audit.earthPixels).toBeGreaterThan(0.09 * 1024 * 768);
     expect(audit.opaqueFraction).toBe(1);
   }
 });

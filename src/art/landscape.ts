@@ -2,7 +2,12 @@ import type Phaser from "phaser";
 import { villageMap as map, anchors } from "./village34";
 import { courts, lanes, decorations } from "./village-design";
 import { texturedSnow, snowAccents } from "./snow-detail";
-import { drawTerrain, drawTerrainDetails, auditTerrain } from "./terrain";
+import {
+  drawTerrain,
+  drawTerrainDetails,
+  auditTerrain,
+  drawResidentialSoil,
+} from "./terrain";
 import { finishWhiteSnow } from "./snow-finishing";
 function macro(ctx: CanvasRenderingContext2D, image: CanvasImageSource) {
   // Mirrored macro-chunks share the same edge texels. No random tile permutation or seam every 16 px.
@@ -71,6 +76,7 @@ export function landscape(
     texturedSnow(scene, ctx);
     finishWhiteSnow(scene, ctx);
     drawTerrain(scene, ctx);
+    drawResidentialSoil(scene, ctx);
     for (const material of ["dirt", "stone"] as const) {
       ctx.globalAlpha = 0.07;
       for (let rim = 3; rim > 0; rim--)

@@ -218,6 +218,7 @@ const positions34: number[][] = [
   [1180, 760],
   [615, 760],
   [1700, 660],
+  [1770, 480],
 ];
 export const terrainRegions34 = terrainRegions.map((p, i) => ({
   ...p,

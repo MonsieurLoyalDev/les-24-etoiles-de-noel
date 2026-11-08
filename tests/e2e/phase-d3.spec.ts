@@ -62,7 +62,8 @@ test("D.3 : terrains, jour, crépuscule, nuit et façades", async ({
     const terrain = JSON.parse(
       (await page.locator("canvas").getAttribute("data-terrain"))!,
     );
-    expect(terrain.earthFraction).toBeGreaterThan(0.035);
+    expect([terrain.width, terrain.height]).toEqual([1920, 1408]);
+    expect(terrain.earthPixels).toBeGreaterThan(0.035 * 1024 * 768);
     expect(terrain.snowFraction).toBeGreaterThan(0.45);
     expect(terrain.opaqueFraction).toBe(1);
     const assets = JSON.parse(

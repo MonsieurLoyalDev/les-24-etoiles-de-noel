@@ -1,3 +1,4 @@
+import { plan } from "./village34";
 import type Phaser from "phaser";
 import { isolateSprite, alphaBounds } from "./pixels";
 import {
@@ -98,7 +99,10 @@ export function auditTerrain(
   scene: Phaser.Scene,
   ctx: CanvasRenderingContext2D,
 ) {
-  const d = ctx.getImageData(0, 0, 1024, 768).data;
+  const width = ctx.canvas.width,
+    height = ctx.canvas.height,
+    area = width * height,
+    d = ctx.getImageData(0, 0, width, height).data;
   let snow = 0,
     earth = 0,
     opaque = 0;
@@ -109,10 +113,33 @@ export function auditTerrain(
       earth++;
   }
   scene.game.canvas.dataset.terrain = JSON.stringify({
-    snowFraction: snow / (1024 * 768),
-    earthFraction: earth / (1024 * 768),
-    opaqueFraction: opaque / (1024 * 768),
+    width,
+    height,
+    residentialRegions: plan.houses.length,
+    scope: "whole-world-ground-before-roads",
+    earthPixels: earth,
+    snowPixels: snow,
+    snowFraction: snow / area,
+    earthFraction: earth / area,
+    opaqueFraction: opaque / area,
     regions: terrainRegions.length,
     details: snowBanks.length,
   });
+}
+
+/** Same residential soil stamps as D33, now part of the measured ground layer. */
+export function drawResidentialSoil(
+  scene: Phaser.Scene,
+  ctx: CanvasRenderingContext2D,
+) {
+  for (const [i, h] of plan.houses.entries()) {
+    const image = scene.textures
+      .get("ground-d3-" + (i % 2 ? "earth-a" : "earth-b"))
+      .getSourceImage() as HTMLCanvasElement;
+    ctx.save();
+    ctx.translate(h.x - 20, h.y - 25);
+    if (i % 2 === 0) ctx.scale(-1, 1);
+    ctx.drawImage(image, -(h.w + 80) / 2, -55, h.w + 80, 110);
+    ctx.restore();
+  }
 }

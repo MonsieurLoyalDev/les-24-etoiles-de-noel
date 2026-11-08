@@ -134,12 +134,7 @@ export function preloadVillage33(scene: Phaser.Scene) {
     scene.load.image("urban-" + k, `/assets/interiors-d31/${k}.png`);
 }
 export function urbanGround(scene: Phaser.Scene) {
-  for (const [i, h] of homes.entries()) {
-    const patch = scene.add
-      .image(h.x - 20, h.y - 25, "ground-d3-" + (i % 2 ? "earth-a" : "earth-b"))
-      .setDisplaySize(h.width + 80, 110)
-      .setDepth(-101);
-    patch.setFlipX(i % 2 === 0);
+  for (const h of homes) {
     scene.add
       .image(h.x + h.width / 2, h.y - 12, "ground-d3-grass-rocks")
       .setDisplaySize(42, 29)
