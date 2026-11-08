@@ -1,0 +1,2326 @@
+{
+  "placed": [
+    {
+      "key": "banc_plaid",
+      "texture": "clean-banc_plaid",
+      "quarter": "BC1",
+      "box": {
+        "x": 368.5,
+        "y": 357.3050847457627,
+        "w": 43,
+        "h": 27.694915254237287
+      },
+      "x": 390,
+      "y": 385,
+      "width": 43,
+      "height": 27.694915254237287
+    },
+    {
+      "key": "lampadaire",
+      "texture": "clean-lampadaire",
+      "quarter": "LC1",
+      "box": {
+        "x": 457.5,
+        "y": 370.4146341463415,
+        "w": 19,
+        "h": 49.58536585365854
+      },
+      "x": 467,
+      "y": 420,
+      "width": 19,
+      "height": 49.58536585365854
+    },
+    {
+      "key": "banc_plaid",
+      "texture": "clean-banc_plaid",
+      "quarter": "BC3",
+      "box": {
+        "x": 388.5,
+        "y": 897.3050847457628,
+        "w": 43,
+        "h": 27.694915254237287
+      },
+      "x": 410,
+      "y": 925,
+      "width": 43,
+      "height": 27.694915254237287
+    },
+    {
+      "key": "banc_plaid",
+      "texture": "clean-banc_plaid",
+      "quarter": "BC4",
+      "box": {
+        "x": 1516.5,
+        "y": 945.3050847457628,
+        "w": 43,
+        "h": 27.694915254237287
+      },
+      "x": 1538,
+      "y": 973,
+      "width": 43,
+      "height": 27.694915254237287
+    },
+    {
+      "key": "banc_plaid",
+      "texture": "clean-banc_plaid",
+      "quarter": "BC0",
+      "box": {
+        "x": 983.5,
+        "y": 842.3050847457628,
+        "w": 43,
+        "h": 27.694915254237287
+      },
+      "x": 1005,
+      "y": 870,
+      "width": 43,
+      "height": 27.694915254237287
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q2",
+      "box": {
+        "x": 1215,
+        "y": 308.85185185185185,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1230,
+      "y": 327,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "logs",
+      "texture": "logs",
+      "quarter": "Q2",
+      "box": {
+        "x": 1673.5,
+        "y": 343,
+        "w": 29,
+        "h": 29
+      },
+      "x": 1688,
+      "y": 372,
+      "width": 29,
+      "height": 29
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q2",
+      "box": {
+        "x": 1476,
+        "y": 353.85185185185185,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1491,
+      "y": 372,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q2",
+      "box": {
+        "x": 1684.5,
+        "y": 318.4765625,
+        "w": 25,
+        "h": 11.5234375
+      },
+      "x": 1697,
+      "y": 330,
+      "width": 25,
+      "height": 11.5234375
+    },
+    {
+      "key": "logs",
+      "texture": "logs",
+      "quarter": "Q2",
+      "box": {
+        "x": 1683.5,
+        "y": 588,
+        "w": 29,
+        "h": 29
+      },
+      "x": 1698,
+      "y": 617,
+      "width": 29,
+      "height": 29
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q2",
+      "box": {
+        "x": 1446,
+        "y": 598.8518518518518,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1461,
+      "y": 617,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q2",
+      "box": {
+        "x": 1694.5,
+        "y": 555.46875,
+        "w": 25,
+        "h": 19.53125
+      },
+      "x": 1707,
+      "y": 575,
+      "width": 25,
+      "height": 19.53125
+    },
+    {
+      "key": "jardiniere",
+      "texture": "clean-jardiniere",
+      "quarter": "Q1",
+      "box": {
+        "x": 177.75,
+        "y": 393.72463768115944,
+        "w": 28,
+        "h": 19.27536231884058
+      },
+      "x": 191.75,
+      "y": 413,
+      "width": 28,
+      "height": 19.27536231884058
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "Q1",
+      "box": {
+        "x": 165.25,
+        "y": 349.609375,
+        "w": 29,
+        "h": 20.390625
+      },
+      "x": 179.75,
+      "y": 370,
+      "width": 29,
+      "height": 20.390625
+    },
+    {
+      "key": "lampadaire",
+      "texture": "clean-lampadaire",
+      "quarter": "Q1",
+      "box": {
+        "x": 324.75,
+        "y": 366.4146341463415,
+        "w": 19,
+        "h": 49.58536585365854
+      },
+      "x": 334.25,
+      "y": 416,
+      "width": 19,
+      "height": 49.58536585365854
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "Q3",
+      "box": {
+        "x": 192.25,
+        "y": 851.09375,
+        "w": 34,
+        "h": 23.90625
+      },
+      "x": 209.25,
+      "y": 875,
+      "width": 34,
+      "height": 23.90625
+    },
+    {
+      "key": "jardiniere",
+      "texture": "clean-jardiniere",
+      "quarter": "Q3",
+      "box": {
+        "x": 373.25,
+        "y": 854.7898550724638,
+        "w": 25,
+        "h": 17.21014492753623
+      },
+      "x": 385.75,
+      "y": 872,
+      "width": 25,
+      "height": 17.21014492753623
+    },
+    {
+      "key": "logs",
+      "texture": "logs",
+      "quarter": "Q4",
+      "box": {
+        "x": 1403,
+        "y": 826,
+        "w": 34,
+        "h": 34
+      },
+      "x": 1420,
+      "y": 860,
+      "width": 34,
+      "height": 34
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q4",
+      "box": {
+        "x": 1554,
+        "y": 843.8518518518518,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1569,
+      "y": 862,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "gift",
+      "texture": "gift",
+      "quarter": "Q4",
+      "box": {
+        "x": 1404,
+        "y": 794,
+        "w": 22,
+        "h": 22
+      },
+      "x": 1415,
+      "y": 816,
+      "width": 22,
+      "height": 22
+    },
+    {
+      "key": "logs",
+      "texture": "logs",
+      "quarter": "Q4",
+      "box": {
+        "x": 1317.75,
+        "y": 1141,
+        "w": 34,
+        "h": 34
+      },
+      "x": 1334.75,
+      "y": 1175,
+      "width": 34,
+      "height": 34
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q4",
+      "box": {
+        "x": 1549.25,
+        "y": 1158.851851851852,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1564.25,
+      "y": 1177,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "gift",
+      "texture": "gift",
+      "quarter": "Q4",
+      "box": {
+        "x": 1318.75,
+        "y": 1109,
+        "w": 22,
+        "h": 22
+      },
+      "x": 1329.75,
+      "y": 1131,
+      "width": 22,
+      "height": 22
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Q4",
+      "box": {
+        "x": 1847.75,
+        "y": 1188.851851851852,
+        "w": 30,
+        "h": 18.14814814814815
+      },
+      "x": 1862.75,
+      "y": 1207,
+      "width": 30,
+      "height": 18.14814814814815
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "Q3",
+      "box": {
+        "x": 369.25,
+        "y": 794.640625,
+        "w": 34,
+        "h": 10.359375
+      },
+      "x": 386.25,
+      "y": 805,
+      "width": 34,
+      "height": 10.359375
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "Q3",
+      "box": {
+        "x": 161,
+        "y": 1134.640625,
+        "w": 34,
+        "h": 10.359375
+      },
+      "x": 178,
+      "y": 1145,
+      "width": 34,
+      "height": 10.359375
+    },
+    {
+      "key": "jardiniere",
+      "texture": "clean-jardiniere",
+      "quarter": "Q3",
+      "box": {
+        "x": 684.75,
+        "y": 1019.7898550724638,
+        "w": 25,
+        "h": 17.21014492753623
+      },
+      "x": 697.25,
+      "y": 1037,
+      "width": 25,
+      "height": 17.21014492753623
+    },
+    {
+      "key": "caisse_fleurs",
+      "texture": "clean-caisse_fleurs",
+      "quarter": "Centre",
+      "box": {
+        "x": 1126,
+        "y": 598.0617283950618,
+        "w": 28,
+        "h": 16.938271604938272
+      },
+      "x": 1140,
+      "y": 615,
+      "width": 28,
+      "height": 16.938271604938272
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Centre",
+      "box": {
+        "x": 1341,
+        "y": 933.125,
+        "w": 28,
+        "h": 21.875
+      },
+      "x": 1355,
+      "y": 955,
+      "width": 28,
+      "height": 21.875
+    },
+    {
+      "key": "lampadaire",
+      "texture": "clean-lampadaire",
+      "quarter": "Centre",
+      "box": {
+        "x": 888.5,
+        "y": 864.9756097560976,
+        "w": 23,
+        "h": 60.02439024390244
+      },
+      "x": 900,
+      "y": 925,
+      "width": 23,
+      "height": 60.02439024390244
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J1",
+      "box": {
+        "x": 241.5,
+        "y": 592.8125,
+        "w": 29,
+        "h": 27.1875
+      },
+      "x": 256,
+      "y": 620,
+      "width": 29,
+      "height": 27.1875
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "J2",
+      "box": {
+        "x": 1763.5,
+        "y": 467.34375,
+        "w": 29,
+        "h": 22.65625
+      },
+      "x": 1778,
+      "y": 490,
+      "width": 29,
+      "height": 22.65625
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "J2",
+      "box": {
+        "x": 1766.5,
+        "y": 516.6328125,
+        "w": 29,
+        "h": 13.3671875
+      },
+      "x": 1781,
+      "y": 530,
+      "width": 29,
+      "height": 13.3671875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 404,
+        "y": 1143.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 416,
+      "y": 1160,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J3",
+      "box": {
+        "x": 474,
+        "y": 1137.5,
+        "w": 24,
+        "h": 22.5
+      },
+      "x": 486,
+      "y": 1160,
+      "width": 24,
+      "height": 22.5
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J3",
+      "box": {
+        "x": 404,
+        "y": 1167.5,
+        "w": 24,
+        "h": 22.5
+      },
+      "x": 416,
+      "y": 1190,
+      "width": 24,
+      "height": 22.5
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "J3",
+      "box": {
+        "x": 439,
+        "y": 1182.6875,
+        "w": 24,
+        "h": 7.3125
+      },
+      "x": 451,
+      "y": 1190,
+      "width": 24,
+      "height": 7.3125
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J3",
+      "box": {
+        "x": 474,
+        "y": 1167.5,
+        "w": 24,
+        "h": 22.5
+      },
+      "x": 486,
+      "y": 1190,
+      "width": 24,
+      "height": 22.5
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 509,
+        "y": 1173.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 521,
+      "y": 1190,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "J3",
+      "box": {
+        "x": 544,
+        "y": 1182.6875,
+        "w": 24,
+        "h": 7.3125
+      },
+      "x": 556,
+      "y": 1190,
+      "width": 24,
+      "height": 7.3125
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 579,
+        "y": 1173.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 591,
+      "y": 1190,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J3",
+      "box": {
+        "x": 404,
+        "y": 1197.5,
+        "w": 24,
+        "h": 22.5
+      },
+      "x": 416,
+      "y": 1220,
+      "width": 24,
+      "height": 22.5
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 439,
+        "y": 1203.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 451,
+      "y": 1220,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_snowy",
+      "quarter": "J3",
+      "box": {
+        "x": 474,
+        "y": 1197.5,
+        "w": 24,
+        "h": 22.5
+      },
+      "x": 486,
+      "y": 1220,
+      "width": 24,
+      "height": 22.5
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 509,
+        "y": 1203.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 521,
+      "y": 1220,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "J3",
+      "box": {
+        "x": 544,
+        "y": 1212.6875,
+        "w": 24,
+        "h": 7.3125
+      },
+      "x": 556,
+      "y": 1220,
+      "width": 24,
+      "height": 7.3125
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-vegetation_bush_snow",
+      "quarter": "J3",
+      "box": {
+        "x": 579,
+        "y": 1203.125,
+        "w": 24,
+        "h": 16.875
+      },
+      "x": 591,
+      "y": 1220,
+      "width": 24,
+      "height": 16.875
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 89.66884013770444,
+        "y": 78.45125184749885,
+        "w": 52,
+        "h": 32.90625
+      },
+      "x": 115.66884013770444,
+      "y": 111.35750184749885,
+      "width": 52,
+      "height": 32.90625
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 173.414233431765,
+        "y": 31.666393604803915,
+        "w": 56,
+        "h": 75.85185185185185
+      },
+      "x": 201.414233431765,
+      "y": 107.51824545665576,
+      "width": 56,
+      "height": 75.85185185185185
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F1",
+      "box": {
+        "x": 241.91883399072003,
+        "y": 33.29917079152136,
+        "w": 60,
+        "h": 93.65853658536585
+      },
+      "x": 271.91883399072003,
+      "y": 126.95770737688721,
+      "width": 60,
+      "height": 93.65853658536585
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_slim",
+      "quarter": "F1",
+      "box": {
+        "x": 366.47318982390254,
+        "y": 15.411847179367356,
+        "w": 43,
+        "h": 94.08547008547009
+      },
+      "x": 387.97318982390254,
+      "y": 109.49731726483745,
+      "width": 43,
+      "height": 94.08547008547009
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F1",
+      "box": {
+        "x": 439.57108392991,
+        "y": 73.91928792724954,
+        "w": 47,
+        "h": 53.00440528634361
+      },
+      "x": 463.07108392991,
+      "y": 126.92369321359315,
+      "width": 47,
+      "height": 53.00440528634361
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 525.2819371807348,
+        "y": 74.97727295726668,
+        "w": 51,
+        "h": 32.2734375
+      },
+      "x": 550.7819371807348,
+      "y": 107.25071045726668,
+      "width": 51,
+      "height": 32.2734375
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 606.9939845996971,
+        "y": 76.88416645229827,
+        "w": 55,
+        "h": 34.8046875
+      },
+      "x": 634.4939845996971,
+      "y": 111.68885395229827,
+      "width": 55,
+      "height": 34.8046875
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F1",
+      "box": {
+        "x": 672.323571651082,
+        "y": 59.8918466724505,
+        "w": 59,
+        "h": 66.53744493392071
+      },
+      "x": 701.823571651082,
+      "y": 126.42929160637121,
+      "width": 59,
+      "height": 66.53744493392071
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 798.188763767488,
+        "y": 57.119348890012915,
+        "w": 42,
+        "h": 56.888888888888886
+      },
+      "x": 819.188763767488,
+      "y": 114.0082377789018,
+      "width": 42,
+      "height": 56.888888888888886
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_slim",
+      "quarter": "F1",
+      "box": {
+        "x": 874.3865037399847,
+        "y": 24.844019317640942,
+        "w": 46,
+        "h": 100.64957264957265
+      },
+      "x": 897.3865037399847,
+      "y": 125.49359196721359,
+      "width": 46,
+      "height": 100.64957264957265
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F1",
+      "box": {
+        "x": 960.7490093000653,
+        "y": 47.94153682829459,
+        "w": 50,
+        "h": 56.38766519823788
+      },
+      "x": 985.7490093000653,
+      "y": 104.32920202653247,
+      "width": 50,
+      "height": 56.38766519823788
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F1",
+      "box": {
+        "x": 1039.9754952864014,
+        "y": 32.07323175329448,
+        "w": 54,
+        "h": 84.29268292682927
+      },
+      "x": 1066.9754952864014,
+      "y": 116.36591468012375,
+      "width": 54,
+      "height": 84.29268292682927
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F1",
+      "box": {
+        "x": 1102.3103988203445,
+        "y": 58.74303110031968,
+        "w": 58,
+        "h": 65.40969162995594
+      },
+      "x": 1131.3103988203445,
+      "y": 124.15272273027563,
+      "width": 58,
+      "height": 65.40969162995594
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 1309.573111645147,
+        "y": 93.98189389167717,
+        "w": 45,
+        "h": 28.4765625
+      },
+      "x": 1332.073111645147,
+      "y": 122.45845639167717,
+      "width": 45,
+      "height": 28.4765625
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 1395.9554944447864,
+        "y": 36.66946187922957,
+        "w": 49,
+        "h": 66.37037037037037
+      },
+      "x": 1420.4554944447864,
+      "y": 103.03983224959994,
+      "width": 49,
+      "height": 66.37037037037037
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 1472.340173813083,
+        "y": 87.2949911241456,
+        "w": 53,
+        "h": 33.5390625
+      },
+      "x": 1498.840173813083,
+      "y": 120.8340536241456,
+      "width": 53,
+      "height": 33.5390625
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 98.22312854408247,
+        "y": 143.71687684749887,
+        "w": 50,
+        "h": 31.640625
+      },
+      "x": 123.22312854408247,
+      "y": 175.35750184749887,
+      "width": 50,
+      "height": 31.640625
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F1",
+      "box": {
+        "x": 728.6259922592716,
+        "y": 131.0070883718822,
+        "w": 61,
+        "h": 38.6015625
+      },
+      "x": 759.1259922592716,
+      "y": 169.6086508718822,
+      "width": 61,
+      "height": 38.6015625
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 1682.574859426797,
+        "y": 101.43866237434254,
+        "w": 63,
+        "h": 85.33333333333333
+      },
+      "x": 1714.074859426797,
+      "y": 186.77199570767587,
+      "width": 63,
+      "height": 85.33333333333333
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_slim",
+      "quarter": "F1",
+      "box": {
+        "x": 1761.8340666825682,
+        "y": 90.38508598269111,
+        "w": 42,
+        "h": 91.8974358974359
+      },
+      "x": 1782.8340666825682,
+      "y": 182.282521880127,
+      "width": 42,
+      "height": 91.8974358974359
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 799.4818590639948,
+        "y": 156.67490444556847,
+        "w": 63,
+        "h": 85.33333333333333
+      },
+      "x": 830.9818590639948,
+      "y": 242.00823777890182,
+      "width": 63,
+      "height": 85.33333333333333
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 870.4470456718269,
+        "y": 196.60470307832472,
+        "w": 42,
+        "h": 56.888888888888886
+      },
+      "x": 891.4470456718269,
+      "y": 253.4935919672136,
+      "width": 42,
+      "height": 56.888888888888886
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F1",
+      "box": {
+        "x": 945.3570438928718,
+        "y": 170.02232371965417,
+        "w": 46,
+        "h": 62.3068783068783
+      },
+      "x": 968.3570438928718,
+      "y": 232.32920202653247,
+      "width": 46,
+      "height": 62.3068783068783
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F2",
+      "box": {
+        "x": 32.580009612843284,
+        "y": 212.78166292150985,
+        "w": 47,
+        "h": 73.36585365853658
+      },
+      "x": 56.080009612843284,
+      "y": 286.14751658004644,
+      "width": 47,
+      "height": 73.36585365853658
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F2",
+      "box": {
+        "x": 113.98527080130748,
+        "y": 262.7418175350901,
+        "w": 49,
+        "h": 66.37037037037037
+      },
+      "x": 138.48527080130748,
+      "y": 329.1121879054605,
+      "width": 49,
+      "height": 66.37037037037037
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F2",
+      "box": {
+        "x": 27.769381397704926,
+        "y": 355.9041303366602,
+        "w": 43,
+        "h": 58.24338624338624
+      },
+      "x": 49.269381397704926,
+      "y": 414.14751658004644,
+      "width": 43,
+      "height": 58.24338624338624
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F2",
+      "box": {
+        "x": 29.44821454484204,
+        "y": 469.9713051263019,
+        "w": 64,
+        "h": 72.1762114537445
+      },
+      "x": 61.44821454484204,
+      "y": 542.1475165800464,
+      "width": 64,
+      "height": 72.1762114537445
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_slim",
+      "quarter": "F2",
+      "box": {
+        "x": 100.06669939098852,
+        "y": 427.0267178199904,
+        "w": 43,
+        "h": 94.08547008547009
+      },
+      "x": 121.56669939098852,
+      "y": 521.1121879054605,
+      "width": 43,
+      "height": 94.08547008547009
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F2",
+      "box": {
+        "x": 28.397450247277035,
+        "y": 566.9131415800464,
+        "w": 62,
+        "h": 39.234375
+      },
+      "x": 59.397450247277035,
+      "y": 606.1475165800464,
+      "width": 62,
+      "height": 39.234375
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F2",
+      "box": {
+        "x": 47.914640848549254,
+        "y": 632.1787665800464,
+        "w": 60,
+        "h": 37.96875
+      },
+      "x": 77.91464084854925,
+      "y": 670.1475165800464,
+      "width": 60,
+      "height": 37.96875
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F2",
+      "box": {
+        "x": 50.79095721434139,
+        "y": 762.7100165800464,
+        "w": 56,
+        "h": 35.4375
+      },
+      "x": 78.79095721434139,
+      "y": 798.1475165800464,
+      "width": 56,
+      "height": 35.4375
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F2",
+      "box": {
+        "x": 37.019304686378675,
+        "y": 844.9767848727294,
+        "w": 52,
+        "h": 81.17073170731707
+      },
+      "x": 63.019304686378675,
+      "y": 926.1475165800464,
+      "width": 52,
+      "height": 81.17073170731707
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F2",
+      "box": {
+        "x": 104.15012962034626,
+        "y": 908.2135094913635,
+        "w": 54,
+        "h": 60.89867841409691
+      },
+      "x": 131.15012962034626,
+      "y": 969.1121879054605,
+      "width": 54,
+      "height": 60.89867841409691
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F2",
+      "box": {
+        "x": 25.638679369702103,
+        "y": 979.2206873117537,
+        "w": 48,
+        "h": 74.92682926829268
+      },
+      "x": 49.6386793697021,
+      "y": 1054.1475165800464,
+      "width": 48,
+      "height": 74.92682926829268
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F2",
+      "box": {
+        "x": 32.801711613956314,
+        "y": 1113.464589750778,
+        "w": 44,
+        "h": 68.6829268292683
+      },
+      "x": 54.801711613956314,
+      "y": 1182.1475165800464,
+      "width": 44,
+      "height": 68.6829268292683
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "F2",
+      "box": {
+        "x": 45.748779945092664,
+        "y": 1198.7818778135265,
+        "w": 42,
+        "h": 47.36563876651982
+      },
+      "x": 66.74877994509266,
+      "y": 1246.1475165800464,
+      "width": 42,
+      "height": 47.36563876651982
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "F3",
+      "box": {
+        "x": 1844.55719520669,
+        "y": 451.0472368198756,
+        "w": 60,
+        "h": 37.96875
+      },
+      "x": 1874.55719520669,
+      "y": 489.0159868198756,
+      "width": 60,
+      "height": 37.96875
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-vegetation_pine_large",
+      "quarter": "F3",
+      "box": {
+        "x": 1844.2530967536206,
+        "y": 596.7233038930464,
+        "w": 54,
+        "h": 84.29268292682927
+      },
+      "x": 1871.2530967536206,
+      "y": 681.0159868198756,
+      "width": 54,
+      "height": 84.29268292682927
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_young",
+      "quarter": "F3",
+      "box": {
+        "x": 1847.0344901088517,
+        "y": 741.2911190950078,
+        "w": 50,
+        "h": 67.72486772486772
+      },
+      "x": 1872.0344901088517,
+      "y": 809.0159868198756,
+      "width": 50,
+      "height": 67.72486772486772
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q1",
+      "box": {
+        "x": 325.25,
+        "y": 339.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 338.25,
+      "y": 360,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q1",
+      "box": {
+        "x": 163.75,
+        "y": 328.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 176.75,
+      "y": 340,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q1",
+      "box": {
+        "x": 682.75,
+        "y": 379.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 695.75,
+      "y": 400,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q1",
+      "box": {
+        "x": 518.75,
+        "y": 239.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 531.75,
+      "y": 260,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "Q1",
+      "box": {
+        "x": 536.75,
+        "y": 266.296875,
+        "w": 22,
+        "h": 6.703125
+      },
+      "x": 547.75,
+      "y": 273,
+      "width": 22,
+      "height": 6.703125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q1",
+      "box": {
+        "x": 270.25,
+        "y": 228.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 283.25,
+      "y": 240,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q2",
+      "box": {
+        "x": 1202,
+        "y": 268.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 1215,
+      "y": 280,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q2",
+      "box": {
+        "x": 1681,
+        "y": 303.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 1694,
+      "y": 315,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "texture": "refined-bush_low",
+      "quarter": "Q2",
+      "box": {
+        "x": 1704,
+        "y": 341.296875,
+        "w": 22,
+        "h": 6.703125
+      },
+      "x": 1715,
+      "y": 348,
+      "width": 22,
+      "height": 6.703125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q2",
+      "box": {
+        "x": 1433,
+        "y": 549.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 1446,
+      "y": 570,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q3",
+      "box": {
+        "x": 372.25,
+        "y": 762.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 385.25,
+      "y": 783,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q3",
+      "box": {
+        "x": 164,
+        "y": 1102.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 177,
+      "y": 1123,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q4",
+      "box": {
+        "x": 1572,
+        "y": 798.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 1585,
+      "y": 810,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q4",
+      "box": {
+        "x": 1564.25,
+        "y": 864.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 1577.25,
+      "y": 885,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q4",
+      "box": {
+        "x": 1824.75,
+        "y": 849.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 1837.75,
+      "y": 870,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-bush_berries_low",
+      "quarter": "Q4",
+      "box": {
+        "x": 1567.25,
+        "y": 1113.015625,
+        "w": 26,
+        "h": 11.984375
+      },
+      "x": 1580.25,
+      "y": 1125,
+      "width": 26,
+      "height": 11.984375
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "texture": "refined-vegetation_bush_berries",
+      "quarter": "Q4",
+      "box": {
+        "x": 1865.75,
+        "y": 1134.6875,
+        "w": 26,
+        "h": 20.3125
+      },
+      "x": 1878.75,
+      "y": 1155,
+      "width": 26,
+      "height": 20.3125
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "lisiere",
+      "box": {
+        "x": 168,
+        "y": 607.8237885462555,
+        "w": 64,
+        "h": 72.1762114537445
+      },
+      "x": 200,
+      "y": 680,
+      "width": 64,
+      "height": 72.1762114537445
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_windswept",
+      "quarter": "lisiere",
+      "box": {
+        "x": 620,
+        "y": 192.33480176211452,
+        "w": 60,
+        "h": 67.66519823788546
+      },
+      "x": 650,
+      "y": 260,
+      "width": 60,
+      "height": 67.66519823788546
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "lisiere",
+      "box": {
+        "x": 659,
+        "y": 1220.765625,
+        "w": 62,
+        "h": 39.234375
+      },
+      "x": 690,
+      "y": 1260,
+      "width": 62,
+      "height": 39.234375
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "lisiere",
+      "box": {
+        "x": 328,
+        "y": 1269.5,
+        "w": 64,
+        "h": 40.5
+      },
+      "x": 360,
+      "y": 1310,
+      "width": 64,
+      "height": 40.5
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_slim",
+      "quarter": "lisiere",
+      "box": {
+        "x": 1071.5,
+        "y": 1075.2820512820513,
+        "w": 57,
+        "h": 124.71794871794872
+      },
+      "x": 1100,
+      "y": 1200,
+      "width": 57,
+      "height": 124.71794871794872
+    },
+    {
+      "key": "vegetation_pine_large",
+      "texture": "refined-fir_broad",
+      "quarter": "lisiere",
+      "box": {
+        "x": 1197.5,
+        "y": 1258.8671875,
+        "w": 65,
+        "h": 41.1328125
+      },
+      "x": 1230,
+      "y": 1300,
+      "width": 65,
+      "height": 41.1328125
+    }
+  ],
+  "rejected": 168,
+  "collisions": [
+    {
+      "x": 698.2,
+      "y": 761,
+      "w": 33.599999999999994,
+      "h": 14
+    },
+    {
+      "x": 1163.2,
+      "y": 721,
+      "w": 33.599999999999994,
+      "h": 14
+    },
+    {
+      "x": 378.39,
+      "y": 379,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 461.87,
+      "y": 414,
+      "w": 10.260000000000002,
+      "h": 7
+    },
+    {
+      "x": 398.39,
+      "y": 919,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 1526.39,
+      "y": 967,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 993.39,
+      "y": 864,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 1221.9,
+      "y": 321,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 1680.17,
+      "y": 366,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 1482.9,
+      "y": 366,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 1690.25,
+      "y": 324,
+      "w": 13.5,
+      "h": 7
+    },
+    {
+      "x": 1690.17,
+      "y": 611,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 1452.9,
+      "y": 611,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 1700.25,
+      "y": 569,
+      "w": 13.5,
+      "h": 7
+    },
+    {
+      "x": 184.19,
+      "y": 407,
+      "w": 15.120000000000001,
+      "h": 7
+    },
+    {
+      "x": 171.92,
+      "y": 364,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 329.12,
+      "y": 410,
+      "w": 10.260000000000002,
+      "h": 7
+    },
+    {
+      "x": 200.07,
+      "y": 869,
+      "w": 18.36,
+      "h": 7
+    },
+    {
+      "x": 379,
+      "y": 866,
+      "w": 13.5,
+      "h": 7
+    },
+    {
+      "x": 1410.82,
+      "y": 854,
+      "w": 18.36,
+      "h": 7
+    },
+    {
+      "x": 1560.9,
+      "y": 856,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 1409.06,
+      "y": 810,
+      "w": 11.88,
+      "h": 7
+    },
+    {
+      "x": 1325.57,
+      "y": 1169,
+      "w": 18.36,
+      "h": 7
+    },
+    {
+      "x": 1556.15,
+      "y": 1171,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 1323.81,
+      "y": 1125,
+      "w": 11.88,
+      "h": 7
+    },
+    {
+      "x": 1854.65,
+      "y": 1201,
+      "w": 16.200000000000003,
+      "h": 7
+    },
+    {
+      "x": 377.07,
+      "y": 799,
+      "w": 18.36,
+      "h": 7
+    },
+    {
+      "x": 168.82,
+      "y": 1139,
+      "w": 18.36,
+      "h": 7
+    },
+    {
+      "x": 690.5,
+      "y": 1031,
+      "w": 13.5,
+      "h": 7
+    },
+    {
+      "x": 1132.44,
+      "y": 609,
+      "w": 15.120000000000001,
+      "h": 7
+    },
+    {
+      "x": 1347.44,
+      "y": 949,
+      "w": 15.120000000000001,
+      "h": 7
+    },
+    {
+      "x": 893.79,
+      "y": 919,
+      "w": 12.420000000000002,
+      "h": 7
+    },
+    {
+      "x": 248.17,
+      "y": 614,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 1770.17,
+      "y": 484,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 1773.17,
+      "y": 524,
+      "w": 15.66,
+      "h": 7
+    },
+    {
+      "x": 409.52,
+      "y": 1154,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 479.52,
+      "y": 1154,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 409.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 444.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 479.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 514.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 549.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 584.52,
+      "y": 1184,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 409.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 444.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 479.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 514.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 549.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 584.52,
+      "y": 1214,
+      "w": 12.96,
+      "h": 7
+    },
+    {
+      "x": 101.62884013770443,
+      "y": 105.35750184749885,
+      "w": 28.080000000000002,
+      "h": 7
+    },
+    {
+      "x": 186.294233431765,
+      "y": 101.51824545665576,
+      "w": 30.240000000000002,
+      "h": 7
+    },
+    {
+      "x": 255.71883399072004,
+      "y": 120.95770737688721,
+      "w": 32.400000000000006,
+      "h": 7
+    },
+    {
+      "x": 376.36318982390253,
+      "y": 103.49731726483745,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 450.38108392991,
+      "y": 120.92369321359315,
+      "w": 25.380000000000003,
+      "h": 7
+    },
+    {
+      "x": 537.0119371807348,
+      "y": 101.25071045726668,
+      "w": 27.540000000000003,
+      "h": 7
+    },
+    {
+      "x": 619.6439845996971,
+      "y": 105.68885395229827,
+      "w": 29.700000000000003,
+      "h": 7
+    },
+    {
+      "x": 685.8935716510821,
+      "y": 120.42929160637121,
+      "w": 31.860000000000003,
+      "h": 7
+    },
+    {
+      "x": 807.848763767488,
+      "y": 108.0082377789018,
+      "w": 22.68,
+      "h": 7
+    },
+    {
+      "x": 884.9665037399848,
+      "y": 119.49359196721359,
+      "w": 24.840000000000003,
+      "h": 7
+    },
+    {
+      "x": 972.2490093000653,
+      "y": 98.32920202653247,
+      "w": 27,
+      "h": 7
+    },
+    {
+      "x": 1052.3954952864015,
+      "y": 110.36591468012375,
+      "w": 29.160000000000004,
+      "h": 7
+    },
+    {
+      "x": 1115.6503988203444,
+      "y": 118.15272273027563,
+      "w": 31.32,
+      "h": 7
+    },
+    {
+      "x": 1319.923111645147,
+      "y": 116.45845639167717,
+      "w": 24.3,
+      "h": 7
+    },
+    {
+      "x": 1407.2254944447864,
+      "y": 97.03983224959994,
+      "w": 26.46,
+      "h": 7
+    },
+    {
+      "x": 1484.5301738130831,
+      "y": 114.8340536241456,
+      "w": 28.62,
+      "h": 7
+    },
+    {
+      "x": 109.72312854408247,
+      "y": 169.35750184749887,
+      "w": 27,
+      "h": 7
+    },
+    {
+      "x": 742.6559922592716,
+      "y": 163.6086508718822,
+      "w": 32.940000000000005,
+      "h": 7
+    },
+    {
+      "x": 1697.064859426797,
+      "y": 180.77199570767587,
+      "w": 34.02,
+      "h": 7
+    },
+    {
+      "x": 1771.4940666825682,
+      "y": 176.282521880127,
+      "w": 22.68,
+      "h": 7
+    },
+    {
+      "x": 813.9718590639948,
+      "y": 236.00823777890182,
+      "w": 34.02,
+      "h": 7
+    },
+    {
+      "x": 880.1070456718269,
+      "y": 247.4935919672136,
+      "w": 22.68,
+      "h": 7
+    },
+    {
+      "x": 955.9370438928719,
+      "y": 226.32920202653247,
+      "w": 24.840000000000003,
+      "h": 7
+    },
+    {
+      "x": 43.390009612843286,
+      "y": 280.14751658004644,
+      "w": 25.380000000000003,
+      "h": 7
+    },
+    {
+      "x": 125.25527080130747,
+      "y": 323.1121879054605,
+      "w": 26.46,
+      "h": 7
+    },
+    {
+      "x": 37.65938139770493,
+      "y": 408.14751658004644,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 44.16821454484204,
+      "y": 536.1475165800464,
+      "w": 34.56,
+      "h": 7
+    },
+    {
+      "x": 109.95669939098852,
+      "y": 515.1121879054605,
+      "w": 23.220000000000002,
+      "h": 7
+    },
+    {
+      "x": 42.65745024727703,
+      "y": 600.1475165800464,
+      "w": 33.480000000000004,
+      "h": 7
+    },
+    {
+      "x": 61.71464084854925,
+      "y": 664.1475165800464,
+      "w": 32.400000000000006,
+      "h": 7
+    },
+    {
+      "x": 63.670957214341385,
+      "y": 792.1475165800464,
+      "w": 30.240000000000002,
+      "h": 7
+    },
+    {
+      "x": 48.979304686378676,
+      "y": 920.1475165800464,
+      "w": 28.080000000000002,
+      "h": 7
+    },
+    {
+      "x": 116.57012962034626,
+      "y": 963.1121879054605,
+      "w": 29.160000000000004,
+      "h": 7
+    },
+    {
+      "x": 36.6786793697021,
+      "y": 1048.1475165800464,
+      "w": 25.92,
+      "h": 7
+    },
+    {
+      "x": 42.92171161395631,
+      "y": 1176.1475165800464,
+      "w": 23.76,
+      "h": 7
+    },
+    {
+      "x": 55.40877994509266,
+      "y": 1240.1475165800464,
+      "w": 22.68,
+      "h": 7
+    },
+    {
+      "x": 1858.35719520669,
+      "y": 483.0159868198756,
+      "w": 32.400000000000006,
+      "h": 7
+    },
+    {
+      "x": 1856.6730967536207,
+      "y": 675.0159868198756,
+      "w": 29.160000000000004,
+      "h": 7
+    },
+    {
+      "x": 1858.5344901088517,
+      "y": 803.0159868198756,
+      "w": 27,
+      "h": 7
+    },
+    {
+      "x": 331.23,
+      "y": 354,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 169.73,
+      "y": 334,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 688.73,
+      "y": 394,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 524.73,
+      "y": 254,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 541.81,
+      "y": 267,
+      "w": 11.88,
+      "h": 7
+    },
+    {
+      "x": 276.23,
+      "y": 234,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1207.98,
+      "y": 274,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1686.98,
+      "y": 309,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1709.06,
+      "y": 342,
+      "w": 11.88,
+      "h": 7
+    },
+    {
+      "x": 1438.98,
+      "y": 564,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 378.23,
+      "y": 777,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 169.98,
+      "y": 1117,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1577.98,
+      "y": 804,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1570.23,
+      "y": 879,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1830.73,
+      "y": 864,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1573.23,
+      "y": 1119,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 1871.73,
+      "y": 1149,
+      "w": 14.040000000000001,
+      "h": 7
+    },
+    {
+      "x": 182.72,
+      "y": 674,
+      "w": 34.56,
+      "h": 7
+    },
+    {
+      "x": 633.8,
+      "y": 254,
+      "w": 32.400000000000006,
+      "h": 7
+    },
+    {
+      "x": 673.26,
+      "y": 1254,
+      "w": 33.480000000000004,
+      "h": 7
+    },
+    {
+      "x": 342.72,
+      "y": 1304,
+      "w": 34.56,
+      "h": 7
+    },
+    {
+      "x": 1084.61,
+      "y": 1194,
+      "w": 30.78,
+      "h": 7
+    },
+    {
+      "x": 1212.45,
+      "y": 1294,
+      "w": 35.1,
+      "h": 7
+    }
+  ],
+  "quarters": [
+    {
+      "id": "Q1",
+      "props": 9
+    },
+    {
+      "id": "Q2",
+      "props": 11
+    },
+    {
+      "id": "Q3",
+      "props": 7
+    },
+    {
+      "id": "Q4",
+      "props": 12
+    }
+  ]
+}
