@@ -22,6 +22,13 @@ import { plaque, updateTags, type ActorTag, type SignTag } from "../art/tags";
 import { signNames } from "../art/tag-layout";
 import { vegetationKey } from "../art/vegetation";
 import { VillageAmbience } from "../art/ambience";
+import { InteriorLight } from "../art/interior-light";
+import { frameInteriorCamera } from "../art/interior-camera";
+import {
+  drawRoomArchitecture,
+  drawRoomFurnishings,
+  drawRoomDecor,
+} from "../art/interiors";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -101,6 +108,7 @@ export class Village extends Phaser.Scene {
   signTags: SignTag[] = [];
   shade!: Phaser.GameObjects.Rectangle;
   ambience?: VillageAmbience;
+  interiorLight?: InteriorLight;
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -149,9 +157,10 @@ export class Village extends Phaser.Scene {
         !!this.dialogue || controls.paused,
       ),
     );
-    this.scale.on(Phaser.Scale.Events.RESIZE, () =>
-      this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2),
-    );
+    this.scale.on(Phaser.Scale.Events.RESIZE, () => {
+      this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2);
+      if (this.state.room !== "village") frameInteriorCamera(this);
+    });
     createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
       "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
@@ -203,6 +212,9 @@ export class Village extends Phaser.Scene {
     this.npcs = [];
     this.actorTags = [];
     this.signTags = [];
+    this.interiorLight = undefined;
+    delete this.game.canvas.dataset.interior;
+    delete this.game.canvas.dataset.interiorLight;
     this.decorations = [];
     this.rects = [];
     this.trail = [];
@@ -284,52 +296,14 @@ export class Village extends Phaser.Scene {
           roofY: y + bh - facade.displayHeight - 4,
         });
       });
-      this.star = this.add
-        .image(512, 304, "quest_star")
-        .setOrigin(0.5, 0.85)
-        .setDepth(410)
-        .setVisible(this.state.stage === 4);
     } else {
       w = 480;
       h = 352;
-      const config = rooms[this.state.room];
-      this.add.rectangle(240, 176, 480, 352, 0x352b40);
-      for (let y = 32; y < 336; y += 16)
-        for (let x = 32; x < 448; x += 16)
-          this.add.rectangle(x, y, 15, 15, config.color);
+      drawRoomArchitecture(this, this.state.room);
       this.rects = [...interiorRects];
-      this.add.rectangle(95, 72, 90, 45, config.furniture);
-      this.add.rectangle(385, 95, 70, 50, config.furniture);
-      this.add.rectangle(240, 119, 80, 38, 0x4c3340);
-      this.add.rectangle(240, 110, 20, 12, 0xffecc2);
-      this.add.rectangle(240, 330, 35, 12, 0xe7b85e);
-      this.label(240, 58, roomNames[this.state.room], 12);
-      this.label(240, 96, config.object);
+      drawRoomFurnishings(this, this.state.room);
+      drawRoomDecor(this, this.state.room);
       this.label(240, 325, "Sortie");
-      this.label(95, 52, "Intérieur provisoire");
-      if (this.state.room === "library") {
-        for (let i = 0; i < 6; i++)
-          this.add.rectangle(
-            60 + i * 12,
-            70,
-            8,
-            27,
-            [0xb27686, 0xd6c08b, 0x92a9ba][i % 3],
-          );
-        this.add.rectangle(370, 237, 42, 24, 0xe3ca97);
-        this.label(370, 230, "Photographie");
-        this.label(385, 72, "Marque-page");
-      }
-      if (this.state.room === "workshop") {
-        this.add.image(370, 235, "gift").setScale(0.55);
-        this.label(385, 72, "Ruban");
-        this.add.image(70, 120, "logs").setScale(0.5);
-      }
-      if (this.state.room === "inn") {
-        this.add.image(385, 90, "campfire").setScale(0.65);
-        this.add.rectangle(370, 235, 44, 26, 0xa88760);
-        this.label(370, 220, "Jeu de mémoire");
-      }
     }
     if (blocked(this.state.position, this.rects, w, h))
       this.state.position =
@@ -347,6 +321,7 @@ export class Village extends Phaser.Scene {
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
     this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2);
+    if (this.state.room !== "village") frameInteriorCamera(this);
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
@@ -386,6 +361,8 @@ export class Village extends Phaser.Scene {
       this.shade,
       this.state.room === "village",
     );
+    if (this.state.room !== "village")
+      this.interiorLight = new InteriorLight(this, this.state.room);
     this.refreshAdvent();
   }
   setAdventDay(day: Day | null) {
@@ -423,6 +400,11 @@ export class Village extends Phaser.Scene {
           Math.max(this.adventLights.length, this.state.stars.length),
         );
     this.tree?.setFrame("sapin_" + String(count).padStart(2, "0"));
+    this.game.canvas.dataset.treeArt = JSON.stringify({
+      texture: this.tree?.texture.key ?? null,
+      frame: this.tree?.frame.name ?? null,
+      overlay: !!this.star?.visible,
+    });
     this.huntMarker?.destroy();
     this.huntMarker = undefined;
     if (
@@ -950,6 +932,7 @@ export class Village extends Phaser.Scene {
       animateActor(npc.image);
     }
     this.ambience?.update(_time, this.state.clock, delta);
+    this.interiorLight?.update(_time, this.state.clock);
     this.loyal.setDepth(this.loyal.y);
     [this.player, this.loyal].forEach((p, i) =>
       this.glasses[i]?.setPosition(p.x, p.y).setDepth(p.y + 0.1),

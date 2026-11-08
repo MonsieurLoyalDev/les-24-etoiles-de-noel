@@ -1,0 +1,111 @@
+{
+  "base": "186367cfb396aa52bf30d2e15bcbc40ff8751c47",
+  "checkedProtectedFiles": 502,
+  "allProtectedUnchanged": true,
+  "allowedExistingFiles": [
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "ops/public-assets.json",
+    "src/art/world.ts",
+    "src/art/landscape.ts",
+    "src/game/Game.ts",
+    "tests/e2e/phase-c.spec.ts"
+  ],
+  "collisionConstructionUnchanged": true,
+  "legacyCalendarTestUnchangedOutsideAwait": true,
+  "methods": [
+    {
+      "name": "preload",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "create",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "label",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "setAdventDay",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "setAdventLights",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "adventAnchor",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "refreshAdvent",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "huntPoint",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "startHunt",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "clearHunt",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "startFinal",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "finalLine",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "candidates",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "nearest",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "interact",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "openDialogue",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "selectChoice",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "closeMini",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "finishMini",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "emit",
+      "unchangedOutsideDisplay": true
+    },
+    {
+      "name": "update",
+      "unchangedOutsideDisplay": true
+    }
+  ],
+  "displayExceptions": [
+    "renderRoom: interior art and removal of the standalone star",
+    "create: interior camera letterboxing on resize",
+    "refreshAdvent: read-only tree diagnostic",
+    "update: call to the purely visual interior lighting controller",
+    "legacy calendar browser test: wait for modal cleanup before sending held keyboard input"
+  ],
+  "note": "Git compares canonical content, including validated assets and all existing HUD/dialogue/save/advent/minigame/physics files. New art files are separately hashed in INVENTAIRE-D31.json."
+}

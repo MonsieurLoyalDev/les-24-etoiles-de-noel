@@ -1,0 +1,27 @@
+{
+  "note": "Chrome local, écran mobile simulé ; CPU du contrôleur intérieur uniquement, pas temps GPU.",
+  "normal": {
+    "quality": "soft",
+    "motion": true,
+    "visibleLights": 4,
+    "lightPool": 6,
+    "cpuP95": 0,
+    "palette": {
+      "ambient": 12632774,
+      "furniture": 14933720,
+      "warm": 1
+    }
+  },
+  "reduced": {
+    "quality": "none",
+    "motion": false,
+    "visibleLights": 4,
+    "lightPool": 6,
+    "cpuP95": 0.09999990463256836,
+    "palette": {
+      "ambient": 12632774,
+      "furniture": 14933720,
+      "warm": 1
+    }
+  }
+}

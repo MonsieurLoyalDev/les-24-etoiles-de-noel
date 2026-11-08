@@ -1,0 +1,25 @@
+{
+  "version": "0.7.1",
+  "note": "Releve du build D31 final, Chrome local, 14 secondes pres de l atelier. Ecran mobile simule, pas GPU mobile physique. CPU du controleur uniquement.",
+  "sourceTest": "phase-d3.spec.ts / demonstration reelle des effets animes",
+  "stats": {
+    "quality": "soft",
+    "reduced": false,
+    "flurry": 0.8484424095775541,
+    "visibleSnow": 14,
+    "visibleSmoke": 4,
+    "visibleWind": 1,
+    "visibleStars": 2,
+    "visibleLights": 11,
+    "swaying": 2,
+    "particleLimit": 28,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 60.05098267272115,
+    "meanFrameMs": 16.667222222222225,
+    "palette": {
+      "color": 1519709,
+      "alpha": 0.27,
+      "warm": 1
+    }
+  }
+}

@@ -13,6 +13,8 @@ import { prepareSprite, prepareSnow, cleanKey } from "./prepare";
 import { borderPlants } from "./vegetation-design";
 import { terrainAssets } from "./terrain-design";
 import { prepareTerrain } from "./terrain";
+import { snowFinishingAssets } from "./snow-finishing";
+import { interiorAssets } from "./interiors";
 
 export const art = catalog.images;
 export const buildingArt: Record<string, string> = {
@@ -54,6 +56,10 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
+  for (const [key, path] of Object.entries(snowFinishingAssets))
+    scene.load.image("d31-" + key, path);
+  for (const [key, path] of Object.entries(interiorAssets))
+    scene.load.image("d31-" + key, path);
   for (const [key, path] of Object.entries(terrainAssets))
     scene.load.image("source-ground-d3-" + key, path);
   for (const [key, url] of Object.entries(allVegetationAssets))

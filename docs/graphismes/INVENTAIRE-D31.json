@@ -1,0 +1,897 @@
+{
+  "version": "0.7.1",
+  "base": "186367cfb396aa52bf30d2e15bcbc40ff8751c47",
+  "method": "Original image_gen PNGs unchanged; nearest-neighbour native texture export, alpha crop and transparent 2 px padding. No new drawing in the export.",
+  "originalBytes": 44316520,
+  "publicBytes": 3897619,
+  "assets": [
+    {
+      "key": "snow-powder",
+      "mode": "snow",
+      "original": {
+        "path": "docs/artwork-d31/originals/snow-powder.png",
+        "bytes": 1324546,
+        "sha256": "4f1315430c94482c4285380519e74e487c29041ffb564f4c6c6c6186259e90b6",
+        "width": 1254,
+        "height": 1254
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/snow-powder.png",
+        "bytes": 417456,
+        "sha256": "06b837a541fec74bffd60577b2bfdedc1bbfee905e435269a042b28053e1f173",
+        "width": 512,
+        "height": 512
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1253,
+        "bottom": 1253
+      }
+    },
+    {
+      "key": "snow-soft",
+      "mode": "snow",
+      "original": {
+        "path": "docs/artwork-d31/originals/snow-soft.png",
+        "bytes": 1309803,
+        "sha256": "3e599d7e1d4d6bf8bc68109a50c4f2b99c50d8f0ce5eefe08a380c598d2ea883",
+        "width": 1254,
+        "height": 1254
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/snow-soft.png",
+        "bytes": 376669,
+        "sha256": "d906fcf14498e13cfc8cb98096565d46615c623c5b51879521b896e955b7e344",
+        "width": 512,
+        "height": 512
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1253,
+        "bottom": 1253
+      }
+    },
+    {
+      "key": "house-shell",
+      "mode": "architecture",
+      "original": {
+        "path": "docs/artwork-d31/originals/house-shell.png",
+        "bytes": 2656710,
+        "sha256": "89cb01d1a1b710a8dddc01a3c490a05877d7b9dfd5018ac6506517fd400118b4",
+        "width": 1464,
+        "height": 1074
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/house-shell.png",
+        "bytes": 490053,
+        "sha256": "c4ac381387c8ebe4ae5e8a168a37f5fdde235f3ab99eeffb76e1552ca86da304",
+        "width": 480,
+        "height": 352
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1463,
+        "bottom": 1073
+      }
+    },
+    {
+      "key": "library-shell",
+      "mode": "architecture",
+      "original": {
+        "path": "docs/artwork-d31/originals/library-shell.png",
+        "bytes": 2500245,
+        "sha256": "a669daee2260e0693799878cd96e94ac859c91fd7234890d65d9a01d6332d642",
+        "width": 1464,
+        "height": 1075
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/library-shell.png",
+        "bytes": 469211,
+        "sha256": "2884b7b4ef0a18bfd805c767aa492d9a711c5ac5d1d0a83a2cfdaf8da1b7c155",
+        "width": 480,
+        "height": 352
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1463,
+        "bottom": 1074
+      }
+    },
+    {
+      "key": "workshop-shell",
+      "mode": "architecture",
+      "original": {
+        "path": "docs/artwork-d31/originals/workshop-shell.png",
+        "bytes": 2526881,
+        "sha256": "9dde27ebe65a47c730e493b374a4529878cf76def83405cded576095a598479a",
+        "width": 1464,
+        "height": 1075
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/workshop-shell.png",
+        "bytes": 462129,
+        "sha256": "832171b163498bd8135c43cdab0c0754f70abbb7fab668b0babdcfad0b0330ac",
+        "width": 480,
+        "height": 352
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1463,
+        "bottom": 1074
+      }
+    },
+    {
+      "key": "inn-shell",
+      "mode": "architecture",
+      "original": {
+        "path": "docs/artwork-d31/originals/inn-shell.png",
+        "bytes": 3688504,
+        "sha256": "48e2828ea7a9333b2c33fd06452be67232421678f6ed66f5ca0b5444c82d4d77",
+        "width": 1464,
+        "height": 1075
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/inn-shell.png",
+        "bytes": 503754,
+        "sha256": "efa609fb368782c674a9e2fc801611e8ebe40c1bf06f0bb34a182feec454c974",
+        "width": 480,
+        "height": 352
+      },
+      "rawCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "rawTransparentFraction": 0,
+      "renderCorners": [
+        255,
+        255,
+        255,
+        255
+      ],
+      "contentBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 1463,
+        "bottom": 1074
+      }
+    },
+    {
+      "key": "rug-woven",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/rug-woven.png",
+        "bytes": 2869843,
+        "sha256": "c19657f8bb63babd0b25b1f5b0728b887104cfdbb8b8821a6f9ed338848a01e8",
+        "width": 1682,
+        "height": 935
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/rug-woven.png",
+        "bytes": 239503,
+        "sha256": "b7618df33ba756b4586eb5c17bba2b188176c782a17d65f7d565a0fae83b1968",
+        "width": 404,
+        "height": 202
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.21667037585761795,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 40,
+        "top": 67,
+        "right": 1641,
+        "bottom": 856
+      }
+    },
+    {
+      "key": "rug-oval",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/rug-oval.png",
+        "bytes": 2399283,
+        "sha256": "232886fbb838a607a78b95bc54a9e8af9412707197352bb3348e95eb6c65d571",
+        "width": 1616,
+        "height": 973
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/rug-oval.png",
+        "bytes": 246120,
+        "sha256": "42528637891568febc6beabdebac077ebde3e17433d3c8c901a08019d5302572",
+        "width": 424,
+        "height": 249
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.2904720777833179,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 27,
+        "top": 38,
+        "right": 1582,
+        "bottom": 942
+      }
+    },
+    {
+      "key": "photo-keepsakes",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/photo-keepsakes.png",
+        "bytes": 1927758,
+        "sha256": "eea0e69fb62bcf7b105a900888cb21cc189941b22439505d6b97ba9fd79db8b1",
+        "width": 1271,
+        "height": 1238
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/photo-keepsakes.png",
+        "bytes": 16511,
+        "sha256": "2db6280a63c03b1429c84196bcd04e19736a2807fbe6db37ea4a4af14a65c7f1",
+        "width": 80,
+        "height": 74
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4126201622118363,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 98,
+        "top": 113,
+        "right": 1154,
+        "bottom": 1095
+      }
+    },
+    {
+      "key": "cards-keepsakes",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/cards-keepsakes.png",
+        "bytes": 1457437,
+        "sha256": "6551aa747d88f97083432429f33d00dd09d9e9a744a7158c322b31a572146cae",
+        "width": 1278,
+        "height": 1230
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/cards-keepsakes.png",
+        "bytes": 11128,
+        "sha256": "475da69bfb846a42007154ae09d53d036257154e12a948b45befc5e6fed7262a",
+        "width": 79,
+        "height": 74
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4964349784342914,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 41,
+        "top": 70,
+        "right": 1234,
+        "bottom": 1186
+      }
+    },
+    {
+      "key": "wrapping-plans",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/wrapping-plans.png",
+        "bytes": 1531076,
+        "sha256": "eb3dd9bf5372ab3897873e5b308ee15a850929501ad7edf71758c0fb366adb64",
+        "width": 1312,
+        "height": 1199
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/wrapping-plans.png",
+        "bytes": 21611,
+        "sha256": "2e2aff86dba8a345655de908f4c497d6c99e49cd4032e376fd71ca70f8f1903e",
+        "width": 105,
+        "height": 94
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4868678675318863,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 95,
+        "top": 112,
+        "right": 1209,
+        "bottom": 1111
+      }
+    },
+    {
+      "key": "wall-lantern",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/wall-lantern.png",
+        "bytes": 869712,
+        "sha256": "0bc42497c8400e2fafbfafffe181957270dd44b7b20cf84814eed399a1bd9016",
+        "width": 938,
+        "height": 1676
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/wall-lantern.png",
+        "bytes": 2911,
+        "sha256": "dd04d32cb577d9f4c04124ac9387e5f58a1fcd5129a66b1b20d3d8ed99ee95c8",
+        "width": 23,
+        "height": 54
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.65823414465348,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 219,
+        "top": 124,
+        "right": 718,
+        "bottom": 1508
+      }
+    },
+    {
+      "key": "house-lounge",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/house-lounge.png",
+        "bytes": 1765400,
+        "sha256": "509ac944b50e26086f70c3e9b47a04015e4dd81edaef38ad0cc41c75c12405b6",
+        "width": 1536,
+        "height": 1024
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/house-lounge.png",
+        "bytes": 34117,
+        "sha256": "ee128ea316f41e3708e61786e5ce72c4912d08f2e7be0ae173fe1593550a0f08",
+        "width": 184,
+        "height": 80
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.5817972819010416,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 44,
+        "top": 204,
+        "right": 1492,
+        "bottom": 807
+      }
+    },
+    {
+      "key": "house-table",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/house-table.png",
+        "bytes": 1815672,
+        "sha256": "cc3f984e9de434f7847cba9dd744a9e43decc6369080cbe18c8fb37426341b12",
+        "width": 1536,
+        "height": 1024
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/house-table.png",
+        "bytes": 42877,
+        "sha256": "60eba5f671ad9e24b5ed9220a4995c16faf8ae046b77e334b34167c44457bf17",
+        "width": 164,
+        "height": 110
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.5489349365234375,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 177,
+        "top": 141,
+        "right": 1356,
+        "bottom": 921
+      }
+    },
+    {
+      "key": "house-hearth",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/house-hearth.png",
+        "bytes": 1516251,
+        "sha256": "486a8c23d4eab6f739a35cfbd1dcc310ebf1019811fba8bd1f47903629cd9b42",
+        "width": 1174,
+        "height": 1339
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/house-hearth.png",
+        "bytes": 54870,
+        "sha256": "d38bb4deba0adbee64922e862f3363c22092152d7cd9bd41d2603cfb685a50ee",
+        "width": 144,
+        "height": 157
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4537209618915181,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 67,
+        "top": 112,
+        "right": 1075,
+        "bottom": 1207
+      }
+    },
+    {
+      "key": "library-shelves",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/library-shelves.png",
+        "bytes": 1818298,
+        "sha256": "040e6494885210aec2103e577c5f6ebe0cef501f61415d83de95a5deee55f15c",
+        "width": 1330,
+        "height": 1182
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/library-shelves.png",
+        "bytes": 73465,
+        "sha256": "b5415788cdb0dc32818e020763dbadb69da542b5e33e594a5b31cb85ce6c9622",
+        "width": 184,
+        "height": 146
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.3642100174293602,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 72,
+        "top": 106,
+        "right": 1257,
+        "bottom": 1038
+      }
+    },
+    {
+      "key": "library-desk",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/library-desk.png",
+        "bytes": 1891342,
+        "sha256": "2fe798a29f57a78aa8ad42338500e3481648027eb0ac2e822d6d06f10411d5c0",
+        "width": 1448,
+        "height": 1086
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/library-desk.png",
+        "bytes": 44343,
+        "sha256": "2ccfe4d99638e9637fcf11fd7da10d6749ba3c4c71745a5f238a5c366ce5413d",
+        "width": 164,
+        "height": 121
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "rawTransparentFraction": 0.3790597051372058,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 37,
+        "top": 41,
+        "right": 1409,
+        "bottom": 1038
+      }
+    },
+    {
+      "key": "library-nook",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/library-nook.png",
+        "bytes": 1110736,
+        "sha256": "0269e92cd52d246dd435067052b42fa526950c5664e59c56a3ce50842c01cadc",
+        "width": 1230,
+        "height": 1278
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/library-nook.png",
+        "bytes": 42997,
+        "sha256": "1a34779350897dc5164d17d7cd7011382c7914e12f470dffa6087e8858d97d0b",
+        "width": 144,
+        "height": 152
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.5711006781429316,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 98,
+        "top": 95,
+        "right": 1113,
+        "bottom": 1168
+      }
+    },
+    {
+      "key": "workshop-tools",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/workshop-tools.png",
+        "bytes": 1848706,
+        "sha256": "db6a9ac591a042abee74c0346c9ff80e3ffce3c1f2eedd99a92cf0801e703ec9",
+        "width": 1330,
+        "height": 1182
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/workshop-tools.png",
+        "bytes": 77955,
+        "sha256": "29b905a1facceabfe60d55db3f4ed9a9098154298ea213ebcf1387176af45577",
+        "width": 166,
+        "height": 176
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.3349859420123914,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 139,
+        "top": 41,
+        "right": 1183,
+        "bottom": 1153
+      }
+    },
+    {
+      "key": "workshop-bench",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/workshop-bench.png",
+        "bytes": 1543287,
+        "sha256": "362773815c2c3b12e4176d32cc19b31f185da87a75095a31f4762379139578b7",
+        "width": 1448,
+        "height": 1086
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/workshop-bench.png",
+        "bytes": 47821,
+        "sha256": "53d117e13e4132ac917a065d8b7ed76b4dba9832496aff94a212e60b320f8480",
+        "width": 164,
+        "height": 125
+      },
+      "rawCorners": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "rawTransparentFraction": 0.4587943744085956,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 116,
+        "top": 104,
+        "right": 1336,
+        "bottom": 1024
+      }
+    },
+    {
+      "key": "workshop-storage",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/workshop-storage.png",
+        "bytes": 1383131,
+        "sha256": "d9f20e60de4cb23407fbf62bdf1631e5489197b22b3f18f77b9fc4d27235b95c",
+        "width": 1189,
+        "height": 1323
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/workshop-storage.png",
+        "bytes": 59929,
+        "sha256": "fc4be426f11c71cc50408ca090fe3cedf3583d7c379e1767a066b7505bf5937c",
+        "width": 141,
+        "height": 180
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4780314892053448,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 134,
+        "top": 62,
+        "right": 1014,
+        "bottom": 1198
+      }
+    },
+    {
+      "key": "inn-counter",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/inn-counter.png",
+        "bytes": 1458968,
+        "sha256": "09bce8c8dcf6e9ea0e370365750082c5f7da7de1fcb0549eaac1c833b677fa17",
+        "width": 1374,
+        "height": 1145
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/inn-counter.png",
+        "bytes": 70314,
+        "sha256": "9ed10a3fb49b89be32eb52f69f7971dc6de1ec3c2fbc589af680ccf5611e603d",
+        "width": 184,
+        "height": 158
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.4649917685271702,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 128,
+        "top": 100,
+        "right": 1236,
+        "bottom": 1043
+      }
+    },
+    {
+      "key": "inn-table",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/inn-table.png",
+        "bytes": 1730124,
+        "sha256": "8a0fd03a9b0248ee143a3b51eea6f53488f89bebf179e45d6082a5c6ee1fe511",
+        "width": 1391,
+        "height": 1131
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/inn-table.png",
+        "bytes": 50207,
+        "sha256": "8f8e6b61dbccbd7d7452e348030a6a2a1c17543501e383f58c74e2f4882d3d29",
+        "width": 164,
+        "height": 125
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.43693606937613977,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 77,
+        "top": 104,
+        "right": 1312,
+        "bottom": 1036
+      }
+    },
+    {
+      "key": "inn-hearth",
+      "mode": "cutout",
+      "original": {
+        "path": "docs/artwork-d31/originals/inn-hearth.png",
+        "bytes": 1372807,
+        "sha256": "7c30651ef692e9ee6a047c22953e1de88b94cb8c7f508e5bbf0f3f4472008df4",
+        "width": 1241,
+        "height": 1267
+      },
+      "public": {
+        "path": "public/assets/interiors-d31/inn-hearth.png",
+        "bytes": 41668,
+        "sha256": "be40542c55e36357968e929aab4ec059d23e42daf04fefd6804b8fc820a02e6f",
+        "width": 144,
+        "height": 133
+      },
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "rawTransparentFraction": 0.5039377440221529,
+      "renderCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "contentBounds": {
+        "left": 59,
+        "top": 128,
+        "right": 1165,
+        "bottom": 1146
+      }
+    }
+  ]
+}

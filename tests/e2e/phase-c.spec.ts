@@ -250,6 +250,17 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
                 exact: true,
               })
               .click();
+            // D31 modal cleanup: Hub resets held keys when the activity closes.
+            await expect(page.locator(".advent-modal")).toHaveCount(0);
+            await page.evaluate(
+              () =>
+                new Promise<void>((resolve) =>
+                  requestAnimationFrame(() =>
+                    requestAnimationFrame(() => resolve()),
+                  ),
+                ),
+            );
+            // D31 modal cleanup end.
             for (const [x, y] of [
               [560, 500],
               [440, 460],

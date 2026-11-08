@@ -1,4 +1,14 @@
-# Les 24 Étoiles de Noël — Phase D.3, village vivant
+# Les 24 Étoiles de Noël — Phase D.3.1, édition artistique
+
+Version 0.7.1 : quatre intérieurs aménagés, neige blanche nuancée sur le terrain D.3 intact, sapin sans étoile graphique superposée et éclairage intérieur lié à l'horloge existante. Les 24 nouvelles ressources sont distribuées sous forme de textures natives légères ; leurs originaux sont conservés pour la validation artistique. Aucun nouveau gameplay.
+
+- [Visite avant/après, PC/mobile, jour et nuit](docs/graphismes/comparatif-d31.html)
+- [Sapin : comparaison et atlas exact](docs/graphismes/sapin-d31.html)
+- [Présentation des 24 ressources sur fonds clair et sombre](docs/graphismes/ressources-d31.html)
+- [Rapport, tests, performances et limites](docs/graphismes/FINITIONS-D31.md)
+- [Inventaire des nouveaux assets](docs/graphismes/INVENTAIRE-D31.json)
+
+## Phase D.3 — historique 0.7.0
 
 Version 0.7.0 : terrain mêlant neige, terre, herbes d'hiver, givre et passages tassés ; neige occasionnelle, cheminées animées, lumières chaudes et petits mouvements des décors. Qualité réglable dans les paramètres existants, indépendante de la progression et respectueuse de la réduction des mouvements. Les personnages, bâtiments, HUD principal, dialogues, sauvegardes, collisions et 24 journées sont conservés.
 
