@@ -16,8 +16,8 @@ import inventory from "../docs/graphismes/INVENTAIRE-D32.json";
 import allowlist from "../ops/public-assets.json";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-it("les 24 nouveaux sprites sont isolés, natifs et traçables, avec des collisions adaptées à leur silhouette", () => {
-  expect(inventory.assets).toHaveLength(24);
+it("les 20 nouveaux sprites sont isolés, natifs et traçables, avec des collisions adaptées à leur silhouette", () => {
+  expect(inventory.assets).toHaveLength(20);
   for (const a of inventory.assets) {
     for (const part of [a.original, a.public])
       expect(
@@ -26,7 +26,7 @@ it("les 24 nouveaux sprites sont isolés, natifs et traçables, avec des collisi
     expect(allowlist).toContain(a.public.path);
     expect(Math.max(...a.rawCorners)).toBeLessThanOrEqual(1);
     expect(a.transparentFraction).toBeGreaterThan(0.05);
-    expect(Math.max(a.width, a.height)).toBeLessThanOrEqual(256);
+    expect(Math.max(a.width, a.height)).toBeLessThanOrEqual(512);
     const raw = readFileSync(a.original.path);
     expect(a.bounds.left).toBeGreaterThan(0);
     expect(a.bounds.top).toBeGreaterThan(0);
@@ -41,7 +41,7 @@ it("les 24 nouveaux sprites sont isolés, natifs et traçables, avec des collisi
     }
   }
 });
-it("les huit nouvelles emprises laissent tous les chemins et accès existants libres", () => {
+it("les quatre nouvelles emprises laissent tous les chemins et accès existants libres", () => {
   const rects = homes.map((x) => x.footprint);
   for (const lane of lanes)
     for (let i = 1; i < lane.points.length; i++) {

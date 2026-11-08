@@ -53,7 +53,7 @@ export class NeighbourhoodLife {
       this.scene.scale.width,
       window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     );
-    const budget = quality === "full" ? 16 : quality === "soft" ? 8 : 0,
+    const budget = quality === "full" ? 8 : quality === "soft" ? 4 : 0,
       view = this.scene.cameras.main.worldView;
     let visible = 0;
     for (const p of this.smoke) {

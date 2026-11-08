@@ -27,3 +27,9 @@ Les silhouettes seront réellement distinctes, avec des abords composés : porch
 A. Enrichir les intérieurs avec les ressources manquantes. B. Intégrer le système décoratif et tester chaque action, les états persistants, les accès et la réduction des mouvements. C. Contrôler les emplacements et intégrer les maisons. D. Ajouter les détails et animations extérieurs. E. Polir et optimiser, puis exécuter lint, TypeScript, unités, build, parcours navigateur historiques et nouveaux. Commits séparés pour les intérieurs/interactions, les habitations/ambiances et la livraison.
 
 Les nouvelles ressources seront créées avec `image_gen` intégré, inspectées, puis exportées à leur résolution utile. Les originaux et prompts seront conservés. Les ressources D.3.1 validées, notamment la neige, ne seront pas réexportées ou remplacées.
+
+## Décision après contrôle rapproché
+
+Les huit candidates ont passé l'exclusion géométrique, mais plusieurs petites façades se sont révélées disproportionnées face à Debby. La livraison retient quatre maisons agrandies : porche (48,505), jardin (285,630), pignon haut (385,740), baie vitrée (960,410). Les quatre autres restent seulement comme originaux de recherche, sans export public ni chargement. Les emprises ont été ajustées à la silhouette réelle puis les exclusions et collisions retestées. Le monde n'a pas été agrandi pour atteindre un quota.
+
+Deux nouveaux ensembles par intérieur complètent finalement les meubles D.3.1 : console personnelle et coin bas de vie/lecture/rangement. Les collisions des consoles se limitent à leur pied, de largeur propre à chaque sprite, plutôt qu'à leur silhouette haute. Les interactions prévues restent au nombre de dix-sept. Le budget supplémentaire des quartiers est de huit volutes en qualité complète et quatre en qualité douce.

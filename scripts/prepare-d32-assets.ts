@@ -139,7 +139,12 @@ if (
   writeFileSync(
     path,
     JSON.stringify(
-      [...new Set([...list, ...inventory.map((x) => x.public.path)])],
+      [
+        ...new Set([
+          ...list.filter((p) => !p.startsWith("public/assets/life-d32/")),
+          ...inventory.map((x) => x.public.path),
+        ]),
+      ],
       null,
       2,
     ) + "\n",

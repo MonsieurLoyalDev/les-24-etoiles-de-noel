@@ -3,62 +3,6 @@
   "method": "image_gen originals preserved; alpha bounding crop and nearest-neighbour native export, 2px transparent padding",
   "assets": [
     {
-      "key": "home-family",
-      "original": {
-        "path": "docs/artwork-d32/originals/home-family.png",
-        "bytes": 2481362,
-        "sha256": "d0b0c93a4fc113be241a5337ae94f95d3aabb939dd9cdd1098dfb182d08ace9a"
-      },
-      "public": {
-        "path": "public/assets/life-d32/home-family.png",
-        "bytes": 71516,
-        "sha256": "ba50ac4e0336055beaf2a1bafc234cbea273e1a2ec7c8b4d87357980207a2710"
-      },
-      "width": 229,
-      "height": 134,
-      "rawCorners": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "transparentFraction": 0.44946924845377606,
-      "bounds": {
-        "left": 60,
-        "top": 115,
-        "right": 1475,
-        "bottom": 932
-      }
-    },
-    {
-      "key": "home-chalet",
-      "original": {
-        "path": "docs/artwork-d32/originals/home-chalet.png",
-        "bytes": 1943920,
-        "sha256": "28f6c901078b0dcb7022085473fa496dfe872753216f84df484fe93c78d1c171"
-      },
-      "public": {
-        "path": "public/assets/life-d32/home-chalet.png",
-        "bytes": 97976,
-        "sha256": "3871aee22fc5709c656d13f0e5fbb72a02a4a168102ad1d93ace4468e18201d6"
-      },
-      "width": 220,
-      "height": 196,
-      "rawCorners": [
-        0,
-        0,
-        1,
-        0
-      ],
-      "transparentFraction": 0.43676386826420394,
-      "bounds": {
-        "left": 74,
-        "top": 92,
-        "right": 1236,
-        "bottom": 1123
-      }
-    },
-    {
       "key": "home-porch",
       "original": {
         "path": "docs/artwork-d32/originals/home-porch.png",
@@ -67,11 +11,11 @@
       },
       "public": {
         "path": "public/assets/life-d32/home-porch.png",
-        "bytes": 50748,
-        "sha256": "591d99f9091ddc2a2c7de9addb2fd8d5a86c92395944986b27ee2e10d35edbe5"
+        "bytes": 113860,
+        "sha256": "dffda0d1190b34ddc7a93735a91a8fd58cec649bfd669862660625ddc5edeafb"
       },
-      "width": 115,
-      "height": 196,
+      "width": 175,
+      "height": 300,
       "rawCorners": [
         0,
         0,
@@ -95,11 +39,11 @@
       },
       "public": {
         "path": "public/assets/life-d32/home-garden.png",
-        "bytes": 99445,
-        "sha256": "5703d203b692d56d9307011f090d05a2a3db20cd6b3bce149b9686649ae2ccd8"
+        "bytes": 241891,
+        "sha256": "5094711b592f0d93d6d67025829195075e3c631f4baf10d70909413de73caaa8"
       },
-      "width": 252,
-      "height": 173,
+      "width": 404,
+      "height": 277,
       "rawCorners": [
         0,
         0,
@@ -123,11 +67,11 @@
       },
       "public": {
         "path": "public/assets/life-d32/home-tall.png",
-        "bytes": 73957,
-        "sha256": "985604125974830d9eae606ff9be20c7e33cef571d3d79569f9d1b0b472f2e38"
+        "bytes": 112554,
+        "sha256": "8eb56909f5f7de4220c07a07ed33f252ca71b8ba25427510c6225abc1f15f1ad"
       },
-      "width": 146,
-      "height": 228,
+      "width": 182,
+      "height": 284,
       "rawCorners": [
         0,
         0,
@@ -143,62 +87,6 @@
       }
     },
     {
-      "key": "home-narrow",
-      "original": {
-        "path": "docs/artwork-d32/originals/home-narrow.png",
-        "bytes": 2126118,
-        "sha256": "7bfc601359ace37e5efde476fce92c9ac29091fcac758fe1b79a67257bd74eb7"
-      },
-      "public": {
-        "path": "public/assets/life-d32/home-narrow.png",
-        "bytes": 44276,
-        "sha256": "b9954e1d73313ed07480b06822e9df6362e3f4f06bed19a474d3c29efcfba57a"
-      },
-      "width": 92,
-      "height": 220,
-      "rawCorners": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "transparentFraction": 0.6075865427652994,
-      "bounds": {
-        "left": 196,
-        "top": 10,
-        "right": 799,
-        "bottom": 1495
-      }
-    },
-    {
-      "key": "home-shutters",
-      "original": {
-        "path": "docs/artwork-d32/originals/home-shutters.png",
-        "bytes": 2688827,
-        "sha256": "fc28a0dd51dd959f792e1eb354ef869f615165e9f8d625dd90ac7aecbae93f99"
-      },
-      "public": {
-        "path": "public/assets/life-d32/home-shutters.png",
-        "bytes": 58752,
-        "sha256": "e51388b86f8b363e97c7c9be94327b684ed012cef66f46c4638757ac357dc4b9"
-      },
-      "width": 196,
-      "height": 123,
-      "rawCorners": [
-        0,
-        0,
-        0,
-        0
-      ],
-      "transparentFraction": 0.3079611460367839,
-      "bounds": {
-        "left": 14,
-        "top": 41,
-        "right": 1522,
-        "bottom": 968
-      }
-    },
-    {
       "key": "home-oriel",
       "original": {
         "path": "docs/artwork-d32/originals/home-oriel.png",
@@ -207,11 +95,11 @@
       },
       "public": {
         "path": "public/assets/life-d32/home-oriel.png",
-        "bytes": 78300,
-        "sha256": "a9fdc52f388faaff1823f3c5126b4152f9e9cf538f38f50ec79357fd0eb45276"
+        "bytes": 127871,
+        "sha256": "b7663f31bd925d160c2839fbdc7049287246e9372f25621faaf2ae154eb46aef"
       },
-      "width": 185,
-      "height": 189,
+      "width": 240,
+      "height": 245,
       "rawCorners": [
         0,
         0,
