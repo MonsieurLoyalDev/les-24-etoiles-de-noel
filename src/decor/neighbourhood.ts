@@ -24,11 +24,11 @@ export const homes: Home[] = [
   },
   {
     key: "home-garden",
-    x: 285,
-    y: 630,
+    x: 296,
+    y: 600,
     width: 200,
     maxHeight: 145,
-    footprint: { x: 215, y: 582, w: 140, h: 48 },
+    footprint: { x: 226, y: 552, w: 140, h: 48 },
     chimney: [0.195, 0.025],
     windows: [
       [0.28, 0.72],

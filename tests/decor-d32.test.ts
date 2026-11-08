@@ -43,6 +43,13 @@ it("les 20 nouveaux sprites sont isolés, natifs et traçables, avec des collisi
 });
 it("les quatre nouvelles emprises laissent tous les chemins et accès existants libres", () => {
   const rects = homes.map((x) => x.footprint);
+  // The original Phase B route also crosses free snow outside the drawn lanes.
+  for (let x = 208; x <= 736; x += 4)
+    for (const y of [608, 614])
+      expect(blocked({ x, y }, rects, 1024, 768)).toBe(false);
+  for (let y = 326; y <= 608; y += 4)
+    for (const x of [208, 216])
+      expect(blocked({ x, y }, rects, 1024, 768)).toBe(false);
   for (const lane of lanes)
     for (let i = 1; i < lane.points.length; i++) {
       const a = lane.points[i - 1],
