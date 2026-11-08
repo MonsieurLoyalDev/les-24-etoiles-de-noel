@@ -117,26 +117,21 @@ export function architecture33(scene: Phaser.Scene, room: Room33) {
   const positions: Record<Room33, number[][]> = {
     house: [
       [270, 34],
-      [620, 34],
-      [790, 34],
+      [540, 34],
     ],
     library: [
       [270, 34],
-      [550, 34],
-      [840, 34],
-      [700, 370],
+      [480, 34],
     ],
     workshop: [
       [275, 34],
-      [690, 66],
-      [820, 66],
+      [615, 66],
+      [840, 66],
     ],
     inn: [
       [270, 34],
-      [550, 34],
+      [470, 34],
       [860, 34],
-      [110, 370],
-      [790, 370],
     ],
   };
   for (const [x, y] of positions[room])

@@ -1,6 +1,7 @@
 import type Phaser from "phaser";
 import type { InteriorRoom } from "./interiors";
-import { furnitureByRoom, interiorLanterns } from "./interior-layout";
+import { furnitureByRoom } from "./interior-layout";
+import { lanterns33 } from "./rooms33";
 import { atmospherePalette, effectiveQuality, readGraphics } from "./graphics";
 function mix(a: number, b: number, t: number) {
   const channel = (shift: number) =>
@@ -75,7 +76,7 @@ export class InteriorLight {
         .setDepth(depth);
       this.lights.push({ image, x, y, size });
     };
-    for (const p of interiorLanterns) add(p.x, p.y + 4, 15, p.y + 0.1);
+    for (const p of lanterns33(room)) add(p.x, p.y + 4, 15, p.y + 0.1);
     for (const p of sources[room]) {
       const image = scene.children.getByName(
         "interior:" + p.name,

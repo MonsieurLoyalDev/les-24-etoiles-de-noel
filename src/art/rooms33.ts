@@ -88,7 +88,7 @@ const f = (
 });
 export const furniture33: Record<Room33, Furnishing33[]> = {
   house: [
-    f("hearth-salon", 660, 154, 162, 36, 0.5, "new"),
+    f("hearth-salon", 660, 154, 124, 36, 0.5, "new"),
     f("reading-corner", 720, 470, 148, 36, 0.5, "new"),
     f("house-lounge", 590, 324, 130),
     f("house-table", 733, 300, 95),
@@ -105,7 +105,7 @@ export const furniture33: Record<Room33, Furnishing33[]> = {
     f("library-nook", 910, 310, 78, 28, 0.6),
   ],
   workshop: [
-    f("artisan-station", 724, 174, 160, 36, 0.5, "new"),
+    f("artisan-station", 724, 174, 120, 36, 0.5, "new"),
     f("workshop-storage", 630, 425, 95, 30, 0.8),
     f("workshop-bench", 783, 373, 120, 32, 0.8),
     f("workshop-tools", 810, 468, 104, 28, 0.65),
@@ -113,7 +113,7 @@ export const furniture33: Record<Room33, Furnishing33[]> = {
   ],
   inn: [
     f("tea-banquette", 790, 460, 150, 32, 0.5, "new"),
-    f("hearth-salon", 760, 150, 160, 36, 0.5, "new"),
+    f("hearth-salon", 760, 150, 124, 36, 0.5, "new"),
     f("inn-table", 577, 300, 100),
     f("inn-table", 855, 300, 100),
     f("inn-nook", 110, 450, 76, 25, 0.65, "life"),
@@ -127,7 +127,7 @@ export function coreFurniture(room: Room33): Furnishing33[] {
       key,
       [105, 240, 385][i],
       [155, 150, 160][i],
-      [128, 108, 100][i],
+      [room === "workshop" ? 120 : 128, 108, 100][i],
       [36, 40, 42][i],
     ),
     name: "interior:" + key,
@@ -151,4 +151,12 @@ export function interiorCollisions(room: Room33): Rect[] {
     }
   }
   return [...rects, ...allFurniture(room).map((f) => f.footprint)];
+}
+
+export function lanterns33(room: Room33) {
+  return [
+    { x: 300, y: 24 },
+    { x: 18, y: 178 },
+    { x: roomPlans[room].width - 12, y: 214 },
+  ];
 }

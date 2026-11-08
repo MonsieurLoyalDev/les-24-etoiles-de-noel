@@ -130,6 +130,26 @@ export const frontPaths = residentialPlots.map((p, i) => {
   const h = homes[i],
     doorX = p.x + (p.door[0] - 0.5) * h.width;
   let endY = p.y < 400 ? 400 : p.y < 750 ? 750 : p.y < 1100 ? 1100 : 1360;
+  const laneId =
+    p.y < 400
+      ? "porte-est"
+      : p.y < 800
+        ? "rue-residentielle"
+        : p.y < 1150
+          ? "rue-artisans"
+          : "rue-jardins";
+  const road = urbanLanes.find((l) => l.id === laneId)!;
+  for (let n = 1; n < road.points.length; n++) {
+    const a = road.points[n - 1],
+      b = road.points[n];
+    if (
+      doorX + 10 >= Math.min(a.x, b.x) &&
+      doorX + 10 <= Math.max(a.x, b.x) &&
+      Math.abs(b.x - a.x) > Math.abs(b.y - a.y)
+    )
+      endY = a.y + ((b.y - a.y) * (doorX + 10 - a.x)) / (b.x - a.x);
+  }
+  if (p.key === "cottage-humble") endY = 1100;
   if (p.key === "home-porch") endY = 1100;
   if (p.key === "home-tall") endY = 1320;
   return {
@@ -241,9 +261,13 @@ export function urbanPaths(scene: Phaser.Scene) {
         (l) => l.material === material,
       )) {
         m.beginPath();
-        lane.points.forEach((v, i) =>
-          i ? m.lineTo(v.x, v.y) : m.moveTo(v.x, v.y),
-        );
+        m.moveTo(lane.points[0].x, lane.points[0].y);
+        for (let n = 1; n < lane.points.length; n++) {
+          const a = lane.points[n],
+            b = lane.points[n + 1];
+          if (b) m.arcTo(a.x, a.y, b.x, b.y, 16);
+          else m.lineTo(a.x, a.y);
+        }
         m.lineWidth = lane.width;
         m.stroke();
       }
@@ -257,6 +281,36 @@ export function urbanPaths(scene: Phaser.Scene) {
   scene.add.image(0, 0, key).setOrigin(0).setDepth(-99);
 }
 export function drawHomes(scene: Phaser.Scene) {
+  // Intentional garden and grove compositions, outside all facade/door corridors.
+  const groves = [
+    [140, 845, 72],
+    [219, 870, 59],
+    [675, 855, 64],
+    [726, 840, 78],
+    [870, 1020, 57],
+    [1370, 730, 60],
+    [1404, 720, 42],
+    [1670, 720, 56],
+    [1700, 710, 40],
+    [1280, 1070, 60],
+    [1580, 1055, 52],
+    [1330, 1310, 55],
+    [1620, 1310, 52],
+  ];
+  for (const [x, y, width] of groves) {
+    const key = vegetationKey("vegetation_pine_large", x, y)!;
+    const image = scene.add
+      .image(x, y, key)
+      .setOrigin(0.5, 1)
+      .setDepth(y)
+      .setName("urban:grove");
+    image.setScale(width / image.width);
+    scene.add
+      .image(x, y + 3, "ground-d3-snowbank-small")
+      .setDisplaySize(width * 0.6, 15)
+      .setDepth(y + 0.1);
+  }
+
   for (const [i, h] of homes.entries()) {
     scene.add
       .image(h.x, h.y, "urban-" + h.key)
@@ -273,13 +327,21 @@ export function drawHomes(scene: Phaser.Scene) {
         .setName("urban:detail:" + h.key + ":" + key);
       image.setScale(width / image.width);
     };
-    const left = h.x - h.width / 2 - 13,
+    const left =
+        h.key === "home-narrow" || h.key === "cottage-porchwide"
+          ? h.x + h.width / 2 + 48
+          : h.x - h.width / 2 - 13,
       right = h.x + h.width / 2 + 12;
     prop("lampadaire", right, h.y + 16, 21);
     prop(i % 2 ? "banc_plaid" : "jardiniere", left, h.y + 14, i % 2 ? 48 : 28);
     prop("vegetation_bush_snow", left + 12, h.y - 18, 27);
-    if (i % 3 === 0) prop("cloture_guirlande", right + 20, h.y - 25, 55);
+    if (i % 3 === 0)
+      prop(
+        "cloture_guirlande",
+        right + (h.key === "cottage-garden" ? -12 : 20),
+        h.y - 25,
+        55,
+      );
     if (i % 4 === 0) prop("vegetation_pine_large", left - 15, h.y - 65, 52);
   }
 }
-

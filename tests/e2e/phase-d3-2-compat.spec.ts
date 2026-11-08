@@ -64,7 +64,7 @@ test("D32 anciennes positions sous un décor et performance dans un quartier vis
       dialogueHistory: ["mira:greeting"],
     };
     await install(page, save);
-    const safe = room === "village" ? { x: 512, y: 608 } : { x: 240, y: 280 };
+    const safe = room === "village" ? save.position : { x: 240, y: 280 };
     await expect(page.locator("canvas")).toHaveAttribute(
       "data-player-x",
       String(safe.x),
@@ -104,7 +104,7 @@ test("D32 anciennes positions sous un décor et performance dans un quartier vis
     stars: [1],
     room: "village",
     clock: 135000,
-    position: { x: 385, y: 757 },
+    position: { x: 1530, y: 755 },
   });
   await expect(page.locator("canvas")).toHaveAttribute(
     "data-neighbourhood",
@@ -142,7 +142,7 @@ test("D32 anciennes positions sous un décor et performance dans un quartier vis
     JSON.stringify(
       {
         project: info.project.name,
-        position: { x: 385, y: 757 },
+        position: { x: 1530, y: 755 },
         frames: sorted.length,
         p95,
         mean: sorted.reduce((a, b) => a + b, 0) / sorted.length,

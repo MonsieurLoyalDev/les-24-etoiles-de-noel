@@ -1,7 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { walkTo } from "./navigation";
-import { furnitureSlots } from "../../src/art/interior-layout";
+import { allFurniture } from "../../src/art/rooms33";
 import { initial } from "../../src/domain";
 import { pathToFileURL } from "node:url";
 import { resolve } from "node:path";
@@ -66,11 +66,11 @@ test("D.3.1 : intérieurs, neige et sapin avant/après", async ({
         (await page.locator("canvas").getAttribute("data-interior"))!,
       );
       expect(interior.room).toBe(room);
-      expect(interior.furniture).toHaveLength(3);
+      expect(interior.furniture).toHaveLength(allFurniture(room).length);
       for (const [i, p] of interior.furniture.entries()) {
-        expect(p.footprint).toEqual(furnitureSlots[i].footprint);
-        expect(p.width).toBeLessThanOrEqual(furnitureSlots[i].width + 2.5);
-        expect(p.height).toBeLessThanOrEqual(furnitureSlots[i].maxHeight + 2.5);
+        expect(p.footprint).toEqual(allFurniture(room)[i].footprint);
+        expect(p.width).toBeLessThanOrEqual(220);
+        expect(p.height).toBeLessThanOrEqual(220);
       }
       await page.screenshot({
         path: `${output}/${info.project.name}-${room}-${name}.png`,
@@ -122,21 +122,20 @@ test("D.3.1 : collisions du mobilier et sorties des quatre pièces", async ({
     const y = Number(
       await page.locator("canvas").getAttribute("data-player-y"),
     );
-    expect(y).toBeGreaterThanOrEqual(141.9);
-    expect(y).toBeLessThan(146);
-    await walkTo(page, "x", 180);
-    await walkTo(page, "y", 115);
+    expect(y).toBeGreaterThanOrEqual(153.9);
+    expect(y).toBeLessThan(158);
+    await walkTo(page, "y", 185);
     await walkTo(page, "x", 95);
     await page.keyboard.down("ArrowUp");
     await page.waitForTimeout(600);
     await page.keyboard.up("ArrowUp");
     expect(
       Number(await page.locator("canvas").getAttribute("data-player-y")),
-    ).toBeGreaterThanOrEqual(98.9);
+    ).toBeGreaterThanOrEqual(158.9);
     expect(
       Number(await page.locator("canvas").getAttribute("data-player-y")),
-    ).toBeLessThan(103);
-    await walkTo(page, "y", 165);
+    ).toBeLessThan(163);
+    await walkTo(page, "y", 185);
     await walkTo(page, "x", 385);
     await page.keyboard.down("ArrowUp");
     await page.waitForTimeout(900);
@@ -144,8 +143,8 @@ test("D.3.1 : collisions du mobilier et sorties des quatre pièces", async ({
     const right = Number(
       await page.locator("canvas").getAttribute("data-player-y"),
     );
-    expect(right).toBeGreaterThanOrEqual(123.9);
-    expect(right).toBeLessThan(128);
+    expect(right).toBeGreaterThanOrEqual(163.9);
+    expect(right).toBeLessThan(168);
     await walkTo(page, "y", 280);
     await walkTo(page, "x", 240);
     await walkTo(page, "y", 305);

@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { initial, type Save } from "../../src/domain";
 import { decorativeObjects, decorationKey } from "../../src/decor/model";
 import { walkTo } from "./navigation";
-import { homes } from "../../src/decor/neighbourhood";
+import { homes } from "../../src/art/village33";
 const out = "docs/screenshots/phase-d3-2/apres";
 test("D32 effets des quartiers, culling et performance extérieure", async ({
   page,
@@ -29,7 +29,7 @@ test("D32 effets des quartiers, culling et performance extérieure", async ({
   const neighbourhood = JSON.parse(
     (await page.locator("canvas").getAttribute("data-neighbourhood"))!,
   );
-  expect(neighbourhood.houses).toBe(4);
+  expect(neighbourhood.houses).toBe(16);
   expect(neighbourhood.smoke).toBeLessThanOrEqual(
     info.project.name === "mobile" ? 8 : 16,
   );

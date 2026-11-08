@@ -57,11 +57,15 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
-  for (const key of Object.keys(lifeAssetSizes))
+  for (const key of Object.keys(lifeAssetSizes).filter(
+    (key) => !key.startsWith("home-"),
+  ))
     scene.load.image("life-" + key, `/assets/life-d32/${key}.png`);
   for (const [key, path] of Object.entries(snowFinishingAssets))
     scene.load.image("d31-" + key, path);
-  for (const [key, path] of Object.entries(interiorAssets))
+  for (const [key, path] of Object.entries(interiorAssets).filter(
+    ([key]) => !key.endsWith("-shell"),
+  ))
     scene.load.image("d31-" + key, path);
   for (const [key, path] of Object.entries(terrainAssets))
     scene.load.image("source-ground-d3-" + key, path);

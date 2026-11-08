@@ -68,9 +68,12 @@ async function approachNPC(page: Page, id: string, name: string) {
 async function resident(page: Page, name: string, accept = false) {
   await approachNPC(
     page,
-    ({ Célestine: "mira", Basile: "oscar", Madeleine: "alma" } as Record<string, string>)[
-      name
-    ],
+    (
+      { Célestine: "mira", Basile: "oscar", Madeleine: "alma" } as Record<
+        string,
+        string
+      >
+    )[name],
     name,
   );
   if (accept) {
@@ -153,10 +156,10 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Célestine", true);
   await walk(page, "y", 170);
   await walk(page, "x", 385);
-  await walk(page, "y", 145);
+  await walk(page, "y", 185);
   await interact(page, /marque-page/);
   await dismiss(page);
-  await walk(page, "y", 160);
+  await walk(page, "y", 185);
   await walk(page, "x", 240);
   await interact(page, /livre des devinettes/);
   await page.getByRole("button", { name: "Un flocon", exact: true }).click();
@@ -201,10 +204,10 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Basile", true);
   await walk(page, "y", 170);
   await walk(page, "x", 385);
-  await walk(page, "y", 145);
+  await walk(page, "y", 185);
   await interact(page, /Prendre le ruban/);
   await dismiss(page);
-  await walk(page, "y", 160);
+  await walk(page, "y", 185);
   await walk(page, "x", 240);
   await interact(page, /Établi/);
   const wrap = page.getByRole("dialog", { name: "Emballage de cadeaux" });
