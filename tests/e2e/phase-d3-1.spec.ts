@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, existsSync } from "node:fs";
 import { walkTo } from "./navigation";
 import { allFurniture } from "../../src/art/rooms33";
 import { initial } from "../../src/domain";
@@ -250,7 +250,13 @@ test("D.3.1 : contrôle des ressources sur fonds clair et sombre", async ({
     fullPage: true,
   });
   await page.goto(
-    pathToFileURL(resolve("docs/graphismes/sapin-d31.html")).href,
+    pathToFileURL(
+      resolve(
+        existsSync("delivery-manifest.json")
+          ? "docs/graphismes/sapin-light.html"
+          : "docs/graphismes/sapin-d31.html",
+      ),
+    ).href,
   );
   await expect(page.locator(".frame")).toHaveCount(3);
   await page.locator("img").evaluateAll((images) =>

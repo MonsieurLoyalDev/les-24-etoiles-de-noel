@@ -40,7 +40,6 @@ const essentials = new Set([
   "docs/graphismes/d33/ASSETS-INTERIEURS.json",
   "docs/graphismes/vegetation-d22.html",
   "docs/graphismes/ressources-d31.html",
-  "docs/graphismes/sapin-d31.html",
 ]);
 const buildScripts = new Set([
   "scripts/generate-seed.ts",
@@ -119,6 +118,15 @@ writeFileSync(join(light, "README.md"), readme);
 const row = source.find((f) => f.path === "README.md");
 row.bytes = Buffer.byteLength(readme);
 row.sha256 = createHash("sha256").update(readme).digest("hex");
+const fixturePath = "docs/graphismes/sapin-light.html";
+const fixture = `<!doctype html><html lang="fr"><meta charset="utf-8"><title>Sapin — contrôle natif SOURCE-LIGHT</title><style>body{background:#192733;color:#ffe7c1;font:16px sans-serif;margin:24px}.frames{display:flex;gap:24px}.frame{width:225px;height:184px;background-image:url('../../public/assets/validated/atlases/sapin_atlas-Etoilebois_Sapin_V11_4.png');background-size:1125px 920px;image-rendering:pixelated}img{max-width:100%;image-rendering:pixelated}</style><h1>Atlas natif du sapin — SOURCE-LIGHT</h1><p>Les comparatifs historiques restent dans ARTWORK. Cette page contrôle le véritable atlas utilisé par le jeu, avec les états 0, 1 et 24.</p><div class="frames"><div class="frame"></div><div class="frame" style="background-position:-225px 0"></div><div class="frame" style="background-position:-900px -736px"></div></div><h2>Texture native complète</h2><img src="../../public/assets/validated/atlases/sapin_atlas-Etoilebois_Sapin_V11_4.png" alt="Atlas natif des 25 états"></html>`;
+writeFileSync(join(light, fixturePath), fixture);
+source.push({
+  path: fixturePath,
+  bytes: Buffer.byteLength(fixture),
+  sha256: createHash("sha256").update(fixture).digest("hex"),
+  purpose: "native-atlas-browser-test-fixture",
+});
 const manifest = {
   format: "etoilebois-source-light-1",
   version: "0.7.3",
