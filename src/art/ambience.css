@@ -1,0 +1,23 @@
+.graphics-settings {
+  border: 1px solid #96774f;
+  border-radius: 6px;
+  padding: 12px;
+  margin: 14px 0;
+}
+.graphics-settings select {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  font: inherit;
+  background: #22333b;
+  color: #fff0d3;
+  border: 1px solid #b49161;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 6px 0;
+}
+.graphics-settings small {
+  display: block;
+  line-height: 1.4;
+  color: #d3dfe5;
+}

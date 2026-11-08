@@ -21,6 +21,7 @@ import { cleanKey } from "../art/prepare";
 import { plaque, updateTags, type ActorTag, type SignTag } from "../art/tags";
 import { signNames } from "../art/tag-layout";
 import { vegetationKey } from "../art/vegetation";
+import { VillageAmbience } from "../art/ambience";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -99,14 +100,7 @@ export class Village extends Phaser.Scene {
   actorTags: ActorTag[] = [];
   signTags: SignTag[] = [];
   shade!: Phaser.GameObjects.Rectangle;
-  snow: Phaser.GameObjects.Arc[] = [];
-  lamps: Phaser.GameObjects.Arc[] = [];
-  smoke: {
-    puff: Phaser.GameObjects.Arc;
-    x: number;
-    y: number;
-    phase: number;
-  }[] = [];
+  ambience?: VillageAmbience;
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -209,8 +203,6 @@ export class Village extends Phaser.Scene {
     this.npcs = [];
     this.actorTags = [];
     this.signTags = [];
-    this.lamps = [];
-    this.smoke = [];
     this.decorations = [];
     this.rects = [];
     this.trail = [];
@@ -264,12 +256,6 @@ export class Village extends Phaser.Scene {
             w: 28,
             h: 15,
           });
-        if (p.sprite === "lantern")
-          this.lamps.push(
-            this.add
-              .circle(p.tileX * 16, p.tileY * 16 - 46, 11, 0xffce72, 1)
-              .setDepth(p.tileY * 16 + 1),
-          );
       });
       map.buildings.forEach((b) => {
         const x = b.tileX * 16,
@@ -281,19 +267,9 @@ export class Village extends Phaser.Scene {
           .image(b.entrance.x * 16, y + bh, cleanKey(buildingArt[b.id]))
           .setOrigin(0.5, 1)
           .setDepth(y + bh - 12);
-        facade.setScale(buildingWidths[b.id] / facade.width);
-        for (let i = 0; i < 3; i++) {
-          const sx = b.entrance.x * 16 - bw * 0.3,
-            sy = y + bh - facade.displayHeight * 0.8;
-          this.smoke.push({
-            puff: this.add
-              .circle(sx, sy, 3, 0xd6d9e4, 0.1)
-              .setDepth(y + bh + 1),
-            x: sx,
-            y: sy,
-            phase: i / 3,
-          });
-        }
+        facade
+          .setScale(buildingWidths[b.id] / facade.width)
+          .setName("facade:" + b.id);
         const plate = plaque(
           this,
           signNames[b.id as keyof typeof signNames],
@@ -405,21 +381,11 @@ export class Village extends Phaser.Scene {
       .setOrigin(0)
       .setScrollFactor(0)
       .setDepth(9000);
-    this.snow =
-      this.state.room === "village"
-        ? Array.from({ length: 36 }, (_, i) =>
-            this.add
-              .circle(
-                (i * 73) % 640,
-                (i * 47) % 400,
-                i % 3 === 0 ? 1.2 : 0.7,
-                0xf3f7ff,
-                0.7,
-              )
-              .setScrollFactor(0)
-              .setDepth(9010),
-          )
-        : [];
+    this.ambience = new VillageAmbience(
+      this,
+      this.shade,
+      this.state.room === "village",
+    );
     this.refreshAdvent();
   }
   setAdventDay(day: Day | null) {
@@ -983,42 +949,7 @@ export class Village extends Phaser.Scene {
       npc.image.setDepth(npc.image.y);
       animateActor(npc.image);
     }
-    const cam = this.cameras.main,
-      sx = (cam.width - cam.width / cam.zoom) / 2,
-      sy = (cam.height - cam.height / cam.zoom) / 2;
-    this.shade
-      .setPosition(sx, sy)
-      .setSize(cam.width / cam.zoom, cam.height / cam.zoom)
-      .setAlpha(
-        this.state.room === "village"
-          ? [0.1, 0, 0.18, 0.32][period(this.state.clock)]
-          : 0.03,
-      );
-    this.lamps.forEach((lamp, i) =>
-      lamp.setAlpha(
-        (period(this.state.clock) >= 2 ? 0.28 : 0.1) +
-          Math.sin(_time / 600 + i) * 0.035,
-      ),
-    );
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    for (const { puff, x, y, phase } of this.smoke) {
-      const life = (_time / 4200 + phase) % 1;
-      puff
-        .setPosition(x + Math.sin(life * 4) * 5, y - life * 24)
-        .setScale(1 + life)
-        .setAlpha(reduced ? 0 : Math.sin(life * Math.PI) * 0.15);
-    }
-    this.snow.forEach((flake, i) => {
-      flake.setVisible(!reduced);
-      const span = cam.width / cam.zoom,
-        height = cam.height / cam.zoom;
-      flake.setPosition(
-        sx + ((i * 73 + _time * (0.003 + (i % 3) * 0.001)) % span),
-        sy + ((i * 47 + _time * (0.008 + (i % 3) * 0.003)) % height),
-      );
-    });
+    this.ambience?.update(_time, this.state.clock, delta);
     this.loyal.setDepth(this.loyal.y);
     [this.player, this.loyal].forEach((p, i) =>
       this.glasses[i]?.setPosition(p.x, p.y).setDepth(p.y + 0.1),

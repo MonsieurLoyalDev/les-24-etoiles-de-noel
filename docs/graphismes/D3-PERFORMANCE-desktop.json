@@ -1,0 +1,43 @@
+{
+  "note": "Chrome headless local, téléphone simulé ; coût CPU du contrôleur, pas temps GPU.",
+  "soft": {
+    "quality": "soft",
+    "reduced": false,
+    "flurry": 0.6751419736265817,
+    "visibleSnow": 14,
+    "visibleSmoke": 2,
+    "visibleWind": 1,
+    "visibleStars": 3,
+    "visibleLights": 11,
+    "swaying": 3,
+    "particleLimit": 28,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 179.091796875,
+    "meanFrameMs": 4.167222222222224,
+    "palette": {
+      "color": 1519709,
+      "alpha": 0.27,
+      "warm": 1
+    }
+  },
+  "reduced": {
+    "quality": "none",
+    "reduced": true,
+    "flurry": 0.7260774201867767,
+    "visibleSnow": 0,
+    "visibleSmoke": 0,
+    "visibleWind": 0,
+    "visibleStars": 0,
+    "visibleLights": 11,
+    "swaying": 0,
+    "particleLimit": 0,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 179.091796875,
+    "meanFrameMs": 4.1677777777777765,
+    "palette": {
+      "color": 1519709,
+      "alpha": 0.27,
+      "warm": 1
+    }
+  }
+}

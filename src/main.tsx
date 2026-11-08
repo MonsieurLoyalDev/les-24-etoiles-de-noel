@@ -1,4 +1,6 @@
 import { Dialogue } from "./art/Dialogue";
+import { GraphicsSettings } from "./art/GraphicsSettings";
+import "./art/ambience.css";
 import { readAudio, setAudio, playSound, stopAmbience } from "./art/audio";
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
@@ -317,6 +319,7 @@ function App() {
                   Fermer ×
                 </button>
                 <h2>Un hiver à votre rythme</h2>
+                <GraphicsSettings />
                 <p>
                   Les animations respectent la préférence de réduction des
                   mouvements de votre appareil.
