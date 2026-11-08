@@ -1,3 +1,4 @@
+import { originalProof } from "./original-proof";
 import { it, expect } from "vitest";
 import {
   DecorationState,
@@ -19,7 +20,8 @@ import { createHash } from "node:crypto";
 it("les 20 nouveaux sprites sont isolés, natifs et traçables, avec des collisions adaptées à leur silhouette", () => {
   expect(inventory.assets).toHaveLength(20);
   for (const a of inventory.assets) {
-    for (const part of [a.original, a.public])
+    expect(originalProof(a.original.path).sha256).toBe(a.original.sha256);
+    for (const part of [a.public])
       expect(
         createHash("sha256").update(readFileSync(part.path)).digest("hex"),
       ).toBe(part.sha256);
@@ -27,11 +29,11 @@ it("les 20 nouveaux sprites sont isolés, natifs et traçables, avec des collisi
     expect(Math.max(...a.rawCorners)).toBeLessThanOrEqual(1);
     expect(a.transparentFraction).toBeGreaterThan(0.05);
     expect(Math.max(a.width, a.height)).toBeLessThanOrEqual(512);
-    const raw = readFileSync(a.original.path);
+    const raw = originalProof(a.original.path);
     expect(a.bounds.left).toBeGreaterThan(0);
     expect(a.bounds.top).toBeGreaterThan(0);
-    expect(a.bounds.right).toBeLessThan(raw.readUInt32BE(16) - 1);
-    expect(a.bounds.bottom).toBeLessThan(raw.readUInt32BE(20) - 1);
+    expect(a.bounds.right).toBeLessThan(raw.width - 1);
+    expect(a.bounds.bottom).toBeLessThan(raw.height - 1);
     const h = homes.find((h) => h.key === a.key);
     if (h) {
       expect(h.footprint.x).toBeGreaterThanOrEqual(h.x - a.width / 4);

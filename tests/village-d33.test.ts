@@ -1,3 +1,4 @@
+import { originalProof } from "./original-proof";
 import { it, expect } from "vitest";
 import {
   roomPlans,
@@ -23,7 +24,8 @@ it("seize silhouettes, portes calibrées et exports alpha traçables", () => {
   expect(new Set(homes.map((x) => x.key)).size).toBe(16);
   expect(humanDoorHeight).toBe(44);
   for (const a of [...houses, ...assets]) {
-    for (const part of [a.original, a.public])
+    expect(originalProof(a.original.path).sha256).toBe(a.original.sha256);
+    for (const part of [a.public])
       expect(
         createHash("sha256").update(readFileSync(part.path)).digest("hex"),
       ).toBe(part.sha256);

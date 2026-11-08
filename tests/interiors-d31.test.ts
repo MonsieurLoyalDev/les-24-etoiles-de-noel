@@ -1,3 +1,4 @@
+import { originalProof } from "./original-proof";
 import { it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -66,9 +67,7 @@ it("les 24 exports natifs restent petits, transparents et conformes aux originau
     );
     expect(allowlist).toContain(a.public.path);
     expect(Math.max(a.public.width, a.public.height)).toBeLessThanOrEqual(512);
-    expect(
-      createHash("sha256").update(readFileSync(a.original.path)).digest("hex"),
-    ).toBe(a.original.sha256);
+    expect(originalProof(a.original.path).sha256).toBe(a.original.sha256);
     if (a.mode === "cutout") {
       expect(a.rawTransparentFraction).toBeGreaterThan(0.05);
       expect(a.renderCorners).toEqual([0, 0, 0, 0]);
