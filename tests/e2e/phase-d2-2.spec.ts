@@ -1,7 +1,8 @@
 import { test, expect, type Page } from "@playwright/test";
 import { mkdirSync } from "node:fs";
 import { initial, type Save } from "../../src/domain";
-import { walkTo } from "./navigation";
+import { navigateTo } from "./pathfinding";
+import { anchors } from "../../src/art/village34";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 async function start(
@@ -112,14 +113,14 @@ test("D.2.2 : étiquettes masquées en dialogue, stables et contenues", async ({
     path: `docs/screenshots/phase-d2-2/apres/${info.project.name}-dialogue.png`,
   });
   await page.getByRole("button", { name: /Continuer/ }).click();
-  await walkTo(page, "x", 600);
+  await navigateTo(page, { x: anchors.spawn.x + 40, y: anchors.spawn.y });
   const first = (await tags(page)).find((t) => t.name === "Debby")!;
   await page.waitForTimeout(200);
   const next = (await tags(page)).find((t) => t.name === "Debby")!;
   expect(Math.abs(first.x - next.x)).toBeLessThanOrEqual(2);
   expect(Math.abs(first.y - next.y)).toBeLessThanOrEqual(2);
-  for (const x of [16, 1000]) {
-    await start(page, { x, y: 720 });
+  for (const x of [16, 1904]) {
+    await start(page, { x, y: 1360 });
     const viewport = await page.locator("canvas").boundingBox();
     for (const t of (await tags(page)).filter((t) => t.visible)) {
       expect(t.x).toBeGreaterThanOrEqual(0);
@@ -129,7 +130,7 @@ test("D.2.2 : étiquettes masquées en dialogue, stables et contenues", async ({
     }
   }
   if (info.project.name === "desktop") {
-    await start(page, { x: 850, y: 575 });
+    await start(page, { x: anchors.flocon.x, y: anchors.flocon.y + 135 });
     // Flocon's head reaches the upper edge here: hide the plaque rather than cover his face.
     expect(
       (await tags(page)).find((t) => t.name === "Flocon")!.visible,

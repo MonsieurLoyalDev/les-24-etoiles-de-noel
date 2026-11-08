@@ -190,16 +190,17 @@ export function urbanPaths(scene: Phaser.Scene) {
         m.lineWidth = lane.width;
         m.stroke();
       }
-      if (material === "stone")
-        for (const court of pedestrianCourts) {
-          m.beginPath();
-          court.points.forEach(([x, y], i) =>
-            i ? m.lineTo(x, y) : m.moveTo(x, y),
-          );
-          m.closePath();
-          m.fillStyle = "#fff";
-          m.fill();
-        }
+      for (const court of pedestrianCourts.filter(
+        (c) => (c.id === "C3" ? "dirt" : "stone") === material,
+      )) {
+        m.beginPath();
+        court.points.forEach(([x, y], i) =>
+          i ? m.lineTo(x, y) : m.moveTo(x, y),
+        );
+        m.closePath();
+        m.fillStyle = "#fff";
+        m.fill();
+      }
       p.drawImage(mask, 0, 0);
       c.globalAlpha = material === "stone" ? 0.85 : 0.53;
       c.drawImage(layer, 0, 0);

@@ -240,6 +240,8 @@ export class Village extends Phaser.Scene {
     this.interiorLife = undefined;
     this.neighbourhood = undefined;
     delete this.game.canvas.dataset.neighbourhood;
+    delete this.game.canvas.dataset.scenery34;
+    delete this.game.canvas.dataset.village34;
     delete this.game.canvas.dataset.decorative;
     delete this.game.canvas.dataset.interior;
     delete this.game.canvas.dataset.interiorLight;

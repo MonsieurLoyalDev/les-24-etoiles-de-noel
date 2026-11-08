@@ -31,7 +31,7 @@ export const initial: Save = {
 };
 export const objectives = [
   "Parler à Loyal · E près de lui",
-  "Entrer dans la Maison de Loyal · au sud-est",
+  "Entrer dans la Maison de Loyal · au sud-ouest",
   "Trouver la lettre sur la table",
   "Revenir au sapin et placer votre étoile",
   "Votre première étoile brille. Merci, Debby ♥",
