@@ -1,0 +1,15 @@
+{
+  "normal": {
+    "p95": 4.299999999999727,
+    "mean": 4.16705882352941,
+    "frames": 170
+  },
+  "data": {
+    "houses": 16,
+    "quality": "full",
+    "smoke": 4,
+    "budget": 8,
+    "lights": 2
+  },
+  "note": "Chrome local, format et toucher émulés ; RAF, pas une mesure sur téléphone physique."
+}

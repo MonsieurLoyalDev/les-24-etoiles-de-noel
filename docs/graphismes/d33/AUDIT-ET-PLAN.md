@@ -33,3 +33,7 @@ A audit → B plan → C façades et échelles → D jardins/chemins/vie extéri
 
 Les contrats de tests purement géométriques D.3.1/D.3.2 devenus obsolètes seront remplacés par des contrôles des nouveaux plans ; les parcours fonctionnels du calendrier et des mini-jeux doivent continuer à fonctionner. Lint, TypeScript, unités, builds et navigateur PC/mobile seront exécutés et leurs résultats réels rapportés. Aucune fusion, aucun déploiement, aucune D.4.
 
+
+## Ajustement du plan après inspection graphique
+
+Le plan initial de travail ci-dessus a été affiné en conservant la même extension et les mêmes quartiers. Les voies principales passent désormais autour de y400, y750, y1100 et y1360, avec des inflexions, des coins courts arrondis et des parcelles décalées. Les positions finales font foi dans `src/art/urban-plan.ts`, le plan SVG actualisé et le tableau du rapport. La maison à baie vitrée est implantée en (1230,610). Les arbres ajoutés encadrent les parcelles plutôt que les portes ; les bosquets de lisière ne remplacent pas les textures de terrain validées.

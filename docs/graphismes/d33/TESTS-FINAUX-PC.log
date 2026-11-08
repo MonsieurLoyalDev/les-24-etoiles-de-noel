@@ -1,0 +1,14 @@
+
+[WebServer] (node:23372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+
+(node:31924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/3] [desktop] › tests\e2e\phase-d3-3.spec.ts:103:1 › D33 plans, annexes accessibles et mobilier jour/nuit
+[2/3] [desktop] › tests\e2e\phase-d3-3.spec.ts:206:1 › D33 performances en quartier habité et effets réduits
+[3/3] [desktop] › tests\e2e\phase-d3-3.spec.ts:241:1 › D33 ancienne position désormais occupée : progression préservée
+  3 passed (2.2m)

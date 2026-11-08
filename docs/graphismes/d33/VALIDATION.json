@@ -1,0 +1,104 @@
+{
+  "version": "0.7.3",
+  "date": "2026-11-08",
+  "lint": "passed",
+  "typescript": "passed (tsc --noEmit dans les builds et contrôle direct)",
+  "build": "passed",
+  "privateBuild": "passed; contrôle de fuite de contenus fictifs réussi",
+  "unit": {
+    "passed": 156,
+    "skipped": 2,
+    "reason": "tests POSIX dans tests/ops.test.mjs, ignorés sous Windows"
+  },
+  "browser": {
+    "complete": {
+      "passed": 86,
+      "skipped": 12,
+      "minutes": 31.9,
+      "log": "TESTS-COMPLETS.log"
+    },
+    "finalTargeted": {
+      "passed": 19,
+      "skipped": 3,
+      "desktopLegacyAndWorld": 8,
+      "desktopRetake": 3,
+      "mobile": 8,
+      "note": "Lots après le calage final des emprises. Le trajet de test de l’auberge a été corrigé pour contourner une table ; reprise réussie sur les deux formats."
+    },
+    "videos": {
+      "passed": 2,
+      "seconds": 46.3
+    }
+  },
+  "graphics": {
+    "publicAssetsPreserved": 196,
+    "newNativeAssets": 24,
+    "newNativeBytes": 4114223,
+    "houses": 16,
+    "rooms": 4,
+    "interactionsPreserved": 17
+  },
+  "performance": {
+    "desktop": {
+      "normal": {
+        "p95": 4.299999999999727,
+        "mean": 4.16705882352941,
+        "frames": 170
+      },
+      "data": {
+        "houses": 16,
+        "quality": "full",
+        "smoke": 4,
+        "budget": 8,
+        "lights": 2
+      },
+      "note": "Chrome local, format et toucher émulés ; RAF, pas une mesure sur téléphone physique."
+    },
+    "mobile": {
+      "normal": {
+        "p95": 4.300000000000182,
+        "mean": 4.186470588235293,
+        "frames": 170
+      },
+      "data": {
+        "houses": 16,
+        "quality": "soft",
+        "smoke": 2,
+        "budget": 4,
+        "lights": 3
+      },
+      "note": "Chrome local, format et toucher émulés ; RAF, pas une mesure sur téléphone physique."
+    }
+  },
+  "galleries": [
+    {
+      "file": "comparatif-d33.html",
+      "images": 35,
+      "broken": 0,
+      "videos": [
+        {
+          "seconds": 18.72,
+          "ready": 4
+        },
+        {
+          "seconds": 18.52,
+          "ready": 4
+        }
+      ]
+    },
+    {
+      "file": "ressources-d33.html",
+      "images": 48,
+      "broken": 0,
+      "videos": []
+    }
+  ],
+  "limitations": [
+    "Téléphone émulé, aucun test sur téléphone physique",
+    "Créations à valider artistiquement",
+    "Maisons décoratives sans nouveaux portails",
+    "Pas de posture assise ajoutée",
+    "Aucune fusion ou mise en ligne",
+    "Avertissement Vite sur le chunk Phaser >500 ko ; pas une erreur de compilation"
+  ]
+}

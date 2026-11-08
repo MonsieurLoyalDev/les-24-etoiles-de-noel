@@ -1,0 +1,4 @@
+
+> les-24-etoiles-de-noel@0.7.3 lint
+> eslint src tests *.ts scripts ops
+
