@@ -1,3 +1,15 @@
+# Les 24 Étoiles de Noël — D.3.4, le village des quatre cours
+
+Version **0.7.4** : implantation V2 validée, seize habitations regroupées autour de quatre cours, quatre bâtiments visitables autour du sapin et deux étals décoratifs. Les intérieurs D.3.3, les17 interactions, les24 journées et les sauvegardes restent compatibles.
+
+- [Captures réelles PC/mobile et comparaison](docs/graphismes/d34/validation.html)
+- [Rapport D.3.4](docs/graphismes/d34/RAPPORT.md)
+- [Implantation V2 approuvée](docs/graphismes/d34/plan-valide-v2.json)
+
+La branche feature/phase-d3-4-village attend la validation artistique finale. Aucune fusion ni aucun déploiement automatique.
+
+## Historique D.3.3
+
 # Les 24 Étoiles de Noël — D.3.3, le grand village chaleureux
 
 Version 0.7.3 : seize habitations décoratives, quatre quartiers reliés et quatre intérieurs aux plans distincts. Les dix-sept interactions décoratives, les personnages, la neige D.3.1 et la progression sont conservés.

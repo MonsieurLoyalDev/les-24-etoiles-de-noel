@@ -1,0 +1,86 @@
+{
+  "baseline": "D.3.3 / b952960",
+  "publicFilesHashed": 221,
+  "publicBytes": 85977279,
+  "publicFilesChanged": [],
+  "protectedPathsUnchanged": [
+    "src/art/rooms33.ts",
+    "src/art/interior-layout.ts",
+    "src/decor/model.ts",
+    "src/save.ts",
+    "src/calendar.ts",
+    "src/advent",
+    "src/rpg/dialogue.ts",
+    "src/rpg/quests.ts",
+    "src/rpg/minigames.ts",
+    "src/ui/MiniGame.tsx"
+  ],
+  "doors": [
+    {
+      "key": "home-family",
+      "pixels": 44.63999999999999
+    },
+    {
+      "key": "home-chalet",
+      "pixels": 44.709999999999994
+    },
+    {
+      "key": "cottage-stone",
+      "pixels": 44.84
+    },
+    {
+      "key": "cottage-twin",
+      "pixels": 44.51500000000001
+    },
+    {
+      "key": "home-porch",
+      "pixels": 44.54999999999999
+    },
+    {
+      "key": "home-garden",
+      "pixels": 44.63999999999999
+    },
+    {
+      "key": "home-tall",
+      "pixels": 44.5
+    },
+    {
+      "key": "home-oriel",
+      "pixels": 44.63999999999999
+    },
+    {
+      "key": "cottage-gable",
+      "pixels": 44.71500000000001
+    },
+    {
+      "key": "home-shutters",
+      "pixels": 44.85
+    },
+    {
+      "key": "cottage-annex",
+      "pixels": 44.625
+    },
+    {
+      "key": "cottage-terrace",
+      "pixels": 44.769999999999996
+    },
+    {
+      "key": "cottage-humble",
+      "pixels": 44.719
+    },
+    {
+      "key": "home-narrow",
+      "pixels": 44.36499999999999
+    },
+    {
+      "key": "cottage-porchwide",
+      "pixels": 44.8
+    },
+    {
+      "key": "cottage-garden",
+      "pixels": 44.84
+    }
+  ],
+  "humanHeight": 52,
+  "scope": "Vérification des ressources et du code protégés, distincte des tests navigateur en cours."
+}
