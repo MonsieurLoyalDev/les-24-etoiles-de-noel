@@ -1,0 +1,19 @@
+
+[WebServer] (node:32976) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:11068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/4] [desktop] › tests\e2e\phase-b.spec.ts:124:1 › Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux
+[2/4] [desktop] › tests\e2e\phase-d3-2-compat.spec.ts:44:1 › D32 anciennes positions sous un décor et performance dans un quartier visible
+(node:5000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[3/4] [mobile] › tests\e2e\phase-b.spec.ts:124:1 › Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux
+[4/4] [mobile] › tests\e2e\phase-d3-2-compat.spec.ts:44:1 › D32 anciennes positions sous un décor et performance dans un quartier visible
+  4 passed (3.3m)

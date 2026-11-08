@@ -15,6 +15,7 @@ import { terrainAssets } from "./terrain-design";
 import { prepareTerrain } from "./terrain";
 import { snowFinishingAssets } from "./snow-finishing";
 import { interiorAssets } from "./interiors";
+import { lifeAssetSizes } from "../decor/model";
 
 export const art = catalog.images;
 export const buildingArt: Record<string, string> = {
@@ -56,6 +57,8 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
+  for (const key of Object.keys(lifeAssetSizes))
+    scene.load.image("life-" + key, `/assets/life-d32/${key}.png`);
   for (const [key, path] of Object.entries(snowFinishingAssets))
     scene.load.image("d31-" + key, path);
   for (const [key, path] of Object.entries(interiorAssets))

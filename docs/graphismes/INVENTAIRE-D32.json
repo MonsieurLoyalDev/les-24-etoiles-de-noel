@@ -1,0 +1,566 @@
+{
+  "version": "0.7.2",
+  "method": "image_gen originals preserved; alpha bounding crop and nearest-neighbour native export, 2px transparent padding",
+  "assets": [
+    {
+      "key": "home-porch",
+      "original": {
+        "path": "docs/artwork-d32/originals/home-porch.png",
+        "bytes": 2165870,
+        "sha256": "09244debfabf2c70fb57f9d3458c51b2d27d2e8fc9ad5410b7c9db2b2a242d87"
+      },
+      "public": {
+        "path": "public/assets/life-d32/home-porch.png",
+        "bytes": 113860,
+        "sha256": "dffda0d1190b34ddc7a93735a91a8fd58cec649bfd669862660625ddc5edeafb"
+      },
+      "width": 175,
+      "height": 300,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5457503000895182,
+      "bounds": {
+        "left": 137,
+        "top": 140,
+        "right": 887,
+        "bottom": 1443
+      }
+    },
+    {
+      "key": "home-garden",
+      "original": {
+        "path": "docs/artwork-d32/originals/home-garden.png",
+        "bytes": 2755666,
+        "sha256": "58dd0773367ab11ac28d0896d2239d0e5e38c704225cda98c91c2b4811ad1afc"
+      },
+      "public": {
+        "path": "public/assets/life-d32/home-garden.png",
+        "bytes": 241891,
+        "sha256": "5094711b592f0d93d6d67025829195075e3c631f4baf10d70909413de73caaa8"
+      },
+      "width": 404,
+      "height": 277,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.3498942057291667,
+      "bounds": {
+        "left": 44,
+        "top": 12,
+        "right": 1490,
+        "bottom": 995
+      }
+    },
+    {
+      "key": "home-tall",
+      "original": {
+        "path": "docs/artwork-d32/originals/home-tall.png",
+        "bytes": 1823050,
+        "sha256": "8330cda71ab1d3f7015bb0505296a42a69a1810375f32e0b77e6f5b178072e7d"
+      },
+      "public": {
+        "path": "public/assets/life-d32/home-tall.png",
+        "bytes": 112554,
+        "sha256": "8eb56909f5f7de4220c07a07ed33f252ca71b8ba25427510c6225abc1f15f1ad"
+      },
+      "width": 182,
+      "height": 284,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.4819473754151134,
+      "bounds": {
+        "left": 128,
+        "top": 16,
+        "right": 984,
+        "bottom": 1368
+      }
+    },
+    {
+      "key": "home-oriel",
+      "original": {
+        "path": "docs/artwork-d32/originals/home-oriel.png",
+        "bytes": 1834637,
+        "sha256": "6166f909b17c827feae71e9e8320a261669b9e5502a9be8d3917327c8449a12c"
+      },
+      "public": {
+        "path": "public/assets/life-d32/home-oriel.png",
+        "bytes": 127871,
+        "sha256": "b7663f31bd925d160c2839fbdc7049287246e9372f25621faaf2ae154eb46aef"
+      },
+      "width": 240,
+      "height": 245,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.3997653023861348,
+      "bounds": {
+        "left": 91,
+        "top": 31,
+        "right": 1219,
+        "bottom": 1179
+      }
+    },
+    {
+      "key": "house-nook",
+      "original": {
+        "path": "docs/artwork-d32/originals/house-nook.png",
+        "bytes": 2259684,
+        "sha256": "208ae0b69efc9a947a21e0391b4d0acedc06df5b874f76a69306b90642d6a214"
+      },
+      "public": {
+        "path": "public/assets/life-d32/house-nook.png",
+        "bytes": 36873,
+        "sha256": "56d77e6d1ea8a39483c02341a32ba3aa028edc2adc55a2a0916e7a3ca7f7664f"
+      },
+      "width": 184,
+      "height": 94,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.39100676310327426,
+      "bounds": {
+        "left": 12,
+        "top": 11,
+        "right": 1737,
+        "bottom": 872
+      }
+    },
+    {
+      "key": "library-nook",
+      "original": {
+        "path": "docs/artwork-d32/originals/library-nook.png",
+        "bytes": 2480627,
+        "sha256": "a3ed53154bf28f992e0397bb3aa2b6972719d4ca351c0f1014f39c81aaa915ac"
+      },
+      "public": {
+        "path": "public/assets/life-d32/library-nook.png",
+        "bytes": 37582,
+        "sha256": "8537ccae65ab486e20ee18bc96acf384e15930c99c17aa46aa54af927010fc17"
+      },
+      "width": 184,
+      "height": 95,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.3569827992714507,
+      "bounds": {
+        "left": 9,
+        "top": 2,
+        "right": 1770,
+        "bottom": 884
+      }
+    },
+    {
+      "key": "workshop-nook",
+      "original": {
+        "path": "docs/artwork-d32/originals/workshop-nook.png",
+        "bytes": 2518649,
+        "sha256": "a5df60b3e1905e8f16b0a9100b226f66878d50836bcb0819ec637255cd3603a8"
+      },
+      "public": {
+        "path": "public/assets/life-d32/workshop-nook.png",
+        "bytes": 41137,
+        "sha256": "41ac619404d175d15d89c180fefa6f693a768d5c99f1dc7a7e0069811bed2f8a"
+      },
+      "width": 184,
+      "height": 94,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.28313075375364305,
+      "bounds": {
+        "left": 16,
+        "top": 3,
+        "right": 1765,
+        "bottom": 877
+      }
+    },
+    {
+      "key": "inn-nook",
+      "original": {
+        "path": "docs/artwork-d32/originals/inn-nook.png",
+        "bytes": 1998216,
+        "sha256": "64dd6afb605fd0f7cdfb7dc8448dad7346acd1c49b3b731081f2be925aa0b9ba"
+      },
+      "public": {
+        "path": "public/assets/life-d32/inn-nook.png",
+        "bytes": 35264,
+        "sha256": "49b96787d718ef44d5d198dcb4223515f86536beff0e1dd634573d367c34cb28"
+      },
+      "width": 184,
+      "height": 91,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.39451160378713446,
+      "bounds": {
+        "left": 15,
+        "top": 30,
+        "right": 1760,
+        "bottom": 870
+      }
+    },
+    {
+      "key": "house-console",
+      "original": {
+        "path": "docs/artwork-d32/originals/house-console.png",
+        "bytes": 1783425,
+        "sha256": "ed5b165620fd6c5c6739c75b725abd3d76a23b1c45b3d8db7dcb8c5364e3043f"
+      },
+      "public": {
+        "path": "public/assets/life-d32/house-console.png",
+        "bytes": 30835,
+        "sha256": "2a00bb642eb13f8871773d4bcb8ce529952862b7cba02a45828d59bb2b21b90c"
+      },
+      "width": 71,
+      "height": 174,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.6842943827311198,
+      "bounds": {
+        "left": 244,
+        "top": 164,
+        "right": 735,
+        "bottom": 1414
+      }
+    },
+    {
+      "key": "library-console",
+      "original": {
+        "path": "docs/artwork-d32/originals/library-console.png",
+        "bytes": 2325502,
+        "sha256": "f9c23f180f8809ae2150d5431db6dfa770327f3eb7acb0e1247f3df8d2f92dee"
+      },
+      "public": {
+        "path": "public/assets/life-d32/library-console.png",
+        "bytes": 36338,
+        "sha256": "0d245c53a7f1d3eeffd5da2fbea7116d4e9aa81ac82c65780ec74eb1fc4a0830"
+      },
+      "width": 92,
+      "height": 174,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.44442113240559894,
+      "bounds": {
+        "left": 124,
+        "top": 8,
+        "right": 903,
+        "bottom": 1524
+      }
+    },
+    {
+      "key": "workshop-console",
+      "original": {
+        "path": "docs/artwork-d32/originals/workshop-console.png",
+        "bytes": 2223475,
+        "sha256": "b133d97e8e7122f1c0ae9e03a4e343cca200c6f4939f3aaa21777baff66f8bfa"
+      },
+      "public": {
+        "path": "public/assets/life-d32/workshop-console.png",
+        "bytes": 30890,
+        "sha256": "46b63832e2d02211b9f92fa30494f772329a253b159e973d0372c78b9a993d97"
+      },
+      "width": 66,
+      "height": 174,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5465443929036459,
+      "bounds": {
+        "left": 237,
+        "top": 10,
+        "right": 778,
+        "bottom": 1519
+      }
+    },
+    {
+      "key": "inn-console",
+      "original": {
+        "path": "docs/artwork-d32/originals/inn-console.png",
+        "bytes": 2448970,
+        "sha256": "62a212022e2da749cea2665b44a97a940e2a63396744f8bd7b985b44b04f17d2"
+      },
+      "public": {
+        "path": "public/assets/life-d32/inn-console.png",
+        "bytes": 37347,
+        "sha256": "961ec63f66a777a7063d4207c7c0a65903c3ee5d9ef7baa0d536641d15563477"
+      },
+      "width": 87,
+      "height": 174,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.42327880859375,
+      "bounds": {
+        "left": 127,
+        "top": 7,
+        "right": 864,
+        "bottom": 1530
+      }
+    },
+    {
+      "key": "cat-sleep",
+      "original": {
+        "path": "docs/artwork-d32/originals/cat-sleep.png",
+        "bytes": 1931738,
+        "sha256": "f17a36a54ebe5c51fd34d8a9bdc6a521caaae129caea14c5f27f65df4a1d43f5"
+      },
+      "public": {
+        "path": "public/assets/life-d32/cat-sleep.png",
+        "bytes": 10986,
+        "sha256": "cba8c1d1dad5e40a9ce4056c29ff48fccda55244e29efb81b0d80f31f11e8bbd"
+      },
+      "width": 72,
+      "height": 58,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5514151255289713,
+      "bounds": {
+        "left": 237,
+        "top": 106,
+        "right": 1294,
+        "bottom": 931
+      }
+    },
+    {
+      "key": "cat-awake",
+      "original": {
+        "path": "docs/artwork-d32/originals/cat-awake.png",
+        "bytes": 1988432,
+        "sha256": "563fc2517ac49ca6a100bb6f64a361f568aaf32279bf6a61b6abfec96274eda8"
+      },
+      "public": {
+        "path": "public/assets/life-d32/cat-awake.png",
+        "bytes": 10885,
+        "sha256": "453cfaccbce53b699e76d045b6e34a67f3ced3b6a4d727fc5370731717fbed4a"
+      },
+      "width": 72,
+      "height": 58,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5534540812174479,
+      "bounds": {
+        "left": 238,
+        "top": 107,
+        "right": 1294,
+        "bottom": 933
+      }
+    },
+    {
+      "key": "candle-off",
+      "original": {
+        "path": "docs/artwork-d32/originals/candle-off.png",
+        "bytes": 1247188,
+        "sha256": "aeba23fe8fa39035ded38ed0d3ca8c55dddf668087d2f08c332386e9c9cfe0a3"
+      },
+      "public": {
+        "path": "public/assets/life-d32/candle-off.png",
+        "bytes": 3390,
+        "sha256": "2573fa33f6e3bd4877816855461bd8fc5b75320f4de049054d3ddbb9d2979cf9"
+      },
+      "width": 28,
+      "height": 56,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.8689467112223307,
+      "bounds": {
+        "left": 319,
+        "top": 359,
+        "right": 702,
+        "bottom": 1177
+      }
+    },
+    {
+      "key": "lamp-off",
+      "original": {
+        "path": "docs/artwork-d32/originals/lamp-off.png",
+        "bytes": 1588426,
+        "sha256": "6b7f0b266e6e8bd35b52e6303eb9e542c2dd02d2aaa634c537993176e284189c"
+      },
+      "public": {
+        "path": "public/assets/life-d32/lamp-off.png",
+        "bytes": 7020,
+        "sha256": "325c134208ff34b2da8cbb3d5f944591d2578628a757687c79f92a724938d16f"
+      },
+      "width": 35,
+      "height": 92,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.7195580800374349,
+      "bounds": {
+        "left": 268,
+        "top": 72,
+        "right": 750,
+        "bottom": 1471
+      }
+    },
+    {
+      "key": "flame-a",
+      "original": {
+        "path": "docs/artwork-d32/originals/flame-a.png",
+        "bytes": 620101,
+        "sha256": "2c115ce03d77e6d67fd9a087b2320407532a5cfaf5bbdf337515619725e83ac4"
+      },
+      "public": {
+        "path": "public/assets/life-d32/flame-a.png",
+        "bytes": 431,
+        "sha256": "797e4f0da7550babc6e7d5efa393101cb6b56289ac75e40c6239c1b11158c05c"
+      },
+      "width": 10,
+      "height": 22,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.9784965515136719,
+      "bounds": {
+        "left": 447,
+        "top": 552,
+        "right": 573,
+        "bottom": 966
+      }
+    },
+    {
+      "key": "flame-b",
+      "original": {
+        "path": "docs/artwork-d32/originals/flame-b.png",
+        "bytes": 671317,
+        "sha256": "d361d155aaefd646c32fd5d3a0f10b21516830877050242a60a607b37b116e83"
+      },
+      "public": {
+        "path": "public/assets/life-d32/flame-b.png",
+        "bytes": 433,
+        "sha256": "a8154200a3d15a3d39fa9e3750462795575cb1f8c48d5f70c867d970469c16e3"
+      },
+      "width": 10,
+      "height": 22,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.9772116343180338,
+      "bounds": {
+        "left": 429,
+        "top": 541,
+        "right": 574,
+        "bottom": 997
+      }
+    },
+    {
+      "key": "steam",
+      "original": {
+        "path": "docs/artwork-d32/originals/steam.png",
+        "bytes": 1172313,
+        "sha256": "19dbdb764dd74738e93cf1325e06200f2d0ac2705f7f15cd4d430b6ea9d5e6b0"
+      },
+      "public": {
+        "path": "public/assets/life-d32/steam.png",
+        "bytes": 1116,
+        "sha256": "fbd5ee2982a6cb3cb12fa283c548e7227bd28d534580dc12073e34c94d3d8528"
+      },
+      "width": 12,
+      "height": 40,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.5486049652099609,
+      "bounds": {
+        "left": 385,
+        "top": 130,
+        "right": 615,
+        "bottom": 1232
+      }
+    },
+    {
+      "key": "toy-train",
+      "original": {
+        "path": "docs/artwork-d32/originals/toy-train.png",
+        "bytes": 2034395,
+        "sha256": "ca0c687ddfd4a146cf969e162b5a6603a51995d84065d0457310e6ed1786b782"
+      },
+      "public": {
+        "path": "public/assets/life-d32/toy-train.png",
+        "bytes": 4505,
+        "sha256": "9392d1474861e459147e72a61db32681c046ad14f69a8e3e791867e87ea23ffa"
+      },
+      "width": 44,
+      "height": 44,
+      "rawCorners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "transparentFraction": 0.586639404296875,
+      "bounds": {
+        "left": 280,
+        "top": 14,
+        "right": 1245,
+        "bottom": 994
+      }
+    }
+  ]
+}

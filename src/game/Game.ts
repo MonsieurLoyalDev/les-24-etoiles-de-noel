@@ -23,6 +23,10 @@ import { signNames } from "../art/tag-layout";
 import { vegetationKey } from "../art/vegetation";
 import { VillageAmbience } from "../art/ambience";
 import { InteriorLight } from "../art/interior-light";
+import { InteriorLife } from "../decor/InteriorLife";
+import { decorativeObjects, decorationRects } from "../decor/model";
+import { homes } from "../decor/neighbourhood";
+import { drawHomes, NeighbourhoodLife } from "../decor/NeighbourhoodLife";
 import { frameInteriorCamera } from "../art/interior-camera";
 import {
   drawRoomArchitecture,
@@ -109,6 +113,8 @@ export class Village extends Phaser.Scene {
   shade!: Phaser.GameObjects.Rectangle;
   ambience?: VillageAmbience;
   interiorLight?: InteriorLight;
+  interiorLife?: InteriorLife;
+  neighbourhood?: NeighbourhoodLife;
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -213,6 +219,10 @@ export class Village extends Phaser.Scene {
     this.actorTags = [];
     this.signTags = [];
     this.interiorLight = undefined;
+    this.interiorLife = undefined;
+    this.neighbourhood = undefined;
+    delete this.game.canvas.dataset.neighbourhood;
+    delete this.game.canvas.dataset.decorative;
     delete this.game.canvas.dataset.interior;
     delete this.game.canvas.dataset.interiorLight;
     this.decorations = [];
@@ -223,6 +233,8 @@ export class Village extends Phaser.Scene {
     if (this.state.room === "village") {
       drawGround(this);
       decorate(this);
+      drawHomes(this);
+      this.rects.push(...homes.map((h) => h.footprint));
       map.props.forEach((p) => {
         if (p.sprite === "quest_star") return;
         if (p.sprite === "pine_festive") {
@@ -303,6 +315,8 @@ export class Village extends Phaser.Scene {
       this.rects = [...interiorRects];
       drawRoomFurnishings(this, this.state.room);
       drawRoomDecor(this, this.state.room);
+      this.rects.push(...decorationRects(this.state.room));
+      this.interiorLife = new InteriorLife(this, this.state.room);
       this.label(240, 325, "Sortie");
     }
     if (blocked(this.state.position, this.rects, w, h))
@@ -363,6 +377,7 @@ export class Village extends Phaser.Scene {
     );
     if (this.state.room !== "village")
       this.interiorLight = new InteriorLight(this, this.state.room);
+    else this.neighbourhood = new NeighbourhoodLife(this);
     this.refreshAdvent();
   }
   setAdventDay(day: Day | null) {
@@ -501,6 +516,7 @@ export class Village extends Phaser.Scene {
       });
     if (this.state.room !== "village")
       return [
+        ...(this.interiorLife?.candidates() ?? []),
         ...residents,
         {
           id:
@@ -572,8 +588,9 @@ export class Village extends Phaser.Scene {
     return this.candidates()
       .filter(
         (t) =>
-          Math.hypot(t.x - this.player.x, t.y - this.player.y) < 43 &&
-          visible(this.player, t, this.rects),
+          Math.hypot(t.x - this.player.x, t.y - this.player.y) <
+            (decorativeObjects.find((x) => "decor:" + x.id === t.id)?.radius ??
+              43) && visible(this.player, t, this.rects),
       )
       .sort(
         (a, b) =>
@@ -608,6 +625,12 @@ export class Village extends Phaser.Scene {
     }
     const t = this.nearest();
     if (!t) return;
+    if (t.id.startsWith("decor:")) {
+      this.dialogue =
+        this.interiorLife?.activate(t.id.slice(6), this.time.now) ?? "";
+      this.emit();
+      return;
+    }
     if (t.id === "advent") {
       this.adventRequested++;
       this.emit();
@@ -933,6 +956,8 @@ export class Village extends Phaser.Scene {
     }
     this.ambience?.update(_time, this.state.clock, delta);
     this.interiorLight?.update(_time, this.state.clock);
+    this.interiorLife?.update(_time);
+    this.neighbourhood?.update(_time, this.state.clock);
     this.loyal.setDepth(this.loyal.y);
     [this.player, this.loyal].forEach((p, i) =>
       this.glasses[i]?.setPosition(p.x, p.y).setDepth(p.y + 0.1),

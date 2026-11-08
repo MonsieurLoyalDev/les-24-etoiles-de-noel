@@ -1,0 +1,276 @@
+{
+  "homes": [
+    {
+      "key": "home-porch",
+      "x": 48,
+      "y": 505,
+      "width": 92,
+      "maxHeight": 148,
+      "footprint": {
+        "x": 18,
+        "y": 460,
+        "w": 60,
+        "h": 45
+      },
+      "chimney": [
+        0.76,
+        0.025
+      ],
+      "windows": [
+        [
+          0.47,
+          0.42
+        ]
+      ]
+    },
+    {
+      "key": "home-garden",
+      "x": 296,
+      "y": 600,
+      "width": 200,
+      "maxHeight": 145,
+      "footprint": {
+        "x": 226,
+        "y": 552,
+        "w": 140,
+        "h": 48
+      },
+      "chimney": [
+        0.195,
+        0.025
+      ],
+      "windows": [
+        [
+          0.28,
+          0.72
+        ],
+        [
+          0.76,
+          0.72
+        ]
+      ]
+    },
+    {
+      "key": "home-tall",
+      "x": 385,
+      "y": 740,
+      "width": 116,
+      "maxHeight": 140,
+      "footprint": {
+        "x": 351,
+        "y": 688,
+        "w": 68,
+        "h": 52
+      },
+      "chimney": [
+        0.79,
+        0.06
+      ],
+      "windows": [
+        [
+          0.54,
+          0.49
+        ],
+        [
+          0.75,
+          0.8
+        ]
+      ]
+    },
+    {
+      "key": "home-oriel",
+      "x": 960,
+      "y": 410,
+      "width": 118,
+      "maxHeight": 132,
+      "footprint": {
+        "x": 916,
+        "y": 365,
+        "w": 88,
+        "h": 45
+      },
+      "chimney": [
+        0.16,
+        0.035
+      ],
+      "windows": [
+        [
+          0.31,
+          0.71
+        ]
+      ]
+    }
+  ],
+  "decorativeObjects": [
+    {
+      "id": "house-candle",
+      "room": "house",
+      "x": 300,
+      "y": 148,
+      "radius": 26,
+      "description": "la bougie du foyer",
+      "action": "toggle"
+    },
+    {
+      "id": "house-cat",
+      "room": "house",
+      "x": 423,
+      "y": 208,
+      "radius": 24,
+      "description": "Caresser le chat",
+      "action": "pet",
+      "text": "Loyal — Un petit ronron, puis il se rendort. Ici, même les silences tiennent chaud. ♥"
+    },
+    {
+      "id": "house-photo",
+      "room": "house",
+      "x": 107,
+      "y": 305,
+      "radius": 27,
+      "description": "Examiner les souvenirs",
+      "action": "read",
+      "text": "Loyal — Deux silhouettes emmitouflées, un carnet et nos chaussons : les petites choses font notre maison."
+    },
+    {
+      "id": "house-note",
+      "room": "house",
+      "x": 205,
+      "y": 170,
+      "radius": 24,
+      "description": "Lire le petit mot",
+      "action": "read",
+      "text": "Loyal — « Debby, j’ai gardé la place près du feu. La journée peut attendre encore une tasse. ♥ » — Mot fictif de démonstration."
+    },
+    {
+      "id": "house-chair",
+      "room": "house",
+      "x": 125,
+      "y": 118,
+      "radius": 24,
+      "description": "Examiner le fauteuil",
+      "action": "read",
+      "text": "Loyal — Un plaid pour deux et un coussin un peu de travers. Le fauteuil attend notre prochaine histoire."
+    },
+    {
+      "id": "library-book",
+      "room": "library",
+      "x": 202,
+      "y": 170,
+      "radius": 24,
+      "description": "Consulter le livre ouvert",
+      "action": "read",
+      "text": "Célestine — « Au bord du bois, la neige gardait les pas ; dans la maison, on gardait les voix. » Un conte original d’Étoilebois."
+    },
+    {
+      "id": "library-lamp",
+      "room": "library",
+      "x": 310,
+      "y": 130,
+      "radius": 26,
+      "description": "la lampe de lecture",
+      "action": "toggle",
+      "initial": true
+    },
+    {
+      "id": "library-photo",
+      "room": "library",
+      "x": 107,
+      "y": 305,
+      "radius": 27,
+      "description": "Examiner la photographie",
+      "action": "read",
+      "text": "Célestine — Le premier hiver de la bibliothèque : trois caisses de livres, une échelle et déjà beaucoup de lecteurs."
+    },
+    {
+      "id": "library-quote",
+      "room": "library",
+      "x": 70,
+      "y": 130,
+      "radius": 23,
+      "description": "Lire la citation",
+      "action": "read",
+      "text": "Célestine — « Une page tournée ensemble fait moins de bruit que la neige, mais réchauffe tout autant. » — Carnet d’Étoilebois."
+    },
+    {
+      "id": "workshop-toy",
+      "room": "workshop",
+      "x": 202,
+      "y": 170,
+      "radius": 24,
+      "description": "Examiner le jouet",
+      "action": "read",
+      "text": "Basile — Ce petit renard attend ses roues. Le bois est encore doux sous les doigts, et le ruban est déjà choisi."
+    },
+    {
+      "id": "workshop-mechanism",
+      "room": "workshop",
+      "x": 423,
+      "y": 247,
+      "radius": 22,
+      "description": "Remonter le petit train",
+      "action": "mechanism",
+      "text": "Basile — Un tour de clé, quelques centimètres de voyage… Ce petit train sait déjà rentrer à la maison."
+    },
+    {
+      "id": "workshop-lantern",
+      "room": "workshop",
+      "x": 300,
+      "y": 148,
+      "radius": 26,
+      "description": "la lanterne de l’établi",
+      "action": "toggle",
+      "initial": true
+    },
+    {
+      "id": "workshop-plan",
+      "room": "workshop",
+      "x": 107,
+      "y": 305,
+      "radius": 27,
+      "description": "Observer le plan",
+      "action": "read",
+      "text": "Basile — Sur le plan : un train, un renard et une boîte à secrets. Dans la marge : « Poncer les angles, garder la tendresse. »"
+    },
+    {
+      "id": "inn-candle",
+      "room": "inn",
+      "x": 300,
+      "y": 148,
+      "radius": 26,
+      "description": "la bougie des visiteurs",
+      "action": "toggle"
+    },
+    {
+      "id": "inn-menu",
+      "room": "inn",
+      "x": 107,
+      "y": 305,
+      "radius": 27,
+      "description": "Lire le menu de Noël",
+      "action": "read",
+      "text": "Madeleine — Ce soir : velouté de courge, pain aux noix, tarte aux poires et chocolat chaud. Une place est toujours gardée pour les voyageurs."
+    },
+    {
+      "id": "inn-keepsake",
+      "room": "inn",
+      "x": 204,
+      "y": 173,
+      "radius": 24,
+      "description": "Observer le souvenir",
+      "action": "read",
+      "text": "Madeleine — Dans le livre des visiteurs, une feuille séchée marque cette phrase : « Nous sommes arrivés pour une nuit. Nous sommes restés pour les gens. »"
+    },
+    {
+      "id": "inn-bench",
+      "room": "inn",
+      "x": 356,
+      "y": 152,
+      "radius": 23,
+      "description": "Examiner la banquette",
+      "action": "read",
+      "text": "Madeleine — Deux coussins, une couverture et une théière à portée de main. Le coin préféré des longues conversations."
+    }
+  ],
+  "decorativeStorage": "etoilebois-decoration-v1",
+  "progressionWrites": false
+}

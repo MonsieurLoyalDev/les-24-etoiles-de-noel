@@ -1,0 +1,38 @@
+{
+  "project": "mobile",
+  "position": {
+    "x": 385,
+    "y": 757
+  },
+  "frames": 170,
+  "p95": 4.300000000000182,
+  "mean": 4.16764705882353,
+  "neighbourhood": {
+    "houses": 4,
+    "quality": "soft",
+    "smoke": 2,
+    "budget": 4,
+    "lights": 3
+  },
+  "ambience": {
+    "quality": "soft",
+    "reduced": false,
+    "flurry": 0.45897650910700927,
+    "visibleSnow": 14,
+    "visibleSmoke": 0,
+    "visibleWind": 0,
+    "visibleStars": 1,
+    "visibleLights": 4,
+    "swaying": 0,
+    "particleLimit": 28,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 133.921875,
+    "meanFrameMs": 4.167222222222219,
+    "palette": {
+      "color": 1519709,
+      "alpha": 0.27,
+      "warm": 1
+    }
+  },
+  "note": "Chrome local, quartier avec nouvelles maisons et fumées visibles. RAF non plafonné ; engineFps décrit Phaser. Téléphone émulé, aucun GPU mobile physique."
+}

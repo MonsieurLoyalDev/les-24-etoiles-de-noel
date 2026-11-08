@@ -1,0 +1,36 @@
+{
+  "assets": [
+    {
+      "key": "home-family",
+      "path": "docs/artwork-d32/originals/home-family.png",
+      "bytes": 2481362,
+      "sha256": "d0b0c93a4fc113be241a5337ae94f95d3aabb939dd9cdd1098dfb182d08ace9a",
+      "status": "non retenue : proportions et contraintes de place",
+      "public": false
+    },
+    {
+      "key": "home-chalet",
+      "path": "docs/artwork-d32/originals/home-chalet.png",
+      "bytes": 1943920,
+      "sha256": "28f6c901078b0dcb7022085473fa496dfe872753216f84df484fe93c78d1c171",
+      "status": "non retenue : proportions et contraintes de place",
+      "public": false
+    },
+    {
+      "key": "home-narrow",
+      "path": "docs/artwork-d32/originals/home-narrow.png",
+      "bytes": 2126118,
+      "sha256": "7bfc601359ace37e5efde476fce92c9ac29091fcac758fe1b79a67257bd74eb7",
+      "status": "non retenue : proportions et contraintes de place",
+      "public": false
+    },
+    {
+      "key": "home-shutters",
+      "path": "docs/artwork-d32/originals/home-shutters.png",
+      "bytes": 2688827,
+      "sha256": "fc28a0dd51dd959f792e1eb354ef869f615165e9f8d625dd90ac7aecbae93f99",
+      "status": "non retenue : proportions et contraintes de place",
+      "public": false
+    }
+  ]
+}

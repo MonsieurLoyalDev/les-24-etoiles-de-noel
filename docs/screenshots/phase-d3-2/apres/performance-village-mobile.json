@@ -1,0 +1,14 @@
+{
+  "project": "mobile",
+  "frames": 170,
+  "p95": 4.299999999999727,
+  "mean": 4.1664705882352955,
+  "neighbourhood": {
+    "houses": 4,
+    "quality": "soft",
+    "smoke": 0,
+    "budget": 4,
+    "lights": 0
+  },
+  "note": "Chrome local, émulation de format ; RAF non plafonné, pas une mesure sur appareil physique"
+}

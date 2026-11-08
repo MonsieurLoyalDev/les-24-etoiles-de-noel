@@ -1,0 +1,240 @@
+{
+  "nativeSprites": 20,
+  "transparentCornersVerified": true,
+  "comparisonFiles": 68,
+  "allComparisonFilesPresent": true,
+  "alpha": [
+    {
+      "asset": "home-porch, fond clair",
+      "width": 175,
+      "height": 300,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "home-garden, fond clair",
+      "width": 404,
+      "height": 277,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "home-tall, fond clair",
+      "width": 182,
+      "height": 284,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "home-oriel, fond clair",
+      "width": 240,
+      "height": 245,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "house-nook, fond clair",
+      "width": 184,
+      "height": 94,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "library-nook, fond clair",
+      "width": 184,
+      "height": 95,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "workshop-nook, fond clair",
+      "width": 184,
+      "height": 94,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "inn-nook, fond clair",
+      "width": 184,
+      "height": 91,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "house-console, fond clair",
+      "width": 71,
+      "height": 174,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "library-console, fond clair",
+      "width": 92,
+      "height": 174,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "workshop-console, fond clair",
+      "width": 66,
+      "height": 174,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "inn-console, fond clair",
+      "width": 87,
+      "height": 174,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "cat-sleep, fond clair",
+      "width": 72,
+      "height": 58,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "cat-awake, fond clair",
+      "width": 72,
+      "height": 58,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "candle-off, fond clair",
+      "width": 28,
+      "height": 56,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "lamp-off, fond clair",
+      "width": 35,
+      "height": 92,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "flame-a, fond clair",
+      "width": 10,
+      "height": 22,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "flame-b, fond clair",
+      "width": 10,
+      "height": 22,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "steam, fond clair",
+      "width": 12,
+      "height": 40,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "asset": "toy-train, fond clair",
+      "width": 44,
+      "height": 44,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "duration": 17.68,
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "duration": 17.6,
+      "width": 390,
+      "height": 844
+    }
+  ]
+}
