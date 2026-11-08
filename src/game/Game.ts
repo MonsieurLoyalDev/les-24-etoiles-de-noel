@@ -237,7 +237,7 @@ export class Village extends Phaser.Scene {
             p.tileX * 16,
             p.tileY * 16,
             replacement
-              ? (vegetationKey(replacement.key) ??
+              ? (vegetationKey(replacement.key, p.tileX * 16, p.tileY * 16) ??
                   (this.textures.exists(cleanKey(replacement.key))
                     ? cleanKey(replacement.key)
                     : "art-" + replacement.key))

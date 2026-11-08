@@ -1,16 +1,20 @@
 import type Phaser from "phaser";
+import { variantAssets, chooseVegetation } from "./vegetation-design";
 export const refinedAssets = {
   vegetation_pine_large: "/assets/refinements-d21/fir-source.png",
   vegetation_bush_snow: "/assets/refinements-d21/bush-source.png",
   vegetation_bush_berries: "/assets/refinements-d21/berries-source.png",
 };
-export function vegetationKey(key: string) {
-  return key in refinedAssets ? `refined-${key}` : null;
+export const allVegetationAssets = { ...refinedAssets, ...variantAssets };
+export function vegetationKey(key: string, x?: number, y?: number) {
+  return key in allVegetationAssets
+    ? `refined-${chooseVegetation(key, x, y)}`
+    : null;
 }
 export function prepareVegetation(scene: Phaser.Scene) {
   const audit: { key: string; transparent: boolean; cornerAlpha: number[] }[] =
     [];
-  for (const key of Object.keys(refinedAssets)) {
+  for (const key of Object.keys(allVegetationAssets)) {
     const target = vegetationKey(key)!;
     if (scene.textures.exists(target)) continue;
     const source = scene.textures
@@ -71,8 +75,12 @@ export function prepareVegetation(scene: Phaser.Scene) {
     );
     texture.refresh();
   }
-  if (audit.length)
-    scene.game.canvas.dataset.vegetationAudit = JSON.stringify(audit);
+  if (audit.length) {
+    scene.game.canvas.dataset.vegetationAudit = JSON.stringify(
+      audit.filter((a) => a.key in refinedAssets),
+    );
+    scene.game.canvas.dataset.vegetationVariantsAudit = JSON.stringify(audit);
+  }
 }
 export function fittedVegetationWidth(
   width: number,
@@ -82,6 +90,7 @@ export function fittedVegetationWidth(
 ) {
   return Math.min(
     width,
+    128 * ratio,
     Math.max(1, (y - 3) * ratio),
     Math.max(1, (1024 - x) * 2 - 2),
     Math.max(1, x * 2 - 2),
