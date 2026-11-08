@@ -2,8 +2,8 @@ import type Phaser from "phaser";
 import metadata from "./homes-d33.json" with { type: "json" };
 import { residentialPlots, urbanLanes, villageSize } from "./urban-plan";
 import type { Home } from "../decor/neighbourhood";
-import { vegetationKey } from "./vegetation";
-import { cleanKey } from "./prepare";
+import { drawScenery34 } from "./scenery34";
+import { plan, roundedRoute, pedestrianCourts } from "./village34";
 const fixtures: Record<
   string,
   { chimney: [number, number]; windows: [number, number][] }
@@ -126,43 +126,7 @@ export const homes: Home[] = residentialPlots.map((p) => {
     ...fixtures[p.key],
   };
 });
-export const frontPaths = residentialPlots.map((p, i) => {
-  const h = homes[i],
-    doorX = p.x + (p.door[0] - 0.5) * h.width;
-  let endY = p.y < 400 ? 400 : p.y < 750 ? 750 : p.y < 1100 ? 1100 : 1360;
-  const laneId =
-    p.y < 400
-      ? "porte-est"
-      : p.y < 800
-        ? "rue-residentielle"
-        : p.y < 1150
-          ? "rue-artisans"
-          : "rue-jardins";
-  const road = urbanLanes.find((l) => l.id === laneId)!;
-  for (let n = 1; n < road.points.length; n++) {
-    const a = road.points[n - 1],
-      b = road.points[n];
-    if (
-      doorX + 10 >= Math.min(a.x, b.x) &&
-      doorX + 10 <= Math.max(a.x, b.x) &&
-      Math.abs(b.x - a.x) > Math.abs(b.y - a.y)
-    )
-      endY = a.y + ((b.y - a.y) * (doorX + 10 - a.x)) / (b.x - a.x);
-  }
-  if (p.key === "cottage-humble") endY = 1100;
-  if (p.key === "home-porch") endY = 1100;
-  if (p.key === "home-tall") endY = 1320;
-  return {
-    id: p.key,
-    material: "dirt" as const,
-    width: 15,
-    points: [
-      { x: doorX, y: p.y + 2 },
-      { x: doorX, y: p.y + 18 },
-      { x: doorX + 10, y: endY },
-    ],
-  };
-});
+export const frontPaths: typeof urbanLanes = [];
 export function preloadVillage33(scene: Phaser.Scene) {
   for (const h of homes)
     scene.load.image("urban-" + h.key, `/assets/village-d33/${h.key}.png`);
@@ -170,46 +134,6 @@ export function preloadVillage33(scene: Phaser.Scene) {
     scene.load.image("urban-" + k, `/assets/interiors-d31/${k}.png`);
 }
 export function urbanGround(scene: Phaser.Scene) {
-  const key = "village-extension-d33";
-  if (!scene.textures.exists(key)) {
-    const t = scene.textures.createCanvas(
-        key,
-        villageSize.width,
-        villageSize.height,
-      )!,
-      c = t.context;
-    c.imageSmoothingEnabled = false;
-    c.fillStyle = c.createPattern(
-      scene.textures.get("quiet-snow").getSourceImage() as HTMLCanvasElement,
-      "repeat",
-    )!;
-    c.fillRect(0, 0, t.width, t.height);
-    c.globalAlpha = 0.76;
-    for (let y = 0; y < t.height; y += 64)
-      for (let x = 0; x < t.width; x += 64)
-        c.drawImage(
-          scene.textures
-            .get("snow-d21-" + (1 + ((x / 64 + y / 64) % 4)))
-            .getSourceImage() as HTMLImageElement,
-          x,
-          y,
-        );
-    for (const [k, alpha] of [
-      ["snow-powder", 0.38],
-      ["snow-soft", 0.18],
-    ] as const) {
-      c.globalAlpha = alpha;
-      const image = scene.textures
-        .get("urban-" + k)
-        .getSourceImage() as HTMLImageElement;
-      for (let y = 0; y < t.height; y += 1024)
-        for (let x = 0; x < t.width; x += 1024)
-          c.drawImage(image, x, y, 1024, 1024);
-    }
-    c.globalAlpha = 1;
-    t.refresh();
-  }
-  scene.add.image(0, 0, key).setOrigin(0).setDepth(-102);
   for (const [i, h] of homes.entries()) {
     const patch = scene.add
       .image(h.x - 20, h.y - 25, "ground-d3-" + (i % 2 ? "earth-a" : "earth-b"))
@@ -262,15 +186,20 @@ export function urbanPaths(scene: Phaser.Scene) {
       )) {
         m.beginPath();
         m.moveTo(lane.points[0].x, lane.points[0].y);
-        for (let n = 1; n < lane.points.length; n++) {
-          const a = lane.points[n],
-            b = lane.points[n + 1];
-          if (b) m.arcTo(a.x, a.y, b.x, b.y, 16);
-          else m.lineTo(a.x, a.y);
-        }
+        for (const p of roundedRoute(lane.points).slice(1)) m.lineTo(p.x, p.y);
         m.lineWidth = lane.width;
         m.stroke();
       }
+      if (material === "stone")
+        for (const court of pedestrianCourts) {
+          m.beginPath();
+          court.points.forEach(([x, y], i) =>
+            i ? m.lineTo(x, y) : m.moveTo(x, y),
+          );
+          m.closePath();
+          m.fillStyle = "#fff";
+          m.fill();
+        }
       p.drawImage(mask, 0, 0);
       c.globalAlpha = material === "stone" ? 0.85 : 0.53;
       c.drawImage(layer, 0, 0);
@@ -281,67 +210,31 @@ export function urbanPaths(scene: Phaser.Scene) {
   scene.add.image(0, 0, key).setOrigin(0).setDepth(-99);
 }
 export function drawHomes(scene: Phaser.Scene) {
-  // Intentional garden and grove compositions, outside all facade/door corridors.
-  const groves = [
-    [140, 845, 72],
-    [219, 870, 59],
-    [675, 855, 64],
-    [726, 840, 78],
-    [870, 1020, 57],
-    [1370, 730, 60],
-    [1404, 720, 42],
-    [1670, 720, 56],
-    [1700, 710, 40],
-    [1280, 1070, 60],
-    [1580, 1055, 52],
-    [1330, 1310, 55],
-    [1620, 1310, 52],
-  ];
-  for (const [x, y, width] of groves) {
-    const key = vegetationKey("vegetation_pine_large", x, y)!;
-    const image = scene.add
-      .image(x, y, key)
-      .setOrigin(0.5, 1)
-      .setDepth(y)
-      .setName("urban:grove");
-    image.setScale(width / image.width);
-    scene.add
-      .image(x, y + 3, "ground-d3-snowbank-small")
-      .setDisplaySize(width * 0.6, 15)
-      .setDepth(y + 0.1);
-  }
-
-  for (const [i, h] of homes.entries()) {
+  for (const h of homes)
     scene.add
       .image(h.x, h.y, "urban-" + h.key)
       .setOrigin(0.5, 1)
       .setScale(0.5)
       .setDepth(h.y - 8)
       .setName("home:" + h.key);
-    const prop = (key: string, x: number, y: number, width: number) => {
-      const texture = vegetationKey(key, x, y) ?? cleanKey(key);
-      const image = scene.add
-        .image(x, y, texture)
-        .setOrigin(0.5, 1)
-        .setDepth(y)
-        .setName("urban:detail:" + h.key + ":" + key);
-      image.setScale(width / image.width);
-    };
-    const left =
-        h.key === "home-narrow" || h.key === "cottage-porchwide"
-          ? h.x + h.width / 2 + 48
-          : h.x - h.width / 2 - 13,
-      right = h.x + h.width / 2 + 12;
-    prop("lampadaire", right, h.y + 16, 21);
-    prop(i % 2 ? "banc_plaid" : "jardiniere", left, h.y + 14, i % 2 ? 48 : 28);
-    prop("vegetation_bush_snow", left + 12, h.y - 18, 27);
-    if (i % 3 === 0)
-      prop(
-        "cloture_guirlande",
-        right + (h.key === "cottage-garden" ? -12 : 20),
-        h.y - 25,
-        55,
-      );
-    if (i % 4 === 0) prop("vegetation_pine_large", left - 15, h.y - 65, 52);
-  }
+  scene.game.canvas.dataset.village34 = JSON.stringify({
+    world: plan.world,
+    houses: plan.houses.map((h) => ({
+      id: h.id,
+      key: h.key,
+      x: h.x,
+      y: h.y,
+      quarter: h.quarter,
+    })),
+    quarters: plan.quarters.map((q) => ({
+      id: q.id,
+      name: q.name,
+      court: q.court,
+    })),
+    doors: plan.houses.map((h) => ({
+      key: h.key,
+      height: h.sourceDoor[3] - h.sourceDoor[1],
+    })),
+  });
 }
+export { drawScenery34 };

@@ -30,8 +30,8 @@ export function texturedSnow(
   ctx: CanvasRenderingContext2D,
 ) {
   ctx.globalAlpha = 0.76;
-  for (let y = 0; y < 768; y += 64)
-    for (let x = 0; x < 1024; x += 64) {
+  for (let y = 0; y < ctx.canvas.height; y += 64)
+    for (let x = 0; x < ctx.canvas.width; x += 64) {
       const n = snowVariant(x / 64, y / 64);
       ctx.drawImage(
         scene.textures

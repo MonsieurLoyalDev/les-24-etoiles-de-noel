@@ -1,5 +1,5 @@
 import type Phaser from "phaser";
-import map from "../game/maps/place-des-lanternes.json";
+import { villageMap as map, anchors } from "./village34";
 import { courts, lanes, decorations } from "./village-design";
 import { texturedSnow, snowAccents } from "./snow-detail";
 import { drawTerrain, drawTerrainDetails, auditTerrain } from "./terrain";
@@ -60,13 +60,14 @@ export function landscape(
 ) {
   const key = "village-floor-d31";
   if (!scene.textures.exists(key)) {
-    const floor = scene.textures.createCanvas(key, 1024, 768)!,
+    const floor = scene.textures.createCanvas(key, 1920, 1408)!,
       ctx = floor.context;
     const snow = scene.textures
       .get("quiet-snow")
       .getSourceImage() as HTMLCanvasElement;
     ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(snow, 0, 0);
+    ctx.fillStyle = ctx.createPattern(snow, "repeat")!;
+    ctx.fillRect(0, 0, 1920, 1408);
     texturedSnow(scene, ctx);
     finishWhiteSnow(scene, ctx);
     drawTerrain(scene, ctx);
@@ -110,7 +111,7 @@ export function landscape(
         buildingWidths[b.id] * 0.86,
         0.17,
       );
-    contact(ctx, 512, 394, 168, 0.13);
+    contact(ctx, anchors.tree.x, anchors.tree.y, 168, 0.13);
     for (const d of decorations)
       if (!d.overhead)
         contact(
@@ -128,5 +129,5 @@ export function landscape(
     auditTerrain(scene, ctx);
     floor.refresh();
   }
-  return scene.add.image(0, 0, key).setOrigin(0).setDepth(-100);
+  return scene.add.image(0, 0, key).setOrigin(0).setDepth(-102);
 }

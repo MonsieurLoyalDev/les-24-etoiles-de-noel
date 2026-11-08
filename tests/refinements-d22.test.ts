@@ -1,3 +1,4 @@
+import { plan } from "../src/art/village34";
 import { it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -17,6 +18,7 @@ import { blocked } from "../src/domain";
 import allowlist from "../ops/public-assets.json";
 it("les cinq silhouettes de sapins sont réellement réparties dans le village", () => {
   const points = [
+    ...plan.woods.flatMap((z) => z.points.map(([x, y]) => ({ x, y }))),
     ...decorations.filter((d) => d.key === "vegetation_pine_large"),
     ...map.props
       .filter((p) => p.sprite === "pine_large")

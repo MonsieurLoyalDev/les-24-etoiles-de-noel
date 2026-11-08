@@ -1,3 +1,4 @@
+import { extraSceneryKeys } from "./scenery34";
 import Phaser from "phaser";
 import catalog from "./catalog.json";
 import { decorations } from "./village-design";
@@ -7,10 +8,8 @@ import {
   allVegetationAssets,
   vegetationKey,
   prepareVegetation,
-  fittedVegetationWidth,
 } from "./vegetation";
-import { prepareSprite, prepareSnow, cleanKey } from "./prepare";
-import { borderPlants } from "./vegetation-design";
+import { prepareSprite, prepareSnow } from "./prepare";
 import { terrainAssets } from "./terrain-design";
 import { prepareTerrain } from "./terrain";
 import { snowFinishingAssets } from "./snow-finishing";
@@ -42,6 +41,8 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareVegetation(scene);
   for (const key of Object.values(buildingArt)) prepareSprite(scene, key, true);
   for (const key of [
+    ...extraSceneryKeys,
+    "arche_etoilebois",
     "lampadaire",
     "banc_plaid",
     "panneau_direction",
@@ -85,6 +86,8 @@ export function preloadWorld(scene: Phaser.Scene) {
   for (const key of Object.values(buildingArt))
     scene.load.image(`art-${key}`, art[key as keyof typeof art]);
   for (const key of new Set([
+    ...extraSceneryKeys,
+    "arche_etoilebois",
     ...Object.values(propArt).map((p) => p.key),
     ...decorations.map((d) => d.key),
     "bonhomme_neige",
@@ -94,54 +97,7 @@ export function preloadWorld(scene: Phaser.Scene) {
   ]))
     scene.load.image(`art-${key}`, art[key as keyof typeof art]);
 }
-export function decorate(scene: Phaser.Scene) {
-  for (const d of [
-    ...decorations,
-    ...borderPlants.map((d) => ({
-      ...d,
-      back: false,
-      flip: false,
-      district: "place",
-    })),
-  ]) {
-    const key =
-      vegetationKey(d.key, d.x, d.y) ??
-      (scene.textures.exists(cleanKey(d.key))
-        ? cleanKey(d.key)
-        : "art-" + d.key);
-    const image = scene.add
-      .image(d.x, d.y, key)
-      .setOrigin(0.5, 1)
-      .setDepth(d.back ? -10 : d.y)
-      .setFlipX(!!d.flip)
-      .setName("scenery:" + d.id);
-    const width = vegetationKey(d.key)
-      ? fittedVegetationWidth(d.width, d.x, d.y, image.width / image.height)
-      : d.width;
-    image.setScale(width / image.width);
-    if (d.back) image.setTint(0xe9f0f0);
-    if (d.key === "panneau_direction") {
-      const text =
-        d.district === "post"
-          ? "Courrier\nÉmile"
-          : d.district === "civic"
-            ? "Allée\nAugustin"
-            : "Sentier\nFlocon";
-      scene.add
-        .text(d.x, d.y - image.displayHeight + 5, text, {
-          fontFamily: "Marcellus",
-          fontSize: 6,
-          color: "#ffe3ad",
-          stroke: "#4b2d1b",
-          strokeThickness: 1,
-          align: "center",
-          lineSpacing: -1,
-        })
-        .setOrigin(0.5, 0)
-        .setDepth(d.y + 0.2);
-    }
-  }
-}
+export function decorate(_scene: Phaser.Scene) {}
 export function drawGround(scene: Phaser.Scene) {
   return landscape(scene, buildingWidths);
 }

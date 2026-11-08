@@ -19,7 +19,7 @@ export const initial: Save = {
   version: 2,
   stage: 0,
   room: "village",
-  position: { x: 512, y: 608 },
+  position: { x: 1012, y: 1020 },
   quests: { "first-light": { step: 0, done: false } },
   flags: [],
   inventory: [],

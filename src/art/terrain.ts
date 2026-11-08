@@ -1,6 +1,12 @@
 import type Phaser from "phaser";
 import { isolateSprite, alphaBounds } from "./pixels";
-import { terrainAssets, terrainRegions, snowBanks } from "./terrain-design";
+import {
+  terrainAssets,
+  terrainRegions,
+  snowBanks,
+  terrainRegions34,
+  snowBanks34,
+} from "./terrain-design";
 export function prepareTerrain(scene: Phaser.Scene) {
   const audit = [];
   for (const key of Object.keys(terrainAssets)) {
@@ -80,13 +86,13 @@ export function drawTerrain(
   scene: Phaser.Scene,
   ctx: CanvasRenderingContext2D,
 ) {
-  for (const p of terrainRegions) stamp(scene, ctx, p);
+  for (const p of terrainRegions34) stamp(scene, ctx, p);
 }
 export function drawTerrainDetails(
   scene: Phaser.Scene,
   ctx: CanvasRenderingContext2D,
 ) {
-  for (const p of snowBanks) stamp(scene, ctx, p);
+  for (const p of snowBanks34) stamp(scene, ctx, p);
 }
 export function auditTerrain(
   scene: Phaser.Scene,

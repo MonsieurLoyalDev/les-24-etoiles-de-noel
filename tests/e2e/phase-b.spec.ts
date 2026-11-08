@@ -1,3 +1,5 @@
+import { navigateTo } from "./pathfinding";
+import { anchors, plan } from "../../src/art/village34";
 import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
 const walk = walkTo;
@@ -132,26 +134,28 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   page.on("pageerror", (e) => errors.push(e.message));
   await startMigrated(page);
   // Augustin is in the open south-east square. His entire patrol remains in reach.
-  await walk(page, "x", 695);
-  await walk(page, "y", 515);
+  await navigateTo(page, anchors.augustin[0]);
   await approachNPC(page, "noe", "Augustin");
   await page
     .getByRole("button", { name: "Avec plaisir, je m’en occupe" })
     .click();
   await page.getByRole("button", { name: "C’est parti !" }).click();
-  await walk(page, "y", 650);
+  await navigateTo(page, { x: 960, y: 900 });
   const npcBefore = await page.locator("canvas").getAttribute("data-npcs");
   await expect
     .poll(() => page.locator("canvas").getAttribute("data-npcs"))
     .not.toBe(npcBefore);
-  await walk(page, "x", 800);
+  await navigateTo(
+    page,
+    plan.buildings.find((b) => b.id === "loyal_house")!.returnPoint,
+  );
   await enter(page, /Maison de Loyal/, "house");
   await exit(page);
   // Travel along the southern route, then north to the library door.
-  await walk(page, "x", 736);
-  await walk(page, "y", 608);
-  await walk(page, "x", 208);
-  await walk(page, "y", 326);
+  await navigateTo(
+    page,
+    plan.buildings.find((b) => b.id === "library")!.returnPoint,
+  );
   await enter(page, /Bibliothèque/, "library");
   await resident(page, "Célestine", true);
   await walk(page, "y", 170);
@@ -197,9 +201,10 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Célestine");
   await expect(page.locator(".quest")).toContainText("2 / 24");
   await exit(page);
-  await walk(page, "y", 420);
-  await walk(page, "x", 784);
-  await walk(page, "y", 278);
+  await navigateTo(
+    page,
+    plan.buildings.find((b) => b.id === "workshop")!.returnPoint,
+  );
   await enter(page, /Atelier des Cadeaux/, "workshop");
   await resident(page, "Basile", true);
   await walk(page, "y", 170);
@@ -233,9 +238,10 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Basile");
   await expect(page.locator(".quest")).toContainText("3 / 24");
   await exit(page);
-  await walk(page, "y", 420);
-  await walk(page, "x", 464);
-  await walk(page, "y", 215);
+  await navigateTo(
+    page,
+    plan.buildings.find((b) => b.id === "inn")!.returnPoint,
+  );
   await enter(page, /Auberge des Étoiles/, "inn");
   await resident(page, "Madeleine", true);
   await walk(page, "y", 255);
@@ -277,9 +283,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await resident(page, "Madeleine");
   await expect(page.locator(".quest")).toContainText("4 / 24");
   await exit(page);
-  await walk(page, "y", 420);
-  await walk(page, "x", 740);
-  await walk(page, "y", 515);
+  await navigateTo(page, anchors.augustin[0]);
   await approachNPC(page, "noe", "Augustin");
   await page.getByRole("button", { name: "À bientôt", exact: true }).click();
   await expect(page.locator(".quest")).toContainText("5 / 24");

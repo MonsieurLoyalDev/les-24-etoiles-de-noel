@@ -1,3 +1,4 @@
+import { blocked } from "../../src/domain";
 import { test, expect, type Page } from "@playwright/test";
 import { initial, type Save } from "../../src/domain";
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -64,7 +65,25 @@ test("D32 anciennes positions sous un décor et performance dans un quartier vis
       dialogueHistory: ["mira:greeting"],
     };
     await install(page, save);
-    const safe = room === "village" ? save.position : { x: 240, y: 280 };
+    const observed = await page
+      .locator("canvas")
+      .evaluate((el) => ({
+        x: Number(el.dataset.playerX),
+        y: Number(el.dataset.playerY),
+        rects: JSON.parse(el.dataset.collisions!),
+      }));
+    expect(
+      blocked(
+        observed,
+        observed.rects,
+        room === "village" ? 1920 : 864,
+        room === "village" ? 1408 : 560,
+      ),
+    ).toBe(false);
+    const safe =
+      room === "village"
+        ? { x: observed.x, y: observed.y }
+        : { x: 240, y: 280 };
     await expect(page.locator("canvas")).toHaveAttribute(
       "data-player-x",
       String(safe.x),

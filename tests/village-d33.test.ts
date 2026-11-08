@@ -106,10 +106,8 @@ it("les quatre plans sont distincts, reliés et tous les objets restent accessib
     expect(seen.size).toBeGreaterThan(1000);
   }
 });
-it("le centre historique et le détour Phase B restent libres", () => {
+it("le centre recentré garde les allées vers les quatre lieux libres", () => {
   const r = homes.map((h) => h.footprint);
-  for (let x = 208; x <= 736; x += 4)
-    expect(blocked({ x, y: 608 }, r, 1920, 1408)).toBe(false);
-  for (let y = 326; y <= 608; y += 4)
-    expect(blocked({ x: 208, y }, r, 1920, 1408)).toBe(false);
+  for (const lane of urbanLanes.filter((l) => l.id.startsWith("P")))
+    for (const p of lane.points) expect(blocked(p, r, 1920, 1408)).toBe(false);
 });

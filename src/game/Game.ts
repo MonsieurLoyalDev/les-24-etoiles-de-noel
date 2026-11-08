@@ -28,6 +28,7 @@ import { decorativeObjects, decorationRects } from "../decor/model";
 import {
   homes,
   drawHomes,
+  drawScenery34,
   urbanGround,
   urbanPaths,
   preloadVillage33,
@@ -44,7 +45,12 @@ import {
 import { frameInteriorCamera } from "../art/interior-camera";
 import { drawRoomDecor } from "../art/interiors";
 import Phaser from "phaser";
-import map from "./maps/place-des-lanternes.json";
+import {
+  villageMap as map,
+  anchors,
+  fenceRects,
+  restoreOutdoorPosition,
+} from "../art/village34";
 import manifest from "../../assets-manifest.json";
 import { sendEvent } from "../rpg/quests";
 import {
@@ -263,11 +269,16 @@ export class Village extends Phaser.Scene {
         if (p.sprite === "quest_star") return;
         if (p.sprite === "pine_festive") {
           this.tree = this.add
-            .image(512, 394, "art-tree", "sapin_00")
+            .image(anchors.tree.x, anchors.tree.y, "art-tree", "sapin_00")
             .setOrigin(0.5, 1)
-            .setDepth(384)
+            .setDepth(anchors.tree.y - 10)
             .setScale(0.9);
-          this.rects.push({ x: 498, y: 375, w: 28, h: 15 });
+          this.rects.push({
+            x: anchors.tree.x - 14,
+            y: anchors.tree.y - 19,
+            w: 28,
+            h: 15,
+          });
           return;
         }
         const conf = manifest.props[p.sprite as keyof typeof manifest.props];
@@ -332,6 +343,7 @@ export class Village extends Phaser.Scene {
           roofY: y + bh - facade.displayHeight - 4,
         });
       });
+      this.rects.push(...fenceRects, ...drawScenery34(this));
     } else {
       ({ width: w, height: h } = roomDimensions(this.state.room));
       architecture33(this, this.state.room);
@@ -341,11 +353,22 @@ export class Village extends Phaser.Scene {
       drawRoomDecor(this, this.state.room);
       this.rects.push(...decorationRects(this.state.room));
       this.interiorLife = new InteriorLife(this, this.state.room);
-      this.label(240, 325, "Sortie");
+      plaque(this, "↓ Sortie · Village", true)
+        .setPosition(240, 327)
+        .setScale(0.85)
+        .setName("interior:exit-tag");
     }
+    if (this.state.room === "village")
+      this.state.position = restoreOutdoorPosition(
+        this.state.position,
+        this.rects,
+      );
     if (blocked(this.state.position, this.rects, w, h))
       this.state.position =
-        this.state.room === "village" ? { x: 512, y: 608 } : { x: 240, y: 280 };
+        this.state.room === "village"
+          ? { ...anchors.spawn }
+          : { x: 240, y: 280 };
+    this.game.canvas.dataset.collisions = JSON.stringify(this.rects);
     const p = this.state.position;
     this.player = actor(this, "debby", p.x, p.y);
     this.loyal = actor(this, "loyal", p.x - 28, p.y + 12);
@@ -383,8 +406,8 @@ export class Village extends Phaser.Scene {
     }
     if (this.state.room === "village") {
       for (const [id, name, x, y] of [
-        ["emile", "Émile", 240, 430],
-        ["flocon", "Flocon", 850, 440],
+        ["emile", "Émile", anchors.emile.x, anchors.emile.y],
+        ["flocon", "Flocon", anchors.flocon.x, anchors.flocon.y],
       ] as const) {
         const image = actor(this, id, x, y).setDepth(y).play(`${id}-attente`);
         this.actorTags.push({ actor: image, plate: plaque(this, name), name });
@@ -417,7 +440,7 @@ export class Village extends Phaser.Scene {
   }
   adventAnchor() {
     return this.state.room === "village"
-      ? { x: 512, y: 430 }
+      ? { ...anchors.advent }
       : { x: 300, y: 270 };
   }
   refreshAdvent() {
@@ -464,11 +487,7 @@ export class Village extends Phaser.Scene {
     }
   }
   huntPoint() {
-    return [
-      { x: 560, y: 500 },
-      { x: 440, y: 460 },
-      { x: 700, y: 500 },
-    ][(this.hunt?.found.length ?? 0) % 3];
+    return anchors.hunts[(this.hunt?.found.length ?? 0) % 3];
   }
   startHunt(step: Step, found: string[]) {
     this.hunt = { step, found: [...found] };
@@ -487,10 +506,10 @@ export class Village extends Phaser.Scene {
     this.state.conversation = null;
     this.clearHunt();
     this.state.room = "village";
-    this.state.position = { x: 512, y: 450 };
+    this.state.position = { ...anchors.final };
     this.finalSequence = { beat: 0, message };
     this.renderRoom();
-    this.loyal.setPosition(486, 455);
+    this.loyal.setPosition(anchors.finalLoyal.x, anchors.finalLoyal.y);
     this.star?.setVisible(true);
     controls.paused = true;
     this.finalLine();

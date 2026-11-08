@@ -15,13 +15,15 @@ export function finishWhiteSnow(
     ["snow-soft", 0.18],
   ] as const) {
     ctx.globalAlpha = alpha;
-    ctx.drawImage(
-      scene.textures.get("d31-" + key).getSourceImage() as HTMLImageElement,
-      0,
-      0,
-      1024,
-      1024,
-    );
+    for (let y = 0; y < ctx.canvas.height; y += 1024)
+      for (let x = 0; x < ctx.canvas.width; x += 1024)
+        ctx.drawImage(
+          scene.textures.get("d31-" + key).getSourceImage() as HTMLImageElement,
+          x,
+          y,
+          1024,
+          1024,
+        );
     scene.textures.remove("d31-" + key);
   }
   ctx.restore();

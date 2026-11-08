@@ -1,7 +1,8 @@
+import { navigateTo } from "./pathfinding";
+import { anchors } from "../../src/art/village34";
 import { test, expect, type Page } from "@playwright/test";
 import { initial } from "../../src/domain";
 import { demoDays } from "../../src/advent/demo";
-import { walkTo } from "./navigation";
 import { mkdirSync } from "node:fs";
 async function startAt(page: Page, room: string) {
   // Date de simulation déterministe, sans modifier les horloges Phaser.
@@ -30,7 +31,7 @@ async function startAt(page: Page, room: string) {
       ...initial,
       stage: 4,
       room,
-      position: room === "village" ? { x: 512, y: 430 } : { x: 300, y: 270 },
+      position: room === "village" ? anchors.advent : { x: 300, y: 270 },
       stars: [1],
     },
   );
@@ -261,14 +262,8 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
                 ),
             );
             // D31 modal cleanup end.
-            for (const [x, y] of [
-              [560, 500],
-              [440, 460],
-              [700, 500],
-            ]) {
-              await walkTo(page, "y", 520);
-              await walkTo(page, "x", x);
-              await walkTo(page, "y", y);
+            for (const p of anchors.hunts) {
+              await navigateTo(page, p);
               await page
                 .getByRole("button", {
                   name:

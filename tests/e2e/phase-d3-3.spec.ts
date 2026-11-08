@@ -1,3 +1,4 @@
+import { blocked } from "../../src/domain";
 import { test, expect, type Page } from "@playwright/test";
 import { initial, type Save } from "../../src/domain";
 import { roomPlans, allFurniture } from "../../src/art/rooms33";
@@ -243,10 +244,19 @@ test("D33 ancienne position désormais occupée : progression préservée", asyn
 }) => {
   const h = homes[4];
   await start(page, "village", { x: h.x, y: h.y - 20 });
-  await expect(page.locator("canvas")).toHaveAttribute("data-player-x", "512");
-  await expect(page.locator("canvas")).toHaveAttribute("data-player-y", "608");
+  const rescued = await page
+    .locator("canvas")
+    .evaluate((el) => ({
+      x: Number(el.dataset.playerX),
+      y: Number(el.dataset.playerY),
+      rects: JSON.parse(el.dataset.collisions!),
+    }));
+  expect(blocked(rescued, rescued.rects, 1920, 1408)).toBe(false);
   await page.reload();
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
-  await expect(page.locator("canvas")).toHaveAttribute("data-player-x", "512");
+  await expect(page.locator("canvas")).toHaveAttribute(
+    "data-player-x",
+    String(rescued.x),
+  );
   await expect(page.locator(".quest")).toContainText("3 / 24");
 });

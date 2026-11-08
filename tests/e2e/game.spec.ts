@@ -1,3 +1,5 @@
+import { navigateTo } from "./pathfinding";
+import { anchors, plan } from "../../src/art/village34";
 import { walkTo } from "./navigation";
 import { test, expect, type Page } from "@playwright/test";
 async function start(page: Page) {
@@ -30,8 +32,10 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   await expect(page.getByRole("dialog")).toContainText("chaque étoile");
   await page.getByRole("button", { name: /Continuer/ }).click();
   // From (512,608): avoid pine at (800,624), approach doorway from below.
-  await walk(page, "ArrowDown", "y", 646);
-  await walk(page, "ArrowRight", "x", 800);
+  await navigateTo(
+    page,
+    plan.buildings.find((b) => b.id === "loyal_house")!.returnPoint,
+  );
   await expect
     .poll(() =>
       page.locator("canvas").evaluate((el) => {
@@ -58,8 +62,7 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   await walk(page, "ArrowDown", "y", 305);
   await page.keyboard.press("e");
   await expect(page.locator(".location")).toContainText("Place des Lanternes");
-  await walk(page, "ArrowLeft", "x", 512);
-  await walk(page, "ArrowUp", "y", 410);
+  await navigateTo(page, { ...anchors.tree, y: anchors.tree.y + 28 });
   await page.keyboard.press("e");
   await expect(page.getByRole("dialog")).toContainText(
     "Notre premier souvenir",

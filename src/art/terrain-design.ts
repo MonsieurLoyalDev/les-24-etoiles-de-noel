@@ -193,3 +193,39 @@ export const snowBanks = [
   { key: "grass-rocks", x: 432, y: 554, w: 27, h: 14 },
   { key: "paw-trail", x: 872, y: 456, w: 53, h: 25 },
 ];
+
+const positions34: number[][] = [
+  [90, 180],
+  [980, 150],
+  [90, 1160],
+  [145, 720],
+  [210, 1185],
+  [1855, 1210],
+  [720, 170],
+  [1870, 640],
+  [480, 1200],
+  [280, 630],
+  [735, 760],
+  [1170, 960],
+  [800, 660],
+  [1060, 650],
+  [1280, 975],
+  [710, 950],
+  [880, 980],
+  [1120, 1010],
+  [740, 735],
+  [1090, 815],
+  [1180, 760],
+  [615, 760],
+  [1700, 660],
+];
+export const terrainRegions34 = terrainRegions.map((p, i) => ({
+  ...p,
+  x: positions34[i]?.[0] ?? p.x,
+  y: positions34[i]?.[1] ?? p.y,
+}));
+export const snowBanks34 = snowBanks.map((p, i) => ({
+  ...p,
+  x: positions34[(i + 2) % positions34.length][0] + ((i % 3) - 1) * 28,
+  y: positions34[(i + 2) % positions34.length][1] + (i % 2 ? 18 : -12),
+}));

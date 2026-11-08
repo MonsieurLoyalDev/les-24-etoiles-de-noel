@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import map from "../game/maps/place-des-lanternes.json";
+import { villageMap as map, anchors } from "./village34";
 import {
   readGraphics,
   effectiveQuality,
@@ -113,12 +113,20 @@ export class VillageAmbience {
     };
     for (const p of map.props.filter((p) => p.sprite === "lantern"))
       light(p.tileX * 16, p.tileY * 16 - 49, 23, 0.55, p.tileY * 16 + 1);
-    for (const [x, y] of [
-      [388, 383],
-      [637, 389],
-    ])
-      light(x, y - 49, 23, 0.55, y + 1);
-    light(512, 398, 176, 0.25, 382);
+    for (const child of scene.children.list)
+      if (
+        child instanceof Phaser.GameObjects.Image &&
+        child.name.startsWith("scenery:") &&
+        child.name.includes("lampadaire")
+      )
+        light(
+          child.x,
+          child.y - child.displayHeight * 0.82,
+          23,
+          0.45,
+          child.depth + 1,
+        );
+    light(anchors.tree.x, anchors.tree.y + 4, 176, 0.25, anchors.tree.y - 12);
     this.lights[this.lights.length - 1].image.setDisplaySize(176, 92);
     for (const b of map.buildings) {
       const image = scene.children.getByName(

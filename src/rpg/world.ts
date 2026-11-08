@@ -1,3 +1,4 @@
+import { anchors } from "../art/village34";
 import type { Save, Point, Rect } from "../domain";
 export type Room = Save["room"];
 export const roomNames: Record<Room, string> = {
@@ -84,12 +85,7 @@ export const citizens = [
     name: "Augustin",
     room: "village",
     color: 0x96d3e1,
-    path: [
-      { x: 660, y: 550 },
-      { x: 730, y: 550 },
-      { x: 730, y: 480 },
-      { x: 660, y: 480 },
-    ],
+    path: anchors.augustin,
   },
 ] satisfies {
   id: string;

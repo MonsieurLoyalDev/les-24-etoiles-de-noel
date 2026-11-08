@@ -156,6 +156,32 @@ export function furnishings33(scene: Phaser.Scene, room: Room33) {
       .setScale(f.scale)
       .setDepth(f.y)
       .setName(f.name ?? "interior:annex:" + index + ":" + f.key);
+    if (room === "inn" && f.key === "inn-table" && f.x > 800) {
+      const oldWidth = image.displayWidth,
+        oldHeight = image.displayHeight;
+      image
+        .setTexture("d31-house-table")
+        .setScale(Math.min(oldWidth / image.width, oldHeight / image.height));
+    }
+    if (room === "library" && f.key === "library-shelves" && index % 2)
+      image.setFlipX(true);
+    if (
+      (room === "inn" && f.key === "inn-table") ||
+      (room === "workshop" && f.key === "workshop-bench")
+    )
+      scene.add
+        .image(
+          f.x,
+          f.y - 22,
+          room === "inn"
+            ? f.x > 800
+              ? "d31-cards-keepsakes"
+              : "d31-photo-keepsakes"
+            : "d31-wrapping-plans",
+        )
+        .setScale(0.35)
+        .setDepth(f.y + 0.2)
+        .setName("interior:table-story:" + index);
     audit.push({
       name: f.key,
       x: f.x,
@@ -189,11 +215,20 @@ export function annexDecor33(scene: Phaser.Scene, room: Room33) {
   };
   for (const [x, y, w] of compositions[room])
     scene.add
-      .image(x, y, "d31-rug-woven")
+      .image(
+        x,
+        y,
+        room === "house" || room === "inn" ? "d31-rug-oval" : "d31-rug-woven",
+      )
       .setScale((0.5 * w) / 200)
       .setDepth(-90)
       .setName("interior:annex:rug");
-  const small = room === "workshop" ? "wrapping-plans" : "photo-keepsakes";
+  const small =
+    room === "workshop"
+      ? "wrapping-plans"
+      : room === "library"
+        ? "cards-keepsakes"
+        : "photo-keepsakes";
   const p =
     room === "house"
       ? [750, 274]
