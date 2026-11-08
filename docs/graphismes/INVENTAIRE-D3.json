@@ -1,0 +1,431 @@
+{
+  "version": "0.7.0",
+  "base": "c35508956ce34264d9d94204349665d4322b5fa2",
+  "assets": [
+    {
+      "key": "earth-a",
+      "path": "public/assets/ambience-d3/earth-a.png",
+      "width": 1618,
+      "height": 972,
+      "bytes": 1614565,
+      "sha256": "e79110cbbebf2e94bdb3c18fbb8c7aaad87e89d7292f8f8c19e67f9e3fada5f4",
+      "instances": 6,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "earth-b",
+      "path": "public/assets/ambience-d3/earth-b.png",
+      "width": 1568,
+      "height": 1003,
+      "bytes": 1570511,
+      "sha256": "23d7df39c4f2a77f20c54529f3fd3323c70e98e9a0ac241914d571dada043696",
+      "instances": 6,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "packed-a",
+      "path": "public/assets/ambience-d3/packed-a.png",
+      "width": 1618,
+      "height": 972,
+      "bytes": 1307562,
+      "sha256": "8f143193591a6a805b29272845bc0662260bb3ec86808c5a0b8ffe80828febe0",
+      "instances": 4,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "packed-b",
+      "path": "public/assets/ambience-d3/packed-b.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1592426,
+      "sha256": "da4588dc00095d4f7fdba22f0e04dd739e3041cab587a1b7ba59998d99ddf570",
+      "instances": 4,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "thaw-a",
+      "path": "public/assets/ambience-d3/thaw-a.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1918808,
+      "sha256": "a3be7b60209e491b4cd62057331a72c56c0849d2d636ba9fd5fa449410f90090",
+      "instances": 2,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "thaw-b",
+      "path": "public/assets/ambience-d3/thaw-b.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1664129,
+      "sha256": "949b21b962bea7996b088d2f21f75b917e32d5a033f5b566b680ed8fac733502",
+      "instances": 2,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "snowbank-wide",
+      "path": "public/assets/ambience-d3/snowbank-wide.png",
+      "width": 2172,
+      "height": 724,
+      "bytes": 682698,
+      "sha256": "362b03ac13aab0583e9257ec653f6af6eed94fb1988119a494d0525f01d74355",
+      "instances": 5,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "snowbank-small",
+      "path": "public/assets/ambience-d3/snowbank-small.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1123896,
+      "sha256": "33af5b9748c2c73ca98d487045a9cb9d0cd4f77646734716fd09a04ddedc882e",
+      "instances": 4,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "grass-rocks",
+      "path": "public/assets/ambience-d3/grass-rocks.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1222058,
+      "sha256": "fed9c0885abac5a48873c5df354bd48b5bbf1c9c2179862123ee150dd99627d5",
+      "instances": 4,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    },
+    {
+      "key": "paw-trail",
+      "path": "public/assets/ambience-d3/paw-trail.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1100120,
+      "sha256": "c9b4ce760fc36cf7066ae8235368536c9477e8d87117e1419d07a16bac7005a4",
+      "instances": 1,
+      "source": "image_gen intégré, D3-GENERATION.md"
+    }
+  ],
+  "terrainRegions": [
+    {
+      "key": "earth-a",
+      "x": 65,
+      "y": 163,
+      "w": 242,
+      "h": 176,
+      "place": "bosquet nord-ouest"
+    },
+    {
+      "key": "earth-b",
+      "x": 958,
+      "y": 144,
+      "w": 214,
+      "h": 170,
+      "place": "bosquet nord-est",
+      "flip": true
+    },
+    {
+      "key": "earth-b",
+      "x": 73,
+      "y": 691,
+      "w": 235,
+      "h": 178,
+      "place": "bosquet sud-ouest"
+    },
+    {
+      "key": "earth-a",
+      "x": 144,
+      "y": 588,
+      "w": 134,
+      "h": 86,
+      "place": "raccord au sapin du sentier ouest"
+    },
+    {
+      "key": "earth-b",
+      "x": 215,
+      "y": 650,
+      "w": 145,
+      "h": 90,
+      "place": "liaison au bosquet sud-ouest",
+      "flip": true
+    },
+    {
+      "key": "earth-a",
+      "x": 955,
+      "y": 679,
+      "w": 219,
+      "h": 169,
+      "place": "bosquet sud-est",
+      "flip": true
+    },
+    {
+      "key": "earth-a",
+      "x": 651,
+      "y": 130,
+      "w": 175,
+      "h": 119,
+      "place": "sapins derrière auberge"
+    },
+    {
+      "key": "earth-b",
+      "x": 951,
+      "y": 401,
+      "w": 167,
+      "h": 143,
+      "place": "lisière de Flocon"
+    },
+    {
+      "key": "earth-b",
+      "x": 865,
+      "y": 683,
+      "w": 230,
+      "h": 108,
+      "place": "jardin clôturé de Loyal"
+    },
+    {
+      "key": "earth-a",
+      "x": 132,
+      "y": 327,
+      "w": 104,
+      "h": 75,
+      "place": "pied du sapin bibliothèque"
+    },
+    {
+      "key": "earth-b",
+      "x": 377,
+      "y": 360,
+      "w": 98,
+      "h": 54,
+      "place": "massif ouest de la place"
+    },
+    {
+      "key": "earth-a",
+      "x": 651,
+      "y": 365,
+      "w": 105,
+      "h": 57,
+      "place": "massif est de la place"
+    },
+    {
+      "key": "packed-a",
+      "x": 208,
+      "y": 333,
+      "w": 172,
+      "h": 84,
+      "place": "entrée bibliothèque"
+    },
+    {
+      "key": "packed-b",
+      "x": 469,
+      "y": 226,
+      "w": 178,
+      "h": 66,
+      "place": "terrasse auberge"
+    },
+    {
+      "key": "packed-a",
+      "x": 787,
+      "y": 290,
+      "w": 183,
+      "h": 92,
+      "place": "parvis atelier",
+      "flip": true
+    },
+    {
+      "key": "packed-b",
+      "x": 797,
+      "y": 649,
+      "w": 175,
+      "h": 77,
+      "place": "entrée maison"
+    },
+    {
+      "key": "packed-b",
+      "x": 435,
+      "y": 515,
+      "w": 220,
+      "h": 110,
+      "place": "passage entre banc et place",
+      "flip": true
+    },
+    {
+      "key": "packed-a",
+      "x": 607,
+      "y": 540,
+      "w": 159,
+      "h": 77,
+      "place": "approche sud-est de la place"
+    },
+    {
+      "key": "packed-b",
+      "x": 270,
+      "y": 411,
+      "w": 155,
+      "h": 67,
+      "place": "point courrier"
+    },
+    {
+      "key": "packed-a",
+      "x": 732,
+      "y": 513,
+      "w": 140,
+      "h": 79,
+      "place": "allée Augustin"
+    },
+    {
+      "key": "thaw-a",
+      "x": 140,
+      "y": 509,
+      "w": 105,
+      "h": 68,
+      "place": "bordure du sentier ouest"
+    },
+    {
+      "key": "thaw-b",
+      "x": 913,
+      "y": 469,
+      "w": 109,
+      "h": 67,
+      "place": "bordure du sentier forêt"
+    },
+    {
+      "key": "thaw-a",
+      "x": 720,
+      "y": 655,
+      "w": 99,
+      "h": 61,
+      "place": "bord de jardin maison",
+      "flip": true
+    },
+    {
+      "key": "thaw-b",
+      "x": 590,
+      "y": 258,
+      "w": 83,
+      "h": 55,
+      "place": "bord terrasse enneigée"
+    }
+  ],
+  "snowBanks": [
+    {
+      "key": "snowbank-wide",
+      "x": 146,
+      "y": 305,
+      "w": 57,
+      "h": 10
+    },
+    {
+      "key": "snowbank-wide",
+      "x": 561,
+      "y": 207,
+      "w": 65,
+      "h": 10
+    },
+    {
+      "key": "snowbank-wide",
+      "x": 717,
+      "y": 260,
+      "w": 61,
+      "h": 11
+    },
+    {
+      "key": "snowbank-wide",
+      "x": 868,
+      "y": 627,
+      "w": 57,
+      "h": 10
+    },
+    {
+      "key": "snowbank-wide",
+      "x": 909,
+      "y": 697,
+      "w": 72,
+      "h": 12
+    },
+    {
+      "key": "snowbank-small",
+      "x": 246,
+      "y": 133,
+      "w": 29,
+      "h": 15
+    },
+    {
+      "key": "snowbank-small",
+      "x": 903,
+      "y": 555,
+      "w": 30,
+      "h": 15
+    },
+    {
+      "key": "snowbank-small",
+      "x": 177,
+      "y": 699,
+      "w": 31,
+      "h": 16
+    },
+    {
+      "key": "snowbank-small",
+      "x": 939,
+      "y": 664,
+      "w": 28,
+      "h": 15
+    },
+    {
+      "key": "grass-rocks",
+      "x": 92,
+      "y": 470,
+      "w": 35,
+      "h": 18
+    },
+    {
+      "key": "grass-rocks",
+      "x": 929,
+      "y": 508,
+      "w": 33,
+      "h": 18
+    },
+    {
+      "key": "grass-rocks",
+      "x": 674,
+      "y": 119,
+      "w": 30,
+      "h": 16
+    },
+    {
+      "key": "grass-rocks",
+      "x": 432,
+      "y": 554,
+      "w": 27,
+      "h": 14
+    },
+    {
+      "key": "paw-trail",
+      "x": 872,
+      "y": 456,
+      "w": 53,
+      "h": 25
+    }
+  ],
+  "effectBudgets": {
+    "full": {
+      "snow": 40,
+      "smoke": 16,
+      "wind": 6,
+      "stars": 10,
+      "sway": 8
+    },
+    "soft": {
+      "snow": 14,
+      "smoke": 8,
+      "wind": 2,
+      "stars": 4,
+      "sway": 3
+    },
+    "none": {
+      "snow": 0,
+      "smoke": 0,
+      "wind": 0,
+      "stars": 0,
+      "sway": 0
+    }
+  },
+  "newColliders": 0,
+  "sourceImagesOverwritten": 0
+}

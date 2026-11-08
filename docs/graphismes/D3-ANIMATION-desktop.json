@@ -1,0 +1,20 @@
+{
+  "quality": "full",
+  "reduced": false,
+  "flurry": 0.8291859617214709,
+  "visibleSnow": 40,
+  "visibleSmoke": 12,
+  "visibleWind": 2,
+  "visibleStars": 4,
+  "visibleLights": 16,
+  "swaying": 8,
+  "particleLimit": 72,
+  "cpuP95": 0.10000014305114746,
+  "engineFps": 236.6502257734537,
+  "meanFrameMs": 4.167222222222224,
+  "palette": {
+    "color": 1519709,
+    "alpha": 0.27,
+    "warm": 1
+  }
+}

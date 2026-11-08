@@ -2,6 +2,7 @@ import type Phaser from "phaser";
 import map from "../game/maps/place-des-lanternes.json";
 import { courts, lanes, decorations } from "./village-design";
 import { texturedSnow, snowAccents } from "./snow-detail";
+import { drawTerrain, drawTerrainDetails, auditTerrain } from "./terrain";
 function macro(ctx: CanvasRenderingContext2D, image: CanvasImageSource) {
   // Mirrored macro-chunks share the same edge texels. No random tile permutation or seam every 16 px.
   for (let y = 0; y < 2; y++)
@@ -56,7 +57,7 @@ export function landscape(
   scene: Phaser.Scene,
   buildingWidths: Record<string, number>,
 ) {
-  const key = "village-floor-d22";
+  const key = "village-floor-d3";
   if (!scene.textures.exists(key)) {
     const floor = scene.textures.createCanvas(key, 1024, 768)!,
       ctx = floor.context;
@@ -66,6 +67,7 @@ export function landscape(
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(snow, 0, 0);
     texturedSnow(scene, ctx);
+    drawTerrain(scene, ctx);
     for (const material of ["dirt", "stone"] as const) {
       ctx.globalAlpha = 0.07;
       for (let rim = 3; rim > 0; rim--)
@@ -120,6 +122,8 @@ export function landscape(
       if (p.sprite !== "quest_star")
         contact(ctx, p.tileX * 16, p.tileY * 16, 26, 0.09);
     snowAccents(ctx);
+    drawTerrainDetails(scene, ctx);
+    auditTerrain(scene, ctx);
     floor.refresh();
   }
   return scene.add.image(0, 0, key).setOrigin(0).setDepth(-100);

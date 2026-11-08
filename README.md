@@ -1,4 +1,13 @@
-# Les 24 Étoiles de Noël — Phase D.2.2, finitions artistiques
+# Les 24 Étoiles de Noël — Phase D.3, village vivant
+
+Version 0.7.0 : terrain mêlant neige, terre, herbes d'hiver, givre et passages tassés ; neige occasionnelle, cheminées animées, lumières chaudes et petits mouvements des décors. Qualité réglable dans les paramètres existants, indépendante de la progression et respectueuse de la réduction des mouvements. Les personnages, bâtiments, HUD principal, dialogues, sauvegardes, collisions et 24 journées sont conservés.
+
+- [Comparatif D.2.2 / D.3, PC/mobile et trois ambiances](docs/graphismes/comparatif-d3.html)
+- [Démonstration animée PC et téléphone](docs/graphismes/demonstration-d3.html)
+- [Rapport et performances](docs/graphismes/FINITIONS-D3.md)
+- [Inventaire et placements des dix nouveaux assets](docs/graphismes/INVENTAIRE-D3.json)
+
+## Phase D.2.2 — historique 0.6.2
 
 Version 0.6.2 : cinq silhouettes de sapins, cinq formes d'arbustes, petits groupes autour de la place, neige et raccords affinés, noms réduits de 12,5 %. Les sept nouveaux sprites complètent les ressources D.2.1 conservées. Aucun changement des personnages, façades, mécaniques, sauvegardes, dialogues ou calendrier. Aucune D.3 commencée.
 

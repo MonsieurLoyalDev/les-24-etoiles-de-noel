@@ -11,6 +11,8 @@ import {
 } from "./vegetation";
 import { prepareSprite, prepareSnow, cleanKey } from "./prepare";
 import { borderPlants } from "./vegetation-design";
+import { terrainAssets } from "./terrain-design";
+import { prepareTerrain } from "./terrain";
 
 export const art = catalog.images;
 export const buildingArt: Record<string, string> = {
@@ -33,6 +35,7 @@ export const buildingWidths: Record<string, number> = {
   inn: 224,
 };
 export function prepareWorld(scene: Phaser.Scene) {
+  prepareTerrain(scene);
   prepareVegetation(scene);
   for (const key of Object.values(buildingArt)) prepareSprite(scene, key, true);
   for (const key of [
@@ -51,6 +54,8 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
+  for (const [key, path] of Object.entries(terrainAssets))
+    scene.load.image("source-ground-d3-" + key, path);
   for (const [key, url] of Object.entries(allVegetationAssets))
     scene.load.image(`raw-${vegetationKey(key)}`, url);
   for (const [key, url] of Object.entries(snowAssets))
