@@ -1,0 +1,7 @@
+{
+  "buildMode": "e2e final, shared public allowlist",
+  "cssAssetReferences": 13,
+  "allPresent": true,
+  "nativeSprites": 20,
+  "missing": []
+}

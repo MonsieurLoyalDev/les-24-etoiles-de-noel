@@ -1,0 +1,239 @@
+{
+  "version": "0.7.2",
+  "base": "21f1e0a8c615b585e2600651f412ed0c565fb46c",
+  "checkedAt": "2026-11-08T11:22:40.694Z",
+  "lint": "passed",
+  "typescript": "passed via build:private, build and build:e2e",
+  "build": "passed",
+  "privateBuild": "passed; no bundled demo surprises or demo media",
+  "builtAssets": [
+    {
+      "mode": "private",
+      "cssAssetReferences": 13,
+      "allPresent": true,
+      "nativeSprites": 20,
+      "missing": []
+    },
+    {
+      "mode": "production",
+      "cssAssetReferences": 13,
+      "allPresent": true,
+      "nativeSprites": 20,
+      "missing": []
+    }
+  ],
+  "unit": {
+    "passed": 151,
+    "skipped": 2,
+    "failed": 0,
+    "skippedCases": [
+      "activation et restauration atomiques, anciens assets conservés",
+      "refuse les symlinks et la sortie du dossier dédié"
+    ]
+  },
+  "browser": {
+    "passed": 78,
+    "skipped": 12,
+    "failed": 0,
+    "total": 90,
+    "duration": "23.1m",
+    "command": "ETB_E2E_BUILT=1 npx playwright test --max-failures=1 --reporter=line",
+    "platforms": [
+      "Chrome desktop 1280×800 / 1280×1000",
+      "Chrome mobile emulation 390×844"
+    ],
+    "physicalPhoneTested": false
+  },
+  "art": {
+    "usedAssets": 20,
+    "servedBytes": 921208,
+    "maxNativeDimension": 404,
+    "authenticBeforeFrames": 43,
+    "verifiedTransparentSprites": 20,
+    "comparisonFiles": 68,
+    "videos": [
+      {
+        "duration": 17.68,
+        "width": 1280,
+        "height": 1000
+      },
+      {
+        "duration": 17.6,
+        "width": 390,
+        "height": 844
+      }
+    ]
+  },
+  "protectedFiles": 661,
+  "metrics": [
+    {
+      "name": "performance-desktop",
+      "project": "desktop",
+      "frames": 170,
+      "p95": 4.300000000000182,
+      "mean": 4.167058823529413,
+      "decor": {
+        "room": "house",
+        "quality": "full",
+        "reduced": false,
+        "objects": [
+          {
+            "id": "house-candle",
+            "action": "toggle",
+            "on": false
+          },
+          {
+            "id": "house-cat",
+            "action": "pet"
+          },
+          {
+            "id": "house-photo",
+            "action": "read"
+          },
+          {
+            "id": "house-note",
+            "action": "read"
+          },
+          {
+            "id": "house-chair",
+            "action": "read"
+          }
+        ],
+        "flames": 1,
+        "steam": 4,
+        "cat": "life-cat-sleep",
+        "petting": false,
+        "mechanism": false
+      },
+      "note": "Chrome local, émulation de taille et toucher ; pas une mesure de téléphone physique"
+    },
+    {
+      "name": "performance-mobile",
+      "project": "mobile",
+      "frames": 170,
+      "p95": 4.300000000000182,
+      "mean": 4.1664705882352955,
+      "decor": {
+        "room": "house",
+        "quality": "soft",
+        "reduced": false,
+        "objects": [
+          {
+            "id": "house-candle",
+            "action": "toggle",
+            "on": false
+          },
+          {
+            "id": "house-cat",
+            "action": "pet"
+          },
+          {
+            "id": "house-photo",
+            "action": "read"
+          },
+          {
+            "id": "house-note",
+            "action": "read"
+          },
+          {
+            "id": "house-chair",
+            "action": "read"
+          }
+        ],
+        "flames": 1,
+        "steam": 2,
+        "cat": "life-cat-sleep",
+        "petting": false,
+        "mechanism": false
+      },
+      "note": "Chrome local, émulation de taille et toucher ; pas une mesure de téléphone physique"
+    },
+    {
+      "name": "performance-quartier-desktop",
+      "project": "desktop",
+      "position": {
+        "x": 385,
+        "y": 757
+      },
+      "frames": 170,
+      "p95": 4.300000000000182,
+      "mean": 4.167647058823527,
+      "neighbourhood": {
+        "houses": 4,
+        "quality": "full",
+        "smoke": 4,
+        "budget": 8,
+        "lights": 4
+      },
+      "ambience": {
+        "quality": "full",
+        "reduced": false,
+        "flurry": 0.45843066138304617,
+        "visibleSnow": 40,
+        "visibleSmoke": 0,
+        "visibleWind": 2,
+        "visibleStars": 3,
+        "visibleLights": 3,
+        "swaying": 3,
+        "particleLimit": 72,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 133.59375,
+        "meanFrameMs": 4.167222222222219,
+        "palette": {
+          "color": 1519709,
+          "alpha": 0.27,
+          "warm": 1
+        }
+      },
+      "note": "Chrome local, quartier avec nouvelles maisons et fumées visibles. RAF non plafonné ; engineFps décrit Phaser. Téléphone émulé, aucun GPU mobile physique."
+    },
+    {
+      "name": "performance-quartier-mobile",
+      "project": "mobile",
+      "position": {
+        "x": 385,
+        "y": 757
+      },
+      "frames": 170,
+      "p95": 4.300000000000182,
+      "mean": 4.16764705882353,
+      "neighbourhood": {
+        "houses": 4,
+        "quality": "soft",
+        "smoke": 2,
+        "budget": 4,
+        "lights": 3
+      },
+      "ambience": {
+        "quality": "soft",
+        "reduced": false,
+        "flurry": 0.45897650910700927,
+        "visibleSnow": 14,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 1,
+        "visibleLights": 4,
+        "swaying": 0,
+        "particleLimit": 28,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 133.921875,
+        "meanFrameMs": 4.167222222222219,
+        "palette": {
+          "color": 1519709,
+          "alpha": 0.27,
+          "warm": 1
+        }
+      },
+      "note": "Chrome local, quartier avec nouvelles maisons et fumées visibles. RAF non plafonné ; engineFps décrit Phaser. Téléphone émulé, aucun GPU mobile physique."
+    }
+  ],
+  "limits": [
+    "No physical phone or deployed HTTPS server tested",
+    "Four decorative houses retained instead of eight miniature placements",
+    "No seated character pose; chairs are examinable",
+    "Texts are fictional; historical V10 edge defects remain",
+    "Headless RAF is not capped and must not be presented as physical-device FPS"
+  ],
+  "deployment": "none",
+  "merge": "none"
+}

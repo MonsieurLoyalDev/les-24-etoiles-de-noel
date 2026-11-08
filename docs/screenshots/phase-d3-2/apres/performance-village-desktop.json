@@ -1,0 +1,14 @@
+{
+  "project": "desktop",
+  "frames": 170,
+  "p95": 4.300000000000182,
+  "mean": 4.16764705882353,
+  "neighbourhood": {
+    "houses": 4,
+    "quality": "full",
+    "smoke": 2,
+    "budget": 8,
+    "lights": 3
+  },
+  "note": "Chrome local, émulation de format ; RAF non plafonné, pas une mesure sur appareil physique"
+}

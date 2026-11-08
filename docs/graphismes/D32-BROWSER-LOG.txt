@@ -1,0 +1,106 @@
+
+[WebServer] (node:23812) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 90 tests using 1 worker
+
+
+(node:19348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/90] [desktop] › tests\e2e\correction-d1.spec.ts:3:1 › D.1 : dialogue compact et monde lisible
+[2/90] [desktop] › tests\e2e\correction-d1.spec.ts:63:1 › D.1 : petit téléphone 320 px
+[3/90] [desktop] › tests\e2e\correction-d1.spec.ts:81:1 › D.1 : vue d'ensemble des façades et décors
+[4/90] [desktop] › tests\e2e\game.spec.ts:25:1 › parcours complet, sauvegarde et journal
+[5/90] [desktop] › tests\e2e\game.spec.ts:81:1 › joystick tactile et absence de débordement
+[6/90] [desktop] › tests\e2e\graphics.spec.ts:5:1 › village graphique, dialogue et affichage responsive
+[7/90] [desktop] › tests\e2e\graphics.spec.ts:43:1 › paramètres séparés de la progression et absence de sons non autorisés
+[8/90] [desktop] › tests\e2e\graphics.spec.ts:84:1 › téléphone paysage et réduction des animations
+[9/90] [desktop] › tests\e2e\graphics.spec.ts:106:1 › contrôle des 32 portraits sur fonds clair et sombre
+[10/90] [desktop] › tests\e2e\graphics.spec.ts:141:1 › chaque étoile ouvre la journée sélectionnée
+[11/90] [desktop] › tests\e2e\phase-b.spec.ts:124:1 › Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux
+[12/90] [desktop] › tests\e2e\phase-c.spec.ts:52:1 › les 24 journées : activités, reprise, récompenses et scène finale
+[13/90] [desktop] › tests\e2e\phase-c.spec.ts:370:1 › calendrier daté fermé en novembre et éditeur fictif persistant
+[14/90] [desktop] › tests\e2e\phase-d2-1.spec.ts:40:1 › D.2.1 : promenade et place centrale
+[15/90] [desktop] › tests\e2e\phase-d2-1.spec.ts:71:1 › D.2.1 : étiquettes masquées en dialogue, stables et contenues
+[16/90] [desktop] › tests\e2e\phase-d2-1.spec.ts:116:1 › D.2.1 : les huit noms conservent leur identité dans les pièces
+[17/90] [desktop] › tests\e2e\phase-d2-1.spec.ts:145:1 › D.2.1 : cadrage des quatre façades sur PC et mobile
+[18/90] [desktop] › tests\e2e\phase-d2-1.spec.ts:166:1 › D.2.1 : vue globale et abords des quatre bâtiments
+[19/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:42:1 › D.2.2 : promenade et place centrale
+[20/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:73:1 › D.2.2 : présentation des dix silhouettes
+[21/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:101:1 › D.2.2 : étiquettes masquées en dialogue, stables et contenues
+[22/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:148:1 › D.2.2 : les huit noms conservent leur identité dans les pièces
+[23/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:177:1 › D.2.2 : cadrage des quatre façades sur PC et mobile
+[24/90] [desktop] › tests\e2e\phase-d2-2.spec.ts:198:1 › D.2.2 : vue globale et abords des quatre bâtiments
+[25/90] [desktop] › tests\e2e\phase-d2.spec.ts:35:1 › D.2 : promenade et place centrale
+[26/90] [desktop] › tests\e2e\phase-d2.spec.ts:53:1 › D.2 : cadrage des quatre façades sur PC et mobile
+[27/90] [desktop] › tests\e2e\phase-d2.spec.ts:74:1 › D.2 : vue globale et abords des quatre bâtiments
+[28/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:46:1 › D.3.1 : intérieurs, neige et sapin avant/après
+[29/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:112:1 › D.3.1 : collisions du mobilier et sorties des quatre pièces
+[30/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:159:1 › D.3.1 : lumière intérieure, performances et réduction des mouvements
+[31/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:203:1 › D.3.1 : petit ordinateur et tablette
+[32/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:224:1 › D.3.1 : contrôle des ressources sur fonds clair et sombre
+[33/90] [desktop] › tests\e2e\phase-d3-1.spec.ts:280:1 › D.3.1 : terrain blanc et conservation des matières D.3
+[34/90] [desktop] › tests\e2e\phase-d3-2-compat.spec.ts:44:1 › D32 anciennes positions sous un décor et performance dans un quartier visible
+[35/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:8:1 › D32 effets des quartiers, culling et performance extérieure
+[36/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:70:1 › D32 habitations, collisions et carte du village
+[37/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:98:1 › D32 démonstration enregistrée des interactions et animations
+[38/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:171:1 › D32 chaque objet décoratif fonctionne au clavier et au toucher
+[39/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:234:1 › D32 sauvegarde décorative séparée et réduction des mouvements
+[40/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:304:1 › D32 quatre intérieurs jour/nuit et circulation
+[41/90] [desktop] › tests\e2e\phase-d3-2.spec.ts:342:1 › D32 performances intérieures mesurées
+[42/90] [desktop] › tests\e2e\phase-d3.spec.ts:47:1 › D.3 : terrains, jour, crépuscule, nuit et façades
+[43/90] [desktop] › tests\e2e\phase-d3.spec.ts:95:1 › D.3 : vue globale du terrain
+[44/90] [desktop] › tests\e2e\phase-d3.spec.ts:110:1 › D.3 : qualité, réduction des mouvements et reprise
+[45/90] [desktop] › tests\e2e\phase-d3.spec.ts:158:1 › D.3 : démonstration réelle des effets animés
+
+(node:24032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[46/90] [mobile] › tests\e2e\correction-d1.spec.ts:3:1 › D.1 : dialogue compact et monde lisible
+[47/90] [mobile] › tests\e2e\correction-d1.spec.ts:63:1 › D.1 : petit téléphone 320 px
+[48/90] [mobile] › tests\e2e\correction-d1.spec.ts:81:1 › D.1 : vue d'ensemble des façades et décors
+[49/90] [mobile] › tests\e2e\game.spec.ts:25:1 › parcours complet, sauvegarde et journal
+[50/90] [mobile] › tests\e2e\game.spec.ts:81:1 › joystick tactile et absence de débordement
+[51/90] [mobile] › tests\e2e\graphics.spec.ts:5:1 › village graphique, dialogue et affichage responsive
+[52/90] [mobile] › tests\e2e\graphics.spec.ts:43:1 › paramètres séparés de la progression et absence de sons non autorisés
+[53/90] [mobile] › tests\e2e\graphics.spec.ts:84:1 › téléphone paysage et réduction des animations
+[54/90] [mobile] › tests\e2e\graphics.spec.ts:106:1 › contrôle des 32 portraits sur fonds clair et sombre
+[55/90] [mobile] › tests\e2e\graphics.spec.ts:141:1 › chaque étoile ouvre la journée sélectionnée
+[56/90] [mobile] › tests\e2e\phase-b.spec.ts:124:1 › Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux
+[57/90] [mobile] › tests\e2e\phase-c.spec.ts:52:1 › les 24 journées : activités, reprise, récompenses et scène finale
+[58/90] [mobile] › tests\e2e\phase-c.spec.ts:370:1 › calendrier daté fermé en novembre et éditeur fictif persistant
+[59/90] [mobile] › tests\e2e\phase-d2-1.spec.ts:40:1 › D.2.1 : promenade et place centrale
+[60/90] [mobile] › tests\e2e\phase-d2-1.spec.ts:71:1 › D.2.1 : étiquettes masquées en dialogue, stables et contenues
+[61/90] [mobile] › tests\e2e\phase-d2-1.spec.ts:116:1 › D.2.1 : les huit noms conservent leur identité dans les pièces
+[62/90] [mobile] › tests\e2e\phase-d2-1.spec.ts:145:1 › D.2.1 : cadrage des quatre façades sur PC et mobile
+[63/90] [mobile] › tests\e2e\phase-d2-1.spec.ts:166:1 › D.2.1 : vue globale et abords des quatre bâtiments
+[64/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:42:1 › D.2.2 : promenade et place centrale
+[65/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:73:1 › D.2.2 : présentation des dix silhouettes
+[66/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:101:1 › D.2.2 : étiquettes masquées en dialogue, stables et contenues
+[67/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:148:1 › D.2.2 : les huit noms conservent leur identité dans les pièces
+[68/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:177:1 › D.2.2 : cadrage des quatre façades sur PC et mobile
+[69/90] [mobile] › tests\e2e\phase-d2-2.spec.ts:198:1 › D.2.2 : vue globale et abords des quatre bâtiments
+[70/90] [mobile] › tests\e2e\phase-d2.spec.ts:35:1 › D.2 : promenade et place centrale
+[71/90] [mobile] › tests\e2e\phase-d2.spec.ts:53:1 › D.2 : cadrage des quatre façades sur PC et mobile
+[72/90] [mobile] › tests\e2e\phase-d2.spec.ts:74:1 › D.2 : vue globale et abords des quatre bâtiments
+[73/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:46:1 › D.3.1 : intérieurs, neige et sapin avant/après
+[74/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:112:1 › D.3.1 : collisions du mobilier et sorties des quatre pièces
+[75/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:159:1 › D.3.1 : lumière intérieure, performances et réduction des mouvements
+[76/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:203:1 › D.3.1 : petit ordinateur et tablette
+[77/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:224:1 › D.3.1 : contrôle des ressources sur fonds clair et sombre
+[78/90] [mobile] › tests\e2e\phase-d3-1.spec.ts:280:1 › D.3.1 : terrain blanc et conservation des matières D.3
+[79/90] [mobile] › tests\e2e\phase-d3-2-compat.spec.ts:44:1 › D32 anciennes positions sous un décor et performance dans un quartier visible
+[80/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:8:1 › D32 effets des quartiers, culling et performance extérieure
+[81/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:70:1 › D32 habitations, collisions et carte du village
+[82/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:98:1 › D32 démonstration enregistrée des interactions et animations
+[83/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:171:1 › D32 chaque objet décoratif fonctionne au clavier et au toucher
+[84/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:234:1 › D32 sauvegarde décorative séparée et réduction des mouvements
+[85/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:304:1 › D32 quatre intérieurs jour/nuit et circulation
+[86/90] [mobile] › tests\e2e\phase-d3-2.spec.ts:342:1 › D32 performances intérieures mesurées
+[87/90] [mobile] › tests\e2e\phase-d3.spec.ts:47:1 › D.3 : terrains, jour, crépuscule, nuit et façades
+[88/90] [mobile] › tests\e2e\phase-d3.spec.ts:95:1 › D.3 : vue globale du terrain
+[89/90] [mobile] › tests\e2e\phase-d3.spec.ts:110:1 › D.3 : qualité, réduction des mouvements et reprise
+[90/90] [mobile] › tests\e2e\phase-d3.spec.ts:158:1 › D.3 : démonstration réelle des effets animés
+  12 skipped
+  78 passed (23.1m)

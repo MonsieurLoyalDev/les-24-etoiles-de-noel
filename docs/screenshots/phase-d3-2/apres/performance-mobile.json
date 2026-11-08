@@ -1,0 +1,40 @@
+{
+  "project": "mobile",
+  "frames": 170,
+  "p95": 4.300000000000182,
+  "mean": 4.1664705882352955,
+  "decor": {
+    "room": "house",
+    "quality": "soft",
+    "reduced": false,
+    "objects": [
+      {
+        "id": "house-candle",
+        "action": "toggle",
+        "on": false
+      },
+      {
+        "id": "house-cat",
+        "action": "pet"
+      },
+      {
+        "id": "house-photo",
+        "action": "read"
+      },
+      {
+        "id": "house-note",
+        "action": "read"
+      },
+      {
+        "id": "house-chair",
+        "action": "read"
+      }
+    ],
+    "flames": 1,
+    "steam": 2,
+    "cat": "life-cat-sleep",
+    "petting": false,
+    "mechanism": false
+  },
+  "note": "Chrome local, émulation de taille et toucher ; pas une mesure de téléphone physique"
+}

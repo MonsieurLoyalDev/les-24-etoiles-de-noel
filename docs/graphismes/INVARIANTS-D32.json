@@ -1,0 +1,107 @@
+{
+  "base": "21f1e0a8c615b585e2600651f412ed0c565fb46c",
+  "protectedFiles": 661,
+  "allProtectedUnchanged": true,
+  "allowedExistingFiles": [
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "ops/public-assets.json",
+    "src/art/world.ts",
+    "src/game/Game.ts"
+  ],
+  "originalCollisionsUnchanged": true,
+  "authenticBeforeFrames": 43,
+  "methods": [
+    {
+      "name": "preload",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "create",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "label",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "setAdventDay",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "setAdventLights",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "adventAnchor",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "refreshAdvent",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "huntPoint",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "startHunt",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "clearHunt",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "startFinal",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "finalLine",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "candidates",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "nearest",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "interact",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "openDialogue",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "selectChoice",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "closeMini",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "finishMini",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "emit",
+      "unchangedOutsideDecorHooks": true
+    },
+    {
+      "name": "update",
+      "unchangedOutsideDecorHooks": true
+    }
+  ],
+  "exceptions": [
+    "renderRoom: additive decorative sprites and footprints; original collision construction preserved",
+    "candidates/nearest/interact: decorative candidates, per-object radius and early action return before all quest events",
+    "update: calls to bounded presentation controllers"
+  ],
+  "note": "All existing terrain/snow/tree/actors/HUD/dialogues/save/calendar/minigame/weather files and historical tests are protected byte-for-byte by Git comparison. New collisions are independently tested against every existing lane and entrance."
+}

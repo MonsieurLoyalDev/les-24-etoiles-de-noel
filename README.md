@@ -1,4 +1,15 @@
-# Les 24 Étoiles de Noël — Phase D.3.1, édition artistique
+# Les 24 Étoiles de Noël — Phase D.3.2, le village habité
+
+Version 0.7.2 : quatre intérieurs enrichis, 17 interactions décoratives, un chat dans son panier, quatre sources lumineuses commutables, un petit train mécanique et quatre maisons décoratives de silhouettes distinctes. Les états des interrupteurs restent séparés de la progression. Les ressources et fonctionnalités D.3.1 sont conservées ; aucune D.4 commencée.
+
+- [Visite D.3.1 / D.3.2, PC/mobile et vidéos des interactions](docs/graphismes/comparatif-d32.html)
+- [Présentation des 20 nouveaux sprites](docs/graphismes/ressources-d32.html)
+- [Rapport, architecture, tests, performances et limites](docs/graphismes/FINITIONS-D32.md)
+- [Inventaire et empreintes des nouveaux assets](docs/graphismes/INVENTAIRE-D32.json)
+
+Les maisons ajoutées sont des décors sans intérieur ni porte interactive. Les fauteuils peuvent être examinés ; aucune posture assise n'est simulée avec les sprites validés. Les textes personnels sont fictifs. L'hébergement privé et la configuration Supabase restent ceux documentés par les phases précédentes ; cette livraison ne déploie rien.
+
+## Phase D.3.1 — historique 0.7.1
 
 Version 0.7.1 : quatre intérieurs aménagés, neige blanche nuancée sur le terrain D.3 intact, sapin sans étoile graphique superposée et éclairage intérieur lié à l'horloge existante. Les 24 nouvelles ressources sont distribuées sous forme de textures natives légères ; leurs originaux sont conservés pour la validation artistique. Aucun nouveau gameplay.
 
