@@ -1,4 +1,13 @@
-# Les 24 Étoiles de Noël — Phase D.2.1, finitions
+# Les 24 Étoiles de Noël — Phase D.2.2, finitions artistiques
+
+Version 0.6.2 : cinq silhouettes de sapins, cinq formes d'arbustes, petits groupes autour de la place, neige et raccords affinés, noms réduits de 12,5 %. Les sept nouveaux sprites complètent les ressources D.2.1 conservées. Aucun changement des personnages, façades, mécaniques, sauvegardes, dialogues ou calendrier. Aucune D.3 commencée.
+
+- [Comparatif D.2.1 / D.2.2 PC et mobile](docs/graphismes/comparatif-d22.html)
+- [Présentation des dix silhouettes](docs/graphismes/vegetation-d22.html)
+- [Rapport et tests](docs/graphismes/FINITIONS-D22.md)
+- [Inventaire des ressources et placements](docs/graphismes/INVENTAIRE-D22.json)
+
+## Phase D.2.1 — historique 0.6.1
 
 Version 0.6.1 : neige subtile du pack D.2.1, petites congères et traces fixes, trois nouveaux sprites transparents de végétation créés avec l'autorisation donnée, enseignes contextuelles à texte dynamique et plaques de noms pour les huit personnages. Les personnages, façades, HUD, dialogues et systèmes de jeu sont conservés. Les nouveaux végétaux restent soumis à validation artistique.
 

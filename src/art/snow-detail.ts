@@ -1,6 +1,7 @@
 import type Phaser from "phaser";
 import map from "../game/maps/place-des-lanternes.json";
 import { decorations, courts } from "./village-design";
+import { borderPlants } from "./vegetation-design";
 export const snowAssets = Object.fromEntries(
   [1, 2, 3, 4].map((i) => [
     `snow-d21-${i}`,
@@ -12,6 +13,9 @@ export const snowTrails = [
   { x: 192, y: 373, dx: 0.1, dy: -1, count: 5 },
   { x: 753, y: 304, dx: 1, dy: -0.3, count: 4 },
   { x: 461, y: 250, dx: 0.15, dy: -1, count: 4 },
+  { x: 524, y: 565, dx: -0.1, dy: -1, count: 6 },
+  { x: 257, y: 409, dx: 1, dy: 0.13, count: 5 },
+  { x: 679, y: 341, dx: 1, dy: 0.05, count: 4 },
 ];
 export function snowVariant(column: number, row: number) {
   return (
@@ -52,6 +56,23 @@ export function texturedSnow(
     const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
     gradient.addColorStop(0, "rgba(118,151,191,.12)");
     gradient.addColorStop(1, "rgba(118,151,191,0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(-1, -1, 2, 2);
+    ctx.restore();
+  }
+  for (const [x, y, rx, ry, color] of [
+    [302, 157, 172, 106, "rgba(255,255,255,.10)"],
+    [718, 93, 154, 91, "rgba(161,151,193,.065)"],
+    [252, 583, 198, 124, "rgba(174,160,199,.055)"],
+    [733, 482, 139, 73, "rgba(245,248,253,.12)"],
+    [577, 684, 147, 87, "rgba(141,175,207,.055)"],
+  ] as const) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(rx, ry);
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 1);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, "rgba(230,237,246,0)");
     ctx.fillStyle = gradient;
     ctx.fillRect(-1, -1, 2, 2);
     ctx.restore();
@@ -97,6 +118,18 @@ export function snowAccents(ctx: CanvasRenderingContext2D) {
     .forEach((d, i) =>
       drift(ctx, d.x, d.y + 1, d.width * 0.52, 3 + (i % 3), i),
     );
+  borderPlants.forEach((p, i) =>
+    drift(ctx, p.x, p.y + 1, p.width * 0.85, 2 + (i % 3), i + 3),
+  );
+  for (const [x, y, w, h] of [
+    [399, 383, 18, 3],
+    [637, 415, 15, 3],
+    [448, 470, 21, 3],
+    [582, 479, 16, 2],
+    [458, 316, 11, 2],
+    [570, 330, 13, 3],
+  ])
+    drift(ctx, x, y, w, h, Math.round(x + y));
   courts.forEach((c, i) => {
     for (let j = 0; j < 4; j++) {
       const angle = j * 0.77 + i * 0.43 + 0.2;

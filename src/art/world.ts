@@ -4,12 +4,13 @@ import { decorations } from "./village-design";
 import { landscape } from "./landscape";
 import { snowAssets } from "./snow-detail";
 import {
-  refinedAssets,
+  allVegetationAssets,
   vegetationKey,
   prepareVegetation,
   fittedVegetationWidth,
 } from "./vegetation";
 import { prepareSprite, prepareSnow, cleanKey } from "./prepare";
+import { borderPlants } from "./vegetation-design";
 
 export const art = catalog.images;
 export const buildingArt: Record<string, string> = {
@@ -50,7 +51,7 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
-  for (const [key, url] of Object.entries(refinedAssets))
+  for (const [key, url] of Object.entries(allVegetationAssets))
     scene.load.image(`raw-${vegetationKey(key)}`, url);
   for (const [key, url] of Object.entries(snowAssets))
     scene.load.image(key, url);
@@ -76,9 +77,17 @@ export function preloadWorld(scene: Phaser.Scene) {
     scene.load.image(`art-${key}`, art[key as keyof typeof art]);
 }
 export function decorate(scene: Phaser.Scene) {
-  for (const d of decorations) {
+  for (const d of [
+    ...decorations,
+    ...borderPlants.map((d) => ({
+      ...d,
+      back: false,
+      flip: false,
+      district: "place",
+    })),
+  ]) {
     const key =
-      vegetationKey(d.key) ??
+      vegetationKey(d.key, d.x, d.y) ??
       (scene.textures.exists(cleanKey(d.key))
         ? cleanKey(d.key)
         : "art-" + d.key);

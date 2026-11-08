@@ -13,7 +13,7 @@ function macro(ctx: CanvasRenderingContext2D, image: CanvasImageSource) {
       ctx.restore();
     }
 }
-function mask(material: "stone" | "dirt") {
+function mask(material: "stone" | "dirt", rim = 0) {
   const canvas = document.createElement("canvas");
   canvas.width = 1024;
   canvas.height = 768;
@@ -27,13 +27,13 @@ function mask(material: "stone" | "dirt") {
     lane.points.forEach((p, i) =>
       i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y),
     );
-    ctx.lineWidth = lane.width;
+    ctx.lineWidth = lane.width + rim * 2;
     ctx.stroke();
   }
   if (material === "stone")
     for (const c of courts) {
       ctx.beginPath();
-      ctx.ellipse(c.x, c.y, c.rx, c.ry, 0, 0, Math.PI * 2);
+      ctx.ellipse(c.x, c.y, c.rx + rim, c.ry + rim, 0, 0, Math.PI * 2);
       ctx.fill();
     }
   return canvas;
@@ -56,7 +56,7 @@ export function landscape(
   scene: Phaser.Scene,
   buildingWidths: Record<string, number>,
 ) {
-  const key = "village-floor-d21";
+  const key = "village-floor-d22";
   if (!scene.textures.exists(key)) {
     const floor = scene.textures.createCanvas(key, 1024, 768)!,
       ctx = floor.context;
@@ -67,6 +67,10 @@ export function landscape(
     ctx.drawImage(snow, 0, 0);
     texturedSnow(scene, ctx);
     for (const material of ["dirt", "stone"] as const) {
+      ctx.globalAlpha = 0.07;
+      for (let rim = 3; rim > 0; rim--)
+        ctx.drawImage(mask(material, rim), 0, 0);
+      ctx.globalAlpha = 1;
       const layer = document.createElement("canvas");
       layer.width = 1024;
       layer.height = 768;

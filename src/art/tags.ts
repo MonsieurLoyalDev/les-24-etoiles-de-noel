@@ -46,6 +46,7 @@ export function plaque(scene: Phaser.Scene, text: string, sign = false) {
   return scene.add
     .container(0, 0, [g, label])
     .setSize(w, h)
+    .setScale(sign ? 1 : 0.875)
     .setDepth(10001)
     .setData("text", text);
 }
@@ -73,15 +74,15 @@ export function updateTags(
     const onscreen =
       t.actor.x >= v.x &&
       t.actor.x <= v.right &&
-      t.actor.y - height >= v.y + t.plate.height + 7 &&
+      t.actor.y - height >= v.y + t.plate.displayHeight + 7 &&
       t.actor.y - height <= v.bottom;
     t.plate.setVisible(!hidden && onscreen);
     const box = fitTag(
       {
-        x: t.actor.x - t.plate.width / 2,
-        y: t.actor.y - height - 4 - t.plate.height,
-        w: t.plate.width,
-        h: t.plate.height,
+        x: t.actor.x - t.plate.displayWidth / 2,
+        y: t.actor.y - height - 4 - t.plate.displayHeight,
+        w: t.plate.displayWidth,
+        h: t.plate.displayHeight,
       },
       view,
       occupied,

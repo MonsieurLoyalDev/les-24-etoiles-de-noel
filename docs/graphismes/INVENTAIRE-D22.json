@@ -1,0 +1,706 @@
+{
+  "version": "0.6.2",
+  "base": "89f3640defdce21b39d7d1999c2342805fb92d07",
+  "assets": [
+    {
+      "key": "vegetation_pine_large",
+      "path": "public/assets/refinements-d21/fir-source.png",
+      "sha256": "8b7a73c0bbc9cbe8f7a1a23259f800d218d5017b2ed3aa4dd6a972554204cbad",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1790735,
+      "instances": 7,
+      "source": "Sprite D.2.1 conservé intact"
+    },
+    {
+      "key": "vegetation_bush_snow",
+      "path": "public/assets/refinements-d21/bush-source.png",
+      "sha256": "e15b13b76d5e4ca5720734fd7190cb45c37007baf2405e9b864677a22291d597",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 979459,
+      "instances": 5,
+      "source": "Sprite D.2.1 conservé intact"
+    },
+    {
+      "key": "vegetation_bush_berries",
+      "path": "public/assets/refinements-d21/berries-source.png",
+      "sha256": "7b28606e8f84076f0b7fbe8248efddd64e42f58cf106c9c41f85a8d752df3ded",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1100213,
+      "instances": 2,
+      "source": "Sprite D.2.1 conservé intact"
+    },
+    {
+      "key": "fir_slim",
+      "path": "public/assets/refinements-d22/fir-slim.png",
+      "sha256": "9d3d70a7322a73cad64745c5a9cd01bbfa9b2936229e03999405a46fe2cf342c",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1522403,
+      "instances": 5,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "fir_broad",
+      "path": "public/assets/refinements-d22/fir-broad.png",
+      "sha256": "e826e91350bca899009f9a63eb813d67fbd84c058373476b12ddef948dd6e8fa",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1708910,
+      "instances": 8,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "fir_young",
+      "path": "public/assets/refinements-d22/fir-young.png",
+      "sha256": "44a57e9545a611df4402ea674d5f1dcc9ccfd353563ae14d2b0c2ed7175a684e",
+      "width": 1199,
+      "height": 1312,
+      "bytes": 629120,
+      "instances": 6,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "fir_windswept",
+      "path": "public/assets/refinements-d22/fir-windswept.png",
+      "sha256": "b38f95d57684b130baefbf71d60b82bad1f51a0f7a8d140de4a682e8d420281b",
+      "width": 1207,
+      "height": 1303,
+      "bytes": 1105808,
+      "instances": 4,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "bush_low",
+      "path": "public/assets/refinements-d22/bush-low.png",
+      "sha256": "41f863d8e7d2ebd300436507018ca4bb4a6832d0af22e78bfe12992d40aec187",
+      "width": 1774,
+      "height": 887,
+      "bytes": 436237,
+      "instances": 13,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "bush_snowy",
+      "path": "public/assets/refinements-d22/bush-snowy.png",
+      "sha256": "03b2c6a67ed34b07351a62e2152340fc0ace1d32d99a722af2d5af72bf5d88b3",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1092800,
+      "instances": 6,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    },
+    {
+      "key": "bush_berries_low",
+      "path": "public/assets/refinements-d22/bush-berries-low.png",
+      "sha256": "c6f5caba39da68a806aac24176532ce304c38d0d8ea9de298977186ac6a516c6",
+      "width": 1774,
+      "height": 887,
+      "bytes": 645852,
+      "instances": 7,
+      "source": "Nouvelle création imagegen, voir D22-GENERATION.md"
+    }
+  ],
+  "placements": [
+    {
+      "id": "place-vegetation_bush_snow-5",
+      "district": "place",
+      "key": "vegetation_bush_snow",
+      "x": 382,
+      "y": 358,
+      "width": 31,
+      "variant": "vegetation_bush_snow"
+    },
+    {
+      "id": "place-vegetation_bush_berries-6",
+      "district": "place",
+      "key": "vegetation_bush_berries",
+      "x": 367,
+      "y": 454,
+      "width": 28,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "library-vegetation_bush_snow-10",
+      "district": "library",
+      "key": "vegetation_bush_snow",
+      "x": 291,
+      "y": 357,
+      "width": 28,
+      "variant": "bush_low"
+    },
+    {
+      "id": "library-vegetation_bush_snow-11",
+      "district": "library",
+      "key": "vegetation_bush_snow",
+      "x": 114,
+      "y": 315,
+      "width": 36,
+      "variant": "bush_low"
+    },
+    {
+      "id": "library-vegetation_bush_berries-12",
+      "district": "library",
+      "key": "vegetation_bush_berries",
+      "x": 300,
+      "y": 365,
+      "width": 29,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "inn-vegetation_bush_snow-20",
+      "district": "inn",
+      "key": "vegetation_bush_snow",
+      "x": 613,
+      "y": 258,
+      "width": 29,
+      "variant": "bush_low"
+    },
+    {
+      "id": "inn-vegetation_bush_berries-21",
+      "district": "inn",
+      "key": "vegetation_bush_berries",
+      "x": 348,
+      "y": 240,
+      "width": 26,
+      "variant": "vegetation_bush_berries"
+    },
+    {
+      "id": "house-vegetation_bush_berries-35",
+      "district": "house",
+      "key": "vegetation_bush_berries",
+      "x": 713,
+      "y": 676,
+      "width": 27,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "house-vegetation_bush_snow-36",
+      "district": "house",
+      "key": "vegetation_bush_snow",
+      "x": 889,
+      "y": 676,
+      "width": 35,
+      "variant": "vegetation_bush_snow"
+    },
+    {
+      "id": "forest-vegetation_bush_berries-44",
+      "district": "forest",
+      "key": "vegetation_bush_berries",
+      "x": 904,
+      "y": 430,
+      "width": 28,
+      "variant": "vegetation_bush_berries"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-45",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 940,
+      "y": 444,
+      "width": 35,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "forest-vegetation_pine_large-46",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 40,
+      "y": 115,
+      "width": 65,
+      "back": true,
+      "flip": false,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-47",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 73,
+      "y": 94,
+      "width": 72,
+      "back": true,
+      "flip": false,
+      "variant": "fir_slim"
+    },
+    {
+      "id": "forest-vegetation_pine_large-48",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 100,
+      "y": 132,
+      "width": 54,
+      "back": true,
+      "flip": true,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-49",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 35,
+      "y": 192,
+      "width": 58,
+      "back": true,
+      "flip": false,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-50",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 69,
+      "y": 216,
+      "width": 69,
+      "back": true,
+      "flip": false,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-51",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 958,
+      "y": 85,
+      "width": 72,
+      "back": true,
+      "flip": true,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "forest-vegetation_pine_large-52",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 990,
+      "y": 128,
+      "width": 60,
+      "back": true,
+      "flip": false,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "forest-vegetation_pine_large-53",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 913,
+      "y": 101,
+      "width": 63,
+      "back": true,
+      "flip": false,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-54",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 979,
+      "y": 337,
+      "width": 70,
+      "back": true,
+      "flip": true,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-55",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 988,
+      "y": 412,
+      "width": 63,
+      "back": true,
+      "flip": false,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-56",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 48,
+      "y": 685,
+      "width": 72,
+      "back": true,
+      "flip": false,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "forest-vegetation_pine_large-57",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 94,
+      "y": 751,
+      "width": 67,
+      "back": true,
+      "flip": true,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-58",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 160,
+      "y": 723,
+      "width": 62,
+      "back": true,
+      "flip": false,
+      "variant": "fir_windswept"
+    },
+    {
+      "id": "forest-vegetation_pine_large-59",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 35,
+      "y": 620,
+      "width": 58,
+      "back": true,
+      "flip": false,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "forest-vegetation_pine_large-60",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 966,
+      "y": 750,
+      "width": 72,
+      "back": true,
+      "flip": true,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-61",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 918,
+      "y": 721,
+      "width": 61,
+      "back": true,
+      "flip": false,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-62",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 980,
+      "y": 652,
+      "width": 77,
+      "back": true,
+      "flip": false,
+      "variant": "fir_young"
+    },
+    {
+      "id": "forest-vegetation_pine_large-63",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 937,
+      "y": 666,
+      "width": 56,
+      "back": true,
+      "flip": true,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "forest-vegetation_pine_large-64",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 625,
+      "y": 91,
+      "width": 64,
+      "back": true,
+      "flip": false,
+      "variant": "fir_slim"
+    },
+    {
+      "id": "forest-vegetation_pine_large-65",
+      "district": "forest",
+      "key": "vegetation_pine_large",
+      "x": 655,
+      "y": 135,
+      "width": 58,
+      "back": true,
+      "flip": false,
+      "variant": "fir_slim"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-66",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 55,
+      "y": 134,
+      "width": 33,
+      "back": true,
+      "variant": "vegetation_bush_snow"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-67",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 109,
+      "y": 139,
+      "width": 26,
+      "back": true,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-68",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 48,
+      "y": 254,
+      "width": 35,
+      "back": true,
+      "variant": "bush_low"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-69",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 957,
+      "y": 147,
+      "width": 33,
+      "back": true,
+      "variant": "bush_low"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-70",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 992,
+      "y": 437,
+      "width": 28,
+      "back": true,
+      "variant": "bush_low"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-71",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 44,
+      "y": 706,
+      "width": 32,
+      "back": true,
+      "variant": "bush_low"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-72",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 143,
+      "y": 750,
+      "width": 31,
+      "back": true,
+      "variant": "vegetation_bush_snow"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-73",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 929,
+      "y": 744,
+      "width": 33,
+      "back": true,
+      "variant": "bush_low"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-74",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 979,
+      "y": 678,
+      "width": 30,
+      "back": true,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "forest-vegetation_bush_snow-75",
+      "district": "forest",
+      "key": "vegetation_bush_snow",
+      "x": 636,
+      "y": 153,
+      "width": 32,
+      "back": true,
+      "variant": "vegetation_bush_snow"
+    },
+    {
+      "id": "west-low-1",
+      "key": "bush_low",
+      "x": 356,
+      "y": 372,
+      "width": 29,
+      "variant": "bush_low"
+    },
+    {
+      "id": "west-low-2",
+      "key": "bush_berries_low",
+      "x": 344,
+      "y": 386,
+      "width": 24,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "east-low-1",
+      "key": "bush_low",
+      "x": 655,
+      "y": 365,
+      "width": 30,
+      "variant": "bush_low"
+    },
+    {
+      "id": "east-low-2",
+      "key": "bush_snowy",
+      "x": 673,
+      "y": 373,
+      "width": 22,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "northwest-low-1",
+      "key": "bush_snowy",
+      "x": 392,
+      "y": 278,
+      "width": 26,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "northwest-low-2",
+      "key": "bush_low",
+      "x": 408,
+      "y": 266,
+      "width": 24,
+      "variant": "bush_low"
+    },
+    {
+      "id": "northeast-low-1",
+      "key": "bush_low",
+      "x": 588,
+      "y": 288,
+      "width": 30,
+      "variant": "bush_low"
+    },
+    {
+      "id": "northeast-low-2",
+      "key": "bush_berries_low",
+      "x": 606,
+      "y": 301,
+      "width": 24,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "southwest-low-1",
+      "key": "bush_snowy",
+      "x": 435,
+      "y": 520,
+      "width": 27,
+      "variant": "bush_snowy"
+    },
+    {
+      "id": "southwest-low-2",
+      "key": "bush_berries_low",
+      "x": 419,
+      "y": 534,
+      "width": 24,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "southeast-low-1",
+      "key": "bush_low",
+      "x": 625,
+      "y": 525,
+      "width": 29,
+      "variant": "bush_low"
+    },
+    {
+      "id": "southeast-low-2",
+      "key": "bush_berries_low",
+      "x": 606,
+      "y": 539,
+      "width": 24,
+      "variant": "bush_berries_low"
+    },
+    {
+      "id": "original-pine-9-10",
+      "key": "vegetation_pine_large",
+      "x": 144,
+      "y": 160,
+      "width": 64,
+      "variant": "fir_slim"
+    },
+    {
+      "id": "original-pine-15-8",
+      "key": "vegetation_pine_large",
+      "x": 240,
+      "y": 128,
+      "width": 64,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "original-pine-49-9",
+      "key": "vegetation_pine_large",
+      "x": 784,
+      "y": 144,
+      "width": 64,
+      "variant": "fir_windswept"
+    },
+    {
+      "id": "original-pine-55-12",
+      "key": "vegetation_pine_large",
+      "x": 880,
+      "y": 192,
+      "width": 64,
+      "variant": "fir_windswept"
+    },
+    {
+      "id": "original-pine-9-37",
+      "key": "vegetation_pine_large",
+      "x": 144,
+      "y": 592,
+      "width": 64,
+      "variant": "fir_slim"
+    },
+    {
+      "id": "original-pine-14-40",
+      "key": "vegetation_pine_large",
+      "x": 224,
+      "y": 640,
+      "width": 64,
+      "variant": "fir_windswept"
+    },
+    {
+      "id": "original-pine-50-39",
+      "key": "vegetation_pine_large",
+      "x": 800,
+      "y": 624,
+      "width": 64,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "original-pine-56-34",
+      "key": "vegetation_pine_large",
+      "x": 896,
+      "y": 544,
+      "width": 64,
+      "variant": "vegetation_pine_large"
+    },
+    {
+      "id": "original-pine-6-21",
+      "key": "vegetation_pine_large",
+      "x": 96,
+      "y": 336,
+      "width": 64,
+      "variant": "fir_broad"
+    },
+    {
+      "id": "original-pine-59-26",
+      "key": "vegetation_pine_large",
+      "x": 944,
+      "y": 416,
+      "width": 64,
+      "variant": "vegetation_pine_large"
+    }
+  ],
+  "newOrnamentalBases": 12,
+  "collidersAdded": 0,
+  "originalFilesOverwritten": 0
+}
