@@ -1,0 +1,348 @@
+{
+  "base": "186367cfb396aa52bf30d2e15bcbc40ff8751c47",
+  "verifiedLocalLinks": 128,
+  "verifiedAssets": 24,
+  "copiedD3ReferencesUnchanged": 21,
+  "captures": {
+    "avant": [
+      {
+        "name": "desktop-animation.png",
+        "sha256": "0b0d12f59fe730ce4a7ae38c1cfaf7e8bba596159bf64339a00d393d9f6bea94"
+      },
+      {
+        "name": "desktop-atelier.png",
+        "sha256": "dae5389d7a8adc35982d10b2323f2e54f3832c436b6b55076b53547b831bb7b2"
+      },
+      {
+        "name": "desktop-auberge.png",
+        "sha256": "4d7790f081fb2b23df80470bcf2b7b9d4b3d22f172d35f62cf355c91dc741ce9"
+      },
+      {
+        "name": "desktop-bibliotheque.png",
+        "sha256": "b2684d44808206d5c26440cb0e2f72260388ba7a5610618277a91f1aba6094f7"
+      },
+      {
+        "name": "desktop-crepuscule.png",
+        "sha256": "e08fe8cfcf6db089782838e86cfcf13a06c0788bce43196c74e0ed9b9180cf0b"
+      },
+      {
+        "name": "desktop-effets-reduits.png",
+        "sha256": "696af3fc7ffe49cca08f5902c4cdf22fd351d0fa69fe8730390d98a51a1463a3"
+      },
+      {
+        "name": "desktop-house-jour.png",
+        "sha256": "de1430f23df6f39a522894358404fa18c0bf8aaa6ebbb6d06a39c5649e7183ee"
+      },
+      {
+        "name": "desktop-house-nuit.png",
+        "sha256": "a87229b40dfd2a419c1dfc118c6a8992832ffd3587df68003bcf2b81bbfe2886"
+      },
+      {
+        "name": "desktop-inn-jour.png",
+        "sha256": "40dc73e358507fb43462f515a14c71721c75dc137a9f575ce307a8ba65167815"
+      },
+      {
+        "name": "desktop-inn-nuit.png",
+        "sha256": "e967eb50846bfb384b392b3152bfe960d6dc0f00a569e670399b9da428bd89a4"
+      },
+      {
+        "name": "desktop-jour.png",
+        "sha256": "df8fe991690dd1e53dbfe6e7395e36a6d965de0eb33368bcac87633aea5b9d36"
+      },
+      {
+        "name": "desktop-library-jour.png",
+        "sha256": "92f795a9b0465ccea6d9371208f6cce977d39a5b681672b60d70efc23c140706"
+      },
+      {
+        "name": "desktop-library-nuit.png",
+        "sha256": "dcfa7ba810a8e2b3e22b2a61dd178325095b559da87034a93ccd7f688f0ee316"
+      },
+      {
+        "name": "desktop-maison.png",
+        "sha256": "e641fb466129637c12632a24ab02f3f62cfa71b33237f99d7b8b2534a3a138f8"
+      },
+      {
+        "name": "desktop-nuit.png",
+        "sha256": "23d3828afddbe3b37eba09593568854e02a225d2459ab84fde93beb37fe15fc6"
+      },
+      {
+        "name": "desktop-sapin-1.png",
+        "sha256": "3629e540e54cd35e497af19a7bef0e3b6f57f0bc2a85cf3e2d3172328dbe08cb"
+      },
+      {
+        "name": "desktop-sapin-24.png",
+        "sha256": "686fc0776c54ff948de3a7ebe5310b9f0ac8f37013975975281a2d83012b86fc"
+      },
+      {
+        "name": "desktop-workshop-jour.png",
+        "sha256": "a9175cf5365bb683c3cfbbad774842e9764671a831c3efc4c62e451249804cdb"
+      },
+      {
+        "name": "desktop-workshop-nuit.png",
+        "sha256": "4435a77acb3b48871416b7faf132665a48e72fe728d07fe67d55a0d04c99a41c"
+      },
+      {
+        "name": "mobile-animation.png",
+        "sha256": "ff86a43598ec1f5c832e2a9cabf6a1adf8ac8df694590caf338fef8ab86969a9"
+      },
+      {
+        "name": "mobile-atelier.png",
+        "sha256": "2039fce6526a863c3d7499465b00a7cd9046dea830e148c947a301f1a4103ad6"
+      },
+      {
+        "name": "mobile-auberge.png",
+        "sha256": "17f6ddf1236d4f797979f6244cdbfe0b66403bc95db90be96def5a22770dc080"
+      },
+      {
+        "name": "mobile-bibliotheque.png",
+        "sha256": "6146dcf30de942d7519fa080728f6c4b098c11b41dd9b39fdfc58adf2ba6116e"
+      },
+      {
+        "name": "mobile-crepuscule.png",
+        "sha256": "431b7477bfa1c4c8546a8af16b03c5b5da8693866f88d873a57ec5094f6dfad5"
+      },
+      {
+        "name": "mobile-effets-reduits.png",
+        "sha256": "c2b7db6d013afc01346d5f5f1af33029dab97b8df440df5c988c54e1a8fd3a97"
+      },
+      {
+        "name": "mobile-house-jour.png",
+        "sha256": "819d8857990223f526411b3b0ff742bdd8b41db19267f18e94c7e6975f40ad28"
+      },
+      {
+        "name": "mobile-house-nuit.png",
+        "sha256": "339046d38e75f665c4da31f4714c2218c1d3379facaaedfe2374ee8c48649ee1"
+      },
+      {
+        "name": "mobile-inn-jour.png",
+        "sha256": "6f62cc1292eeefb2144b8daea0149fd32d9efb3788cde5f30090bd329f0c8475"
+      },
+      {
+        "name": "mobile-inn-nuit.png",
+        "sha256": "a9112645ecc6824c90f46d9da16ae2e6b6e251e10fdf3ac7d4e1faa0de841144"
+      },
+      {
+        "name": "mobile-jour.png",
+        "sha256": "ee93edb6ad3c8c3cc3ecfbe91a935ac55de2b3812cdd7bfffbe350c59607a14d"
+      },
+      {
+        "name": "mobile-library-jour.png",
+        "sha256": "c382962ebb60bbcee7e8e2615627eda5b24502c18b744a671a30802c1340b710"
+      },
+      {
+        "name": "mobile-library-nuit.png",
+        "sha256": "f151f2dfe68d3c3d5150df15d245cc04725b7425ff0dda1e4a4f39ef66adfc7e"
+      },
+      {
+        "name": "mobile-maison.png",
+        "sha256": "13b7d01bc06a57d7b61b1abc9e0c6ada534eab94de0f064e2b2fbb3bfb2b2e44"
+      },
+      {
+        "name": "mobile-nuit.png",
+        "sha256": "ab73f65b0e09cd11feb8762e5fdc408440f5e4d5165eb5009bdc6ad292d13542"
+      },
+      {
+        "name": "mobile-sapin-1.png",
+        "sha256": "143263ec754d7b395caefc4b53409c38dddd78dd708841b26ba6d4df0c938e4e"
+      },
+      {
+        "name": "mobile-sapin-24.png",
+        "sha256": "18ddd5b3115b1d031cf4eaf8c04ffad246ab2ed6936205c4150174c7de2d11b7"
+      },
+      {
+        "name": "mobile-workshop-jour.png",
+        "sha256": "380c2315263674651702372b8b087ecf97640bff50e5d95e9374526aeab76937"
+      },
+      {
+        "name": "mobile-workshop-nuit.png",
+        "sha256": "8a6c98bc22f9ea4b62bb1e2e47fd4d128da642ba4785477d4fd2d61cf4ecab0a"
+      },
+      {
+        "name": "village-complet-crepuscule.png",
+        "sha256": "2ce1bf21b656c0b0720fd90b10ab0fcc7ebd3b34cf1746e45fdba78d61407627"
+      },
+      {
+        "name": "village-complet-jour.png",
+        "sha256": "4fdbd8a95dde37138dcfcf0534f0b81ca6af1c145d656d3202d820f8236b5ac2"
+      },
+      {
+        "name": "village-complet-nuit.png",
+        "sha256": "8508229d91dc1b15d1753faa01ebfef96987c093cf20bb9e509c72be1a953bfa"
+      }
+    ],
+    "apres": [
+      {
+        "name": "desktop-house-jour.png",
+        "sha256": "787fd2ea63fc7b2622ab2059769de64cc4873d97740672ea41b7b617c26e5266"
+      },
+      {
+        "name": "desktop-house-nuit.png",
+        "sha256": "13c5074ed12ac0729cf6338a439077103602d4de3f637117f2101998d28db4da"
+      },
+      {
+        "name": "desktop-inn-jour.png",
+        "sha256": "124ec0049e944c6eb5078bfb9975c63886d092c450b6b074146072854e2ccf43"
+      },
+      {
+        "name": "desktop-inn-nuit.png",
+        "sha256": "95a3247a019d5ca840e9195c8f2af563aa1eaf346b12f8f823805ca5cde34d0d"
+      },
+      {
+        "name": "desktop-library-jour.png",
+        "sha256": "8a4ea125ba2a07b10b0834a391c7723fb461edef857ea9158f8584f8f15d4f75"
+      },
+      {
+        "name": "desktop-library-nuit.png",
+        "sha256": "75202db44f6f71779feeda301a249c9efa376e40ed17bb89f8fd336499e65400"
+      },
+      {
+        "name": "desktop-lumiere-reduite.png",
+        "sha256": "4eaa7960541dbdb2be3e38f519d0c5b4421c54298d119800ecac8fbcdb233d6e"
+      },
+      {
+        "name": "desktop-sapin-1.png",
+        "sha256": "2add05ae5022d62461dd16712372a5355dfaf0b39d3342b5905ca9dead3fa829"
+      },
+      {
+        "name": "desktop-sapin-24.png",
+        "sha256": "d4d3cf8539347e220e161b523b86414a217875b396ef801fceab7146473667d9"
+      },
+      {
+        "name": "desktop-workshop-jour.png",
+        "sha256": "2db9efe15fbc50db688bf3bedd24abfacf34511300de0754f546f4710e5259a7"
+      },
+      {
+        "name": "desktop-workshop-nuit.png",
+        "sha256": "31107a636bc14197e317b7e000541f64a57fcc2061e4402435294e285d5a49a3"
+      },
+      {
+        "name": "mobile-house-coin-droit.png",
+        "sha256": "129f5dd867948a1419ed31e1b6f65443e7a35424033ad78a4ee12d303f86d2f8"
+      },
+      {
+        "name": "mobile-house-coin-gauche.png",
+        "sha256": "07bf35f2db613b5fa6af6a06a08c6153fcbb05a71b85e338d300d100d7c4dfe6"
+      },
+      {
+        "name": "mobile-house-jour.png",
+        "sha256": "73c981c6cb8bc400e492e9398ba0e8dc94b7f7abfb1880ee3678e98a64488968"
+      },
+      {
+        "name": "mobile-house-nuit.png",
+        "sha256": "d8ae322d054b5033b480713c445052418e448f8d23bf529e929817728a954680"
+      },
+      {
+        "name": "mobile-inn-coin-droit.png",
+        "sha256": "8f4d395d92b75e04430646cd500d333d4d65600e3f01a690126fa86372870a4a"
+      },
+      {
+        "name": "mobile-inn-coin-gauche.png",
+        "sha256": "6896691681f768baf42693318b51d5970b9f00c463499e5bf0525134d6299ccc"
+      },
+      {
+        "name": "mobile-inn-jour.png",
+        "sha256": "e0d216b0ccfa3d6a8c9df936c1e1bd66792681c4d09869647ca223ddd10cb722"
+      },
+      {
+        "name": "mobile-inn-nuit.png",
+        "sha256": "0e5650f01e1bcd99b0e4bcf9dd3f95bef483d3559f404f977316683ef4b00369"
+      },
+      {
+        "name": "mobile-library-coin-droit.png",
+        "sha256": "f55970f70e5fe24f4dd3599144c4a84a3da935875be80ef005962cd515b21f4d"
+      },
+      {
+        "name": "mobile-library-coin-gauche.png",
+        "sha256": "edb13a5a3ccf1fd33e93b526975c7f98afc90522a476134777128c1868c7507c"
+      },
+      {
+        "name": "mobile-library-jour.png",
+        "sha256": "5dc70c8a5baecc7b0b0515e09f2819d57ae89eae73698c0dca8b1281d47260ce"
+      },
+      {
+        "name": "mobile-library-nuit.png",
+        "sha256": "f524061c65e4b6d039ced6d8349a27da84c51c15c05c0c5bb125e7a22ff3a036"
+      },
+      {
+        "name": "mobile-lumiere-reduite.png",
+        "sha256": "1586406abc26b2c90f8fb749ed378ae6a5745a664546376a26bcd879c3b188a8"
+      },
+      {
+        "name": "mobile-sapin-1.png",
+        "sha256": "49c5d6d869a49f549d2f20f7dd5735d7c30ef51afba78b49a270b591f77ec16d"
+      },
+      {
+        "name": "mobile-sapin-24.png",
+        "sha256": "30de5494767bdb5edbf33534f3ab77cddf79065464e7cfc1f84605c47e943902"
+      },
+      {
+        "name": "mobile-workshop-coin-droit.png",
+        "sha256": "c68e5b038e43f840213ba531aa3d36df8d169150b282fedbb2dd0e16730fdcb9"
+      },
+      {
+        "name": "mobile-workshop-coin-gauche.png",
+        "sha256": "28a9807f3ae9ac34a063b69c3cbdba54decd02027d9041b5fbfb8dfecafbf284"
+      },
+      {
+        "name": "mobile-workshop-jour.png",
+        "sha256": "92ec3f8a55c8b4339f1e8e384c19c2b2de6930e54a6f61d7cd761b1285c7991c"
+      },
+      {
+        "name": "mobile-workshop-nuit.png",
+        "sha256": "6fd54c447b80c88c9e2fc4320e751d203960d70f9cc06d84623e234d4dffd2fb"
+      },
+      {
+        "name": "petit-pc-house.png",
+        "sha256": "2c7d66d6134ccfd6ad77fe2aa6300adebe416275e2e7b3136129086eeb3644ba"
+      },
+      {
+        "name": "petit-pc-inn.png",
+        "sha256": "2674f7221b813ce299e78597d33420c501039d8b50fe1141e85113ae1b6e7df4"
+      },
+      {
+        "name": "petit-pc-library.png",
+        "sha256": "18ea3ef4900c7d1ebbd489c1bb58281c2b8a9148d7ab43ad19ad97ddbfc67759"
+      },
+      {
+        "name": "petit-pc-workshop.png",
+        "sha256": "df04e88588aaa1f8277e3399ef2a2978118a2449fd51e205a5b2f0c4dffd2903"
+      },
+      {
+        "name": "ressources-clair-sombre.png",
+        "sha256": "47c6f8d9bad7db69150eef4197258366705f1cb9582d9213bef0608815f43b61"
+      },
+      {
+        "name": "sapin-atlas-controle.png",
+        "sha256": "163fb29d94c842f0e1d5e7e036afef94163af28234c5079f9f36fb6c7d4d8725"
+      },
+      {
+        "name": "tablette-house.png",
+        "sha256": "55449cda41afdfab925df3647f5d956348ac67560d50ef0d0bc44c17faae233b"
+      },
+      {
+        "name": "tablette-inn.png",
+        "sha256": "9581b8d147db8839512980dbc77297c6f93a0efb7e03ebb047bbd93204b21c44"
+      },
+      {
+        "name": "tablette-library.png",
+        "sha256": "cae5876e958ae485605dd4bc956aadfa195df9d7099e45471a75dfe3481e445b"
+      },
+      {
+        "name": "tablette-workshop.png",
+        "sha256": "029f7e6b1b9889d30297d5390892faa12685b3a39988981f227db50ef62a0db6"
+      },
+      {
+        "name": "village-complet-crepuscule.png",
+        "sha256": "95980ea8547eef0923c31beae74b909c4ea0e672a68652e1bbffede427c615ea"
+      },
+      {
+        "name": "village-complet-jour.png",
+        "sha256": "77aa5e18958473bdfe619a515507ba0cdc650e1cd5d960d351b3e62a99f83339"
+      },
+      {
+        "name": "village-complet-nuit.png",
+        "sha256": "dd28508641f08337db755d99f96c7577d5bcb0dcb02c1d21d5c1c0c1ab560326"
+      }
+    ]
+  }
+}
