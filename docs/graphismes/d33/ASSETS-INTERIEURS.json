@@ -1,0 +1,226 @@
+[
+  {
+    "key": "oak-floor",
+    "width": 256,
+    "height": 256,
+    "bounds": {
+      "l": 0,
+      "t": 0,
+      "r": 1253,
+      "b": 1253
+    },
+    "corners": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "transparentFraction": 0,
+    "original": {
+      "path": "docs/artwork-d33/originals/oak-floor.png",
+      "bytes": 1652307,
+      "sha256": "5df0782d154a2f2c30e25a4aaf03a28e547dca3ff90e27b4ff7758d01c614125"
+    },
+    "public": {
+      "path": "public/assets/village-d33/oak-floor.png",
+      "bytes": 155988,
+      "sha256": "2e9475d7049a8ded507b62de3ca5e15c6314b29ed15daaa01a5afb1800f2b5fd"
+    }
+  },
+  {
+    "key": "rough-floor",
+    "width": 256,
+    "height": 256,
+    "bounds": {
+      "l": 0,
+      "t": 0,
+      "r": 1253,
+      "b": 1253
+    },
+    "corners": [
+      255,
+      255,
+      255,
+      255
+    ],
+    "transparentFraction": 0,
+    "original": {
+      "path": "docs/artwork-d33/originals/rough-floor.png",
+      "bytes": 2290863,
+      "sha256": "9c36f7f92ce84f482ee9acfef164a0ad6159eaaaff5f189e2ecf5b5576d153c9"
+    },
+    "public": {
+      "path": "public/assets/village-d33/rough-floor.png",
+      "bytes": 183736,
+      "sha256": "b859d45ff541b0bafb7ac7cde508a1554c2446d5ce82e733b89eefef66c6c272"
+    }
+  },
+  {
+    "key": "wall-panel",
+    "width": 388,
+    "height": 113,
+    "bounds": {
+      "l": 18,
+      "t": 51,
+      "r": 2153,
+      "b": 658
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.23007603044270117,
+    "original": {
+      "path": "docs/artwork-d33/originals/wall-panel.png",
+      "bytes": 2070089,
+      "sha256": "8f82dbe37a0c6e1bbed0928c7278b18a1162ba644a1f843d77e9e52cc410bc06"
+    },
+    "public": {
+      "path": "public/assets/village-d33/wall-panel.png",
+      "bytes": 100970,
+      "sha256": "8d5c8a6938455be39dc4367287f46be18b4b357aa373a61922ca618b1bcefaed"
+    }
+  },
+  {
+    "key": "winter-window",
+    "width": 158,
+    "height": 124,
+    "bounds": {
+      "l": 122,
+      "t": 7,
+      "r": 1408,
+      "b": 1007
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.2836221059163411,
+    "original": {
+      "path": "docs/artwork-d33/originals/winter-window.png",
+      "bytes": 2649005,
+      "sha256": "707130e9b475db5642ef7fdf3db2d1011c8a538618893c1e4506cd9b7893eb4f"
+    },
+    "public": {
+      "path": "public/assets/village-d33/winter-window.png",
+      "bytes": 52126,
+      "sha256": "44c3a396b2772ee242643d38834f71fcf8ee9c0f5eb9436b0b8c3ad2cc0cf2da"
+    }
+  },
+  {
+    "key": "hearth-salon",
+    "width": 273,
+    "height": 274,
+    "bounds": {
+      "l": 120,
+      "t": 39,
+      "r": 1226,
+      "b": 1149
+    },
+    "corners": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "transparentFraction": 0.4244930989239,
+    "original": {
+      "path": "docs/artwork-d33/originals/hearth-salon.png",
+      "bytes": 1947523,
+      "sha256": "78275550fd9ad7532172285101fa5a89ec7245935359a1fe024a0951154c440e"
+    },
+    "public": {
+      "path": "public/assets/village-d33/hearth-salon.png",
+      "bytes": 162929,
+      "sha256": "0808ec0d0d9f0b70d22092d08423c3c4990e42b5d6b2b74948516056ae3513bb"
+    }
+  },
+  {
+    "key": "reading-corner",
+    "width": 334,
+    "height": 280,
+    "bounds": {
+      "l": 180,
+      "t": 32,
+      "r": 1332,
+      "b": 996
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.5063247680664062,
+    "original": {
+      "path": "docs/artwork-d33/originals/reading-corner.png",
+      "bytes": 2277609,
+      "sha256": "ac82cbe8e07c35dd39ae65a5ee86f174e1ed5a5c8ae5e9c8d79784cf99006d5a"
+    },
+    "public": {
+      "path": "public/assets/village-d33/reading-corner.png",
+      "bytes": 192892,
+      "sha256": "08eccb866ad5555bba6892165a225e630a1c9cd3fc04d2b986bf4f11f48d1cae"
+    }
+  },
+  {
+    "key": "artisan-station",
+    "width": 256,
+    "height": 254,
+    "bounds": {
+      "l": 88,
+      "t": 25,
+      "r": 1246,
+      "b": 1172
+    },
+    "corners": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "transparentFraction": 0.3832017026383775,
+    "original": {
+      "path": "docs/artwork-d33/originals/artisan-station.png",
+      "bytes": 2118377,
+      "sha256": "5c9c88ea272be54f0f1f1a161cc7e6c0a38d5cfd32256b0d78a7646817c8af12"
+    },
+    "public": {
+      "path": "public/assets/village-d33/artisan-station.png",
+      "bytes": 139361,
+      "sha256": "82d68846bb85ce139dd84f8fb251c678702a9ef7437b14a6a7db383a90d928fa"
+    }
+  },
+  {
+    "key": "tea-banquette",
+    "width": 304,
+    "height": 234,
+    "bounds": {
+      "l": 64,
+      "t": 172,
+      "r": 1238,
+      "b": 1072
+    },
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "transparentFraction": 0.47680803616835166,
+    "original": {
+      "path": "docs/artwork-d33/originals/tea-banquette.png",
+      "bytes": 1794869,
+      "sha256": "83b042fb3a65f6dbe0b7c8729809ee4793237242c8ea14781d75329547448634"
+    },
+    "public": {
+      "path": "public/assets/village-d33/tea-banquette.png",
+      "bytes": 162700,
+      "sha256": "3b1413d3ef8c04fdae57c1a1f2fbe527e99b173be8ed64fccab22de40d25d647"
+    }
+  }
+]

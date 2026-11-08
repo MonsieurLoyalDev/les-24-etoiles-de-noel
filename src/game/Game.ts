@@ -25,14 +25,24 @@ import { VillageAmbience } from "../art/ambience";
 import { InteriorLight } from "../art/interior-light";
 import { InteriorLife } from "../decor/InteriorLife";
 import { decorativeObjects, decorationRects } from "../decor/model";
-import { homes } from "../decor/neighbourhood";
-import { drawHomes, NeighbourhoodLife } from "../decor/NeighbourhoodLife";
-import { frameInteriorCamera } from "../art/interior-camera";
 import {
-  drawRoomArchitecture,
-  drawRoomFurnishings,
-  drawRoomDecor,
-} from "../art/interiors";
+  homes,
+  drawHomes,
+  urbanGround,
+  urbanPaths,
+  preloadVillage33,
+} from "../art/village33";
+import { villageSize, relocatedPine } from "../art/urban-plan";
+import { NeighbourhoodLife } from "../decor/NeighbourhoodLife";
+import { roomDimensions, interiorCollisions } from "../art/rooms33";
+import {
+  architecture33,
+  furnishings33,
+  annexDecor33,
+  preloadRooms33,
+} from "../art/room-render33";
+import { frameInteriorCamera } from "../art/interior-camera";
+import { drawRoomDecor } from "../art/interiors";
 import Phaser from "phaser";
 import map from "./maps/place-des-lanternes.json";
 import manifest from "../../assets-manifest.json";
@@ -46,7 +56,6 @@ import {
 import {
   rooms,
   roomNames,
-  interiorRects,
   citizens,
   period,
   periodNames,
@@ -141,6 +150,8 @@ export class Village extends Phaser.Scene {
   }
   preload() {
     preloadWorld(this);
+    preloadVillage33(this);
+    preloadRooms33(this);
     preloadActors(this);
     const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
     this.load.atlas("art-tree", tree.image, tree.data);
@@ -165,7 +176,8 @@ export class Village extends Phaser.Scene {
     );
     this.scale.on(Phaser.Scale.Events.RESIZE, () => {
       this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2);
-      if (this.state.room !== "village") frameInteriorCamera(this);
+      if (this.state.room !== "village")
+        frameInteriorCamera(this, roomDimensions(this.state.room));
     });
     createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
@@ -228,14 +240,26 @@ export class Village extends Phaser.Scene {
     this.decorations = [];
     this.rects = [];
     this.trail = [];
-    let w = 1024,
-      h = 768;
+    let w = villageSize.width,
+      h = villageSize.height;
     if (this.state.room === "village") {
+      urbanGround(this);
       drawGround(this);
+      urbanPaths(this);
       decorate(this);
       drawHomes(this);
       this.rects.push(...homes.map((h) => h.footprint));
-      map.props.forEach((p) => {
+      map.props.forEach((source) => {
+        const p =
+          source.sprite === "pine_large" &&
+          source.tileX * 16 === relocatedPine.from.x &&
+          source.tileY * 16 === relocatedPine.from.y
+            ? {
+                ...source,
+                tileX: relocatedPine.to.x / 16,
+                tileY: relocatedPine.to.y / 16,
+              }
+            : source;
         if (p.sprite === "quest_star") return;
         if (p.sprite === "pine_festive") {
           this.tree = this.add
@@ -309,11 +333,11 @@ export class Village extends Phaser.Scene {
         });
       });
     } else {
-      w = 480;
-      h = 352;
-      drawRoomArchitecture(this, this.state.room);
-      this.rects = [...interiorRects];
-      drawRoomFurnishings(this, this.state.room);
+      ({ width: w, height: h } = roomDimensions(this.state.room));
+      architecture33(this, this.state.room);
+      this.rects = interiorCollisions(this.state.room);
+      furnishings33(this, this.state.room);
+      annexDecor33(this, this.state.room);
       drawRoomDecor(this, this.state.room);
       this.rects.push(...decorationRects(this.state.room));
       this.interiorLife = new InteriorLife(this, this.state.room);
@@ -335,7 +359,8 @@ export class Village extends Phaser.Scene {
       .setBounds(0, 0, w, h)
       .startFollow(this.player, true, 1, 1);
     this.cameras.main.setZoom(this.scale.width < 700 ? 1.5 : 2);
-    if (this.state.room !== "village") frameInteriorCamera(this);
+    if (this.state.room !== "village")
+      frameInteriorCamera(this, roomDimensions(this.state.room));
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
       this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
@@ -528,7 +553,7 @@ export class Village extends Phaser.Scene {
                   ? "mini:wrap"
                   : "mini:memory",
           x: 240,
-          y: 143,
+          y: 175,
           name: rooms[this.state.room].object,
         },
         ...(this.state.room === "library"
@@ -536,7 +561,7 @@ export class Village extends Phaser.Scene {
               {
                 id: "find:bookmark",
                 x: 385,
-                y: 139,
+                y: 185,
                 name: "Retrouver le marque-page",
               },
               {
@@ -547,7 +572,7 @@ export class Village extends Phaser.Scene {
               },
             ]
           : this.state.room === "workshop"
-            ? [{ id: "find:ribbon", x: 385, y: 139, name: "Prendre le ruban" }]
+            ? [{ id: "find:ribbon", x: 385, y: 185, name: "Prendre le ruban" }]
             : this.state.room === "inn"
               ? [
                   {
@@ -834,8 +859,7 @@ export class Village extends Phaser.Scene {
       controls.interact = false;
       this.interact();
     }
-    const w = this.state.room === "village" ? 1024 : 480,
-      h = this.state.room === "village" ? 768 : 352;
+    const { width: w, height: h } = roomDimensions(this.state.room);
     let x = controls.x,
       y = controls.y;
     const down = (k: string) => this.keys[k]?.isDown;

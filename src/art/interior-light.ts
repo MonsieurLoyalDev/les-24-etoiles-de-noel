@@ -60,6 +60,12 @@ export class InteriorLight {
           "interior:" + name,
         ) as Phaser.GameObjects.Image,
     );
+    this.furniture.push(
+      ...(scene.children.list.filter(
+        (x) =>
+          x.name.startsWith("interior:annex:") || x.name === "interior:window",
+      ) as Phaser.GameObjects.Image[]),
+    );
     const add = (x: number, y: number, size: number, depth: number) => {
       const image = scene.add
         .image(x, y, "ambient-soft")

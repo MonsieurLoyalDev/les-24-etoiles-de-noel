@@ -1,5 +1,5 @@
 import type Phaser from "phaser";
-import { homes } from "./neighbourhood";
+import { homes } from "../art/village33";
 import {
   atmospherePalette,
   effectiveQuality,
