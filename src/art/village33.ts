@@ -1,9 +1,10 @@
 import type Phaser from "phaser";
 import metadata from "./homes-d33.json" with { type: "json" };
-import { residentialPlots, urbanLanes, villageSize } from "./urban-plan";
+import { residentialPlots, urbanLanes } from "./urban-plan";
 import type { Home } from "../decor/neighbourhood";
 import { drawScenery34 } from "./scenery34";
-import { plan, roundedRoute, pedestrianCourts } from "./village34";
+import { plan } from "./village34";
+import { drawGround35 } from "./ground35";
 const fixtures: Record<
   string,
   { chimney: [number, number]; windows: [number, number][] }
@@ -147,63 +148,7 @@ export function urbanGround(scene: Phaser.Scene) {
   }
 }
 export function urbanPaths(scene: Phaser.Scene) {
-  const key = "village-paths-d33";
-  if (!scene.textures.exists(key)) {
-    const t = scene.textures.createCanvas(
-        key,
-        villageSize.width,
-        villageSize.height,
-      )!,
-      c = t.context;
-    for (const material of ["dirt", "stone"] as const) {
-      const layer = document.createElement("canvas");
-      layer.width = t.width;
-      layer.height = t.height;
-      const p = layer.getContext("2d")!;
-      p.imageSmoothingEnabled = false;
-      p.fillStyle = p.createPattern(
-        scene.textures
-          .get("art-" + material)
-          .getSourceImage() as HTMLImageElement,
-        "repeat",
-      )!;
-      p.fillRect(0, 0, t.width, t.height);
-      p.globalCompositeOperation = "destination-in";
-      const mask = document.createElement("canvas");
-      mask.width = t.width;
-      mask.height = t.height;
-      const m = mask.getContext("2d")!;
-      m.strokeStyle = "#fff";
-      m.lineJoin = "round";
-      m.lineCap = "round";
-      for (const lane of [...urbanLanes, ...frontPaths].filter(
-        (l) => l.material === material,
-      )) {
-        m.beginPath();
-        m.moveTo(lane.points[0].x, lane.points[0].y);
-        for (const p of roundedRoute(lane.points).slice(1)) m.lineTo(p.x, p.y);
-        m.lineWidth = lane.width;
-        m.stroke();
-      }
-      for (const court of pedestrianCourts.filter(
-        (c) => (c.id === "C3" ? "dirt" : "stone") === material,
-      )) {
-        m.beginPath();
-        court.points.forEach(([x, y], i) =>
-          i ? m.lineTo(x, y) : m.moveTo(x, y),
-        );
-        m.closePath();
-        m.fillStyle = "#fff";
-        m.fill();
-      }
-      p.drawImage(mask, 0, 0);
-      c.globalAlpha = material === "stone" ? 0.85 : 0.53;
-      c.drawImage(layer, 0, 0);
-    }
-    c.globalAlpha = 1;
-    t.refresh();
-  }
-  scene.add.image(0, 0, key).setOrigin(0).setDepth(-99);
+  drawGround35(scene);
 }
 export function drawHomes(scene: Phaser.Scene) {
   for (const h of homes)

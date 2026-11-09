@@ -1,3 +1,4 @@
+import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
 import { playSound, stopAmbience } from "../art/audio";
 import {
@@ -289,12 +290,14 @@ export class Village extends Phaser.Scene {
           .image(
             p.tileX * 16,
             p.tileY * 16,
-            replacement
-              ? (vegetationKey(replacement.key, p.tileX * 16, p.tileY * 16) ??
+            p.sprite === "gift"
+              ? environmentKey(p.id === "gift_18" ? "gift-red" : "gift-cream")
+              : replacement
+                ? (vegetationKey(replacement.key, p.tileX * 16, p.tileY * 16) ??
                   (this.textures.exists(cleanKey(replacement.key))
                     ? cleanKey(replacement.key)
                     : "art-" + replacement.key))
-              : p.sprite,
+                : p.sprite,
           )
           .setOrigin(conf.origin.x, conf.origin.y)
           .setDepth(p.tileY * 16);

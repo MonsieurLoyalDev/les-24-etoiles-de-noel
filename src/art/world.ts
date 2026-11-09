@@ -1,3 +1,4 @@
+import { preloadEnvironment35, prepareEnvironment35 } from "./assets35";
 import { extraSceneryKeys } from "./scenery34";
 import Phaser from "phaser";
 import catalog from "./catalog.json";
@@ -37,6 +38,7 @@ export const buildingWidths: Record<string, number> = {
   inn: 224,
 };
 export function prepareWorld(scene: Phaser.Scene) {
+  prepareEnvironment35(scene);
   prepareTerrain(scene);
   prepareVegetation(scene);
   for (const key of Object.values(buildingArt)) prepareSprite(scene, key, true);
@@ -58,6 +60,7 @@ export function prepareWorld(scene: Phaser.Scene) {
   prepareSnow(scene);
 }
 export function preloadWorld(scene: Phaser.Scene) {
+  preloadEnvironment35(scene);
   for (const key of Object.keys(lifeAssetSizes).filter(
     (key) => !key.startsWith("home-"),
   ))

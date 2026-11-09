@@ -117,7 +117,7 @@ export class VillageAmbience {
       if (
         child instanceof Phaser.GameObjects.Image &&
         child.name.startsWith("scenery:") &&
-        child.name.includes("lampadaire")
+        (child.name.includes("lampadaire") || child.name.includes("prop-lantern"))
       )
         light(
           child.x,
