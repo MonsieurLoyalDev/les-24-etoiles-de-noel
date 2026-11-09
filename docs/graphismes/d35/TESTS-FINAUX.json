@@ -1,0 +1,2632 @@
+{
+  "phase": "D.3.5",
+  "version": "0.7.5",
+  "branch": "feature/phase-d3-5-details",
+  "merged": false,
+  "deployed": false,
+  "artisticApproval": "pending",
+  "archives": [
+    {
+      "name": "D35-SOURCE-LIGHT.zip",
+      "bytes": 90400774,
+      "sha256": "5f11ed4d5702539bafcf0df5adfd5f2c98f86c021137d6bc5118d24072a52cf4"
+    },
+    {
+      "name": "D35-ARTWORK.zip",
+      "bytes": 559547710,
+      "sha256": "6270d8f69e1e34d4b6ae0e813386b3e19b8abb0c051a72d7a9cac39ddf0c729e"
+    }
+  ],
+  "checks": {
+    "freshExtraction": true,
+    "npmCi": true,
+    "typescript": true,
+    "lint": true,
+    "units": {
+      "passed": 163,
+      "skippedWindows": 2
+    },
+    "privateBuild": true,
+    "productionBuild": true,
+    "e2eBuild": true,
+    "browser": {
+      "complete": true,
+      "expected": 108,
+      "passed": 96,
+      "skipped": 12,
+      "failed": [],
+      "missing": [],
+      "unexpected": [],
+      "errors": [],
+      "stats": {
+        "startTime": "2026-11-09T18:20:26.278Z",
+        "duration": 2529683.264,
+        "expected": 96,
+        "skipped": 12,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "tests": [
+        {
+          "key": "desktop:correction-d1.spec.ts:D.1 : dialogue compact et monde lisible",
+          "project": "desktop",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : dialogue compact et monde lisible",
+          "status": "passed",
+          "duration": 4870,
+          "annotations": []
+        },
+        {
+          "key": "desktop:correction-d1.spec.ts:D.1 : petit téléphone 320 px",
+          "project": "desktop",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : petit téléphone 320 px",
+          "status": "skipped",
+          "duration": 130,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Format téléphone uniquement.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\correction-d1.spec.ts",
+                "line": 64,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:correction-d1.spec.ts:D.1 : vue d'ensemble des façades et décors",
+          "project": "desktop",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : vue d'ensemble des façades et décors",
+          "status": "passed",
+          "duration": 4640,
+          "annotations": []
+        },
+        {
+          "key": "mobile:correction-d1.spec.ts:D.1 : dialogue compact et monde lisible",
+          "project": "mobile",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : dialogue compact et monde lisible",
+          "status": "passed",
+          "duration": 4105,
+          "annotations": []
+        },
+        {
+          "key": "mobile:correction-d1.spec.ts:D.1 : petit téléphone 320 px",
+          "project": "mobile",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : petit téléphone 320 px",
+          "status": "passed",
+          "duration": 3462,
+          "annotations": []
+        },
+        {
+          "key": "mobile:correction-d1.spec.ts:D.1 : vue d'ensemble des façades et décors",
+          "project": "mobile",
+          "file": "correction-d1.spec.ts",
+          "title": "D.1 : vue d'ensemble des façades et décors",
+          "status": "skipped",
+          "duration": 98,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Vue d'ensemble unique.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\correction-d1.spec.ts",
+                "line": 82,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:game.spec.ts:parcours complet, sauvegarde et journal",
+          "project": "desktop",
+          "file": "game.spec.ts",
+          "title": "parcours complet, sauvegarde et journal",
+          "status": "passed",
+          "duration": 24057,
+          "annotations": []
+        },
+        {
+          "key": "desktop:game.spec.ts:joystick tactile et absence de débordement",
+          "project": "desktop",
+          "file": "game.spec.ts",
+          "title": "joystick tactile et absence de débordement",
+          "status": "passed",
+          "duration": 4481,
+          "annotations": []
+        },
+        {
+          "key": "mobile:game.spec.ts:parcours complet, sauvegarde et journal",
+          "project": "mobile",
+          "file": "game.spec.ts",
+          "title": "parcours complet, sauvegarde et journal",
+          "status": "passed",
+          "duration": 22591,
+          "annotations": []
+        },
+        {
+          "key": "mobile:game.spec.ts:joystick tactile et absence de débordement",
+          "project": "mobile",
+          "file": "game.spec.ts",
+          "title": "joystick tactile et absence de débordement",
+          "status": "passed",
+          "duration": 3892,
+          "annotations": []
+        },
+        {
+          "key": "desktop:graphics.spec.ts:village graphique, dialogue et affichage responsive",
+          "project": "desktop",
+          "file": "graphics.spec.ts",
+          "title": "village graphique, dialogue et affichage responsive",
+          "status": "passed",
+          "duration": 4545,
+          "annotations": []
+        },
+        {
+          "key": "desktop:graphics.spec.ts:paramètres séparés de la progression et absence de sons non autorisés",
+          "project": "desktop",
+          "file": "graphics.spec.ts",
+          "title": "paramètres séparés de la progression et absence de sons non autorisés",
+          "status": "passed",
+          "duration": 8150,
+          "annotations": []
+        },
+        {
+          "key": "desktop:graphics.spec.ts:téléphone paysage et réduction des animations",
+          "project": "desktop",
+          "file": "graphics.spec.ts",
+          "title": "téléphone paysage et réduction des animations",
+          "status": "skipped",
+          "duration": 122,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Format téléphone uniquement.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\graphics.spec.ts",
+                "line": 87,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:graphics.spec.ts:contrôle des 32 portraits sur fonds clair et sombre",
+          "project": "desktop",
+          "file": "graphics.spec.ts",
+          "title": "contrôle des 32 portraits sur fonds clair et sombre",
+          "status": "passed",
+          "duration": 572,
+          "annotations": []
+        },
+        {
+          "key": "desktop:graphics.spec.ts:chaque étoile ouvre la journée sélectionnée",
+          "project": "desktop",
+          "file": "graphics.spec.ts",
+          "title": "chaque étoile ouvre la journée sélectionnée",
+          "status": "passed",
+          "duration": 5157,
+          "annotations": []
+        },
+        {
+          "key": "mobile:graphics.spec.ts:village graphique, dialogue et affichage responsive",
+          "project": "mobile",
+          "file": "graphics.spec.ts",
+          "title": "village graphique, dialogue et affichage responsive",
+          "status": "passed",
+          "duration": 3914,
+          "annotations": []
+        },
+        {
+          "key": "mobile:graphics.spec.ts:paramètres séparés de la progression et absence de sons non autorisés",
+          "project": "mobile",
+          "file": "graphics.spec.ts",
+          "title": "paramètres séparés de la progression et absence de sons non autorisés",
+          "status": "passed",
+          "duration": 7330,
+          "annotations": []
+        },
+        {
+          "key": "mobile:graphics.spec.ts:téléphone paysage et réduction des animations",
+          "project": "mobile",
+          "file": "graphics.spec.ts",
+          "title": "téléphone paysage et réduction des animations",
+          "status": "passed",
+          "duration": 3434,
+          "annotations": []
+        },
+        {
+          "key": "mobile:graphics.spec.ts:contrôle des 32 portraits sur fonds clair et sombre",
+          "project": "mobile",
+          "file": "graphics.spec.ts",
+          "title": "contrôle des 32 portraits sur fonds clair et sombre",
+          "status": "skipped",
+          "duration": 99,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule planche de contrôle des PNG originaux suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\graphics.spec.ts",
+                "line": 109,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "mobile:graphics.spec.ts:chaque étoile ouvre la journée sélectionnée",
+          "project": "mobile",
+          "file": "graphics.spec.ts",
+          "title": "chaque étoile ouvre la journée sélectionnée",
+          "status": "passed",
+          "duration": 4658,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-b.spec.ts:Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+          "project": "desktop",
+          "file": "phase-b.spec.ts",
+          "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+          "status": "passed",
+          "duration": 78880,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-b.spec.ts:Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+          "project": "mobile",
+          "file": "phase-b.spec.ts",
+          "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+          "status": "passed",
+          "duration": 76703,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-c.spec.ts:les 24 journées : activités, reprise, récompenses et scène finale",
+          "project": "desktop",
+          "file": "phase-c.spec.ts",
+          "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+          "status": "passed",
+          "duration": 110133,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-c.spec.ts:calendrier daté fermé en novembre et éditeur fictif persistant",
+          "project": "desktop",
+          "file": "phase-c.spec.ts",
+          "title": "calendrier daté fermé en novembre et éditeur fictif persistant",
+          "status": "passed",
+          "duration": 6658,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-c.spec.ts:les 24 journées : activités, reprise, récompenses et scène finale",
+          "project": "mobile",
+          "file": "phase-c.spec.ts",
+          "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+          "status": "passed",
+          "duration": 101104,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-c.spec.ts:calendrier daté fermé en novembre et éditeur fictif persistant",
+          "project": "mobile",
+          "file": "phase-c.spec.ts",
+          "title": "calendrier daté fermé en novembre et éditeur fictif persistant",
+          "status": "passed",
+          "duration": 5997,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-1.spec.ts:D.2.1 : promenade et place centrale",
+          "project": "desktop",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : promenade et place centrale",
+          "status": "passed",
+          "duration": 8021,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-1.spec.ts:D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+          "project": "desktop",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+          "status": "passed",
+          "duration": 15639,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-1.spec.ts:D.2.1 : les huit noms conservent leur identité dans les pièces",
+          "project": "desktop",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : les huit noms conservent leur identité dans les pièces",
+          "status": "passed",
+          "duration": 13518,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-1.spec.ts:D.2.1 : cadrage des quatre façades sur PC et mobile",
+          "project": "desktop",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 14812,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-1.spec.ts:D.2.1 : vue globale et abords des quatre bâtiments",
+          "project": "desktop",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : vue globale et abords des quatre bâtiments",
+          "status": "passed",
+          "duration": 4646,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-1.spec.ts:D.2.1 : promenade et place centrale",
+          "project": "mobile",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : promenade et place centrale",
+          "status": "passed",
+          "duration": 7185,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-1.spec.ts:D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+          "project": "mobile",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : étiquettes masquées en dialogue, stables et contenues",
+          "status": "passed",
+          "duration": 11742,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-1.spec.ts:D.2.1 : les huit noms conservent leur identité dans les pièces",
+          "project": "mobile",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : les huit noms conservent leur identité dans les pièces",
+          "status": "passed",
+          "duration": 13259,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-1.spec.ts:D.2.1 : cadrage des quatre façades sur PC et mobile",
+          "project": "mobile",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 14442,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-1.spec.ts:D.2.1 : vue globale et abords des quatre bâtiments",
+          "project": "mobile",
+          "file": "phase-d2-1.spec.ts",
+          "title": "D.2.1 : vue globale et abords des quatre bâtiments",
+          "status": "skipped",
+          "duration": 107,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule vue globale suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d2-1.spec.ts",
+                "line": 170,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : promenade et place centrale",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : promenade et place centrale",
+          "status": "passed",
+          "duration": 8039,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : présentation des dix silhouettes",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : présentation des dix silhouettes",
+          "status": "passed",
+          "duration": 348,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+          "status": "passed",
+          "duration": 14666,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : les huit noms conservent leur identité dans les pièces",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : les huit noms conservent leur identité dans les pièces",
+          "status": "passed",
+          "duration": 13344,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : cadrage des quatre façades sur PC et mobile",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 14445,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2-2.spec.ts:D.2.2 : vue globale et abords des quatre bâtiments",
+          "project": "desktop",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : vue globale et abords des quatre bâtiments",
+          "status": "passed",
+          "duration": 4240,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : promenade et place centrale",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : promenade et place centrale",
+          "status": "passed",
+          "duration": 6692,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : présentation des dix silhouettes",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : présentation des dix silhouettes",
+          "status": "skipped",
+          "duration": 103,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule planche documentaire suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d2-2.spec.ts",
+                "line": 75,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : étiquettes masquées en dialogue, stables et contenues",
+          "status": "passed",
+          "duration": 11341,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : les huit noms conservent leur identité dans les pièces",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : les huit noms conservent leur identité dans les pièces",
+          "status": "passed",
+          "duration": 11764,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : cadrage des quatre façades sur PC et mobile",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 13133,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2-2.spec.ts:D.2.2 : vue globale et abords des quatre bâtiments",
+          "project": "mobile",
+          "file": "phase-d2-2.spec.ts",
+          "title": "D.2.2 : vue globale et abords des quatre bâtiments",
+          "status": "skipped",
+          "duration": 118,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule vue globale suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d2-2.spec.ts",
+                "line": 202,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:phase-d2.spec.ts:D.2 : promenade et place centrale",
+          "project": "desktop",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : promenade et place centrale",
+          "status": "passed",
+          "duration": 7283,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2.spec.ts:D.2 : cadrage des quatre façades sur PC et mobile",
+          "project": "desktop",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 15649,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d2.spec.ts:D.2 : vue globale et abords des quatre bâtiments",
+          "project": "desktop",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : vue globale et abords des quatre bâtiments",
+          "status": "passed",
+          "duration": 4252,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2.spec.ts:D.2 : promenade et place centrale",
+          "project": "mobile",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : promenade et place centrale",
+          "status": "passed",
+          "duration": 6534,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2.spec.ts:D.2 : cadrage des quatre façades sur PC et mobile",
+          "project": "mobile",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : cadrage des quatre façades sur PC et mobile",
+          "status": "passed",
+          "duration": 13145,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d2.spec.ts:D.2 : vue globale et abords des quatre bâtiments",
+          "project": "mobile",
+          "file": "phase-d2.spec.ts",
+          "title": "D.2 : vue globale et abords des quatre bâtiments",
+          "status": "skipped",
+          "duration": 108,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule vue globale suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d2.spec.ts",
+                "line": 77,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : intérieurs, neige et sapin avant/après",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : intérieurs, neige et sapin avant/après",
+          "status": "passed",
+          "duration": 33152,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : collisions du mobilier et sorties des quatre pièces",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : collisions du mobilier et sorties des quatre pièces",
+          "status": "passed",
+          "duration": 54156,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : lumière intérieure, performances et réduction des mouvements",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : lumière intérieure, performances et réduction des mouvements",
+          "status": "passed",
+          "duration": 14205,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : petit ordinateur et tablette",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : petit ordinateur et tablette",
+          "status": "passed",
+          "duration": 25231,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : contrôle des ressources sur fonds clair et sombre",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : contrôle des ressources sur fonds clair et sombre",
+          "status": "passed",
+          "duration": 494,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-1.spec.ts:D.3.1 : terrain blanc et conservation des matières D.3",
+          "project": "desktop",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : terrain blanc et conservation des matières D.3",
+          "status": "passed",
+          "duration": 11868,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : intérieurs, neige et sapin avant/après",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : intérieurs, neige et sapin avant/après",
+          "status": "passed",
+          "duration": 50393,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : collisions du mobilier et sorties des quatre pièces",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : collisions du mobilier et sorties des quatre pièces",
+          "status": "passed",
+          "duration": 53953,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : lumière intérieure, performances et réduction des mouvements",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : lumière intérieure, performances et réduction des mouvements",
+          "status": "passed",
+          "duration": 13969,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : petit ordinateur et tablette",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : petit ordinateur et tablette",
+          "status": "skipped",
+          "duration": 109,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Formats complémentaires capturés une seule fois",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d3-1.spec.ts",
+                "line": 203,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : contrôle des ressources sur fonds clair et sombre",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : contrôle des ressources sur fonds clair et sombre",
+          "status": "skipped",
+          "duration": 82,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Présentation des ressources capturée une seule fois",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d3-1.spec.ts",
+                "line": 226,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "mobile:phase-d3-1.spec.ts:D.3.1 : terrain blanc et conservation des matières D.3",
+          "project": "mobile",
+          "file": "phase-d3-1.spec.ts",
+          "title": "D.3.1 : terrain blanc et conservation des matières D.3",
+          "status": "skipped",
+          "duration": 87,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Vue globale destinée au PC",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d3-1.spec.ts",
+                "line": 288,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "desktop:phase-d3-2-compat.spec.ts:D32 anciennes positions sous un décor et performance dans un quartier visible",
+          "project": "desktop",
+          "file": "phase-d3-2-compat.spec.ts",
+          "title": "D32 anciennes positions sous un décor et performance dans un quartier visible",
+          "status": "passed",
+          "duration": 19898,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2-compat.spec.ts:D32 anciennes positions sous un décor et performance dans un quartier visible",
+          "project": "mobile",
+          "file": "phase-d3-2-compat.spec.ts",
+          "title": "D32 anciennes positions sous un décor et performance dans un quartier visible",
+          "status": "passed",
+          "duration": 19620,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 effets des quartiers, culling et performance extérieure",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 effets des quartiers, culling et performance extérieure",
+          "status": "passed",
+          "duration": 4633,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 habitations, collisions et carte du village",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 habitations, collisions et carte du village",
+          "status": "passed",
+          "duration": 77864,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 démonstration enregistrée des interactions et animations",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 démonstration enregistrée des interactions et animations",
+          "status": "passed",
+          "duration": 21305,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 chaque objet décoratif fonctionne au clavier et au toucher",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+          "status": "passed",
+          "duration": 54930,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 sauvegarde décorative séparée et réduction des mouvements",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 sauvegarde décorative séparée et réduction des mouvements",
+          "status": "passed",
+          "duration": 12629,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 quatre intérieurs jour/nuit et circulation",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 quatre intérieurs jour/nuit et circulation",
+          "status": "passed",
+          "duration": 28457,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-2.spec.ts:D32 performances intérieures mesurées",
+          "project": "desktop",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 performances intérieures mesurées",
+          "status": "passed",
+          "duration": 3749,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 effets des quartiers, culling et performance extérieure",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 effets des quartiers, culling et performance extérieure",
+          "status": "passed",
+          "duration": 4494,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 habitations, collisions et carte du village",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 habitations, collisions et carte du village",
+          "status": "passed",
+          "duration": 65156,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 démonstration enregistrée des interactions et animations",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 démonstration enregistrée des interactions et animations",
+          "status": "passed",
+          "duration": 18873,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 chaque objet décoratif fonctionne au clavier et au toucher",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+          "status": "passed",
+          "duration": 54740,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 sauvegarde décorative séparée et réduction des mouvements",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 sauvegarde décorative séparée et réduction des mouvements",
+          "status": "passed",
+          "duration": 12219,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 quatre intérieurs jour/nuit et circulation",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 quatre intérieurs jour/nuit et circulation",
+          "status": "passed",
+          "duration": 47839,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-2.spec.ts:D32 performances intérieures mesurées",
+          "project": "mobile",
+          "file": "phase-d3-2.spec.ts",
+          "title": "D32 performances intérieures mesurées",
+          "status": "passed",
+          "duration": 3719,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-3.spec.ts:D33 carte, quartiers et seize façades lisibles",
+          "project": "desktop",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 carte, quartiers et seize façades lisibles",
+          "status": "passed",
+          "duration": 87185,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-3.spec.ts:D33 plans, annexes accessibles et mobilier jour/nuit",
+          "project": "desktop",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 plans, annexes accessibles et mobilier jour/nuit",
+          "status": "passed",
+          "duration": 112014,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-3.spec.ts:D33 performances en quartier habité et effets réduits",
+          "project": "desktop",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 performances en quartier habité et effets réduits",
+          "status": "passed",
+          "duration": 4799,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-3.spec.ts:D33 ancienne position désormais occupée : progression préservée",
+          "project": "desktop",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 ancienne position désormais occupée : progression préservée",
+          "status": "passed",
+          "duration": 6825,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-3.spec.ts:D33 carte, quartiers et seize façades lisibles",
+          "project": "mobile",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 carte, quartiers et seize façades lisibles",
+          "status": "passed",
+          "duration": 69910,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-3.spec.ts:D33 plans, annexes accessibles et mobilier jour/nuit",
+          "project": "mobile",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 plans, annexes accessibles et mobilier jour/nuit",
+          "status": "passed",
+          "duration": 105646,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-3.spec.ts:D33 performances en quartier habité et effets réduits",
+          "project": "mobile",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 performances en quartier habité et effets réduits",
+          "status": "passed",
+          "duration": 4403,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-3.spec.ts:D33 ancienne position désormais occupée : progression préservée",
+          "project": "mobile",
+          "file": "phase-d3-3.spec.ts",
+          "title": "D33 ancienne position désormais occupée : progression préservée",
+          "status": "passed",
+          "duration": 6471,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-4.spec.ts:D34 intégration réelle, quartiers et transparences",
+          "project": "desktop",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 intégration réelle, quartiers et transparences",
+          "status": "passed",
+          "duration": 29572,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-4.spec.ts:D34 toutes les portes, les portillons et les sorties restent praticables",
+          "project": "desktop",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 toutes les portes, les portillons et les sorties restent praticables",
+          "status": "passed",
+          "duration": 217797,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-4.spec.ts:D34 sauvegarde ancienne, progression et position libre préservées",
+          "project": "desktop",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 sauvegarde ancienne, progression et position libre préservées",
+          "status": "passed",
+          "duration": 11208,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-4.spec.ts:D34 intégration réelle, quartiers et transparences",
+          "project": "mobile",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 intégration réelle, quartiers et transparences",
+          "status": "passed",
+          "duration": 13653,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-4.spec.ts:D34 toutes les portes, les portillons et les sorties restent praticables",
+          "project": "mobile",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 toutes les portes, les portillons et les sorties restent praticables",
+          "status": "passed",
+          "duration": 217897,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-4.spec.ts:D34 sauvegarde ancienne, progression et position libre préservées",
+          "project": "mobile",
+          "file": "phase-d3-4.spec.ts",
+          "title": "D34 sauvegarde ancienne, progression et position libre préservées",
+          "status": "passed",
+          "duration": 10965,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-5.spec.ts:D35 intégration artistique, matières, clôtures et végétation intérieure",
+          "project": "desktop",
+          "file": "phase-d3-5.spec.ts",
+          "title": "D35 intégration artistique, matières, clôtures et végétation intérieure",
+          "status": "passed",
+          "duration": 31518,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3-5.spec.ts:D35 circulation réelle, performances et réduction des effets",
+          "project": "desktop",
+          "file": "phase-d3-5.spec.ts",
+          "title": "D35 circulation réelle, performances et réduction des effets",
+          "status": "passed",
+          "duration": 6012,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-5.spec.ts:D35 intégration artistique, matières, clôtures et végétation intérieure",
+          "project": "mobile",
+          "file": "phase-d3-5.spec.ts",
+          "title": "D35 intégration artistique, matières, clôtures et végétation intérieure",
+          "status": "passed",
+          "duration": 15018,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3-5.spec.ts:D35 circulation réelle, performances et réduction des effets",
+          "project": "mobile",
+          "file": "phase-d3-5.spec.ts",
+          "title": "D35 circulation réelle, performances et réduction des effets",
+          "status": "passed",
+          "duration": 5889,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3.spec.ts:D.3 : terrains, jour, crépuscule, nuit et façades",
+          "project": "desktop",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : terrains, jour, crépuscule, nuit et façades",
+          "status": "passed",
+          "duration": 24386,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3.spec.ts:D.3 : vue globale du terrain",
+          "project": "desktop",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : vue globale du terrain",
+          "status": "passed",
+          "duration": 11216,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3.spec.ts:D.3 : qualité, réduction des mouvements et reprise",
+          "project": "desktop",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : qualité, réduction des mouvements et reprise",
+          "status": "passed",
+          "duration": 11407,
+          "annotations": []
+        },
+        {
+          "key": "desktop:phase-d3.spec.ts:D.3 : démonstration réelle des effets animés",
+          "project": "desktop",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : démonstration réelle des effets animés",
+          "status": "passed",
+          "duration": 19462,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3.spec.ts:D.3 : terrains, jour, crépuscule, nuit et façades",
+          "project": "mobile",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : terrains, jour, crépuscule, nuit et façades",
+          "status": "passed",
+          "duration": 22176,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3.spec.ts:D.3 : vue globale du terrain",
+          "project": "mobile",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : vue globale du terrain",
+          "status": "skipped",
+          "duration": 112,
+          "annotations": [
+            {
+              "type": "skip",
+              "description": "Une seule vue globale par ambiance suffit.",
+              "location": {
+                "file": "C:\\Users\\arthu\\Documents\\Codex\\2026-11-03\\je-souhaite-lancer-d-s-maintenant\\outputs\\livraison-d35\\verification\\source-light\\tests\\e2e\\phase-d3.spec.ts",
+                "line": 97,
+                "column": 8
+              }
+            }
+          ]
+        },
+        {
+          "key": "mobile:phase-d3.spec.ts:D.3 : qualité, réduction des mouvements et reprise",
+          "project": "mobile",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : qualité, réduction des mouvements et reprise",
+          "status": "passed",
+          "duration": 10904,
+          "annotations": []
+        },
+        {
+          "key": "mobile:phase-d3.spec.ts:D.3 : démonstration réelle des effets animés",
+          "project": "mobile",
+          "file": "phase-d3.spec.ts",
+          "title": "D.3 : démonstration réelle des effets animés",
+          "status": "passed",
+          "duration": 18718,
+          "annotations": []
+        }
+      ],
+      "note": "Tous les cas proviennent d’une seule exécution intégrale dans une extraction vierge du ZIP SOURCE-LIGHT livré. Les essais ciblés et historiques ne sont pas ajoutés au nombre de réussites."
+    }
+  },
+  "integrity": {
+    "source": {
+      "verified": true,
+      "files": 398,
+      "runtimeFiles": 294,
+      "publicFiles": 223,
+      "errors": []
+    },
+    "artwork": {
+      "verified": true,
+      "restoredPaths": 829,
+      "nativeOriginals": 6,
+      "errors": []
+    }
+  },
+  "inventory": {
+    "phase": "D.3.5",
+    "version": "0.7.5",
+    "categories": {
+      "bancs": 4,
+      "cadeaux": 9,
+      "bois": 6,
+      "accessoires": 12,
+      "modulesClotures": 16,
+      "matieresSol": 4
+    },
+    "createdSpriteFrames": 47,
+    "createdGroundMaterials": 4,
+    "liveNamedFrames": 43,
+    "publicAtlases": [
+      "public/assets/environment-d35/sprites.png",
+      "public/assets/environment-d35/path-materials.png"
+    ],
+    "nativeOriginals": {
+      "benches": {
+        "bytes": 1570271,
+        "sha256": "4bfdebf2627a5711d2636de20136bce23c4f090eb79571836cdb97ee339d78a2"
+      },
+      "gifts": {
+        "bytes": 2274489,
+        "sha256": "3fbae26438b9521b5f7deb30092c6b4daf999ff503301cc21a9e633a81022025"
+      },
+      "firewood": {
+        "bytes": 2677437,
+        "sha256": "8aff5792f294cf1c6aadf5b5a168d5947b52a6766e1ed784d6e05dd1078b76ee"
+      },
+      "accessories": {
+        "bytes": 2588420,
+        "sha256": "c4cd7b33f413622319a19e346fb2ff4985bdd15ec0a49930a89aee18a9cd5dcd"
+      },
+      "fences": {
+        "bytes": 1635430,
+        "sha256": "2fc638d60f354a79eb42db91c8bf1fa3e4df131c4a97658de6ce5f3ca65f7949"
+      },
+      "paths": {
+        "bytes": 3604053,
+        "sha256": "e5bd26f5b65906b8618b9593d9f2282e7e275edd6f8516f59ffe2066327a2a9d"
+      }
+    },
+    "frames": [
+      {
+        "name": "bench-rustic",
+        "source": "benches",
+        "bounds": [
+          75,
+          105,
+          739,
+          285
+        ],
+        "width": 260,
+        "height": 103,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "w": 260,
+          "h": 103
+        },
+        "pixelSha256": "793238276c466700c27b36bd654d3ff02bfb64932276ba60137eb5842294e222"
+      },
+      {
+        "name": "bench-village",
+        "source": "benches",
+        "bounds": [
+          959,
+          117,
+          739,
+          273
+        ],
+        "width": 260,
+        "height": 99,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 260,
+          "y": 0,
+          "w": 260,
+          "h": 99
+        },
+        "pixelSha256": "6666d646c860712ff0394245cedfad17d4f50c0a1eab3f4a2383c9fb44c64415"
+      },
+      {
+        "name": "bench-copper",
+        "source": "benches",
+        "bounds": [
+          74,
+          557,
+          740,
+          269
+        ],
+        "width": 260,
+        "height": 98,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 520,
+          "y": 0,
+          "w": 260,
+          "h": 98
+        },
+        "pixelSha256": "005a9dfc3a7b4689f229c03f615e5ef8db5eabb5fe836104e0374c6d0c7873a9"
+      },
+      {
+        "name": "bench-garden",
+        "source": "benches",
+        "bounds": [
+          961,
+          606,
+          736,
+          220
+        ],
+        "width": 260,
+        "height": 81,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 0,
+          "w": 260,
+          "h": 81
+        },
+        "pixelSha256": "76da09659bdd2e1234d928cdcbf4d3efe921eaf70dad00573602407087e09894"
+      },
+      {
+        "name": "gift-red",
+        "source": "gifts",
+        "bounds": [
+          180,
+          90,
+          199,
+          203
+        ],
+        "width": 203,
+        "height": 207,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 0,
+          "w": 203,
+          "h": 207
+        },
+        "pixelSha256": "958d04ce1394f067e9ef5f631313ce28a0828a31894edc0d4ee68f28f8b957b4"
+      },
+      {
+        "name": "gift-tall",
+        "source": "gifts",
+        "bounds": [
+          670,
+          17,
+          191,
+          296
+        ],
+        "width": 170,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 0,
+          "w": 170,
+          "h": 260
+        },
+        "pixelSha256": "23109bd7b452e0ee74703d933416145ed9505d7000dd41d992acfb658d042e43"
+      },
+      {
+        "name": "gift-cream",
+        "source": "gifts",
+        "bounds": [
+          1106,
+          110,
+          343,
+          187
+        ],
+        "width": 260,
+        "height": 144,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 0,
+          "w": 260,
+          "h": 144
+        },
+        "pixelSha256": "827b458118027114fd1d2f3544aa16043ac93fd0a4d82f7558f47b78e72bb6ba"
+      },
+      {
+        "name": "gift-pair",
+        "source": "gifts",
+        "bounds": [
+          97,
+          388,
+          343,
+          268
+        ],
+        "width": 260,
+        "height": 205,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 260,
+          "w": 260,
+          "h": 205
+        },
+        "pixelSha256": "fec09925c8f668f35f0f6a3909b98d0402288eec5e8522f74cb14398eb09ecca"
+      },
+      {
+        "name": "gift-trio",
+        "source": "gifts",
+        "bounds": [
+          563,
+          360,
+          410,
+          299
+        ],
+        "width": 260,
+        "height": 191,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 260,
+          "y": 260,
+          "w": 260,
+          "h": 191
+        },
+        "pixelSha256": "bcf1c6367cd33cf84b814ada94676f8b55ea02b501d836d2b6e94202b9eab20c"
+      },
+      {
+        "name": "gift-kraft",
+        "source": "gifts",
+        "bounds": [
+          1183,
+          354,
+          192,
+          303
+        ],
+        "width": 167,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 520,
+          "y": 260,
+          "w": 167,
+          "h": 260
+        },
+        "pixelSha256": "a60963713c4149419cd29c1fd2b980ec1180c3e35740267dedac2a6de58f381f"
+      },
+      {
+        "name": "gift-stack",
+        "source": "gifts",
+        "bounds": [
+          98,
+          697,
+          330,
+          317
+        ],
+        "width": 260,
+        "height": 250,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 260,
+          "w": 260,
+          "h": 250
+        },
+        "pixelSha256": "55d53f87177b0cce40a80be9a136e1903cd9ff243a6cb103639839511badbb4e"
+      },
+      {
+        "name": "gift-basket",
+        "source": "gifts",
+        "bounds": [
+          556,
+          691,
+          402,
+          319
+        ],
+        "width": 260,
+        "height": 208,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 260,
+          "w": 260,
+          "h": 208
+        },
+        "pixelSha256": "30fed07f7c24d44709ecc60145323ef7355edda539f26267141e7c879f6f3df2"
+      },
+      {
+        "name": "gift-display",
+        "source": "gifts",
+        "bounds": [
+          1063,
+          708,
+          427,
+          296
+        ],
+        "width": 260,
+        "height": 182,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 260,
+          "w": 260,
+          "h": 182
+        },
+        "pixelSha256": "2de37a2132d55f3a91bf5cd30ccd922c72d254285dc85e23ea4c087cdd170e83"
+      },
+      {
+        "name": "wood-small",
+        "source": "firewood",
+        "bounds": [
+          25,
+          147,
+          408,
+          336
+        ],
+        "width": 260,
+        "height": 215,
+        "corners": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 260,
+          "w": 260,
+          "h": 215
+        },
+        "pixelSha256": "c5b6c5a70c7bd0e4990b33f87ca0e0710b1fac172c9bf72e1a6ce3f8b9d0b54e"
+      },
+      {
+        "name": "wood-medium",
+        "source": "firewood",
+        "bounds": [
+          490,
+          83,
+          440,
+          391
+        ],
+        "width": 260,
+        "height": 232,
+        "corners": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 520,
+          "w": 260,
+          "h": 232
+        },
+        "pixelSha256": "9090bfab5bd8d93b7b52abaee80075b1c876c011d621cf9b80843e1785562543"
+      },
+      {
+        "name": "wood-rack",
+        "source": "firewood",
+        "bounds": [
+          967,
+          80,
+          537,
+          403
+        ],
+        "width": 260,
+        "height": 197,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 260,
+          "y": 520,
+          "w": 260,
+          "h": 197
+        },
+        "pixelSha256": "9d10e4d55d7ca5eb44c55849f653794f6b7c24860282267cd7fa0dc1ed834b36"
+      },
+      {
+        "name": "wood-irregular",
+        "source": "firewood",
+        "bounds": [
+          25,
+          570,
+          482,
+          402
+        ],
+        "width": 260,
+        "height": 218,
+        "corners": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "frame": {
+          "x": 520,
+          "y": 520,
+          "w": 260,
+          "h": 218
+        },
+        "pixelSha256": "55d46f84fa667c15593727faaa62c28d19180db059a05a795229ba87dab93cbe"
+      },
+      {
+        "name": "wood-bundle",
+        "source": "firewood",
+        "bounds": [
+          610,
+          546,
+          279,
+          425
+        ],
+        "width": 173,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 520,
+          "w": 173,
+          "h": 260
+        },
+        "pixelSha256": "b4f6972757fa1305accb10c0a068fb6424375118ddc31e1a5d8d9b6cc9710db9"
+      },
+      {
+        "name": "wood-kindling",
+        "source": "firewood",
+        "bounds": [
+          1038,
+          551,
+          432,
+          420
+        ],
+        "width": 260,
+        "height": 253,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 520,
+          "w": 260,
+          "h": 253
+        },
+        "pixelSha256": "59c77fea1db0cc7be6d2c0a22c800cac8e06c5e6e094892bfb3729df90ad6411"
+      },
+      {
+        "name": "prop-lantern",
+        "source": "accessories",
+        "bounds": [
+          51,
+          16,
+          219,
+          330
+        ],
+        "width": 174,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 520,
+          "w": 174,
+          "h": 260
+        },
+        "pixelSha256": "4c843675150664831ccc9842fb87169d8a8a7eb1835b92c024c1c197c7ac75e9"
+      },
+      {
+        "name": "prop-mailbox",
+        "source": "accessories",
+        "bounds": [
+          412,
+          18,
+          228,
+          336
+        ],
+        "width": 178,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 520,
+          "w": 178,
+          "h": 260
+        },
+        "pixelSha256": "5883d4946bd009cb960584ce4868755d78abe7faf7a96659e6b45f11cb025486"
+      },
+      {
+        "name": "prop-planter",
+        "source": "accessories",
+        "bounds": [
+          731,
+          91,
+          347,
+          237
+        ],
+        "width": 260,
+        "height": 179,
+        "corners": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 780,
+          "w": 260,
+          "h": 179
+        },
+        "pixelSha256": "0d8f0006a59e78a570983651e09a8b4df6d2a425c2eeaa139f09c2b98fae6bdb"
+      },
+      {
+        "name": "prop-table",
+        "source": "accessories",
+        "bounds": [
+          33,
+          393,
+          293,
+          313
+        ],
+        "width": 244,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 260,
+          "y": 780,
+          "w": 244,
+          "h": 260
+        },
+        "pixelSha256": "b90545508dc99198cc82201a6d6f6ada5cd05758810788ba7667b77988ca1249"
+      },
+      {
+        "name": "prop-sled",
+        "source": "accessories",
+        "bounds": [
+          371,
+          444,
+          345,
+          246
+        ],
+        "width": 260,
+        "height": 187,
+        "corners": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 520,
+          "y": 780,
+          "w": 260,
+          "h": 187
+        },
+        "pixelSha256": "b7b57dcd10eb3907cc0e2dbf4eab0868ec330851afbd91b1555297d1fac96f0b"
+      },
+      {
+        "name": "prop-crates",
+        "source": "accessories",
+        "bounds": [
+          752,
+          399,
+          306,
+          308
+        ],
+        "width": 259,
+        "height": 260,
+        "corners": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 780,
+          "w": 259,
+          "h": 260
+        },
+        "pixelSha256": "20484fca91fdf4d704d01512f0de2c064966203e1af9b0b9ac82a3aec8940ce7"
+      },
+      {
+        "name": "prop-basket",
+        "source": "accessories",
+        "bounds": [
+          26,
+          749,
+          310,
+          306
+        ],
+        "width": 260,
+        "height": 257,
+        "corners": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 780,
+          "w": 260,
+          "h": 257
+        },
+        "pixelSha256": "959f00f10bf36ae594f4d47a27e1425d817151d1d3559d972280fe8dc61cebca"
+      },
+      {
+        "name": "prop-tools",
+        "source": "accessories",
+        "bounds": [
+          406,
+          746,
+          318,
+          311
+        ],
+        "width": 260,
+        "height": 255,
+        "corners": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 780,
+          "w": 260,
+          "h": 255
+        },
+        "pixelSha256": "4dc3f3b1b29ee8ae29ccd7e202accbdf51a839e51954a2bde68779fd7b7c4caa"
+      },
+      {
+        "name": "prop-watering",
+        "source": "accessories",
+        "bounds": [
+          724,
+          770,
+          343,
+          287
+        ],
+        "width": 260,
+        "height": 219,
+        "corners": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 780,
+          "w": 260,
+          "h": 219
+        },
+        "pixelSha256": "c0342bde55470b657a180e63530a84425bb016c037c5d9382765b96595b73787"
+      },
+      {
+        "name": "prop-bare-tree",
+        "source": "accessories",
+        "bounds": [
+          16,
+          1098,
+          331,
+          325
+        ],
+        "width": 260,
+        "height": 256,
+        "corners": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 0,
+          "y": 1040,
+          "w": 260,
+          "h": 256
+        },
+        "pixelSha256": "d6a162d0e6c7966c027c47f5ffdafe51306bc01d488257111e47dceb6020e6e9"
+      },
+      {
+        "name": "prop-stump",
+        "source": "accessories",
+        "bounds": [
+          383,
+          1151,
+          291,
+          258
+        ],
+        "width": 260,
+        "height": 231,
+        "corners": [
+          1,
+          0,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 260,
+          "y": 1040,
+          "w": 260,
+          "h": 231
+        },
+        "pixelSha256": "b445924adbf2bcd14a779876797fac9b8b93cc2ef179a631d0004d362543bd42"
+      },
+      {
+        "name": "prop-rocks",
+        "source": "accessories",
+        "bounds": [
+          733,
+          1176,
+          335,
+          218
+        ],
+        "width": 260,
+        "height": 171,
+        "corners": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 520,
+          "y": 1040,
+          "w": 260,
+          "h": 171
+        },
+        "pixelSha256": "b1a29a4633d617a0d123368cdf1ba9cdf06c265d5dc8c94f2d6a4fcf8bc984db"
+      },
+      {
+        "name": "fence-rustic-panel",
+        "source": "fences",
+        "bounds": [
+          16,
+          99,
+          386,
+          178
+        ],
+        "width": 260,
+        "height": 123,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 1040,
+          "w": 260,
+          "h": 123
+        },
+        "pixelSha256": "9b20bbd96869d7d2d767c682588655da45cca8d8f5d75a3930160a3cb673733a"
+      },
+      {
+        "name": "fence-rustic-post",
+        "source": "fences",
+        "bounds": [
+          484,
+          19,
+          118,
+          274
+        ],
+        "width": 115,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 1040,
+          "w": 115,
+          "h": 260
+        },
+        "pixelSha256": "6e53586a0e518e8bbcba5b799a6516e16b82774282b02a82337bacaf4f5763e0"
+      },
+      {
+        "name": "fence-rustic-side",
+        "source": "fences",
+        "bounds": [
+          756,
+          17,
+          57,
+          275
+        ],
+        "width": 58,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 1040,
+          "w": 58,
+          "h": 260
+        },
+        "pixelSha256": "1b0a430bd320370b5f3e8fa16d1e26d02aa763b01868d27a0fb99ff39c83a370"
+      },
+      {
+        "name": "fence-rustic-gate",
+        "source": "fences",
+        "bounds": [
+          1002,
+          27,
+          184,
+          264
+        ],
+        "width": 183,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 1040,
+          "w": 183,
+          "h": 260
+        },
+        "pixelSha256": "575750600098f01172e2a207e249c7ed84eab16d28923afa0fe6563fda87940e"
+      },
+      {
+        "name": "fence-picket-panel",
+        "source": "fences",
+        "bounds": [
+          13,
+          386,
+          390,
+          198
+        ],
+        "width": 260,
+        "height": 134,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 1300,
+          "w": 260,
+          "h": 134
+        },
+        "pixelSha256": "1c21a11ef052721852a7fb6d93d4348dd37f5e184bad47c16dc6740ee8dc85a8"
+      },
+      {
+        "name": "fence-picket-post",
+        "source": "fences",
+        "bounds": [
+          481,
+          326,
+          126,
+          287
+        ],
+        "width": 117,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "frame": {
+          "x": 260,
+          "y": 1300,
+          "w": 117,
+          "h": 260
+        },
+        "pixelSha256": "57e4c9c762a253f3c6a14d5fabdd70ea92dfc9ef734d05f6cd14dee5517b5321"
+      },
+      {
+        "name": "fence-picket-side",
+        "source": "fences",
+        "bounds": [
+          742,
+          326,
+          69,
+          281
+        ],
+        "width": 67,
+        "height": 260,
+        "corners": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 520,
+          "y": 1300,
+          "w": 67,
+          "h": 260
+        },
+        "pixelSha256": "1ff7742beb20c6024a65257fd58bb73a38a8f8b039e0d8133419c30002f015b9"
+      },
+      {
+        "name": "fence-picket-gate",
+        "source": "fences",
+        "bounds": [
+          998,
+          332,
+          189,
+          278
+        ],
+        "width": 179,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 780,
+          "y": 1300,
+          "w": 179,
+          "h": 260
+        },
+        "pixelSha256": "cf1fe38950a3568e05c8730e6ffa3e2c3893e729880d3f131a68ee05b988be28"
+      },
+      {
+        "name": "fence-logs-panel",
+        "source": "fences",
+        "bounds": [
+          11,
+          694,
+          392,
+          210
+        ],
+        "width": 260,
+        "height": 142,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 1300,
+          "w": 260,
+          "h": 142
+        },
+        "pixelSha256": "27f516557cb43c043f36bc144c32d9212b1381bbb39132710aa6e9f008315435"
+      },
+      {
+        "name": "fence-logs-post",
+        "source": "fences",
+        "bounds": [
+          468,
+          642,
+          149,
+          279
+        ],
+        "width": 141,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1300,
+          "y": 1300,
+          "w": 141,
+          "h": 260
+        },
+        "pixelSha256": "69129c317d1a0a11133f7638f1146c0a160241cea2e2e096d1d7ebc324f43cfa"
+      },
+      {
+        "name": "fence-logs-side",
+        "source": "fences",
+        "bounds": [
+          741,
+          647,
+          81,
+          274
+        ],
+        "width": 80,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1560,
+          "y": 1300,
+          "w": 80,
+          "h": 260
+        },
+        "pixelSha256": "28ef341ecd088d95a6aff85b252be69f425848ecb638d00a6084888c2a6009f9"
+      },
+      {
+        "name": "fence-logs-gate",
+        "source": "fences",
+        "bounds": [
+          998,
+          647,
+          209,
+          270
+        ],
+        "width": 203,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 0,
+          "y": 1560,
+          "w": 203,
+          "h": 260
+        },
+        "pixelSha256": "f6afbc2b7eaef9f8d8c66ff2896598cb30861026c8d70b51b93386d9d3fee716"
+      },
+      {
+        "name": "fence-copper-panel",
+        "source": "fences",
+        "bounds": [
+          15,
+          1026,
+          387,
+          193
+        ],
+        "width": 260,
+        "height": 132,
+        "corners": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 260,
+          "y": 1560,
+          "w": 260,
+          "h": 132
+        },
+        "pixelSha256": "51eab81f7bf5cdfccabd0411ead6c0d5b17b440d9ca73d0ecd7bca2f6286f69e"
+      },
+      {
+        "name": "fence-copper-post",
+        "source": "fences",
+        "bounds": [
+          477,
+          953,
+          132,
+          286
+        ],
+        "width": 123,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "frame": {
+          "x": 520,
+          "y": 1560,
+          "w": 123,
+          "h": 260
+        },
+        "pixelSha256": "8b6d247525b0aa9d149efdd9f84a519960749c6cee761edbf8a8ad5325c7c059"
+      },
+      {
+        "name": "fence-copper-side",
+        "source": "fences",
+        "bounds": [
+          742,
+          958,
+          74,
+          280
+        ],
+        "width": 72,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "frame": {
+          "x": 780,
+          "y": 1560,
+          "w": 72,
+          "h": 260
+        },
+        "pixelSha256": "0dac2135ae10de78cd493606fcf114529afa8ab14cfd03f82158bd1a0a25a127"
+      },
+      {
+        "name": "fence-copper-gate",
+        "source": "fences",
+        "bounds": [
+          1002,
+          959,
+          195,
+          278
+        ],
+        "width": 184,
+        "height": 260,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "frame": {
+          "x": 1040,
+          "y": 1560,
+          "w": 184,
+          "h": 260
+        },
+        "pixelSha256": "c7591e16912f2199f7b8ea771ac8d51785ad3b009cf383d1ad7707ed049003c8"
+      }
+    ],
+    "scene": {
+      "props": 160,
+      "benches": 5,
+      "seats": [
+        {
+          "x": 420,
+          "y": 400,
+          "texture": "d35-bench-rustic",
+          "positions": [
+            [
+              400,
+              385
+            ],
+            [
+              440,
+              385
+            ]
+          ]
+        },
+        {
+          "x": 1465,
+          "y": 380,
+          "texture": "d35-bench-village",
+          "positions": [
+            [
+              1445,
+              365
+            ],
+            [
+              1485,
+              365
+            ]
+          ]
+        },
+        {
+          "x": 375,
+          "y": 975,
+          "texture": "d35-bench-garden",
+          "positions": [
+            [
+              355,
+              960
+            ],
+            [
+              395,
+              960
+            ]
+          ]
+        },
+        {
+          "x": 1660,
+          "y": 1025,
+          "texture": "d35-bench-copper",
+          "positions": [
+            [
+              1640,
+              1010
+            ],
+            [
+              1680,
+              1010
+            ]
+          ]
+        },
+        {
+          "x": 1260,
+          "y": 745,
+          "texture": "d35-bench-copper",
+          "positions": [
+            [
+              1240,
+              730
+            ],
+            [
+              1280,
+              730
+            ]
+          ]
+        }
+      ],
+      "trees": 79,
+      "innerQuarterTrees": 23,
+      "innerCentreTrees": 10,
+      "byQuarter": [
+        {
+          "id": "Q1",
+          "name": "Cour des Livres",
+          "trees": 5,
+          "props": 17
+        },
+        {
+          "id": "Q2",
+          "name": "Cour des Veillées",
+          "trees": 5,
+          "props": 18
+        },
+        {
+          "id": "Q3",
+          "name": "Cour du Foyer",
+          "trees": 6,
+          "props": 13
+        },
+        {
+          "id": "Q4",
+          "name": "Cour des Artisans",
+          "trees": 7,
+          "props": 23
+        }
+      ],
+      "fencePosts": 74,
+      "fencePanels": 69,
+      "gates": [
+        {
+          "id": "J1",
+          "center": [
+            310,
+            660
+          ],
+          "width": 32,
+          "style": "rustic"
+        },
+        {
+          "id": "J2",
+          "center": [
+            1755,
+            427.5
+          ],
+          "width": 32,
+          "style": "copper"
+        },
+        {
+          "id": "J3",
+          "center": [
+            442.5,
+            1135
+          ],
+          "width": 32,
+          "style": "picket"
+        },
+        {
+          "id": "J4",
+          "center": [
+            1845,
+            957.5
+          ],
+          "width": 32,
+          "style": "logs"
+        },
+        {
+          "id": "JL",
+          "center": [
+            605,
+            725
+          ],
+          "width": 32,
+          "style": "copper"
+        }
+      ]
+    },
+    "protectedFiles": 265
+  },
+  "performance": {
+    "desktop": {
+      "p95": 4.300000000000182,
+      "mean": 4.166666666666667,
+      "frames": 180,
+      "cpu": 1,
+      "ground": {
+        "width": 1920,
+        "height": 1408,
+        "covered": 282616,
+        "irregularEdge": 60294,
+        "snowIslands": 54555,
+        "materials": 4,
+        "routes": 38,
+        "courts": 5,
+        "baked": true,
+        "milliseconds": 141
+      },
+      "reduced": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.542899353261543,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 4,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 133.734375,
+        "meanFrameMs": 4.167222222222219,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local : mobile émulé avec CPU x4 pour cette mesure, pas un téléphone physique ; échantillons RAF, pas une garantie de FPS."
+    },
+    "mobile": {
+      "p95": 4.300000000000182,
+      "mean": 4.167222222222224,
+      "frames": 180,
+      "cpu": 4,
+      "ground": {
+        "width": 1920,
+        "height": 1408,
+        "covered": 282616,
+        "irregularEdge": 60294,
+        "snowIslands": 54555,
+        "materials": 4,
+        "routes": 38,
+        "courts": 5,
+        "baked": true,
+        "milliseconds": 139
+      },
+      "reduced": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.5378869545162684,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 3,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.20000004768371582,
+        "engineFps": 127.13671875,
+        "meanFrameMs": 4.1677777777777765,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local : mobile émulé avec CPU x4 pour cette mesure, pas un téléphone physique ; échantillons RAF, pas une garantie de FPS."
+    }
+  },
+  "dependencyAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 10,
+    "high": 0,
+    "critical": 0,
+    "total": 10
+  },
+  "githubActions": "Statuts inaccessibles via le connecteur GitHub (404) ; branche publiée par Git. Aucun résultat CI déclaré réussi."
+}
