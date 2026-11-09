@@ -242,8 +242,7 @@ export function drawScenery34(scene: Phaser.Scene): Rect[] {
     ["fir_young", 690, 740, 35, "Centre"],
     ["fir_windswept", 1180, 1075, 48, "Centre"],
   ] as [string, number, number, number, string][])
-    if (key === "wood-medium") fit(key, x, y, w, q, 24);
-    else place(key, x, y, w, q, true);
+    place(key, x, y, w, q, true);
   // Deliberate inner-village pockets: not a uniform planting grid or a peripheral forest ring.
   const pockets: [string, number, number, number, string][] = [
     ["vegetation_pine_large", 472, 385, 38, "Q1"],
@@ -547,12 +546,11 @@ export function drawScenery34(scene: Phaser.Scene): Rect[] {
     ["prop-table", 1140, 635, 34, "Centre"],
     ["prop-basket", 292, 614, 24, "J1"],
     ["prop-sled", 275, 647, 34, "J1"],
-    ["wood-medium", 1367, 984, 34, "Q4"],
+    ["wood-medium", 1386, 984, 34, "Q4"],
     ["gift-display", 1320, 968, 32, "Q4"],
     ["gift-tall", 1385, 955, 18, "Q4"],
   ] as [string, number, number, number, string][])
-    if (key === "wood-medium") fit(key, x, y, w, q, 24);
-    else place(key, x, y, w, q, true);
+    place(key, x, y, w, q, true);
   for (const [key, x, y, w] of [
     ["fir_young", 1280, 710, 34],
     ["fir_windswept", 1315, 718, 28],

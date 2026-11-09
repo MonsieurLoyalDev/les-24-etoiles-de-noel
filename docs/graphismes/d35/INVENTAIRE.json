@@ -11,7 +11,7 @@
   },
   "createdSpriteFrames": 47,
   "createdGroundMaterials": 4,
-  "liveNamedFrames": 42,
+  "liveNamedFrames": 43,
   "publicAtlases": [
     "public/assets/environment-d35/sprites.png",
     "public/assets/environment-d35/path-materials.png"
@@ -1220,7 +1220,7 @@
     }
   ],
   "scene": {
-    "props": 159,
+    "props": 160,
     "benches": 5,
     "seats": [
       {
@@ -1325,7 +1325,7 @@
         "id": "Q4",
         "name": "Cour des Artisans",
         "trees": 7,
-        "props": 22
+        "props": 23
       }
     ],
     "fencePosts": 74,

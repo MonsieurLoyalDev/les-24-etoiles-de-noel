@@ -1186,7 +1186,7 @@
     "routes": 38,
     "courts": 5,
     "baked": true,
-    "milliseconds": 193
+    "milliseconds": 175
   },
   "fences": {
     "posts": [
@@ -4911,6 +4911,21 @@
         "height": 24.453846153846154
       },
       {
+        "key": "wood-medium",
+        "texture": "d35-wood-medium",
+        "quarter": "Q4",
+        "box": {
+          "x": 1369,
+          "y": 953.6615384615385,
+          "w": 34,
+          "h": 30.338461538461537
+        },
+        "x": 1386,
+        "y": 984,
+        "width": 34,
+        "height": 30.338461538461537
+      },
+      {
         "key": "gift-display",
         "texture": "d35-gift-display",
         "quarter": "Q4",
@@ -4986,7 +5001,7 @@
         "height": 23.908045977011493
       }
     ],
-    "rejected": 834,
+    "rejected": 833,
     "collisions": [
       {
         "x": 698.2,
@@ -5925,6 +5940,12 @@
         "h": 7
       },
       {
+        "x": 1372.4,
+        "y": 978,
+        "w": 27.200000000000003,
+        "h": 7
+      },
+      {
         "x": 1311.36,
         "y": 962,
         "w": 17.28,
@@ -5970,7 +5991,7 @@
       },
       {
         "id": "Q4",
-        "props": 22
+        "props": 23
       }
     ]
   }

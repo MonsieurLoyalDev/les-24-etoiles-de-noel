@@ -1,6 +1,6 @@
 {
-  "p95": 4.300000000000182,
-  "mean": 4.166666666666667,
+  "p95": 4.299999999999272,
+  "mean": 4.167222222222219,
   "frames": 180,
   "cpu": 4,
   "ground": {
@@ -13,12 +13,12 @@
     "routes": 38,
     "courts": 5,
     "baked": true,
-    "milliseconds": 160
+    "milliseconds": 158
   },
   "reduced": {
     "quality": "none",
     "reduced": true,
-    "flurry": 0.5837061913962491,
+    "flurry": 0.5686445701559433,
     "visibleSnow": 0,
     "visibleSmoke": 0,
     "visibleWind": 0,
@@ -27,7 +27,7 @@
     "swaying": 0,
     "particleLimit": 0,
     "cpuP95": 0.20000004768371582,
-    "engineFps": 130.875,
+    "engineFps": 131.109375,
     "meanFrameMs": 4.167222222222224,
     "palette": {
       "color": 7902119,

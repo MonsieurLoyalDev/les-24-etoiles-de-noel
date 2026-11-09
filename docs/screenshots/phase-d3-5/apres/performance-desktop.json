@@ -13,12 +13,12 @@
     "routes": 38,
     "courts": 5,
     "baked": true,
-    "milliseconds": 177
+    "milliseconds": 154
   },
   "reduced": {
     "quality": "none",
     "reduced": true,
-    "flurry": 0.5890177749173516,
+    "flurry": 0.5612775077749812,
     "visibleSnow": 0,
     "visibleSmoke": 0,
     "visibleWind": 0,
@@ -27,8 +27,8 @@
     "swaying": 0,
     "particleLimit": 0,
     "cpuP95": 0.10000014305114746,
-    "engineFps": 126.17578125,
-    "meanFrameMs": 4.167222222222219,
+    "engineFps": 126.4921875,
+    "meanFrameMs": 4.167222222222224,
     "palette": {
       "color": 7902119,
       "alpha": 0.018,
