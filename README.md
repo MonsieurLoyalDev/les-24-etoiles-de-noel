@@ -1,3 +1,16 @@
+# Les 24 Étoiles de Noël — D.3.5, la magie dans les détails
+
+Version **0.7.5** : chemins et cours intégrés à la neige, quatre styles de clôtures modulaires, cinq bancs deux places, cadeaux et bois détaillés, végétation au cœur des quartiers. Les bâtiments, les intérieurs, les personnages et la progression sont préservés.
+
+- [Galerie de validation artistique](docs/graphismes/d35/validation.html)
+- [Rapport D.3.5](docs/graphismes/d35/RAPPORT.md)
+- [Inventaire et variantes](docs/graphismes/d35/INVENTAIRE.json)
+- [Prompts et export des ressources](docs/graphismes/d35/PROMPTS.md)
+
+Branche feature/phase-d3-5-details. Aucune fusion ni aucun déploiement.
+
+## Historique D.3.4
+
 # Les 24 Étoiles de Noël — D.3.4, le village des quatre cours
 
 Version **0.7.4** : implantation V2 validée, seize habitations regroupées autour de quatre cours, quatre bâtiments visitables autour du sapin et deux étals décoratifs. Les intérieurs D.3.3, les17 interactions, les24 journées et les sauvegardes restent compatibles.

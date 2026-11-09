@@ -1,0 +1,1382 @@
+{
+  "phase": "D.3.5",
+  "version": "0.7.5",
+  "categories": {
+    "bancs": 4,
+    "cadeaux": 9,
+    "bois": 6,
+    "accessoires": 12,
+    "modulesClotures": 16,
+    "matieresSol": 4
+  },
+  "createdSpriteFrames": 47,
+  "createdGroundMaterials": 4,
+  "liveNamedFrames": 43,
+  "publicAtlases": [
+    "public/assets/environment-d35/sprites.png",
+    "public/assets/environment-d35/path-materials.png"
+  ],
+  "nativeOriginals": {
+    "benches": {
+      "bytes": 1570271,
+      "sha256": "4bfdebf2627a5711d2636de20136bce23c4f090eb79571836cdb97ee339d78a2"
+    },
+    "gifts": {
+      "bytes": 2274489,
+      "sha256": "3fbae26438b9521b5f7deb30092c6b4daf999ff503301cc21a9e633a81022025"
+    },
+    "firewood": {
+      "bytes": 2677437,
+      "sha256": "8aff5792f294cf1c6aadf5b5a168d5947b52a6766e1ed784d6e05dd1078b76ee"
+    },
+    "accessories": {
+      "bytes": 2588420,
+      "sha256": "c4cd7b33f413622319a19e346fb2ff4985bdd15ec0a49930a89aee18a9cd5dcd"
+    },
+    "fences": {
+      "bytes": 1635430,
+      "sha256": "2fc638d60f354a79eb42db91c8bf1fa3e4df131c4a97658de6ce5f3ca65f7949"
+    },
+    "paths": {
+      "bytes": 3604053,
+      "sha256": "e5bd26f5b65906b8618b9593d9f2282e7e275edd6f8516f59ffe2066327a2a9d"
+    }
+  },
+  "frames": [
+    {
+      "name": "bench-rustic",
+      "source": "benches",
+      "bounds": [
+        75,
+        105,
+        739,
+        285
+      ],
+      "width": 260,
+      "height": 103,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 260,
+        "h": 103
+      },
+      "pixelSha256": "793238276c466700c27b36bd654d3ff02bfb64932276ba60137eb5842294e222"
+    },
+    {
+      "name": "bench-village",
+      "source": "benches",
+      "bounds": [
+        959,
+        117,
+        739,
+        273
+      ],
+      "width": 260,
+      "height": 99,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 260,
+        "y": 0,
+        "w": 260,
+        "h": 99
+      },
+      "pixelSha256": "6666d646c860712ff0394245cedfad17d4f50c0a1eab3f4a2383c9fb44c64415"
+    },
+    {
+      "name": "bench-copper",
+      "source": "benches",
+      "bounds": [
+        74,
+        557,
+        740,
+        269
+      ],
+      "width": 260,
+      "height": 98,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 520,
+        "y": 0,
+        "w": 260,
+        "h": 98
+      },
+      "pixelSha256": "005a9dfc3a7b4689f229c03f615e5ef8db5eabb5fe836104e0374c6d0c7873a9"
+    },
+    {
+      "name": "bench-garden",
+      "source": "benches",
+      "bounds": [
+        961,
+        606,
+        736,
+        220
+      ],
+      "width": 260,
+      "height": 81,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 0,
+        "w": 260,
+        "h": 81
+      },
+      "pixelSha256": "76da09659bdd2e1234d928cdcbf4d3efe921eaf70dad00573602407087e09894"
+    },
+    {
+      "name": "gift-red",
+      "source": "gifts",
+      "bounds": [
+        180,
+        90,
+        199,
+        203
+      ],
+      "width": 203,
+      "height": 207,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 0,
+        "w": 203,
+        "h": 207
+      },
+      "pixelSha256": "958d04ce1394f067e9ef5f631313ce28a0828a31894edc0d4ee68f28f8b957b4"
+    },
+    {
+      "name": "gift-tall",
+      "source": "gifts",
+      "bounds": [
+        670,
+        17,
+        191,
+        296
+      ],
+      "width": 170,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 0,
+        "w": 170,
+        "h": 260
+      },
+      "pixelSha256": "23109bd7b452e0ee74703d933416145ed9505d7000dd41d992acfb658d042e43"
+    },
+    {
+      "name": "gift-cream",
+      "source": "gifts",
+      "bounds": [
+        1106,
+        110,
+        343,
+        187
+      ],
+      "width": 260,
+      "height": 144,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 0,
+        "w": 260,
+        "h": 144
+      },
+      "pixelSha256": "827b458118027114fd1d2f3544aa16043ac93fd0a4d82f7558f47b78e72bb6ba"
+    },
+    {
+      "name": "gift-pair",
+      "source": "gifts",
+      "bounds": [
+        97,
+        388,
+        343,
+        268
+      ],
+      "width": 260,
+      "height": 205,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 260,
+        "w": 260,
+        "h": 205
+      },
+      "pixelSha256": "fec09925c8f668f35f0f6a3909b98d0402288eec5e8522f74cb14398eb09ecca"
+    },
+    {
+      "name": "gift-trio",
+      "source": "gifts",
+      "bounds": [
+        563,
+        360,
+        410,
+        299
+      ],
+      "width": 260,
+      "height": 191,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 260,
+        "y": 260,
+        "w": 260,
+        "h": 191
+      },
+      "pixelSha256": "bcf1c6367cd33cf84b814ada94676f8b55ea02b501d836d2b6e94202b9eab20c"
+    },
+    {
+      "name": "gift-kraft",
+      "source": "gifts",
+      "bounds": [
+        1183,
+        354,
+        192,
+        303
+      ],
+      "width": 167,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 520,
+        "y": 260,
+        "w": 167,
+        "h": 260
+      },
+      "pixelSha256": "a60963713c4149419cd29c1fd2b980ec1180c3e35740267dedac2a6de58f381f"
+    },
+    {
+      "name": "gift-stack",
+      "source": "gifts",
+      "bounds": [
+        98,
+        697,
+        330,
+        317
+      ],
+      "width": 260,
+      "height": 250,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 260,
+        "w": 260,
+        "h": 250
+      },
+      "pixelSha256": "55d53f87177b0cce40a80be9a136e1903cd9ff243a6cb103639839511badbb4e"
+    },
+    {
+      "name": "gift-basket",
+      "source": "gifts",
+      "bounds": [
+        556,
+        691,
+        402,
+        319
+      ],
+      "width": 260,
+      "height": 208,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 260,
+        "w": 260,
+        "h": 208
+      },
+      "pixelSha256": "30fed07f7c24d44709ecc60145323ef7355edda539f26267141e7c879f6f3df2"
+    },
+    {
+      "name": "gift-display",
+      "source": "gifts",
+      "bounds": [
+        1063,
+        708,
+        427,
+        296
+      ],
+      "width": 260,
+      "height": 182,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 260,
+        "w": 260,
+        "h": 182
+      },
+      "pixelSha256": "2de37a2132d55f3a91bf5cd30ccd922c72d254285dc85e23ea4c087cdd170e83"
+    },
+    {
+      "name": "wood-small",
+      "source": "firewood",
+      "bounds": [
+        25,
+        147,
+        487,
+        336
+      ],
+      "width": 260,
+      "height": 181,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 260,
+        "w": 260,
+        "h": 181
+      },
+      "pixelSha256": "0c0ea760c9333168c2ab4325ac14b27f52722231700458977f6eb1e0b15795c0"
+    },
+    {
+      "name": "wood-medium",
+      "source": "firewood",
+      "bounds": [
+        512,
+        83,
+        512,
+        391
+      ],
+      "width": 260,
+      "height": 200,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 520,
+        "w": 260,
+        "h": 200
+      },
+      "pixelSha256": "1f50e899f71be54c7e7fcb818279cf3f45f6398180cb431ff5d2726442108850"
+    },
+    {
+      "name": "wood-rack",
+      "source": "firewood",
+      "bounds": [
+        1024,
+        80,
+        480,
+        403
+      ],
+      "width": 260,
+      "height": 219,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 260,
+        "y": 520,
+        "w": 260,
+        "h": 219
+      },
+      "pixelSha256": "d441a5f3bf11e2f43a8db0c2687cdc1fa82a00b07ea78c8f862b264e76664a2f"
+    },
+    {
+      "name": "wood-irregular",
+      "source": "firewood",
+      "bounds": [
+        25,
+        570,
+        482,
+        402
+      ],
+      "width": 260,
+      "height": 218,
+      "corners": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "frame": {
+        "x": 520,
+        "y": 520,
+        "w": 260,
+        "h": 218
+      },
+      "pixelSha256": "55d46f84fa667c15593727faaa62c28d19180db059a05a795229ba87dab93cbe"
+    },
+    {
+      "name": "wood-bundle",
+      "source": "firewood",
+      "bounds": [
+        610,
+        546,
+        279,
+        425
+      ],
+      "width": 173,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 520,
+        "w": 173,
+        "h": 260
+      },
+      "pixelSha256": "b4f6972757fa1305accb10c0a068fb6424375118ddc31e1a5d8d9b6cc9710db9"
+    },
+    {
+      "name": "wood-kindling",
+      "source": "firewood",
+      "bounds": [
+        1038,
+        551,
+        432,
+        420
+      ],
+      "width": 260,
+      "height": 253,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 520,
+        "w": 260,
+        "h": 253
+      },
+      "pixelSha256": "59c77fea1db0cc7be6d2c0a22c800cac8e06c5e6e094892bfb3729df90ad6411"
+    },
+    {
+      "name": "prop-lantern",
+      "source": "accessories",
+      "bounds": [
+        51,
+        16,
+        219,
+        330
+      ],
+      "width": 174,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 520,
+        "w": 174,
+        "h": 260
+      },
+      "pixelSha256": "4c843675150664831ccc9842fb87169d8a8a7eb1835b92c024c1c197c7ac75e9"
+    },
+    {
+      "name": "prop-mailbox",
+      "source": "accessories",
+      "bounds": [
+        412,
+        18,
+        228,
+        336
+      ],
+      "width": 178,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 520,
+        "w": 178,
+        "h": 260
+      },
+      "pixelSha256": "5883d4946bd009cb960584ce4868755d78abe7faf7a96659e6b45f11cb025486"
+    },
+    {
+      "name": "prop-planter",
+      "source": "accessories",
+      "bounds": [
+        731,
+        91,
+        347,
+        237
+      ],
+      "width": 260,
+      "height": 179,
+      "corners": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 780,
+        "w": 260,
+        "h": 179
+      },
+      "pixelSha256": "0d8f0006a59e78a570983651e09a8b4df6d2a425c2eeaa139f09c2b98fae6bdb"
+    },
+    {
+      "name": "prop-table",
+      "source": "accessories",
+      "bounds": [
+        33,
+        393,
+        293,
+        313
+      ],
+      "width": 244,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 260,
+        "y": 780,
+        "w": 244,
+        "h": 260
+      },
+      "pixelSha256": "b90545508dc99198cc82201a6d6f6ada5cd05758810788ba7667b77988ca1249"
+    },
+    {
+      "name": "prop-sled",
+      "source": "accessories",
+      "bounds": [
+        371,
+        444,
+        345,
+        246
+      ],
+      "width": 260,
+      "height": 187,
+      "corners": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 520,
+        "y": 780,
+        "w": 260,
+        "h": 187
+      },
+      "pixelSha256": "b7b57dcd10eb3907cc0e2dbf4eab0868ec330851afbd91b1555297d1fac96f0b"
+    },
+    {
+      "name": "prop-crates",
+      "source": "accessories",
+      "bounds": [
+        752,
+        399,
+        306,
+        308
+      ],
+      "width": 259,
+      "height": 260,
+      "corners": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 780,
+        "w": 259,
+        "h": 260
+      },
+      "pixelSha256": "20484fca91fdf4d704d01512f0de2c064966203e1af9b0b9ac82a3aec8940ce7"
+    },
+    {
+      "name": "prop-basket",
+      "source": "accessories",
+      "bounds": [
+        26,
+        749,
+        310,
+        306
+      ],
+      "width": 260,
+      "height": 257,
+      "corners": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 780,
+        "w": 260,
+        "h": 257
+      },
+      "pixelSha256": "959f00f10bf36ae594f4d47a27e1425d817151d1d3559d972280fe8dc61cebca"
+    },
+    {
+      "name": "prop-tools",
+      "source": "accessories",
+      "bounds": [
+        406,
+        746,
+        318,
+        311
+      ],
+      "width": 260,
+      "height": 255,
+      "corners": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 780,
+        "w": 260,
+        "h": 255
+      },
+      "pixelSha256": "4dc3f3b1b29ee8ae29ccd7e202accbdf51a839e51954a2bde68779fd7b7c4caa"
+    },
+    {
+      "name": "prop-watering",
+      "source": "accessories",
+      "bounds": [
+        724,
+        770,
+        343,
+        287
+      ],
+      "width": 260,
+      "height": 219,
+      "corners": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 780,
+        "w": 260,
+        "h": 219
+      },
+      "pixelSha256": "c0342bde55470b657a180e63530a84425bb016c037c5d9382765b96595b73787"
+    },
+    {
+      "name": "prop-bare-tree",
+      "source": "accessories",
+      "bounds": [
+        16,
+        1098,
+        331,
+        325
+      ],
+      "width": 260,
+      "height": 256,
+      "corners": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 0,
+        "y": 1040,
+        "w": 260,
+        "h": 256
+      },
+      "pixelSha256": "d6a162d0e6c7966c027c47f5ffdafe51306bc01d488257111e47dceb6020e6e9"
+    },
+    {
+      "name": "prop-stump",
+      "source": "accessories",
+      "bounds": [
+        383,
+        1151,
+        291,
+        258
+      ],
+      "width": 260,
+      "height": 231,
+      "corners": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 260,
+        "y": 1040,
+        "w": 260,
+        "h": 231
+      },
+      "pixelSha256": "b445924adbf2bcd14a779876797fac9b8b93cc2ef179a631d0004d362543bd42"
+    },
+    {
+      "name": "prop-rocks",
+      "source": "accessories",
+      "bounds": [
+        733,
+        1176,
+        335,
+        218
+      ],
+      "width": 260,
+      "height": 171,
+      "corners": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 520,
+        "y": 1040,
+        "w": 260,
+        "h": 171
+      },
+      "pixelSha256": "b1a29a4633d617a0d123368cdf1ba9cdf06c265d5dc8c94f2d6a4fcf8bc984db"
+    },
+    {
+      "name": "fence-rustic-panel",
+      "source": "fences",
+      "bounds": [
+        16,
+        99,
+        386,
+        178
+      ],
+      "width": 260,
+      "height": 123,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 1040,
+        "w": 260,
+        "h": 123
+      },
+      "pixelSha256": "9b20bbd96869d7d2d767c682588655da45cca8d8f5d75a3930160a3cb673733a"
+    },
+    {
+      "name": "fence-rustic-post",
+      "source": "fences",
+      "bounds": [
+        484,
+        19,
+        118,
+        274
+      ],
+      "width": 115,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 1040,
+        "w": 115,
+        "h": 260
+      },
+      "pixelSha256": "6e53586a0e518e8bbcba5b799a6516e16b82774282b02a82337bacaf4f5763e0"
+    },
+    {
+      "name": "fence-rustic-side",
+      "source": "fences",
+      "bounds": [
+        756,
+        17,
+        57,
+        275
+      ],
+      "width": 58,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 1040,
+        "w": 58,
+        "h": 260
+      },
+      "pixelSha256": "1b0a430bd320370b5f3e8fa16d1e26d02aa763b01868d27a0fb99ff39c83a370"
+    },
+    {
+      "name": "fence-rustic-gate",
+      "source": "fences",
+      "bounds": [
+        1002,
+        27,
+        184,
+        264
+      ],
+      "width": 183,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 1040,
+        "w": 183,
+        "h": 260
+      },
+      "pixelSha256": "575750600098f01172e2a207e249c7ed84eab16d28923afa0fe6563fda87940e"
+    },
+    {
+      "name": "fence-picket-panel",
+      "source": "fences",
+      "bounds": [
+        13,
+        386,
+        390,
+        198
+      ],
+      "width": 260,
+      "height": 134,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 1300,
+        "w": 260,
+        "h": 134
+      },
+      "pixelSha256": "1c21a11ef052721852a7fb6d93d4348dd37f5e184bad47c16dc6740ee8dc85a8"
+    },
+    {
+      "name": "fence-picket-post",
+      "source": "fences",
+      "bounds": [
+        481,
+        326,
+        126,
+        287
+      ],
+      "width": 117,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "frame": {
+        "x": 260,
+        "y": 1300,
+        "w": 117,
+        "h": 260
+      },
+      "pixelSha256": "57e4c9c762a253f3c6a14d5fabdd70ea92dfc9ef734d05f6cd14dee5517b5321"
+    },
+    {
+      "name": "fence-picket-side",
+      "source": "fences",
+      "bounds": [
+        742,
+        326,
+        69,
+        281
+      ],
+      "width": 67,
+      "height": 260,
+      "corners": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 520,
+        "y": 1300,
+        "w": 67,
+        "h": 260
+      },
+      "pixelSha256": "1ff7742beb20c6024a65257fd58bb73a38a8f8b039e0d8133419c30002f015b9"
+    },
+    {
+      "name": "fence-picket-gate",
+      "source": "fences",
+      "bounds": [
+        998,
+        332,
+        189,
+        278
+      ],
+      "width": 179,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 780,
+        "y": 1300,
+        "w": 179,
+        "h": 260
+      },
+      "pixelSha256": "cf1fe38950a3568e05c8730e6ffa3e2c3893e729880d3f131a68ee05b988be28"
+    },
+    {
+      "name": "fence-logs-panel",
+      "source": "fences",
+      "bounds": [
+        11,
+        694,
+        392,
+        210
+      ],
+      "width": 260,
+      "height": 142,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 1300,
+        "w": 260,
+        "h": 142
+      },
+      "pixelSha256": "27f516557cb43c043f36bc144c32d9212b1381bbb39132710aa6e9f008315435"
+    },
+    {
+      "name": "fence-logs-post",
+      "source": "fences",
+      "bounds": [
+        468,
+        642,
+        149,
+        279
+      ],
+      "width": 141,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1300,
+        "y": 1300,
+        "w": 141,
+        "h": 260
+      },
+      "pixelSha256": "69129c317d1a0a11133f7638f1146c0a160241cea2e2e096d1d7ebc324f43cfa"
+    },
+    {
+      "name": "fence-logs-side",
+      "source": "fences",
+      "bounds": [
+        741,
+        647,
+        81,
+        274
+      ],
+      "width": 80,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1560,
+        "y": 1300,
+        "w": 80,
+        "h": 260
+      },
+      "pixelSha256": "28ef341ecd088d95a6aff85b252be69f425848ecb638d00a6084888c2a6009f9"
+    },
+    {
+      "name": "fence-logs-gate",
+      "source": "fences",
+      "bounds": [
+        998,
+        647,
+        209,
+        270
+      ],
+      "width": 203,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 0,
+        "y": 1560,
+        "w": 203,
+        "h": 260
+      },
+      "pixelSha256": "f6afbc2b7eaef9f8d8c66ff2896598cb30861026c8d70b51b93386d9d3fee716"
+    },
+    {
+      "name": "fence-copper-panel",
+      "source": "fences",
+      "bounds": [
+        15,
+        1026,
+        387,
+        193
+      ],
+      "width": 260,
+      "height": 132,
+      "corners": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 260,
+        "y": 1560,
+        "w": 260,
+        "h": 132
+      },
+      "pixelSha256": "51eab81f7bf5cdfccabd0411ead6c0d5b17b440d9ca73d0ecd7bca2f6286f69e"
+    },
+    {
+      "name": "fence-copper-post",
+      "source": "fences",
+      "bounds": [
+        477,
+        953,
+        132,
+        286
+      ],
+      "width": 123,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "frame": {
+        "x": 520,
+        "y": 1560,
+        "w": 123,
+        "h": 260
+      },
+      "pixelSha256": "8b6d247525b0aa9d149efdd9f84a519960749c6cee761edbf8a8ad5325c7c059"
+    },
+    {
+      "name": "fence-copper-side",
+      "source": "fences",
+      "bounds": [
+        742,
+        958,
+        74,
+        280
+      ],
+      "width": 72,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "frame": {
+        "x": 780,
+        "y": 1560,
+        "w": 72,
+        "h": 260
+      },
+      "pixelSha256": "0dac2135ae10de78cd493606fcf114529afa8ab14cfd03f82158bd1a0a25a127"
+    },
+    {
+      "name": "fence-copper-gate",
+      "source": "fences",
+      "bounds": [
+        1002,
+        959,
+        195,
+        278
+      ],
+      "width": 184,
+      "height": 260,
+      "corners": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "frame": {
+        "x": 1040,
+        "y": 1560,
+        "w": 184,
+        "h": 260
+      },
+      "pixelSha256": "c7591e16912f2199f7b8ea771ac8d51785ad3b009cf383d1ad7707ed049003c8"
+    }
+  ],
+  "scene": {
+    "props": 160,
+    "benches": 5,
+    "seats": [
+      {
+        "x": 420,
+        "y": 400,
+        "texture": "d35-bench-rustic",
+        "positions": [
+          [
+            400,
+            385
+          ],
+          [
+            440,
+            385
+          ]
+        ]
+      },
+      {
+        "x": 1465,
+        "y": 380,
+        "texture": "d35-bench-village",
+        "positions": [
+          [
+            1445,
+            365
+          ],
+          [
+            1485,
+            365
+          ]
+        ]
+      },
+      {
+        "x": 375,
+        "y": 975,
+        "texture": "d35-bench-garden",
+        "positions": [
+          [
+            355,
+            960
+          ],
+          [
+            395,
+            960
+          ]
+        ]
+      },
+      {
+        "x": 1660,
+        "y": 1025,
+        "texture": "d35-bench-copper",
+        "positions": [
+          [
+            1640,
+            1010
+          ],
+          [
+            1680,
+            1010
+          ]
+        ]
+      },
+      {
+        "x": 1260,
+        "y": 745,
+        "texture": "d35-bench-copper",
+        "positions": [
+          [
+            1240,
+            730
+          ],
+          [
+            1280,
+            730
+          ]
+        ]
+      }
+    ],
+    "trees": 79,
+    "innerQuarterTrees": 23,
+    "innerCentreTrees": 10,
+    "byQuarter": [
+      {
+        "id": "Q1",
+        "name": "Cour des Livres",
+        "trees": 5,
+        "props": 17
+      },
+      {
+        "id": "Q2",
+        "name": "Cour des Veillées",
+        "trees": 5,
+        "props": 18
+      },
+      {
+        "id": "Q3",
+        "name": "Cour du Foyer",
+        "trees": 6,
+        "props": 13
+      },
+      {
+        "id": "Q4",
+        "name": "Cour des Artisans",
+        "trees": 7,
+        "props": 23
+      }
+    ],
+    "fencePosts": 74,
+    "fencePanels": 69,
+    "gates": [
+      {
+        "id": "J1",
+        "center": [
+          310,
+          660
+        ],
+        "width": 32,
+        "style": "rustic"
+      },
+      {
+        "id": "J2",
+        "center": [
+          1755,
+          427.5
+        ],
+        "width": 32,
+        "style": "copper"
+      },
+      {
+        "id": "J3",
+        "center": [
+          442.5,
+          1135
+        ],
+        "width": 32,
+        "style": "picket"
+      },
+      {
+        "id": "J4",
+        "center": [
+          1845,
+          957.5
+        ],
+        "width": 32,
+        "style": "logs"
+      },
+      {
+        "id": "JL",
+        "center": [
+          605,
+          725
+        ],
+        "width": 32,
+        "style": "copper"
+      }
+    ]
+  },
+  "protectedFiles": 265
+}

@@ -1,0 +1,19 @@
+{
+  "before": "D.3.4 SOURCE-LIGHT vérifié, servi localement sans modification",
+  "after": "D.3.5 / 0.7.5",
+  "sameSeed": true,
+  "clock": 45000,
+  "viewport": [
+    1280,
+    900
+  ],
+  "errors": [],
+  "contactSheets": [
+    "bancs",
+    "cadeaux",
+    "bois",
+    "accessoires",
+    "clotures",
+    "sols"
+  ]
+}
