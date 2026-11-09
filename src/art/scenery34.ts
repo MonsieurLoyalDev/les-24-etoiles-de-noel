@@ -13,6 +13,7 @@ import {
 } from "./village34";
 import { vegetationKey } from "./vegetation";
 import { cleanKey } from "./prepare";
+import { composeWitness351 } from "./composition351";
 export const extraSceneryKeys = [
   "stand_cadeaux",
   "caisse_fleurs",
@@ -558,6 +559,7 @@ export function drawScenery34(scene: Phaser.Scene): Rect[] {
     ["prop-lantern", 1352, 750, 16],
   ] as [string, number, number, number][])
     place(key, x, y, w, "Centre", true);
+  composeWitness351(scene, placed, solids, seats);
   drawFences35(scene);
   scene.game.canvas.dataset.seats35 = JSON.stringify(seats);
   scene.game.canvas.dataset.scenery34 = JSON.stringify({

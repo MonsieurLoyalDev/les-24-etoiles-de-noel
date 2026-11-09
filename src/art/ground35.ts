@@ -8,6 +8,7 @@ import {
   distanceToSegment,
 } from "./village34";
 import type { Point } from "../domain";
+import { pathWeathering351 } from "./composition351";
 
 /** Broad correlated variations, not independently scattered speckles. Deterministic on reload. */
 export function edgeVariation(x: number, y: number) {
@@ -179,7 +180,11 @@ export function drawGround35(scene: Phaser.Scene) {
           clamp((dune - 0.75) * 0.8, 0, 0.9) * (distance > -9 ? 1 : 0.48);
         const edgeAlpha =
           edge > 1.5 ? 0 : edge > -0.7 ? 0.35 : edge > -2.3 ? 0.72 : 1;
-        const alpha = edgeAlpha * (material === 1 ? 0.84 : 0.97) * (1 - snow);
+        const alpha =
+          edgeAlpha *
+          (material === 1 ? 0.84 : 0.97) *
+          (1 - snow) *
+          (1 - pathWeathering351(x, y, distance));
         for (let rgb = 0; rgb < 3; rgb++)
           dst[index + rgb] =
             src[si + rgb] * (1 - blend) + other[oi + rgb] * blend;
