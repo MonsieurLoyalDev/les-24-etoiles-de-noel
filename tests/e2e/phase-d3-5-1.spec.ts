@@ -54,10 +54,7 @@ test("D351 compositions complètes, autres quartiers inchangés et 38 chemins li
     expect(bank.w / bank.h).toBeCloseTo(bank.sourceRatio, 6);
   expect(a.witness.accepted).toHaveLength(witnessItems351.length);
   const before = JSON.parse(
-    readFileSync(
-      "docs/screenshots/phase-d3-5/apres/audit-desktop.json",
-      "utf8",
-    ),
+    readFileSync("tests/fixtures/scenery-d35.json", "utf8"),
   );
   type P = { x: number; y: number; group?: string };
   expect(

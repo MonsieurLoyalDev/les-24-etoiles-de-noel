@@ -1,0 +1,183 @@
+{
+  "units": {
+    "passed": 165,
+    "skipped": 2
+  },
+  "browser": {
+    "cases": [
+      {
+        "project": "desktop",
+        "title": "parcours complet, sauvegarde et journal",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "joystick tactile et absence de débordement",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "parcours complet, sauvegarde et journal",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "joystick tactile et absence de débordement",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "D351 compositions complètes, autres quartiers inchangés et 38 chemins libres",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "D351 promenade réelle, portillons du Foyer et quatre entrées/sorties",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "desktop",
+        "title": "D351 performances et réduction des mouvements PC/mobile",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "D351 compositions complètes, autres quartiers inchangés et 38 chemins libres",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "D351 promenade réelle, portillons du Foyer et quatre entrées/sorties",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed",
+        "annotations": []
+      },
+      {
+        "project": "mobile",
+        "title": "D351 performances et réduction des mouvements PC/mobile",
+        "status": "passed",
+        "annotations": []
+      }
+    ],
+    "errors": [],
+    "stats": {
+      "startTime": "2026-11-09T22:52:14.823Z",
+      "duration": 642872.854,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "performances": {
+    "desktop": {
+      "cpu": 1,
+      "p95": 4.300000000000182,
+      "mean": 4.189444444444444,
+      "samples": 180,
+      "effects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.3579899534240266,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 9,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 89.09375,
+        "meanFrameMs": 4.190555555555554,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, pas un téléphone physique."
+    },
+    "mobile": {
+      "cpu": 4,
+      "p95": 16.799999999999727,
+      "mean": 16.666666666666668,
+      "samples": 180,
+      "effects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.6816387600233341,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 5,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.2999999523162842,
+        "engineFps": 55.78125,
+        "meanFrameMs": 16.667222222222225,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, pas un téléphone physique."
+    }
+  }
+}
