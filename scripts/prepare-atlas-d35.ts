@@ -147,6 +147,15 @@ export function prepareEnvironment35(scene: Phaser.Scene) {
     spec.names.forEach((name, i) => {
       const col = i % spec.columns,
         row = Math.floor(i / spec.columns);
+      if (source === "firewood" && row === 0) {
+        const [left, right] = [
+          [0, 475],
+          [475, 960],
+          [960, 1536],
+        ][col];
+        extract(source, name, left, 0, right - left, 512);
+        return;
+      }
       const x = Math.round((col * im.width) / spec.columns),
         y = Math.round((row * im.height) / spec.rows);
       extract(

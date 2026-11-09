@@ -125,3 +125,51 @@ it("D35 bordures corrélées et matières différenciées sans bruit pixel aléa
     ]),
   ).toBe(5);
 });
+
+it("D35 bois : aucune bande voisine détachée dans les trois découpes hautes", () => {
+  const im = rgbaPng("public/assets/environment-d35/sprites.png");
+  for (const f of metadata.frames.filter((f) =>
+    ["wood-small", "wood-medium", "wood-rack"].includes(f.name),
+  )) {
+    const r = f.frame,
+      seen = new Uint8Array(r.w * r.h),
+      sizes = [];
+    for (let j = 0; j < seen.length; j++) {
+      if (
+        seen[j] ||
+        im.data[
+          ((r.y + Math.floor(j / r.w)) * im.width + r.x + (j % r.w)) * 4 + 3
+        ] <= 64
+      )
+        continue;
+      seen[j] = 1;
+      const q = [j];
+      for (let k = 0; k < q.length; k++) {
+        const x = q[k] % r.w,
+          y = Math.floor(q[k] / r.w);
+        for (let dy = -2; dy <= 2; dy++)
+          for (let dx = -2; dx <= 2; dx++) {
+            const xx = x + dx,
+              yy = y + dy,
+              n = yy * r.w + xx;
+            if (
+              xx < 0 ||
+              yy < 0 ||
+              xx >= r.w ||
+              yy >= r.h ||
+              seen[n] ||
+              im.data[((r.y + yy) * im.width + r.x + xx) * 4 + 3] <= 64
+            )
+              continue;
+            seen[n] = 1;
+            q.push(n);
+          }
+      }
+      sizes.push(q.length);
+    }
+    expect(
+      sizes.filter((n) => n >= 20),
+      f.name,
+    ).toHaveLength(1);
+  }
+});

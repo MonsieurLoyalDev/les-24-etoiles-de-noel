@@ -39,3 +39,5 @@ Production transparent pixel art game sprite atlas, 3 columns by 4 rows equal ce
 ## Reproduire l’export
 
 Restaurer ARTWORK dans le projet pour disposer des six PNG natifs et des outils. Lancer `npm ci`, puis `npm run dev -- --port 5180`. Dans un autre terminal : `npx tsx scripts/export-d35.ts` (Chrome installé). Cela produit les deux PNG d’exécution et `src/art/environment-d35.json`. Exécuter les tests et comparer les captures après tout changement artistique. Les deux atlas publics sont les seuls fichiers graphiques D.3.5 nécessaires au build et au jeu.
+
+Contrôle final : les trois stocks de bois de la première ligne utilisent des bornes de colonnes spécifiques (0–475–960–1536), car la planche native ne suit pas une grille égale. Les fragments voisins sont exclus et le bûcher est conservé intégralement. Un test de composantes alpha contrôle ces trois découpes.

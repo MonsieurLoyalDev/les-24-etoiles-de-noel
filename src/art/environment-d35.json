@@ -332,14 +332,14 @@
       "bounds": [
         25,
         147,
-        487,
+        408,
         336
       ],
       "width": 260,
-      "height": 181,
+      "height": 215,
       "corners": [
         0,
-        0,
+        1,
         0,
         0
       ],
@@ -347,23 +347,23 @@
         "x": 1560,
         "y": 260,
         "w": 260,
-        "h": 181
+        "h": 215
       },
-      "pixelSha256": "0c0ea760c9333168c2ab4325ac14b27f52722231700458977f6eb1e0b15795c0"
+      "pixelSha256": "c5b6c5a70c7bd0e4990b33f87ca0e0710b1fac172c9bf72e1a6ce3f8b9d0b54e"
     },
     {
       "name": "wood-medium",
       "source": "firewood",
       "bounds": [
-        512,
+        490,
         83,
-        512,
+        440,
         391
       ],
       "width": 260,
-      "height": 200,
+      "height": 232,
       "corners": [
-        0,
+        1,
         0,
         0,
         0
@@ -372,21 +372,21 @@
         "x": 0,
         "y": 520,
         "w": 260,
-        "h": 200
+        "h": 232
       },
-      "pixelSha256": "1f50e899f71be54c7e7fcb818279cf3f45f6398180cb431ff5d2726442108850"
+      "pixelSha256": "9090bfab5bd8d93b7b52abaee80075b1c876c011d621cf9b80843e1785562543"
     },
     {
       "name": "wood-rack",
       "source": "firewood",
       "bounds": [
-        1024,
+        967,
         80,
-        480,
+        537,
         403
       ],
       "width": 260,
-      "height": 219,
+      "height": 197,
       "corners": [
         0,
         0,
@@ -397,9 +397,9 @@
         "x": 260,
         "y": 520,
         "w": 260,
-        "h": 219
+        "h": 197
       },
-      "pixelSha256": "d441a5f3bf11e2f43a8db0c2687cdc1fa82a00b07ea78c8f862b264e76664a2f"
+      "pixelSha256": "9d10e4d55d7ca5eb44c55849f653794f6b7c24860282267cd7fa0dc1ed834b36"
     },
     {
       "name": "wood-irregular",
