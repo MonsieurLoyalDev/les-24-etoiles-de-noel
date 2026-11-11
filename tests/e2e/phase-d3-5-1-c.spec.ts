@@ -37,13 +37,11 @@ test("D351 C préservation B, trois scènes et portillons libres", async ({
   page,
 }) => {
   await start(page);
-  const a = await page
-    .locator("canvas")
-    .evaluate((c) => ({
-      scenery: JSON.parse(c.dataset.scenery34!),
-      quarters: JSON.parse(c.dataset.quarters351b!),
-      fences: JSON.parse(c.dataset.fences35!),
-    }));
+  const a = await page.locator("canvas").evaluate((c) => ({
+    scenery: JSON.parse(c.dataset.scenery34!),
+    quarters: JSON.parse(c.dataset.quarters351b!),
+    fences: JSON.parse(c.dataset.fences35!),
+  }));
   const b = JSON.parse(readFileSync("tests/fixtures/scenery-b.json", "utf8"));
   type P = {
     quarter: string;
@@ -76,13 +74,13 @@ test("D351 C parcours continu des quatre quartiers, place, jardin et quatre seui
   page,
 }) => {
   test.setTimeout(600000);
-  await start(page);
+  await start(page, { x: 440, y: 920 });
   for (const p of [
     { x: 420, y: 420 },
     { x: 1420, y: 430 },
     { x: 960, y: 790 },
     { x: 1600, y: 980 },
-    { x: 560, y: 960 },
+    { x: 440, y: 920 },
   ])
     await navigateTo(page, p);
   for (const h of plan.houses.filter((h) => h.quarter === "Q2"))
