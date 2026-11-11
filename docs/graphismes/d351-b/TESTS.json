@@ -1,0 +1,376 @@
+{
+  "typescript": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "e2eBuild": "passed",
+  "units": {
+    "passed": 169,
+    "skippedPOSIXOnWindows": 2
+  },
+  "browser": {
+    "cases": [
+      {
+        "project": "desktop",
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "status": "passed",
+        "duration": 25920
+      },
+      {
+        "project": "desktop",
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "status": "passed",
+        "duration": 5121
+      },
+      {
+        "project": "mobile",
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "status": "passed",
+        "duration": 25731
+      },
+      {
+        "project": "mobile",
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "status": "passed",
+        "duration": 4975
+      },
+      {
+        "project": "desktop",
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "status": "passed",
+        "duration": 81085
+      },
+      {
+        "project": "mobile",
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "status": "passed",
+        "duration": 80598
+      },
+      {
+        "project": "desktop",
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "status": "passed",
+        "duration": 124104
+      },
+      {
+        "project": "mobile",
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "status": "passed",
+        "duration": 114543
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "status": "passed",
+        "duration": 65269
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "status": "passed",
+        "duration": 56928
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1-a2.spec.ts",
+        "title": "D351 A2 tour réel du sapin et des deux bancs sans obstacle",
+        "status": "passed",
+        "duration": 10232
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1-a2.spec.ts",
+        "title": "D351 A2 tour réel du sapin et des deux bancs sans obstacle",
+        "status": "passed",
+        "duration": 9289
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1-b.spec.ts",
+        "title": "D351 B compositions effectives, échelles et trois jardins",
+        "status": "passed",
+        "duration": 3923
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1-b.spec.ts",
+        "title": "D351 B promenade réelle aux douze habitations et aux trois portillons",
+        "status": "passed",
+        "duration": 81184
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1-b.spec.ts",
+        "title": "D351 B compositions effectives, échelles et trois jardins",
+        "status": "passed",
+        "duration": 3204
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1-b.spec.ts",
+        "title": "D351 B promenade réelle aux douze habitations et aux trois portillons",
+        "status": "passed",
+        "duration": 79932
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 compositions complètes, A.2 conservée et 38 chemins libres",
+        "status": "passed",
+        "duration": 4689
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 promenade réelle, portillons du Foyer et quatre entrées/sorties",
+        "status": "passed",
+        "duration": 31143
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed",
+        "duration": 11563
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 performances et réduction des mouvements PC/mobile",
+        "status": "passed",
+        "duration": 4801
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 compositions complètes, A.2 conservée et 38 chemins libres",
+        "status": "passed",
+        "duration": 3690
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 promenade réelle, portillons du Foyer et quatre entrées/sorties",
+        "status": "passed",
+        "duration": 29815
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed",
+        "duration": 11209
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5-1.spec.ts",
+        "title": "D351 performances et réduction des mouvements PC/mobile",
+        "status": "passed",
+        "duration": 4404
+      },
+      {
+        "project": "desktop",
+        "file": "phase-d3-5.spec.ts",
+        "title": "D35 circulation réelle, performances et réduction des effets",
+        "status": "passed",
+        "duration": 6219
+      },
+      {
+        "project": "mobile",
+        "file": "phase-d3-5.spec.ts",
+        "title": "D35 circulation réelle, performances et réduction des effets",
+        "status": "passed",
+        "duration": 6127
+      }
+    ],
+    "stats": {
+      "startTime": "2026-11-11T13:06:18.397Z",
+      "duration": 890991.7339999999,
+      "expected": 26,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "performances": {
+    "desktop": {
+      "cpu": 1,
+      "p95": 4.300000000000182,
+      "mean": 4.166666666666667,
+      "samples": 180,
+      "effects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.39799345705700595,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 11,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 89.296875,
+        "meanFrameMs": 4.167222222222219,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, pas un téléphone physique."
+    },
+    "mobile": {
+      "cpu": 4,
+      "p95": 4.300000000000182,
+      "mean": 4.167222222222222,
+      "samples": 180,
+      "effects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.3724058574178372,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 7,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.2999999523162842,
+        "engineFps": 89.125,
+        "meanFrameMs": 4.1677777777777765,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, pas un téléphone physique."
+    }
+  },
+  "quarterPerformance": [
+    {
+      "name": "livres",
+      "cpu": 1,
+      "p95": 5.600000000000364,
+      "mean": 4.375,
+      "samples": 180,
+      "reducedEffects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.584390354439355,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 6,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 126.75,
+        "meanFrameMs": 4.418333333333335,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+    },
+    {
+      "name": "veillees",
+      "cpu": 1,
+      "p95": 6,
+      "mean": 4.467777777777777,
+      "samples": 180,
+      "reducedEffects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.5639702272723379,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 5,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 130.09375,
+        "meanFrameMs": 4.319999999999997,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+    },
+    {
+      "name": "artisans",
+      "cpu": 1,
+      "p95": 5.899999999999636,
+      "mean": 4.383333333333334,
+      "samples": 180,
+      "reducedEffects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.5890524080940447,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 5,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.10000014305114746,
+        "engineFps": 130.9375,
+        "meanFrameMs": 4.337777777777779,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+    },
+    {
+      "name": "veillees-mobile",
+      "cpu": 4,
+      "p95": 7.299999999999272,
+      "mean": 4.763333333333331,
+      "samples": 180,
+      "reducedEffects": {
+        "quality": "none",
+        "reduced": true,
+        "flurry": 0.572949422037792,
+        "visibleSnow": 0,
+        "visibleSmoke": 0,
+        "visibleWind": 0,
+        "visibleStars": 0,
+        "visibleLights": 3,
+        "swaying": 0,
+        "particleLimit": 0,
+        "cpuP95": 0.2999999523162842,
+        "engineFps": 121.65625,
+        "meanFrameMs": 4.67388888888889,
+        "palette": {
+          "color": 7902119,
+          "alpha": 0.018,
+          "warm": 0.08
+        }
+      },
+      "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+    }
+  ],
+  "protectedTerrainHash": "ec74489077833efd8a054edf98262ca2c032d2589263bf027b047327e64c3a68"
+}
