@@ -1,0 +1,141 @@
+{
+  "clock": 9834.5,
+  "prototypeIds": [
+    "noe",
+    "emile",
+    "mira"
+  ],
+  "actors": [
+    {
+      "id": "noe",
+      "name": "Augustin",
+      "room": "village",
+      "x": 850,
+      "y": 690,
+      "state": "OBSERVING",
+      "period": 0,
+      "activity": "Ronde des lanternes",
+      "point": "plaza-gifts-lantern",
+      "nearPlayer": false,
+      "visits": 1,
+      "pathRemaining": 0,
+      "blockedReason": "",
+      "arrivalAge": 183.61163235216856
+    },
+    {
+      "id": "emile",
+      "name": "Émile",
+      "room": "village",
+      "x": 584.0000000000001,
+      "y": 479.75373595501117,
+      "state": "WALKING",
+      "period": 0,
+      "activity": "Vérifie le courrier",
+      "point": "mail-books",
+      "nearPlayer": false,
+      "visits": 0,
+      "pathRemaining": 15,
+      "blockedReason": "",
+      "arrivalAge": 0
+    },
+    {
+      "id": "mira",
+      "name": "Célestine",
+      "room": "library",
+      "x": 100,
+      "y": 230,
+      "state": "IDLE",
+      "period": 0,
+      "activity": "Observe les rayonnages",
+      "point": "library-shelves",
+      "nearPlayer": false,
+      "visits": 0,
+      "pathRemaining": 0,
+      "blockedReason": "",
+      "arrivalAge": 0
+    }
+  ],
+  "reservations": [
+    {
+      "id": "plaza-gifts-lantern",
+      "owners": [
+        {
+          "actor": "noe",
+          "slot": 0
+        }
+      ]
+    },
+    {
+      "id": "mail-books",
+      "owners": [
+        {
+          "actor": "emile",
+          "slot": 0
+        }
+      ]
+    }
+  ],
+  "points": [
+    {
+      "id": "plaza-market-lantern",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "plaza-gifts-lantern",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "plaza-evening-lantern",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "plaza-quiet",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "mail-books",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "mail-families",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "post-start",
+      "room": "village",
+      "valid": true
+    },
+    {
+      "id": "library-welcome",
+      "room": "library",
+      "valid": null
+    },
+    {
+      "id": "library-shelves",
+      "room": "library",
+      "valid": null
+    },
+    {
+      "id": "library-reading",
+      "room": "library",
+      "valid": null
+    }
+  ],
+  "navigation": [
+    {
+      "room": "village",
+      "cellSize": 8,
+      "cells": 42657,
+      "searches": 2,
+      "cacheHits": 0,
+      "cachedRoutes": 2,
+      "lastExpanded": 832
+    }
+  ]
+}

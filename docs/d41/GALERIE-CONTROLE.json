@@ -1,0 +1,83 @@
+{
+  "images": [
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 1440,
+      "height": 1200
+    },
+    {
+      "loaded": true,
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "videos": [
+    {
+      "time": 0.827,
+      "width": 1440,
+      "height": 1102,
+      "duration": 7.422292,
+      "error": null
+    },
+    {
+      "time": 0.8292,
+      "width": 1440,
+      "height": 1102,
+      "duration": 4.917048,
+      "error": null
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "width": 390,
+      "scroll": 390
+    }
+  ],
+  "errors": [],
+  "remote": [],
+  "conversion": "WebP sans perte vérifié pixel par pixel à la génération ; dimensions conservées."
+}

@@ -1,0 +1,11 @@
+{
+  "baseline": "f3e3472",
+  "checked": 412,
+  "publicFiles": 223,
+  "changed": [
+    "src/game/Game.ts",
+    "tests/e2e/phase-b.spec.ts"
+  ],
+  "unexpected": [],
+  "note": "Game.ts : intégration du prototype. phase-b.spec.ts : pilote de déplacement adapté aux routines. Assets, neige, géométrie, HUD, dialogues sources, animations, sauvegarde et Avent inchangés."
+}

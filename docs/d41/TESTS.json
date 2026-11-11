@@ -1,0 +1,209 @@
+{
+  "unit": {
+    "passed": 182,
+    "failed": 0,
+    "pending": 2,
+    "total": 184
+  },
+  "browser": {
+    "distinct": 18,
+    "passed": 18,
+    "cases": [
+      {
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 24835,
+        "error": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 5215,
+        "error": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 24955,
+        "error": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 4172,
+        "error": []
+      },
+      {
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 91946,
+        "error": []
+      },
+      {
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 91051,
+        "error": []
+      },
+      {
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 117388,
+        "error": []
+      },
+      {
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 113739,
+        "error": []
+      },
+      {
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 59202,
+        "error": []
+      },
+      {
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 59462,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 tous les anciens habitants présents et géométrie inchangée dans les cinq pièces",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 13989,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 marche réelle sans obstacle ni saut, dialogue suspendu puis repris",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 13385,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 horaires, nouvelle conversation Émile et rencontre sauvegardée sans étoile ajoutée",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 22365,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 budget de navigation, fluidité et réduction des mouvements",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 5038,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 tous les anciens habitants présents et géométrie inchangée dans les cinq pièces",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 15149,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 marche réelle sans obstacle ni saut, dialogue suspendu puis repris",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 13438,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 horaires, nouvelle conversation Émile et rencontre sauvegardée sans étoile ajoutée",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 27235,
+        "error": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 budget de navigation, fluidité et réduction des mouvements",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 5925,
+        "error": []
+      }
+    ]
+  },
+  "runs": [
+    {
+      "report": "d41-final-playwright.json",
+      "stats": {
+        "startTime": "2026-11-11T20:08:20.032Z",
+        "duration": 611859.34,
+        "expected": 16,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "report": "d41-prototype-final.json",
+      "stats": {
+        "startTime": "2026-11-11T20:19:38.574Z",
+        "duration": 118395.799,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "report": "d41-quests-final.json",
+      "stats": {
+        "startTime": "2026-11-11T20:20:55.980Z",
+        "duration": 94201.545,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "report": "d41-polish-final.json",
+      "stats": {
+        "startTime": "2026-11-11T20:23:41.131Z",
+        "duration": 12485.859999999999,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  ],
+  "scope": "Sélection ciblée, pas toute la collection historique. Chrome PC et mobile émulé. Les reprises remplacent les anciens échecs de pilote ; historique conservé ci-dessous."
+}
