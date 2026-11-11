@@ -68,7 +68,7 @@ test("D351 C préservation B, trois scènes et portillons libres", async ({
   const rest = a.quarters.accepted.find(
     (p: P) => p.key === "bench-garden" && p.quarter === "Q2",
   );
-  expect(rest.x).toBe(1668);
+  expect(rest.x).toBe(1660);
   expect(rest.width).toBe(80);
   for (const g of [
     "veillees-voisinage",

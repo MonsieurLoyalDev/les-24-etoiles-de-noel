@@ -1,0 +1,137 @@
+{
+  "typescript": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "e2eBuild": "passed",
+  "units": {
+    "passed": 170,
+    "skippedPOSIXOnWindows": 2
+  },
+  "browser": {
+    "cases": [
+      {
+        "project": "desktop",
+        "title": "D351 correctif : deux zones seulement, huit bancs deux places et calque des chemins conservé",
+        "status": "passed"
+      },
+      {
+        "project": "desktop",
+        "title": "D351 correctif : accès réel au repos, au portillon et aux seuils voisins",
+        "status": "passed"
+      },
+      {
+        "project": "mobile",
+        "title": "D351 correctif : deux zones seulement, huit bancs deux places et calque des chemins conservé",
+        "status": "passed"
+      },
+      {
+        "project": "mobile",
+        "title": "D351 correctif : accès réel au repos, au portillon et aux seuils voisins",
+        "status": "passed"
+      },
+      {
+        "project": "desktop",
+        "title": "D351 compositions complètes, A.2 conservée et 38 chemins libres",
+        "status": "passed"
+      },
+      {
+        "project": "desktop",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed"
+      },
+      {
+        "project": "mobile",
+        "title": "D351 compositions complètes, A.2 conservée et 38 chemins libres",
+        "status": "passed"
+      },
+      {
+        "project": "mobile",
+        "title": "D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles",
+        "status": "passed"
+      },
+      {
+        "project": "desktop",
+        "title": "D35 circulation réelle, performances et réduction des effets",
+        "status": "passed"
+      },
+      {
+        "project": "mobile",
+        "title": "D35 circulation réelle, performances et réduction des effets",
+        "status": "passed"
+      }
+    ],
+    "stats": {
+      "startTime": "2026-11-11T19:13:58.971Z",
+      "duration": 80425.367,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "errors": []
+  },
+  "benches": [
+    {
+      "key": "bench-copper",
+      "x": 1260,
+      "y": 745,
+      "width": 82
+    },
+    {
+      "key": "bench-garden",
+      "x": 365,
+      "y": 969,
+      "width": 80
+    },
+    {
+      "key": "bench-copper",
+      "x": 934,
+      "y": 852,
+      "width": 80
+    },
+    {
+      "key": "bench-village",
+      "x": 1022,
+      "y": 794,
+      "width": 80
+    },
+    {
+      "key": "bench-rustic",
+      "x": 420,
+      "y": 400,
+      "width": 80
+    },
+    {
+      "key": "bench-village",
+      "x": 1465,
+      "y": 380,
+      "width": 80
+    },
+    {
+      "key": "bench-garden",
+      "x": 1660,
+      "y": 414,
+      "width": 80
+    },
+    {
+      "key": "bench-copper",
+      "x": 1660,
+      "y": 1025,
+      "width": 80
+    }
+  ],
+  "actors": [
+    {
+      "key": "debby_atlas-Etoilebois_Debby_V3_Propre",
+      "visibleWidthAtGameScale": 30.70689655172414,
+      "height": 52
+    },
+    {
+      "key": "loyal_atlas-Etoilebois_Loyal_V9_Attente",
+      "visibleWidthAtGameScale": 35.953125,
+      "height": 52
+    }
+  ],
+  "publicFilesUnchanged": 223,
+  "notes": "Chrome PC et mobile émulé. Sélection ciblée, pas réexécution de la totalité des tests navigateur historiques."
+}

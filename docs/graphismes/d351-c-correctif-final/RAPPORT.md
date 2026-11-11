@@ -1,0 +1,10 @@
+# D.3.5.1 — Correctif final de composition
+
+- **Jardin familial :** banc rapproché de l'allée existante (1660,414), lanterne sur son côté libre (1610,430), jardinière au coin de l'assise (1679,436). L'ancienne grande base est remplacée localement par la ressource existante de neige tassée, avec empreintes, sans modifier la neige générale. Accès physique testé depuis l'allée jusqu'au devant du banc, puis au portillon et dans le jardin. Clôture, portillon, végétation et table conservés.
+- **Voisins :** panier déplacé de (1450,402) à (1440,388), au pied du banc, en retrait du passage. Aucun objet ajouté.
+- **Préservation :** les 209 autres placements sont identiques à C ; Foyer, Livres, Artisans, place, bâtiments, personnages, neige générale et systèmes du jeu inchangés. Les 223 fichiers publics ont les mêmes SHA-256. Un seul fichier de rendu est modifié : src/art/quarters351b.ts (positions et base locale uniquement).
+- **Bancs :** huit bancs de 80 à 82 px, deux emplacements par banc espacés de 40 px. Debby et Loyal mesurent visuellement environ 30,7 et 36,0 px de large à leur échelle habituelle, soit 66,7 px ensemble. Aucune nouvelle posture assise ni modification des sprites. Contrôle visuel des deux coins : pas de flottement ou de chevauchement gênant constaté.
+
+**Tests exécutés :** TypeScript, lint, builds production et E2E réussis. 170 tests unitaires réussis, deux contrôles POSIX ignorés sous Windows. Dix cas navigateur ciblés réussis, sans échec ni instabilité : préservation des secteurs, huit bancs, accès au repos et au jardin, seuils voisins, 38 chemins, collisions/façades, récupération d'une sauvegarde et réduction des effets, sur PC et mobile émulé. La totalité des anciens tests navigateur n'est pas réexécutée.
+
+**Captures :** quatre vues du vrai jeu, cadrages/heure/viewport identiques par paire. WebP sans perte et sans redimensionnement ; animations actives. Aucun téléphone physique testé. Aucune nouvelle décoration, aucune fusion, aucun déploiement. Validation artistique attendue.
