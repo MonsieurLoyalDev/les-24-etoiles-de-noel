@@ -129,7 +129,7 @@ try {
         .getByRole("button", { name: "À bientôt", exact: true })
         .click();
     }
-    await start(page, port, { x: 760, y: 398 }, 45000, "library");
+    await start(page, port, { x: 830, y: 340 }, 45000, "library");
     if (stage === "apres")
       await page.waitForFunction(
         () => {

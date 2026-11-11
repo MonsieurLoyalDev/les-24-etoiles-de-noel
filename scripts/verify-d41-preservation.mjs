@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const baseline=JSON.parse(readFileSync('docs/d41/BASELINE.json','utf8'));
+const allowed=new Set(['src/game/Game.ts','tests/e2e/phase-b.spec.ts']);
+const changed=baseline.files.filter(f=>createHash('sha256').update(readFileSync(f.path)).digest('hex')!==f.sha256).map(f=>f.path);
+const unexpected=changed.filter(p=>!allowed.has(p));
+const result={baseline:baseline.commit,checked:baseline.files.length,publicFiles:baseline.files.filter(f=>f.path.startsWith('public/')).length,changed,unexpected,note:'Game.ts : intégration du prototype. phase-b.spec.ts : pilote de déplacement adapté aux routines. Assets, neige, géométrie, HUD, dialogues sources, animations, sauvegarde et Avent inchangés.'};
+writeFileSync('docs/d41/PRESERVATION.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result,null,2));
+if(unexpected.length)process.exitCode=1;

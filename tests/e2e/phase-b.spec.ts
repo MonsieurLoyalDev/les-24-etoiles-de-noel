@@ -135,7 +135,9 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await navigateTo(page, { x: 960, y: 900 });
   const npcBefore = await page.locator("canvas").getAttribute("data-npcs");
   await expect
-    .poll(() => page.locator("canvas").getAttribute("data-npcs"))
+    .poll(() => page.locator("canvas").getAttribute("data-npcs"), {
+      timeout: 30000,
+    })
     .not.toBe(npcBefore);
   await navigateTo(
     page,

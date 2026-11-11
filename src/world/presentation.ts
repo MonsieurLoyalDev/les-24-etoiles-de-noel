@@ -3,6 +3,7 @@ import { animateActor } from "../art/actors";
 import { faceActor } from "./facing";
 import type { LivingWorld } from "./runtime";
 import type { Room } from "../rpg/world";
+import { facadeBounds } from "../art/village34";
 /** One quiet context line at most, separate from names and hidden for player dialogue/menu. */
 export class LivingPresentation {
   private labels = new Map<string, Phaser.GameObjects.Text>();
@@ -70,12 +71,22 @@ export class LivingPresentation {
           y > bounds.top
         );
       });
+      const overlapsFacade =
+        room === "village" &&
+        facadeBounds.some(
+          (r) =>
+            x - label.width / 2 < r.x + r.w &&
+            x + label.width / 2 > r.x &&
+            y - label.height < r.y + r.h &&
+            y > r.y,
+        );
       const show =
         !hidden &&
         !bubble &&
         shown &&
         fits &&
         !overlapsPlate &&
+        !overlapsFacade &&
         !a.nearPlayer &&
         (a.state === "OBSERVING" || a.state === "RESTING") &&
         a.arrivalAge < 3200;
