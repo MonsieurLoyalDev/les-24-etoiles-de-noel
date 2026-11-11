@@ -36,6 +36,9 @@ import {
 } from "../art/village33";
 import { villageSize, relocatedPine } from "../art/urban-plan";
 import { NeighbourhoodLife } from "../decor/NeighbourhoodLife";
+import { LivingWorld } from "../world/runtime";
+import { LivingPresentation } from "../world/presentation";
+import { contextualWorldDialogue, markWorldEncounter } from "../world/registry";
 import { roomDimensions, interiorCollisions } from "../art/rooms33";
 import {
   architecture33,
@@ -51,6 +54,9 @@ import {
   anchors,
   fenceRects,
   restoreOutdoorPosition,
+  facadeBounds,
+  routeSegments,
+  pedestrianCourts,
 } from "../art/village34";
 import manifest from "../../assets-manifest.json";
 import { sendEvent } from "../rpg/quests";
@@ -131,6 +137,9 @@ export class Village extends Phaser.Scene {
   interiorLight?: InteriorLight;
   interiorLife?: InteriorLife;
   neighbourhood?: NeighbourhoodLife;
+  living = new LivingWorld();
+  livingPresentation?: LivingPresentation;
+  private livingAuditAt = -Infinity;
   decorations: Phaser.GameObjects.Arc[] = [];
   frame = 0;
   lastEEvent = -1;
@@ -205,7 +214,12 @@ export class Village extends Phaser.Scene {
         "Loyal — Bienvenue à Étoilebois, Debby. J’ai préparé une petite surprise pour toi. Approche-toi de moi et parlons…";
     const conversation = this.state.conversation;
     if (conversation) {
-      const graph = dialogues[conversation.key as keyof typeof dialogues];
+      const graph = contextualWorldDialogue(
+        conversation.key,
+        this.state.clock,
+        dialogues[conversation.key as keyof typeof dialogues] as
+          DialogueGraph | undefined,
+      );
       if (graph && (graph as DialogueGraph)[conversation.node])
         this.openDialogue(conversation.key, graph, conversation.node);
       else this.state.conversation = null;
@@ -240,6 +254,7 @@ export class Village extends Phaser.Scene {
     this.interiorLight = undefined;
     this.interiorLife = undefined;
     this.neighbourhood = undefined;
+    this.livingPresentation = undefined;
     delete this.game.canvas.dataset.neighbourhood;
     delete this.game.canvas.dataset.scenery34;
     delete this.game.canvas.dataset.village34;
@@ -393,8 +408,19 @@ export class Village extends Phaser.Scene {
       this.cameras.main.fadeIn(180, 16, 28, 36);
     this.lastTrail = { ...p };
     this.timer = 0;
+    this.living.attach(
+      this.state.room,
+      w,
+      h,
+      [...this.rects, ...(this.state.room === "village" ? facadeBounds : [])],
+      this.state.room === "village" ? routeSegments : [],
+      this.state.room === "village"
+        ? pedestrianCourts.map((c) => c.points)
+        : [],
+    );
+    this.livingPresentation = new LivingPresentation(this, this.living);
     for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
-      const p = citizen.path[0];
+      const p = this.living.get(citizen.id)?.position ?? citizen.path[0];
       const image = actor(this, residentActors[citizen.id], p.x, p.y);
       this.npcs.push({
         id: citizen.id,
@@ -410,8 +436,21 @@ export class Village extends Phaser.Scene {
       });
     }
     if (this.state.room === "village") {
+      const emile = this.living.get("emile")!;
+      const image = actor(this, "emile", emile.position.x, emile.position.y);
+      this.npcs.push({
+        id: "emile",
+        name: "Émile",
+        image,
+        path: [{ ...anchors.emile }],
+        step: 0,
+      });
+      this.actorTags.push({
+        actor: image,
+        plate: plaque(this, "Émile"),
+        name: "Émile",
+      });
       for (const [id, name, x, y] of [
-        ["emile", "Émile", anchors.emile.x, anchors.emile.y],
         ["flocon", "Flocon", anchors.flocon.x, anchors.flocon.y],
       ] as const) {
         const image = actor(this, id, x, y).setDepth(y).play(`${id}-attente`);
@@ -718,9 +757,17 @@ export class Village extends Phaser.Scene {
       if (this.state.room === "inn")
         reaction(this, "rechauffe", this.player, this.loyal);
     } else if (t.id.startsWith("npc:")) {
-      const id = t.id.slice(4) as keyof typeof dialogues;
-      sendEvent(this.state, { kind: "talk", target: id });
-      this.openDialogue(id, dialogues[id], "greeting");
+      const id = t.id.slice(4);
+      const graph = contextualWorldDialogue(
+        id,
+        this.state.clock,
+        dialogues[id as keyof typeof dialogues] as DialogueGraph | undefined,
+      );
+      if (graph) {
+        markWorldEncounter(this.state, id);
+        sendEvent(this.state, { kind: "talk", target: id });
+        this.openDialogue(id, graph, "greeting");
+      }
     } else if (t.id === "riddle") {
       this.openDialogue("riddle", dialogues.riddle, "question");
     } else if (t.id.startsWith("find:")) {
@@ -977,7 +1024,27 @@ export class Village extends Phaser.Scene {
       );
       this.star?.setScale(1 + Math.sin(_time / 300) * 0.08);
     }
+    const worldView = this.cameras.main.worldView;
+    this.living.update(
+      this.state.clock,
+      !this.dialogue && !controls.paused && !this.finalSequence ? delta : 0,
+      this.state.room,
+      this.player,
+      this.activeDialogue?.key ?? null,
+      (p) =>
+        p.x >= worldView.x - 70 &&
+        p.x <= worldView.right + 70 &&
+        p.y >= worldView.y - 70 &&
+        p.y <= worldView.bottom + 70,
+    );
     for (const npc of this.npcs) {
+      const living = this.living.get(npc.id);
+      if (living) {
+        npc.image
+          .setPosition(living.position.x, living.position.y)
+          .setDepth(living.position.y);
+        continue;
+      }
       const waitingForDebby =
         Math.hypot(npc.image.x - this.player.x, npc.image.y - this.player.y) <
           43 && visible(this.player, npc.image, this.rects);
@@ -1002,6 +1069,16 @@ export class Village extends Phaser.Scene {
       npc.image.setDepth(npc.image.y);
       animateActor(npc.image);
     }
+    this.livingPresentation?.update(
+      this.npcs,
+      this.state.room,
+      this.player,
+      !!this.dialogue || controls.paused,
+      [
+        ...this.actorTags.map((t) => t.plate),
+        ...this.signTags.map((t) => t.plate),
+      ],
+    );
     this.ambience?.update(_time, this.state.clock, delta);
     this.interiorLight?.update(_time, this.state.clock);
     this.interiorLife?.update(_time);
@@ -1021,6 +1098,12 @@ export class Village extends Phaser.Scene {
     this.game.canvas.dataset.npcs = JSON.stringify(
       this.npcs.map((n) => ({ id: n.id, x: n.image.x, y: n.image.y })),
     );
+    if (_time - this.livingAuditAt > 250) {
+      this.livingAuditAt = _time;
+      this.game.canvas.dataset.livingWorld = JSON.stringify(
+        this.living.snapshot(),
+      );
+    }
     this.emit();
   }
 }

@@ -53,17 +53,11 @@ async function approachNPC(page: Page, id: string, name: string) {
       await button.click();
       return;
     }
-    for (const axis of ["x", "y"] as const) {
-      const people = JSON.parse(
-        (await page.locator("canvas").getAttribute("data-npcs")) ?? "[]",
-      ) as { id: string; x: number; y: number }[];
-      const person = people.find((n) => n.id === id)!;
-      await walk(page, axis, person[axis]);
-      if (await button.isVisible()) {
-        await button.click();
-        return;
-      }
-    }
+    const people = JSON.parse(
+      (await page.locator("canvas").getAttribute("data-npcs")) ?? "[]",
+    ) as { id: string; x: number; y: number }[];
+    const person = people.find((n) => n.id === id)!;
+    await navigateTo(page, { x: person.x, y: person.y });
   }
   await interact(page, new RegExp("Parler à " + name));
 }
@@ -116,9 +110,7 @@ async function resident(page: Page, name: string, accept = false) {
   await expect(page.locator(".dialogue")).toHaveCount(0);
 }
 async function exit(page: Page) {
-  await walk(page, "y", 280);
-  await walk(page, "x", 240);
-  await walk(page, "y", 305);
+  await navigateTo(page, { x: 240, y: 305 });
   await interact(page, /Sortir/);
   await expect(page.locator("canvas")).toHaveAttribute("data-room", "village");
 }
@@ -133,7 +125,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await startMigrated(page);
-  // Augustin is in the open south-east square. His entire patrol remains in reach.
+  // Follow the current scheduled position using the independent collision-aware test navigator.
   await navigateTo(page, anchors.augustin[0]);
   await approachNPC(page, "noe", "Augustin");
   await page
@@ -158,9 +150,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   );
   await enter(page, /Bibliothèque/, "library");
   await resident(page, "Célestine", true);
-  await walk(page, "y", 170);
-  await walk(page, "x", 385);
-  await walk(page, "y", 185);
+  await navigateTo(page, { x: 385, y: 185 });
   await interact(page, /marque-page/);
   await dismiss(page);
   await walk(page, "y", 185);
