@@ -1,0 +1,2068 @@
+{
+  "commit": "f3e3472",
+  "files": [
+    {
+      "path": "ops/audit-vps.sh",
+      "bytes": 2528,
+      "sha256": "de944145ee1d4df290d192f30841a4497503b607b4cafa830d62d07f2699bddf"
+    },
+    {
+      "path": "ops/audit-web-details.sh",
+      "bytes": 2216,
+      "sha256": "971f6c023cd546d77816d92ed52e5bef6091dfbf602078767130bbd339fd5f7c"
+    },
+    {
+      "path": "ops/backup.mjs",
+      "bytes": 9440,
+      "sha256": "64b18070c2a25e2c49fef0c121ff17d865636422324a0cf9cd0d42823df30481"
+    },
+    {
+      "path": "ops/bootstrap-vps.sh",
+      "bytes": 2616,
+      "sha256": "197b1a9d6aa8856ab711e206d7c3247bd5b67a8edeebb8688119e47ca54d97d0"
+    },
+    {
+      "path": "ops/cert-renew-hook.sh",
+      "bytes": 264,
+      "sha256": "0da377b1991d4d4c8e72a93e45d987057876a55d18de02e13d5dcf06a6550145"
+    },
+    {
+      "path": "ops/config/backup.env.example",
+      "bytes": 527,
+      "sha256": "c92171864ba8a1cbba491f223dc7270ad0da077cf4222e4f9ecc5c64eadd3c86"
+    },
+    {
+      "path": "ops/config/build.env.example",
+      "bytes": 344,
+      "sha256": "c2c995003053635c9f4cda020f6fa8eeb537d7be08f5695b718706ed80070690"
+    },
+    {
+      "path": "ops/lib/artifact.mjs",
+      "bytes": 2759,
+      "sha256": "59932b8dbc85e48e262a8faccbcd915c2186069220ac0faec97fd3033a5fbfe0"
+    },
+    {
+      "path": "ops/lib/crypto.mjs",
+      "bytes": 2432,
+      "sha256": "55ed9a1517c33b8939417f477a75accd332484a75a53ad30d90ac0a489cc3d43"
+    },
+    {
+      "path": "ops/lib/public-config.mjs",
+      "bytes": 1453,
+      "sha256": "1c693dde20b4d34a19d100c9fbaee5eeaf39c25f49f47ec3605c4508abf0d4ed"
+    },
+    {
+      "path": "ops/nginx.mjs",
+      "bytes": 3797,
+      "sha256": "1534be922c08495473a08d2a8904b2e7c3ea88871b0699eb56b3625331021221"
+    },
+    {
+      "path": "ops/nginx/etoilebois.http.example.conf",
+      "bytes": 228,
+      "sha256": "8de17c754883f05193491268dfcdb0aeb8f77558c49938bb20470c40f5d9eb47"
+    },
+    {
+      "path": "ops/nginx/etoilebois.https.example.conf",
+      "bytes": 2272,
+      "sha256": "d89c662c39765394076e478f2811dbab439fc0f432df638bc5ecab05491bed5f"
+    },
+    {
+      "path": "ops/pm2/ecosystem.config.cjs",
+      "bytes": 263,
+      "sha256": "6a15775a1df90f80da2a1bac6bdcc5f55281c06de88b361871f09f9f6602bc01"
+    },
+    {
+      "path": "ops/probe-auth-limits.mjs",
+      "bytes": 1231,
+      "sha256": "d5e1c2edd675871fe67a7bb63b5cfac47330979c8a1e49c517e9255790b62f22"
+    },
+    {
+      "path": "ops/public-assets.json",
+      "bytes": 12028,
+      "sha256": "20f78611c1830064ceebaba98f51c22b6f04b6fa191ea304b067b37652d53962"
+    },
+    {
+      "path": "ops/release.mjs",
+      "bytes": 5745,
+      "sha256": "7877fcc432a47d90b8e01d7516581f58af8aa9d4ee33f7bd55b858c9cda9e4a5"
+    },
+    {
+      "path": "ops/test-backup-postgres.mjs",
+      "bytes": 6049,
+      "sha256": "88c6574eb692fb8c42ead8c5044db0218caf2d1f2c41bf05904e644aa35e1297"
+    },
+    {
+      "path": "ops/test-nginx.mjs",
+      "bytes": 6877,
+      "sha256": "b9a86bdaa902fe3e5412b0190aa5869709ae039b83bdbb6784719e188847224c"
+    },
+    {
+      "path": "ops/verify-backend.mjs",
+      "bytes": 4404,
+      "sha256": "7b8cc2aa5b7568560c36f07504a91e2c098b7fa5446fe6991fa9552356f4762e"
+    },
+    {
+      "path": "ops/verify-host.mjs",
+      "bytes": 2508,
+      "sha256": "ba3a2932048b20f7247e8781a15f23b01802fff99851eddd6527dc7830ef4136"
+    },
+    {
+      "path": "public/assets/ambience-d3/earth-a.png",
+      "bytes": 1614565,
+      "sha256": "e79110cbbebf2e94bdb3c18fbb8c7aaad87e89d7292f8f8c19e67f9e3fada5f4"
+    },
+    {
+      "path": "public/assets/ambience-d3/earth-b.png",
+      "bytes": 1570511,
+      "sha256": "23d7df39c4f2a77f20c54529f3fd3323c70e98e9a0ac241914d571dada043696"
+    },
+    {
+      "path": "public/assets/ambience-d3/grass-rocks.png",
+      "bytes": 1222058,
+      "sha256": "fed9c0885abac5a48873c5df354bd48b5bbf1c9c2179862123ee150dd99627d5"
+    },
+    {
+      "path": "public/assets/ambience-d3/packed-a.png",
+      "bytes": 1307562,
+      "sha256": "8f143193591a6a805b29272845bc0662260bb3ec86808c5a0b8ffe80828febe0"
+    },
+    {
+      "path": "public/assets/ambience-d3/packed-b.png",
+      "bytes": 1592426,
+      "sha256": "da4588dc00095d4f7fdba22f0e04dd739e3041cab587a1b7ba59998d99ddf570"
+    },
+    {
+      "path": "public/assets/ambience-d3/paw-trail.png",
+      "bytes": 1100120,
+      "sha256": "c9b4ce760fc36cf7066ae8235368536c9477e8d87117e1419d07a16bac7005a4"
+    },
+    {
+      "path": "public/assets/ambience-d3/snowbank-small.png",
+      "bytes": 1123896,
+      "sha256": "33af5b9748c2c73ca98d487045a9cb9d0cd4f77646734716fd09a04ddedc882e"
+    },
+    {
+      "path": "public/assets/ambience-d3/snowbank-wide.png",
+      "bytes": 682698,
+      "sha256": "362b03ac13aab0583e9257ec653f6af6eed94fb1988119a494d0525f01d74355"
+    },
+    {
+      "path": "public/assets/ambience-d3/thaw-a.png",
+      "bytes": 1918808,
+      "sha256": "a3be7b60209e491b4cd62057331a72c56c0849d2d636ba9fd5fa449410f90090"
+    },
+    {
+      "path": "public/assets/ambience-d3/thaw-b.png",
+      "bytes": 1664129,
+      "sha256": "949b21b962bea7996b088d2f21f75b917e32d5a033f5b566b680ed8fac733502"
+    },
+    {
+      "path": "public/assets/characters/debby_placeholder.png",
+      "bytes": 309,
+      "sha256": "eed06d1ce9b67c63f922a7ffca81dc41fc3e39722ceba439964e4f2fa3576894"
+    },
+    {
+      "path": "public/assets/characters/loyal_placeholder.png",
+      "bytes": 293,
+      "sha256": "4e8b8ca208d869e83c02dd499ca79426fc10bad0895ea5ec6884b379854ab03e"
+    },
+    {
+      "path": "public/assets/environment-d35/path-materials.png",
+      "bytes": 143535,
+      "sha256": "e9c80793dbf4b63d48cb64340ad56e1cc543d0625e14bf632d1db98c2a1b78a2"
+    },
+    {
+      "path": "public/assets/environment-d35/sprites.png",
+      "bytes": 4764027,
+      "sha256": "16bad170f962e45cba6398eb99bc0754a336b1c9d3b666b0060dde7a52d8191f"
+    },
+    {
+      "path": "public/assets/ground/ground.png",
+      "bytes": 2755,
+      "sha256": "a77a97d601088371c7b62816538e1e05b520b36267c85a9ef3f5f574dfdc6b54"
+    },
+    {
+      "path": "public/assets/interiors-d31/cards-keepsakes.png",
+      "bytes": 11128,
+      "sha256": "475da69bfb846a42007154ae09d53d036257154e12a948b45befc5e6fed7262a"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-hearth.png",
+      "bytes": 54870,
+      "sha256": "d38bb4deba0adbee64922e862f3363c22092152d7cd9bd41d2603cfb685a50ee"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-lounge.png",
+      "bytes": 34117,
+      "sha256": "ee128ea316f41e3708e61786e5ce72c4912d08f2e7be0ae173fe1593550a0f08"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-shell.png",
+      "bytes": 490053,
+      "sha256": "c4ac381387c8ebe4ae5e8a168a37f5fdde235f3ab99eeffb76e1552ca86da304"
+    },
+    {
+      "path": "public/assets/interiors-d31/house-table.png",
+      "bytes": 42877,
+      "sha256": "60eba5f671ad9e24b5ed9220a4995c16faf8ae046b77e334b34167c44457bf17"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-counter.png",
+      "bytes": 70314,
+      "sha256": "9ed10a3fb49b89be32eb52f69f7971dc6de1ec3c2fbc589af680ccf5611e603d"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-hearth.png",
+      "bytes": 41668,
+      "sha256": "be40542c55e36357968e929aab4ec059d23e42daf04fefd6804b8fc820a02e6f"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-shell.png",
+      "bytes": 503754,
+      "sha256": "efa609fb368782c674a9e2fc801611e8ebe40c1bf06f0bb34a182feec454c974"
+    },
+    {
+      "path": "public/assets/interiors-d31/inn-table.png",
+      "bytes": 50207,
+      "sha256": "8f8e6b61dbccbd7d7452e348030a6a2a1c17543501e383f58c74e2f4882d3d29"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-desk.png",
+      "bytes": 44343,
+      "sha256": "2ccfe4d99638e9637fcf11fd7da10d6749ba3c4c71745a5f238a5c366ce5413d"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-nook.png",
+      "bytes": 42997,
+      "sha256": "1a34779350897dc5164d17d7cd7011382c7914e12f470dffa6087e8858d97d0b"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-shell.png",
+      "bytes": 469211,
+      "sha256": "2884b7b4ef0a18bfd805c767aa492d9a711c5ac5d1d0a83a2cfdaf8da1b7c155"
+    },
+    {
+      "path": "public/assets/interiors-d31/library-shelves.png",
+      "bytes": 73465,
+      "sha256": "b5415788cdb0dc32818e020763dbadb69da542b5e33e594a5b31cb85ce6c9622"
+    },
+    {
+      "path": "public/assets/interiors-d31/photo-keepsakes.png",
+      "bytes": 16511,
+      "sha256": "2db6280a63c03b1429c84196bcd04e19736a2807fbe6db37ea4a4af14a65c7f1"
+    },
+    {
+      "path": "public/assets/interiors-d31/rug-oval.png",
+      "bytes": 246120,
+      "sha256": "42528637891568febc6beabdebac077ebde3e17433d3c8c901a08019d5302572"
+    },
+    {
+      "path": "public/assets/interiors-d31/rug-woven.png",
+      "bytes": 239503,
+      "sha256": "b7618df33ba756b4586eb5c17bba2b188176c782a17d65f7d565a0fae83b1968"
+    },
+    {
+      "path": "public/assets/interiors-d31/snow-powder.png",
+      "bytes": 417456,
+      "sha256": "06b837a541fec74bffd60577b2bfdedc1bbfee905e435269a042b28053e1f173"
+    },
+    {
+      "path": "public/assets/interiors-d31/snow-soft.png",
+      "bytes": 376669,
+      "sha256": "d906fcf14498e13cfc8cb98096565d46615c623c5b51879521b896e955b7e344"
+    },
+    {
+      "path": "public/assets/interiors-d31/wall-lantern.png",
+      "bytes": 2911,
+      "sha256": "dd04d32cb577d9f4c04124ac9387e5f58a1fcd5129a66b1b20d3d8ed99ee95c8"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-bench.png",
+      "bytes": 47821,
+      "sha256": "53d117e13e4132ac917a065d8b7ed76b4dba9832496aff94a212e60b320f8480"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-shell.png",
+      "bytes": 462129,
+      "sha256": "832171b163498bd8135c43cdab0c0754f70abbb7fab668b0babdcfad0b0330ac"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-storage.png",
+      "bytes": 59929,
+      "sha256": "fc4be426f11c71cc50408ca090fe3cedf3583d7c379e1767a066b7505bf5937c"
+    },
+    {
+      "path": "public/assets/interiors-d31/workshop-tools.png",
+      "bytes": 77955,
+      "sha256": "29b905a1facceabfe60d55db3f4ed9a9098154298ea213ebcf1387176af45577"
+    },
+    {
+      "path": "public/assets/interiors-d31/wrapping-plans.png",
+      "bytes": 21611,
+      "sha256": "2e2aff86dba8a345655de908f4c497d6c99e49cd4032e376fd71ca70f8f1903e"
+    },
+    {
+      "path": "public/assets/life-d32/candle-off.png",
+      "bytes": 3390,
+      "sha256": "2573fa33f6e3bd4877816855461bd8fc5b75320f4de049054d3ddbb9d2979cf9"
+    },
+    {
+      "path": "public/assets/life-d32/cat-awake.png",
+      "bytes": 10885,
+      "sha256": "453cfaccbce53b699e76d045b6e34a67f3ced3b6a4d727fc5370731717fbed4a"
+    },
+    {
+      "path": "public/assets/life-d32/cat-sleep.png",
+      "bytes": 10986,
+      "sha256": "cba8c1d1dad5e40a9ce4056c29ff48fccda55244e29efb81b0d80f31f11e8bbd"
+    },
+    {
+      "path": "public/assets/life-d32/flame-a.png",
+      "bytes": 431,
+      "sha256": "797e4f0da7550babc6e7d5efa393101cb6b56289ac75e40c6239c1b11158c05c"
+    },
+    {
+      "path": "public/assets/life-d32/flame-b.png",
+      "bytes": 433,
+      "sha256": "a8154200a3d15a3d39fa9e3750462795575cb1f8c48d5f70c867d970469c16e3"
+    },
+    {
+      "path": "public/assets/life-d32/home-garden.png",
+      "bytes": 241891,
+      "sha256": "5094711b592f0d93d6d67025829195075e3c631f4baf10d70909413de73caaa8"
+    },
+    {
+      "path": "public/assets/life-d32/home-oriel.png",
+      "bytes": 127871,
+      "sha256": "b7663f31bd925d160c2839fbdc7049287246e9372f25621faaf2ae154eb46aef"
+    },
+    {
+      "path": "public/assets/life-d32/home-porch.png",
+      "bytes": 113860,
+      "sha256": "dffda0d1190b34ddc7a93735a91a8fd58cec649bfd669862660625ddc5edeafb"
+    },
+    {
+      "path": "public/assets/life-d32/home-tall.png",
+      "bytes": 112554,
+      "sha256": "8eb56909f5f7de4220c07a07ed33f252ca71b8ba25427510c6225abc1f15f1ad"
+    },
+    {
+      "path": "public/assets/life-d32/house-console.png",
+      "bytes": 30835,
+      "sha256": "2a00bb642eb13f8871773d4bcb8ce529952862b7cba02a45828d59bb2b21b90c"
+    },
+    {
+      "path": "public/assets/life-d32/house-nook.png",
+      "bytes": 36873,
+      "sha256": "56d77e6d1ea8a39483c02341a32ba3aa028edc2adc55a2a0916e7a3ca7f7664f"
+    },
+    {
+      "path": "public/assets/life-d32/inn-console.png",
+      "bytes": 37347,
+      "sha256": "961ec63f66a777a7063d4207c7c0a65903c3ee5d9ef7baa0d536641d15563477"
+    },
+    {
+      "path": "public/assets/life-d32/inn-nook.png",
+      "bytes": 35264,
+      "sha256": "49b96787d718ef44d5d198dcb4223515f86536beff0e1dd634573d367c34cb28"
+    },
+    {
+      "path": "public/assets/life-d32/lamp-off.png",
+      "bytes": 7020,
+      "sha256": "325c134208ff34b2da8cbb3d5f944591d2578628a757687c79f92a724938d16f"
+    },
+    {
+      "path": "public/assets/life-d32/library-console.png",
+      "bytes": 36338,
+      "sha256": "0d245c53a7f1d3eeffd5da2fbea7116d4e9aa81ac82c65780ec74eb1fc4a0830"
+    },
+    {
+      "path": "public/assets/life-d32/library-nook.png",
+      "bytes": 37582,
+      "sha256": "8537ccae65ab486e20ee18bc96acf384e15930c99c17aa46aa54af927010fc17"
+    },
+    {
+      "path": "public/assets/life-d32/steam.png",
+      "bytes": 1116,
+      "sha256": "fbd5ee2982a6cb3cb12fa283c548e7227bd28d534580dc12073e34c94d3d8528"
+    },
+    {
+      "path": "public/assets/life-d32/toy-train.png",
+      "bytes": 4505,
+      "sha256": "9392d1474861e459147e72a61db32681c046ad14f69a8e3e791867e87ea23ffa"
+    },
+    {
+      "path": "public/assets/life-d32/workshop-console.png",
+      "bytes": 30890,
+      "sha256": "46b63832e2d02211b9f92fa30494f772329a253b159e973d0372c78b9a993d97"
+    },
+    {
+      "path": "public/assets/life-d32/workshop-nook.png",
+      "bytes": 41137,
+      "sha256": "41ac619404d175d15d89c180fefa6f693a768d5c99f1dc7a7e0069811bed2f8a"
+    },
+    {
+      "path": "public/assets/props/bench.png",
+      "bytes": 324,
+      "sha256": "1299a005d87952a1b507f92d2a670a80babba83f78e005f67cb3d9e4ed6dc418"
+    },
+    {
+      "path": "public/assets/props/bush_berries.png",
+      "bytes": 768,
+      "sha256": "4b7fafee0b989c959a06837106b9f5f864413b2e512c1091c0342fae2bca00a1"
+    },
+    {
+      "path": "public/assets/props/bush_snow.png",
+      "bytes": 644,
+      "sha256": "4499d7f15a40927c0215b2653a7b73bc6b75ce9e225b898322e17ef54c5d0d57"
+    },
+    {
+      "path": "public/assets/props/campfire.png",
+      "bytes": 740,
+      "sha256": "b4a409d05b6a03400475ebf4ee63b1bf4fd83809f52eeaade32599e1425333b9"
+    },
+    {
+      "path": "public/assets/props/fence.png",
+      "bytes": 399,
+      "sha256": "4ae7cbf17789738fd0214001aa6ecdd4a5a285ee863472cb86b2b07bf6a50511"
+    },
+    {
+      "path": "public/assets/props/gift.png",
+      "bytes": 477,
+      "sha256": "3ec7609972fbffc5af6b7a3163d570b8867429acd576b7365869e313ba86e544"
+    },
+    {
+      "path": "public/assets/props/lantern.png",
+      "bytes": 431,
+      "sha256": "b18783017089e3a8c5939b8ccd3868a67e24a417b0ab89868b7a0736e69b2436"
+    },
+    {
+      "path": "public/assets/props/logs.png",
+      "bytes": 572,
+      "sha256": "300f7c8a6b9fff7cc630d570f12252f02f1cb87f1a60c10374e166429bd560ba"
+    },
+    {
+      "path": "public/assets/props/pine_festive.png",
+      "bytes": 1233,
+      "sha256": "7646f3f1503678895929c6bbf485887a5095d97ad05acd6e65e5aa9698408f6d"
+    },
+    {
+      "path": "public/assets/props/pine_large.png",
+      "bytes": 1053,
+      "sha256": "d91c0c4c8f2a6e5b05d02d3239a68534ca1d45c481d6d8d79f7f62bda987ca9e"
+    },
+    {
+      "path": "public/assets/props/quest_star.png",
+      "bytes": 574,
+      "sha256": "e09755a2a15bfb89140ffe85ff5dfcc35f2a20242562b4583953fab059181f5e"
+    },
+    {
+      "path": "public/assets/props/signpost.png",
+      "bytes": 339,
+      "sha256": "c988767c84dc01b7cd9d3e89f40ad9e3c32674bc464221740180dd2f73e8de7b"
+    },
+    {
+      "path": "public/assets/props/snowman.png",
+      "bytes": 701,
+      "sha256": "f15d154d8aca6745d0fe7caea0b70fa8e5b9e3aaade9f3e13da08acdd9982c72"
+    },
+    {
+      "path": "public/assets/references/place_lanternes_concept.png",
+      "bytes": 3121796,
+      "sha256": "262473f770401dd6d19ec38eeaf295c33ef9236b0202ba31b21a5360aefa33bf"
+    },
+    {
+      "path": "public/assets/refinements-d21/berries-source.png",
+      "bytes": 1100213,
+      "sha256": "7b28606e8f84076f0b7fbe8248efddd64e42f58cf106c9c41f85a8d752df3ded"
+    },
+    {
+      "path": "public/assets/refinements-d21/bush-source.png",
+      "bytes": 979459,
+      "sha256": "e15b13b76d5e4ca5720734fd7190cb45c37007baf2405e9b864677a22291d597"
+    },
+    {
+      "path": "public/assets/refinements-d21/fir-source.png",
+      "bytes": 1790735,
+      "sha256": "8b7a73c0bbc9cbe8f7a1a23259f800d218d5017b2ed3aa4dd6a972554204cbad"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_1_64.png",
+      "bytes": 2603,
+      "sha256": "311d6fdc59f9aa5d66d67d0441e2efb25e5fbf67139fb749dd9ff481e21b2421"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_2_64.png",
+      "bytes": 2592,
+      "sha256": "1115aed97c50745a8b2c1e4a67aaba3d6b98e993b654d8c18807233417ed7b6c"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_3_64.png",
+      "bytes": 2607,
+      "sha256": "0383911c7bc4a519a00b5d2a95c4e13aa455607ec13aaf4568661f9af8655ac6"
+    },
+    {
+      "path": "public/assets/refinements-d21/neige_subtile_4_64.png",
+      "bytes": 2591,
+      "sha256": "eac6273ad50950be4649148ef6dbe094001e08d75584dbe44933810b491e8e29"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-berries-low.png",
+      "bytes": 645852,
+      "sha256": "c6f5caba39da68a806aac24176532ce304c38d0d8ea9de298977186ac6a516c6"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-low.png",
+      "bytes": 436237,
+      "sha256": "41f863d8e7d2ebd300436507018ca4bb4a6832d0af22e78bfe12992d40aec187"
+    },
+    {
+      "path": "public/assets/refinements-d22/bush-snowy.png",
+      "bytes": 1092800,
+      "sha256": "03b2c6a67ed34b07351a62e2152340fc0ace1d32d99a722af2d5af72bf5d88b3"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-broad.png",
+      "bytes": 1708910,
+      "sha256": "e826e91350bca899009f9a63eb813d67fbd84c058373476b12ddef948dd6e8fa"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-slim.png",
+      "bytes": 1522403,
+      "sha256": "9d3d70a7322a73cad64745c5a9cd01bbfa9b2936229e03999405a46fe2cf342c"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-windswept.png",
+      "bytes": 1105808,
+      "sha256": "b38f95d57684b130baefbf71d60b82bad1f51a0f7a8d140de4a682e8d420281b"
+    },
+    {
+      "path": "public/assets/refinements-d22/fir-young.png",
+      "bytes": 629120,
+      "sha256": "44a57e9545a611df4402ea674d5f1dcc9ccfd353563ae14d2b0c2ed7175a684e"
+    },
+    {
+      "path": "public/assets/validated/atlases/atlas-Etoilebois_Loyal_Profil_V18_1_Fluide.png",
+      "bytes": 502957,
+      "sha256": "560f12203e2e9669f85f8988665e67fb618aee771b92036477047db9d5583fc3"
+    },
+    {
+      "path": "public/assets/validated/atlases/atlas-Etoilebois_Loyal_V19_1.png",
+      "bytes": 1133410,
+      "sha256": "0ddca8a112beefd001a55f4db4aab63b187992595519e73113f57fc6e7d4a405"
+    },
+    {
+      "path": "public/assets/validated/atlases/augustin_atlas-Etoilebois_Augustin_V4_Entier.png",
+      "bytes": 1090778,
+      "sha256": "868743ace9c6a4caf84dcd94aa3a23d6a5d62e0ceef50be588eb970115481d75"
+    },
+    {
+      "path": "public/assets/validated/atlases/augustin_idle_atlas-Etoilebois_Augustin_Idle_V5.png",
+      "bytes": 73536,
+      "sha256": "bd2ada9238727e68cbc45b04c8cacfa7a97c8110d2ab441d690c3ade38742a0d"
+    },
+    {
+      "path": "public/assets/validated/atlases/basile_atlas-Etoilebois_Basile_V1.png",
+      "bytes": 1073250,
+      "sha256": "308a5a10984265e2e2df1d7ddfd7443b6af0c09b7a25ff47c3b0186dcb71d8c1"
+    },
+    {
+      "path": "public/assets/validated/atlases/bisou_atlas-Etoilebois_Bisou_V1_Sprites.png",
+      "bytes": 1812018,
+      "sha256": "5e59abace9027fcde8dcd96a88b062d322b7d62fd958c20e8232e581c06044ef"
+    },
+    {
+      "path": "public/assets/validated/atlases/calin_atlas-Etoilebois_Calin_V4_Coeur_Alignement.png",
+      "bytes": 1402716,
+      "sha256": "e173c07653a672c96097ee20a793651ec3951e37cab5df418e109343cb0e6331"
+    },
+    {
+      "path": "public/assets/validated/atlases/celestine_atlas-Etoilebois_Celestine_V1.png",
+      "bytes": 1053497,
+      "sha256": "42b35d86abf0c059b1f27c358ce6519a27d3fa8b15e41172d9a67ee120bdff74"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_atlas-Etoilebois_Debby_V3_Propre.png",
+      "bytes": 787389,
+      "sha256": "bd6448c664a0155204adc3aa0bec09d9c493d95292b6d98d57b678f54d0a2735"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_boude_atlas-Etoilebois_Debby_Boude_V1.png",
+      "bytes": 1295486,
+      "sha256": "49a4f57bc8ea12bc7978b3e4a499275039f9f513f0a422ac8e89c3fe27d5027c"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_coeur_atlas-Etoilebois_Debby_Coeur_V1.png",
+      "bytes": 1236116,
+      "sha256": "bf157dd88eeeb51b5eb6950415786143fbd522478d78cf8be937797aa0e6f163"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_coucou_atlas-Etoilebois_Debby_Coucou_V1.png",
+      "bytes": 1376847,
+      "sha256": "d56d058cd5d482325e0262b452f636141e303187ebaaa4e20ec3974d9ee6e65f"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_etoile_atlas-Etoilebois_Debby_Etoile_V1.png",
+      "bytes": 1418092,
+      "sha256": "91157bb8b4661b999e5e7d34b58a2e5a3addfe98d52afbc243a1ff5f1a9e3928"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_froid_atlas-Etoilebois_Debby_Froid_V1.png",
+      "bytes": 1255411,
+      "sha256": "65c9cd0570610627026666b4c33b8dbee30b3e11fb4fa20a54008fed7b18dabe"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_joie_atlas-Etoilebois_Debby_Joie_V1.png",
+      "bytes": 1441569,
+      "sha256": "68b2641e042e86ba346a3be2963b9d4873c4e4d4dad6d61aecee149825936aa6"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_lecture_atlas-Etoilebois_Debby_Lecture_V1.png",
+      "bytes": 1264884,
+      "sha256": "494abcf230b7075473540067866558288cad69734bc4d7f8177ae563e360ac65"
+    },
+    {
+      "path": "public/assets/validated/atlases/debby_lettre_atlas-Etoilebois_Debby_Lettre_V1.png",
+      "bytes": 1370520,
+      "sha256": "af17a87142d3e8719788be0450270e5ccf97bfacf90a5cbb3eee00ba5ae0f50f"
+    },
+    {
+      "path": "public/assets/validated/atlases/emile_atlas-Etoilebois_Emile_V1.png",
+      "bytes": 996718,
+      "sha256": "a120fee8af9b29534c3e25fae5bb643bfee88efa1604e98cac1807baf4bcb066"
+    },
+    {
+      "path": "public/assets/validated/atlases/flocon_atlas-Etoilebois_Flocon_V4_Transparent.png",
+      "bytes": 868666,
+      "sha256": "9a21cfc49ed19cec37b1c065a90c6b3cbdf135e3de4bdaf559c472bf82649808"
+    },
+    {
+      "path": "public/assets/validated/atlases/loyal_atlas-Etoilebois_Loyal_V9_Attente.png",
+      "bytes": 1026057,
+      "sha256": "130556c905c946c5b66ccc280734feffee8e87224669e208ff59eaa6c14603b3"
+    },
+    {
+      "path": "public/assets/validated/atlases/madeleine_atlas-Etoilebois_Madeleine_V7.png",
+      "bytes": 881350,
+      "sha256": "6bc5507a6c94465071c9637e8178d9886cf32eeb6cf1f885c1f4bed84527ada1"
+    },
+    {
+      "path": "public/assets/validated/atlases/mains_atlas-Etoilebois_Mains_Dans_La_Main_V2_Contours.png",
+      "bytes": 1806754,
+      "sha256": "783158cc3510b981da10f3e2113a5bb9858954def3a5e3bff29a9ab644308bc2"
+    },
+    {
+      "path": "public/assets/validated/atlases/rechauffe_atlas-Etoilebois_Loyal_Rechauffe_Debby_V1.png",
+      "bytes": 2099100,
+      "sha256": "802610a040d4008b32fa0a22204774ebe932bf5e7d71fbf8cfe42d9abe428b14"
+    },
+    {
+      "path": "public/assets/validated/atlases/sapin_atlas-Etoilebois_Sapin_V11_4.png",
+      "bytes": 427647,
+      "sha256": "fd619a501ab1978ef142412550d2b9f5c5e4b3fcde9aa64ab2f4d087f0ac9cf4"
+    },
+    {
+      "path": "public/assets/validated/buildings/atelier_cadeaux.png",
+      "bytes": 762316,
+      "sha256": "561c8a38856c3fa87e2da2ed085b2ade8365a9cf32eb2b11add2a2d6dd579fbc"
+    },
+    {
+      "path": "public/assets/validated/buildings/auberge_etoiles.png",
+      "bytes": 827055,
+      "sha256": "88f003a43491aff943b79e645aae7f59e04fafc3188c4810f0caae0606701bb6"
+    },
+    {
+      "path": "public/assets/validated/buildings/bibliotheque_etoilebois.png",
+      "bytes": 738525,
+      "sha256": "0eaf6732e3ce84fd50337e5654b34ac62fe57a1380d96b2a5955be7d486df628"
+    },
+    {
+      "path": "public/assets/validated/buildings/maison_loyal.png",
+      "bytes": 693265,
+      "sha256": "1b566718cca9bd8437a20c9f5e6006ad9157cc2b9894368a25e26faa38f58bd5"
+    },
+    {
+      "path": "public/assets/validated/calendar/calendrier_art.png",
+      "bytes": 3355529,
+      "sha256": "f215056ff71553e80b1664966c168a60dfa5335bc87b45638c1aaad90e965724"
+    },
+    {
+      "path": "public/assets/validated/decor/arche_etoilebois.png",
+      "bytes": 337959,
+      "sha256": "7ea80edae97d53fa76a6246e3f686ee6d299787d2177d3628ca84f580353461b"
+    },
+    {
+      "path": "public/assets/validated/decor/banc_neige.png",
+      "bytes": 37406,
+      "sha256": "a9678dcedc99aeb76ca978cc995fdd7b0d0f6e66791d42e1fc0762e0c15d5b4c"
+    },
+    {
+      "path": "public/assets/validated/decor/banc_plaid.png",
+      "bytes": 44755,
+      "sha256": "40703de17b7d1f85106e2392d7ac53ac3644aeca019fcc482b64881ac8469d4f"
+    },
+    {
+      "path": "public/assets/validated/decor/bonhomme_neige.png",
+      "bytes": 67281,
+      "sha256": "3816b0ed1955bf238bd4b7b14e25045f98d0a7417d6f5579ab889adfbd1707b3"
+    },
+    {
+      "path": "public/assets/validated/decor/brasero.png",
+      "bytes": 36475,
+      "sha256": "64be91524c41c641b1976964ef8ee7fb2d62829f6d3b9fbe66515c27d69b756d"
+    },
+    {
+      "path": "public/assets/validated/decor/caisse_fleurs.png",
+      "bytes": 38332,
+      "sha256": "c535a5b6995d6aa768fc6c3523c585614757fbaabcbb0677d39200e0f4dbb158"
+    },
+    {
+      "path": "public/assets/validated/decor/cloture_guirlande.png",
+      "bytes": 73381,
+      "sha256": "328c2533a65ccb2c6adb3cc44e0a87caff9c2f0b342269546e8c8ed05ef42326"
+    },
+    {
+      "path": "public/assets/validated/decor/etoile_allumee.png",
+      "bytes": 1779,
+      "sha256": "1468c9ef97646563e9f5311895d4ee9ddb7890cb0eb18a8f936c28bf945bec0e"
+    },
+    {
+      "path": "public/assets/validated/decor/etoile_eteinte.png",
+      "bytes": 275,
+      "sha256": "6b4c2733c4622d199a53fee2f00c014a5ed4306cb6b63c6a785e80954d63c6c9"
+    },
+    {
+      "path": "public/assets/validated/decor/fontaine_etoile.png",
+      "bytes": 116534,
+      "sha256": "a4f10a8e40406066e7769417e4273fb8e0b091f3534263b409826cd5f27bc97d"
+    },
+    {
+      "path": "public/assets/validated/decor/guirlande_lanternes.png",
+      "bytes": 98024,
+      "sha256": "e859930f32afd978bd21d988feefaeb001a404f33eefdbc30e94a633e9a37671"
+    },
+    {
+      "path": "public/assets/validated/decor/jardiniere.png",
+      "bytes": 31324,
+      "sha256": "483dc9dd4038616075aac5c57d9ea341ed9c70309478e9138966b963b2d8cd99"
+    },
+    {
+      "path": "public/assets/validated/decor/lampadaire.png",
+      "bytes": 63774,
+      "sha256": "1439cfffd222fe430c72e742bc27a5c8eade4fe8064e5b5ab3b332125b50bf50"
+    },
+    {
+      "path": "public/assets/validated/decor/lanterne_banniere.png",
+      "bytes": 66586,
+      "sha256": "e16e39b56a467c43b16933fa06b28c3fc75759de59eb28dd593c3abb60ea1f5e"
+    },
+    {
+      "path": "public/assets/validated/decor/panneau_affichage.png",
+      "bytes": 62820,
+      "sha256": "e6140972cb5d822f8626843117ff49e3c94f61110eeaad75d070c6e392185d41"
+    },
+    {
+      "path": "public/assets/validated/decor/panneau_direction.png",
+      "bytes": 27119,
+      "sha256": "0068cbae1337dccf6edd63d4cac2aca9c019b0f9a09d2ea29b7d2d2b1f4182a5"
+    },
+    {
+      "path": "public/assets/validated/decor/sapin_place.png",
+      "bytes": 1093237,
+      "sha256": "309992732c43e8c409df47924e7acd9d24b78e21437635fa974d717bd5473348"
+    },
+    {
+      "path": "public/assets/validated/decor/stand_cadeaux.png",
+      "bytes": 120037,
+      "sha256": "7421657262d5cf461687549508fb4330b1c08a0329363707996592cd02913814"
+    },
+    {
+      "path": "public/assets/validated/fonts/Marcellus-Regular.ttf",
+      "bytes": 43288,
+      "sha256": "2f6fa616f76102d81c4a935c3a8cd547a8db9de679ad9fda9cfd42f16e7f0743"
+    },
+    {
+      "path": "public/assets/validated/fonts/Nunito-Bold.ttf",
+      "bytes": 125464,
+      "sha256": "1a025dfce6e6e03bbe31ba82277ec5ed96df8b8dd58b3df6267269490b90b1dc"
+    },
+    {
+      "path": "public/assets/validated/fonts/Nunito-Regular.ttf",
+      "bytes": 125528,
+      "sha256": "9ecbdba35fa74f10a1a916c31649b802a12deb9e66c7b1fe4650afcfd4d16971"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_calendrier.png",
+      "bytes": 48967,
+      "sha256": "043234be91d1f3e24dc9e9273766b8b08ad09f81f66bf60a935e67e81a448572"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre.png",
+      "bytes": 35205,
+      "sha256": "c0631ed81b31e00dd7cb2dab02901cb97324d7df861b03d92f106fe911ba721b"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre_2.png",
+      "bytes": 34759,
+      "sha256": "70d60e7b95d4b856cfdc41bfef4cec9cb92ebe04402b4e6462156066b7ff9b55"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_neutre_3.png",
+      "bytes": 37825,
+      "sha256": "cbf9e8491dd07b6adb521e605a046ec6e429d101ca6687342594ead2e681bf4d"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_choix_selection.png",
+      "bytes": 39605,
+      "sha256": "e9895d121d1635ce8c9823da9a1844fcca97bf0aeb71b70b0def3251e99f4cec"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_parametres.png",
+      "bytes": 50286,
+      "sha256": "713785019cb6dee5e320622434c1b51cdf8bab10ab3624758a12b13bad84d3a9"
+    },
+    {
+      "path": "public/assets/validated/hud/bouton_souvenirs.png",
+      "bytes": 50058,
+      "sha256": "77081101d4d97fbd632d8624b5ac7543fd440ebf012f1e32be9f271f2906ca3a"
+    },
+    {
+      "path": "public/assets/validated/hud/calendrier.png",
+      "bytes": 158565,
+      "sha256": "6676c7cef76d87a0e2efcb29d7c0f45e4e5d0a06433eeeb5bd0b8f48fc045413"
+    },
+    {
+      "path": "public/assets/validated/hud/compteur_etoiles.png",
+      "bytes": 105893,
+      "sha256": "52eb37f0e65ded2cbc5c385fe138adc27daf83f4d36f8440aba7d69c6b916f01"
+    },
+    {
+      "path": "public/assets/validated/hud/dialogue_complet_4_choix.png",
+      "bytes": 1157776,
+      "sha256": "ff5078b8ac6a8127f7f9a0551b6a94a573d2e98106ef1e58a1d82fdbdeec35d6"
+    },
+    {
+      "path": "public/assets/validated/hud/dialogue_narratif.png",
+      "bytes": 842021,
+      "sha256": "35fe4b034c45280de1e072c5d35def078dcec02625cb8e7347751bbb51d6faf9"
+    },
+    {
+      "path": "public/assets/validated/hud/enseigne.png",
+      "bytes": 489984,
+      "sha256": "3959cac6cac87288c632bf4a0d7e95d7d18829e6980f44637484bd34e61f2527"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_joyeux.png",
+      "bytes": 102613,
+      "sha256": "0d87e41c0d4c48691c2af20b7db03b7587ec11b77b1d54737fdc82920af3790c"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_neutre.png",
+      "bytes": 105473,
+      "sha256": "741a9a6e2059ed0f203fda891f5dfd1d87c9246d9c2bb69238d24bdbb99b13fe"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_surpris.png",
+      "bytes": 105218,
+      "sha256": "7120a59277264f4d6cf6b97f5c36a44a0fb10c42c66b90c85231c64d690d3601"
+    },
+    {
+      "path": "public/assets/validated/portraits/augustin_triste.png",
+      "bytes": 96029,
+      "sha256": "5502df178da413750eb6d7fe4a4f4c62d5f00e28d21241d84f7a99303355b177"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_joyeux.png",
+      "bytes": 133935,
+      "sha256": "93d44dd0c431be3ae839fb825f908b92e9f36b65402c027bd5dcea631d4a4644"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_neutre.png",
+      "bytes": 136837,
+      "sha256": "85d846e98e63443cc2f2ca0252fa7e71965bd6d18a63437b0bc3a326c5f58fdb"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_surpris.png",
+      "bytes": 135386,
+      "sha256": "9a6d7857e825d1f446c9eff8a9aa150f0665daa658d41b9fa4cf00f22442ecb2"
+    },
+    {
+      "path": "public/assets/validated/portraits/basile_triste.png",
+      "bytes": 130164,
+      "sha256": "96a7b3eb44340e5bdb7956a1df2cccdf24cee6257fe4ae0e9077362555c9be2f"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_joyeux.png",
+      "bytes": 118740,
+      "sha256": "a31a33d64a01f56395e5d8a16d24a506c11fb1bad0d88429c62a6bd0cee8a09c"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_neutre.png",
+      "bytes": 120002,
+      "sha256": "6c74f1bc1d747a722b1926edb733a323b960761320b07035fdff433282969b62"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_surpris.png",
+      "bytes": 121260,
+      "sha256": "c6a9a80d79006683f638a8077392d68aaf8ad753d4e74cdc9bad96f3361200f1"
+    },
+    {
+      "path": "public/assets/validated/portraits/celestine_triste.png",
+      "bytes": 113694,
+      "sha256": "3d72a09c628a482a7f7d2669d2a4c3f0fa45a09f0d2eba2ecafa199d2554a807"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_joyeux.png",
+      "bytes": 341972,
+      "sha256": "a7b3e69c8a36e123ffe2ec3a772befd95ee059851ca49508ea8829344913c53c"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_neutre.png",
+      "bytes": 341220,
+      "sha256": "1a85b30ab32c7ea05e0be304445f42092ee446cdcf0ace868cbd15b60019c122"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_surpris.png",
+      "bytes": 343954,
+      "sha256": "300b2fdb5e890ceab02bb2d7b5ba84d9237b4df62e1305a233885669f7657330"
+    },
+    {
+      "path": "public/assets/validated/portraits/debby_triste.png",
+      "bytes": 323526,
+      "sha256": "fe1d2f9e17247dd91a6a5065b9a76a3fe6c034e7c0d6395e3e20986a8b04e010"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_joyeux.png",
+      "bytes": 109867,
+      "sha256": "7e9f49a631517793e45ba974bc1e59567eb94699132b1721016de9aadf0b6e0d"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_neutre.png",
+      "bytes": 108980,
+      "sha256": "c81e18d55e6ccefa751a5ef9e7241998bb41934c9b168fceff7406dd2417cca7"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_surpris.png",
+      "bytes": 113383,
+      "sha256": "28f96e4bf570a22f7c67d3478b8ea6e13d7cd5557744c8948f86bfa1e485ae65"
+    },
+    {
+      "path": "public/assets/validated/portraits/emile_triste.png",
+      "bytes": 103152,
+      "sha256": "4e293eb943d52f97e0b19f6e7d92611f5dc27df9b74aac1604a36f2c8c544ad1"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_joyeux.png",
+      "bytes": 120016,
+      "sha256": "f30a2439205d4c51ce8567ac6760e22c0b6332c42950768365ea53556f05305e"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_neutre.png",
+      "bytes": 122679,
+      "sha256": "3a87ea2c89f8b615f0e17e08cea752737eacde0f2624d809c0348f368293f3e1"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_surpris.png",
+      "bytes": 123096,
+      "sha256": "cb7928bd4b8a5cfa2b5424b33c7790b31d0f29460b7636ad6fae0dcd71b92d55"
+    },
+    {
+      "path": "public/assets/validated/portraits/flocon_triste.png",
+      "bytes": 118491,
+      "sha256": "afe71e0fa25411a92494a6f43d325e1d209fff92d67103ec8876027962ed1918"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_joyeux.png",
+      "bytes": 311406,
+      "sha256": "f9dd33b52e2130456c398af355951bb5fefb21981a3f6aabe8cfd68908882c0a"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_neutre.png",
+      "bytes": 310076,
+      "sha256": "2e3e51d206fdde8bccb29184b15b3dd23c26b2b01a9a4bb318d28ca7e0932bee"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_surpris.png",
+      "bytes": 311238,
+      "sha256": "bc9530f61bf8293a43c061d63b20bafbee845d53d86e358875799f98e3c5f184"
+    },
+    {
+      "path": "public/assets/validated/portraits/loyal_triste.png",
+      "bytes": 311626,
+      "sha256": "b9b19357b5548fe0217e13af3a205ae3cbe26dafbc8c95517a169658e2fd792e"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_joyeux.png",
+      "bytes": 99617,
+      "sha256": "4a0f21db33ee60e4c804986bec3da172ce9f7e92287802a48e33772d6e5dbc63"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_neutre.png",
+      "bytes": 99294,
+      "sha256": "e74d3b7ee8e8c8873155a9e4afc474f584d2ae910d3b5faef94847f93c214906"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_surpris.png",
+      "bytes": 100649,
+      "sha256": "54effa3ae5f81449d1eb80bd083931c021793a0f2128a1a191da8b464b09bcb7"
+    },
+    {
+      "path": "public/assets/validated/portraits/madeleine_triste.png",
+      "bytes": 93582,
+      "sha256": "d8aae9370dc53459f99ff82ee9bccea9cb6998b53b60dc4c27f41167cb08bb9e"
+    },
+    {
+      "path": "public/assets/validated/terrain/autotile.png",
+      "bytes": 470329,
+      "sha256": "5fd52b2a43e1a324c686904bcf2528f46fb6f6a5889429ba35c1eb2df84d0724"
+    },
+    {
+      "path": "public/assets/validated/terrain/dirt.png",
+      "bytes": 1168390,
+      "sha256": "5e3e7c2ffcfa5b23f9773f3c01153329a254b4182a7dfa1865030bdf71ced096"
+    },
+    {
+      "path": "public/assets/validated/terrain/snow.png",
+      "bytes": 1098902,
+      "sha256": "c129f90f4589284b723df3bc301c52020eff9fc39c47503e72522efd0d1f1506"
+    },
+    {
+      "path": "public/assets/validated/terrain/stone.png",
+      "bytes": 1242513,
+      "sha256": "b8c848c54a69aca76c2db1970f8041fc05513a127ba536f938662bbca7805ab6"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bench.png",
+      "bytes": 324,
+      "sha256": "1299a005d87952a1b507f92d2a670a80babba83f78e005f67cb3d9e4ed6dc418"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bush_berries.png",
+      "bytes": 768,
+      "sha256": "4b7fafee0b989c959a06837106b9f5f864413b2e512c1091c0342fae2bca00a1"
+    },
+    {
+      "path": "public/assets/validated/vegetation/bush_snow.png",
+      "bytes": 644,
+      "sha256": "4499d7f15a40927c0215b2653a7b73bc6b75ce9e225b898322e17ef54c5d0d57"
+    },
+    {
+      "path": "public/assets/validated/vegetation/campfire.png",
+      "bytes": 740,
+      "sha256": "b4a409d05b6a03400475ebf4ee63b1bf4fd83809f52eeaade32599e1425333b9"
+    },
+    {
+      "path": "public/assets/validated/vegetation/fence.png",
+      "bytes": 399,
+      "sha256": "4ae7cbf17789738fd0214001aa6ecdd4a5a285ee863472cb86b2b07bf6a50511"
+    },
+    {
+      "path": "public/assets/validated/vegetation/gift.png",
+      "bytes": 477,
+      "sha256": "3ec7609972fbffc5af6b7a3163d570b8867429acd576b7365869e313ba86e544"
+    },
+    {
+      "path": "public/assets/validated/vegetation/lantern.png",
+      "bytes": 431,
+      "sha256": "b18783017089e3a8c5939b8ccd3868a67e24a417b0ab89868b7a0736e69b2436"
+    },
+    {
+      "path": "public/assets/validated/vegetation/logs.png",
+      "bytes": 572,
+      "sha256": "300f7c8a6b9fff7cc630d570f12252f02f1cb87f1a60c10374e166429bd560ba"
+    },
+    {
+      "path": "public/assets/validated/vegetation/pine_festive.png",
+      "bytes": 1233,
+      "sha256": "7646f3f1503678895929c6bbf485887a5095d97ad05acd6e65e5aa9698408f6d"
+    },
+    {
+      "path": "public/assets/validated/vegetation/pine_large.png",
+      "bytes": 1053,
+      "sha256": "d91c0c4c8f2a6e5b05d02d3239a68534ca1d45c481d6d8d79f7f62bda987ca9e"
+    },
+    {
+      "path": "public/assets/validated/vegetation/quest_star.png",
+      "bytes": 574,
+      "sha256": "e09755a2a15bfb89140ffe85ff5dfcc35f2a20242562b4583953fab059181f5e"
+    },
+    {
+      "path": "public/assets/validated/vegetation/signpost.png",
+      "bytes": 339,
+      "sha256": "c988767c84dc01b7cd9d3e89f40ad9e3c32674bc464221740180dd2f73e8de7b"
+    },
+    {
+      "path": "public/assets/validated/vegetation/snowman.png",
+      "bytes": 701,
+      "sha256": "f15d154d8aca6745d0fe7caea0b70fa8e5b9e3aaade9f3e13da08acdd9982c72"
+    },
+    {
+      "path": "public/assets/village-d33/artisan-station.png",
+      "bytes": 139361,
+      "sha256": "82d68846bb85ce139dd84f8fb251c678702a9ef7437b14a6a7db383a90d928fa"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-annex.png",
+      "bytes": 196583,
+      "sha256": "d2ad09930d158eaa51db6b3d114ac9ab2bba84f6333b0fe56d1b8ca817c0b9aa"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-gable.png",
+      "bytes": 115799,
+      "sha256": "c11337bee8b2fa736397d5672ce0f57c158aa4c831374941d845f09e2c07dca0"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-garden.png",
+      "bytes": 184464,
+      "sha256": "cb5fb7395a86c359a52467c4f183f9e6ecff50ef9dafe3146ae89e1e9df13362"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-humble.png",
+      "bytes": 134138,
+      "sha256": "7c0274df14b278ff4bc7d120a78f44d64345d2c985c488ea4f0fb59b96c59ef2"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-porchwide.png",
+      "bytes": 166220,
+      "sha256": "6f2e0d18e6b021e9f1a4445c36255e53ecedf8a109537513506071145941bba2"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-stone.png",
+      "bytes": 187415,
+      "sha256": "2055bf3c3b0b538f45bb1d201f48f3f6edda5eab763c7371db9ce1513fa1bddf"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-terrace.png",
+      "bytes": 185407,
+      "sha256": "07ac0e5f6e5802f82690470470e625bbaaf0c541704d04fec93e8cc137dae4c6"
+    },
+    {
+      "path": "public/assets/village-d33/cottage-twin.png",
+      "bytes": 248619,
+      "sha256": "2d6fb7199e77f531a1cfce2dbd659ac9757542b116fd4aa33b6f8f6db8dbac72"
+    },
+    {
+      "path": "public/assets/village-d33/hearth-salon.png",
+      "bytes": 162929,
+      "sha256": "0808ec0d0d9f0b70d22092d08423c3c4990e42b5d6b2b74948516056ae3513bb"
+    },
+    {
+      "path": "public/assets/village-d33/home-chalet.png",
+      "bytes": 172848,
+      "sha256": "81e2d36f21846f3434d5ee1cf5a381094a206141de4b9df504850787ddb1f4ec"
+    },
+    {
+      "path": "public/assets/village-d33/home-family.png",
+      "bytes": 288955,
+      "sha256": "2d02a257404f4eda3f98191cb5e32ce795915550fa027af0750c0317d2f06dc1"
+    },
+    {
+      "path": "public/assets/village-d33/home-garden.png",
+      "bytes": 246983,
+      "sha256": "8cf1d218360f2db14637a2499c2f5fc8322f1982e827b6088970061575a0fb3c"
+    },
+    {
+      "path": "public/assets/village-d33/home-narrow.png",
+      "bytes": 182593,
+      "sha256": "5b014c6366915c1129c3f9e162fb63106f76b9e890f97396dd8536e3ad5aa5d0"
+    },
+    {
+      "path": "public/assets/village-d33/home-oriel.png",
+      "bytes": 174395,
+      "sha256": "8ee5f854ab97b4c9ad308689434a135c891f6bea515fa5fe589b48c84b906b4e"
+    },
+    {
+      "path": "public/assets/village-d33/home-porch.png",
+      "bytes": 111490,
+      "sha256": "8626ec751b867885c3b0923d28b9f69c026a90cb73061db86f8a963928bf6fdc"
+    },
+    {
+      "path": "public/assets/village-d33/home-shutters.png",
+      "bytes": 194633,
+      "sha256": "5686d5441f567580f302be9893cc12c1e7f6a8285f87eb265ef544c90ffbebf7"
+    },
+    {
+      "path": "public/assets/village-d33/home-tall.png",
+      "bytes": 172979,
+      "sha256": "e7f8b18fbd3bc9e62cfcd15783fa16a76f2333d42c6041d576bc611fd1781724"
+    },
+    {
+      "path": "public/assets/village-d33/oak-floor.png",
+      "bytes": 155988,
+      "sha256": "2e9475d7049a8ded507b62de3ca5e15c6314b29ed15daaa01a5afb1800f2b5fd"
+    },
+    {
+      "path": "public/assets/village-d33/reading-corner.png",
+      "bytes": 192892,
+      "sha256": "08eccb866ad5555bba6892165a225e630a1c9cd3fc04d2b986bf4f11f48d1cae"
+    },
+    {
+      "path": "public/assets/village-d33/rough-floor.png",
+      "bytes": 183736,
+      "sha256": "b859d45ff541b0bafb7ac7cde508a1554c2446d5ce82e733b89eefef66c6c272"
+    },
+    {
+      "path": "public/assets/village-d33/tea-banquette.png",
+      "bytes": 162700,
+      "sha256": "3b1413d3ef8c04fdae57c1a1f2fbe527e99b173be8ed64fccab22de40d25d647"
+    },
+    {
+      "path": "public/assets/village-d33/wall-panel.png",
+      "bytes": 100970,
+      "sha256": "8d5c8a6938455be39dc4367287f46be18b4b357aa373a61922ca618b1bcefaed"
+    },
+    {
+      "path": "public/assets/village-d33/winter-window.png",
+      "bytes": 52126,
+      "sha256": "44c3a396b2772ee242643d38834f71fcf8ee9c0f5eb9436b0b8c3ad2cc0cf2da"
+    },
+    {
+      "path": "public/demo/surprise.webm",
+      "bytes": 42774,
+      "sha256": "2892295db9292ed374105fdd6e261a0f25b2a158223216e071e6766a40560514"
+    },
+    {
+      "path": "scripts/asset-gallery-d33.ts",
+      "bytes": 1659,
+      "sha256": "161d64ef454640ee08f7236665b3abd112d49d08d6e5b5489aa233b62ef460d8"
+    },
+    {
+      "path": "scripts/audit-d31-invariants.ts",
+      "bytes": 4897,
+      "sha256": "35544e44657c252ca8d88859552cc44012563a2e1ac7b3caa4476208bc45fa50"
+    },
+    {
+      "path": "scripts/audit-d32-invariants.ts",
+      "bytes": 5591,
+      "sha256": "5d6127a234b77fbdb9697ea814e7655cfc2a35ac2f2e440530ca8ecdeb82977f"
+    },
+    {
+      "path": "scripts/audit-light.mjs",
+      "bytes": 965,
+      "sha256": "39ac34549794f2afc5d8bb55d0907011ef87e363686a1f0bf92c76fef94105d9"
+    },
+    {
+      "path": "scripts/audit-preservation-d33.mjs",
+      "bytes": 1065,
+      "sha256": "a07d2b71101ce67f577f9e361043593ea29f1d9162d6cac7b4d1314180121c00"
+    },
+    {
+      "path": "scripts/capture-d35.ts",
+      "bytes": 7744,
+      "sha256": "81f29e26a35aa12668e4c17a7714e8d25bbbab78c04229a87ab95038b39f422b"
+    },
+    {
+      "path": "scripts/capture-d351-a2.ts",
+      "bytes": 4919,
+      "sha256": "25320c88e13d9859b18a2529518909e3e7886131c8d6242cfae255c0027e474c"
+    },
+    {
+      "path": "scripts/capture-d351-b.ts",
+      "bytes": 5124,
+      "sha256": "b0a97dab58023dd21c80e0838aac7968c127e91447b9891da15711e4db1e67af"
+    },
+    {
+      "path": "scripts/capture-d351-c-correctif.ts",
+      "bytes": 3847,
+      "sha256": "2b2e28720cf1a877f316f28e0693d126a5bb9b9960918111c5ca8954f04cda17"
+    },
+    {
+      "path": "scripts/capture-d351-c.ts",
+      "bytes": 5096,
+      "sha256": "476268f22831ee55e62cf1e61bbfc051739881a84b29225daa0a326341c40b00"
+    },
+    {
+      "path": "scripts/capture-d351.ts",
+      "bytes": 4384,
+      "sha256": "4338a3d807ce38da5a73d07868f0189ac982165d006af30eba6515f118e464fc"
+    },
+    {
+      "path": "scripts/check-d32-built-assets.ts",
+      "bytes": 1110,
+      "sha256": "f9b314098da5732a325a36fc8960fc719643e9ce688c06a66edfcea7e6eaf2f4"
+    },
+    {
+      "path": "scripts/check-d351-b-performance.ts",
+      "bytes": 3599,
+      "sha256": "64169987761aabb3d46c24254b95e35589eb08f2bd9409506ef20263aeb0eeb5"
+    },
+    {
+      "path": "scripts/check-d351-b-preservation.ts",
+      "bytes": 2574,
+      "sha256": "df1436605c87c80b7fd8e4589f5eb7d57a6a8379bc572bd1ab4afa3c6f0e045c"
+    },
+    {
+      "path": "scripts/check-d351-c-gardens.ts",
+      "bytes": 2441,
+      "sha256": "8f29674b8adb8ee6b3988a1d0ab9fbe23ed9a14d0ccbe127263a9699cd15b8ea"
+    },
+    {
+      "path": "scripts/check-d351-c-performance.ts",
+      "bytes": 3599,
+      "sha256": "ee14feede3f8101469f37aed2a426a30673dbea47f40a5fd44be63e67c0fecbb"
+    },
+    {
+      "path": "scripts/check-d351-c-preservation.ts",
+      "bytes": 3325,
+      "sha256": "ce4e5ae8c4121b8714ccf857be08e81b5583244c13a2dc6c5a0f6e5a45671449"
+    },
+    {
+      "path": "scripts/check-private-build.ts",
+      "bytes": 701,
+      "sha256": "640cb46bb3a1bb5d8d29d8119ae1e7586ef041763cc42bbcec6901cec1caac65"
+    },
+    {
+      "path": "scripts/contact-d33.ts",
+      "bytes": 1167,
+      "sha256": "ee9137f73235a04067e3bf4cf4db82d4479eaf782baa7a22fd3651c5510157f9"
+    },
+    {
+      "path": "scripts/export-d35.ts",
+      "bytes": 4513,
+      "sha256": "24d843ce0aee35b33ed5af5f03edb65462c36c27880370c0f6fc80e569da6119"
+    },
+    {
+      "path": "scripts/generate-seed.ts",
+      "bytes": 636,
+      "sha256": "5cb3ea610310b6ae8e76cbc12f809fd66d30e075d27f861fd62f9dd9d93ccaee"
+    },
+    {
+      "path": "scripts/package-d32.ps1",
+      "bytes": 1044,
+      "sha256": "04610df3f24a25984b2764a12c6c9d6525f164219a9c90fb8e4b02cf8fcd9f79"
+    },
+    {
+      "path": "scripts/package-d33-split.mjs",
+      "bytes": 9817,
+      "sha256": "24b8851fda9be2465fec60cd68712c3038883c784e08c931ceb81cfe37c3a71c"
+    },
+    {
+      "path": "scripts/package-d33.ps1",
+      "bytes": 1045,
+      "sha256": "e97561bea566361266d1bfba7e5b4e9f629c2483ce6433fd3728cdf45c795a6b"
+    },
+    {
+      "path": "scripts/package-d34-split.mjs",
+      "bytes": 9989,
+      "sha256": "120c030c53274484deec2f0691764c21b245f60054d9ce339190edf12fcdf8af"
+    },
+    {
+      "path": "scripts/package-d35-split.mjs",
+      "bytes": 10166,
+      "sha256": "2ae5e5a1db7d6269012b3c8b557687b48b72c6e9e37c51fcfa30d9069321bc3c"
+    },
+    {
+      "path": "scripts/package-vps.mjs",
+      "bytes": 1440,
+      "sha256": "dd57150e2445275de12ebedfb344b5266708ec36df24d3bd6095de72bdea9d55"
+    },
+    {
+      "path": "scripts/plan-d33.ts",
+      "bytes": 1587,
+      "sha256": "59cdd7a78840e07ad25ecc2a21adcc2a1da7412d514f4f31af06b4ac0f5b732d"
+    },
+    {
+      "path": "scripts/plans-interieurs-d33.ts",
+      "bytes": 1852,
+      "sha256": "25466dd41cb467104cfe359173204934a2d3a8d2c7bb0fe60edfe5caaf752630"
+    },
+    {
+      "path": "scripts/prepare-atlas-d35.ts",
+      "bytes": 5191,
+      "sha256": "290c575e7d44fbd57687f936cad22ab7ba237aa9772afe691fedddd2b46e2a90"
+    },
+    {
+      "path": "scripts/prepare-d31-assets.ts",
+      "bytes": 6169,
+      "sha256": "7b51d56e615796aaf0aa49e8a79c06a1dc4244b61bf7daa328c8b088e54a23b9"
+    },
+    {
+      "path": "scripts/prepare-d32-assets.ts",
+      "bytes": 4635,
+      "sha256": "57055bbada618cf4d2bb9a5dc6bd516a71aeffec438128fd086f60fa4c20594b"
+    },
+    {
+      "path": "scripts/prepare-d33-homes.ts",
+      "bytes": 3346,
+      "sha256": "321378ccbc0d98476ec1534535bd1161f73525ba22f1850f7003cd4ea2840948"
+    },
+    {
+      "path": "scripts/prepare-d33-interiors.ts",
+      "bytes": 4341,
+      "sha256": "988524b3d6146ab1d5f9117fe696fe9b1e680369f7fbe442c951c85c7a31ffde"
+    },
+    {
+      "path": "scripts/present-d32.ts",
+      "bytes": 6798,
+      "sha256": "3afc6413e11101478d5f523aa7a88a1a7913aace8a6683e0526cfc0e3721824d"
+    },
+    {
+      "path": "scripts/proof-d35.ts",
+      "bytes": 1378,
+      "sha256": "87d92cec3f1539c942a69ca002afd5d665495fa3bff6006434e6cc9cb744e7c7"
+    },
+    {
+      "path": "scripts/report-d32.ts",
+      "bytes": 9268,
+      "sha256": "40ed87589296fb01da6b3b99a99959505098936504e43eac376bc579f132631e"
+    },
+    {
+      "path": "scripts/report-d35.mjs",
+      "bytes": 12065,
+      "sha256": "ffb61d610a72a2f30a4ebd4944d58e9b3b9725732e9bc5b2de74cacb454647e8"
+    },
+    {
+      "path": "scripts/report-gallery-d33.ts",
+      "bytes": 3990,
+      "sha256": "6ae105cd8129539185426d0922db2d2c69013366c1444764dfdeea0ecb774f28"
+    },
+    {
+      "path": "scripts/verify-d32-art.ts",
+      "bytes": 4915,
+      "sha256": "e48cd9299dbff73d5f973ea4b5f288d51341a385a696321ba78c4213c87c95c3"
+    },
+    {
+      "path": "scripts/verify-gallery-d33.ts",
+      "bytes": 3403,
+      "sha256": "ddde1e856c9edbe4b4e737640030171ddd12dc9f9edf8c6f161882dde83e39b5"
+    },
+    {
+      "path": "src/advent/Captcha.tsx",
+      "bytes": 2176,
+      "sha256": "bb8cf9fecf8e4da872d729e235334c7583488cfa25fde1e12691d771af1bcc42"
+    },
+    {
+      "path": "src/advent/Hub.tsx",
+      "bytes": 33921,
+      "sha256": "a2992fb3161108cda07d0625ae620bde809812edcb7fd6c42626ddd8c98dfd40"
+    },
+    {
+      "path": "src/advent/Task.tsx",
+      "bytes": 12924,
+      "sha256": "ca65c0a630aeaab093e4033b354e087b516b402bdc748201f308b247f27e7c41"
+    },
+    {
+      "path": "src/advent/api.ts",
+      "bytes": 721,
+      "sha256": "58e1cb71cc9ae5cd23b522a1e072ad6d23219057cdb5c48320a448684798a174"
+    },
+    {
+      "path": "src/advent/auth.ts",
+      "bytes": 1032,
+      "sha256": "2a40443725167ca562476188d3ee775513236f079cd48c4a74f989b39f56c6df"
+    },
+    {
+      "path": "src/advent/demo.ts",
+      "bytes": 15720,
+      "sha256": "a2fe7d70108ce96ffddd1ef6dc10b9bc09d2cedb6c4c98f77b73d42364139476"
+    },
+    {
+      "path": "src/advent/demoApi.ts",
+      "bytes": 4116,
+      "sha256": "d0f90a82616fc33518724a36a81b2bfc217f7a68b04fc0d0f4296e1848cf37b0"
+    },
+    {
+      "path": "src/advent/id.ts",
+      "bytes": 466,
+      "sha256": "506c5888fa22b9c6f5495bddb7c5addc5e9397d601cb5a7875c40b8273e533ad"
+    },
+    {
+      "path": "src/advent/local.ts",
+      "bytes": 981,
+      "sha256": "b927629be0aeea9e01ddabebdace5b7de3dd63942e5ee5e515c9eca8e1896acd"
+    },
+    {
+      "path": "src/advent/model.ts",
+      "bytes": 6626,
+      "sha256": "12616b0f57a32d6e16a980411d915d23438f24d4931f55ce6902ff424d244de1"
+    },
+    {
+      "path": "src/advent/supabase.ts",
+      "bytes": 4110,
+      "sha256": "d68c3bc619f78a91b09923801299a482990402cdf177a115a1fd57bce52da07a"
+    },
+    {
+      "path": "src/art/Calendar.tsx",
+      "bytes": 1916,
+      "sha256": "94ef55d54dbf345f8c6067271e2d3e0b4dd460731714363d8c3fb048d36895a6"
+    },
+    {
+      "path": "src/art/Dialogue.tsx",
+      "bytes": 2157,
+      "sha256": "6ae32d1417a2209e503c7b1467cab47bfa290c2a1f1154d24a42ee8f06f7615d"
+    },
+    {
+      "path": "src/art/GraphicsSettings.tsx",
+      "bytes": 1011,
+      "sha256": "4301bd56b6732e8e878c61cff74ae3c6edc93da8c58dcc2826f893f60a6b7f28"
+    },
+    {
+      "path": "src/art/actors.ts",
+      "bytes": 3887,
+      "sha256": "a1f6d49b19f48d13458c51e6fca9d928d4ebc8dee135eefc7a5fe337fbac4d53"
+    },
+    {
+      "path": "src/art/ambience.css",
+      "bytes": 418,
+      "sha256": "c1c4d1708b2390c478d68fce5559ffab91ea21c597ad7f53f8be34831eac47cb"
+    },
+    {
+      "path": "src/art/ambience.ts",
+      "bytes": 10582,
+      "sha256": "0c2b8628497a496d9983872ca5019f32cb6cb1d38ffe6b51a1e5f43fe4981c2d"
+    },
+    {
+      "path": "src/art/assets35.ts",
+      "bytes": 2331,
+      "sha256": "0d3d178bc4726cbe8446cb1ac62ec8e30329530b21ebde45fd89b076bde6efd0"
+    },
+    {
+      "path": "src/art/audio-slots.json",
+      "bytes": 74,
+      "sha256": "78372e142015260c20479e1c62dc711c11bf96e0dfefbe6be9147878078ab6fe"
+    },
+    {
+      "path": "src/art/audio.ts",
+      "bytes": 1937,
+      "sha256": "536e6583636631ae78b05e24c0d3fe2f3cbe5fff8b6baf28aa14cc727a8243d3"
+    },
+    {
+      "path": "src/art/catalog.json",
+      "bytes": 156338,
+      "sha256": "57ce0a8c320371678810a271a92a9e59aed08339643ebbe6bd00ae0bb65a8fca"
+    },
+    {
+      "path": "src/art/composition351.ts",
+      "bytes": 16164,
+      "sha256": "6f0b6ef81d6d6e3bebdc17b55a1b2231286648b6d71731555b88fd8e0d3d784b"
+    },
+    {
+      "path": "src/art/correction-d1.css",
+      "bytes": 7448,
+      "sha256": "ee9bc53dd35216f1c5ac308bb52adc0e8adc6ad0833092bec1e41af19931d3a5"
+    },
+    {
+      "path": "src/art/environment-d35.json",
+      "bytes": 22215,
+      "sha256": "fa49fd1f636886d4c2f250bb405d63966719ad992336c9eac0b85fbcad7eb93a"
+    },
+    {
+      "path": "src/art/fences35.ts",
+      "bytes": 5668,
+      "sha256": "5911b7955b8b57b942ef4a787bf08f67f367e113870e1a89e81c9d3414fbc39a"
+    },
+    {
+      "path": "src/art/graphics.ts",
+      "bytes": 2406,
+      "sha256": "5ac687543acf067fa3bc36fc712813264006d8542e5ed9e01e8ae53485e74348"
+    },
+    {
+      "path": "src/art/ground35.ts",
+      "bytes": 7930,
+      "sha256": "0a905e85ea34811b6128a164f5a223dd7a6bf698fdc10790b25000357beb11f1"
+    },
+    {
+      "path": "src/art/homes-d33.json",
+      "bytes": 10080,
+      "sha256": "fec679a2ebcba68141daf01cd99d87493691287a2e5c4d4c716ead38de253e42"
+    },
+    {
+      "path": "src/art/interior-camera.ts",
+      "bytes": 859,
+      "sha256": "e94d1f686494debc96d903fcc70cfac07eff36ec4098f109c3d44d51138dd355"
+    },
+    {
+      "path": "src/art/interior-layout.ts",
+      "bytes": 1939,
+      "sha256": "2dcd927713a5301e2e8606763e0b27e8beff7f0423c7ba402e4a1df369ec44b5"
+    },
+    {
+      "path": "src/art/interior-light.ts",
+      "bytes": 4717,
+      "sha256": "65077ce922839784da18e6520f9c4c4c5a41061952fc36e8ab5a8e365c3fffd3"
+    },
+    {
+      "path": "src/art/interiors.ts",
+      "bytes": 2002,
+      "sha256": "2951db7adaa9239aa2304f8d82fdefca10f1e02ef9d8cbc0a36d449095e7fba2"
+    },
+    {
+      "path": "src/art/landscape.ts",
+      "bytes": 4438,
+      "sha256": "ae03a57bc6b07c15c5475ec487dbe50ab1ec1af377d7f39ae5fe1a98f3afd766"
+    },
+    {
+      "path": "src/art/pixels.ts",
+      "bytes": 4602,
+      "sha256": "ba90ed0b380ebaf9bd67cf68cb169ca70423d81bec1f8de01ddff931b6b45757"
+    },
+    {
+      "path": "src/art/plan-d34.json",
+      "bytes": 40550,
+      "sha256": "e37bbf6c1c325424b7863e4487ce4e794730d03f154d07ba66812057496ba525"
+    },
+    {
+      "path": "src/art/prepare.ts",
+      "bytes": 6720,
+      "sha256": "c3f2cc3fb2bf79f6c5e4cbbff1fe71362950cca1e925f4da9560f612ffe5c6d9"
+    },
+    {
+      "path": "src/art/quarters351b.ts",
+      "bytes": 15171,
+      "sha256": "d1b06a68a6b67834093320c39b503f2561aa1fe20902af10c03343261a304c5b"
+    },
+    {
+      "path": "src/art/reactions.ts",
+      "bytes": 2699,
+      "sha256": "b87adb5694599a392df3dc62dd857463b507f2ef4f5ecf9d7d36ac769f62ff6e"
+    },
+    {
+      "path": "src/art/room-render33.ts",
+      "bytes": 6472,
+      "sha256": "15653b3ba6d4b37f2a037c37eaaba966b9fdb1d1b1ba4e17f9febc1af396b91d"
+    },
+    {
+      "path": "src/art/rooms33.ts",
+      "bytes": 4596,
+      "sha256": "1dcb4ed06e361b373d754b06773e91244c6047f56b7e870b0ff7d382c3fab227"
+    },
+    {
+      "path": "src/art/scenery34.ts",
+      "bytes": 18117,
+      "sha256": "c453d57b035efdc642004d0bd423674434edf78f1e11c907fa353085a76b5075"
+    },
+    {
+      "path": "src/art/snow-detail.ts",
+      "bytes": 4628,
+      "sha256": "beeabae4521b3161b0eb1f2190aa995e367e64e29f0bf54ef22bdd45b623d9c8"
+    },
+    {
+      "path": "src/art/snow-finishing.ts",
+      "bytes": 894,
+      "sha256": "89df61e152e6dfaa6e674ac1364421c8428d1a862cc844d682eab3e9ffc3c6b5"
+    },
+    {
+      "path": "src/art/style.css",
+      "bytes": 11724,
+      "sha256": "5e4d20453f73d2f75ac1373b4df94bc9bd4d6406bc8a6eeee737b1b6b2fa4e7d"
+    },
+    {
+      "path": "src/art/tag-layout.ts",
+      "bytes": 1004,
+      "sha256": "b863f2bafe18770c8f6593174addd8be66a21378845cdef1a058084ac23b3c77"
+    },
+    {
+      "path": "src/art/tags.ts",
+      "bytes": 4035,
+      "sha256": "21a417af34ac753a727a358acfeb34978700688c700806eadfd4937837e025bf"
+    },
+    {
+      "path": "src/art/terrain-design.ts",
+      "bytes": 4554,
+      "sha256": "cd5e020d1785471bf3972293754a1fff221ff89133c1a990db03b43f6a084099"
+    },
+    {
+      "path": "src/art/terrain.ts",
+      "bytes": 4417,
+      "sha256": "b66c5ec9d2358ec977cd9975c5df403684f58ac96479e70d5a2c326492ff1410"
+    },
+    {
+      "path": "src/art/urban-plan.ts",
+      "bytes": 507,
+      "sha256": "b287da19ca49c2de15bf813d7699b462645de1abd0f4260d42e8702cf49a9915"
+    },
+    {
+      "path": "src/art/vegetation-design.ts",
+      "bytes": 2197,
+      "sha256": "789a9f6b9cae9b7042b947ad89a568f8f7d38a6302de128f28d9846add0848af"
+    },
+    {
+      "path": "src/art/vegetation.ts",
+      "bytes": 3100,
+      "sha256": "b2bdbdcfac270dee0c3fbaa6be1b45bacde04d5a5dab0b72f1503d7aab660c7e"
+    },
+    {
+      "path": "src/art/village-design.ts",
+      "bytes": 1152,
+      "sha256": "6907580d63a3226a8c380f5f201967a12043d81a2b418abab060c16328b6f143"
+    },
+    {
+      "path": "src/art/village33.ts",
+      "bytes": 3985,
+      "sha256": "1314c32cffb486a9b2be4322488a524409f32ab7eca9df5db2f50c740ceeca74"
+    },
+    {
+      "path": "src/art/village34.ts",
+      "bytes": 5792,
+      "sha256": "804b06f42e675e640709b7e39544512ffcd4286ab4e639e03e9cd1c3ec87d539"
+    },
+    {
+      "path": "src/art/world.ts",
+      "bytes": 3670,
+      "sha256": "c7eef9be5f4bc6eaf0881b81e9a8ffb1507812447fd0bdf9e783f4a1ed848fa1"
+    },
+    {
+      "path": "src/calendar.ts",
+      "bytes": 1663,
+      "sha256": "5dbf2030dbddcb4c5cdf5d75641308cf06ca91e93d5f94c22cc5551fd09e02d6"
+    },
+    {
+      "path": "src/decor/InteriorLife.ts",
+      "bytes": 5539,
+      "sha256": "25a954bbc53e47d313f5bffd292d381eb6b32db67ddb41c3bf05c1088dd11c94"
+    },
+    {
+      "path": "src/decor/NeighbourhoodLife.ts",
+      "bytes": 3004,
+      "sha256": "c2a58a849fb0467c14b8f8fb2a3dba73e1372401cda3fceb3cbb8299a305fba9"
+    },
+    {
+      "path": "src/decor/model.ts",
+      "bytes": 7999,
+      "sha256": "af4edf83bb860be0632facc07724dce75bd1c679d6181a4416cf0799ef26c6dd"
+    },
+    {
+      "path": "src/decor/neighbourhood.ts",
+      "bytes": 1413,
+      "sha256": "b4e1301a5fca6986cd97f582d5c94d55f320fb57525e72eb3d2de82a887a4abc"
+    },
+    {
+      "path": "src/domain.ts",
+      "bytes": 4554,
+      "sha256": "ac8e7915a421c857fa918e820c7f459cb76564f55e7d74cbc692cb6185ce5aeb"
+    },
+    {
+      "path": "src/env.d.ts",
+      "bytes": 38,
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5"
+    },
+    {
+      "path": "src/game/Game.ts",
+      "bytes": 34937,
+      "sha256": "206009dfcefce28dfcd6f4e047343d58ddf6bf19e949ab3f8c8afe18c64f7309"
+    },
+    {
+      "path": "src/game/maps/place-des-lanternes.json",
+      "bytes": 36801,
+      "sha256": "4ffabd921dd5311f6d0d3e72f8cd1bdae62781cdeadaff1a1396e937eb33f86a"
+    },
+    {
+      "path": "src/main.tsx",
+      "bytes": 18765,
+      "sha256": "d6b697508a579c37513e17868b6fc4e7d291491ea21a793bacf96fa679943b1d"
+    },
+    {
+      "path": "src/rpg/dialogue.ts",
+      "bytes": 5097,
+      "sha256": "b6a40e1129d29af0a1778798e6bc557c16bc4206072043b6307e9048dcfd154b"
+    },
+    {
+      "path": "src/rpg/minigames.ts",
+      "bytes": 1609,
+      "sha256": "ad53575540cffbbad8de6e02d7331260da9f05bf124bfb2f516d791efb088bcc"
+    },
+    {
+      "path": "src/rpg/quests.ts",
+      "bytes": 4203,
+      "sha256": "c2c810594e81dd918f0741a2d2c3aeef2eec876d9b4f6085510e040a896e74a9"
+    },
+    {
+      "path": "src/rpg/world.ts",
+      "bytes": 2554,
+      "sha256": "1cba405c81f8f58d8a6bd602402ddd830eaa85f063e6a196ac1187ed783a9e8f"
+    },
+    {
+      "path": "src/save.ts",
+      "bytes": 604,
+      "sha256": "455b1068c46956a5502bdad8781d69b1edfd2c59084f8292a7c63ef11bdb163c"
+    },
+    {
+      "path": "src/style.css",
+      "bytes": 16348,
+      "sha256": "1fe0256dc83a917398487dff071a37fe72c62b6d89a77324c3363e0fb595bdb1"
+    },
+    {
+      "path": "src/ui/MiniGame.tsx",
+      "bytes": 8861,
+      "sha256": "e82421a1fd185aee3586510185fcb2cd6fa8d46f0bfd52fe45e0600e5d7cc746"
+    },
+    {
+      "path": "src/ui/miniStorage.ts",
+      "bytes": 1645,
+      "sha256": "3510e7b5d6fd4e68831bed7d9b4da9c3ee9193e230e83488433d5dc16e79c312"
+    },
+    {
+      "path": "supabase/migrations/202611030001_advent.sql",
+      "bytes": 16398,
+      "sha256": "1473d6e08a71322bae9249652c204e1c123ed8637b73f19790aad763f7251891"
+    },
+    {
+      "path": "supabase/seed.sql",
+      "bytes": 19199,
+      "sha256": "174d09abc12b454846f85df1a0884500d57a46f610c1497fb1acd2c3f634458f"
+    },
+    {
+      "path": "tests/advent.test.ts",
+      "bytes": 3681,
+      "sha256": "82775abebd237815e93af7f1327c2a73ca6bb92dc1292fc69ca95bc7462d9d6c"
+    },
+    {
+      "path": "tests/ambience-d3.test.ts",
+      "bytes": 2974,
+      "sha256": "91d6beffa360e3aeb8d2c1e1361d6446df091927956237c01ee6bf4937171956"
+    },
+    {
+      "path": "tests/art.test.ts",
+      "bytes": 3337,
+      "sha256": "86a985130c55c83d39899e7aed361d8dfa3f4966982c9806a573f379dc4d1c34"
+    },
+    {
+      "path": "tests/auth.test.ts",
+      "bytes": 1323,
+      "sha256": "1babc043473f6c1f3030c10fe59ca184fbea13741546f8e232f0b70c5c40b59c"
+    },
+    {
+      "path": "tests/composition351.test.ts",
+      "bytes": 2894,
+      "sha256": "64743aa530ac8727207075a9900cb6b82c036d3b292c2b48cae661859097ea64"
+    },
+    {
+      "path": "tests/decor-d32.test.ts",
+      "bytes": 6221,
+      "sha256": "5c8d6ee21da378056d4e466495338d2c076b59a844ca36ec686703d0dbc5ec3a"
+    },
+    {
+      "path": "tests/domain.test.ts",
+      "bytes": 2749,
+      "sha256": "0d7cbc5170128fb7e3c118eb73f331dc7009fcccb52c5b830acf1b8c161ed021"
+    },
+    {
+      "path": "tests/e2e/correction-d1.spec.ts",
+      "bytes": 3577,
+      "sha256": "9adcf2361f9e4da0e6bb5a4a5f641feb2ac267e156b4ad85a77f61abc95fa06e"
+    },
+    {
+      "path": "tests/e2e/game.spec.ts",
+      "bytes": 4150,
+      "sha256": "ae32cdaa82c411454b680d38cdf1823fccd8ada1df1e539becb6d6e74e490778"
+    },
+    {
+      "path": "tests/e2e/graphics.spec.ts",
+      "bytes": 6294,
+      "sha256": "29b33898764a8cb87f831c76a0c3ca08783c3aebf09eae91ac21a7f3c1d4eb40"
+    },
+    {
+      "path": "tests/e2e/navigation.ts",
+      "bytes": 2277,
+      "sha256": "9a82383f024a4fded61b9d18ad1389cfeefe57ce586dc77a0c9b4374965abcce"
+    },
+    {
+      "path": "tests/e2e/pathfinding.ts",
+      "bytes": 6040,
+      "sha256": "06adfb7fa7bdf9725f31a0152726744e2d3eae3c8a3aa7aecf39c1fc7c144070"
+    },
+    {
+      "path": "tests/e2e/phase-b.spec.ts",
+      "bytes": 11704,
+      "sha256": "34b9a417fa8090cbff1d8340dbe7f422a945f2e501aa27f7309ca961abdeb265"
+    },
+    {
+      "path": "tests/e2e/phase-c.spec.ts",
+      "bytes": 14688,
+      "sha256": "e4071698c7a48fbe612f7ced4c09c66e2d65b896dcf69e73978f2e68c8e8861b"
+    },
+    {
+      "path": "tests/e2e/phase-d2-1.spec.ts",
+      "bytes": 6106,
+      "sha256": "e8c3156465519783708437fd5e11b654a96e442094c3bf59a11051c6ebea5b58"
+    },
+    {
+      "path": "tests/e2e/phase-d2-2.spec.ts",
+      "bytes": 7026,
+      "sha256": "eaf7ecb96af6fda30f8a6573ab1fd8ebf4bbf8b30d705b54d0b987bf069ba3f2"
+    },
+    {
+      "path": "tests/e2e/phase-d2.spec.ts",
+      "bytes": 2932,
+      "sha256": "36b284c0a58f6e4d0a0690547eb65eb26663b6b2d758d9be7f5c4459b5f301cb"
+    },
+    {
+      "path": "tests/e2e/phase-d3-1.spec.ts",
+      "bytes": 9928,
+      "sha256": "5337157fe7434fee759ed9ca0830c7790f1a49320d9cf6f02895c9869a46e928"
+    },
+    {
+      "path": "tests/e2e/phase-d3-2-compat.spec.ts",
+      "bytes": 5656,
+      "sha256": "20513babcd148c6652b9c30268ea36597740f192625985a0459f650674e8cd4d"
+    },
+    {
+      "path": "tests/e2e/phase-d3-2.spec.ts",
+      "bytes": 13372,
+      "sha256": "37af8523880c3c951ca76aca5424a120ee66f0961be3fb9c2af4d94446ed1639"
+    },
+    {
+      "path": "tests/e2e/phase-d3-3.spec.ts",
+      "bytes": 8360,
+      "sha256": "91f3fece701186619984929752c633296155273cfcb2921f1e047d5a5056eef2"
+    },
+    {
+      "path": "tests/e2e/phase-d3-4.spec.ts",
+      "bytes": 5968,
+      "sha256": "b8cd1cd50cebbb5e44ba78f826b61618f4065b5dc16338c5e51397759247a4a3"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5-1-a2.spec.ts",
+      "bytes": 1572,
+      "sha256": "940e7cefbbbd20e45afff2043af2a6fdd73eb8f53885207300966fe297496dd6"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5-1-b.spec.ts",
+      "bytes": 2443,
+      "sha256": "df410ea21fb6f28d43ce330370d5388b92b9aa4180562f0823a0a9f0ea15d462"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5-1-c-correctif.spec.ts",
+      "bytes": 3821,
+      "sha256": "df6bec47a56074373d322ecd2bfbf0204dfd8ee385ebeabd5e9f10cc26dab9ea"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5-1-c.spec.ts",
+      "bytes": 3819,
+      "sha256": "8623dc333638a9e23f3a7817cac391414f03cc45ff40eaf452c85613cd763046"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5-1.spec.ts",
+      "bytes": 7189,
+      "sha256": "ade18e32bddce9b9b0e7c5e9461343b7abfa8ba1291af28fd334683679f0b882"
+    },
+    {
+      "path": "tests/e2e/phase-d3-5.spec.ts",
+      "bytes": 8030,
+      "sha256": "142bf6b018b47570e5eb0e19769e1af9156b478374c67689ed21bce952a2792f"
+    },
+    {
+      "path": "tests/e2e/phase-d3.spec.ts",
+      "bytes": 6795,
+      "sha256": "0879fccc3a181156e4c9605b0d801c1d766f5f12b0d73f6cb9526f685485f222"
+    },
+    {
+      "path": "tests/environment-d35.test.ts",
+      "bytes": 5393,
+      "sha256": "51bbbbb5549baac94ff9e2dc5e72e604102ceff58f26230fd4f14c53a272ba85"
+    },
+    {
+      "path": "tests/fixtures/scenery-a2.json",
+      "bytes": 93662,
+      "sha256": "5c01175fe2f48a683291026bd4cbdff1667279548e440be5965abeece0f103db"
+    },
+    {
+      "path": "tests/fixtures/scenery-b.json",
+      "bytes": 151505,
+      "sha256": "cdb95a27de305edd68ed0128ccc9d1e7336b9fa8976f6995b9e7b0c9df5c1431"
+    },
+    {
+      "path": "tests/fixtures/scenery-c.json",
+      "bytes": 273662,
+      "sha256": "826ac29d7da8c511f0ba15c92d4a2fb42b54ded1ba32f52de80bba775f603c50"
+    },
+    {
+      "path": "tests/fixtures/scenery-d35.json",
+      "bytes": 56544,
+      "sha256": "b51b9bcb5b7be55a0c08b6bf11ce507926ea409701a003c6bff3948b26458f49"
+    },
+    {
+      "path": "tests/furniture-d33.test.ts",
+      "bytes": 845,
+      "sha256": "59d2b9b52f9fc5f21f32e455708a68873f7c85478d9f2560e966513385144979"
+    },
+    {
+      "path": "tests/interiors-d31.test.ts",
+      "bytes": 3339,
+      "sha256": "437a77b085964cd93a98a76d7a0df918a7251820e9a84577a6c9f90067ab2552"
+    },
+    {
+      "path": "tests/light-delivery.test.ts",
+      "bytes": 929,
+      "sha256": "e1792b837b414854935cfccfac85a72d325c21ab63ec7c771192ccabd63ddbb1"
+    },
+    {
+      "path": "tests/ops.test.mjs",
+      "bytes": 9544,
+      "sha256": "135c255e95f00a536ce848f2a334037c2bdb373316a7c142395a48d4b37890b4"
+    },
+    {
+      "path": "tests/original-proof.ts",
+      "bytes": 1163,
+      "sha256": "b9f220d475931c393add5f25be77b2d6ec20bfdae8b7712fbedf8d0b8bef4998"
+    },
+    {
+      "path": "tests/pixels.test.ts",
+      "bytes": 2596,
+      "sha256": "4c0116565c9360bd5b8422ec09eb2c6581b972b54bbf996f34f658c45cbc6cf1"
+    },
+    {
+      "path": "tests/png-rgba.ts",
+      "bytes": 1503,
+      "sha256": "c85acac25d59182c703ca6730cd0f7fd0aff65246e8bbde2bf3be4ebb50ebc47"
+    },
+    {
+      "path": "tests/private-client.test.ts",
+      "bytes": 1436,
+      "sha256": "874cb533cd412bc0ed406878d56cab24e3757d563d8673dd4ec9062109083ed5"
+    },
+    {
+      "path": "tests/quarters351b.test.ts",
+      "bytes": 1432,
+      "sha256": "a0a4b061c1f6a20de727d8a7b19b91688cfbb2a129a3adbfc2a4d913bd193cbb"
+    },
+    {
+      "path": "tests/quarters351c.test.ts",
+      "bytes": 954,
+      "sha256": "957fdf88ebb9fd06c210f9f85f9185cf7856896788227f20bfb8bec2fb721906"
+    },
+    {
+      "path": "tests/refinements-d21.test.ts",
+      "bytes": 2456,
+      "sha256": "d9f1919a0838df14389d34290b2f89bf591a6696db4097a516c6502a0e4b22cb"
+    },
+    {
+      "path": "tests/refinements-d22.test.ts",
+      "bytes": 2414,
+      "sha256": "eaf471da7b6a53929b74cc036b7b332e862308d007c678047706c0aac9858aa8"
+    },
+    {
+      "path": "tests/rpg.test.ts",
+      "bytes": 6575,
+      "sha256": "24a740e3d47c91b87e7a80d5b2de3ef02893cec0bdc70790acc97b078003652b"
+    },
+    {
+      "path": "tests/save.test.ts",
+      "bytes": 965,
+      "sha256": "d75b00dfa50b42319c23ead94674c0f3280ffc75c0ca466ce2b963dbb0cca0ea"
+    },
+    {
+      "path": "tests/security.test.ts",
+      "bytes": 10455,
+      "sha256": "f1d03c2abf2328cf0400357e3f58e51b4a380c2f2f524f85e12c7be86ed5bc61"
+    },
+    {
+      "path": "tests/village-d33.test.ts",
+      "bytes": 4023,
+      "sha256": "1db03b7b93d0985f6de0dd9e878eb69bedb0148e9c91e9c29f610efe8472a5fe"
+    },
+    {
+      "path": "tests/village-design.test.ts",
+      "bytes": 4164,
+      "sha256": "17d28a5ec749c2f931e97b4e986df7affb5fc4222aeceaf08e50d001da4fd253"
+    },
+    {
+      "path": "tests/vps-e2e/private.spec.ts",
+      "bytes": 4108,
+      "sha256": "3e6337703ff4d3bc635f2138ccd75266bca7b9c255163e7cd5c629747f126f90"
+    }
+  ],
+  "source": 73,
+  "public": 223,
+  "notice": "Inventaire intégral des fichiers suivis des systèmes et ressources ; les secrets locaux ne sont ni lus ni inclus."
+}
