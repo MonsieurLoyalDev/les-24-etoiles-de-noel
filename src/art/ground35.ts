@@ -8,7 +8,11 @@ import {
   distanceToSegment,
 } from "./village34";
 import type { Point } from "../domain";
-import { pathWeathering351 } from "./composition351";
+import {
+  pathWeathering351,
+  driftRelief351,
+  driftShadow351,
+} from "./composition351";
 
 /** Broad correlated variations, not independently scattered speckles. Deterministic on reload. */
 export function edgeVariation(x: number, y: number) {
@@ -143,8 +147,11 @@ export function drawGround35(scene: Phaser.Scene) {
         ((v < s ? v : s * 2 - 1 - v) * s + (u < s ? u : s * 2 - 1 - u)) * 4
       );
     };
+    const previousDriftRow = new Float32Array(width);
     for (let y = 0; y < height; y++)
       for (let x = 0; x < width; x++) {
+        const previousDrift = previousDriftRow[x];
+        previousDriftRow[x] = 0;
         const i = y * width + x;
         let material = 0,
           distance = fields[0][i],
@@ -180,14 +187,23 @@ export function drawGround35(scene: Phaser.Scene) {
           clamp((dune - 0.75) * 0.8, 0, 0.9) * (distance > -9 ? 1 : 0.48);
         const edgeAlpha =
           edge > 1.5 ? 0 : edge > -0.7 ? 0.35 : edge > -2.3 ? 0.72 : 1;
+        const drift = pathWeathering351(x, y, distance);
+        previousDriftRow[x] = drift;
+        const relief = driftRelief351(
+          drift,
+          (src[si] + src[si + 1] + src[si + 2]) / 3,
+        );
+        const contact = driftShadow351(previousDrift, drift, x, y);
         const alpha =
           edgeAlpha *
           (material === 1 ? 0.84 : 0.97) *
           (1 - snow) *
-          (1 - pathWeathering351(x, y, distance));
+          (1 - relief);
         for (let rgb = 0; rgb < 3; rgb++)
           dst[index + rgb] =
-            src[si + rgb] * (1 - blend) + other[oi + rgb] * blend;
+            (src[si + rgb] * (1 - blend) + other[oi + rgb] * blend) *
+              (1 - contact) +
+            [118, 143, 165][rgb] * contact;
         dst[index + 3] = Math.round(alpha * 255);
         if (alpha > 0.3) covered++;
         if (edgeAlpha > 0 && edgeAlpha < 1) irregularEdge++;

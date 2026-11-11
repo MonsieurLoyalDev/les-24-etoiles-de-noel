@@ -53,6 +53,11 @@ test("D351 compositions complètes, autres quartiers inchangés et 38 chemins li
   for (const bank of a.witness.accumulations)
     expect(bank.w / bank.h).toBeCloseTo(bank.sourceRatio, 6);
   expect(a.witness.accepted).toHaveLength(witnessItems351.length);
+  const benches = a.witness.accepted.filter(
+    (p: { group: string; key: string }) =>
+      p.group === "place-conviviale" && p.key.startsWith("bench-"),
+  );
+  expect(Math.abs(benches[0].y - benches[1].y)).toBeGreaterThanOrEqual(50);
   const before = JSON.parse(
     readFileSync("tests/fixtures/scenery-d35.json", "utf8"),
   );
@@ -130,14 +135,15 @@ test("D351 promenade réelle, portillons du Foyer et quatre entrées/sorties", a
 test("D351 ancienne position sous un nouveau décor récupérée sans perdre les étoiles", async ({
   page,
 }) => {
-  await start(page, { x: 758, y: 1042 });
+  const tree = witnessItems351.find((p) => p.group === "loyal-bosquet")!;
+  await start(page, { x: tree.x, y: tree.y });
   const pos = await page.locator("canvas").evaluate((c) => ({
     x: Number(c.dataset.playerX),
     y: Number(c.dataset.playerY),
     rects: JSON.parse(c.dataset.collisions!) as Rect[],
   }));
   expect(blocked(pos, pos.rects, 1920, 1408)).toBe(false);
-  expect(Math.hypot(pos.x - 758, pos.y - 1042)).toBeGreaterThan(5);
+  expect(Math.hypot(pos.x - tree.x, pos.y - tree.y)).toBeGreaterThan(5);
   await page.waitForTimeout(4600);
   await page.reload();
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
