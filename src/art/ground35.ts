@@ -8,6 +8,7 @@ import {
   distanceToSegment,
 } from "./village34";
 import type { Point } from "../domain";
+import { pathWeathering351b, driftShadow351b } from "./quarters351b";
 import {
   pathWeathering351,
   driftRelief351,
@@ -148,10 +149,13 @@ export function drawGround35(scene: Phaser.Scene) {
       );
     };
     const previousDriftRow = new Float32Array(width);
+    const previousQuarterRow = new Float32Array(width);
     for (let y = 0; y < height; y++)
       for (let x = 0; x < width; x++) {
         const previousDrift = previousDriftRow[x];
         previousDriftRow[x] = 0;
+        const previousQuarter = previousQuarterRow[x];
+        previousQuarterRow[x] = 0;
         const i = y * width + x;
         let material = 0,
           distance = fields[0][i],
@@ -189,11 +193,15 @@ export function drawGround35(scene: Phaser.Scene) {
           edge > 1.5 ? 0 : edge > -0.7 ? 0.35 : edge > -2.3 ? 0.72 : 1;
         const drift = pathWeathering351(x, y, distance);
         previousDriftRow[x] = drift;
+        const quarterDrift = pathWeathering351b(x, y, distance);
+        previousQuarterRow[x] = quarterDrift;
         const relief = driftRelief351(
-          drift,
+          Math.max(drift, quarterDrift),
           (src[si] + src[si + 1] + src[si + 2]) / 3,
         );
-        const contact = driftShadow351(previousDrift, drift, x, y);
+        const contact =
+          driftShadow351(previousDrift, drift, x, y) +
+          driftShadow351b(previousQuarter, quarterDrift, x, y);
         const alpha =
           edgeAlpha *
           (material === 1 ? 0.84 : 0.97) *

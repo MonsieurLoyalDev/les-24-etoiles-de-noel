@@ -7,7 +7,7 @@ import {
   witnessRegion351,
 } from "../../src/art/composition351";
 import { navigateTo } from "./pathfinding";
-const out = "docs/screenshots/phase-d3-5-1/controles";
+const out = "docs/screenshots/phase-d3-5-1-b/controles";
 async function start(page: Page, position = { x: 560, y: 960 }) {
   await page.goto("/");
   await page.evaluate(
@@ -37,7 +37,7 @@ async function start(page: Page, position = { x: 560, y: 960 }) {
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
   await expect(page.locator("canvas")).toHaveAttribute("data-room", "village");
 }
-test("D351 compositions complètes, autres quartiers inchangés et 38 chemins libres", async ({
+test("D351 compositions complètes, A.2 conservée et 38 chemins libres", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -59,13 +59,11 @@ test("D351 compositions complètes, autres quartiers inchangés et 38 chemins li
   );
   expect(Math.abs(benches[0].y - benches[1].y)).toBeGreaterThanOrEqual(50);
   const before = JSON.parse(
-    readFileSync("tests/fixtures/scenery-d35.json", "utf8"),
+    readFileSync("tests/fixtures/scenery-a2.json", "utf8"),
   );
   type P = { x: number; y: number; group?: string };
-  expect(
-    a.scenery.placed.filter((p: P) => !witnessRegion351(p.x, p.y)),
-  ).toEqual(
-    before.scenery.placed.filter((p: P) => !witnessRegion351(p.x, p.y)),
+  expect(a.scenery.placed.filter((p: P) => witnessRegion351(p.x, p.y))).toEqual(
+    before.scenery.placed.filter((p: P) => witnessRegion351(p.x, p.y)),
   );
   expect(
     a.witness.accepted.filter(
