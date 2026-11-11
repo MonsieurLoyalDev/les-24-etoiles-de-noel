@@ -43,7 +43,15 @@ try {
     await page.close();
   }
   const unchanged = (r: (typeof results)[number]) =>
-    r.scenery.placed.filter((p: { quarter: string }) => p.quarter !== "Q2");
+    r.scenery.placed.filter(
+      (p: { quarter: string; key: string; group: string }) =>
+        p.quarter !== "Q2" &&
+        !(
+          p.quarter === "Q4" &&
+          p.key === "prop-watering" &&
+          p.group === "artisans-jardinet"
+        ),
+    );
   if (
     results[0].protectedTerrainHash !== results[1].protectedTerrainHash ||
     JSON.stringify(unchanged(results[0])) !==
@@ -66,7 +74,7 @@ try {
         baseline: "B de9b507",
         protectedTerrainHash: results[0].protectedTerrainHash,
         protectedBytes: results[0].protectedBytes,
-        unchangedOutsideQ2: unchanged(results[0]).length,
+        unchangedOutsideCorrections: unchanged(results[0]).length,
         witnessUnchanged: true,
         before: results[0].quarters.accepted,
         after: results[1].quarters.accepted,
@@ -76,9 +84,10 @@ try {
     ),
   );
   console.log(
-    "B protected terrain and all non-Q2 placements identical",
+    "B protected path pixels and all unchanged placements identical",
     results[0].protectedTerrainHash,
   );
 } finally {
   await browser.close();
 }
+

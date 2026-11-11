@@ -51,8 +51,18 @@ test("D351 C préservation B, trois scènes et portillons libres", async ({
     box: { x: number; y: number; w: number; h: number };
   };
   expect(a.quarters.rejected).toEqual([]);
-  expect(a.scenery.placed.filter((p: P) => p.quarter !== "Q2")).toEqual(
-    b.scenery.placed.filter((p: P) => p.quarter !== "Q2"),
+  expect(
+    a.scenery.placed.filter(
+      (p: P) =>
+        p.quarter !== "Q2" &&
+        !(p.quarter === "Q4" && p.key === "prop-watering"),
+    ),
+  ).toEqual(
+    b.scenery.placed.filter(
+      (p: P) =>
+        p.quarter !== "Q2" &&
+        !(p.quarter === "Q4" && p.key === "prop-watering"),
+    ),
   );
   expect(a.fences.gates).toHaveLength(5);
   const rest = a.quarters.accepted.find(
@@ -90,4 +100,19 @@ test("D351 C parcours continu des quatre quartiers, place, jardin et quatre seui
   await navigateTo(page, { x: 1760, y: 461 });
   await navigateTo(page, { x: g.gate[0], y: g.gate[1] });
   await expect(page.locator(".quest")).toContainText("3 / 24");
+});
+
+test("D351 C entrée et sortie du jardin artisanal sans arrosoir devant le portillon", async ({
+  page,
+}) => {
+  await start(page, { x: 1709, y: 930 });
+  const a = await page
+    .locator("canvas")
+    .evaluate((c) => JSON.parse(c.dataset.quarters351b!));
+  expect(
+    a.accepted.find((p: { key: string }) => p.key === "prop-watering"),
+  ).toMatchObject({ x: 1827, y: 980, width: 20 });
+  await navigateTo(page, { x: 1845, y: 957.5 });
+  await navigateTo(page, { x: 1866, y: 979 });
+  await navigateTo(page, { x: 1845, y: 957.5 });
 });

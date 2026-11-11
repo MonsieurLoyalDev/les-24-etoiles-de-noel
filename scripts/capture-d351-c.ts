@@ -43,6 +43,7 @@ const clips: Record<
   string,
   { x: number; y: number; width: number; height: number }
 > = {
+  "jardin-artisans": { x: 1160, y: 450, width: 260, height: 380 },
   "jardin-veillees": { x: 800, y: 580, width: 480, height: 490 },
   voisins: { x: 650, y: 160, width: 500, height: 360 },
   "chalet-bois": { x: 820, y: 350, width: 360, height: 390 },
@@ -70,6 +71,7 @@ try {
     page.on("pageerror", (e) => errors.push(e.message));
     const shots: [string, number, number, number][] = [
       ["veillees", 1480, 430, 45000],
+      ["jardin-artisans", 1600, 1000, 45000],
       ["jardin-veillees", 1900, 400, 45000],
       ["voisins", 1420, 540, 45000],
       ["chalet-bois", 1572, 625, 45000],

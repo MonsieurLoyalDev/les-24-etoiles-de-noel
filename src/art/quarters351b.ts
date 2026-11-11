@@ -156,7 +156,7 @@ export const quarterItems351b: Item[] = [
     ["fir_young", 1832, 1017, 27],
     ["bush_berries_low", 1855, 1031, 27],
     ["prop-planter", 1861, 999, 23],
-    ["prop-watering", 1842, 980, 20],
+    ["prop-watering", 1827, 980, 20],
     ["wood-kindling", 1860, 1015, 19],
     ["prop-tools", 1831, 1030, 17],
     ["prop-lantern", 1845, 1042, 13],

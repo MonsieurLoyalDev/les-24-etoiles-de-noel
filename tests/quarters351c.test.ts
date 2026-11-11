@@ -7,7 +7,8 @@ it("C : aucune recomposition des Livres ou Artisans, végétaux des Veillées co
   ).quarters.accepted;
   for (const p of before.filter(
     (p: { quarter: string; key: string }) =>
-      p.quarter !== "Q2" || /^(fir_|bush_)/.test(p.key),
+      (p.quarter !== "Q2" && p.key !== "prop-watering") ||
+      /^(fir_|bush_)/.test(p.key),
   )) {
     const item = quarterItems351b.find(
       (i) =>
