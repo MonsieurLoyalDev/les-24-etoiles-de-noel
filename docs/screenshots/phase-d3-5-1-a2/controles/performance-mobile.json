@@ -1,0 +1,27 @@
+{
+  "cpu": 4,
+  "p95": 4.300000000000182,
+  "mean": 4.2588888888888885,
+  "samples": 180,
+  "effects": {
+    "quality": "none",
+    "reduced": true,
+    "flurry": 0.3773458341919851,
+    "visibleSnow": 0,
+    "visibleSmoke": 0,
+    "visibleWind": 0,
+    "visibleStars": 0,
+    "visibleLights": 7,
+    "swaying": 0,
+    "particleLimit": 0,
+    "cpuP95": 0.39999985694885254,
+    "engineFps": 88.109375,
+    "meanFrameMs": 4.259444444444443,
+    "palette": {
+      "color": 7902119,
+      "alpha": 0.018,
+      "warm": 0.08
+    }
+  },
+  "note": "Chrome local, mobile émulé, pas un téléphone physique."
+}
