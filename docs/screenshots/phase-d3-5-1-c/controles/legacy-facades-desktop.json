@@ -1,0 +1,39 @@
+{
+  "p95": 4.300000000000182,
+  "mean": 4.166666666666667,
+  "frames": 180,
+  "cpu": 1,
+  "ground": {
+    "width": 1920,
+    "height": 1408,
+    "covered": 249814,
+    "irregularEdge": 60294,
+    "snowIslands": 54555,
+    "materials": 4,
+    "routes": 38,
+    "courts": 5,
+    "baked": true,
+    "milliseconds": 263
+  },
+  "reduced": {
+    "quality": "none",
+    "reduced": true,
+    "flurry": 0.562730900588159,
+    "visibleSnow": 0,
+    "visibleSmoke": 0,
+    "visibleWind": 0,
+    "visibleStars": 0,
+    "visibleLights": 6,
+    "swaying": 0,
+    "particleLimit": 0,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 132.703125,
+    "meanFrameMs": 4.1677777777777765,
+    "palette": {
+      "color": 7902119,
+      "alpha": 0.018,
+      "warm": 0.08
+    }
+  },
+  "note": "Chrome local : mobile émulé avec CPU x4 pour cette mesure, pas un téléphone physique ; échantillons RAF, pas une garantie de FPS."
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "profile": "desktop",
+    "garden": "J1",
+    "entryAndExit": true,
+    "gate": {
+      "x": 310,
+      "y": 660
+    },
+    "inside": {
+      "x": 310,
+      "y": 645
+    },
+    "controls": "real keyboard movement, mobile viewport emulated"
+  },
+  {
+    "profile": "desktop",
+    "garden": "J4",
+    "entryAndExit": true,
+    "gate": {
+      "x": 1845,
+      "y": 957.5
+    },
+    "inside": {
+      "x": 1866,
+      "y": 979
+    },
+    "controls": "real keyboard movement, mobile viewport emulated"
+  },
+  {
+    "profile": "mobile",
+    "garden": "J1",
+    "entryAndExit": true,
+    "gate": {
+      "x": 310,
+      "y": 660
+    },
+    "inside": {
+      "x": 310,
+      "y": 645
+    },
+    "controls": "real keyboard movement, mobile viewport emulated"
+  },
+  {
+    "profile": "mobile",
+    "garden": "J4",
+    "entryAndExit": true,
+    "gate": {
+      "x": 1845,
+      "y": 957.5
+    },
+    "inside": {
+      "x": 1866,
+      "y": 979
+    },
+    "controls": "real keyboard movement, mobile viewport emulated"
+  }
+]

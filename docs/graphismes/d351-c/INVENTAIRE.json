@@ -1,0 +1,250 @@
+{
+  "phase": "D.3.5.1 — C",
+  "baseline": "B de9b507",
+  "world": [
+    1920,
+    1408
+  ],
+  "runtimeChanges": [
+    "src/art/quarters351b.ts"
+  ],
+  "newGraphicAssets": 0,
+  "publicFilesUnchanged": 223,
+  "beforePlacements": 74,
+  "afterPlacements": 77,
+  "addedOrRepositioned": [
+    {
+      "key": "prop-basket",
+      "texture": "d35-prop-basket",
+      "x": 1450,
+      "y": 402,
+      "width": 18,
+      "height": 17.79230769230769,
+      "quarter": "Q2",
+      "group": "veillees-voisinage",
+      "box": {
+        "x": 1441,
+        "y": 384.2076923076923,
+        "w": 18,
+        "h": 17.79230769230769
+      }
+    },
+    {
+      "key": "bush_snowy",
+      "texture": "refined-bush_snowy",
+      "x": 1435,
+      "y": 365,
+      "width": 25,
+      "height": 23.4375,
+      "quarter": "Q2",
+      "group": "veillees-voisinage",
+      "box": {
+        "x": 1422.5,
+        "y": 341.5625,
+        "w": 25,
+        "h": 23.4375
+      }
+    },
+    {
+      "key": "prop-basket",
+      "texture": "d35-prop-basket",
+      "x": 1702,
+      "y": 638,
+      "width": 17,
+      "height": 16.803846153846155,
+      "quarter": "Q2",
+      "group": "veillees-bois-maison",
+      "box": {
+        "x": 1693.5,
+        "y": 621.1961538461538,
+        "w": 17,
+        "h": 16.803846153846155
+      }
+    },
+    {
+      "key": "gift-cream",
+      "texture": "d35-gift-cream",
+      "x": 1698,
+      "y": 630,
+      "width": 15,
+      "height": 8.307692307692308,
+      "quarter": "Q2",
+      "group": "veillees-bois-maison",
+      "box": {
+        "x": 1690.5,
+        "y": 621.6923076923077,
+        "w": 15,
+        "h": 8.307692307692308
+      }
+    },
+    {
+      "key": "prop-lantern",
+      "texture": "d35-prop-lantern",
+      "x": 1704,
+      "y": 487,
+      "width": 14,
+      "height": 20.919540229885058,
+      "quarter": "Q2",
+      "group": "veillees-jardin-famille",
+      "box": {
+        "x": 1697,
+        "y": 466.08045977011494,
+        "w": 14,
+        "h": 20.919540229885058
+      }
+    },
+    {
+      "key": "prop-planter",
+      "texture": "d35-prop-planter",
+      "x": 1702,
+      "y": 463,
+      "width": 22,
+      "height": 15.146153846153846,
+      "quarter": "Q2",
+      "group": "veillees-jardin-famille",
+      "box": {
+        "x": 1691,
+        "y": 447.8538461538462,
+        "w": 22,
+        "h": 15.146153846153846
+      }
+    },
+    {
+      "key": "bench-garden",
+      "texture": "d35-bench-garden",
+      "x": 1668,
+      "y": 443,
+      "width": 80,
+      "height": 24.923076923076923,
+      "quarter": "Q2",
+      "group": "veillees-jardin-famille",
+      "box": {
+        "x": 1628,
+        "y": 418.0769230769231,
+        "w": 80,
+        "h": 24.923076923076923
+      }
+    },
+    {
+      "key": "prop-watering",
+      "texture": "d35-prop-watering",
+      "x": 1827,
+      "y": 980,
+      "width": 20,
+      "height": 16.846153846153847,
+      "quarter": "Q4",
+      "group": "artisans-jardinet",
+      "box": {
+        "x": 1817,
+        "y": 963.1538461538462,
+        "w": 20,
+        "h": 16.846153846153847
+      }
+    }
+  ],
+  "removedOrRepositioned": [
+    {
+      "key": "prop-mailbox",
+      "texture": "d35-prop-mailbox",
+      "x": 1715,
+      "y": 648,
+      "width": 17,
+      "height": 24.831460674157302,
+      "quarter": "Q2",
+      "group": "veillees-bois-maison",
+      "box": {
+        "x": 1706.5,
+        "y": 623.1685393258427,
+        "w": 17,
+        "h": 24.831460674157302
+      }
+    },
+    {
+      "key": "gift-cream",
+      "texture": "d35-gift-cream",
+      "x": 1298,
+      "y": 334,
+      "width": 15,
+      "height": 8.307692307692308,
+      "quarter": "Q2",
+      "group": "veillees-petites-attentions",
+      "box": {
+        "x": 1290.5,
+        "y": 325.6923076923077,
+        "w": 15,
+        "h": 8.307692307692308
+      }
+    },
+    {
+      "key": "prop-lantern",
+      "texture": "d35-prop-lantern",
+      "x": 1788,
+      "y": 530,
+      "width": 14,
+      "height": 20.919540229885058,
+      "quarter": "Q2",
+      "group": "veillees-jardin-famille",
+      "box": {
+        "x": 1781,
+        "y": 509.08045977011494,
+        "w": 14,
+        "h": 20.919540229885058
+      }
+    },
+    {
+      "key": "prop-planter",
+      "texture": "d35-prop-planter",
+      "x": 1760,
+      "y": 544,
+      "width": 22,
+      "height": 15.146153846153846,
+      "quarter": "Q2",
+      "group": "veillees-jardin-famille",
+      "box": {
+        "x": 1749,
+        "y": 528.8538461538461,
+        "w": 22,
+        "h": 15.146153846153846
+      }
+    },
+    {
+      "key": "prop-watering",
+      "texture": "d35-prop-watering",
+      "x": 1842,
+      "y": 980,
+      "width": 20,
+      "height": 16.846153846153847,
+      "quarter": "Q4",
+      "group": "artisans-jardinet",
+      "box": {
+        "x": 1832,
+        "y": 963.1538461538462,
+        "w": 20,
+        "h": 16.846153846153847
+      }
+    }
+  ],
+  "quarterCounts": {
+    "Q1": 21,
+    "Q2": 25,
+    "Q4": 31
+  },
+  "newGroundPad": [
+    {
+      "key": "packed-b",
+      "x": 1668,
+      "y": 449,
+      "w": 87,
+      "h": 58.79296875,
+      "ratio": 1.4797687861271676
+    }
+  ],
+  "localSnowChanges": [
+    "veillees-passage",
+    "veillees-seuils"
+  ],
+  "protectedPathTextureHash": "ce3a465ed02213dc6f9b65aa89b96991450cb2da72ed76f1f64a531aab6a03ab",
+  "protectedPathBytes": 10781804,
+  "unchangedPlacementsOutsideCorrections": 187,
+  "preservedWitnessCount": 67
+}

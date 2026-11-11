@@ -1,0 +1,114 @@
+[
+  {
+    "name": "livres",
+    "cpu": 1,
+    "p95": 4.300000000000182,
+    "mean": 4.1677777777777765,
+    "samples": 180,
+    "reducedEffects": {
+      "quality": "none",
+      "reduced": true,
+      "flurry": 0.5181615289923169,
+      "visibleSnow": 0,
+      "visibleSmoke": 0,
+      "visibleWind": 0,
+      "visibleStars": 0,
+      "visibleLights": 6,
+      "swaying": 0,
+      "particleLimit": 0,
+      "cpuP95": 0.10000014305114746,
+      "engineFps": 134.015625,
+      "meanFrameMs": 4.167222222222222,
+      "palette": {
+        "color": 7902119,
+        "alpha": 0.018,
+        "warm": 0.08
+      }
+    },
+    "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+  },
+  {
+    "name": "veillees",
+    "cpu": 1,
+    "p95": 4.300000000000182,
+    "mean": 4.167222222222222,
+    "samples": 180,
+    "reducedEffects": {
+      "quality": "none",
+      "reduced": true,
+      "flurry": 0.49920905739773336,
+      "visibleSnow": 0,
+      "visibleSmoke": 0,
+      "visibleWind": 0,
+      "visibleStars": 0,
+      "visibleLights": 5,
+      "swaying": 0,
+      "particleLimit": 0,
+      "cpuP95": 0.10000014305114746,
+      "engineFps": 133.640625,
+      "meanFrameMs": 4.167222222222224,
+      "palette": {
+        "color": 7902119,
+        "alpha": 0.018,
+        "warm": 0.08
+      }
+    },
+    "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+  },
+  {
+    "name": "artisans",
+    "cpu": 1,
+    "p95": 4.300000000000182,
+    "mean": 4.167777777777779,
+    "samples": 180,
+    "reducedEffects": {
+      "quality": "none",
+      "reduced": true,
+      "flurry": 0.49818130713505465,
+      "visibleSnow": 0,
+      "visibleSmoke": 0,
+      "visibleWind": 0,
+      "visibleStars": 0,
+      "visibleLights": 5,
+      "swaying": 0,
+      "particleLimit": 0,
+      "cpuP95": 0.10000014305114746,
+      "engineFps": 133.59375,
+      "meanFrameMs": 4.167222222222224,
+      "palette": {
+        "color": 7902119,
+        "alpha": 0.018,
+        "warm": 0.08
+      }
+    },
+    "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+  },
+  {
+    "name": "veillees-mobile",
+    "cpu": 4,
+    "p95": 4.300000000000182,
+    "mean": 4.167222222222224,
+    "samples": 180,
+    "reducedEffects": {
+      "quality": "none",
+      "reduced": true,
+      "flurry": 0.4955902585720815,
+      "visibleSnow": 0,
+      "visibleSmoke": 0,
+      "visibleWind": 0,
+      "visibleStars": 0,
+      "visibleLights": 3,
+      "swaying": 0,
+      "particleLimit": 0,
+      "cpuP95": 0.20000004768371582,
+      "engineFps": 134.203125,
+      "meanFrameMs": 4.167222222222219,
+      "palette": {
+        "color": 7902119,
+        "alpha": 0.018,
+        "warm": 0.08
+      }
+    },
+    "note": "Chrome local, mobile émulé, mesure RAF sans garantie de performances sur appareil physique."
+  }
+]
