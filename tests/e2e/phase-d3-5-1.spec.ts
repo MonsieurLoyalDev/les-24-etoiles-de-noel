@@ -7,7 +7,7 @@ import {
   witnessRegion351,
 } from "../../src/art/composition351";
 import { navigateTo } from "./pathfinding";
-const out = "docs/screenshots/phase-d3-5-1-b/controles";
+const out = "docs/screenshots/phase-d3-5-1-c/controles";
 async function start(page: Page, position = { x: 560, y: 960 }) {
   await page.goto("/");
   await page.evaluate(
