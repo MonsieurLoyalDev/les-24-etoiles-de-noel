@@ -50,7 +50,7 @@ test("E1 véritable build privé : chaque image et fonte existe, MIME et octets 
     (await page.request.get("/demo/surprise.webm")).headers()["content-type"],
   ).not.toContain("video/");
 });
-test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fauteuil", async ({
+test("E1 Célestine privée : vraies poses, réduction et fauteuil", async ({
   page,
 }, info) => {
   test.setTimeout(240000);
@@ -72,7 +72,7 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
     ).toHaveCount(0);
     await page.getByRole("button", { name: "Retour au village ×" }).click();
     await waitClip(page, "mira", clip);
-    const trace = await traceActivity(page, "mira", 2200);
+    const trace = await recordActivity(page, "mira", 2200);
     expect(trace.some((s) => s.drawn?.texture === "activity-celestine")).toBe(
       true,
     );
@@ -88,7 +88,7 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
     await expect
       .poll(async () => (await activity(page, "mira"))?.drawn?.frame)
       .toBe(restingFrame);
-    const reduced = await traceActivity(page, "mira", 600);
+    const reduced = await recordActivity(page, "mira", 600);
     expect(
       reduced.every(
         (s) =>
@@ -101,61 +101,78 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
       page,
       `${out}/${info.project.name}-celestine-${clip}.png`,
     );
-    if (clip === "read") {
-      await navigateTo(page, { x: 760, y: 324 });
-      const talk = page.getByRole("button", { name: /Parler à Célestine/ });
-      await expect(talk).toBeVisible();
-      await expect(talk).toBeEnabled();
-      if (info.project.name === "mobile") {
-        const box = (await talk.boundingBox())!;
-        await page.touchscreen.tap(
-          box.x + box.width / 2,
-          box.y + box.height / 2,
-        );
-      } else await page.keyboard.press("e");
-      await expect(
-        page.getByRole("button", { name: "À bientôt", exact: true }),
-      ).toBeVisible();
-      await expect
-        .poll(async () => (await activity(page, "mira"))?.phase)
-        .toBe("interrupted");
-      const interrupted = await activity(page, "mira");
-      expect(interrupted?.object).toBe(
-        interrupted?.clip === "seatRead" ? "book-closed" : null,
-      );
-      await capturePrivatePage(
-        page,
-        `${out}/${info.project.name}-dialogue.png`,
-      );
-      await page
-        .getByRole("button", { name: "À bientôt", exact: true })
-        .click();
-      await navigateTo(page, { x: 830, y: 370 });
-      // A real schedule may advance during navigation/dialogue. Resume the
-      // current routine, rather than requiring the previous time slot forever.
-      await expect
-        .poll(async () => {
-          const a = await activity(page, "mira");
-          const actor = await page
-            .locator("canvas")
-            .evaluate((c) =>
-              JSON.parse(c.dataset.livingWorld!).actors.find(
-                (a: { id: string }) => a.id === "mira",
-              ),
-            );
-          return (
-            !!a &&
-            !a.interrupted &&
-            a.phase !== "interrupted" &&
-            !!actor &&
-            actor.state !== "TALKING_TO_PLAYER"
-          );
-        })
-        .toBe(true);
-    }
   }
   await fixture.verify();
 });
+test("E1 Célestine privée : interruption immédiate, clavier/tactile et reprise", async ({
+  page,
+}, info) => {
+  test.setTimeout(120000);
+  const fixture = await installPrivateFixture(page);
+  // 50px from the reading point: outside the 43px approach pause, a short
+  // walk away from interaction. Interrupt the nine-second activity first.
+  await startActivityGame(page, "library", 45000, { x: 790, y: 324 });
+  await loginFixture(page);
+  await page.getByRole("button", { name: "Retour au village ×" }).click();
+  await waitClip(page, "mira", "read");
+  expect((await activity(page, "mira"))?.drawn?.texture).toBe(
+    "activity-celestine",
+  );
+  await navigateTo(page, { x: 770, y: 324 });
+  const talk = page.getByRole("button", { name: /Parler à Célestine/ });
+  await expect(talk).toBeVisible();
+  await expect(talk).toBeEnabled();
+  if (info.project.name === "mobile") {
+    const box = (await talk.boundingBox())!;
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+  } else await page.keyboard.press("e");
+  const goodbye = page.getByRole("button", { name: "À bientôt", exact: true });
+  await expect(goodbye).toBeVisible();
+  await expect
+    .poll(async () => (await activity(page, "mira"))?.phase)
+    .toBe("interrupted");
+  expect((await activity(page, "mira"))?.object).toBeNull();
+  const actor = () =>
+    page
+      .locator("canvas")
+      .evaluate((c) =>
+        JSON.parse(c.dataset.livingWorld!).actors.find(
+          (a: { id: string }) => a.id === "mira",
+        ),
+      );
+  await expect
+    .poll(async () => (await actor())?.state)
+    .toBe("TALKING_TO_PLAYER");
+  const paused = await actor();
+  await page.waitForTimeout(500);
+  expect(await actor()).toEqual(paused);
+  await capturePrivatePage(page, `${out}/${info.project.name}-dialogue.png`);
+  if (info.project.name === "mobile") {
+    const box = (await goodbye.boundingBox())!;
+    await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+  } else {
+    await goodbye.focus();
+    await page.keyboard.press("Enter");
+  }
+  await expect(goodbye).toHaveCount(0);
+  await navigateTo(page, { x: 830, y: 370 });
+  await expect
+    .poll(async () => {
+      const a = await activity(page, "mira"),
+        resident = await actor();
+      return (
+        !!a &&
+        !a.interrupted &&
+        a.phase !== "interrupted" &&
+        !!resident &&
+        resident.state !== "TALKING_TO_PLAYER" &&
+        !resident.nearPlayer
+      );
+    })
+    .toBe(true);
+  await fixture.verify();
+});
+
 test("E1 Émile privé : vraie lettre déposée, aucune texture de secours", async ({
   page,
 }, info) => {
