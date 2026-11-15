@@ -11,12 +11,34 @@ export type WorldPoint = {
   slots?: Point[];
   kind: "lantern" | "mailbox" | "reading" | "rest" | "seat";
   seatedAnimation?: string;
+  seatProjection?: {
+    offset: Point;
+    fixture: { key: string; x: number; y: number };
+    foreground: { x: number; y: number; w: number; h: number }[];
+  };
 };
 export const worldPoints: WorldPoint[] = [
   {
+    id: "library-armchair",
+    room: "library",
+    position: { x: 910, y: 316 },
+    lookAt: { x: 910, y: 278 },
+    capacity: 1,
+    kind: "seat",
+    seatedAnimation: "seatRead",
+    seatProjection: {
+      offset: { x: 0, y: -28 },
+      fixture: { key: "library-nook", x: 910, y: 310 },
+      foreground: [
+        { x: 25, y: 80, w: 20, h: 60 },
+        { x: 95, y: 80, w: 13, h: 60 },
+      ],
+    },
+  },
+  {
     id: "plaza-market-lantern",
     room: "village",
-    position: { x: 807, y: 775 },
+    position: { x: 805, y: 764 },
     lookAt: { x: 784, y: 775 },
     capacity: 1,
     kind: "lantern",
@@ -24,7 +46,7 @@ export const worldPoints: WorldPoint[] = [
   {
     id: "plaza-gifts-lantern",
     room: "village",
-    position: { x: 850, y: 690 },
+    position: { x: 855, y: 664 },
     lookAt: { x: 875, y: 678 },
     capacity: 1,
     kind: "lantern",
@@ -32,7 +54,7 @@ export const worldPoints: WorldPoint[] = [
   {
     id: "plaza-evening-lantern",
     room: "village",
-    position: { x: 1040, y: 868 },
+    position: { x: 1036, y: 844 },
     lookAt: { x: 1015, y: 858 },
     capacity: 1,
     kind: "lantern",
@@ -48,7 +70,7 @@ export const worldPoints: WorldPoint[] = [
   {
     id: "mail-books",
     room: "village",
-    position: { x: 213, y: 422 },
+    position: { x: 173, y: 446 },
     lookAt: { x: 193, y: 427 },
     capacity: 1,
     kind: "mailbox",
@@ -56,7 +78,7 @@ export const worldPoints: WorldPoint[] = [
   {
     id: "mail-families",
     room: "village",
-    position: { x: 1335, y: 588 },
+    position: { x: 1315, y: 588 },
     lookAt: { x: 1335, y: 569 },
     capacity: 1,
     kind: "mailbox",

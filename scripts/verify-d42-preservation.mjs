@@ -1,0 +1,11 @@
+import{readFileSync,writeFileSync}from'node:fs';import{createHash}from'node:crypto';import{execFileSync}from'node:child_process';
+const hash=b=>createHash('sha256').update(b).digest('hex'),baseline='be52808';
+const files=JSON.parse(readFileSync('docs/d41/BASELINE.json')).files.filter(f=>f.path.startsWith('public/'));
+const changedAssets=files.filter(f=>hash(readFileSync(f.path))!==f.sha256).map(f=>f.path);
+const allowed=['src/art/ambience.ts','src/game/Game.ts','src/world/points.ts','src/world/presentation.ts','src/world/registry.ts','src/world/runtime.ts'];
+const source=execFileSync('git',['ls-tree','-r','--name-only',baseline,'src'],{encoding:'utf8'}).trim().split('\n');
+const changedSources=source.filter(p=>hash(execFileSync('git',['show',baseline+':'+p]).toString().replaceAll('\r\n','\n'))!==hash(readFileSync(p,'utf8').replaceAll('\r\n','\n')));
+const unexpected=changedSources.filter(p=>!allowed.includes(p));
+const newAssets=['celestine','emile','augustin'].map(name=>{const path='public/assets/activities-d42/'+name+'.png',b=readFileSync(path);return{path,bytes:b.length,sha256:hash(b),poses:16,width:b.readUInt32BE(16),height:b.readUInt32BE(20)}});
+const result={baseline,oldPublicFilesChecked:files.length,changedAssets,sourceFilesChecked:source.length,changedSources,unexpected,newAssets,newAssetBytes:newAssets.reduce((a,b)=>a+b.bytes,0),note:'Les fins de ligne des sources sont normalisées pour comparer les blobs Git aux fichiers Windows ; les 223 anciens fichiers publics sont comparés octet par octet.'};
+writeFileSync('docs/d42/PRESERVATION.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result,null,2));if(changedAssets.length||unexpected.length)process.exitCode=1;

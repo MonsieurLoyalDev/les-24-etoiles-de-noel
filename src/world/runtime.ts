@@ -1,3 +1,5 @@
+import { ActivityDirector } from "./activities";
+import { LanternCoordinator } from "./lanterns";
 import type { Point, Rect } from "../domain";
 import { period, type Room } from "../rpg/world";
 import { NavigationGrid, type RouteSegment } from "./navigation";
@@ -29,9 +31,21 @@ export type LivingActor = {
   previousState: WorldState | null;
   visits: number;
   blockedReason: string;
+  reaction: {
+    clip: string;
+    age: number;
+    duration: number;
+    other: string;
+  } | null;
+  reactionCooldown: number;
 };
 const dist = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
 export class LivingWorld {
+  readonly activities = new ActivityDirector();
+  readonly lanterns = new LanternCoordinator();
+  get clock() {
+    return this.lastClock;
+  }
   readonly actors = new Map<string, LivingActor>();
   readonly reservations = new PointReservations();
   readonly environments = new Map<Room, NavigationGrid>();
@@ -62,6 +76,8 @@ export class LivingWorld {
         previousState: null,
         visits: 0,
         blockedReason: "",
+        reaction: null,
+        reactionCooldown: 0,
       });
   }
   attach(
@@ -157,10 +173,12 @@ export class LivingWorld {
   ) {
     this.lastClock = clock;
     delta = Math.max(0, Math.min(delta, 200));
+    this.lanterns.update(clock, delta);
     const phase = period(clock),
       all = [...this.actors.values()];
     for (const a of all) {
       if (a.id === talking) {
+        a.reaction = null;
         if (a.state !== "TALKING_TO_PLAYER") {
           a.previousState = a.state;
           a.state = "TALKING_TO_PLAYER";
@@ -181,8 +199,41 @@ export class LivingWorld {
         nav.clear(a.position, player);
       a.nearPlayer = close;
       if (close) {
+        a.reaction = null;
         a.accumulator = 0;
         continue;
+      }
+      a.reactionCooldown = Math.max(0, a.reactionCooldown - delta);
+      if (a.reaction) {
+        a.reaction.age += delta;
+        a.accumulator = 0;
+        if (a.reaction.age >= a.reaction.duration) a.reaction = null;
+        else continue;
+      }
+      if (
+        a.profile.greetingClip &&
+        a.state === "WALKING" &&
+        a.reactionCooldown === 0
+      ) {
+        const peer = all.find(
+          (b) =>
+            b.id !== a.id &&
+            b.profile.room === a.profile.room &&
+            b.state !== "TALKING_TO_PLAYER" &&
+            dist(a.position, b.position) < 45 &&
+            nav.clear(a.position, b.position),
+        );
+        if (peer) {
+          a.reaction = {
+            clip: a.profile.greetingClip,
+            age: 0,
+            duration: 1300,
+            other: peer.id,
+          };
+          a.reactionCooldown = 45000;
+          a.accumulator = 0;
+          continue;
+        }
       }
       a.retryIn = Math.max(0, a.retryIn - delta);
       const active = a.profile.room === room && visible(a.position);
@@ -283,6 +334,7 @@ export class LivingWorld {
         }
       }
     }
+    this.activities.update(this.actors.values(), clock, delta, this.lanterns);
   }
   snapshot() {
     return {

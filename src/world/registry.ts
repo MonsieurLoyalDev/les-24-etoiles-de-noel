@@ -15,6 +15,7 @@ export type WorldProfile = {
   room: Room;
   spawn: Point;
   speed: number;
+  greetingClip?: string;
   schedule: readonly Activity[][];
 };
 const activity = (
@@ -57,6 +58,7 @@ export const worldProfiles: WorldProfile[] = [
     room: "village",
     spawn: { x: 750, y: 700 },
     speed: 42,
+    greetingClip: "greet",
     schedule: [
       [activity("mail-books", "Vérifie le courrier", 10000)],
       [activity("mail-families", "Tournée des voisins", 11000)],
@@ -81,7 +83,7 @@ export const worldProfiles: WorldProfile[] = [
         activity("library-reading", "Au livre des histoires", 9000),
       ],
       [
-        activity("library-reading", "Lecture de la veillée", 12000),
+        activity("library-armchair", "Lecture au fauteuil", 12000),
         activity("library-shelves", "Dernière ronde des livres"),
       ],
       [

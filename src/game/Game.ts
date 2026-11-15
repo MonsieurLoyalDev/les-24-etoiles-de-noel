@@ -1,3 +1,4 @@
+import { preloadActivities } from "../world/activity-presentation";
 import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
 import { playSound, stopAmbience } from "../art/audio";
@@ -169,6 +170,7 @@ export class Village extends Phaser.Scene {
     preloadVillage33(this);
     preloadRooms33(this);
     preloadActors(this);
+    preloadActivities(this);
     const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
     this.load.atlas("art-tree", tree.image, tree.data);
     this.load.spritesheet("ground", manifest.ground.path, {
@@ -466,6 +468,7 @@ export class Village extends Phaser.Scene {
       this,
       this.shade,
       this.state.room === "village",
+      this.living.lanterns,
     );
     if (this.state.room !== "village")
       this.interiorLight = new InteriorLight(this, this.state.room);
@@ -1100,6 +1103,15 @@ export class Village extends Phaser.Scene {
     );
     if (_time - this.livingAuditAt > 250) {
       this.livingAuditAt = _time;
+      this.game.canvas.dataset.activityLightRendering = JSON.stringify(
+        this.ambience?.activityLights() ?? [],
+      );
+      this.game.canvas.dataset.activityLanterns = JSON.stringify(
+        this.living.lanterns.snapshot(),
+      );
+      this.game.canvas.dataset.activities = JSON.stringify(
+        this.livingPresentation?.activities.snapshot() ?? [],
+      );
       this.game.canvas.dataset.livingWorld = JSON.stringify(
         this.living.snapshot(),
       );

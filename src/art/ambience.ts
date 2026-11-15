@@ -1,3 +1,5 @@
+import type { LanternCoordinator } from "../world/lanterns";
+import { worldPoints } from "../world/points";
 import Phaser from "phaser";
 import { villageMap as map, anchors } from "./village34";
 import {
@@ -13,6 +15,8 @@ type Light = {
   y: number;
   base: number;
   size: number;
+  point?: string;
+  fixture?: Phaser.GameObjects.Image;
 };
 type Smoke = {
   image: Phaser.GameObjects.Image;
@@ -72,6 +76,7 @@ export class VillageAmbience {
     private scene: Phaser.Scene,
     private shade: Phaser.GameObjects.Rectangle,
     private village: boolean,
+    private lanterns?: LanternCoordinator,
   ) {
     if (!scene.textures.exists("ambient-soft")) {
       const tex = scene.textures.createCanvas("ambient-soft", 48, 48)!;
@@ -102,6 +107,7 @@ export class VillageAmbience {
       size: number,
       base: number,
       depth: number,
+      fixture?: Phaser.GameObjects.Image,
     ) => {
       const image = scene.add
         .image(x, y, "ambient-soft")
@@ -109,7 +115,14 @@ export class VillageAmbience {
         .setDisplaySize(size, size)
         .setBlendMode(Phaser.BlendModes.ADD)
         .setDepth(depth);
-      this.lights.push({ image, x, y, size, base });
+      const point = fixture
+        ? worldPoints.find(
+            (p) =>
+              p.kind === "lantern" &&
+              Math.hypot(p.lookAt.x - fixture.x, p.lookAt.y - fixture.y) < 1,
+          )?.id
+        : undefined;
+      this.lights.push({ image, x, y, size, base, fixture, point });
     };
     for (const p of map.props.filter((p) => p.sprite === "lantern"))
       light(p.tileX * 16, p.tileY * 16 - 49, 23, 0.55, p.tileY * 16 + 1);
@@ -117,7 +130,8 @@ export class VillageAmbience {
       if (
         child instanceof Phaser.GameObjects.Image &&
         child.name.startsWith("scenery:") &&
-        (child.name.includes("lampadaire") || child.name.includes("prop-lantern"))
+        (child.name.includes("lampadaire") ||
+          child.name.includes("prop-lantern"))
       )
         light(
           child.x,
@@ -125,6 +139,7 @@ export class VillageAmbience {
           23,
           0.45,
           child.depth + 1,
+          child,
         );
     light(anchors.tree.x, anchors.tree.y + 4, 176, 0.25, anchors.tree.y - 12);
     this.lights[this.lights.length - 1].image.setDisplaySize(176, 92);
@@ -189,6 +204,16 @@ export class VillageAmbience {
         o.name.includes("guirlande_lanternes"),
     ) as Phaser.GameObjects.Image[];
   }
+  activityLights() {
+    return this.lights
+      .filter((l) => l.point)
+      .map((l) => ({
+        id: l.point,
+        alpha: l.image.alpha,
+        tint: l.fixture?.tintTopLeft,
+        texture: l.fixture?.texture.key,
+      }));
+  }
   update(time: number, clock: number, delta: number) {
     this.epoch ??= time;
     time -= this.epoch;
@@ -227,8 +252,23 @@ export class VillageAmbience {
       const visible = onscreen(l.x, l.y, l.size);
       l.image.setVisible(visible);
       if (visible) {
+        const controlled = l.point ? this.lanterns?.get(l.point) : undefined;
+        const level = controlled
+          ? motion
+            ? controlled.level
+            : controlled.on
+              ? 1
+              : 0
+          : 1;
+        if (controlled && l.fixture) {
+          const r = Math.round(101 + 154 * level),
+            g = Math.round(117 + 138 * level),
+            b = Math.round(135 + 120 * level);
+          l.fixture.setTint((r << 16) | (g << 8) | b);
+        }
         l.image.setAlpha(
-          l.base *
+          level *
+            l.base *
             (0.12 + palette.warm * 0.88) *
             (motion ? 1 + Math.sin(time / 1900 + i * 1.7) * 0.035 : 1),
         );

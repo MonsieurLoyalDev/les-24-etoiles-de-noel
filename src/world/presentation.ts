@@ -1,3 +1,4 @@
+import { ActivityPresentation } from "./activity-presentation";
 import type Phaser from "phaser";
 import { animateActor } from "../art/actors";
 import { faceActor } from "./facing";
@@ -6,11 +7,14 @@ import type { Room } from "../rpg/world";
 import { facadeBounds } from "../art/village34";
 /** One quiet context line at most, separate from names and hidden for player dialogue/menu. */
 export class LivingPresentation {
+  readonly activities: ActivityPresentation;
   private labels = new Map<string, Phaser.GameObjects.Text>();
   constructor(
     private scene: Phaser.Scene,
     private world: LivingWorld,
-  ) {}
+  ) {
+    this.activities = new ActivityPresentation(scene, world);
+  }
   update(
     npcs: { id: string; image: Phaser.GameObjects.Sprite }[],
     room: Room,
@@ -18,6 +22,7 @@ export class LivingPresentation {
     hidden: boolean,
     plates: Phaser.GameObjects.Container[] = [],
   ) {
+    this.activities.beginFrame();
     const view = this.scene.cameras.main.worldView;
     let bubble = false;
     for (const npc of npcs) {
@@ -28,7 +33,8 @@ export class LivingPresentation {
         npc.image.x <= view.right + 60 &&
         npc.image.y >= view.y - 60 &&
         npc.image.y <= view.bottom + 60;
-      if (shown) {
+      const acting = this.activities.render(npc.image, a, shown, hidden);
+      if (shown && !acting) {
         npc.image.anims.resume();
         if (a.state === "TALKING_TO_PLAYER" || a.nearPlayer)
           faceActor(npc.image, a.profile.actor, player);
@@ -36,7 +42,7 @@ export class LivingPresentation {
           const point = this.world.point(a);
           if (point) faceActor(npc.image, a.profile.actor, point.lookAt);
         } else animateActor(npc.image);
-      } else npc.image.anims.pause();
+      } else if (!shown) npc.image.anims.pause();
       let label = this.labels.get(a.id);
       if (!label) {
         label = this.scene.add

@@ -56,7 +56,13 @@ async function approachNPC(page: Page, id: string, name: string) {
     const people = JSON.parse(
       (await page.locator("canvas").getAttribute("data-npcs")) ?? "[]",
     ) as { id: string; x: number; y: number }[];
-    const person = people.find((n) => n.id === id)!;
+    const world = JSON.parse(
+      (await page.locator("canvas").getAttribute("data-living-world")) ?? "{}",
+    );
+    const person =
+      (
+        world.actors as { id: string; x: number; y: number }[] | undefined
+      )?.find((n) => n.id === id) ?? people.find((n) => n.id === id)!;
     await navigateTo(page, { x: person.x, y: person.y });
   }
   await interact(page, new RegExp("Parler à " + name));
