@@ -73,6 +73,8 @@ Le build privé de recette utilise uniquement `https://example.supabase.co`, `sb
 
 ### Échecs intermédiaires conservés et expliqués
 
+- Première recette GitHub Linux (`0126504`, exécution `43759894892`) : 205 tests unitaires réussis, infrastructure isolée réussie (Nginx/TLS, 2 parcours navigateur et sauvegarde/restauration PostgreSQL). Le lot privé obtient 10/14 : quatre captures dépassent le délai d'action de 10 secondes, après le chargement des fontes, dans le rendu logiciel Chromium. Les assertions atteintes avant ces captures passent, mais les scénarios interrompus ne sont pas comptés réussis. Le délai des seules captures explicites est porté à 60 secondes, avec une enveloppe de scénario adaptée ; les délais/assertions de navigation, activités, Auth et sécurité restent inchangés. Le résultat de la nouvelle recette est à consulter sur le commit correctif.
+
 - Les premiers contrôles d'intégration ont signalé des types explicites manquants dans le plugin Rollup et une mise en forme ambiguë pour ESLint ; ces erreurs sont corrigées, les contrôles finaux passent.
 - Le premier pilote de connexion utilisait une visibilité instantanée avant rendu du formulaire ; plusieurs scénarios ont échoué. Il attend maintenant explicitement formulaire ou calendrier, sans contourner la connexion.
 - Une installation/test concurrente avec les animations a provoqué cinq délais unitaires de 5 secondes. La concurrence est bornée à deux workers, sans augmenter ces délais ; la série finale passe.

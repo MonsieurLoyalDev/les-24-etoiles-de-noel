@@ -79,6 +79,7 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
       new Set(trace.map((s) => s.drawn?.frame).filter(Boolean)).size,
     ).toBeGreaterThan(1);
     await page.screenshot({
+      timeout: 60000,
       path: `${out}/${info.project.name}-celestine-${clip}.png`,
     });
     if (clip === "read") {
@@ -89,6 +90,7 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
         .toBe("interrupted");
       expect((await activity(page, "mira"))?.object).toBeNull();
       await page.screenshot({
+        timeout: 60000,
         path: `${out}/${info.project.name}-dialogue.png`,
       });
       await page
@@ -113,6 +115,7 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
 test("E1 Émile privé : vraie lettre déposée, aucune texture de secours", async ({
   page,
 }, info) => {
+  test.setTimeout(180000);
   const fixture = await installPrivateFixture(page);
   // Observe the morning stop, leaving enough time for a full delivery before
   // the next scheduled period. Do not alter the resident's existing routine.
@@ -127,7 +130,10 @@ test("E1 Émile privé : vraie lettre déposée, aucune texture de secours", asy
       return a?.object === "letter" && a.drawn?.texture === "activity-emile";
     })
     .toBe(true);
-  await page.screenshot({ path: `${out}/${info.project.name}-emile.png` });
+  await page.screenshot({
+    path: `${out}/${info.project.name}-emile.png`,
+    timeout: 60000,
+  });
   const trace = await recording;
   await info.attach("emile-cycle", {
     body: Buffer.from(JSON.stringify(trace)),
@@ -151,6 +157,7 @@ test("E1 Émile privé : vraie lettre déposée, aucune texture de secours", asy
 test("E1 Augustin privé : vraies poses et lumière existante synchronisée", async ({
   page,
 }, info) => {
+  test.setTimeout(180000);
   const fixture = await installPrivateFixture(page);
   await startActivityGame(page, "village", 90000, { x: 1120, y: 900 });
   await loginFixture(page);
@@ -170,7 +177,10 @@ test("E1 Augustin privé : vraies poses et lumière existante synchronisée", as
       ),
     );
   expect(lamp).toMatchObject({ on: true, level: 1, commits: 1 });
-  await page.screenshot({ path: `${out}/${info.project.name}-augustin.png` });
+  await page.screenshot({
+    path: `${out}/${info.project.name}-augustin.png`,
+    timeout: 60000,
+  });
   await fixture.verify();
 });
 test("E1 joueur privé : calendrier daté, aucun aperçu/admin ni média futur accessible", async ({
