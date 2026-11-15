@@ -30,7 +30,7 @@ Avant correction, `npm run build:private` terminait avec le code 0 alors que `ce
 | `vitest.config.ts` | Deux workers maximum pour borner le travail PNG/hash/PGlite ; aucun relâchement des assertions ou délais unitaires |
 | `tests/e2e/phase-d3-2-compat.spec.ts` | Attente de démarrage alignée à 20 secondes comme les pilotes récents ; assertions de position sûre, inventaire, quêtes, étoiles, scores et historique inchangées |
 | `.github/workflows/ci.yml` | Nouveau job Linux `private-release` : installation, lint, unitaires, build privé fictif, navigateur et captures. Les jobs qualité/infrastructure existants sont conservés ; aucune étape de déploiement ajoutée |
-| `docs/phase-e/` | Ajout de ce rapport et de 12 captures ; sept documents E.0 conservés et inclus dans la livraison |
+| `docs/phase-e/` | Ajout de ce rapport et de 14 captures ; sept documents E.0 conservés et inclus dans la livraison |
 
 Le contrôle de fichiers ne copie jamais automatiquement tout `public/`. Un nouvel asset doit être revu et autorisé. Les familles et métadonnées couvrent les ressources actuelles ; une nouvelle famille ou un nouveau mécanisme de chargement devra compléter ce contrat et les tests navigateur. Cette vérification ne reconnaît pas magiquement une photo personnelle : la revue humaine des ajouts reste nécessaire.
 
@@ -54,6 +54,7 @@ Environnement : Windows, Node 24.14.0, npm 11.9.0, Playwright 1.64.1, Chrome loc
 | Ressource supprimée de la liste, HTML sous nom PNG, octets différents, chunk JS/CSS absent | Refus effectivement exécutés par les tests |
 | Régressions `game`, `phase-b`, `phase-c`, `phase-d3-2-compat` | Série initiale **11 réussis / 1 échec d'attente de démarrage** ; confirmation du test de compatibilité **2/2 réussis** après correction du pilote. Les **12 scénarios distincts sont validés** |
 | `npm run test:private` final | **16/16 réussis**, aucun ignoré ni instable, 7 min 17,66 s, sur le pilote final ; l'installation vierge avait aussi validé le lot initial 14/14 |
+| Même lot avec `ETB_PRIVATE_CANVAS=1` | **16/16 réussis**, aucun ignoré ni instable, 6 min 45,28 s ; contexte 2D effectivement vérifié sur PC et mobile |
 | Export Git et fins de ligne | Archive de contrôle de `Captcha.tsx` et `domain.ts` avec les attributs de travail : LF conservé malgré `core.autocrlf=true` ; aucune suppression de preuve SHA-256 |
 
 Les régressions couvrent les 24 activités fictives complétées sur les deux formats, le final, le rejeu, le journal, les brouillons/reprises, le calendrier fermé en novembre, l'éditeur fictif, les trois mini-jeux, la première quête, les quêtes secondaires, le joystick et d'anciennes sauvegardes replacées hors des obstacles. Les 24 jours constituent des étapes dans deux parcours, pas 48 tests navigateur comptés artificiellement.
@@ -71,7 +72,21 @@ npm run test:private
 
 Le build privé de recette utilise uniquement `https://example.supabase.co`, `sb_publishable_fixture_not_real` et `fixture-public-site-key`. **Ces valeurs ne configurent pas un service réel et ne doivent pas servir à une publication.** Les fixtures refusent les requêtes imprévues et les origines externes. Les tests exercent le client Supabase du build de production, sans importer le module demo ni les fixtures dans ce bundle.
 
-### Échecs intermédiaires conservés et expliqués
+## Recette GitHub finale du code
+
+Code vérifié : `4fff392`, branche `feature/phase-e1-private-release`. [Exécution Quality 43767591903](https://github.com/MonsieurLoyalDev/les-24-etoiles-de-noel/actions/runs/43767591903).
+
+| Job | Résultat effectivement terminé |
+|---|---|
+| `private-release`, Ubuntu / Node 24.22.2 / npm 11.19.1 | **Réussi** : installation propre, lint, **205/205 unitaires**, build privé configuré fictivement, **16/16 navigateur PC/mobile**, 7,3 min, fallback Canvas effectivement contrôlé |
+| `infrastructure`, Ubuntu / Node 22.22.3 / npm 10.9.8 | **Réussi** : **205/205 unitaires**, y compris les deux cas POSIX ignorés Windows ; paquet privé fictif ; Nginx/TLS isolé, headers, SPA, refus de fichiers privés, ACME de fixture, activation/restauration ; **2/2 parcours navigateur**, 23,2 s ; PostgreSQL 17 `pg_dump`/`pg_restore` et médias chiffrés restaurés ; syntaxe Bash |
+| `verify`, suite historique complète | Encore en cours au moment de ce compte rendu ; **pas comptée comme réussie**. Elle conserve ses paramètres historiques SwiftShader et ses tests graphiques étendus. Les régressions ciblées A/B/C/sauvegardes sont, elles, terminées localement comme indiqué ci-dessus. |
+
+Les warnings `punycode` et `url.parse()` apparaissent aussi pendant la préparation du runner Node 24 (outillage Actions). Aucun changement de dépendances applicatives n'a été introduit. Le job privé Linux ne constitue pas une validation de WebGL logiciel Linux, ni d'un GPU matériel. Les captures publiées proviennent des lots locaux réellement exécutés.
+
+Le commit de clôture ne modifie que ce rapport et deux captures Canvas ; les résultats CI ci-dessus portent sur le code `4fff392`. Aucun Supabase réel, VPS réel, certificat de domaine ou navigateur Safari iOS n'a été testé.
+
+### Historique des essais intermédiaires
 
 - Cinquième recette (`fbe5da7`, `43765772681`) : 13/16 privés, les huit cas mobiles passent. Sur PC SwiftShader Linux, le parcours de poses dépasse 240 s, l'état de conversation n'est pas observé dans les 5 s, et les 8 s de relevé d'Émile ne contiennent pas sa fermeture. Le même lot passe localement 16/16 en WebGL. La recette privée Linux utilise désormais le **fallback Canvas existant de `Phaser.AUTO`**, via l'option de lancement Chromium `--disable-webgl`, sans modifier le jeu. Une assertion vérifie réellement le contexte 2D après les parcours. Chrome local garde WebGL par défaut ; `ETB_PRIVATE_CANVAS=1` permet de reproduire le fallback. Le pilote Canvas PC d'Émile passe 1/1 en 34,4 s, avec capture du jeu contrôlée visuellement. Cela ne constitue pas une validation de WebGL logiciel Linux ; les résultats des deux renderers restent distincts.
 
@@ -94,6 +109,8 @@ Les journaux et JSON détaillés sont conservés hors du dépôt dans `outputs/e
 
 Les dernières confirmations du pilote sont `celestine-final.json` (2/2), `interruption-split.json` (2/2, 1 min 27,95 s) et `private-final16.json` (16/16, aucun ignoré ni instable). Le premier lot 14/14 reste une preuve historique ; le lot 16/16 couvre la séparation définitive des activités et de l'interruption.
 
+`private-canvas16.json` contient la confirmation 16/16 du fallback Canvas. Le lot local par défaut utilise les options SwiftShader de Chrome et `Phaser.AUTO` ; aucune validation de GPU matériel n'est revendiquée. Le contexte Canvas du second lot est, lui, contrôlé explicitement.
+
 ## Captures du jeu réellement exécuté
 
 Ces captures proviennent du **build privé final**, avec backend de recette fictif intercepté. Date du 1er novembre et trois étoiles village : valeurs de sauvegardes de test pour vérifier la compatibilité, sans progression réelle de Debby. Les textes hérités « Démo libre » dans le HUD sont conservés ; le calendrier utilise bien le chemin privé Supabase testé.
@@ -106,8 +123,9 @@ Ces captures proviennent du **build privé final**, avec backend de recette fict
 | Interruption par dialogue | [Capture](e1-captures/desktop-dialogue.png) | [Capture](e1-captures/mobile-dialogue.png) |
 | Distribution d'Émile | [Capture](e1-captures/desktop-emile.png) | [Capture](e1-captures/mobile-emile.png) |
 | Augustin et sa lanterne | [Capture](e1-captures/desktop-augustin.png) | [Capture](e1-captures/mobile-augustin.png) |
+| Fallback Canvas vérifié | [Émile](e1-captures/desktop-emile-canvas.png) | [Célestine au fauteuil](e1-captures/mobile-celestine-seatRead-canvas.png) |
 
-Douze PNG, proportions conservées, **8 233 199 octets au total**. Les captures et les poses natives ont été contrôlées visuellement sur PC et mobile ; la validation des animations repose aussi sur leurs séquences de frames et leurs états, pas sur ces seules images statiques.
+Quatorze PNG, proportions conservées, **9 739 050 octets au total** : douze du lot local initial et deux du lot Canvas final. Les captures et les poses natives ont été contrôlées visuellement sur PC et mobile ; la validation des animations repose aussi sur leurs séquences de frames et leurs états, pas sur ces seules images statiques.
 
 ## Limites et conditions pour la suite
 
