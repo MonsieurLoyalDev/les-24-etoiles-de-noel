@@ -15,6 +15,7 @@ import {
   backend,
   authorization,
   recordActivity,
+  capturePrivatePage,
 } from "./fixtures";
 const out = "docs/phase-e/e1-captures";
 const hash = (b: Buffer) => createHash("sha256").update(b).digest("hex");
@@ -78,21 +79,24 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
     expect(
       new Set(trace.map((s) => s.drawn?.frame).filter(Boolean)).size,
     ).toBeGreaterThan(1);
-    await page.screenshot({
-      timeout: 60000,
-      path: `${out}/${info.project.name}-celestine-${clip}.png`,
-    });
+    await capturePrivatePage(
+      page,
+      `${out}/${info.project.name}-celestine-${clip}.png`,
+    );
     if (clip === "read") {
       await navigateTo(page, { x: 760, y: 324 });
       await page.getByRole("button", { name: /Parler à Célestine/ }).click();
       await expect
         .poll(async () => (await activity(page, "mira"))?.phase)
         .toBe("interrupted");
-      expect((await activity(page, "mira"))?.object).toBeNull();
-      await page.screenshot({
-        timeout: 60000,
-        path: `${out}/${info.project.name}-dialogue.png`,
-      });
+      const interrupted = await activity(page, "mira");
+      expect(interrupted?.object).toBe(
+        interrupted?.clip === "seatRead" ? "book-closed" : null,
+      );
+      await capturePrivatePage(
+        page,
+        `${out}/${info.project.name}-dialogue.png`,
+      );
       await page
         .getByRole("button", { name: "À bientôt", exact: true })
         .click();
@@ -130,10 +134,7 @@ test("E1 Émile privé : vraie lettre déposée, aucune texture de secours", asy
       return a?.object === "letter" && a.drawn?.texture === "activity-emile";
     })
     .toBe(true);
-  await page.screenshot({
-    path: `${out}/${info.project.name}-emile.png`,
-    timeout: 60000,
-  });
+  await capturePrivatePage(page, `${out}/${info.project.name}-emile.png`);
   const trace = await recording;
   await info.attach("emile-cycle", {
     body: Buffer.from(JSON.stringify(trace)),
@@ -177,10 +178,7 @@ test("E1 Augustin privé : vraies poses et lumière existante synchronisée", as
       ),
     );
   expect(lamp).toMatchObject({ on: true, level: 1, commits: 1 });
-  await page.screenshot({
-    path: `${out}/${info.project.name}-augustin.png`,
-    timeout: 60000,
-  });
+  await capturePrivatePage(page, `${out}/${info.project.name}-augustin.png`);
   await fixture.verify();
 });
 test("E1 joueur privé : calendrier daté, aucun aperçu/admin ni média futur accessible", async ({

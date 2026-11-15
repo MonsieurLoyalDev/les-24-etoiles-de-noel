@@ -2,6 +2,12 @@ import { expect, type Page, type APIResponse } from "@playwright/test";
 import { readFileSync } from "node:fs";
 import type { ActivityView } from "../e2e/activity-support";
 
+// Gallery exports are local only: Linux SwiftShader surface screenshots can
+// stall after fonts load. CI still runs every activity/frame/security assertion.
+export async function capturePrivatePage(page: Page, path: string) {
+  if (process.env.CI) return;
+  await page.screenshot({ path, timeout: 60000 });
+}
 // Sample in the browser while screenshots/driver calls run. A short pose must
 // not disappear just because the test process is busy encoding a screenshot.
 export function recordActivity(page: Page, id: string, ms: number) {
