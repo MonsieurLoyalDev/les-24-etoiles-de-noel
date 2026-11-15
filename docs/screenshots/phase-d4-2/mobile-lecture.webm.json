@@ -1,0 +1,1428 @@
+[
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "approaching",
+      "clip": "read",
+      "frame": 1,
+      "object": "book",
+      "flip": false,
+      "age": 1144.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-1",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "approaching",
+      "clip": "read",
+      "frame": 1,
+      "object": "book",
+      "flip": false,
+      "age": 1144.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-1",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 1400.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 1656.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 1911.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 2168.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 2168.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 2423.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 4,
+      "object": "book",
+      "flip": false,
+      "age": 2679.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-4",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 4,
+      "object": "book",
+      "flip": false,
+      "age": 2936.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-4",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 4,
+      "object": "book",
+      "flip": false,
+      "age": 2936.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-4",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 3193.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-5",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 3447.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-5",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 3704.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 3960.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 3960.2552053752697,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 4215.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 4472.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 4728.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 4984.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 4984.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 5241.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 5495.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 5751.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 5751.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 3,
+      "object": "book",
+      "flip": false,
+      "age": 6008.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-3",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 4,
+      "object": "book",
+      "flip": false,
+      "age": 6263.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-4",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 4,
+      "object": "book",
+      "flip": false,
+      "age": 6520.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-4",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 6775.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-5",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 6775.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-5",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ],
+  [
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "emile",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 7031.25520537527,
+      "total": 8815.255205375273,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-5",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ]
+]

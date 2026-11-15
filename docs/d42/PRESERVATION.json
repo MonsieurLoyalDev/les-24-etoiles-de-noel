@@ -1,0 +1,43 @@
+{
+  "baseline": "be52808",
+  "oldPublicFilesChecked": 223,
+  "changedAssets": [],
+  "sourceFilesChecked": 79,
+  "changedSources": [
+    "src/art/ambience.ts",
+    "src/game/Game.ts",
+    "src/world/points.ts",
+    "src/world/presentation.ts",
+    "src/world/registry.ts",
+    "src/world/runtime.ts"
+  ],
+  "unexpected": [],
+  "newAssets": [
+    {
+      "path": "public/assets/activities-d42/celestine.png",
+      "bytes": 2031231,
+      "sha256": "ccf915bc0e398e2b3a14800e27ea18762acd3ce250fa81b882f05f42668aa29b",
+      "poses": 16,
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "public/assets/activities-d42/emile.png",
+      "bytes": 2037425,
+      "sha256": "eb78272908538b02856861b704331fb8879267800aa4be9d461556d32cc15b69",
+      "poses": 16,
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "public/assets/activities-d42/augustin.png",
+      "bytes": 2125711,
+      "sha256": "0304b36123d717376b662632224b84a4a78fb5c93c01b481558473c199e3fda8",
+      "poses": 16,
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "newAssetBytes": 6194367,
+  "note": "Les fins de ligne des sources sont normalisées pour comparer les blobs Git aux fichiers Windows ; les 223 anciens fichiers publics sont comparés octet par octet."
+}

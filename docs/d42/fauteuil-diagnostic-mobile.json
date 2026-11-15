@@ -1,0 +1,193 @@
+{
+  "initialSeat": {
+    "actor": "mira",
+    "phase": "acting",
+    "clip": "seatRead",
+    "frame": 13,
+    "object": "book",
+    "flip": false,
+    "age": 2418.8474317853397,
+    "total": 12137.84743178534,
+    "seatProgress": 1,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-celestine",
+      "frame": "pose-13",
+      "x": 910,
+      "y": 288
+    }
+  },
+  "afterApproach": {
+    "actor": "mira",
+    "phase": "interrupted",
+    "clip": "seatRead",
+    "frame": 15,
+    "object": "book-closed",
+    "flip": false,
+    "age": 3266.8474317853397,
+    "total": 11960.84743178534,
+    "seatProgress": 1,
+    "interrupted": true,
+    "drawn": {
+      "texture": "activity-celestine",
+      "frame": "pose-15",
+      "x": 910,
+      "y": 288
+    }
+  },
+  "view": {
+    "actor": "mira",
+    "phase": "interrupted",
+    "clip": "seatRead",
+    "frame": 15,
+    "object": "book-closed",
+    "flip": false,
+    "age": 3266.8474317853397,
+    "total": 11786.84743178534,
+    "seatProgress": 1,
+    "interrupted": true,
+    "drawn": {
+      "texture": "activity-celestine",
+      "frame": "pose-15",
+      "x": 910,
+      "y": 288
+    }
+  },
+  "world": {
+    "clock": 126480,
+    "prototypeIds": [
+      "noe",
+      "emile",
+      "mira"
+    ],
+    "actors": [
+      {
+        "id": "noe",
+        "name": "Augustin",
+        "room": "village",
+        "x": 1070,
+        "y": 760,
+        "state": "IDLE",
+        "period": 2,
+        "activity": "Veille aux lanternes",
+        "point": "plaza-evening-lantern",
+        "nearPlayer": false,
+        "visits": 0,
+        "pathRemaining": 0,
+        "blockedReason": "",
+        "arrivalAge": 0
+      },
+      {
+        "id": "emile",
+        "name": "Émile",
+        "room": "village",
+        "x": 750,
+        "y": 700,
+        "state": "IDLE",
+        "period": 2,
+        "activity": "Retour de tournée",
+        "point": "post-start",
+        "nearPlayer": false,
+        "visits": 0,
+        "pathRemaining": 0,
+        "blockedReason": "",
+        "arrivalAge": 0
+      },
+      {
+        "id": "mira",
+        "name": "Célestine",
+        "room": "library",
+        "x": 910,
+        "y": 316,
+        "state": "TALKING_TO_PLAYER",
+        "period": 2,
+        "activity": "Lecture au fauteuil",
+        "point": "library-armchair",
+        "nearPlayer": true,
+        "visits": 1,
+        "pathRemaining": 0,
+        "blockedReason": "",
+        "arrivalAge": 3266.8474317853397
+      }
+    ],
+    "reservations": [
+      {
+        "id": "library-armchair",
+        "owners": [
+          {
+            "actor": "mira",
+            "slot": 0
+          }
+        ]
+      }
+    ],
+    "points": [
+      {
+        "id": "library-armchair",
+        "room": "library",
+        "valid": true
+      },
+      {
+        "id": "plaza-market-lantern",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "plaza-quiet",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "mail-books",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "mail-families",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "post-start",
+        "room": "village",
+        "valid": null
+      },
+      {
+        "id": "library-welcome",
+        "room": "library",
+        "valid": true
+      },
+      {
+        "id": "library-shelves",
+        "room": "library",
+        "valid": true
+      },
+      {
+        "id": "library-reading",
+        "room": "library",
+        "valid": true
+      }
+    ],
+    "navigation": [
+      {
+        "room": "library",
+        "cellSize": 8,
+        "cells": 8591,
+        "searches": 1,
+        "cacheHits": 0,
+        "cachedRoutes": 1,
+        "lastExpanded": 1033
+      }
+    ]
+  }
+}

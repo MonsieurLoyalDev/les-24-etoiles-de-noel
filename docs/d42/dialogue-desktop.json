@@ -1,0 +1,60 @@
+{
+  "paused": true,
+  "resumed": true,
+  "reducedFrames": [
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 5,
+      "object": "book",
+      "flip": false,
+      "age": 3466.6837768034247,
+      "total": 8232.683776803424,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 3722.6837768034247,
+      "total": 8232.683776803424,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    },
+    {
+      "actor": "mira",
+      "phase": "acting",
+      "clip": "read",
+      "frame": 2,
+      "object": "book",
+      "flip": false,
+      "age": 3978.6837768034247,
+      "total": 8232.683776803424,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-celestine",
+        "frame": "pose-2",
+        "x": 740,
+        "y": 324
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "errors": [],
+  "dialogueFrozen": true,
+  "resumed": [
+    {
+      "actor": "mira",
+      "phase": "moving"
+    }
+  ]
+}

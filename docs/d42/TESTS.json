@@ -1,0 +1,344 @@
+{
+  "baseline": "be52808",
+  "unit": {
+    "passed": 194,
+    "failed": 0,
+    "skipped": 2,
+    "total": 196
+  },
+  "browser": {
+    "distinct": 30,
+    "passed": 30,
+    "cases": [
+      {
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 28372,
+        "errors": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 5521,
+        "errors": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "parcours complet, sauvegarde et journal",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 26520,
+        "errors": []
+      },
+      {
+        "file": "game.spec.ts",
+        "title": "joystick tactile et absence de débordement",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 5056,
+        "errors": []
+      },
+      {
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 91579,
+        "errors": []
+      },
+      {
+        "file": "phase-b.spec.ts",
+        "title": "Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 90055,
+        "errors": []
+      },
+      {
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 140604,
+        "errors": []
+      },
+      {
+        "file": "phase-c.spec.ts",
+        "title": "les 24 journées : activités, reprise, récompenses et scène finale",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 135121,
+        "errors": []
+      },
+      {
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 80523,
+        "errors": []
+      },
+      {
+        "file": "phase-d3-2.spec.ts",
+        "title": "D32 chaque objet décoratif fonctionne au clavier et au toucher",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 75476,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 tous les anciens habitants présents et géométrie inchangée dans les cinq pièces",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 19274,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 marche réelle sans obstacle ni saut, dialogue suspendu puis repris",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 14385,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 horaires, nouvelle conversation Émile et rencontre sauvegardée sans étoile ajoutée",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 27628,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 budget de navigation, fluidité et réduction des mouvements",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 7278,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 tous les anciens habitants présents et géométrie inchangée dans les cinq pièces",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 19625,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 marche réelle sans obstacle ni saut, dialogue suspendu puis repris",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 15496,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 horaires, nouvelle conversation Émile et rencontre sauvegardée sans étoile ajoutée",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 27989,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-1.spec.ts",
+        "title": "D41 budget de navigation, fluidité et réduction des mouvements",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 6046,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Célestine lit, range et utilise le fauteuil sur la géométrie conservée",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 122719,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Émile ouvre la sacoche, dépose une lettre et la fait disparaître",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 30226,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Augustin synchronise sa lanterne sans doubler les sources lumineuses",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 15086,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 dialogue, reprise, sauvegarde et réduction des mouvements",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 49469,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Célestine lit, range et utilise le fauteuil sur la géométrie conservée",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 122682,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Émile ouvre la sacoche, dépose une lettre et la fait disparaître",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 29553,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 Augustin synchronise sa lanterne sans doubler les sources lumineuses",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 14910,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 dialogue, reprise, sauvegarde et réduction des mouvements",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 50286,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 inspection et extinction suivent les états réels des lanternes",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 36728,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 le fauteuil conserve son assise et sa réservation pendant un dialogue",
+        "project": "desktop",
+        "status": "expected",
+        "duration": 41870,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 inspection et extinction suivent les états réels des lanternes",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 36758,
+        "errors": []
+      },
+      {
+        "file": "phase-d4-2.spec.ts",
+        "title": "D42 le fauteuil conserve son assise et sa réservation pendant un dialogue",
+        "project": "mobile",
+        "status": "expected",
+        "duration": 42035,
+        "errors": []
+      }
+    ]
+  },
+  "runs": [
+    {
+      "file": "d42-final-browser.json",
+      "stats": {
+        "startTime": "2026-11-15T15:16:36.110Z",
+        "duration": 716851.2620000001,
+        "expected": 25,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "d42-extra-browser.json",
+      "stats": {
+        "startTime": "2026-11-15T15:29:40.553Z",
+        "duration": 129732.539,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "d42-confirmed-browser.json",
+      "stats": {
+        "startTime": "2026-11-15T15:36:57.174Z",
+        "duration": 519042.939,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "errors": []
+    },
+    {
+      "file": "d42-reading-final.json",
+      "stats": {
+        "startTime": "2026-11-15T15:43:30.859Z",
+        "duration": 125447.205,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": []
+    }
+  ],
+  "scope": "Chrome PC et mobile émulé, sélection ciblée. Résultat final par scénario après reprise ; les erreurs intermédiaires ne sont pas masquées.",
+  "developmentRuns": [
+    {
+      "file": "d42-first-browser.json",
+      "stats": {
+        "startTime": "2026-11-11T21:40:48.934Z",
+        "duration": 276773.09300000005,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 4,
+        "flaky": 0
+      },
+      "note": "Essai de développement antérieur aux corrections ; non utilisé comme résultat final."
+    },
+    {
+      "file": "d42-second-browser.json",
+      "stats": {
+        "startTime": "2026-11-11T21:45:51.870Z",
+        "duration": 230475.02200000003,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      "note": "Essai de développement antérieur aux corrections ; non utilisé comme résultat final."
+    },
+    {
+      "file": "d42-chair-debug.json",
+      "stats": {
+        "startTime": "2026-11-15T15:33:52.836Z",
+        "duration": 62236.947,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "note": "Essai de développement antérieur aux corrections ; non utilisé comme résultat final."
+    }
+  ]
+}

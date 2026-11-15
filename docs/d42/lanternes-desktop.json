@@ -1,0 +1,542 @@
+{
+  "before": {
+    "lamps": [
+      {
+        "id": "plaza-market-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "on": false,
+        "level": 0,
+        "owner": "noe",
+        "target": true,
+        "commits": 0
+      }
+    ],
+    "lights": 10,
+    "rendering": [
+      {
+        "id": "plaza-gifts-lantern",
+        "alpha": 0,
+        "tint": 6649223,
+        "texture": "d35-prop-lantern"
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "alpha": 0,
+        "tint": 6649223,
+        "texture": "d35-prop-lantern"
+      },
+      {
+        "id": "plaza-market-lantern",
+        "alpha": 0,
+        "tint": 6649223,
+        "texture": "d35-prop-lantern"
+      }
+    ]
+  },
+  "after": {
+    "lamps": [
+      {
+        "id": "plaza-market-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "on": true,
+        "level": 1,
+        "owner": null,
+        "target": true,
+        "commits": 1
+      }
+    ],
+    "lights": 10,
+    "rendering": [
+      {
+        "id": "plaza-gifts-lantern",
+        "alpha": 0,
+        "tint": 6649223,
+        "texture": "d35-prop-lantern"
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "alpha": 0.36825407805630805,
+        "tint": 16777215,
+        "texture": "d35-prop-lantern"
+      },
+      {
+        "id": "plaza-market-lantern",
+        "alpha": 0,
+        "tint": 6649223,
+        "texture": "d35-prop-lantern"
+      }
+    ]
+  },
+  "trace": [
+    {
+      "actor": "noe",
+      "phase": "approaching",
+      "clip": "light",
+      "frame": 1,
+      "object": "tool",
+      "flip": true,
+      "age": 1065.7233047032607,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-1",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "approaching",
+      "clip": "light",
+      "frame": 1,
+      "object": "tool",
+      "flip": true,
+      "age": 1065.7233047032607,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-1",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "approaching",
+      "clip": "light",
+      "frame": 1,
+      "object": "tool",
+      "flip": true,
+      "age": 1320.7233047032607,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-1",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "approaching",
+      "clip": "light",
+      "frame": 2,
+      "object": "tool",
+      "flip": true,
+      "age": 1576.7233047032607,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-2",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "approaching",
+      "clip": "light",
+      "frame": 2,
+      "object": "tool",
+      "flip": true,
+      "age": 1833.7233047032607,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-2",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 3,
+      "object": "tool",
+      "flip": true,
+      "age": 2088.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-3",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 3,
+      "object": "tool",
+      "flip": true,
+      "age": 2346.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-3",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 3,
+      "object": "tool",
+      "flip": true,
+      "age": 2601.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-3",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 4,
+      "object": "tool",
+      "flip": true,
+      "age": 2857.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-4",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 4,
+      "object": "tool",
+      "flip": true,
+      "age": 2857.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-4",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 4,
+      "object": "tool",
+      "flip": true,
+      "age": 3113.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-4",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 5,
+      "object": "tool",
+      "flip": true,
+      "age": 3369.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-5",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 5,
+      "object": "tool",
+      "flip": true,
+      "age": 3624.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-5",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 5,
+      "object": "tool",
+      "flip": true,
+      "age": 3880.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-5",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 5,
+      "object": "tool",
+      "flip": true,
+      "age": 4136.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-5",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "acting",
+      "clip": "light",
+      "frame": 5,
+      "object": "tool",
+      "flip": true,
+      "age": 4394.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-5",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 6,
+      "object": "tool",
+      "flip": true,
+      "age": 4650.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-6",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 6,
+      "object": "tool",
+      "flip": true,
+      "age": 4650.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-6",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 6,
+      "object": "tool",
+      "flip": true,
+      "age": 4904.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-6",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 6,
+      "object": "tool",
+      "flip": true,
+      "age": 5160.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-6",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 7,
+      "object": "tool",
+      "flip": true,
+      "age": 5417.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-7",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 7,
+      "object": "tool",
+      "flip": true,
+      "age": 5673.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-7",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "finishing",
+      "clip": "light",
+      "frame": 7,
+      "object": "tool",
+      "flip": true,
+      "age": 5929.7233047032605,
+      "total": 6000,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": {
+        "texture": "activity-augustin",
+        "frame": "pose-7",
+        "x": 1036,
+        "y": 844
+      }
+    },
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    },
+    {
+      "actor": "noe",
+      "phase": "idle",
+      "clip": null,
+      "frame": null,
+      "object": null,
+      "flip": false,
+      "age": 0,
+      "total": 0,
+      "seatProgress": 0,
+      "interrupted": false,
+      "drawn": null
+    }
+  ]
+}

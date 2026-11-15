@@ -1,0 +1,163 @@
+{
+  "images": [
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "loaded": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "loaded": true,
+      "width": 390,
+      "height": 844
+    },
+    {
+      "loaded": true,
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "loaded": true,
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "loaded": true,
+      "width": 1254,
+      "height": 1254
+    }
+  ],
+  "videos": [
+    {
+      "time": 0.7805,
+      "width": 1280,
+      "height": 802,
+      "duration": 8.510775,
+      "error": null
+    },
+    {
+      "time": 0.8236,
+      "width": 1280,
+      "height": 802,
+      "duration": 7.18206,
+      "error": null
+    },
+    {
+      "time": 0.8329,
+      "width": 1280,
+      "height": 802,
+      "duration": 6.926207,
+      "error": null
+    },
+    {
+      "time": 0.8459,
+      "width": 1280,
+      "height": 802,
+      "duration": 13.408806,
+      "error": null
+    },
+    {
+      "time": 0.8195,
+      "width": 1280,
+      "height": 802,
+      "duration": 6.752419,
+      "error": null
+    },
+    {
+      "time": 0.8244,
+      "width": 1280,
+      "height": 900,
+      "duration": 7.410471,
+      "error": null
+    },
+    {
+      "time": 0.8142,
+      "width": 1280,
+      "height": 900,
+      "duration": 6.433469,
+      "error": null
+    },
+    {
+      "time": 0.826,
+      "width": 1280,
+      "height": 802,
+      "duration": 5.937171,
+      "error": null
+    },
+    {
+      "time": 0.8168,
+      "width": 1280,
+      "height": 802,
+      "duration": 4.433809,
+      "error": null
+    },
+    {
+      "time": 0.8213,
+      "width": 1280,
+      "height": 802,
+      "duration": 6.92646,
+      "error": null
+    },
+    {
+      "time": 0.8193,
+      "width": 390,
+      "height": 754,
+      "duration": 6.17572,
+      "error": null
+    },
+    {
+      "time": 0.8148,
+      "width": 390,
+      "height": 754,
+      "duration": 6.161088,
+      "error": null
+    }
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "scroll": 1440
+    },
+    {
+      "width": 390,
+      "scroll": 390
+    }
+  ],
+  "errors": [],
+  "remote": [],
+  "conversion": "WebP sans perte vérifié pixel par pixel à la génération ; dimensions conservées."
+}

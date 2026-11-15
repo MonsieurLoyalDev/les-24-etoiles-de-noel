@@ -1,0 +1,576 @@
+[
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 0,
+    "object": null,
+    "flip": false,
+    "age": 607.4729534525264,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-0",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 1,
+    "object": null,
+    "flip": false,
+    "age": 862.4729534525264,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-1",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 1,
+    "object": null,
+    "flip": false,
+    "age": 1119.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-1",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 1,
+    "object": null,
+    "flip": false,
+    "age": 1375.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-1",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 2,
+    "object": "letter",
+    "flip": false,
+    "age": 1631.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-2",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 2,
+    "object": "letter",
+    "flip": false,
+    "age": 1887.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-2",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 2,
+    "object": "letter",
+    "flip": false,
+    "age": 1887.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-2",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 2,
+    "object": "letter",
+    "flip": false,
+    "age": 2143.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-2",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 2,
+    "object": "letter",
+    "flip": false,
+    "age": 2399.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-2",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 3,
+    "object": "letter",
+    "flip": false,
+    "age": 2655.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-3",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 3,
+    "object": "letter",
+    "flip": false,
+    "age": 2911.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-3",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "approaching",
+    "clip": "delivery",
+    "frame": 3,
+    "object": "letter",
+    "flip": false,
+    "age": 3166.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-3",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 4,
+    "object": "letter",
+    "flip": false,
+    "age": 3423.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-4",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 4,
+    "object": "letter",
+    "flip": false,
+    "age": 3678.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-4",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 4,
+    "object": "letter",
+    "flip": false,
+    "age": 3678.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-4",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 4,
+    "object": "letter",
+    "flip": false,
+    "age": 3934.4729534525263,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-4",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 5,
+    "object": null,
+    "flip": false,
+    "age": 4192.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-5",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 5,
+    "object": null,
+    "flip": false,
+    "age": 4446.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-5",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 4703.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 4959.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 5214.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 5214.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 5471.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "acting",
+    "clip": "delivery",
+    "frame": 6,
+    "object": null,
+    "flip": false,
+    "age": 5726.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-6",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "finishing",
+    "clip": "delivery",
+    "frame": 7,
+    "object": null,
+    "flip": false,
+    "age": 5983.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-7",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "finishing",
+    "clip": "delivery",
+    "frame": 7,
+    "object": null,
+    "flip": false,
+    "age": 6238.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-7",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "finishing",
+    "clip": "delivery",
+    "frame": 7,
+    "object": null,
+    "flip": false,
+    "age": 6494.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-7",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "finishing",
+    "clip": "delivery",
+    "frame": 7,
+    "object": null,
+    "flip": false,
+    "age": 6750.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-7",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "finishing",
+    "clip": "delivery",
+    "frame": 7,
+    "object": null,
+    "flip": false,
+    "age": 6750.472953452527,
+    "total": 7000,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": {
+      "texture": "activity-emile",
+      "frame": "pose-7",
+      "x": 1315,
+      "y": 588
+    }
+  },
+  {
+    "actor": "emile",
+    "phase": "idle",
+    "clip": null,
+    "frame": null,
+    "object": null,
+    "flip": false,
+    "age": 0,
+    "total": 0,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": null
+  },
+  {
+    "actor": "emile",
+    "phase": "idle",
+    "clip": null,
+    "frame": null,
+    "object": null,
+    "flip": false,
+    "age": 0,
+    "total": 0,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": null
+  },
+  {
+    "actor": "emile",
+    "phase": "idle",
+    "clip": null,
+    "frame": null,
+    "object": null,
+    "flip": false,
+    "age": 0,
+    "total": 0,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": null
+  },
+  {
+    "actor": "emile",
+    "phase": "idle",
+    "clip": null,
+    "frame": null,
+    "object": null,
+    "flip": false,
+    "age": 0,
+    "total": 0,
+    "seatProgress": 0,
+    "interrupted": false,
+    "drawn": null
+  }
+]

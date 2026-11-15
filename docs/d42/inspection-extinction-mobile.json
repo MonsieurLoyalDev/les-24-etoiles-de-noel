@@ -1,0 +1,156 @@
+[
+  {
+    "clip": "inspect",
+    "before": [
+      {
+        "id": "plaza-market-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "on": false,
+        "level": 0,
+        "owner": null,
+        "target": false,
+        "commits": 0
+      }
+    ],
+    "after": {
+      "state": [
+        {
+          "id": "plaza-market-lantern",
+          "on": false,
+          "level": 0,
+          "owner": null,
+          "target": false,
+          "commits": 0
+        },
+        {
+          "id": "plaza-gifts-lantern",
+          "on": false,
+          "level": 0,
+          "owner": null,
+          "target": false,
+          "commits": 0
+        },
+        {
+          "id": "plaza-evening-lantern",
+          "on": false,
+          "level": 0,
+          "owner": null,
+          "target": false,
+          "commits": 0
+        }
+      ],
+      "render": [
+        {
+          "id": "plaza-gifts-lantern",
+          "alpha": 0,
+          "tint": 6649223,
+          "texture": "d35-prop-lantern"
+        },
+        {
+          "id": "plaza-evening-lantern",
+          "alpha": 0,
+          "tint": 6649223,
+          "texture": "d35-prop-lantern"
+        },
+        {
+          "id": "plaza-market-lantern",
+          "alpha": 0,
+          "tint": 6649223,
+          "texture": "d35-prop-lantern"
+        }
+      ]
+    }
+  },
+  {
+    "clip": "extinguish",
+    "before": [
+      {
+        "id": "plaza-market-lantern",
+        "on": true,
+        "level": 1,
+        "owner": null,
+        "target": true,
+        "commits": 0
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "on": true,
+        "level": 1,
+        "owner": "noe",
+        "target": false,
+        "commits": 0
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "on": true,
+        "level": 1,
+        "owner": null,
+        "target": true,
+        "commits": 0
+      }
+    ],
+    "after": {
+      "state": [
+        {
+          "id": "plaza-market-lantern",
+          "on": true,
+          "level": 1,
+          "owner": null,
+          "target": true,
+          "commits": 0
+        },
+        {
+          "id": "plaza-gifts-lantern",
+          "on": false,
+          "level": 0,
+          "owner": "noe",
+          "target": false,
+          "commits": 1
+        },
+        {
+          "id": "plaza-evening-lantern",
+          "on": true,
+          "level": 1,
+          "owner": null,
+          "target": true,
+          "commits": 0
+        }
+      ],
+      "render": [
+        {
+          "id": "plaza-gifts-lantern",
+          "alpha": 0,
+          "tint": 6649223,
+          "texture": "d35-prop-lantern"
+        },
+        {
+          "id": "plaza-evening-lantern",
+          "alpha": 0.14480624371886622,
+          "tint": 16777215,
+          "texture": "d35-prop-lantern"
+        },
+        {
+          "id": "plaza-market-lantern",
+          "alpha": 0.1439050927112014,
+          "tint": 16777215,
+          "texture": "d35-prop-lantern"
+        }
+      ]
+    }
+  }
+]

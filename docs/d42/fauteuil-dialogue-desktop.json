@@ -1,0 +1,33 @@
+{
+  "touch": false,
+  "view": {
+    "actor": "mira",
+    "phase": "interrupted",
+    "clip": "seatRead",
+    "frame": 15,
+    "object": "book-closed",
+    "flip": false,
+    "age": 3217.84743178508,
+    "total": 11764.847431785078,
+    "seatProgress": 1,
+    "interrupted": true,
+    "drawn": {
+      "texture": "activity-celestine",
+      "frame": "pose-15",
+      "x": 910,
+      "y": 288
+    }
+  },
+  "reservations": [
+    {
+      "id": "library-armchair",
+      "owners": [
+        {
+          "actor": "mira",
+          "slot": 0
+        }
+      ]
+    }
+  ],
+  "resumed": true
+}

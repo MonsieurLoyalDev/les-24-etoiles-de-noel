@@ -1,0 +1,173 @@
+{
+  "p95": 7,
+  "mean": 4.8633333333333315,
+  "samples": 180,
+  "cpu": 1,
+  "world": {
+    "clock": 46323.09999999989,
+    "prototypeIds": [
+      "noe",
+      "emile",
+      "mira"
+    ],
+    "actors": [
+      {
+        "id": "noe",
+        "name": "Augustin",
+        "room": "village",
+        "x": 1041.6064000000017,
+        "y": 760,
+        "state": "WALKING",
+        "period": 1,
+        "activity": "Veille sur la place",
+        "point": "plaza-market-lantern",
+        "nearPlayer": false,
+        "visits": 0,
+        "pathRemaining": 2,
+        "blockedReason": "",
+        "arrivalAge": 0
+      },
+      {
+        "id": "emile",
+        "name": "Émile",
+        "room": "village",
+        "x": 771.1089999999995,
+        "y": 688,
+        "state": "WALKING",
+        "period": 1,
+        "activity": "Tournée des voisins",
+        "point": "mail-families",
+        "nearPlayer": false,
+        "visits": 0,
+        "pathRemaining": 9,
+        "blockedReason": "",
+        "arrivalAge": 0
+      },
+      {
+        "id": "mira",
+        "name": "Célestine",
+        "room": "library",
+        "x": 100,
+        "y": 230,
+        "state": "IDLE",
+        "period": 1,
+        "activity": "Accueil des lecteurs",
+        "point": "library-welcome",
+        "nearPlayer": false,
+        "visits": 0,
+        "pathRemaining": 0,
+        "blockedReason": "",
+        "arrivalAge": 0
+      }
+    ],
+    "reservations": [
+      {
+        "id": "plaza-market-lantern",
+        "owners": [
+          {
+            "actor": "noe",
+            "slot": 0
+          }
+        ]
+      },
+      {
+        "id": "mail-families",
+        "owners": [
+          {
+            "actor": "emile",
+            "slot": 0
+          }
+        ]
+      }
+    ],
+    "points": [
+      {
+        "id": "library-armchair",
+        "room": "library",
+        "valid": null
+      },
+      {
+        "id": "plaza-market-lantern",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "plaza-gifts-lantern",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "plaza-evening-lantern",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "plaza-quiet",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "mail-books",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "mail-families",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "post-start",
+        "room": "village",
+        "valid": true
+      },
+      {
+        "id": "library-welcome",
+        "room": "library",
+        "valid": null
+      },
+      {
+        "id": "library-shelves",
+        "room": "library",
+        "valid": null
+      },
+      {
+        "id": "library-reading",
+        "room": "library",
+        "valid": null
+      }
+    ],
+    "navigation": [
+      {
+        "room": "village",
+        "cellSize": 8,
+        "cells": 42657,
+        "searches": 2,
+        "cacheHits": 0,
+        "cachedRoutes": 2,
+        "lastExpanded": 1047
+      }
+    ]
+  },
+  "effects": {
+    "quality": "none",
+    "reduced": true,
+    "flurry": 0.5551139864555042,
+    "visibleSnow": 0,
+    "visibleSmoke": 0,
+    "visibleWind": 0,
+    "visibleStars": 0,
+    "visibleLights": 11,
+    "swaying": 0,
+    "particleLimit": 0,
+    "cpuP95": 0.10000014305114746,
+    "engineFps": 78.25,
+    "meanFrameMs": 4.871111111111112,
+    "palette": {
+      "color": 7902119,
+      "alpha": 0.018,
+      "warm": 0.08
+    }
+  },
+  "note": "Chrome local ; mobile émulé, pas un téléphone physique."
+}
