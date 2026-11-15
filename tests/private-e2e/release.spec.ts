@@ -79,13 +79,43 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
     expect(
       new Set(trace.map((s) => s.drawn?.frame).filter(Boolean)).size,
     ).toBeGreaterThan(1);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const restingFrame = {
+      read: "pose-2",
+      sort: "pose-10",
+      seatRead: "pose-13",
+    }[clip];
+    await expect
+      .poll(async () => (await activity(page, "mira"))?.drawn?.frame)
+      .toBe(restingFrame);
+    const reduced = await traceActivity(page, "mira", 600);
+    expect(
+      reduced.every(
+        (s) =>
+          s.drawn?.texture === "activity-celestine" &&
+          s.drawn.frame === restingFrame,
+      ),
+    ).toBe(true);
+    await page.emulateMedia({ reducedMotion: "no-preference" });
     await capturePrivatePage(
       page,
       `${out}/${info.project.name}-celestine-${clip}.png`,
     );
     if (clip === "read") {
       await navigateTo(page, { x: 760, y: 324 });
-      await page.getByRole("button", { name: /Parler à Célestine/ }).click();
+      const talk = page.getByRole("button", { name: /Parler à Célestine/ });
+      await expect(talk).toBeVisible();
+      await expect(talk).toBeEnabled();
+      if (info.project.name === "mobile") {
+        const box = (await talk.boundingBox())!;
+        await page.touchscreen.tap(
+          box.x + box.width / 2,
+          box.y + box.height / 2,
+        );
+      } else await page.keyboard.press("e");
+      await expect(
+        page.getByRole("button", { name: "À bientôt", exact: true }),
+      ).toBeVisible();
       await expect
         .poll(async () => (await activity(page, "mira"))?.phase)
         .toBe("interrupted");
@@ -101,17 +131,27 @@ test("E1 Célestine privée : vraies poses, dialogue, reprise, réduction et fau
         .getByRole("button", { name: "À bientôt", exact: true })
         .click();
       await navigateTo(page, { x: 830, y: 370 });
-      await waitClip(page, "mira", "read");
-      await page.emulateMedia({ reducedMotion: "reduce" });
+      // A real schedule may advance during navigation/dialogue. Resume the
+      // current routine, rather than requiring the previous time slot forever.
       await expect
-        .poll(async () => (await activity(page, "mira"))?.drawn?.frame)
-        .toBe("pose-2");
-      const reduced = await traceActivity(page, "mira", 600);
-      expect(new Set(reduced.map((s) => s.drawn?.frame))).toHaveProperty(
-        "size",
-        1,
-      );
-      await page.emulateMedia({ reducedMotion: "no-preference" });
+        .poll(async () => {
+          const a = await activity(page, "mira");
+          const actor = await page
+            .locator("canvas")
+            .evaluate((c) =>
+              JSON.parse(c.dataset.livingWorld!).actors.find(
+                (a: { id: string }) => a.id === "mira",
+              ),
+            );
+          return (
+            !!a &&
+            !a.interrupted &&
+            a.phase !== "interrupted" &&
+            !!actor &&
+            actor.state !== "TALKING_TO_PLAYER"
+          );
+        })
+        .toBe(true);
     }
   }
   await fixture.verify();
