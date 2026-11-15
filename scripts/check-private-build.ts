@@ -1,23 +1,10 @@
-import { readdirSync, readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
-function scan(path: string): string[] {
-  return readdirSync(path, { withFileTypes: true }).flatMap((f) =>
-    f.isDirectory() ? scan(join(path, f.name)) : [join(path, f.name)],
-  );
-}
-const files = scan("dist");
-if (
-  existsSync("dist/demo") ||
-  files.some(
-    (p) =>
-      /demoApi/.test(p) ||
-      (/\.js$/.test(p) &&
-        readFileSync(p, "utf8").includes(
-          "Ce voyage de démonstration nous attend",
-        )),
-  )
-)
-  throw Error("Contenu fictif embarqué dans le build privé");
+// @ts-expect-error Build-only module, never included in the browser.
+import { checkPrivateBuild } from "../ops/lib/private-assets.mjs";
+const result = checkPrivateBuild(process.cwd());
 console.log(
-  "Build privé : aucun paquet de surprises fictives ni média de démonstration.",
+  `Build privé : ${result.assets} ressources contrôlées, octets identiques, paquet demo exclu.`,
 );
+if (!result.configured)
+  console.warn(
+    "Compilation privée de contrôle : backend/CAPTCHA non configurés, paquet de livraison interdit.",
+  );

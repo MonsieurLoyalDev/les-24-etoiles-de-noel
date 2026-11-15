@@ -13,12 +13,14 @@ import {
   allowedPublic,
   inspectArtifact,
 } from "../ops/lib/artifact.mjs";
+import { checkPrivateBuild } from "../ops/lib/private-assets.mjs";
 const destination = process.argv[2] ?? "artifacts/etoilebois-private";
 if (existsSync(destination))
   throw Error("Output exists; choose a new artifact directory");
 const info = JSON.parse(readFileSync("dist/build-info.json", "utf8"));
 if (info.mode !== "supabase" || !info.configured || !info.captcha)
   throw Error("Configured private build with CAPTCHA required");
+checkPrivateBuild(process.cwd());
 const commit = execFileSync("git", ["rev-parse", "HEAD"], {
   encoding: "utf8",
 }).trim();

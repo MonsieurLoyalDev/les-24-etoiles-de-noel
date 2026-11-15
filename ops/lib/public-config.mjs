@@ -2,6 +2,15 @@ export function publicConfig(env) {
   const url = env.VITE_SUPABASE_URL ?? "",
     key = env.VITE_SUPABASE_ANON_KEY ?? "",
     siteKey = env.VITE_TURNSTILE_SITE_KEY ?? "";
+  for (const [name, value] of Object.entries(env))
+    if (
+      name.startsWith("VITE_") &&
+      typeof value === "string" &&
+      value.startsWith("sb_secret_")
+    )
+      throw Error("Server key forbidden in Vite");
+  if (env.VITE_APP_MODE && !["demo", "supabase"].includes(env.VITE_APP_MODE))
+    throw Error("Invalid public application mode");
   if (key.startsWith("sb_secret_")) throw Error("Server key forbidden in Vite");
   if (key.split(".").length === 3) {
     let role;
@@ -10,11 +19,19 @@ export function publicConfig(env) {
         Buffer.from(key.split(".")[1], "base64url").toString(),
       ).role;
     } catch {
-      /* Invalid keys fail service validation later. */
+      throw Error("Invalid public JWT key");
     }
-    if (role && role !== "anon")
+    if (role !== "anon")
       throw Error("Only anon/publishable key permitted in Vite");
   }
+  if (
+    key &&
+    (key.length > 16384 ||
+      /\s/.test(key) ||
+      (key.split(".").length !== 3 &&
+        !/^sb_publishable_[A-Za-z0-9_-]+$/.test(key)))
+  )
+    throw Error("Invalid public anon/publishable key");
   for (const name of Object.keys(env))
     if (
       name.startsWith("VITE_") &&

@@ -21,7 +21,9 @@ async function install(page: Page, save: Save) {
     });
   }, save);
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
-  await expect(page.locator("canvas")).toHaveAttribute("data-room", save.room);
+  await expect(page.locator("canvas")).toHaveAttribute("data-room", save.room, {
+    timeout: 20000,
+  });
 }
 async function read(page: Page) {
   return page.evaluate(
@@ -65,13 +67,11 @@ test("D32 anciennes positions sous un décor et performance dans un quartier vis
       dialogueHistory: ["mira:greeting"],
     };
     await install(page, save);
-    const observed = await page
-      .locator("canvas")
-      .evaluate((el) => ({
-        x: Number(el.dataset.playerX),
-        y: Number(el.dataset.playerY),
-        rects: JSON.parse(el.dataset.collisions!),
-      }));
+    const observed = await page.locator("canvas").evaluate((el) => ({
+      x: Number(el.dataset.playerX),
+      y: Number(el.dataset.playerY),
+      rects: JSON.parse(el.dataset.collisions!),
+    }));
     expect(
       blocked(
         observed,

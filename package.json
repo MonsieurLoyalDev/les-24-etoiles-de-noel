@@ -10,6 +10,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "test:private": "playwright test --config playwright.private.config.ts",
     "lint": "eslint src tests *.ts scripts ops",
     "seed:demo": "tsx scripts/generate-seed.ts",
     "test:security": "vitest run tests/security.test.ts",

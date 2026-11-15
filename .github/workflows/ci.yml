@@ -9,6 +9,31 @@ concurrency:
   group: quality-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 jobs:
+  private-release:
+    runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: https://example.supabase.co
+      VITE_SUPABASE_ANON_KEY: sb_publishable_fixture_not_real
+      VITE_TURNSTILE_SITE_KEY: fixture-public-site-key
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build:private
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:private
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: private-release-fixtures
+          path: |
+            test-results/private-e1
+            docs/phase-e/e1-captures
   verify:
     runs-on: ubuntu-latest
     steps:
