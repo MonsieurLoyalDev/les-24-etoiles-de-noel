@@ -20,6 +20,18 @@ import {
 const out = "docs/phase-e/e1-captures";
 const hash = (b: Buffer) => createHash("sha256").update(b).digest("hex");
 test.beforeAll(() => mkdirSync(out, { recursive: true }));
+test.afterEach(async ({ page }) => {
+  if (
+    (process.env.CI || process.env.ETB_PRIVATE_CANVAS) &&
+    (await page.locator("canvas").count())
+  ) {
+    expect(
+      await page
+        .locator("canvas")
+        .evaluate((c) => (c as HTMLCanvasElement).getContext("2d") !== null),
+    ).toBe(true);
+  }
+});
 test("E1 véritable build privé : chaque image et fonte existe, MIME et octets exacts", async ({
   page,
 }) => {

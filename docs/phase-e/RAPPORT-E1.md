@@ -4,7 +4,7 @@ Validation locale du 15 novembre 2026. Base : `feature/phase-d4-2-activites`, co
 
 ## Résultat et périmètre
 
-Les trois feuilles D.4.2 sont désormais incluses dans le build privé. Les contrôles de construction et de packaging vérifient **225 ressources : 222 PNG et 3 fontes**, leurs signatures et leurs octets, ainsi que les entrées JavaScript/CSS. Le véritable build privé configuré avec des valeurs fictives passe **14 tests navigateur dans une même série**, PC et mobile émulé. Célestine lit, range et s'assoit ; Émile distribue sa lettre ; Augustin utilise ses poses et synchronise sa lanterne. Dialogue, reprise et réduction des mouvements sont exercés.
+Les trois feuilles D.4.2 sont désormais incluses dans le build privé. Les contrôles de construction et de packaging vérifient **225 ressources : 222 PNG et 3 fontes**, leurs signatures et leurs octets, ainsi que les entrées JavaScript/CSS. Le véritable build privé configuré avec des valeurs fictives passe **16 tests navigateur dans une même série**, PC et mobile émulé. Célestine lit, range et s'assoit ; Émile distribue sa lettre ; Augustin utilise ses poses et synchronise sa lanterne. Dialogue, reprise et réduction des mouvements sont exercés.
 
 Le dépôt GitHub reste **public conformément à votre instruction E.1**. Les constats E.0 concernant cette visibilité restent un historique d'audit ; ils ne constituent plus une demande de changement du réglage. Aucune donnée personnelle réelle, aucun média privé ou secret n'est ajouté. Les comptes, jetons et clés des tests sont explicitement fictifs, sans validité sur un service réel. Les véritables surprises devront rester dans Supabase privé et son stockage, hors Git et hors `public/`.
 
@@ -25,7 +25,7 @@ Avant correction, `npm run build:private` terminait avec le code 0 alors que `ce
 | `playwright.private.config.ts` — nouveau ; `package.json` | Commande `npm run test:private`, serveur de prévisualisation local dédié au véritable `dist` privé ; aucun mode développeur injecté |
 | `tests/private-release.test.mjs` — nouveau | Neuf tests ciblés : retrait d'une feuille obligatoire, couverture des ressources, HTML déguisé en PNG, octets altérés, dépendance JS/CSS absente, surprises ajoutées au site, configuration dangereuse et packaging sans Auth/CAPTCHA |
 | `tests/private-e2e/fixtures.ts` — nouveau | Backend de recette intercepté dans Playwright uniquement : connexion, membre/joueur/admin, contrats RPC fermés, séparation live/preview, média autorisé/futur ; origine externe inattendue refusée ; aucun branchement fictif ajouté au jeu |
-| `tests/private-e2e/release.spec.ts` — nouveau | Sept scénarios sur deux formats : ressources, Célestine, Émile, Augustin, joueur, aperçu administrateur, anonyme/non-membre |
+| `tests/private-e2e/release.spec.ts` — nouveau | Huit scénarios sur deux formats : ressources, poses/réduction Célestine, interruption/reprise Célestine, Émile, Augustin, joueur, aperçu administrateur, anonyme/non-membre |
 | `.gitattributes` | Fins de ligne LF stables pour les sources/configurations textuelles ; hashes de préservation conservés |
 | `vitest.config.ts` | Deux workers maximum pour borner le travail PNG/hash/PGlite ; aucun relâchement des assertions ou délais unitaires |
 | `tests/e2e/phase-d3-2-compat.spec.ts` | Attente de démarrage alignée à 20 secondes comme les pilotes récents ; assertions de position sûre, inventaire, quêtes, étoiles, scores et historique inchangées |
@@ -53,7 +53,7 @@ Environnement : Windows, Node 24.14.0, npm 11.9.0, Playwright 1.64.1, Chrome loc
 | Packaging sans configuration / sans CAPTCHA | Refus effectivement exécutés par les tests, avant création d'un paquet |
 | Ressource supprimée de la liste, HTML sous nom PNG, octets différents, chunk JS/CSS absent | Refus effectivement exécutés par les tests |
 | Régressions `game`, `phase-b`, `phase-c`, `phase-d3-2-compat` | Série initiale **11 réussis / 1 échec d'attente de démarrage** ; confirmation du test de compatibilité **2/2 réussis** après correction du pilote. Les **12 scénarios distincts sont validés** |
-| `npm run test:private` final | **14/14 réussis**, aucun ignoré ni instable, 5 min 50,26 s, dans une même exécution depuis l'installation vierge |
+| `npm run test:private` final | **16/16 réussis**, aucun ignoré ni instable, 7 min 17,66 s, sur le pilote final ; l'installation vierge avait aussi validé le lot initial 14/14 |
 | Export Git et fins de ligne | Archive de contrôle de `Captcha.tsx` et `domain.ts` avec les attributs de travail : LF conservé malgré `core.autocrlf=true` ; aucune suppression de preuve SHA-256 |
 
 Les régressions couvrent les 24 activités fictives complétées sur les deux formats, le final, le rejeu, le journal, les brouillons/reprises, le calendrier fermé en novembre, l'éditeur fictif, les trois mini-jeux, la première quête, les quêtes secondaires, le joystick et d'anciennes sauvegardes replacées hors des obstacles. Les 24 jours constituent des étapes dans deux parcours, pas 48 tests navigateur comptés artificiellement.
@@ -73,6 +73,8 @@ Le build privé de recette utilise uniquement `https://example.supabase.co`, `sb
 
 ### Échecs intermédiaires conservés et expliqués
 
+- Cinquième recette (`fbe5da7`, `43765772681`) : 13/16 privés, les huit cas mobiles passent. Sur PC SwiftShader Linux, le parcours de poses dépasse 240 s, l'état de conversation n'est pas observé dans les 5 s, et les 8 s de relevé d'Émile ne contiennent pas sa fermeture. Le même lot passe localement 16/16 en WebGL. La recette privée Linux utilise désormais le **fallback Canvas existant de `Phaser.AUTO`**, via l'option de lancement Chromium `--disable-webgl`, sans modifier le jeu. Une assertion vérifie réellement le contexte 2D après les parcours. Chrome local garde WebGL par défaut ; `ETB_PRIVATE_CANVAS=1` permet de reproduire le fallback. Le pilote Canvas PC d'Émile passe 1/1 en 34,4 s, avec capture du jeu contrôlée visuellement. Cela ne constitue pas une validation de WebGL logiciel Linux ; les résultats des deux renderers restent distincts.
+
 - Quatrième recette (`f3a139a`, `43764342879`) : 12/14 privés. Les poses/réduction passent localement 2/2 en 3 min 52 s, mais le parcours combiné peut dépasser les neuf secondes de lecture debout après son arrivée, puis interrompre un simple repos ; la fermeture par clic subit aussi l'attente de stabilité du renderer Linux. Le pilote sépare maintenant les poses et l'interruption en deux scénarios indépendants (16 cas PC/mobile au total). L'interruption commence immédiatement après l'arrivée, avec un court déplacement depuis un point d'observation à 50 pixels ; elle exige l'activité native, l'état interrompu, l'absence d'accessoire, `TALKING_TO_PLAYER`, l'immobilité pendant la conversation et la reprise. La fermeture utilise réellement Entrée sur PC et un contact tactile sur mobile. Ce parcours isolé passe localement 2/2, sans ignoré ni instable. L'échantillonnage des poses se fait dans le navigateur, évitant de consommer ce court créneau en allers-retours du pilote.
 
 - Troisième recette (`fd15430`, `43762941093`) : 12/14 privés, sans échec de capture. Le parcours combiné Célestine attendait la stabilité d'un bouton pour le clic PC et exigeait sur mobile la lecture du créneau précédent après une conversation. Le pilote utilise maintenant la touche E sur PC et un vrai contact tactile sur le bouton visible/activé sur mobile. Il exige l'ouverture du dialogue, l'interruption et son accessoire exact, puis la reprise d'une routine non interrompue hors `TALKING_TO_PLAYER` ; il n'impose plus un horaire déjà écoulé. Les trois poses de réduction des mouvements (lecture, rangement, fauteuil) sont désormais contrôlées chacune pendant leur propre créneau. Les routines et contrôles du jeu restent inchangés.
@@ -89,6 +91,8 @@ Le build privé de recette utilise uniquement `https://example.supabase.co`, `sb
 - Le lot de régression a conservé un échec mobile sur une attente de démarrage de cinq secondes. Sa confirmation PC/mobile conserve tous les contrôles de données après l'alignement de cette attente à vingt secondes.
 
 Les journaux et JSON détaillés sont conservés hors du dépôt dans `outputs/e1-verification/` : `baseline-private.log`, `missing-before-fix.log`, `npm-ci.log`, `confirmed-unit.log`, `regression-completed.json`, `compat-confirmed.json`, `private-completed.json` et journaux associés.
+
+Les dernières confirmations du pilote sont `celestine-final.json` (2/2), `interruption-split.json` (2/2, 1 min 27,95 s) et `private-final16.json` (16/16, aucun ignoré ni instable). Le premier lot 14/14 reste une preuve historique ; le lot 16/16 couvre la séparation définitive des activités et de l'interruption.
 
 ## Captures du jeu réellement exécuté
 
