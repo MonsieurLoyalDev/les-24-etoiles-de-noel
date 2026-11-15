@@ -35,11 +35,13 @@ test("D42 Célestine lit, range et utilise le fauteuil sur la géométrie conser
     const trace = await traceActivity(page, "mira", 6000);
     expect(
       new Set(trace.map((s) => s.drawn?.frame).filter(Boolean)).size,
-    ).toBeGreaterThan(2);
+    ).toBeGreaterThan(clip === "seatRead" ? 1 : 2);
     expect(trace.some((s) => s.object === "book")).toBe(true);
     const sample = trace.find((s) => s.phase === "acting" && s.drawn)!;
     expect(sample.drawn!.texture).toBe("activity-celestine");
     if (clip === "seatRead") {
+      expect(trace.some((s) => s.drawn?.frame === "pose-13")).toBe(true);
+      expect(trace.some((s) => s.drawn?.frame === "pose-14")).toBe(true);
       expect(sample.frame).toBeGreaterThanOrEqual(13);
       expect(sample.frame).toBeLessThanOrEqual(14);
       expect(sample.drawn!.y).toBeLessThan(300);
@@ -238,12 +240,10 @@ test("D42 inspection et extinction suivent les états réels des lanternes", asy
       .locator("canvas")
       .evaluate((c) => JSON.parse(c.dataset.activityLanterns!));
     await page.waitForTimeout(3600);
-    const after = await page
-      .locator("canvas")
-      .evaluate((c) => ({
-        state: JSON.parse(c.dataset.activityLanterns!),
-        render: JSON.parse(c.dataset.activityLightRendering!),
-      }));
+    const after = await page.locator("canvas").evaluate((c) => ({
+      state: JSON.parse(c.dataset.activityLanterns!),
+      render: JSON.parse(c.dataset.activityLightRendering!),
+    }));
     const b = before.find((l: { id: string }) => l.id === c.point),
       a = after.state.find((l: { id: string }) => l.id === c.point);
     if (c.clip === "inspect") {
@@ -271,7 +271,9 @@ test("D42 le fauteuil conserve son assise et sa réservation pendant un dialogue
   await startActivityGame(page, "library", 90000, { x: 830, y: 370 });
   await waitClip(page, "mira", "seatRead");
   await page.waitForTimeout(1600);
+  const initialSeat = await activity(page, "mira");
   await navigateTo(page, { x: 910, y: 326 });
+  const afterApproach = await activity(page, "mira");
   const button = page.getByRole("button", { name: /Parler à Célestine/ });
   if (info.project.name === "mobile") await button.tap();
   else await button.click();
@@ -288,6 +290,22 @@ test("D42 le fauteuil conserve son assise et sa réservation pendant un dialogue
     )
     .toBe("TALKING_TO_PLAYER");
   const view = await activity(page, "mira");
+  writeFileSync(
+    out + "/fauteuil-diagnostic-" + info.project.name + ".json",
+    JSON.stringify(
+      {
+        initialSeat,
+        afterApproach,
+        view,
+        world: JSON.parse(
+          (await page.locator("canvas").getAttribute("data-living-world")) ??
+            "{}",
+        ),
+      },
+      null,
+      2,
+    ),
+  );
   expect(view?.frame).toBe(15);
   expect(view?.drawn?.y).toBeLessThan(300);
   expect(view?.object).toBe("book-closed");

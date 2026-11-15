@@ -580,12 +580,17 @@ export class Village extends Phaser.Scene {
     this.emit();
   }
   candidates() {
-    const residents = this.npcs.map((n) => ({
-      id: `npc:${n.id}`,
-      x: n.image.x,
-      y: n.image.y,
-      name: `Parler à ${n.name}`,
-    }));
+    const residents = this.npcs.map((n) => {
+      // A seated drawing is inside its furniture; dialogue uses the free
+      // approach point, so line-of-sight still respects every real obstacle.
+      const contact = this.living.get(n.id)?.position ?? n.image;
+      return {
+        id: `npc:${n.id}`,
+        x: contact.x,
+        y: contact.y,
+        name: `Parler à ${n.name}`,
+      };
+    });
     if (this.adventDay?.room === this.state.room)
       residents.push({
         id: "advent",

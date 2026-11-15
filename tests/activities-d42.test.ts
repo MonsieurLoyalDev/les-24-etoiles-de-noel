@@ -209,3 +209,13 @@ it("D42 projection assise et lanternes désignent les objets réels sans les dé
   ).toBe(true);
   expect(seat.position.y + projection.offset.y).toBe(288);
 });
+import { visible } from "../src/domain";
+import environments from "./fixtures/world-d41-environments.json";
+it("D42 le dialogue au fauteuil vise l’approche libre sans supprimer la visibilité des murs", () => {
+  const rects = environments.find((r) => r.room === "library")!.rects,
+    player = { x: 910, y: 326 },
+    seat = worldPoints.find((p) => p.id === "library-armchair")!;
+  expect(visible(player, seat.position, rects)).toBe(true);
+  expect(visible(player, { x: 910, y: 288 }, rects)).toBe(false);
+  expect(visible({ x: 830, y: 370 }, { x: 910, y: 370 }, rects)).toBe(false);
+});

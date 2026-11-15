@@ -69,7 +69,7 @@ export async function waitClip(page: Page, id: string, clip: string) {
         const a = await activity(page, id);
         return a?.clip === clip && a.frame !== null && !a.interrupted;
       },
-      { timeout: 55000 },
+      { timeout: 55000, intervals: [100] },
     )
     .toBe(true);
 }

@@ -44,7 +44,7 @@ const cases: {
     room: "library",
     clock: 90000,
     position: { x: 830, y: 370 },
-    ms: 10000,
+    ms: 13500,
   },
   {
     name: "distribution",
