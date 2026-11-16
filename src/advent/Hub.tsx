@@ -1,4 +1,5 @@
 import { CalendarArt } from "../art/Calendar";
+import { NarrativeHub } from "../narrative/Hub";
 import { useEffect, useRef, useState } from "react";
 import type { Village, View } from "../game/Game";
 import { controls } from "../game/Game";
@@ -34,6 +35,8 @@ export function AdventHub({
   const [captchaToken, setCaptchaToken] = useState(""),
     [captchaAttempt, setCaptchaAttempt] = useState(0);
   const [api, setApi] = useState<AdventAPI>();
+  const [narrativeOpen, setNarrativeOpen] = useState(0),
+    [narrativeBusy, setNarrativeBusy] = useState(false);
   const [panel, setPanel] = useState<Panel>(null),
     [preview, setPreview] = useState(false),
     [statuses, setStatuses] = useState<DayStatus[]>([]),
@@ -119,7 +122,7 @@ export function AdventHub({
     };
   }, []);
   useEffect(() => {
-    const paused = !!panel || view.cinematic;
+    const paused = !!panel || view.cinematic || narrativeBusy;
     controls.paused = paused;
     controls.x = 0;
     controls.y = 0;
@@ -129,7 +132,7 @@ export function AdventHub({
       root.current
         ?.querySelector<HTMLElement>("button,input,textarea")
         ?.focus({ preventScroll: true });
-  }, [panel, view.cinematic, scene, onBusy]);
+  }, [panel, view.cinematic, narrativeBusy, scene, onBusy]);
   useEffect(() => {
     if (!openRequest) return;
     setPanel(api ? "calendar" : privateMode ? "auth" : "calendar");
@@ -329,6 +332,18 @@ export function AdventHub({
   };
   return (
     <>
+      <NarrativeHub
+        api={api}
+        scene={scene}
+        view={view}
+        openRequest={narrativeOpen}
+        onBusy={setNarrativeBusy}
+        onStart={() => {
+          setDefinition(null);
+          setRun(null);
+          scene.setAdventDay(null);
+        }}
+      />
       {definition && <span className="advent-session" hidden />}
       {definition && !panel && !view.cinematic && (
         <aside className="advent-tracker" aria-label="Quête de l’Avent">
@@ -469,6 +484,14 @@ export function AdventHub({
                   Les jours ouverts restent rejouables.
                 </p>
                 <div className="advent-toolbar">
+                  <button
+                    onClick={() => {
+                      close();
+                      setNarrativeOpen((n) => n + 1);
+                    }}
+                  >
+                    Aventure narrative
+                  </button>
                   <button onClick={() => void refresh()}>
                     Actualiser les journées
                   </button>

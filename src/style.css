@@ -967,3 +967,8 @@ button[aria-pressed="true"] {
 .game-shell:has(.advent-session) .quest {
   display: none;
 }
+.game-shell:has(.narrative-session) .quest { display: none; }
+.narrative-tracker { max-width: 300px; }
+.narrative-tracker div { display: flex; gap: 5px; flex-wrap: wrap; }
+.narrative-tracker button { touch-action: none; }
+.game-shell:has(.dialogue, .journal, .settings-panel) .narrative-tracker { display: none; }

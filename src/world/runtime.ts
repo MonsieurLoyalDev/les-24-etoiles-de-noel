@@ -170,6 +170,7 @@ export class LivingWorld {
     player: Point,
     talking: string | null,
     visible: (p: Point) => boolean,
+    reserved: ReadonlySet<string> = new Set(),
   ) {
     this.lastClock = clock;
     delta = Math.max(0, Math.min(delta, 200));
@@ -177,7 +178,7 @@ export class LivingWorld {
     const phase = period(clock),
       all = [...this.actors.values()];
     for (const a of all) {
-      if (a.id === talking) {
+      if (a.id === talking || reserved.has(a.id)) {
         a.reaction = null;
         if (a.state !== "TALKING_TO_PLAYER") {
           a.previousState = a.state;

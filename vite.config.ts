@@ -36,6 +36,7 @@ export default defineConfig(({ command, mode }) => {
                       if (
                         module.renderedLength > 0 &&
                         (/\/src\/advent\/(demo|demoApi)\.ts$/.test(path) ||
+                            /\/src\/narrative\/author\.ts$/.test(path) ||
                           path.includes("/tests/"))
                       )
                         throw Error(

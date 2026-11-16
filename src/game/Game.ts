@@ -1,4 +1,5 @@
 import { preloadActivities } from "../world/activity-presentation";
+import type { NarrativeBridge, NarrativeView } from "../narrative/bridge";
 import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
 import { playSound, stopAmbience } from "../art/audio";
@@ -102,8 +103,15 @@ export type View = {
   finalCompleted: number;
   cinematic: boolean;
   adventStars: number;
+  narrative?: NarrativeView;
 };
-export const controls = { x: 0, y: 0, interact: false, paused: false };
+export const controls = {
+  x: 0,
+  y: 0,
+  interact: false,
+  paused: false,
+  run: false,
+};
 export class Village extends Phaser.Scene {
   state: Save;
   publish: (view: View) => void;
@@ -155,6 +163,7 @@ export class Village extends Phaser.Scene {
   huntMarker?: Phaser.GameObjects.Container;
   finalSequence: { beat: number; message: string } | null = null;
   finalCompleted = 0;
+  narrative?: NarrativeBridge;
   constructor(
     save: Save,
     publish: (v: View) => void,
@@ -199,7 +208,7 @@ export class Village extends Phaser.Scene {
     });
     createActorAnimations(this);
     this.keys = this.input.keyboard!.addKeys(
-      "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE",
+      "UP,DOWN,LEFT,RIGHT,W,A,S,D,Z,Q,E,SPACE,SHIFT",
     ) as typeof this.keys;
     this.input.keyboard!.addCapture(["UP", "DOWN", "LEFT", "RIGHT", "SPACE"]);
     this.input.keyboard!.on("keydown-E", (event: KeyboardEvent) => {
@@ -421,7 +430,10 @@ export class Village extends Phaser.Scene {
         : [],
     );
     this.livingPresentation = new LivingPresentation(this, this.living);
-    for (const citizen of citizens.filter((n) => n.room === this.state.room)) {
+    for (const citizen of citizens.filter(
+      (n) =>
+        (this.living.get(n.id)?.profile.room ?? n.room) === this.state.room,
+    )) {
       const p = this.living.get(citizen.id)?.position ?? citizen.path[0];
       const image = actor(this, residentActors[citizen.id], p.x, p.y);
       this.npcs.push({
@@ -474,6 +486,39 @@ export class Village extends Phaser.Scene {
       this.interiorLight = new InteriorLight(this, this.state.room);
     else this.neighbourhood = new NeighbourhoodLife(this);
     this.refreshAdvent();
+    this.narrative?.roomRendered();
+  }
+  syncNarrativeResidents() {
+    for (const citizen of citizens) {
+      const room = this.living.get(citizen.id)?.profile.room ?? citizen.room;
+      const current = this.npcs.find((n) => n.id === citizen.id);
+      if (current && room !== this.state.room) {
+        for (const tag of this.actorTags.filter(
+          (t) => t.actor === current.image,
+        ))
+          tag.plate.destroy();
+        this.actorTags = this.actorTags.filter(
+          (t) => t.actor !== current.image,
+        );
+        current.image.destroy();
+        this.npcs = this.npcs.filter((n) => n !== current);
+      } else if (!current && room === this.state.room) {
+        const p = this.living.get(citizen.id)?.position ?? citizen.path[0];
+        const image = actor(this, residentActors[citizen.id], p.x, p.y);
+        this.npcs.push({
+          id: citizen.id,
+          name: citizen.name,
+          image,
+          path: citizen.path,
+          step: 0,
+        });
+        this.actorTags.push({
+          actor: image,
+          plate: plaque(this, citizen.name),
+          name: citizen.name,
+        });
+      }
+    }
   }
   setAdventDay(day: Day | null) {
     this.adventDay = day;
@@ -509,7 +554,9 @@ export class Village extends Phaser.Scene {
           24,
           Math.max(this.adventLights.length, this.state.stars.length),
         );
-    this.tree?.setFrame("sapin_" + String(count).padStart(2, "0"));
+    this.tree?.setFrame(
+      "sapin_" + String(this.narrative?.treeFrame ?? count).padStart(2, "0"),
+    );
     this.game.canvas.dataset.treeArt = JSON.stringify({
       texture: this.tree?.texture.key ?? null,
       frame: this.tree?.frame.name ?? null,
@@ -591,6 +638,7 @@ export class Village extends Phaser.Scene {
         name: `Parler à ${n.name}`,
       };
     });
+    residents.push(...(this.narrative?.candidates() ?? []));
     if (this.adventDay?.room === this.state.room)
       residents.push({
         id: "advent",
@@ -691,9 +739,17 @@ export class Village extends Phaser.Scene {
       .sort(
         (a, b) =>
           Math.hypot(a.x - this.player.x, a.y - this.player.y) +
-          (a.id === "loyal" ? 43 : 0) -
+          (a.id === "loyal" || a.id === "narrative:fox"
+            ? 43
+            : a.id.startsWith("narrative:")
+              ? -43
+              : 0) -
           (Math.hypot(b.x - this.player.x, b.y - this.player.y) +
-            (b.id === "loyal" ? 43 : 0)),
+            (b.id === "loyal" || b.id === "narrative:fox"
+              ? 43
+              : b.id.startsWith("narrative:")
+                ? -43
+                : 0)),
       )[0];
   }
   interact() {
@@ -710,6 +766,10 @@ export class Village extends Phaser.Scene {
       return;
     }
     if (controls.paused) return;
+    if (this.narrative?.dialogueActive) {
+      this.narrative.choose(0);
+      return;
+    }
     if (this.dialogue) {
       if (this.activeDialogue) {
         this.selectChoice(0);
@@ -721,6 +781,10 @@ export class Village extends Phaser.Scene {
     }
     const t = this.nearest();
     if (!t) return;
+    if (this.narrative?.interact(t.id)) {
+      this.emit();
+      return;
+    }
     if (t.id.startsWith("decor:")) {
       this.dialogue =
         this.interiorLife?.activate(t.id.slice(6), this.time.now) ?? "";
@@ -842,6 +906,10 @@ export class Village extends Phaser.Scene {
     this.dialogue = `${node.speaker} — ${node.text}`;
   }
   selectChoice(index: number) {
+    if (this.narrative?.dialogueActive) {
+      this.narrative.choose(index);
+      return;
+    }
     const active = this.activeDialogue;
     if (!active) return;
     const next = choose(this.state, active.graph, active.id, index, active.key);
@@ -889,12 +957,14 @@ export class Village extends Phaser.Scene {
       dialogue: this.dialogue,
       target: this.target,
       location: roomNames[this.state.room],
-      choices: this.activeDialogue
-        ? choicesFor(
-            this.state,
-            this.activeDialogue.graph[this.activeDialogue.id],
-          ).map((c) => c.label)
-        : [],
+      choices: this.narrative?.dialogueActive
+        ? this.narrative.choices
+        : this.activeDialogue
+          ? choicesFor(
+              this.state,
+              this.activeDialogue.graph[this.activeDialogue.id],
+            ).map((c) => c.label)
+          : [],
       miniGame: this.miniGame,
       period: periodNames[period(this.state.clock)],
       activity: this.npcs
@@ -904,7 +974,8 @@ export class Village extends Phaser.Scene {
       adventRequested: this.adventRequested,
       huntFound: this.hunt?.found ?? [],
       finalCompleted: this.finalCompleted,
-      cinematic: !!this.finalSequence,
+      cinematic: !!this.finalSequence || !!this.narrative?.busy,
+      narrative: this.narrative?.view,
     };
     const key = JSON.stringify([
       v.save.stage,
@@ -923,6 +994,7 @@ export class Village extends Phaser.Scene {
       v.finalCompleted,
       v.cinematic,
       v.adventStars,
+      v.narrative,
     ]);
     if (key !== this.lastView) {
       this.lastView = key;
@@ -934,6 +1006,7 @@ export class Village extends Phaser.Scene {
     // Phaser's smoothed delta can reuse a 60 FPS sample when frames exceed
     // its minimum FPS threshold. Use actual elapsed time for simulation.
     delta = Math.min(this.game.loop.rawDelta, 200);
+    this.narrative?.update(delta);
     if (controls.interact) {
       controls.interact = false;
       this.interact();
@@ -950,7 +1023,9 @@ export class Village extends Phaser.Scene {
       const before = { x: this.player.x, y: this.player.y };
       this.state.clock = (this.state.clock + Math.min(delta, 200)) % 180000;
       const len = Math.hypot(x, y) || 1,
-        speed = movementDistance(delta);
+        speed =
+          movementDistance(delta) *
+          (this.narrative && (controls.run || down("SHIFT")) ? 1.45 : 1);
       this.state.position = move(
         this.player,
         (x / len) * speed,
@@ -968,7 +1043,7 @@ export class Village extends Phaser.Scene {
         this.lastFootstep = _time;
       }
 
-      if (this.hunt?.step.style !== "loyal") {
+      if (this.hunt?.step.style !== "loyal" && !this.narrative?.ownCompanion) {
         const segment = Math.hypot(
           this.player.x - this.lastTrail.x,
           this.player.y - this.lastTrail.y,
@@ -1038,12 +1113,13 @@ export class Village extends Phaser.Scene {
       !this.dialogue && !controls.paused && !this.finalSequence ? delta : 0,
       this.state.room,
       this.player,
-      this.activeDialogue?.key ?? null,
+      this.narrative?.talkingActor ?? this.activeDialogue?.key ?? null,
       (p) =>
         p.x >= worldView.x - 70 &&
         p.x <= worldView.right + 70 &&
         p.y >= worldView.y - 70 &&
         p.y <= worldView.bottom + 70,
+      this.narrative?.reservedActors,
     );
     for (const npc of this.npcs) {
       const living = this.living.get(npc.id);

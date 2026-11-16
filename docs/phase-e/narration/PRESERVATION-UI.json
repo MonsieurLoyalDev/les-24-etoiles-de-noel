@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "path": "src/advent/Hub.tsx",
+      "sha256": "0ac75e2192ec21bf6ef89ae5e7ff363adcd4bc5eca81d18a733cfe2144628b0f"
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "8ad42c48b2148c0c4e4e940549417f0d72e98dbf8db1dffa09b3bfb47e8faf99"
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "1ca87aae573edce13bccb2b11cf32d40f84aedeea90a1b59461f1804efd7a0df"
+    }
+  ],
+  "reason": "Historical D35 manifest remains unchanged. These three UI files add the narrative entry point and journal; assets, save formats and village remain covered by the original manifest.",
+  "baseline": "E.1 narrative foundation — authorized UI integration only"
+}

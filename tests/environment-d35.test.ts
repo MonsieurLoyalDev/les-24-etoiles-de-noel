@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { rgbaPng } from "./png-rgba";
 import metadata from "../src/art/environment-d35.json";
 import proof from "../docs/graphismes/d35/PRESERVATION.json";
+import narrativeUI from "../docs/phase-e/narration/PRESERVATION-UI.json";
 import { fenceModules35 } from "../src/art/fences35";
 import {
   edgeVariation,
@@ -12,11 +13,19 @@ import {
 } from "../src/art/ground35";
 import { plan, overlaps } from "../src/art/village34";
 it("D35 préserve les fichiers publics et sources validés protégés", () => {
+  expect(narrativeUI.files.map((f) => f.path).sort()).toEqual([
+    "src/advent/Hub.tsx",
+    "src/main.tsx",
+    "src/style.css",
+  ]);
   for (const f of proof.files)
     expect(
       createHash("sha256").update(readFileSync(f.path)).digest("hex"),
       f.path,
-    ).toBe(f.sha256);
+    ).toBe(
+      narrativeUI.files.find((update) => update.path === f.path)?.sha256 ??
+        f.sha256,
+    );
 });
 it("D35 atlas compact : 47 images exactes, sans fond ni débordement de cellule", () => {
   const im = rgbaPng("public/assets/environment-d35/sprites.png");

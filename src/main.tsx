@@ -8,6 +8,7 @@ import Phaser from "phaser";
 import { Village, controls, type View } from "./game/Game";
 import { initial, type Save } from "./domain";
 import { loadSave, writeSave } from "./save";
+import { roomNames } from "./rpg/world";
 import "./style.css";
 import "./art/style.css";
 import "./art/correction-d1.css";
@@ -113,13 +114,21 @@ function App() {
       game?.destroy(true);
     };
   }, [started]);
-  const toggleJournal = () =>
+  useEffect(() => {
+    if (view?.narrative?.bookRequest) {
+      setJournal(true);
+      controls.paused = true;
+    }
+  }, [view?.narrative?.bookRequest]);
+  const toggleJournal = () => {
+    if (!journal) scene.current?.narrative?.openBook();
     setJournal((v) => {
       controls.paused = !v;
       controls.x = 0;
       controls.y = 0;
       return !v;
     });
+  };
   const resetStick = () => {
     controls.x = 0;
     controls.y = 0;
@@ -146,7 +155,9 @@ function App() {
             }).format(new Date())}
           </time>
           <span className="hud-stars" aria-label="Étoiles récupérées">
-            {Math.max(stars.length, view?.adventStars ?? 0)} / 24
+            {view?.narrative?.restored ??
+              Math.max(stars.length, view?.adventStars ?? 0)}{" "}
+            / 24
           </span>
         </div>
         <div className="header-actions">
@@ -379,6 +390,29 @@ function App() {
                 </button>
                 <p className="eyebrow">VOTRE JOURNAL</p>
                 <h2>24 jours, autant de souvenirs.</h2>
+                {view?.narrative?.book && (
+                  <section aria-label="Livre des Étoiles">
+                    <h3>Livre des Étoiles · {view.narrative.restored}/24</h3>
+                    <h4>{view.narrative.book.title}</h4>
+                    <p>{view.narrative.book.text}</p>
+                    <p>
+                      Choix conservés :{" "}
+                      {view.narrative.chosenReplies.join(" · ") || "—"}
+                    </p>
+                    <p>
+                      Habitants rencontrés :{" "}
+                      {view.narrative.characters.join(", ") || "—"}
+                    </p>
+                    <p>
+                      Lieux découverts :{" "}
+                      {view.narrative.places
+                        .map(
+                          (room) => roomNames[room as keyof typeof roomNames],
+                        )
+                        .join(", ")}
+                    </p>
+                  </section>
+                )}
                 <p>
                   Archives fictives du village · Phase B. Le calendrier 2026 est
                   accessible avec le bouton « Avent 2026 ».
