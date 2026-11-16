@@ -14,6 +14,10 @@ export type Reaction =
   | "lecture"
   | "lettre";
 const active = new WeakMap<Phaser.Scene, () => void>();
+export function clearReaction(scene: Phaser.Scene) {
+  active.get(scene)?.();
+  active.delete(scene);
+}
 const cache = new WeakMap<Phaser.Scene, Map<string, string>>();
 /** Cosmetic overlay only: no save mutation, movement, dialogue or quest effects. */
 export function reaction(

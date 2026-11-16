@@ -3,7 +3,7 @@ import base from "./playwright.config";
 export default defineConfig({
   ...base,
   testDir: "tests/narrative-e2e",
-  testMatch: "author.spec.ts",
+  testMatch: ["author.spec.ts", "compat.spec.ts"],
   timeout: 900000,
   outputDir: "test-results/narrative-author",
   use: {

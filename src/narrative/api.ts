@@ -13,6 +13,7 @@ export type EpisodeStatus = {
   title: string | null;
 };
 export type EpisodeSession = {
+  completedAt?: string | null;
   content: EpisodeScript;
   progress: EpisodeProgress | null;
   runId: string;
@@ -36,7 +37,11 @@ export interface EpisodeAPI {
     runId: string,
     expected: number,
     progress: EpisodeProgress,
-  ): Promise<void>;
+  ): Promise<void | {
+    revision: number;
+    restored: boolean;
+    completedAt: string | null;
+  }>;
 }
 export function privateEpisodeAPI(
   userId: string,
@@ -80,7 +85,11 @@ export function privateEpisodeAPI(
         }
       : {}),
     async save(day, runId, expected, progress) {
-      await rpc("episode_save", {
+      return await rpc<{
+        revision: number;
+        restored: boolean;
+        completedAt: string | null;
+      }>("episode_save", {
         p_day: day,
         p_preview: preview,
         p_run: runId,

@@ -6,6 +6,7 @@ import {
 } from "./engine";
 import type { Point, Save } from "../domain";
 import type { GameEvent } from "../rpg/quests";
+import type { Presentation } from "./orchestration";
 
 export type SceneKind =
   "arrival" | "meet" | "tree" | "scatter" | "trail" | "restore" | "home";
@@ -27,8 +28,10 @@ export type EpisodeScript = Omit<EpisodeDefinition, "scenes"> & {
   title: string;
   scenes: ScriptScene[];
   book: { title: string; text: string };
+  hints?: string[];
 };
 export type EpisodeRuntime = {
+  presentation?: Presentation;
   dialogue: { block: string; beat: number; actor: string | null } | null;
   origin: Point | null;
   firstMetVillager: string | null;
@@ -65,6 +68,13 @@ const text = (v: unknown, max = 2000): v is string =>
   typeof v === "string" && v.length > 0 && v.length <= max;
 export function validateScript(input: unknown): EpisodeScript {
   const s = input as EpisodeScript;
+  if (
+    s?.hints !== undefined &&
+    (!Array.isArray(s.hints) ||
+      s.hints.length > 3 ||
+      s.hints.some((h) => !text(h, 500)))
+  )
+    throw Error("Aides privées invalides");
   if (
     !s ||
     s.schema !== 1 ||
@@ -124,6 +134,42 @@ export function validateScript(input: unknown): EpisodeScript {
 }
 export function validateRuntime(r: EpisodeRuntime) {
   const rooms = ["village", "house", "library", "workshop", "inn"];
+  const p = r?.presentation;
+  if (
+    p?.location &&
+    (!rooms.includes(p.location.room) ||
+      [
+        p.location.position,
+        p.location.loyal,
+        ...(p.location.flocon ? [p.location.flocon] : []),
+      ].some(
+        (point) =>
+          !point ||
+          !Number.isFinite(point.x) ||
+          !Number.isFinite(point.y) ||
+          point.x < 0 ||
+          point.x > 1920 ||
+          point.y < 0 ||
+          point.y > 1408,
+      ))
+  )
+    throw Error("Point de reprise invalide");
+  if (
+    p &&
+    (typeof p.introSeen !== "boolean" ||
+      !Number.isFinite(p.introRemaining) ||
+      p.introRemaining < 0 ||
+      p.introRemaining > 4000 ||
+      ![null, "tree", "invitation"].includes(p.moment) ||
+      !Array.isArray(p.optional) ||
+      p.optional.length > 100 ||
+      p.optional.some((id) => typeof id !== "string" || id.length > 80) ||
+      !Number.isInteger(p.hintSpoken) ||
+      p.hintSpoken < 0 ||
+      p.hintSpoken > 3 ||
+      (p.completedAt !== null && !Number.isFinite(Date.parse(p.completedAt))))
+  )
+    throw Error("État de présentation invalide");
   if (
     !r ||
     !Number.isInteger(r.clueIndex) ||

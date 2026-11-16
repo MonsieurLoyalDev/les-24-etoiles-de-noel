@@ -739,13 +739,17 @@ export class Village extends Phaser.Scene {
       .sort(
         (a, b) =>
           Math.hypot(a.x - this.player.x, a.y - this.player.y) +
-          (a.id === "loyal" || a.id === "narrative:fox"
+          (a.id === "loyal" ||
+          a.id === "narrative:fox" ||
+          a.id.startsWith("narrative:optional:")
             ? 43
             : a.id.startsWith("narrative:")
               ? -43
               : 0) -
           (Math.hypot(b.x - this.player.x, b.y - this.player.y) +
-            (b.id === "loyal" || b.id === "narrative:fox"
+            (b.id === "loyal" ||
+            b.id === "narrative:fox" ||
+            b.id.startsWith("narrative:optional:")
               ? 43
               : b.id.startsWith("narrative:")
                 ? -43

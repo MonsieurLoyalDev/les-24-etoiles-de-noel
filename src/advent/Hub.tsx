@@ -37,6 +37,11 @@ export function AdventHub({
   const [api, setApi] = useState<AdventAPI>();
   const [narrativeOpen, setNarrativeOpen] = useState(0),
     [narrativeBusy, setNarrativeBusy] = useState(false);
+  const [narrativeDay, setNarrativeDay] = useState<{
+    day: number;
+    replay: boolean;
+    preview: boolean;
+  } | null>(null);
   const [panel, setPanel] = useState<Panel>(null),
     [preview, setPreview] = useState(false),
     [statuses, setStatuses] = useState<DayStatus[]>([]),
@@ -65,7 +70,9 @@ export function AdventHub({
   const storage =
     api && run ? draftKey(api.userId, preview, run.day, run.runId) : "";
   const step = definition?.steps[run?.checked.length ?? 0];
-  const earned = statuses.filter((s) => s.complete).map((s) => s.day);
+  const earned = statuses
+    .filter((s) => s.restored ?? s.complete)
+    .map((s) => s.day);
   async function initialize() {
     const gen = ++generation.current;
     try {
@@ -158,7 +165,11 @@ export function AdventHub({
         if (!live) return;
         setStatuses(list);
         const active = await getLocal<number>(activeKey);
-        if (active && list.find((x) => x.day === active)?.unlocked) {
+        if (
+          active &&
+          list.find((x) => x.day === active)?.unlocked &&
+          list.find((x) => x.day === active)?.source !== "narrative"
+        ) {
           const day = await api.day(active, preview),
             state = await api.start(active, preview);
           if (!live) return;
@@ -242,10 +253,17 @@ export function AdventHub({
   }
   async function selectDay(day: number, replay = false) {
     if (!api) return;
+    if (statuses.find((s) => s.day === day)?.source === "narrative") {
+      setNarrativeDay({ day, replay, preview });
+      setPanel(null);
+      setNarrativeOpen((n) => n + 1);
+      return;
+    }
     setBusy(true);
     setError("");
     try {
       scene.clearHunt();
+      await scene.narrative?.deactivate();
       const d = await api.day(day, preview),
         r = await api.start(day, preview, replay);
       setDefinition(d);
@@ -337,8 +355,10 @@ export function AdventHub({
         scene={scene}
         view={view}
         openRequest={narrativeOpen}
+        dayRequest={narrativeDay}
         onBusy={setNarrativeBusy}
-        onStart={() => {
+        onStart={async () => {
+          if (activeKey) await putLocal(activeKey, null);
           setDefinition(null);
           setRun(null);
           scene.setAdventDay(null);
@@ -488,6 +508,7 @@ export function AdventHub({
                     onClick={() => {
                       close();
                       setNarrativeOpen((n) => n + 1);
+                      setNarrativeDay(null);
                     }}
                   >
                     Aventure narrative
@@ -581,22 +602,29 @@ export function AdventHub({
                         <button onClick={() => void selectDay(s.day, true)}>
                           Rejouer le jour {s.day}
                         </button>
-                        <button
-                          onClick={() => {
-                            const memory = s.run?.memory ?? s.run?.values ?? {};
-                            downloadText(
-                              `souvenir-${s.day}.txt`,
-                              Object.entries(memory)
-                                .map(
-                                  ([id, value]) =>
-                                    `${id}\n${typeof value === "string" ? value : JSON.stringify(value, null, 2)}`,
-                                )
-                                .join("\n\n"),
-                            );
-                          }}
-                        >
-                          Garder une copie
-                        </button>
+                        {s.source === "narrative" ? (
+                          <button onClick={() => void selectDay(s.day)}>
+                            Retrouver le Livre dans le village
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              const memory =
+                                s.run?.memory ?? s.run?.values ?? {};
+                              downloadText(
+                                `souvenir-${s.day}.txt`,
+                                Object.entries(memory)
+                                  .map(
+                                    ([id, value]) =>
+                                      `${id}\n${typeof value === "string" ? value : JSON.stringify(value, null, 2)}`,
+                                  )
+                                  .join("\n\n"),
+                              );
+                            }}
+                          >
+                            Garder une copie
+                          </button>
+                        )}
                       </article>
                     ))}
                 </div>

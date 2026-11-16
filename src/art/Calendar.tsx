@@ -24,11 +24,12 @@ export function CalendarArt({
         {catalog.positions.map((p) => {
           const day = Number(p.jour),
             status = statuses.find((s) => s.day === day);
-          const state = status?.complete
-            ? "complete"
-            : status?.unlocked
-              ? "available"
-              : "locked";
+          const state =
+            status?.complete || status?.restored
+              ? "complete"
+              : status?.unlocked
+                ? "available"
+                : "locked";
           return (
             <button
               key={day}

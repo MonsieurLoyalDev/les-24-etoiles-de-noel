@@ -333,7 +333,7 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
               await expect(page.locator(".dialogue")).toBeVisible();
               if (i === 3)
                 await page.screenshot({
-                  path: `docs/screenshots/phase-c-${info.project.name}-final.png`,
+                  path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-c-${info.project.name}-final.png`,
                 });
               await page.getByRole("button", { name: /Continuer/ }).click();
             }
@@ -358,7 +358,7 @@ test("les 24 journées : activités, reprise, récompenses et scène finale", as
     page.getByRole("heading", { name: "Journal des souvenirs · 24/24" }),
   ).toBeVisible();
   await page.screenshot({
-    path: `docs/screenshots/phase-c-${info.project.name}-calendrier.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-c-${info.project.name}-calendrier.png`,
   });
   expect(errors).toEqual([]);
 });

@@ -27,12 +27,15 @@ jobs:
       - run: npm run build:private
       - run: npx playwright install --with-deps chromium
       - run: npm run test:private
+      - run: npx playwright test --config playwright.narrative-private.config.ts
+      - run: npx playwright test tests/narrative-e2e/compat.spec.ts --config playwright.author.config.ts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: private-release-fixtures
           path: |
             test-results/private-e1
+            test-results/narrative-private-e2
             docs/phase-e/e1-captures
   verify:
     runs-on: ubuntu-latest

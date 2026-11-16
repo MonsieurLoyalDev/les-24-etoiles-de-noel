@@ -2,7 +2,8 @@ import { blocked } from "../../src/domain";
 import { test, expect, type Page } from "@playwright/test";
 import { initial, type Save } from "../../src/domain";
 import { mkdirSync, writeFileSync } from "node:fs";
-const out = "docs/screenshots/phase-d3-2/apres";
+const out =
+  process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots/phase-d3-2/apres";
 async function install(page: Page, save: Save) {
   await page.goto("/");
   await page.evaluate(async (save) => {

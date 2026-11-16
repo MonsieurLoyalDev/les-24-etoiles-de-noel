@@ -17,7 +17,7 @@ import {
   recordActivity,
   capturePrivatePage,
 } from "./fixtures";
-const out = "docs/phase-e/e1-captures";
+const out = process.env.ETB_PRIVATE_CAPTURE_DIR ?? "docs/phase-e/e1-captures";
 const hash = (b: Buffer) => createHash("sha256").update(b).digest("hex");
 test.beforeAll(() => mkdirSync(out, { recursive: true }));
 test.afterEach(async ({ page }) => {

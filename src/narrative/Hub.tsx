@@ -11,12 +11,14 @@ import {
   type EpisodeProgress,
 } from "./script";
 import { loadCheckpoint, saveCheckpoint } from "./checkpoint";
+import { presentation } from "./orchestration";
 
 export function NarrativeHub({
   api: legacy,
   scene,
   view,
   openRequest,
+  dayRequest,
   onBusy,
   onStart,
 }: {
@@ -24,8 +26,9 @@ export function NarrativeHub({
   scene: Village;
   view: View;
   openRequest: number;
+  dayRequest: { day: number; replay: boolean; preview: boolean } | null;
   onBusy: (value: boolean) => void;
-  onStart: () => void;
+  onStart: () => void | Promise<void>;
 }) {
   const [panel, setPanel] = useState(false),
     [preview, setPreview] = useState(false),
@@ -33,6 +36,7 @@ export function NarrativeHub({
     [statuses, setStatuses] = useState<EpisodeStatus[]>([]),
     [error, setError] = useState(""),
     [loading, setLoading] = useState(false);
+  const [pendingLaunch, setPendingLaunch] = useState<typeof dayRequest>(null);
   const director = useRef<NarrativeDirector | null>(null),
     generation = useRef(0),
     lastRequest = useRef(openRequest),
@@ -92,8 +96,18 @@ export function NarrativeHub({
     lastRequest.current = openRequest;
     setPanel(true);
     setError("");
+    if (dayRequest) {
+      setPreview(dayRequest.preview);
+      setPendingLaunch(dayRequest);
+    }
     if (api) void refresh();
   }, [openRequest]);
+  useEffect(() => {
+    if (api && pendingLaunch && api.preview === pendingLaunch.preview) {
+      setPendingLaunch(null);
+      void begin(pendingLaunch.day, pendingLaunch.replay);
+    }
+  }, [api, pendingLaunch]);
   useEffect(() => {
     if (panel && api) void refresh();
   }, [api, panel]);
@@ -142,12 +156,14 @@ export function NarrativeHub({
           runtime: initialRuntime(),
         };
       validateRuntime(progress.runtime);
+      if (api.mode === "private" && session.completedAt)
+        presentation(progress).completedAt = session.completedAt;
       let remoteRevision = session.revision,
         localRevision = local?.revision ?? null;
       const list = await api.status();
       setStatuses(list);
       director.current?.stop();
-      startCallback.current();
+      await startCallback.current();
       const next = new NarrativeDirector(
         scene,
         content,
@@ -158,11 +174,21 @@ export function NarrativeHub({
             await saveCheckpoint(scope, content, snapshot, localRevision);
             localRevision = snapshot.revision;
           }
-          await api.save(day, session.runId, remoteRevision, snapshot);
+          const receipt = await api.save(
+            day,
+            session.runId,
+            remoteRevision,
+            snapshot,
+          );
           remoteRevision = snapshot.revision;
+          if (receipt && typeof receipt.restored === "boolean")
+            director.current?.acknowledge(receipt);
         },
         list.filter((s) => s.restored).length,
         list.some((s) => s.day === day && s.restored),
+        api.mode === "private" && !api.preview ? "server" : "preview",
+        replay,
+        () => putLocal(activeKey, null),
       );
       director.current = next;
       await putLocal(activeKey, { day, replay });
@@ -202,11 +228,26 @@ export function NarrativeHub({
           aria-label="Aventure narrative"
         >
           <strong>
-            {current.preview ? "Aperçu séparé" : "Livre des Étoiles"} ·{" "}
-            {current.restored}/24
+            {current.preview
+              ? "Aperçu séparé"
+              : current.replay
+                ? "Relecture séparée"
+                : "Livre des Étoiles"}{" "}
+            · {current.restored}/24
           </strong>
           <span>{current.title}</span>
           <small>{current.objective}</small>
+          {current.actions.some((a) => a.id === "hug") && (
+            <small>
+              Moments tendres : poses debout existantes. Gestes de couple
+              dessinés à valider.
+            </small>
+          )}
+          {current.complete && (
+            <p role="status">
+              Jour 1 terminé · La première étoile a retrouvé sa place.
+            </p>
+          )}
           {current.hintLevel >= 2 && (
             <small>Un indice reste à examiner. Flocon peut vous guider.</small>
           )}
@@ -220,6 +261,16 @@ export function NarrativeHub({
             </p>
           )}
           <div>
+            {current.actions.map((action) => (
+              <button
+                key={action.id}
+                onClick={() =>
+                  scene.narrative?.interact(`narrative:optional:${action.id}`)
+                }
+              >
+                {action.label}
+              </button>
+            ))}
             <button
               aria-label="Courir"
               onPointerDown={() => {
@@ -315,34 +366,41 @@ export function NarrativeHub({
               <p role="status">Chargement de l’épisode et de sa sauvegarde…</p>
             )}
             {error && <p role="alert">{error}</p>}
-            <div className="advent-calendar">
-              {Array.from({ length: 24 }, (_, i) => {
-                const s = statuses.find((s) => s.day === i + 1);
-                return (
-                  <div key={i}>
-                    <button
-                      disabled={loading || !s?.available || !s.unlocked}
-                      aria-label={`Commencer l’épisode ${i + 1}`}
-                      onClick={() => void begin(i + 1, false)}
-                    >
-                      {i + 1} {s?.restored ? "✦" : "·"}
-                      <small>
-                        {!s?.available
-                          ? "À intégrer"
-                          : !s.unlocked
-                            ? "Verrouillé"
-                            : s.title}
-                      </small>
-                    </button>
-                    {s?.complete && s.unlocked && (
-                      <button onClick={() => void begin(i + 1, true)}>
-                        Rejouer l’épisode {i + 1}
+            {api?.mode === "private" && !legacy?.isAdmin ? (
+              <p>
+                Le calendrier illustré existant permet de commencer ou reprendre
+                une journée. Revenez au village puis ouvrez « Avent 2026 ».
+              </p>
+            ) : (
+              <div className="advent-calendar">
+                {Array.from({ length: 24 }, (_, i) => {
+                  const s = statuses.find((s) => s.day === i + 1);
+                  return (
+                    <div key={i}>
+                      <button
+                        disabled={loading || !s?.available || !s.unlocked}
+                        aria-label={`Commencer l’épisode ${i + 1}`}
+                        onClick={() => void begin(i + 1, false)}
+                      >
+                        {i + 1} {s?.restored ? "✦" : "·"}
+                        <small>
+                          {!s?.available
+                            ? "À intégrer"
+                            : !s.unlocked
+                              ? "Verrouillé"
+                              : s.title}
+                        </small>
                       </button>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                      {s?.complete && s.unlocked && (
+                        <button onClick={() => void begin(i + 1, true)}>
+                          Rejouer l’épisode {i + 1}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
             <p>
               Quatre constellations de six étoiles. Aucun épisode incomplet ne
               peut être lancé.

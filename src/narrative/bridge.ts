@@ -8,6 +8,7 @@ export type NarrativeView = {
   complete: boolean;
   restored: number;
   preview: boolean;
+  replay: boolean;
   hintLevel: number;
   saving: boolean;
   error: string;
@@ -16,6 +17,10 @@ export type NarrativeView = {
   characters: string[];
   places: string[];
   chosenReplies: string[];
+  phase: string;
+  completedAt: string | null;
+  actions: { id: string; label: string }[];
+  audioCue: string;
 };
 export interface NarrativeBridge {
   readonly dialogueActive: boolean;
@@ -33,4 +38,5 @@ export interface NarrativeBridge {
   roomRendered(): void;
   openBook(): void;
   stop(): void;
+  deactivate(): Promise<void>;
 }

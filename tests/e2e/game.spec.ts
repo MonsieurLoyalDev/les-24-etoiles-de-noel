@@ -72,12 +72,13 @@ test("parcours complet, sauvegarde et journal", async ({ page }, info) => {
   await page.waitForTimeout(4500);
   await page.reload();
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
+
   await expect(page.locator(".quest")).toContainText("1 / 24");
   await page.getByRole("button", { name: /Journal/ }).click();
   await expect(page.locator(".days > div")).toHaveCount(24);
   await page.getByRole("button", { name: /Fermer/ }).click();
   await page.screenshot({
-    path: `docs/screenshots/${info.project.name}-quest.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/${info.project.name}-quest.png`,
   });
   expect(errors).toEqual([]);
 });

@@ -5,6 +5,14 @@ import { technicalEpisode } from "../fixtures/narrative";
 import { navigateTo as navigateOnce } from "../e2e/pathfinding";
 import type { Page } from "@playwright/test";
 import type { Point } from "../../src/domain";
+import { installNarrativeFixture } from "../private-e2e/narrative-fixture";
+import { loginFixture } from "../private-e2e/fixtures";
+import { validateScript } from "../../src/narrative/script";
+let backend: Awaited<ReturnType<typeof installNarrativeFixture>> | null = null;
+test.afterEach(async () => {
+  await backend?.close();
+  backend = null;
+});
 async function navigateTo(page: Page, target: Point) {
   try {
     await navigateOnce(page, target);
@@ -36,6 +44,12 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
     });
   }
   const errors: string[] = [];
+  const raw = process.env.ETB_EPISODE_SOURCE
+    ? readFileSync(process.env.ETB_EPISODE_SOURCE)
+    : Buffer.from(JSON.stringify(technicalEpisode()));
+  const script = validateScript(JSON.parse(raw.toString("utf8")));
+  const privateMode = process.env.ETB_EPISODE_PRIVATE === "1";
+  if (privateMode) backend = await installNarrativeFixture(page, script);
   page.on("pageerror", (e) => errors.push(e.message));
   await page.addInitScript("window.__name=f=>f");
   await page.goto("/");
@@ -44,28 +58,45 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
     timeout: 30000,
   });
   await page.getByRole("button", { name: /Continuer/ }).click();
-  await page.getByRole("button", { name: "✦ Avent 2026", exact: true }).click();
-  await page
-    .getByRole("button", { name: "Aventure narrative", exact: true })
-    .click();
-  const raw = process.env.ETB_EPISODE_SOURCE
-    ? readFileSync(process.env.ETB_EPISODE_SOURCE)
-    : Buffer.from(JSON.stringify(technicalEpisode()));
-  await page.getByLabel("Importer un cahier narratif").setInputFiles({
-    name: "episode-source.json",
-    mimeType: "application/json",
-    buffer: raw,
-  });
-  await expect(
-    page.getByRole("button", { name: "Commencer l’épisode 1", exact: true }),
-  ).toBeEnabled();
-  await page
-    .getByRole("button", { name: "Commencer l’épisode 1", exact: true })
-    .click();
+  if (privateMode) {
+    await loginFixture(page);
+    await expect(
+      page.getByRole("button", { name: "Ouvrir le jour 2", exact: true }),
+    ).toBeDisabled();
+    await page
+      .getByRole("button", { name: "Ouvrir le jour 1", exact: true })
+      .click();
+  } else {
+    await page
+      .getByRole("button", { name: "✦ Avent 2026", exact: true })
+      .click();
+    await page
+      .getByRole("button", { name: "Aventure narrative", exact: true })
+      .click();
+    await page.getByLabel("Importer un cahier narratif").setInputFiles({
+      name: "episode-source.json",
+      mimeType: "application/json",
+      buffer: raw,
+    });
+    await expect(
+      page.getByRole("button", { name: "Commencer l’épisode 1", exact: true }),
+    ).toBeEnabled();
+    await page
+      .getByRole("button", { name: "Commencer l’épisode 1", exact: true })
+      .click();
+  }
   const state = () =>
     page
       .locator("canvas")
       .evaluate((c) => JSON.parse(c.dataset.narrative ?? "null"));
+  async function resume(sceneIndex: number) {
+    await expect.poll(async () => (await state()).saving).toBe(false);
+    await page.reload();
+    await page.getByRole("button", { name: /Entrer dans le village/ }).click();
+    await expect
+      .poll(async () => (await state())?.sceneIndex, { timeout: 30000 })
+      .toBe(sceneIndex);
+  }
   await expect
     .poll(async () => (await state())?.sceneIndex, { timeout: 10000 })
     .toBe(0);
@@ -87,9 +118,8 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
   await expect(
     page.getByRole("dialog", { name: "Dialogue", exact: true }),
   ).toBeVisible();
-  const script = JSON.parse(raw.toString("utf8"));
   const welcome = script.scenes[0].dialogues.welcome;
-  for (const beat of welcome) {
+  for (const [index, beat] of welcome.entries()) {
     await expect(page.locator(".dialogue-content p")).toHaveText(beat.text);
     if (beat.choiceId)
       await page
@@ -99,7 +129,15 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
         })
         .click();
     else await page.getByRole("button", { name: /Continuer/ }).click();
+    if (index === 1 && welcome.length > 2) {
+      await expect
+        .poll(async () => (await state()).runtime.dialogue.beat)
+        .toBe(2);
+      await resume(0);
+      expect((await state()).runtime.dialogue.beat).toBe(2);
+    }
   }
+  await navigateTo(page, { x: target.x + 24, y: target.y });
   await expect.poll(async () => (await state()).sceneIndex).toBe(1);
   await expect.poll(async () => (await state()).saving).toBe(false);
   const before = await state();
@@ -124,6 +162,7 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
         const choice = script.scenes[s.sceneIndex].choices.find(
           (c: { id: string }) => c.id === beat.choiceId,
         );
+        if (!choice) throw Error("Choix absent du cahier de recette");
         await page
           .getByRole("button", { name: choice.options[0].label, exact: true })
           .click();
@@ -163,20 +202,60 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
       .toBe(id);
     await dialogue(id);
   }
-  await resident("emile");
-  await resident("noe");
   const library = plan.buildings.find((b) => b.id === "library")!;
-  await navigateTo(page, library.returnPoint);
-  await page.keyboard.press("e");
-  await expect(page.locator("canvas")).toHaveAttribute("data-room", "library");
-  await resident("mira");
-  await navigateTo(page, { x: 240, y: 316 });
-  await page.keyboard.press("e");
-  await expect(page.locator("canvas")).toHaveAttribute("data-room", "village");
+  const order =
+    info.project.name === "mobile"
+      ? ["mira", "noe", "emile"]
+      : ["emile", "noe", "mira"];
+  for (const id of order) {
+    if (id === "mira") {
+      await navigateTo(page, library.returnPoint);
+      await page.keyboard.press("e");
+      await expect(page.locator("canvas")).toHaveAttribute(
+        "data-room",
+        "library",
+      );
+    }
+    await resident(id);
+    if (id === "mira") {
+      await navigateTo(page, { x: 240, y: 316 });
+      await page.keyboard.press("e");
+      await expect(page.locator("canvas")).toHaveAttribute(
+        "data-room",
+        "village",
+      );
+    }
+  }
+  expect((await state()).runtime.firstMetVillager).toBe(
+    info.project.name === "mobile" ? "celestine" : "emile",
+  );
   await navigateTo(page, anchors.advent);
   await expect.poll(async () => (await state()).sceneIndex).toBe(2);
   await page.keyboard.press("e");
   await dialogue("tree");
+  await page
+    .getByRole("button", { name: "Prendre la main de Loyal", exact: true })
+    .click();
+  await expect
+    .poll(async () => (await state()).identity)
+    .toEqual({ debbyVisible: true, loyalVisible: true, pairOverlays: 0 });
+  expect((await state()).sceneIndex).toBe(2);
+  expect((await state()).treeFrame).toBe("sapin_24");
+  await capture("moment-sapin");
+  await page
+    .getByRole("button", { name: "Poursuivre l’aventure", exact: true })
+    .click();
+  if (info.project.name === "mobile") {
+    await expect
+      .poll(async () => (await state()).runtime.cinematic?.kind)
+      .toBe("scatter");
+    await resume(3);
+    await expect.poll(async () => (await state()).runtime.dispersed).toBe(true);
+    expect((await state()).runtime.cinematic).toBeNull();
+  } else {
+    await page.waitForTimeout(8000);
+    await capture("dispersion-cascade");
+  }
   await expect
     .poll(async () => (await state()).runtime.dialogue?.block, {
       timeout: 60000,
@@ -184,13 +263,37 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
     .toBe("scatter");
   await dialogue("scatter");
   await expect.poll(async () => (await state()).sceneIndex).toBe(4);
+  await expect
+    .poll(async () => (await state()).hintLevel, { timeout: 40000 })
+    .toBe(1);
+  const timerBefore = (await state()).runtime.hintMs;
+  await page.getByRole("button", { name: "✧ Journal", exact: true }).click();
+  await page.waitForTimeout(1000);
+  await page.getByRole("button", { name: "Fermer ×", exact: true }).click();
+  expect((await state()).runtime.hintMs - timerBefore).toBeLessThan(500);
+  await expect(
+    page.getByRole("dialog", { name: "Dialogue", exact: true }),
+  ).toBeVisible({ timeout: 40000 });
+  const hintPaused = (await state()).runtime.hintMs;
+  await page.waitForTimeout(1000);
+  expect((await state()).runtime.hintMs).toBe(hintPaused);
+  await page.getByRole("button", { name: /Continuer/ }).click();
+  await expect
+    .poll(async () => (await state()).hintLevel, { timeout: 40000 })
+    .toBe(3);
+  await capture("aide-progressive");
   for (let i = 1; i <= 3; i++) {
     const p = (await state()).targets.find(
       (t: { id: string }) => t.id === "narrative:clue",
     );
     await navigateTo(page, p);
+    await capture(`indice-${i}-visible`);
     await page.keyboard.press("e");
     await dialogue(`clue-${i}`);
+    if (i === 1) {
+      await resume(4);
+      expect((await state()).runtime.clueIndex).toBe(1);
+    }
   }
   await expect.poll(async () => (await state()).sceneIndex).toBe(5);
   await navigateTo(
@@ -201,6 +304,20 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
   );
   await page.keyboard.press("e");
   await dialogue("star");
+  if (info.project.name === "mobile") {
+    await expect
+      .poll(async () => (await state()).runtime.cinematic?.kind)
+      .toBe("restore");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await resume(6);
+  } else {
+    await expect(
+      page.getByRole("button", { name: "Continuer à explorer", exact: true }),
+    ).toBeVisible({ timeout: 20000 });
+    await page
+      .getByRole("button", { name: "Continuer à explorer", exact: true })
+      .click();
+  }
   await expect
     .poll(async () => (await state()).sceneIndex, { timeout: 20000 })
     .toBe(6);
@@ -227,5 +344,28 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
   await page.getByRole("button", { name: "Fermer ×", exact: true }).click();
   await expect.poll(async () => (await state()).complete).toBe(true);
   expect((await state()).restored).toBe(1);
+  await resume(7);
+  expect((await state()).restored).toBe(1);
+  expect((await state()).completedAt).toBeTruthy();
+  await expect
+    .poll(async () => (await state()).runtime.escort, { timeout: 60000 })
+    .toBeNull();
+  if (privateMode && backend) {
+    const canonical = await backend.canonical();
+    await page
+      .getByRole("button", { name: "✦ Avent 2026", exact: true })
+      .click();
+    await expect(
+      page.getByRole("button", { name: "Garder une copie", exact: true }),
+    ).toHaveCount(0);
+    await page
+      .getByRole("button", { name: "Rejouer le jour 1", exact: true })
+      .click();
+    await expect.poll(async () => (await state())?.replay).toBe(true);
+    expect((await state()).complete).toBe(false);
+    expect((await state()).restored).toBe(1);
+    expect(await backend.canonical()).toEqual(canonical);
+  }
   expect(errors).toEqual([]);
+  await backend?.verify();
 });

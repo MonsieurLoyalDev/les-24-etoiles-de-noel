@@ -61,6 +61,9 @@ export type Run = {
   memory: Record<string, Value>;
 };
 export type DayStatus = {
+  source?: "narrative" | "activity";
+  restored?: boolean;
+  completedAt?: string | null;
   day: number;
   unlocked: boolean;
   complete: boolean;

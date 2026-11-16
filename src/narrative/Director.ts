@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { controls, type Village } from "../game/Game";
-import { actor, animateActor } from "../art/actors";
+import { actor, animateActor, actorKeys, type Actor } from "../art/actors";
 import { plaque } from "../art/tags";
 import { reaction } from "../art/reactions";
 import { anchors, plan, villageMap } from "../art/village34";
@@ -21,6 +21,18 @@ import {
   type EpisodeProgress,
 } from "./script";
 import type { NarrativeBridge, NarrativeView } from "./bridge";
+import {
+  presentation,
+  phaseOf,
+  activeHintTime,
+  hintLevel,
+} from "./orchestration";
+import { dayOneBindings as bindings } from "./bindings";
+import { playSceneAudio } from "./sound";
+import { clearReaction } from "../art/reactions";
+import { prepareNarrativeCues } from "./cues";
+import { dialogueGraph, advancePrivateDialogue } from "./dialogue-adapter";
+import { choicesFor, type DialogueGraph } from "../rpg/dialogue";
 
 const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
 const canonical: Record<string, string> = {
@@ -56,6 +68,25 @@ export class NarrativeDirector implements NarrativeBridge {
   private originalProfile;
   private oldDialogue;
   private zoom: number;
+  private hintLine = "";
+  private cue = "";
+  private glimmers: Phaser.GameObjects.Image[] = [];
+  private graphs = new Map<string, DialogueGraph>();
+  private momentUntil = 0;
+  private momentStart: Point | null = null;
+  private pose = () => {
+    if (
+      this.scene.time.now > this.momentUntil ||
+      !this.momentStart ||
+      distance(this.scene.player, this.momentStart) > 3 ||
+      this.dialogueActive ||
+      this.busy
+    )
+      return;
+    this.face(this.scene.player, this.scene.loyal);
+    this.face(this.scene.loyal, this.scene.player);
+  };
+  private confirmedRestored = false;
   private bench: Point & { top: number } = {
     x: anchors.hunts[2].x,
     y: anchors.hunts[2].y,
@@ -72,7 +103,11 @@ export class NarrativeDirector implements NarrativeBridge {
     private persist: Persist,
     private restoredBefore = 0,
     private alreadyRestored = false,
+    private authority: "server" | "preview" = "preview",
+    readonly replay = false,
+    private clearIntent: () => Promise<void> = async () => {},
   ) {
+    this.confirmedRestored = alreadyRestored;
     this.progress = restoreProgress(script, progress) as EpisodeProgress;
     validateRuntime(this.progress.runtime);
     this.originalProfile = scene.living.get("mira")!.profile;
@@ -82,6 +117,19 @@ export class NarrativeDirector implements NarrativeBridge {
     scene.dialogue = "";
     scene.clearHunt();
     scene.narrative = this;
+    scene.events.on("postupdate", this.pose);
+    const savedLocation = presentation(this.progress).location;
+    if (savedLocation) {
+      scene.state.room = savedLocation.room;
+      scene.state.position = { ...savedLocation.position };
+      scene.renderRoom();
+      const loyal = this.safe(savedLocation.loyal);
+      scene.loyal.setPosition(loyal.x, loyal.y);
+      if (savedLocation.flocon && this.flocon) {
+        const fox = this.safe(savedLocation.flocon);
+        this.flocon.setPosition(fox.x, fox.y);
+      }
+    }
     const escort = this.progress.runtime.escort,
       mira = scene.living.get("mira")!;
     if (escort) {
@@ -92,13 +140,30 @@ export class NarrativeDirector implements NarrativeBridge {
       scene.syncNarrativeResidents();
     }
     this.roomRendered();
+    const stage = presentation(this.progress);
+    if (!stage.introSeen && this.current.kind === "arrival") {
+      if (scene.state.room !== "village") {
+        scene.state.room = "village";
+        scene.renderRoom();
+      }
+      const entry = this.entry;
+      scene.player.setPosition(entry.x, entry.y);
+      scene.state.position = { ...entry };
+      scene.loyal.setPosition(entry.x - 36, entry.y - 4);
+      this.flocon?.setPosition(entry.x - 58, entry.y + 18);
+      stage.introSeen = true;
+      stage.introRemaining = this.reduced ? 300 : 2400;
+      scene.cameras.main.fadeIn(this.reduced ? 0 : 600);
+      this.progress.runtime.origin = { ...entry };
+      this.checkpoint();
+    } else stage.introRemaining = 0;
     // Never replay an already-started effect after reload. Its outcome is stable.
     if (this.progress.runtime.cinematic) {
       const kind = this.progress.runtime.cinematic.kind;
       this.progress.runtime.cinematic = null;
       if (kind === "scatter") {
         this.progress.runtime.dispersed = true;
-        this.beginDialogue("scatter");
+        if (this.scatterReady()) this.beginDialogue("scatter");
       } else {
         this.progress.runtime.restored = true;
         this.event({ kind: "interact", target: "restored-star" });
@@ -113,6 +178,39 @@ export class NarrativeDirector implements NarrativeBridge {
       Math.min(this.progress.sceneIndex, this.script.scenes.length - 1)
     ];
   }
+  private scatterReady() {
+    const escort = this.runtime.escort;
+    return (
+      this.scene.state.room === "village" &&
+      distance(this.scene.player, this.center) < 160 &&
+      (!escort ||
+        (escort.room === "village" &&
+          distance(escort.position, {
+            x: this.center.x + 55,
+            y: this.center.y + 20,
+          }) < 40))
+    );
+  }
+  private face(sprite: Phaser.GameObjects.Sprite, target: Point) {
+    const name = sprite.getData("actor") as Actor;
+    if (!name || !actorKeys[name]) return;
+    const dx = target.x - sprite.x,
+      dy = target.y - sprite.y;
+    const direction =
+      Math.abs(dx) > Math.abs(dy)
+        ? dx > 0
+          ? "droite"
+          : "gauche"
+        : dy > 0
+          ? "bas"
+          : "haut";
+    const texture = actorKeys[name],
+      frame = this.scene.textures
+        .get(texture)
+        .getFrameNames()
+        .find((f) => f.includes(`_${direction}_01`));
+    if (frame) sprite.stop().setTexture(texture, frame).setFlipX(false);
+  }
   private get runtime() {
     return this.progress.runtime;
   }
@@ -123,24 +221,31 @@ export class NarrativeDirector implements NarrativeBridge {
     );
   }
   get dialogueActive() {
-    return !!this.runtime.dialogue;
+    return !!this.runtime.dialogue || !!this.hintLine;
   }
   get choices() {
     const beat = this.beat();
-    return beat?.choiceId
-      ? (this.current.choices
-          .find((c) => c.id === beat.choiceId)
-          ?.options.map((o) => o.label) ?? [])
+    const d = this.runtime.dialogue;
+    return beat?.choiceId && d
+      ? choicesFor(this.scene.state, this.graph(d.block)[`beat-${d.beat}`]).map(
+          (c) => c.label,
+        )
       : [];
   }
   get talkingActor() {
     return this.runtime.dialogue?.actor ?? null;
   }
   get reservedActors(): ReadonlySet<string> {
-    return new Set(this.runtime.escort ? ["mira"] : []);
+    const ids = this.runtime.escort ? ["mira"] : [];
+    if (this.busy)
+      for (const n of this.scene.npcs)
+        if (distance(n.image, this.scene.player) < 350) ids.push(n.id);
+    return new Set(ids);
   }
   get busy() {
-    return !!this.runtime.cinematic;
+    return (
+      !!this.runtime.cinematic || presentation(this.progress).introRemaining > 0
+    );
   }
   get ownCompanion() {
     return true;
@@ -171,14 +276,23 @@ export class NarrativeDirector implements NarrativeBridge {
       restored: Math.min(
         24,
         this.restoredBefore +
-          (this.runtime.restored && !this.alreadyRestored ? 1 : 0),
+          ((this.authority === "server"
+            ? this.confirmedRestored
+            : this.runtime.restored) && !this.alreadyRestored
+            ? 1
+            : 0),
       ),
       preview: this.preview,
-      hintLevel: Math.min(3, Math.floor(this.runtime.hintMs / 30000)),
+      replay: this.replay,
+      hintLevel: hintLevel(this.runtime.hintMs),
       saving: this.pending > 0,
       error: this.error,
       book: this.runtime.restored ? this.script.book : null,
       bookRequest: this.bookRequest,
+      phase: phaseOf(this.progress, this.current.kind),
+      completedAt: presentation(this.progress).completedAt,
+      actions: this.actions(),
+      audioCue: this.cue,
       chosenReplies: this.script.scenes.flatMap((s) =>
         s.choices.flatMap((c) =>
           c.options
@@ -194,8 +308,98 @@ export class NarrativeDirector implements NarrativeBridge {
     const d = this.runtime.dialogue;
     return d ? this.current.dialogues[d.block]?.[d.beat] : undefined;
   }
+  private graph(block: string) {
+    const key = `${this.current.id}/${block}`;
+    if (!this.graphs.has(key))
+      this.graphs.set(key, dialogueGraph(this.current, block));
+    return this.graphs.get(key)!;
+  }
+  acknowledge(receipt: { restored: boolean; completedAt: string | null }) {
+    this.confirmedRestored = receipt.restored;
+    if (receipt.completedAt)
+      presentation(this.progress).completedAt = receipt.completedAt;
+    this.scene.emit();
+  }
+  private actions() {
+    if (this.busy || this.dialogueActive || this.error) return [];
+    const p = presentation(this.progress),
+      near = distance(this.scene.player, this.scene.loyal) < 80;
+    const actions: { id: string; label: string }[] = [];
+    if (
+      near &&
+      (p.moment === "tree" ||
+        this.current.kind === "home" ||
+        (this.current.kind === "arrival" &&
+          this.progress.objectives.some((id) => id.endsWith("/welcome"))))
+    )
+      actions.push(
+        { id: "hands", label: "Prendre la main de Loyal" },
+        { id: "hug", label: "Faire un câlin à Loyal" },
+        {
+          id: "admire",
+          label:
+            p.moment === "tree"
+              ? "Admirer le sapin ensemble"
+              : "Profiter du moment",
+        },
+      );
+    if (p.moment === "tree")
+      actions.push({ id: "continue", label: "Poursuivre l’aventure" });
+    if (p.moment === "invitation")
+      actions.push(
+        { id: "continue", label: "Rejoindre le chalet" },
+        { id: "explore", label: "Continuer à explorer" },
+      );
+    for (const target of this.candidates())
+      if (
+        target.id.startsWith("narrative:optional:") &&
+        distance(target, this.scene.player) < 43
+      )
+        actions.push({
+          id: target.id.slice("narrative:optional:".length),
+          label: target.name,
+        });
+    return actions;
+  }
+  private optional(id: string) {
+    const p = presentation(this.progress);
+    if (id === "continue" || id === "explore") {
+      p.moment = null;
+      this.advance();
+    } else {
+      if (!p.optional.includes(id)) p.optional.push(id);
+      if (id === "hands" || id === "hug") this.companionMoment();
+      else if (id === "fox" && this.flocon)
+        reaction(this.scene, "coeur", this.scene.player, this.flocon);
+      else if (id === "admire")
+        this.scene.cameras.main.pan(
+          bindings.square.x,
+          bindings.square.y - 50,
+          this.reduced ? 0 : 500,
+        );
+      else
+        this.scene.dialogue = `Étoilebois — ${({ window: "Une vitrine de pâtisseries, à observer tranquillement.", lantern: "La lumière chaude accompagne les pas dans la neige.", bench: "Une pause près du banc, aux côtés de Loyal.", fire: "Le feu du foyer invite à prendre son temps.", rest: "Le salon reste un endroit pour se reposer ensemble." } as Record<string, string>)[id] ?? "Un petit moment à partager."}`;
+    }
+    this.checkpoint();
+    this.scene.emit();
+  }
+  private companionMoment() {
+    // Pair reaction atlases depict a fox Loyal: incompatible with the validated humans.
+    // Keep the real sprites and orient them. No claim of a newly drawn hugging pose.
+    clearReaction(this.scene);
+    this.momentUntil = this.scene.time.now + (this.reduced ? 300 : 1600);
+    this.momentStart = { x: this.scene.player.x, y: this.scene.player.y };
+    this.face(this.scene.player, this.scene.loyal);
+    this.face(this.scene.loyal, this.scene.player);
+  }
   private checkpoint() {
     if (this.disposed) return;
+    presentation(this.progress).location = {
+      room: this.scene.state.room,
+      position: { x: this.scene.player.x, y: this.scene.player.y },
+      loyal: { x: this.scene.loyal.x, y: this.scene.loyal.y },
+      flocon: this.flocon ? { x: this.flocon.x, y: this.flocon.y } : null,
+    };
     this.progress.revision++;
     const snapshot = structuredClone(this.progress);
     this.pending++;
@@ -222,6 +426,17 @@ export class NarrativeDirector implements NarrativeBridge {
     this.checkpoint();
   }
   private event(event: GameEvent) {
+    if (
+      this.current.objectives.some(
+        (o) =>
+          o.event.kind === event.kind &&
+          o.event.target === event.target &&
+          this.progress.objectives.includes(`${this.current.id}/${o.id}`),
+      )
+    ) {
+      this.advance();
+      return;
+    }
     const next = receiveEvent(
       this.script,
       this.progress,
@@ -238,7 +453,8 @@ export class NarrativeDirector implements NarrativeBridge {
       this.progress.complete ||
       this.dialogueActive ||
       this.busy ||
-      this.error
+      this.error ||
+      presentation(this.progress).moment
     )
       return;
     try {
@@ -262,6 +478,7 @@ export class NarrativeDirector implements NarrativeBridge {
   private beginDialogue(block: string, actorId: string | null = null) {
     if (!this.current.dialogues[block] || this.dialogueActive || this.error)
       return;
+    clearReaction(this.scene);
     this.runtime.dialogue = { block, beat: 0, actor: actorId };
     if (!this.runtime.firstMetVillager && actorId && canonical[actorId])
       this.runtime.firstMetVillager = canonical[actorId];
@@ -269,16 +486,31 @@ export class NarrativeDirector implements NarrativeBridge {
     this.checkpoint();
   }
   private renderDialogue() {
+    if (this.hintLine) {
+      this.scene.dialogue = this.hintLine;
+      return;
+    }
     const beat = this.beat();
     if (beat) this.scene.dialogue = `${beat.speaker} — ${beat.text}`;
   }
   choose(index: number) {
+    if (this.hintLine) {
+      this.hintLine = "";
+      this.scene.dialogue = "";
+      this.scene.emit();
+      return;
+    }
     if (!this.runtime.dialogue || this.error) return;
     const beat = this.beat();
     if (!beat) return;
+    const cursor = this.runtime.dialogue,
+      graph = this.graph(cursor.block),
+      node = `beat-${cursor.beat}`;
+    const selected = choicesFor(this.scene.state, graph[node])[index];
+    if (!selected) return;
     if (beat.choiceId) {
       const option = this.current.choices.find((c) => c.id === beat.choiceId)
-        ?.options[index];
+        ?.options[graph[node].choices.indexOf(selected)];
       if (!option) return;
       this.progress = selectNarrativeChoice(
         this.script,
@@ -287,13 +519,14 @@ export class NarrativeDirector implements NarrativeBridge {
         option.id,
         { world: this.scene.state, completedDays: [] },
       ) as EpisodeProgress;
-      if (option.id === "quiet")
-        reaction(this.scene, "mains", this.scene.player, this.scene.loyal);
+      if (option.id === "quiet") this.companionMoment();
     }
     const d = this.runtime.dialogue!;
-    d.beat++;
-    if (d.beat < this.current.dialogues[d.block].length) this.renderDialogue();
-    else {
+    const next = advancePrivateDialogue(this.scene.state, graph, node, index);
+    if (next) {
+      d.beat = Number(next.slice("beat-".length));
+      this.renderDialogue();
+    } else {
       const block = d.block,
         event = this.current.dialogueEvents[block],
         kind = this.current.kind;
@@ -302,14 +535,19 @@ export class NarrativeDirector implements NarrativeBridge {
       if (kind === "trail") {
         this.runtime.clueIndex++;
         this.runtime.hintMs = 0;
+        presentation(this.progress).hintSpoken = 0;
         this.marker?.destroy();
         this.marker = undefined;
       }
+      if (kind === "tree") presentation(this.progress).moment = "tree";
+      if (kind === "arrival")
+        this.runtime.origin = { ...this.scene.state.position };
       this.event(event);
       if (kind === "restore" && !this.runtime.restored)
         this.startEffect("restore");
       if (kind === "scatter" && this.runtime.escort)
-        this.runtime.escort.phase = "return";
+        this.runtime.escort.phase =
+          this.runtime.escort.room === "library" ? "inside" : "return";
     }
     this.checkpoint();
     this.scene.emit();
@@ -322,10 +560,10 @@ export class NarrativeDirector implements NarrativeBridge {
     );
   }
   private get entry() {
-    return this.safe({ x: 1012, y: 1224 });
+    return this.safe(bindings.arrival);
   }
   private get center() {
-    return this.safe({ ...anchors.advent });
+    return this.safe(bindings.square);
   }
   private get windowPoint() {
     return this.safe({
@@ -334,10 +572,10 @@ export class NarrativeDirector implements NarrativeBridge {
     });
   }
   private get lampPoint() {
-    return this.safe({ x: 1036, y: 844 });
+    return this.safe(bindings.lantern.position);
   }
   private get cluePoint() {
-    return [this.safe(anchors.hunts[0]), this.windowPoint, this.lampPoint][
+    return [this.safe(bindings.snow), this.windowPoint, this.lampPoint][
       Math.min(2, this.runtime.clueIndex)
     ];
   }
@@ -369,7 +607,7 @@ export class NarrativeDirector implements NarrativeBridge {
           id: "narrative:clue",
           name: `Examiner l’indice ${this.runtime.clueIndex + 1}`,
         });
-      else if (this.current.kind === "restore")
+      else if (this.current.kind === "restore" && !this.runtime.restored)
         candidates.push({
           ...this.safe(this.bench),
           id: "narrative:star",
@@ -378,7 +616,7 @@ export class NarrativeDirector implements NarrativeBridge {
     }
     if (this.scene.state.room === "house" && this.runtime.restored)
       candidates.push({
-        ...this.safe({ x: 720, y: 488 }),
+        ...this.safe(bindings.houseBook),
         id: "narrative:book",
         name: "Ouvrir le Livre des Étoiles",
       });
@@ -400,12 +638,52 @@ export class NarrativeDirector implements NarrativeBridge {
         id: "narrative:fox",
         name: "Caresser Flocon",
       });
+    if (village && this.current.kind === "meet") {
+      const inn = plan.buildings.find((b) => b.id === "inn")!;
+      candidates.push({
+        ...this.safe(inn.returnPoint),
+        id: "narrative:optional:window",
+        name: "Observer la vitrine",
+      });
+      candidates.push({
+        ...this.lampPoint,
+        id: "narrative:optional:lantern",
+        name: "Observer les lanternes",
+      });
+      candidates.push({
+        ...this.safe(this.bench),
+        id: "narrative:optional:bench",
+        name: "Faire une pause avec Loyal",
+      });
+    }
+    if (this.scene.state.room === "house") {
+      candidates.push({
+        ...this.safe(bindings.houseHearth),
+        id: "narrative:optional:fire",
+        name: "Observer le feu",
+      });
+      candidates.push({
+        ...this.safe(bindings.houseRest),
+        id: "narrative:optional:rest",
+        name: "Se reposer près du canapé",
+      });
+    }
     return candidates;
   }
   interact(id: string) {
     if (this.error || this.busy) return id.startsWith("narrative:");
+    if (id.startsWith("narrative:optional:")) {
+      const name = id.slice("narrative:optional:".length);
+      const target = this.candidates().find((c) => c.id === id);
+      if (
+        this.actions().some((a) => a.id === name) ||
+        (target && distance(target, this.scene.player) < 43)
+      )
+        this.optional(name);
+      return true;
+    }
     if (id === "narrative:fox") {
-      reaction(this.scene, "coeur", this.scene.player, this.flocon!);
+      this.optional("fox");
       return true;
     }
     if (id === "narrative:book") {
@@ -466,6 +744,11 @@ export class NarrativeDirector implements NarrativeBridge {
     ) {
       this.runtime.bookOpened = true;
       this.event({ kind: "interact", target: "book-at-home" });
+      if (this.progress.complete) {
+        presentation(this.progress).completedAt ??=
+          this.authority === "preview" ? new Date().toISOString() : null;
+        this.checkpoint();
+      }
     }
     this.scene.emit();
   }
@@ -489,7 +772,13 @@ export class NarrativeDirector implements NarrativeBridge {
       (distance(old.goal, goal) > 16 && old.retry <= 0) ||
       !old.points.length
     ) {
-      const path = nav.findPath(sprite, goal);
+      const path = nav.findPath(
+        sprite,
+        goal,
+        id !== "loyal" && room === this.scene.state.room
+          ? [this.scene.player]
+          : [],
+      );
       if (!path) return false;
       this.paths.set(id, { goal, points: path, retry: 500 });
     }
@@ -515,8 +804,10 @@ export class NarrativeDirector implements NarrativeBridge {
         room === this.scene.state.room &&
         id !== "loyal" &&
         distance(next, this.scene.player) < 18
-      )
+      ) {
+        this.paths.delete(id);
         break;
+      }
       if (distance(sprite, next) < 0.01) {
         this.paths.delete(id);
         break;
@@ -533,6 +824,7 @@ export class NarrativeDirector implements NarrativeBridge {
   private startEffect(kind: "scatter" | "restore") {
     this.runtime.cinematic = { kind, elapsed: 0 };
     if (kind === "scatter") this.runtime.dispersalStarted = true;
+    clearReaction(this.scene);
     this.scene.cameras.main.stopFollow();
     const tree = this.scene.tree;
     if (tree) {
@@ -559,6 +851,59 @@ export class NarrativeDirector implements NarrativeBridge {
     c.elapsed += delta;
     const length = this.reduced ? 2500 : c.kind === "scatter" ? 30000 : 6500;
     const normalized = c.elapsed / length;
+    if (c.kind === "scatter" && this.scene.tree) {
+      const tree = this.scene.tree;
+      if (!this.glimmers.length) {
+        for (let i = 0; i < 25; i++)
+          this.glimmers.push(
+            this.scene.add
+              .image(0, 0, "quest_star")
+              .setScale(i === 24 ? 0.09 : 0.12)
+              .setDepth(4999)
+              .setAlpha(0),
+          );
+      }
+      this.glimmers.forEach((image, i) => {
+        if (i === 24 && this.flocon) {
+          image
+            .setPosition(
+              this.flocon.x,
+              this.flocon.y - this.flocon.displayHeight * 0.8,
+            )
+            .setAlpha(
+              normalized < 0.13
+                ? this.reduced
+                  ? 0.35
+                  : 0.3 + Math.sin(normalized * 30) * 0.2
+                : 0,
+            );
+        } else {
+          const row = Math.floor(i / 4),
+            t = i % 4;
+          image
+            .setPosition(
+              tree.x + (t - 1.5) * (16 + row * 4),
+              tree.y -
+                tree.displayHeight * 0.83 +
+                row * tree.displayHeight * 0.1,
+            )
+            .setAlpha(
+              normalized > 0.13 + i * 0.006 && normalized < 0.46
+                ? this.reduced
+                  ? 0.25
+                  : 0.45
+                : 0,
+            );
+        }
+      });
+      if (normalized < 0.13 && this.flocon) this.face(this.flocon, tree);
+      if (normalized > 0.83)
+        this.scene.cameras.main.pan(
+          this.scene.player.x,
+          this.scene.player.y,
+          this.reduced ? 0 : Math.min(delta * 4, 400),
+        );
+    }
     if (
       !this.reduced &&
       !this.particlesStarted &&
@@ -613,14 +958,17 @@ export class NarrativeDirector implements NarrativeBridge {
     this.runtime.cinematic = null;
     this.effects.forEach((i) => i.destroy());
     this.effects = [];
+    this.glimmers.forEach((i) => i.destroy());
+    this.glimmers = [];
     this.scene.cameras.main
       .setZoom(this.zoom)
       .startFollow(this.scene.player, true, 1, 1);
     if (kind === "scatter") {
       this.runtime.dispersed = true;
-      this.beginDialogue("scatter");
+      if (this.scatterReady()) this.beginDialogue("scatter");
     } else {
       this.runtime.restored = true;
+      presentation(this.progress).moment = "invitation";
       this.event({ kind: "interact", target: "restored-star" });
     }
     this.scene.refreshAdvent();
@@ -649,7 +997,7 @@ export class NarrativeDirector implements NarrativeBridge {
       y: building.entrance.y * 16 + 20,
     };
     let target: Point;
-    if (escort.phase === "out") target = { x: 240, y: 316 };
+    if (escort.phase === "out") target = bindings.libraryDoor;
     else if (escort.phase === "place") target = { x: 1015, y: 795 };
     else if (escort.phase === "return") target = door;
     else target = { x: 240, y: 280 };
@@ -675,7 +1023,7 @@ export class NarrativeDirector implements NarrativeBridge {
       escort.phase = "inside";
       escort.room = "library";
       mira.profile = { ...this.originalProfile };
-      mira.position = { x: 240, y: 316 };
+      mira.position = { ...bindings.libraryDoor };
       escort.position = { ...mira.position };
       this.paths.delete("mira");
       this.scene.syncNarrativeResidents();
@@ -701,9 +1049,11 @@ export class NarrativeDirector implements NarrativeBridge {
     }
   }
   roomRendered() {
+    prepareNarrativeCues(this.scene);
     this.lastPlayer = this.scene.player;
     this.paths.clear();
     this.marker = undefined;
+    this.glimmers = [];
     this.flocon = this.scene.children.getByName("flocon") as
       Phaser.GameObjects.Sprite | undefined;
     if (!this.flocon) {
@@ -733,6 +1083,16 @@ export class NarrativeDirector implements NarrativeBridge {
           top: bench.y - bench.displayHeight - 8,
         };
     }
+    if (
+      this.scene.state.room === "house" &&
+      !this.scene.children.getByName("narrative:fox-rest")
+    ) {
+      const image = this.scene.add
+        .image(bindings.foxCushion.x, bindings.foxCushion.y, "d31-rug-oval")
+        .setDepth(-88)
+        .setName("narrative:fox-rest");
+      image.setScale(40 / image.width);
+    }
     this.renderDialogue();
   }
   update(delta: number) {
@@ -740,6 +1100,19 @@ export class NarrativeDirector implements NarrativeBridge {
     if (this.lastPlayer !== this.scene.player) this.roomRendered();
     if (controls.paused && !this.busy) return;
     if (this.scene.dialogue && !this.dialogueActive) return;
+    if (this.cue !== this.current.kind) {
+      this.cue = this.current.kind;
+      playSceneAudio(this.cue);
+    }
+    const stage = presentation(this.progress);
+    if (stage.introRemaining > 0) {
+      stage.introRemaining = Math.max(0, stage.introRemaining - delta);
+      if (stage.introRemaining === 0) {
+        this.checkpoint();
+        this.scene.emit();
+      }
+      return;
+    }
     const r = this.runtime,
       kind = this.current.kind,
       village = this.scene.state.room === "village";
@@ -748,13 +1121,25 @@ export class NarrativeDirector implements NarrativeBridge {
       this.checkpoint();
     }
     this.escort(delta);
+    if (
+      kind === "scatter" &&
+      r.dispersed &&
+      !this.dialogueActive &&
+      !r.cinematic &&
+      this.scatterReady()
+    )
+      this.beginDialogue("scatter");
     if (this.busy) this.effect(delta);
     else {
       if (!r.origin) {
         r.origin = { ...this.scene.state.position };
         this.checkpoint();
       }
-      if (kind === "arrival" && distance(r.origin, this.scene.player) > 10)
+      if (
+        kind === "arrival" &&
+        this.progress.objectives.some((id) => id.endsWith("/welcome")) &&
+        distance(r.origin, this.scene.player) > 10
+      )
         this.event({ kind: "explore", target: "first-walk" });
       if (
         kind === "meet" &&
@@ -764,25 +1149,38 @@ export class NarrativeDirector implements NarrativeBridge {
         this.event({ kind: "explore", target: "central-square" });
       if (kind === "scatter" && !r.dispersalStarted && !this.dialogueActive)
         this.startEffect("scatter");
-      if (kind === "trail" && !this.dialogueActive) r.hintMs += delta;
+      if (kind === "trail") {
+        r.hintMs = activeHintTime(
+          r.hintMs,
+          delta,
+          this.dialogueActive || controls.paused || document.hidden,
+        );
+        if (r.hintMs >= 60000 && stage.hintSpoken < 2 && !this.dialogueActive) {
+          stage.hintSpoken = 2;
+          this.hintLine = `Loyal — ${this.script.hints?.[r.clueIndex] ?? this.current.prompt}`;
+          this.scene.dialogue = this.hintLine;
+          this.checkpoint();
+          this.scene.emit();
+        }
+      }
       const loyalTarget =
         kind === "arrival" && village && !this.dialogueActive
           ? { x: this.entry.x - 40, y: this.entry.y }
           : { x: this.scene.player.x - 30, y: this.scene.player.y + 10 };
-      if (distance(this.scene.loyal, loyalTarget) > 12)
+      if (!this.dialogueActive && distance(this.scene.loyal, loyalTarget) > 12)
         this.walk("loyal", this.scene.loyal, loyalTarget, delta, 120);
       if (this.flocon) {
         const target =
-          kind === "trail" && r.hintMs >= 30000 && village
-            ? this.cluePoint
+          this.scene.state.room === "house" && this.runtime.restored
+            ? this.safe(bindings.foxCushion)
             : { x: this.scene.loyal.x - 25, y: this.scene.loyal.y + 20 };
-        if (
-          distance(this.flocon, target) > 20 &&
-          distance(this.flocon, this.scene.player) > 45
-        )
+        if (!this.dialogueActive && distance(this.flocon, target) > 15)
           this.walk("flocon", this.flocon, target, delta, 135);
         this.flocon.setDepth(this.flocon.y);
         animateActor(this.flocon);
+        if (kind === "trail" && r.hintMs >= 30000)
+          this.face(this.flocon, this.cluePoint);
+        if (this.dialogueActive) this.face(this.scene.loyal, this.scene.player);
       }
     }
     if (
@@ -790,11 +1188,17 @@ export class NarrativeDirector implements NarrativeBridge {
       !this.dialogueActive &&
       !this.busy &&
       !this.progress.complete &&
-      ["trail", "restore"].includes(kind)
+      (kind === "trail" || (kind === "restore" && !r.restored))
     ) {
       if (!this.marker?.scene)
         this.marker = this.scene.add
-          .image(0, 0, "quest_star")
+          .image(
+            0,
+            0,
+            kind === "trail" && r.clueIndex === 2
+              ? "narrative-bell"
+              : "quest_star",
+          )
           .setScale(kind === "restore" ? 0.7 : 0.25)
           .setDepth(5000);
       const p =
@@ -802,18 +1206,33 @@ export class NarrativeDirector implements NarrativeBridge {
           ? { x: this.bench.x, y: this.bench.top }
           : this.cluePoint;
       this.marker
-        .setPosition(p.x, p.y - (kind === "trail" ? 5 : 0))
+        .setName(
+          kind === "restore"
+            ? "narrative:star-cue"
+            : [
+                "narrative:golden-snow",
+                "narrative:window-reflection",
+                "narrative:bell",
+              ][r.clueIndex],
+        )
+        .setPosition(
+          p.x,
+          kind === "trail" ? p.y - [5, 48, 36][r.clueIndex] : p.y,
+        )
+        .setScale(kind === "restore" ? 0.7 : r.clueIndex === 2 ? 1 : 0.2)
         .setAlpha(
           this.reduced
             ? 0.85
-            : 0.75 + Math.sin(this.scene.time.now / 700) * 0.1,
+            : kind === "trail" && r.hintMs < 90000
+              ? 0.5
+              : 0.85 + Math.sin(this.scene.time.now / 700) * 0.1,
         );
     } else if (this.marker?.scene) this.marker.setVisible(false);
     if (
       this.marker?.scene &&
       village &&
       !this.progress.complete &&
-      ["trail", "restore"].includes(kind) &&
+      (kind === "trail" || (kind === "restore" && !r.restored)) &&
       !this.dialogueActive &&
       !this.busy
     )
@@ -842,14 +1261,25 @@ export class NarrativeDirector implements NarrativeBridge {
         flocon: this.flocon ? { x: this.flocon.x, y: this.flocon.y } : null,
         entry: this.entry,
       },
+      identity: {
+        debbyVisible: this.scene.player.visible,
+        loyalVisible: this.scene.loyal.visible,
+        pairOverlays: this.scene.children.list.filter((o) => {
+          const s = o as Phaser.GameObjects.Sprite;
+          return s.visible && /^(calin|mains)_atlas/.test(s.texture?.key ?? "");
+        }).length,
+      },
       treeFrame: this.scene.tree?.frame.name ?? null,
     });
   }
   stop() {
     if (this.disposed) return;
     this.disposed = true;
+    this.scene.events.off("postupdate", this.pose);
     this.effects.forEach((i) => i.destroy());
     this.marker?.destroy();
+    this.glimmers.forEach((i) => i.destroy());
+    clearReaction(this.scene);
     if (this.scene.narrative === this) this.scene.narrative = undefined;
     const mira = this.scene.living.get("mira")!;
     if (this.runtime.escort) {
@@ -872,5 +1302,10 @@ export class NarrativeDirector implements NarrativeBridge {
     delete this.scene.game.canvas.dataset.narrative;
     this.scene.refreshAdvent();
     this.scene.emit();
+  }
+  async deactivate() {
+    await this.flush();
+    await this.clearIntent();
+    this.stop();
   }
 }

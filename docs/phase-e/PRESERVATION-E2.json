@@ -1,0 +1,17 @@
+{
+  "reason": "E2 authorized calendar routing, status typing and reaction cleanup; historical manifests remain unchanged.",
+  "files": [
+    {
+      "path": "src/advent/Hub.tsx",
+      "sha256": "56fb7bb24c10a38f48b327c4fb7a91b1d85de2ec4380c3124f7c4e754d93cf43"
+    },
+    {
+      "path": "src/advent/model.ts",
+      "sha256": "464933e9637be0c709b1c83201154ffebfed0c29b1b4adcd4a4be067319551e5"
+    },
+    {
+      "path": "src/art/reactions.ts",
+      "sha256": "f565bba37aea0c3021b6b2e2ef53b325759edd8c70600a91c34871463be5371e"
+    }
+  ]
+}

@@ -175,7 +175,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   const photo = page.getByRole("dialog", { name: "Puzzle de photographie" });
   await expect(photo).toBeVisible();
   await page.screenshot({
-    path: `docs/screenshots/phase-b-${info.project.name}-photo.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-b-${info.project.name}-photo.png`,
   });
   await photo.getByRole("button", { name: /Quitter le jeu/ }).click();
   await expect(page.locator(".quest")).toContainText(
@@ -220,7 +220,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await wrap.getByRole("button", { name: "Emballer", exact: true }).click();
   await expect(wrap).toContainText("Réessayez");
   await page.screenshot({
-    path: `docs/screenshots/phase-b-${info.project.name}-wrap.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-b-${info.project.name}-wrap.png`,
   });
   for (const [paper, ribbon] of [
     ["Rouge", "Or"],
@@ -274,7 +274,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
       .click();
   }
   await page.screenshot({
-    path: `docs/screenshots/phase-b-${info.project.name}-memory.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-b-${info.project.name}-memory.png`,
   });
   await memory.getByRole("button", { name: "Recevoir le souvenir" }).click();
   await dismiss(page);
@@ -289,7 +289,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await page.getByRole("button", { name: "Quêtes", exact: true }).click();
   await expect(page.locator(".quest-list")).toContainText("Souvenir gagné");
   await page.screenshot({
-    path: `docs/screenshots/phase-b-${info.project.name}-quests.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-b-${info.project.name}-quests.png`,
   });
   await page.getByRole("button", { name: "Calendrier", exact: true }).click();
   await page.getByRole("button", { name: "Jour 24", exact: true }).click();
@@ -302,7 +302,7 @@ test("Phase B : village vivant, quatre maisons, quêtes et trois mini-jeux", asy
   await page.getByRole("button", { name: /Entrer dans le village/ }).click();
   await expect(page.locator(".quest")).toContainText("5 / 24");
   await page.screenshot({
-    path: `docs/screenshots/phase-b-${info.project.name}-village.png`,
+    path: `${process.env.ETB_LEGACY_CAPTURE_DIR ?? "docs/screenshots"}/phase-b-${info.project.name}-village.png`,
   });
   expect(errors).toEqual([]);
 });
