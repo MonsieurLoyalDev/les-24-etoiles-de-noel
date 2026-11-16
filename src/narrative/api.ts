@@ -1,4 +1,5 @@
 import { supabaseClient } from "../advent/supabase";
+import { validateEpisodeContext, type EpisodeContext } from "./context";
 import {
   validateScript,
   type EpisodeProgress,
@@ -13,6 +14,7 @@ export type EpisodeStatus = {
   title: string | null;
 };
 export type EpisodeSession = {
+  context?: EpisodeContext;
   completedAt?: string | null;
   content: EpisodeScript;
   progress: EpisodeProgress | null;
@@ -73,7 +75,11 @@ export function privateEpisodeAPI(
         p_replay: replay,
         p_restart: restart,
       });
-      return { ...session, content: validateScript(session.content) };
+      return {
+        ...session,
+        content: validateScript(session.content),
+        context: validateEpisodeContext(session.context),
+      };
     },
     ...(admin
       ? {

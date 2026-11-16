@@ -1,6 +1,6 @@
 import type { Rect, Save } from "../domain";
 import { furnitureByRoom } from "./interior-layout";
-export type Room33 = Exclude<Save["room"], "village">;
+export type Room33 = "house" | "library" | "workshop" | "inn";
 export const roomPlans: Record<
   Room33,
   { width: number; height: number; volumes: Rect[]; title: string }
@@ -45,7 +45,11 @@ export const roomPlans: Record<
   },
 };
 export function roomDimensions(room: Save["room"]) {
-  return room === "village" ? { width: 1920, height: 1408 } : roomPlans[room];
+  return room === "village"
+    ? { width: 1920, height: 1408 }
+    : room === "forest"
+      ? { width: 1024, height: 768 }
+      : roomPlans[room === "bakery" ? "inn" : room];
 }
 export function inFloor(room: Room33, x: number, y: number) {
   return roomPlans[room].volumes.some(

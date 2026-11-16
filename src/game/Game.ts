@@ -1,5 +1,7 @@
 import { preloadActivities } from "../world/activity-presentation";
 import { preloadNarrativePolish } from "../narrative/polish";
+import { preloadProductionAssets } from "../narrative/production-assets";
+import { drawExtraRoom, isExtraRoom, areaPortals } from "../narrative/areas";
 import type { NarrativeBridge, NarrativeView } from "../narrative/bridge";
 import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
@@ -114,6 +116,7 @@ export const controls = {
   run: false,
 };
 export class Village extends Phaser.Scene {
+  narrativeRegions = new Set<"forest" | "bakery">();
   state: Save;
   publish: (view: View) => void;
   persist: (s: Save) => void;
@@ -181,6 +184,7 @@ export class Village extends Phaser.Scene {
     preloadRooms33(this);
     preloadActors(this);
     preloadNarrativePolish(this);
+    preloadProductionAssets(this);
     preloadActivities(this);
     const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
     this.load.atlas("art-tree", tree.image, tree.data);
@@ -279,7 +283,10 @@ export class Village extends Phaser.Scene {
     this.trail = [];
     let w = villageSize.width,
       h = villageSize.height;
-    if (this.state.room === "village") {
+    if (isExtraRoom(this.state.room)) {
+      ({ width: w, height: h } = roomDimensions(this.state.room));
+      this.rects = drawExtraRoom(this, this.state.room);
+    } else if (this.state.room === "village") {
       urbanGround(this);
       drawGround(this);
       urbanPaths(this);
@@ -484,11 +491,20 @@ export class Village extends Phaser.Scene {
       this.state.room === "village",
       this.living.lanterns,
     );
-    if (this.state.room !== "village")
+    if (this.state.room !== "village" && !isExtraRoom(this.state.room))
       this.interiorLight = new InteriorLight(this, this.state.room);
-    else this.neighbourhood = new NeighbourhoodLife(this);
+    else if (this.state.room === "village")
+      this.neighbourhood = new NeighbourhoodLife(this);
     this.refreshAdvent();
     this.narrative?.roomRendered();
+    this.game.canvas.dataset.missingTextures = JSON.stringify(
+      this.children.list
+        .filter(
+          (child) =>
+            (child as Phaser.GameObjects.Image).texture?.key === "__MISSING",
+        )
+        .map((child) => child.name || child.type),
+    );
   }
   syncNarrativeResidents() {
     for (const citizen of citizens) {
@@ -641,6 +657,15 @@ export class Village extends Phaser.Scene {
       };
     });
     residents.push(...(this.narrative?.candidates() ?? []));
+    if (this.state.room === "village")
+      for (const id of this.narrativeRegions) {
+        if (!residents.some((t) => t.id === `narrative:portal:${id}`))
+          residents.push({
+            id: `area-enter:${id}`,
+            ...areaPortals[id].village,
+            name: "Entrer",
+          });
+      }
     if (this.adventDay?.room === this.state.room)
       residents.push({
         id: "advent",
@@ -660,6 +685,15 @@ export class Village extends Phaser.Scene {
             ? "Trouver Loyal"
             : "Recueillir le petit bonheur",
       });
+    if (isExtraRoom(this.state.room))
+      return [
+        ...residents,
+        {
+          id: "area-exit",
+          ...areaPortals[this.state.room].entry,
+          name: "Retour au village",
+        },
+      ];
     if (this.state.room !== "village")
       return [
         ...(this.interiorLife?.candidates() ?? []),
@@ -787,6 +821,25 @@ export class Village extends Phaser.Scene {
     }
     const t = this.nearest();
     if (!t) return;
+    if (t.id.startsWith("area-enter:")) {
+      const area = t.id.slice("area-enter:".length) as "forest" | "bakery";
+      if (!this.narrativeRegions.has(area)) return;
+      this.state.room = area;
+      this.state.position = { ...areaPortals[area].entry };
+      this.renderRoom();
+      this.persist(this.state);
+      this.emit();
+      return;
+    }
+    if (t.id === "area-exit" && isExtraRoom(this.state.room)) {
+      const back = areaPortals[this.state.room].village;
+      this.state.room = "village";
+      this.state.position = { x: back.x, y: back.y + 24 };
+      this.renderRoom();
+      this.persist(this.state);
+      this.emit();
+      return;
+    }
     if (this.narrative?.interact(t.id)) {
       this.emit();
       return;

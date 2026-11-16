@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./polish.css";
+import "./flow.css";
+import { FlowTask } from "./FlowTask";
 import type { AdventAPI } from "../advent/api";
 import { getLocal, putLocal } from "../advent/local";
 import { controls, type Village, type View } from "../game/Game";
@@ -39,6 +41,7 @@ export function NarrativeHub({
     [loading, setLoading] = useState(false);
   const [pendingLaunch, setPendingLaunch] = useState<typeof dayRequest>(null);
   const director = useRef<NarrativeDirector | null>(null),
+    launchInFlight = useRef<number | null>(null),
     generation = useRef(0),
     lastRequest = useRef(openRequest),
     startCallback = useRef(onStart);
@@ -47,8 +50,8 @@ export function NarrativeHub({
     ? `narrative:active:${api.mode}:${api.userId}:${api.preview ? "preview" : "player"}`
     : "";
   useEffect(() => {
-    onBusy(panel || loading);
-  }, [panel, loading, onBusy]);
+    onBusy(panel || loading || !!view.narrative?.task);
+  }, [panel, loading, onBusy, !!view.narrative?.task]);
   useEffect(() => {
     let active = true;
     const gen = ++generation.current;
@@ -121,13 +124,17 @@ export function NarrativeHub({
     }
   }
   async function begin(day: number, replay: boolean, restoring = false) {
-    if (!api || loading) return;
     const gen = generation.current;
+    // Auto-resume and a calendar click can share a React render. Only one
+    // director may own the session's checkpoint/revision stream.
+    if (!api || loading || launchInFlight.current === gen) return;
+    launchInFlight.current = gen;
     setLoading(true);
     setError("");
     try {
       await director.current?.flush();
       const session = await api.load(day, replay, replay && !restoring);
+      const list = await api.status();
       if (gen !== generation.current) return;
       const content = session.content,
         scope = {
@@ -149,9 +156,9 @@ export function NarrativeHub({
             { day, unlocked: true },
             {
               world: scene.state,
-              completedDays: statuses
-                .filter((s) => s.complete)
-                .map((s) => s.day),
+              completedDays: api.preview
+                ? content.dependsOn
+                : list.filter((s) => s.complete).map((s) => s.day),
             },
           ),
           runtime: initialRuntime(),
@@ -161,7 +168,6 @@ export function NarrativeHub({
         presentation(progress).completedAt = session.completedAt;
       let remoteRevision = session.revision,
         localRevision = local?.revision ?? null;
-      const list = await api.status();
       setStatuses(list);
       director.current?.stop();
       await startCallback.current();
@@ -190,6 +196,7 @@ export function NarrativeHub({
         api.mode === "private" && !api.preview ? "server" : "preview",
         replay,
         () => putLocal(activeKey, null),
+        session.context,
       );
       director.current = next;
       await putLocal(activeKey, { day, replay });
@@ -198,7 +205,8 @@ export function NarrativeHub({
       setError(message(e));
       setPanel(true);
     } finally {
-      setLoading(false);
+      if (launchInFlight.current === gen) launchInFlight.current = null;
+      if (gen === generation.current) setLoading(false);
     }
   }
   async function importScript(file: File) {
@@ -234,6 +242,22 @@ export function NarrativeHub({
     ));
   return (
     <>
+      {current?.error && view.dialogue && (
+        <aside className="narrative-save-error" role="alert">
+          <p>{current.error}</p>
+          <button onClick={() => director.current?.retry()}>
+            Réessayer la sauvegarde
+          </button>
+        </aside>
+      )}
+      {current?.task && (
+        <FlowTask
+          puzzle={current.task.puzzle}
+          draft={current.task.draft}
+          move={(m) => scene.narrative?.puzzle?.(m)}
+          close={() => scene.narrative?.puzzle?.(null)}
+        />
+      )}
       {current && <span className="narrative-session" hidden />}
       {current && !panel && !view.cinematic && !view.dialogue && (
         <aside
@@ -252,7 +276,10 @@ export function NarrativeHub({
           {!current.complete && <span>{current.title}</span>}
           {!current.complete && <small>{current.objective}</small>}
           {current.complete && (
-            <small role="status">Jour 1 terminé · Exploration libre</small>
+            <small role="status">
+              Jour {Number(current.episodeId.slice(-2))} terminé · Exploration
+              libre
+            </small>
           )}
           {current.hintLevel >= 2 && (
             <small>Un indice reste à examiner. Flocon peut vous guider.</small>

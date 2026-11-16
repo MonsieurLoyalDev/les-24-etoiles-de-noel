@@ -188,10 +188,10 @@ export function receiveEvent(
   event: GameEvent,
 ) {
   const p = restoreProgress(d, previous);
-  if (p.complete) return p;
-  const scene = d.scenes[p.sceneIndex];
+  const scene = d.scenes[Math.min(p.sceneIndex, d.scenes.length - 1)];
   for (const o of scene.objectives)
     if (
+      (!p.complete || o.optional) &&
       o.event.kind === event.kind &&
       o.event.target === event.target &&
       (o.after ?? []).every((id) => p.objectives.includes(key(scene.id, id))) &&
@@ -209,12 +209,12 @@ export function selectNarrativeChoice(
   context: NarrativeContext,
 ) {
   const p = restoreProgress(d, previous);
-  if (p.complete) throw Error("Épisode terminé");
-  const scene = d.scenes[p.sceneIndex],
+  const scene = d.scenes[Math.min(p.sceneIndex, d.scenes.length - 1)],
     choice = scene.choices.find((c) => c.id === choiceId),
     option = choice?.options.find((o) => o.id === optionId),
     id = key(scene.id, choiceId);
   if (
+    (p.complete && !choice?.optional) ||
     !option ||
     !allowed(scene, context) ||
     !satisfies(context.world, option.condition)

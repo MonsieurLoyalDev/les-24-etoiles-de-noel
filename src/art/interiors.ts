@@ -7,7 +7,10 @@ import {
   floorDecorByRoom,
   interiorDecorSizes,
 } from "./interior-layout";
-export type InteriorRoom = Exclude<Save["room"], "village">;
+export type InteriorRoom = Exclude<
+  Save["room"],
+  "village" | "forest" | "bakery"
+>;
 export const interiorAssets = Object.fromEntries(
   [
     ...["house", "library", "workshop", "inn"].map((room) => room + "-shell"),

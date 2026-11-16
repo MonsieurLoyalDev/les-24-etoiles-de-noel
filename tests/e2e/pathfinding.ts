@@ -1,6 +1,8 @@
 import { expect, type Page } from "@playwright/test";
 import { blocked, type Point, type Rect } from "../../src/domain";
 import { facadeBounds } from "../../src/art/village34";
+import { roomDimensions } from "../../src/art/rooms33";
+import type { WorldRoom } from "../../src/domain";
 /** Independent A* over read-only actual colliders. Movement uses real keyboard events. */
 export async function navigateTo(page: Page, target: Point) {
   await expect(page.locator(".dialogue")).toHaveCount(0);
@@ -21,8 +23,8 @@ export async function navigateTo(page: Page, target: Point) {
       h: r.h + 6,
     })),
     step = 4,
-    width = state.room === "village" ? 1920 : 960,
-    height = state.room === "village" ? 1408 : 560,
+    width = roomDimensions(state.room as WorldRoom).width,
+    height = roomDimensions(state.room as WorldRoom).height,
     nx = Math.ceil(width / step),
     start = { x: Math.round(state.x / step), y: Math.round(state.y / step) },
     key = (x: number, y: number) => y * nx + x;

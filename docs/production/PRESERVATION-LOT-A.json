@@ -1,0 +1,33 @@
+{
+  "reason": "Additive production regions and room types, cumulative authenticated book pages, and story lighting through the existing coordinator. Validated world geometry, textures, actors and interiors are retained.",
+  "files": [
+    {
+      "path": "src/art/ambience.ts",
+      "sha256": "fafe54bc38c0f3638f5fdd763ea2703785f0f9b91d8f6588c9b439f5f9a0f916"
+    },
+    {
+      "path": "src/art/interiors.ts",
+      "sha256": "70b879003f09eed2ef9a106c21b0fdba70f28a7036906eb2b7a796f1c95d9d60"
+    },
+    {
+      "path": "src/art/rooms33.ts",
+      "sha256": "46db5ec2c5ae574e4e1b265028fdb0c48c9daa3c3a1f326a2e933756d4874846"
+    },
+    {
+      "path": "src/decor/model.ts",
+      "sha256": "90c77eaf1473e509b3a0a05b637166bc013e5ed978f7b296951e8f8657646b4f"
+    },
+    {
+      "path": "src/domain.ts",
+      "sha256": "da429bffd3f666592d730afbde15519e6771737dc6725f0a30a508c45e7b4fd2"
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "a047e8bb26170d5d49be83dc63b7ee7b0a42701bbfa9f9521f0c1c8a0332bfca"
+    },
+    {
+      "path": "src/rpg/world.ts",
+      "sha256": "39bb3624bcb3269146dc0d7d49bcf08aca52802df08f50576e1256d5327b0064"
+    }
+  ]
+}

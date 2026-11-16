@@ -7,10 +7,23 @@ import {
 import type { Point, Save } from "../domain";
 import type { GameEvent } from "../rpg/quests";
 import type { Presentation } from "./orchestration";
+import {
+  validateFlowDefinition,
+  validatePuzzle,
+  validateFlowRuntime,
+  type FlowDefinition,
+  type FlowScene,
+  type FlowRuntime,
+} from "./flow";
 
 export type SceneKind =
   "arrival" | "meet" | "tree" | "scatter" | "trail" | "restore" | "home";
-export type Beat = { speaker: string; text: string; choiceId?: string };
+export type Beat = {
+  speaker: string;
+  text: string;
+  choiceId?: string;
+  nextByOption?: Record<string, number | null>;
+};
 export type ScriptScene = Omit<NarrativeScene, "choices"> & {
   kind: SceneKind;
   title: string;
@@ -22,6 +35,7 @@ export type ScriptScene = Omit<NarrativeScene, "choices"> & {
       label: string;
     })[];
   })[];
+  flow?: FlowScene;
 };
 export type EpisodeScript = Omit<EpisodeDefinition, "scenes"> & {
   schema: 1;
@@ -29,8 +43,10 @@ export type EpisodeScript = Omit<EpisodeDefinition, "scenes"> & {
   scenes: ScriptScene[];
   book: { title: string; text: string };
   hints?: string[];
+  flow?: FlowDefinition;
 };
 export type EpisodeRuntime = {
+  flow?: FlowRuntime;
   presentation?: Presentation;
   dialogue: { block: string; beat: number; actor: string | null } | null;
   origin: Point | null;
@@ -85,7 +101,55 @@ export function validateScript(input: unknown): EpisodeScript {
   )
     throw Error("Contenu narratif invalide");
   validateDefinition(s);
+  if (s.flow) validateFlowDefinition(s.flow);
+  const actionIds = new Set<string>();
   for (const scene of s.scenes) {
+    if (s.flow) {
+      if (
+        !scene.flow ||
+        !Array.isArray(scene.flow.actions) ||
+        scene.flow.actions.length > 100
+      )
+        throw Error("Actions narratives manquantes");
+      for (const action of scene.flow.actions) {
+        if (
+          action.icon &&
+          !["letter", "blue-letter", "book", "stone"].includes(action.icon)
+        )
+          throw Error("Objet narratif inconnu");
+        if (
+          actionIds.has(action.id) ||
+          (action.replayable && !scene.flow.optional) ||
+          (scene.flow.optional && s.scenes.at(-1) !== scene) ||
+          (action.availableAfter !== undefined &&
+            (!Number.isSafeInteger(action.availableAfter) ||
+              action.availableAfter < 0 ||
+              action.availableAfter >= s.scenes.length)) ||
+          (action.anyRoom && action.point.anchor !== "companion:loyal")
+        )
+          throw Error("Portée d’action invalide");
+        actionIds.add(action.id);
+        if (
+          !scene.objectives.some((o) => o.id === action.id) ||
+          !text(action.label, 300) ||
+          !action.point ||
+          ![
+            "village",
+            "house",
+            "library",
+            "workshop",
+            "inn",
+            "forest",
+            "bakery",
+          ].includes(action.point.room) ||
+          !text(action.point.anchor, 100)
+        )
+          throw Error("Point narratif invalide");
+        if (action.dialogue && !scene.dialogues[action.dialogue])
+          throw Error("Dialogue narratif absent");
+        if (action.puzzle) validatePuzzle(action.puzzle);
+      }
+    }
     if (
       ![
         "arrival",
@@ -110,13 +174,29 @@ export function validateScript(input: unknown): EpisodeScript {
         beats.length > 100
       )
         throw Error("Séquence de dialogue invalide");
-      for (const beat of beats)
+      for (const [index, beat] of beats.entries()) {
         if (
           !text(beat.speaker, 80) ||
           !text(beat.text) ||
           (beat.choiceId && !scene.choices.some((c) => c.id === beat.choiceId))
         )
           throw Error("Réplique invalide");
+        if (
+          beat.nextByOption &&
+          (!beat.choiceId ||
+            Object.entries(beat.nextByOption).some(
+              ([id, next]) =>
+                !scene.choices
+                  .find((c) => c.id === beat.choiceId)
+                  ?.options.some((o) => o.id === id) ||
+                (next !== null &&
+                  (!Number.isInteger(next) ||
+                    next <= index ||
+                    next >= beats.length)),
+            ))
+        )
+          throw Error("Branche de dialogue invalide");
+      }
       const event = scene.dialogueEvents[id];
       if (
         !event ||
@@ -133,7 +213,16 @@ export function validateScript(input: unknown): EpisodeScript {
   return structuredClone(s);
 }
 export function validateRuntime(r: EpisodeRuntime) {
-  const rooms = ["village", "house", "library", "workshop", "inn"];
+  if (r?.flow) validateFlowRuntime(r.flow);
+  const rooms = [
+    "village",
+    "house",
+    "library",
+    "workshop",
+    "inn",
+    "forest",
+    "bakery",
+  ];
   const p = r?.presentation;
   if (
     p?.location &&
@@ -182,7 +271,7 @@ export function validateRuntime(r: EpisodeRuntime) {
       (b) => typeof b !== "boolean",
     ) ||
     !Array.isArray(r.visited) ||
-    r.visited.length > 5 ||
+    r.visited.length > 7 ||
     r.visited.some((room) => !rooms.includes(room)) ||
     new Set(r.visited).size !== r.visited.length ||
     (r.origin !== null &&

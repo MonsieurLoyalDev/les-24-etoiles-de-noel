@@ -1,0 +1,65 @@
+.narrative-save-error {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 90vw;
+  z-index: 1000;
+  background: #30251d;
+  color: #fff3cf;
+  border: 1px solid #b98a55;
+  padding: 12px;
+}
+.flow-circuit {
+  display: grid;
+  gap: 8px;
+  max-width: 480px;
+  margin: 20px auto;
+}
+.flow-circuit button {
+  padding: 4px;
+  min-height: 80px;
+}
+.flow-circuit svg {
+  width: 100%;
+  max-height: 120px;
+  image-rendering: pixelated;
+}
+.flow-circuit [data-powered="true"] {
+  border-color: #e4bf70;
+}
+.flow-field {
+  display: block;
+  padding: 12px;
+  border-bottom: 1px solid #b1935a55;
+}
+.flow-field select {
+  font: inherit;
+  min-height: 44px;
+  width: 100%;
+}
+.flow-field button,
+.flow-buttons button {
+  min-width: 44px;
+  min-height: 44px;
+  margin: 5px;
+}
+.flow-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.flow-field small {
+  display: block;
+}
+.flow-field input {
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+}
+@media (min-width: 1000px) {
+  .advent-modal:has(.flow-circuit) {
+    max-width: 900px;
+  }
+}

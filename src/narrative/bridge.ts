@@ -1,4 +1,5 @@
 import type { Point } from "../domain";
+import type { Puzzle, PuzzleDraft, PuzzleMove } from "./flow";
 export type NarrativeView = {
   episodeId: string;
   title: string;
@@ -13,6 +14,7 @@ export type NarrativeView = {
   saving: boolean;
   error: string;
   book: { title: string; text: string } | null;
+  bookPages?: { day: number; title: string; text: string }[];
   bookRequest: number;
   characters: string[];
   places: string[];
@@ -21,6 +23,7 @@ export type NarrativeView = {
   completedAt: string | null;
   actions: { id: string; label: string }[];
   audioCue: string;
+  task?: { puzzle: Puzzle; draft: PuzzleDraft };
 };
 export interface NarrativeBridge {
   readonly dialogueActive: boolean;
@@ -39,4 +42,5 @@ export interface NarrativeBridge {
   openBook(): void;
   stop(): void;
   deactivate(): Promise<void>;
+  puzzle?(move: PuzzleMove | null): void;
 }

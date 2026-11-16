@@ -7,11 +7,22 @@ export type LanternState = {
   owner: string | null;
   target: boolean;
   commits: number;
+  tint?: number;
+  shimmer?: boolean;
 };
 /** Single coordinator consumed by the existing ambient lights, never another light renderer. */
 export class LanternCoordinator {
   private phase = -1;
   private states = new Map<string, LanternState>();
+  private narrative = new Map<
+    string,
+    { on: boolean; tint: number; shimmer?: boolean }
+  >();
+  configureNarrative(
+    values: Record<string, { on: boolean; tint: number; shimmer?: boolean }>,
+  ) {
+    this.narrative = new Map(Object.entries(values));
+  }
   constructor() {
     for (const p of worldPoints.filter((p) => p.kind === "lantern"))
       this.states.set(p.id, {
@@ -35,6 +46,17 @@ export class LanternCoordinator {
       }
     }
     for (const s of this.states.values()) {
+      const override = this.narrative.get(s.id);
+      if (override) {
+        s.on = override.on;
+        s.target = override.on;
+        s.owner = null;
+        s.tint = override.tint;
+        s.shimmer = override.shimmer;
+      } else {
+        s.tint = undefined;
+        s.shimmer = undefined;
+      }
       const goal = s.on ? 1 : 0,
         step = Math.max(0, delta) / 800;
       s.level +=
@@ -43,7 +65,13 @@ export class LanternCoordinator {
   }
   reserve(id: string, actor: string, on: boolean) {
     const s = this.states.get(id);
-    if (!s || s.on === on || (s.owner && s.owner !== actor)) return false;
+    if (
+      !s ||
+      this.narrative.has(id) ||
+      s.on === on ||
+      (s.owner && s.owner !== actor)
+    )
+      return false;
     s.owner = actor;
     s.target = on;
     return true;

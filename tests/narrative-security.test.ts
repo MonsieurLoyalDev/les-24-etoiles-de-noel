@@ -11,6 +11,8 @@ import {
 } from "../src/narrative/engine";
 import { initialRuntime, type EpisodeProgress } from "../src/narrative/script";
 import { presentation } from "../src/narrative/orchestration";
+import { technicalProductionEpisode } from "./fixtures/production";
+import { newFlowRuntime, newPuzzle, puzzleMove } from "../src/narrative/flow";
 const admin = "00000000-0000-4000-8000-000000000011",
   player = "00000000-0000-4000-8000-000000000012",
   outsider = "00000000-0000-4000-8000-000000000013";
@@ -41,6 +43,7 @@ beforeAll(async () => {
     "202611030001_advent.sql",
     "202611160001_narrative.sql",
     "202611160002_episode_calendar_contract.sql",
+    "202611160003_production_activities.sql",
   ]) {
     if (file === "202611160002_episode_calendar_contract.sql") {
       await pg.query(
@@ -63,6 +66,158 @@ beforeAll(async () => {
 }, 30000);
 afterAll(async () => {
   await pg?.close();
+});
+it("reconstruit le Livre depuis les preuves canoniques du bon utilisateur et ne charge aucune page future", async () => {
+  const id = "00000000-0000-4000-8000-000000000014";
+  await pg.exec("reset role");
+  await pg.query("insert into auth.users(id) values($1)", [id]);
+  await pg.query("insert into public.app_members values($1,'player')", [id]);
+  await now("2026-12-04T10:00:00Z");
+  for (const day of [1, 2, 4]) {
+    await user(admin);
+    const c = technicalProductionEpisode(day);
+    c.version = 99;
+    if (day === 4) c.dependsOn = [2];
+    await rpc("public.episode_admin_put($1::jsonb)", [JSON.stringify(c)]);
+  }
+  for (const day of [1, 2]) {
+    const c = technicalProductionEpisode(day);
+    c.version = 99;
+    await user(id);
+    const session = await rpc<{ runId: string }>(
+      "public.episode_load($1,false,false,false)",
+      [day],
+    );
+    let p: EpisodeProgress = {
+      ...startEpisode(
+        c,
+        { day, unlocked: true },
+        { world: initial, completedDays: day === 1 ? [] : [1] },
+      ),
+      runtime: { ...initialRuntime(), flow: newFlowRuntime() },
+    };
+    const puzzle = c.scenes[0].flow!.actions[0].puzzle!;
+    let draft = newPuzzle(puzzle);
+    draft = puzzleMove(puzzle, draft, { type: "toggle", id: "a" });
+    draft = puzzleMove(puzzle, draft, { type: "check" });
+    p.runtime.flow!.drafts["activity/check"] = draft;
+    p = receiveEvent(c, p, {
+      kind: "solve",
+      target: "technical-puzzle",
+    }) as EpisodeProgress;
+    p = finishScene(c, p, {
+      world: initial,
+      completedDays: [],
+    }) as EpisodeProgress;
+    p.runtime.restored = true;
+    p.runtime.bookOpened = true;
+    p = receiveEvent(c, p, {
+      kind: "interact",
+      target: "restored-star",
+    }) as EpisodeProgress;
+    p = finishScene(c, p, {
+      world: initial,
+      completedDays: [],
+    }) as EpisodeProgress;
+    p = finishScene(c, p, {
+      world: initial,
+      completedDays: [],
+    }) as EpisodeProgress;
+    const receipt = await rpc<{ restored: boolean; completedAt: string }>(
+      "public.episode_save($1,false,$2::uuid,-1,$3::jsonb)",
+      [day, session.runId, JSON.stringify(p)],
+    );
+    expect(receipt.restored).toBe(true);
+    expect(receipt.completedAt).toBeTruthy();
+  }
+  const result = await rpc<{ context: { pages: { day: number }[] } }>(
+    "public.episode_load(4,false,false,false)",
+  );
+  expect(result.context.pages.map((p) => p.day)).toEqual([1, 2]);
+  await user(admin);
+  const preview = await rpc<{ context: { pages: unknown[] } }>(
+    "public.episode_load(4,true,false,false)",
+  );
+  expect(preview.context.pages).toEqual([]);
+  await user(outsider);
+  await expect(
+    rpc("public.episode_load(4,false,false,false)"),
+  ).rejects.toThrow();
+});
+it("isole la recette indépendante de la partie canonique et vérifie réellement les réponses", async () => {
+  const c = technicalProductionEpisode(3);
+  await now("2026-12-03T01:00:00Z");
+  await user(admin);
+  await rpc("public.episode_admin_put($1::jsonb)", [JSON.stringify(c)]);
+  await user(player);
+  await expect(
+    rpc("public.episode_load(3,true,false,false)"),
+  ).rejects.toThrow();
+  await expect(rpc("public.episode_load(3,false,false,false)")).rejects.toThrow(
+    "précédent incomplet",
+  );
+  await user(admin);
+  const session = await rpc<{ runId: string }>(
+    "public.episode_load(3,true,false,false)",
+  );
+  let p: EpisodeProgress = {
+    ...startEpisode(
+      c,
+      { day: 3, unlocked: true },
+      { world: initial, completedDays: [2] },
+    ),
+    runtime: { ...initialRuntime(), flow: newFlowRuntime() },
+  };
+  const puzzle = c.scenes[0].flow!.actions[0].puzzle!;
+  p.runtime.flow!.drafts["activity/check"] = {
+    ...newPuzzle(puzzle),
+    solved: true,
+  };
+  p = receiveEvent(c, p, {
+    kind: "solve",
+    target: "technical-puzzle",
+  }) as EpisodeProgress;
+  await expect(
+    rpc("public.episode_save(3,true,$1::uuid,-1,$2::jsonb)", [
+      session.runId,
+      JSON.stringify(p),
+    ]),
+  ).rejects.toThrow("Checkpoint");
+  let draft = newPuzzle(puzzle);
+  draft = puzzleMove(puzzle, draft, { type: "toggle", id: "a" });
+  draft = puzzleMove(puzzle, draft, { type: "check" });
+  p.runtime.flow!.drafts["activity/check"] = draft;
+  await rpc("public.episode_save(3,true,$1::uuid,-1,$2::jsonb)", [
+    session.runId,
+    JSON.stringify(p),
+  ]);
+  const status = await rpc<{ day: number; complete: boolean }[]>(
+    "public.episode_status(false)",
+  );
+  expect(status.find((s) => s.day === 3)?.complete).toBe(false);
+  p.revision++;
+  p.runtime.visited = ["forest", "bakery"];
+  presentation(p).location = {
+    room: "forest",
+    position: { x: 512, y: 688 },
+    loyal: { x: 490, y: 688 },
+    flocon: null,
+  };
+  await rpc("public.episode_save(3,true,$1::uuid,$2,$3::jsonb)", [
+    session.runId,
+    p.revision - 1,
+    JSON.stringify(p),
+  ]);
+  p.revision++;
+  p.runtime.visited.push("village" as never);
+  p.runtime.flow!.drafts["unknown/check"] = draft;
+  await expect(
+    rpc("public.episode_save(3,true,$1::uuid,$2,$3::jsonb)", [
+      session.runId,
+      p.revision - 1,
+      JSON.stringify(p),
+    ]),
+  ).rejects.toThrow("Checkpoint");
 });
 it("rejette les checkpoints avec curseurs ou positions forgés", async () => {
   await now("2026-12-01T01:00:00Z");

@@ -393,8 +393,15 @@ function App() {
                 {view?.narrative?.book && (
                   <section aria-label="Livre des Étoiles">
                     <h3>Livre des Étoiles · {view.narrative.restored}/24</h3>
-                    <h4>{view.narrative.book.title}</h4>
-                    <p>{view.narrative.book.text}</p>
+                    {(view.narrative.bookPages?.length
+                      ? view.narrative.bookPages
+                      : [view.narrative.book]
+                    ).map((page, index) => (
+                      <article key={index}>
+                        <h4>{page.title}</h4>
+                        <p>{page.text}</p>
+                      </article>
+                    ))}
                     <p>
                       Choix conservés :{" "}
                       {view.narrative.chosenReplies.join(" · ") || "—"}

@@ -253,6 +253,7 @@ export class VillageAmbience {
       l.image.setVisible(visible);
       if (visible) {
         const controlled = l.point ? this.lanterns?.get(l.point) : undefined;
+        l.image.setTint(controlled?.tint ?? 0xffc178);
         const level = controlled
           ? motion
             ? controlled.level
@@ -270,7 +271,11 @@ export class VillageAmbience {
           level *
             l.base *
             (0.12 + palette.warm * 0.88) *
-            (motion ? 1 + Math.sin(time / 1900 + i * 1.7) * 0.035 : 1),
+            (motion
+              ? 1 +
+                Math.sin(time / 1900 + i * 1.7) *
+                  (controlled?.shimmer ? 0.06 : 0.035)
+              : 1),
         );
         visibleLights++;
       }

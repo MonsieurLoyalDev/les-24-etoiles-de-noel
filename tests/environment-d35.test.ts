@@ -7,6 +7,7 @@ import proof from "../docs/graphismes/d35/PRESERVATION.json";
 import narrativeUI from "../docs/phase-e/narration/PRESERVATION-UI.json";
 import e2 from "../docs/phase-e/PRESERVATION-E2.json";
 import e21 from "../docs/phase-e/PRESERVATION-E2-1.json";
+import production from "../docs/production/PRESERVATION-LOT-A.json";
 import { fenceModules35 } from "../src/art/fences35";
 import {
   edgeVariation,
@@ -15,6 +16,15 @@ import {
 } from "../src/art/ground35";
 import { plan, overlaps } from "../src/art/village34";
 it("D35 préserve les fichiers publics et sources validés protégés", () => {
+  expect(production.files.map((f) => f.path)).toEqual([
+    "src/art/ambience.ts",
+    "src/art/interiors.ts",
+    "src/art/rooms33.ts",
+    "src/decor/model.ts",
+    "src/domain.ts",
+    "src/main.tsx",
+    "src/rpg/world.ts",
+  ]);
   expect(e21.files.map((f) => f.path)).toEqual([
     "src/art/audio.ts",
     "src/art/tags.ts",
@@ -35,7 +45,8 @@ it("D35 préserve les fichiers publics et sources validés protégés", () => {
       createHash("sha256").update(readFileSync(f.path)).digest("hex"),
       f.path,
     ).toBe(
-      e21.files.find((update) => update.path === f.path)?.sha256 ??
+      production.files.find((update) => update.path === f.path)?.sha256 ??
+        e21.files.find((update) => update.path === f.path)?.sha256 ??
         e2.files.find((update) => update.path === f.path)?.sha256 ??
         narrativeUI.files.find((update) => update.path === f.path)?.sha256 ??
         f.sha256,

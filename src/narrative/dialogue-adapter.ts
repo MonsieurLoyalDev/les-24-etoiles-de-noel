@@ -36,7 +36,12 @@ export function dialogueGraph(
             ? choice.options.map((o) => ({
                 label: o.label,
                 condition: o.condition,
-                next,
+                next:
+                  beat.nextByOption && Object.hasOwn(beat.nextByOption, o.id)
+                    ? beat.nextByOption[o.id] === null
+                      ? undefined
+                      : `beat-${beat.nextByOption[o.id]}`
+                    : next,
               }))
             : [{ label: "Continuer", next }],
         },

@@ -3,11 +3,16 @@ import { PGlite } from "@electric-sql/pglite";
 import { readFileSync } from "node:fs";
 import { installPrivateFixture, authorization } from "./fixtures";
 import type { EpisodeScript } from "../../src/narrative/script";
+import { completedEpisodeSnapshots } from "../fixtures/complete-episode";
 export async function installNarrativeFixture(
   page: Page,
   content: EpisodeScript,
+  options: { admin?: boolean; date?: string; previous?: EpisodeScript[] } = {},
 ) {
-  const fixture = await installPrivateFixture(page),
+  const fixture = await installPrivateFixture(
+      page,
+      options.admin ? "admin" : "player",
+    ),
     pg = new PGlite();
   const id = "00000000-0000-4000-8000-000000000002",
     admin = "00000000-0000-4000-8000-000000000011";
@@ -19,19 +24,41 @@ export async function installNarrativeFixture(
       "202611030001_advent.sql",
       "202611160001_narrative.sql",
       "202611160002_episode_calendar_contract.sql",
+      "202611160003_production_activities.sql",
     ])
       await pg.exec(readFileSync(`supabase/migrations/${file}`, "utf8"));
     await pg.exec(
-      `insert into public.app_members values('${admin}','admin'),('${id}','player');create or replace function private.server_now() returns timestamptz language sql stable set search_path='' as $$select '2026-12-01T01:00:00Z'::timestamptz$$;`,
+      `insert into public.app_members values('${admin}','admin'),('${id}','${options.admin ? "admin" : "player"}');create or replace function private.server_now() returns timestamptz language sql stable set search_path='' as $$select '${new Date(options.date ?? "2026-12-01T01:00:00Z").toISOString()}'::timestamptz$$;`,
     );
     await pg.query("select set_config('request.jwt.claim.sub',$1,false)", [
       admin,
     ]);
-    await pg.query("select public.episode_admin_put($1::jsonb)", [
-      JSON.stringify(content),
-    ]);
+    for (const episode of [...(options.previous ?? []), content])
+      await pg.query("select public.episode_admin_put($1::jsonb)", [
+        JSON.stringify(episode),
+      ]);
     await pg.query("select set_config('request.jwt.claim.sub',$1,false)", [id]);
     await pg.exec("set role authenticated");
+    const completed: number[] = [];
+    for (const episode of options.previous ?? []) {
+      const session = (
+        await pg.query<{ s: { runId: string } }>(
+          "select public.episode_load($1,false,false,false) as s",
+          [episode.day],
+        )
+      ).rows[0].s;
+      let revision = -1;
+      for (const checkpoint of completedEpisodeSnapshots(episode, completed)) {
+        const receipt = (
+          await pg.query<{ s: { revision: number } }>(
+            "select public.episode_save($1,false,$2::uuid,$3,$4::jsonb) as s",
+            [episode.day, session.runId, revision, JSON.stringify(checkpoint)],
+          )
+        ).rows[0].s;
+        revision = receipt.revision;
+      }
+      completed.push(episode.day);
+    }
     const calls: string[] = [];
     await page.route(
       /\/rest\/v1\/rpc\/(episode_\w+|advent_status)$/,

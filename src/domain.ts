@@ -1,10 +1,12 @@
 export type Point = { x: number; y: number };
 export type Rect = Point & { w: number; h: number };
 export type Stage = 0 | 1 | 2 | 3 | 4;
+export type LegacyRoom = "village" | "house" | "library" | "workshop" | "inn";
+export type WorldRoom = LegacyRoom | "forest" | "bakery";
 export type Save = {
   version: 2;
   stage: Stage;
-  room: "village" | "house" | "library" | "workshop" | "inn";
+  room: WorldRoom;
   position: Point;
   quests: Record<string, { step: number; done: boolean }>;
   flags: string[];
@@ -110,7 +112,15 @@ export function decode(value: unknown): Save | null {
     !Number.isInteger(s.stage) ||
     s.stage < 0 ||
     s.stage > 4 ||
-    !["village", "house", "library", "workshop", "inn"].includes(s.room) ||
+    ![
+      "village",
+      "house",
+      "library",
+      "workshop",
+      "inn",
+      "forest",
+      "bakery",
+    ].includes(s.room) ||
     !Number.isFinite(s.position?.x) ||
     !Number.isFinite(s.position?.y)
   )
