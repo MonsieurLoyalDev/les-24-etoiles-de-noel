@@ -1,0 +1,56 @@
+{
+  "human": {
+    "file": "/assets/narrative-polish/human.png",
+    "frameWidth": 256,
+    "frameHeight": 256,
+    "frames": 8,
+    "groups": [
+      {
+        "height": 224,
+        "width": 215,
+        "foot": 0.953125
+      },
+      {
+        "height": 224,
+        "width": 222,
+        "foot": 0.953125
+      }
+    ]
+  },
+  "fox": {
+    "file": "/assets/narrative-polish/fox.png",
+    "frameWidth": 256,
+    "frameHeight": 256,
+    "frames": 8,
+    "groups": [
+      {
+        "height": 196,
+        "width": 224,
+        "foot": 0.953125
+      },
+      {
+        "height": 224,
+        "width": 203,
+        "foot": 0.953125
+      }
+    ]
+  },
+  "seats": {
+    "file": "/assets/narrative-polish/seats.png",
+    "frameWidth": 256,
+    "frameHeight": 256,
+    "frames": 8,
+    "groups": [
+      {
+        "height": 224,
+        "width": 192,
+        "foot": 0.953125
+      },
+      {
+        "height": 224,
+        "width": 211,
+        "foot": 0.953125
+      }
+    ]
+  }
+}

@@ -67,6 +67,9 @@ export async function installPrivateFixture(
   page: Page,
   role: "player" | "admin" | "outsider" = "player",
 ) {
+  const appOrigin = process.env.ETB_FIXTURE_ORIGIN ?? "http://127.0.0.1:5191";
+  if (!["http://127.0.0.1:5191", "http://127.0.0.1:5193"].includes(appOrigin))
+    throw Error("Unapproved local fixture origin");
   const violations: string[] = [],
     errors: string[] = [],
     images: Promise<void>[] = [];
@@ -103,7 +106,7 @@ export async function installPrivateFixture(
   });
   page.on("response", (r) => {
     if (
-      new URL(r.url()).origin === "http://127.0.0.1:5191" &&
+      new URL(r.url()).origin === appOrigin &&
       /\.(png|ttf)$/.test(new URL(r.url()).pathname)
     )
       images.push(
@@ -122,7 +125,7 @@ export async function installPrivateFixture(
   await page.route("**/*", async (route) => {
     const req = route.request(),
       url = new URL(req.url());
-    if (url.origin === "http://127.0.0.1:5191") return route.continue();
+    if (url.origin === appOrigin) return route.continue();
     if (
       url.origin === "https://challenges.cloudflare.com" &&
       url.pathname === "/turnstile/v0/api.js"
@@ -136,7 +139,7 @@ export async function installPrivateFixture(
       return route.abort();
     }
     const cors = {
-      "access-control-allow-origin": "http://127.0.0.1:5191",
+      "access-control-allow-origin": appOrigin,
       "access-control-allow-headers":
         "authorization,apikey,content-type,x-client-info,x-supabase-api-version",
       "access-control-allow-methods": "GET,POST,PATCH,DELETE,OPTIONS",

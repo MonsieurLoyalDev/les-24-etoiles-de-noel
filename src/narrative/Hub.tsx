@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "./polish.css";
 import type { AdventAPI } from "../advent/api";
 import { getLocal, putLocal } from "../advent/local";
 import { controls, type Village, type View } from "../game/Game";
@@ -219,11 +220,24 @@ export function NarrativeHub({
     }
   }
   const current = view.narrative;
+  const momentButtons = current?.actions
+    .filter((a) => a.id !== "continue" && a.id !== "explore")
+    .map((action) => (
+      <button
+        key={action.id}
+        onClick={() =>
+          scene.narrative?.interact(`narrative:optional:${action.id}`)
+        }
+      >
+        {action.label}
+      </button>
+    ));
   return (
     <>
       {current && <span className="narrative-session" hidden />}
       {current && !panel && !view.cinematic && !view.dialogue && (
         <aside
+          key={current.complete ? "completed" : "active"}
           className="advent-tracker narrative-tracker"
           aria-label="Aventure narrative"
         >
@@ -235,18 +249,10 @@ export function NarrativeHub({
                 : "Livre des Étoiles"}{" "}
             · {current.restored}/24
           </strong>
-          <span>{current.title}</span>
-          <small>{current.objective}</small>
-          {current.actions.some((a) => a.id === "hug") && (
-            <small>
-              Moments tendres : poses debout existantes. Gestes de couple
-              dessinés à valider.
-            </small>
-          )}
+          {!current.complete && <span>{current.title}</span>}
+          {!current.complete && <small>{current.objective}</small>}
           {current.complete && (
-            <p role="status">
-              Jour 1 terminé · La première étoile a retrouvé sa place.
-            </p>
+            <small role="status">Jour 1 terminé · Exploration libre</small>
           )}
           {current.hintLevel >= 2 && (
             <small>Un indice reste à examiner. Flocon peut vous guider.</small>
@@ -261,16 +267,24 @@ export function NarrativeHub({
             </p>
           )}
           <div>
-            {current.actions.map((action) => (
-              <button
-                key={action.id}
-                onClick={() =>
-                  scene.narrative?.interact(`narrative:optional:${action.id}`)
-                }
-              >
-                {action.label}
-              </button>
-            ))}
+            {!!momentButtons?.length && (
+              <details className="narrative-moments">
+                <summary>Moments à partager</summary>
+                <div>{momentButtons}</div>
+              </details>
+            )}
+            {current.actions
+              .filter((a) => a.id === "continue" || a.id === "explore")
+              .map((action) => (
+                <button
+                  key={action.id}
+                  onClick={() =>
+                    scene.narrative?.interact(`narrative:optional:${action.id}`)
+                  }
+                >
+                  {action.label}
+                </button>
+              ))}
             <button
               aria-label="Courir"
               onPointerDown={() => {

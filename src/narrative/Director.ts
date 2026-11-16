@@ -33,6 +33,8 @@ import { clearReaction } from "../art/reactions";
 import { prepareNarrativeCues } from "./cues";
 import { dialogueGraph, advancePrivateDialogue } from "./dialogue-adapter";
 import { choicesFor, type DialogueGraph } from "../rpg/dialogue";
+import { DayOnePolish, type Gesture } from "./polish";
+import { starFlight } from "./star-flight";
 
 const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
 const canonical: Record<string, string> = {
@@ -65,6 +67,7 @@ export class NarrativeDirector implements NarrativeBridge {
   private lastPlayer?: Phaser.GameObjects.Sprite;
   private effects: Phaser.GameObjects.Image[] = [];
   private particlesStarted = false;
+  private cameraReturning = false;
   private originalProfile;
   private oldDialogue;
   private zoom: number;
@@ -74,6 +77,8 @@ export class NarrativeDirector implements NarrativeBridge {
   private graphs = new Map<string, DialogueGraph>();
   private momentUntil = 0;
   private momentStart: Point | null = null;
+  private polish: DayOnePolish;
+  private restingBench?: Phaser.GameObjects.Image;
   private pose = () => {
     if (
       this.scene.time.now > this.momentUntil ||
@@ -107,6 +112,7 @@ export class NarrativeDirector implements NarrativeBridge {
     readonly replay = false,
     private clearIntent: () => Promise<void> = async () => {},
   ) {
+    this.polish = new DayOnePolish(scene);
     this.confirmedRestored = alreadyRestored;
     this.progress = restoreProgress(script, progress) as EpisodeProgress;
     validateRuntime(this.progress.runtime);
@@ -335,6 +341,7 @@ export class NarrativeDirector implements NarrativeBridge {
       actions.push(
         { id: "hands", label: "Prendre la main de Loyal" },
         { id: "hug", label: "Faire un câlin à Loyal" },
+        { id: "glasses", label: "Ajuster nos lunettes" },
         {
           id: "admire",
           label:
@@ -368,7 +375,15 @@ export class NarrativeDirector implements NarrativeBridge {
       this.advance();
     } else {
       if (!p.optional.includes(id)) p.optional.push(id);
-      if (id === "hands" || id === "hug") this.companionMoment();
+      if (id === "hands" || id === "hug" || id === "glasses")
+        this.companionMoment(id);
+      else if (id === "bench" && this.restingBench)
+        this.polish.start(
+          "sit",
+          this.scene.player,
+          this.scene.loyal,
+          this.restingBench,
+        );
       else if (id === "fox" && this.flocon)
         reaction(this.scene, "coeur", this.scene.player, this.flocon);
       else if (id === "admire")
@@ -383,14 +398,13 @@ export class NarrativeDirector implements NarrativeBridge {
     this.checkpoint();
     this.scene.emit();
   }
-  private companionMoment() {
-    // Pair reaction atlases depict a fox Loyal: incompatible with the validated humans.
-    // Keep the real sprites and orient them. No claim of a newly drawn hugging pose.
+  private companionMoment(kind?: Gesture) {
     clearReaction(this.scene);
     this.momentUntil = this.scene.time.now + (this.reduced ? 300 : 1600);
     this.momentStart = { x: this.scene.player.x, y: this.scene.player.y };
     this.face(this.scene.player, this.scene.loyal);
     this.face(this.scene.loyal, this.scene.player);
+    if (kind) this.polish.start(kind, this.scene.player, this.scene.loyal);
   }
   private checkpoint() {
     if (this.disposed) return;
@@ -651,7 +665,14 @@ export class NarrativeDirector implements NarrativeBridge {
         name: "Observer les lanternes",
       });
       candidates.push({
-        ...this.safe(this.bench),
+        ...this.safe(
+          this.restingBench
+            ? {
+                x: this.restingBench.x,
+                y: this.restingBench.getBounds().bottom + 12,
+              }
+            : this.bench,
+        ),
         id: "narrative:optional:bench",
         name: "Faire une pause avec Loyal",
       });
@@ -822,6 +843,7 @@ export class NarrativeDirector implements NarrativeBridge {
     return distance(sprite, goal) < 4;
   }
   private startEffect(kind: "scatter" | "restore") {
+    this.cameraReturning = false;
     this.runtime.cinematic = { kind, elapsed: 0 };
     if (kind === "scatter") this.runtime.dispersalStarted = true;
     clearReaction(this.scene);
@@ -851,6 +873,8 @@ export class NarrativeDirector implements NarrativeBridge {
     c.elapsed += delta;
     const length = this.reduced ? 2500 : c.kind === "scatter" ? 30000 : 6500;
     const normalized = c.elapsed / length;
+    if (this.flocon)
+      this.polish.fox(this.flocon, delta, "discovery", this.reduced);
     if (c.kind === "scatter" && this.scene.tree) {
       const tree = this.scene.tree;
       if (!this.glimmers.length) {
@@ -897,12 +921,14 @@ export class NarrativeDirector implements NarrativeBridge {
         }
       });
       if (normalized < 0.13 && this.flocon) this.face(this.flocon, tree);
-      if (normalized > 0.83)
+      if (normalized > 0.83 && !this.cameraReturning) {
+        this.cameraReturning = true;
         this.scene.cameras.main.pan(
           this.scene.player.x,
           this.scene.player.y,
-          this.reduced ? 0 : Math.min(delta * 4, 400),
+          this.reduced ? 0 : 450,
         );
+      }
     }
     if (
       !this.reduced &&
@@ -927,15 +953,33 @@ export class NarrativeDirector implements NarrativeBridge {
           .setScale(0.45)
           .setDepth(5000);
         this.effects.push(image);
-        this.scene.tweens.add({
-          targets: image,
+        const destination = {
           x: c.kind === "scatter" ? origin.x + Math.cos(theta) * 240 : tree.x,
           y:
             c.kind === "scatter"
               ? origin.y - 140 - i * 5
               : tree.y - tree.displayHeight / 2,
-          alpha: c.kind === "scatter" ? 0 : 1,
+        };
+        const scatter = c.kind === "scatter";
+        this.scene.tweens.addCounter({
+          from: 0,
+          to: 1,
           duration: c.kind === "scatter" ? 2500 : 1800,
+          ease: "Sine.easeInOut",
+          onUpdate: (tween) => {
+            if (!image.active) return;
+            const t = tween.getValue() ?? 0;
+            const point = starFlight(
+              origin,
+              destination,
+              t,
+              scatter ? Math.sin(theta) * 65 : 55,
+            );
+            image
+              .setPosition(point.x, point.y)
+              .setAlpha(scatter ? 1 - t : 1)
+              .setScale(scatter ? 0.45 : 0.45 - Math.sin(Math.PI * t) * 0.08);
+          },
           onComplete: () => image.destroy(),
         });
       }
@@ -960,9 +1004,13 @@ export class NarrativeDirector implements NarrativeBridge {
     this.effects = [];
     this.glimmers.forEach((i) => i.destroy());
     this.glimmers = [];
-    this.scene.cameras.main
-      .setZoom(this.zoom)
-      .startFollow(this.scene.player, true, 1, 1);
+    this.scene.cameras.main.zoomTo(this.zoom, this.reduced ? 0 : 350);
+    this.scene.cameras.main.startFollow(
+      this.scene.player,
+      true,
+      this.reduced ? 1 : 0.12,
+      this.reduced ? 1 : 0.12,
+    );
     if (kind === "scatter") {
       this.runtime.dispersed = true;
       if (this.scatterReady()) this.beginDialogue("scatter");
@@ -1049,6 +1097,28 @@ export class NarrativeDirector implements NarrativeBridge {
     }
   }
   roomRendered() {
+    this.polish.clear();
+    this.restingBench = this.scene.children.list
+      .filter((o) => {
+        const im = o as Phaser.GameObjects.Image;
+        return (
+          im.active && im.visible && /^d35-bench-/.test(im.texture?.key ?? "")
+        );
+      })
+      .map((o) => o as Phaser.GameObjects.Image)
+      .sort(
+        (a, b) =>
+          distance(
+            a,
+            plan.buildings.find((building) => building.id === "loyal_house")!
+              .returnPoint,
+          ) -
+          distance(
+            b,
+            plan.buildings.find((building) => building.id === "loyal_house")!
+              .returnPoint,
+          ),
+      )[0];
     prepareNarrativeCues(this.scene);
     this.lastPlayer = this.scene.player;
     this.paths.clear();
@@ -1096,6 +1166,13 @@ export class NarrativeDirector implements NarrativeBridge {
     this.renderDialogue();
   }
   update(delta: number) {
+    this.polish.update(
+      delta,
+      this.dialogueActive || this.busy || controls.paused || document.hidden,
+      this.reduced,
+    );
+    this.scene.game.canvas.dataset.gesture = this.polish.gesture ?? "";
+    if (this.dialogueActive || controls.paused) this.polish.resetFox();
     if (this.disposed || document.hidden || this.error) return;
     if (this.lastPlayer !== this.scene.player) this.roomRendered();
     if (controls.paused && !this.busy) return;
@@ -1167,7 +1244,11 @@ export class NarrativeDirector implements NarrativeBridge {
         kind === "arrival" && village && !this.dialogueActive
           ? { x: this.entry.x - 40, y: this.entry.y }
           : { x: this.scene.player.x - 30, y: this.scene.player.y + 10 };
-      if (!this.dialogueActive && distance(this.scene.loyal, loyalTarget) > 12)
+      if (
+        !this.dialogueActive &&
+        !this.polish.active &&
+        distance(this.scene.loyal, loyalTarget) > 12
+      )
         this.walk("loyal", this.scene.loyal, loyalTarget, delta, 120);
       if (this.flocon) {
         const target =
@@ -1181,6 +1262,18 @@ export class NarrativeDirector implements NarrativeBridge {
         if (kind === "trail" && r.hintMs >= 30000)
           this.face(this.flocon, this.cluePoint);
         if (this.dialogueActive) this.face(this.scene.loyal, this.scene.player);
+        this.polish.fox(
+          this.flocon,
+          delta,
+          this.dialogueActive || kind === "trail" || this.busy
+            ? "blocked"
+            : this.scene.state.room === "house" && this.runtime.restored
+              ? "home"
+              : kind === "restore"
+                ? "discovery"
+                : "quiet",
+          this.reduced,
+        );
       }
     }
     if (
@@ -1269,12 +1362,20 @@ export class NarrativeDirector implements NarrativeBridge {
           return s.visible && /^(calin|mains)_atlas/.test(s.texture?.key ?? "");
         }).length,
       },
+      polish: {
+        gesture: this.polish.gesture,
+        bounds: this.polish.bounds,
+        foxFrame: this.flocon?.frame.name,
+        foxTexture: this.flocon?.texture.key,
+      },
       treeFrame: this.scene.tree?.frame.name ?? null,
     });
   }
   stop() {
     if (this.disposed) return;
     this.disposed = true;
+    this.polish.destroy();
+    delete this.scene.game.canvas.dataset.gesture;
     this.scene.events.off("postupdate", this.pose);
     this.effects.forEach((i) => i.destroy());
     this.marker?.destroy();

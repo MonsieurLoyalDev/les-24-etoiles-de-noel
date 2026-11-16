@@ -1,4 +1,5 @@
 import { preloadActivities } from "../world/activity-presentation";
+import { preloadNarrativePolish } from "../narrative/polish";
 import type { NarrativeBridge, NarrativeView } from "../narrative/bridge";
 import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
@@ -179,6 +180,7 @@ export class Village extends Phaser.Scene {
     preloadVillage33(this);
     preloadRooms33(this);
     preloadActors(this);
+    preloadNarrativePolish(this);
     preloadActivities(this);
     const tree = catalog.atlases["sapin_atlas-Etoilebois_Sapin_V11_4"];
     this.load.atlas("art-tree", tree.image, tree.data);

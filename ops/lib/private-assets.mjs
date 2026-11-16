@@ -17,6 +17,7 @@ export const publicAssetFamilies = [
   "village-d33",
   "environment-d35",
   "activities-d42",
+  "narrative-polish",
 ];
 const families = publicAssetFamilies;
 const digest = (b) => createHash("sha256").update(b).digest("hex");

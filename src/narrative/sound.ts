@@ -1,6 +1,6 @@
-import { stopAmbience } from "../art/audio";
+import { transitionAmbience, type Sound } from "../art/audio";
 // Scene hooks only. No licensed music supplied: deliberately silent, no synthesis/network.
-export const sceneAudio = {
+export const sceneAudio: Record<string, Sound | null> = {
   arrival: null,
   meet: null,
   tree: null,
@@ -10,5 +10,5 @@ export const sceneAudio = {
   home: null,
 } as const;
 export function playSceneAudio(cue: string) {
-  if (cue in sceneAudio) stopAmbience();
+  if (cue in sceneAudio) transitionAmbience(sceneAudio[cue], 700);
 }

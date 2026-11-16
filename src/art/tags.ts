@@ -76,7 +76,12 @@ export function updateTags(
       t.actor.x <= v.right &&
       t.actor.y - height >= v.y + t.plate.displayHeight + 7 &&
       t.actor.y - height <= v.bottom;
-    t.plate.setVisible(!hidden && onscreen);
+    t.plate.setVisible(
+      !hidden &&
+        !scene.game.canvas.dataset.gesture &&
+        onscreen &&
+        t.actor.visible,
+    );
     const box = fitTag(
       {
         x: t.actor.x - t.plate.displayWidth / 2,

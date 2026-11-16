@@ -28,6 +28,10 @@ export function reaction(
 ) {
   active.get(scene)?.();
   const pair = ["calin", "bisou", "mains", "rechauffe"].includes(kind);
+  // Legacy ambient triggers (e.g. entering the inn) must never overlay fox-couple art
+  // on a private narrative scene. DayOnePolish owns the reviewed human gestures.
+  if (pair && (scene as Phaser.Scene & { narrative?: unknown }).narrative)
+    return;
   const entry = Object.entries(catalog.atlases).find(([key]) =>
     key.startsWith(`${pair ? kind : "debby_" + kind}_atlas`),
   );

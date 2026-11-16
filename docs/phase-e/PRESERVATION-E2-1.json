@@ -1,0 +1,17 @@
+{
+  "reason": "E2.1 audio fades, temporary label visibility and refusal of legacy fox-couple overlays during narrative scenes.",
+  "files": [
+    {
+      "path": "src/art/audio.ts",
+      "sha256": "d4881455238ca3fa23ce1993af7bb62f6cb618ba8291e1b2d67f5c590b61f871"
+    },
+    {
+      "path": "src/art/tags.ts",
+      "sha256": "59e943941ca678378c33196b0a33c25f1104783c2aa1a593ea29ecb5d75d1ad6"
+    },
+    {
+      "path": "src/art/reactions.ts",
+      "sha256": "3a49006a26068953709baaa66d76822c7f83af880a3d4181e5f6bcec322672bb"
+    }
+  ]
+}

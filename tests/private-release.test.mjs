@@ -53,6 +53,15 @@ it("E1 refuse une spritesheet D42 retirée de la liste, même si le PNG source e
       ),
     ).toThrow(`public/assets/activities-d42/${name}.png`);
 });
+it("E2.1 refuse une planche narrative absente de la livraison privée", () => {
+  for (const name of ["human", "fox", "seats"])
+    expect(() =>
+      assertPublicAssets(
+        root,
+        assets.filter((p) => !p.endsWith(`/narrative-polish/${name}.png`)),
+      ),
+    ).toThrow(`public/assets/narrative-polish/${name}.png`);
+});
 it("E1 couvre les familles dynamiques, atlas, fontes et références CSS sans copier public entier", () => {
   const required = requiredPublicAssets(root);
   expect(assertPublicAssets(root, assets)).toEqual(assets);

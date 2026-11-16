@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { readFileSync, mkdirSync } from "node:fs";
+import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { technicalEpisode } from "../fixtures/narrative";
 import { navigateTo as navigateOnce } from "../e2e/pathfinding";
@@ -89,6 +89,49 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
     page
       .locator("canvas")
       .evaluate((c) => JSON.parse(c.dataset.narrative ?? "null"));
+  async function gesture(name: string, label: string) {
+    if (
+      !(await page
+        .getByRole("button", { name: label, exact: true })
+        .isVisible())
+    )
+      await page.getByText("Moments à partager", { exact: true }).click();
+    await page.getByRole("button", { name: label, exact: true }).click();
+    await expect.poll(async () => (await state()).polish.gesture).toBe(name);
+    expect((await state()).identity.pairOverlays).toBe(0);
+    await expect(page.locator(".narrative-tracker")).toBeHidden();
+    if (process.env.ETB_NARRATIVE_CAPTURE_DIR) {
+      const b = (await state()).polish.bounds,
+        canvas = (await page.locator("canvas").boundingBox())!,
+        viewport = page.viewportSize()!;
+      const x = Math.max(0, Math.floor(canvas.x + b.x)),
+        y = Math.max(0, Math.floor(canvas.y + b.y));
+      const clip = {
+        x,
+        y,
+        width: Math.min(viewport.width - x, Math.ceil(b.width)),
+        height: Math.min(viewport.height - y, Math.ceil(b.height)),
+      };
+      for (let i = 0; i < 12; i++) {
+        await page.screenshot({
+          path: join(
+            process.env.ETB_NARRATIVE_CAPTURE_DIR,
+            `${info.project.name}-seq-${name}-${String(i).padStart(2, "0")}.png`,
+          ),
+          clip,
+        });
+        await page.waitForTimeout(120);
+      }
+    }
+    await expect
+      .poll(async () => (await state()).polish.gesture, { timeout: 10000 })
+      .toBeNull();
+    expect((await state()).identity).toEqual({
+      debbyVisible: true,
+      loyalVisible: true,
+      pairOverlays: 0,
+    });
+  }
   async function resume(sceneIndex: number) {
     await expect.poll(async () => (await state()).saving).toBe(false);
     await page.reload();
@@ -202,6 +245,11 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
       .toBe(id);
     await dialogue(id);
   }
+  const restTarget = (await state()).targets.find(
+    (t: { id: string }) => t.id === "narrative:optional:bench",
+  );
+  await navigateTo(page, restTarget);
+  await gesture("sit", "Faire une pause avec Loyal");
   const library = plan.buildings.find((b) => b.id === "library")!;
   const order =
     info.project.name === "mobile"
@@ -233,9 +281,28 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
   await expect.poll(async () => (await state()).sceneIndex).toBe(2);
   await page.keyboard.press("e");
   await dialogue("tree");
+  await gesture("hands", "Prendre la main de Loyal");
+  if (
+    !(await page
+      .getByRole("button", { name: "Prendre la main de Loyal", exact: true })
+      .isVisible())
+  )
+    await page.getByText("Moments à partager", { exact: true }).click();
   await page
     .getByRole("button", { name: "Prendre la main de Loyal", exact: true })
     .click();
+  await expect.poll(async () => (await state()).polish.gesture).toBe("hands");
+  await page.keyboard.down("ArrowRight");
+  await page.waitForTimeout(160);
+  await page.keyboard.up("ArrowRight");
+  await expect.poll(async () => (await state()).polish.gesture).toBeNull();
+  expect((await state()).identity.debbyVisible).toBe(true);
+  await gesture("hug", "Faire un câlin à Loyal");
+  if (info.project.name === "mobile")
+    await page.emulateMedia({ reducedMotion: "reduce" });
+  await gesture("glasses", "Ajuster nos lunettes");
+  if (info.project.name === "mobile")
+    await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect
     .poll(async () => (await state()).identity)
     .toEqual({ debbyVisible: true, loyalVisible: true, pairOverlays: 0 });
@@ -347,6 +414,43 @@ test("atelier : sept scènes, choix, indices, étoile unique et reprise", async 
   await resume(7);
   expect((await state()).restored).toBe(1);
   expect((await state()).completedAt).toBeTruthy();
+  // Observe the companion settle at the existing hearth cushion, without moving him directly.
+  const hearth = (await state()).targets.find(
+    (t: { id: string }) => t.id === "narrative:optional:fire",
+  );
+  await navigateTo(page, hearth);
+  // Stand beside the hearth instead of in the follower's line over the fox cushion.
+  await navigateTo(page, { x: hearth.x + 45, y: hearth.y + 18 });
+  await expect
+    .poll(async () => (await state()).polish.foxTexture, { timeout: 30000 })
+    .toBe("e21-fox");
+  await capture("flocon-repos");
+  const perf = await page.evaluate(async () => {
+    const times: number[] = [];
+    let last = performance.now();
+    for (let i = 0; i < 120; i++)
+      await new Promise<void>((r) =>
+        requestAnimationFrame((t) => {
+          times.push(t - last);
+          last = t;
+          r();
+        }),
+      );
+    times.sort((a, b) => a - b);
+    return {
+      samples: times.length,
+      p95: times[Math.floor(times.length * 0.95)],
+      mean: times.reduce((a, b) => a + b, 0) / times.length,
+    };
+  });
+  if (process.env.ETB_NARRATIVE_CAPTURE_DIR)
+    writeFileSync(
+      join(
+        process.env.ETB_NARRATIVE_CAPTURE_DIR,
+        `${info.project.name}-performance.json`,
+      ),
+      JSON.stringify(perf, null, 2),
+    );
   await expect
     .poll(async () => (await state()).runtime.escort, { timeout: 60000 })
     .toBeNull();
