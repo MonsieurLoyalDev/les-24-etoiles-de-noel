@@ -4,17 +4,17 @@ La matrice détaillée (scènes, personnages, lieux, énigmes, choix et dépenda
 
 | Jour | Pages du cahier | Séquences décrites | Lot | État de livraison |
 |---|---|---:|---|---|
-| 2 | 14–21 | 7 | A | Jouable et testé localement ; validation artistique attendue |
-| 3 | 22–30 | 8 | A | Jouable et testé localement ; validation artistique attendue |
-| 4 | 31–39 | 8 | A | Jouable et testé localement ; validation artistique attendue |
-| 5 | 40–48 | 8 | A | Jouable et testé localement ; validation artistique attendue |
-| 6 | 49–60 | 9 | A | Jouable et testé localement ; validation artistique attendue |
-| 7 | 61–70 | 9 | B | Non commencé |
-| 8 | 71–79 | 9 | B | Non commencé |
-| 9 | 80–89 | 9 | B | Non commencé |
-| 10 | 90–99 | 9 | B | Non commencé |
-| 11 | 100–109 | 9 | B | Non commencé |
-| 12 | 110–121 | 10 | B | Non commencé |
+| 2 | 14–21 | 7 | A | Lot A validé artistiquement par le créateur |
+| 3 | 22–30 | 8 | A | Lot A validé artistiquement par le créateur |
+| 4 | 31–39 | 8 | A | Lot A validé artistiquement par le créateur |
+| 5 | 40–48 | 8 | A | Lot A validé artistiquement par le créateur |
+| 6 | 49–60 | 9 | A | Lot A validé artistiquement par le créateur |
+| 7 | 61–70 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
+| 8 | 71–79 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
+| 9 | 80–89 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
+| 10 | 90–99 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
+| 11 | 100–109 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
+| 12 | 110–121 | 10 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
 | 13 | 122–131 | 10 | C | Non commencé |
 | 14 | 132–142 | 10 | C | Non commencé |
 | 15 | 143–153 | 10 | C | Non commencé |

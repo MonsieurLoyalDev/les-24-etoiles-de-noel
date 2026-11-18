@@ -13,6 +13,7 @@ Suivre [la configuration Auth/Storage existante](../CONFIGURATION-SUPABASE.md), 
 202611160001_narrative.sql
 202611160002_episode_calendar_contract.sql
 202611160003_production_activities.sql
+202611180001_production_lot_b.sql
 ```
 
 La dernière migration est additive : elle garde les versions de contenus et les progressions existantes. Elle valide les brouillons/solutions des nouvelles activités, transporte les conséquences/pages déjà gagnées et réserve la recette sans prérequis aux administrateurs en aperçu. Une version déjà utilisée ne se réécrit pas : publier une nouvelle version, conserver l'ancienne pour les sauvegardes qui y sont attachées.
@@ -29,6 +30,10 @@ npx tsx scripts/check-narrative-source.ts CHEMIN_PRIVE/episode-02.json CHEMIN_PR
 ```
 
 Répéter pour tous les fichiers à importer. Ce contrôle refuse la CI publique et n'affiche pas les répliques. Dans le jeu privé, se connecter en administrateur, ouvrir le calendrier puis « Aventure narrative » / atelier d'import administrateur et charger chaque JSON. Ne pas copier ces fichiers sous `public/`, dans un seed SQL versionné ou dans un bundle Vite. Tester chaque import dans l'aperçu séparé ; tester ensuite la chaîne de prérequis dans un projet de staging distinct, sans avancer l'horloge de production ni éditer artificiellement une progression réelle.
+
+Le Lot B fournit également un média narratif privé séparé. Le déposer dans le bucket **privé** `advent-media`, au chemin exact et avec le type MIME indiqués dans `README-LOT-B.md` de la livraison privée. Ne pas utiliser un téléversement qui renomme ce chemin sans mettre à jour le descripteur et la version du scénario. Les URL sont signées pour cinq minutes, après les contrôles Auth/RLS/date existants. Une ressource privée manquante est une erreur de configuration, jamais une raison de la publier sous `public/`.
+
+La migration du Lot B étend les validations aux régions et activités supplémentaires, aux checkpoints d'accompagnement et aux conséquences déjà gagnées. Elle conserve les validateurs précédents comme fonctions internes de compatibilité. Les scénarios existants, leurs versions et leurs preuves de progression ne sont pas supprimés. Le frontend et les scénarios du Lot B requièrent cette migration ; ne pas publier ces scénarios à un ancien client.
 
 ## Compilation et artefact statique
 
