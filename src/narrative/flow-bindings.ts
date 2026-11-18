@@ -14,18 +14,26 @@ export function flowAnchor(scene: Village, ref: AnchorRef, raw = false): Point {
   if (kind === "building")
     p = plan.buildings.find((v) => v.id === key)?.returnPoint;
   if (kind === "home") p = plan.houses.find((v) => v.id === key)?.door;
-  if (kind === "portal" && (key === "forest" || key === "bakery"))
+  if (kind === "portal" && isExtraRoom(key))
     p =
-      ref.room === "village"
+      ref.room === (areaPortals[key].from ?? "village")
         ? areaPortals[key].village
         : areaPortals[key].entry;
   if (kind === "area" && isExtraRoom(ref.room))
     p =
       areaAnchors[ref.room][key as keyof (typeof areaAnchors)[typeof ref.room]];
-  if (kind === "furniture" && ref.room !== "village" && ref.room !== "forest")
-    p = allFurniture(ref.room === "bakery" ? "inn" : (ref.room as Room33)).find(
-      (v) => v.key === key,
-    );
+  if (
+    kind === "furniture" &&
+    ref.room !== "village" &&
+    !["forest", "lake", "hamlet"].includes(ref.room)
+  )
+    p = allFurniture(
+      ref.room === "bakery"
+        ? "inn"
+        : ref.room === "clockshop"
+          ? "workshop"
+          : (ref.room as Room33),
+    ).find((v) => v.key === key);
   if (kind === "square") p = anchors.advent;
   if (kind === "trail") p = anchors.hunts[Number(key)];
   if (kind === "point") {

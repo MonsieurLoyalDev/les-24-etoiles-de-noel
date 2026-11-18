@@ -102,6 +102,8 @@ export function validateScript(input: unknown): EpisodeScript {
     throw Error("Contenu narratif invalide");
   validateDefinition(s);
   if (s.flow) validateFlowDefinition(s.flow);
+  if (s.flow?.media?.some((m) => m.day > s.day))
+    throw Error("Média futur interdit");
   const actionIds = new Set<string>();
   for (const scene of s.scenes) {
     if (s.flow) {
@@ -141,12 +143,43 @@ export function validateScript(input: unknown): EpisodeScript {
             "inn",
             "forest",
             "bakery",
+            "lake",
+            "hamlet",
+            "clockshop",
           ].includes(action.point.room) ||
           !text(action.point.anchor, 100)
         )
           throw Error("Point narratif invalide");
         if (action.dialogue && !scene.dialogues[action.dialogue])
           throw Error("Dialogue narratif absent");
+        if (
+          action.inspect &&
+          !s.flow.media?.some((m) => m.key === action.inspect)
+        )
+          throw Error("Observation privée non déclarée");
+        if (
+          action.constellation !== undefined &&
+          ![6, 12].includes(action.constellation)
+        )
+          throw Error("Constellation invalide");
+        if (
+          action.waitForFollower &&
+          action.waitForFollower !== s.flow.follower?.actor
+        )
+          throw Error("Compagnon non déclaré");
+        if (
+          action.variants &&
+          (!Array.isArray(action.variants) ||
+            action.variants.length > 10 ||
+            action.variants.some(
+              (v) =>
+                !v ||
+                !text(v.fact, 160) ||
+                !scene.dialogues[v.dialogue] ||
+                !["string", "boolean"].includes(typeof v.value),
+            ))
+        )
+          throw Error("Variante contextuelle invalide");
         if (action.puzzle) validatePuzzle(action.puzzle);
       }
     }
@@ -215,6 +248,9 @@ export function validateScript(input: unknown): EpisodeScript {
 export function validateRuntime(r: EpisodeRuntime) {
   if (r?.flow) validateFlowRuntime(r.flow);
   const rooms = [
+    "lake",
+    "hamlet",
+    "clockshop",
     "village",
     "house",
     "library",
@@ -271,7 +307,7 @@ export function validateRuntime(r: EpisodeRuntime) {
       (b) => typeof b !== "boolean",
     ) ||
     !Array.isArray(r.visited) ||
-    r.visited.length > 7 ||
+    r.visited.length > 10 ||
     r.visited.some((room) => !rooms.includes(room)) ||
     new Set(r.visited).size !== r.visited.length ||
     (r.origin !== null &&
@@ -284,7 +320,7 @@ export function validateRuntime(r: EpisodeRuntime) {
         r.dialogue.beat < 0 ||
         r.dialogue.beat > 99 ||
         (r.dialogue.actor !== null &&
-          !["mira", "noe", "emile"].includes(r.dialogue.actor)))) ||
+          !["mira", "noe", "emile", "oscar"].includes(r.dialogue.actor)))) ||
     (r.cinematic !== null &&
       (!["scatter", "restore"].includes(r.cinematic.kind) ||
         !Number.isFinite(r.cinematic.elapsed) ||

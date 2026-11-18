@@ -7,6 +7,9 @@ export const roomNames: Record<Room, string> = {
   library: "Bibliothèque d’Étoilebois",
   workshop: "Atelier des Cadeaux",
   inn: "Auberge des Étoiles",
+  lake: "Lac",
+  hamlet: "Hameau",
+  clockshop: "Horlogerie",
   forest: "Forêt",
   bakery: "Fournil",
 };

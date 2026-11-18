@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./polish.css";
 import "./flow.css";
 import { FlowTask } from "./FlowTask";
+import { loadNarrativeMedia } from "./private-media";
 import type { AdventAPI } from "../advent/api";
 import { getLocal, putLocal } from "../advent/local";
 import { controls, type Village, type View } from "../game/Game";
@@ -171,6 +172,13 @@ export function NarrativeHub({
       setStatuses(list);
       director.current?.stop();
       await startCallback.current();
+      await loadNarrativeMedia(scene, content, (path, day) =>
+        legacy!.media(path, day),
+      );
+      if (gen !== generation.current) {
+        for (const m of content.flow?.media ?? []) scene.textures.remove(m.key);
+        return;
+      }
       const next = new NarrativeDirector(
         scene,
         content,
@@ -257,6 +265,17 @@ export function NarrativeHub({
           move={(m) => scene.narrative?.puzzle?.(m)}
           close={() => scene.narrative?.puzzle?.(null)}
         />
+      )}
+      {current?.inspection && (
+        <aside
+          className="narrative-inspection"
+          aria-label="Observation rapprochée"
+        >
+          <img src={current.inspection.src} alt={current.inspection.caption} />
+          <button onClick={() => scene.narrative?.dismissInspection?.()}>
+            Fermer l’image
+          </button>
+        </aside>
       )}
       {current && <span className="narrative-session" hidden />}
       {current && !panel && !view.cinematic && !view.dialogue && (

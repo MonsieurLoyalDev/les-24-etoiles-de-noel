@@ -116,7 +116,9 @@ export const controls = {
   run: false,
 };
 export class Village extends Phaser.Scene {
-  narrativeRegions = new Set<"forest" | "bakery">();
+  narrativeRegions = new Set<
+    "forest" | "bakery" | "lake" | "hamlet" | "clockshop"
+  >();
   state: Save;
   publish: (view: View) => void;
   persist: (s: Save) => void;
@@ -657,15 +659,15 @@ export class Village extends Phaser.Scene {
       };
     });
     residents.push(...(this.narrative?.candidates() ?? []));
-    if (this.state.room === "village")
-      for (const id of this.narrativeRegions) {
-        if (!residents.some((t) => t.id === `narrative:portal:${id}`))
-          residents.push({
-            id: `area-enter:${id}`,
-            ...areaPortals[id].village,
-            name: "Entrer",
-          });
-      }
+    for (const id of this.narrativeRegions) {
+      if ((areaPortals[id].from ?? "village") !== this.state.room) continue;
+      if (!residents.some((t) => t.id === `narrative:portal:${id}`))
+        residents.push({
+          id: `area-enter:${id}`,
+          ...areaPortals[id].village,
+          name: "Entrer",
+        });
+    }
     if (this.adventDay?.room === this.state.room)
       residents.push({
         id: "advent",
@@ -691,7 +693,7 @@ export class Village extends Phaser.Scene {
         {
           id: "area-exit",
           ...areaPortals[this.state.room].entry,
-          name: "Retour au village",
+          name: "Reprendre le chemin",
         },
       ];
     if (this.state.room !== "village")
@@ -822,7 +824,7 @@ export class Village extends Phaser.Scene {
     const t = this.nearest();
     if (!t) return;
     if (t.id.startsWith("area-enter:")) {
-      const area = t.id.slice("area-enter:".length) as "forest" | "bakery";
+      const area = t.id.slice("area-enter:".length) as keyof typeof areaPortals;
       if (!this.narrativeRegions.has(area)) return;
       this.state.room = area;
       this.state.position = { ...areaPortals[area].entry };
@@ -833,7 +835,7 @@ export class Village extends Phaser.Scene {
     }
     if (t.id === "area-exit" && isExtraRoom(this.state.room)) {
       const back = areaPortals[this.state.room].village;
-      this.state.room = "village";
+      this.state.room = areaPortals[this.state.room].from ?? "village";
       this.state.position = { x: back.x, y: back.y + 24 };
       this.renderRoom();
       this.persist(this.state);

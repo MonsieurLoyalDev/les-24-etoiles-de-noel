@@ -7,7 +7,12 @@ import { completedEpisodeSnapshots } from "../fixtures/complete-episode";
 export async function installNarrativeFixture(
   page: Page,
   content: EpisodeScript,
-  options: { admin?: boolean; date?: string; previous?: EpisodeScript[] } = {},
+  options: {
+    admin?: boolean;
+    date?: string;
+    previous?: EpisodeScript[];
+    media?: Record<string, Buffer>;
+  } = {},
 ) {
   const fixture = await installPrivateFixture(
       page,
@@ -25,6 +30,7 @@ export async function installNarrativeFixture(
       "202611160001_narrative.sql",
       "202611160002_episode_calendar_contract.sql",
       "202611160003_production_activities.sql",
+      "202611180001_production_lot_b.sql",
     ])
       await pg.exec(readFileSync(`supabase/migrations/${file}`, "utf8"));
     await pg.exec(
@@ -38,6 +44,11 @@ export async function installNarrativeFixture(
         JSON.stringify(episode),
       ]);
     await pg.query("select set_config('request.jwt.claim.sub',$1,false)", [id]);
+    for (const path of Object.keys(options.media ?? {}))
+      await pg.query(
+        "insert into storage.objects(bucket_id,name) values('advent-media',$1)",
+        [path],
+      );
     await pg.exec("set role authenticated");
     const completed: number[] = [];
     for (const episode of options.previous ?? []) {
@@ -60,6 +71,55 @@ export async function installNarrativeFixture(
       completed.push(episode.day);
     }
     const calls: string[] = [];
+    if (options.media)
+      await page.route(
+        /\/storage\/v1\/object\/sign\/advent-media\//,
+        async (route) => {
+          const req = route.request(),
+            url = new URL(req.url()),
+            path = decodeURIComponent(url.pathname.split("/advent-media/")[1]);
+          if (!(path in options.media!)) return route.fallback();
+          const headers = {
+            "access-control-allow-origin": "*",
+            "access-control-allow-headers": "*",
+          };
+          if (req.method() === "OPTIONS")
+            return route.fulfill({ status: 204, headers });
+          if (req.method() === "POST") {
+            expect(req.headers().authorization).toBe(
+              authorization.Authorization,
+            );
+            expect(req.headers().apikey).toBe(authorization.apikey);
+            expect(req.postDataJSON()).toEqual({ expiresIn: 300 });
+            const rows = (
+              await pg.query(
+                "select name from storage.objects where bucket_id='advent-media' and name=$1",
+                [path],
+              )
+            ).rows;
+            if (!rows.length)
+              return route.fulfill({ status: 403, headers, body: "{}" });
+            return route.fulfill({
+              status: 200,
+              headers,
+              contentType: "application/json",
+              body: JSON.stringify({
+                signedURL: `/object/sign/advent-media/${path}?token=fixture-narrative-private`,
+              }),
+            });
+          }
+          expect(req.method()).toBe("GET");
+          expect(url.searchParams.get("token")).toBe(
+            "fixture-narrative-private",
+          );
+          return route.fulfill({
+            status: 200,
+            headers,
+            contentType: "image/png",
+            body: options.media![path],
+          });
+        },
+      );
     await page.route(
       /\/rest\/v1\/rpc\/(episode_\w+|advent_status)$/,
       async (route) => {

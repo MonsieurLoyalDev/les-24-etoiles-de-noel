@@ -11,7 +11,9 @@ import {
   type PuzzleMove,
 } from "./flow";
 import { flowAnchor } from "./flow-bindings";
-import { areaPortals } from "./areas";
+import { areaPortals, type ExtraRoom } from "./areas";
+import { actor, animateActor } from "../art/actors";
+import type { Point, WorldRoom } from "../domain";
 import { plaque } from "../art/tags";
 import { starFlight } from "./star-flight";
 import type { EpisodeContext } from "./context";
@@ -28,15 +30,68 @@ type Host = {
   reduced: () => boolean;
   stars: () => number;
   gatherReady: () => boolean;
+  walk: (
+    id: string,
+    sprite: Point & { setPosition?: (x: number, y: number) => unknown },
+    target: Point,
+    delta: number,
+    speed: number,
+    room: WorldRoom,
+  ) => boolean;
 };
 /** Data-to-world presentation only; all objectives, choices, checkpoints and rewards use the existing director/reducer/RPC. */
 export class FlowPresentation {
+  inspection?: { src: string; caption: string };
+  dismissInspection() {
+    this.inspection = undefined;
+    this.host.scene.emit();
+  }
+  private inspect(action: FlowAction) {
+    if (!action.inspect) return;
+    const texture = this.host.scene.textures.get(action.inspect);
+    if (texture.key === "__MISSING")
+      throw Error("Illustration privée manquante");
+    const im = texture.getSourceImage() as HTMLImageElement,
+      canvas = document.createElement("canvas");
+    canvas.width = im.width;
+    canvas.height = im.height;
+    canvas.getContext("2d")!.drawImage(im, 0, 0);
+    this.inspection = {
+      src: canvas.toDataURL("image/png"),
+      caption: action.label,
+    };
+  }
   private markers = new Map<string, Phaser.GameObjects.Image>();
   private extras: Phaser.GameObjects.Sprite[] = [];
   private foregrounds: Phaser.GameObjects.Image[] = [];
   private flight?: Phaser.GameObjects.Image;
   private lightRevision = -1;
+  private followerSave = 0;
+  private followerAnimation?: {
+    sprite: Phaser.GameObjects.Sprite;
+    key: string;
+  };
+  presentFollower() {
+    const pose = this.followerAnimation;
+    if (pose?.sprite.active) {
+      // The existing courtesy renderer stops a reserved resident's clip each frame.
+      // Sample its original walk frames after that renderer, without new poses or textures.
+      const animation = this.host.scene.anims.get(pose.key);
+      const frame =
+        animation.frames[
+          Math.floor((this.host.scene.time.now * animation.frameRate) / 1000) %
+            animation.frames.length
+        ];
+      pose.sprite.anims.stop();
+      pose.sprite.setTexture(frame.textureKey, frame.textureFrame);
+    }
+    this.host.scene.game.canvas.dataset.followerAnimation = pose?.key ?? "";
+    this.host.scene.game.canvas.dataset.followerFrame =
+      pose?.sprite.frame.name.toString() ?? "";
+  }
+
   private decorations = new Map<string, Phaser.GameObjects.Container>();
+  private networkImages = new Map<string, Phaser.GameObjects.Image>();
   private celebration?: {
     count: number;
     elapsed: number;
@@ -90,6 +145,8 @@ export class FlowPresentation {
     return this.p.objectives.includes(key) || this.state.seen.includes(key);
   }
   private enabled(action: FlowAction) {
+    if (action.when && this.factValue(action.when.fact) !== action.when.value)
+      return false;
     if (action.waitForGather && !this.host.gatherReady()) return false;
     const scope = this.scope(action);
     const objective = scope.objectives.find((o) => o.id === action.id);
@@ -103,11 +160,33 @@ export class FlowPresentation {
       (!this.p.complete || objective.optional)
     );
   }
+  private factValue(key: string) {
+    const prefix = `episode-${String(this.host.script.day).padStart(2, "0")}/`;
+    if (!key.startsWith(prefix)) return this.host.context.facts[key];
+    const f = this.host.script.flow?.facts?.[key.slice(prefix.length)];
+    if (!f) return undefined;
+    const id = `${f.scene}/${f.choice ?? f.objective}`;
+    return f.choice
+      ? (this.p.choices[id] ?? this.state.sideChoices[id])
+      : this.p.objectives.includes(id) || this.state.seen.includes(id);
+  }
+  private followerReady(id: string) {
+    const f = this.host.script.flow?.follower,
+      p = this.state.followers?.[id];
+    if (!f || !p || p.room !== f.destination.room) return false;
+    const goal = flowAnchor(this.host.scene, f.destination);
+    return Math.hypot(p.x - goal.x, p.y - goal.y) < 26;
+  }
   get task() {
     const action = this.actions.find((a) => a.id === this.state.active);
     if (!action?.puzzle) return undefined;
     const draft = this.state.drafts[`${this.scope(action).id}/${action.id}`];
     return draft ? { puzzle: action.puzzle, draft } : undefined;
+  }
+  get availableActions() {
+    return this.actions
+      .filter((a) => this.enabled(a) && !this.done(a))
+      .map((a) => a.id);
   }
   candidates() {
     const scene = this.host.scene;
@@ -124,28 +203,34 @@ export class FlowPresentation {
           a.anyRoom ? { ...a.point, room: scene.state.room } : a.point,
         ),
         id: `narrative:flow:${a.id}`,
-        name: a.label,
+        name:
+          a.label +
+          (a.waitForFollower && !this.followerReady(a.waitForFollower)
+            ? " (compagnon en chemin)"
+            : ""),
+        ready: !a.waitForFollower || this.followerReady(a.waitForFollower),
       }));
-    if (scene.state.room === "village")
-      for (const id of this.host.script.flow!.portals) {
-        const access = this.host.script.flow!.portalAccess?.[id];
-        if (access && this.p.sceneIndex < access.after) continue;
-        const point = scene.living.environments
-          .get("village")!
-          .nearestFree(areaPortals[id].village);
-        if (!point) continue;
-        targets.push({
-          ...point,
-          id: `narrative:portal:${id}`,
-          name: access?.label ?? "Entrer",
-        });
-      }
+    for (const id of this.host.script.flow!.portals) {
+      if ((areaPortals[id].from ?? "village") !== scene.state.room) continue;
+      const access = this.host.script.flow!.portalAccess?.[id];
+      if (access && this.p.sceneIndex < access.after) continue;
+      const point = scene.living.environments
+        .get(scene.state.room)!
+        .nearestFree(areaPortals[id].village);
+      if (!point) continue;
+      targets.push({
+        ...point,
+        id: `narrative:portal:${id}`,
+        name: access?.label ?? "Entrer",
+        ready: true,
+      });
+    }
     return targets;
   }
   interact(id: string) {
     const scene = this.host.scene;
     if (id.startsWith("narrative:portal:")) {
-      const area = id.slice("narrative:portal:".length) as "forest" | "bakery";
+      const area = id.slice("narrative:portal:".length) as ExtraRoom;
       const target = this.candidates().find((t) => t.id === id);
       if (
         !target ||
@@ -164,6 +249,9 @@ export class FlowPresentation {
       (a) => a.id === id.slice("narrative:flow:".length),
     );
     if (!action || !this.enabled(action) || this.done(action)) return true;
+    if (action.waitForFollower && !this.followerReady(action.waitForFollower))
+      return true;
+    this.inspect(action);
     const target = flowAnchor(
       scene,
       action.anyRoom
@@ -196,8 +284,9 @@ export class FlowPresentation {
     }
     if (action.dialogue)
       this.host.dialogue(
-        action.dialogue,
-        ["mira", "noe", "emile"].includes(action.actor ?? "")
+        action.variants?.find((v) => this.factValue(v.fact) === v.value)
+          ?.dialogue ?? action.dialogue,
+        ["mira", "noe", "emile", "oscar"].includes(action.actor ?? "")
           ? action.actor
           : null,
       );
@@ -206,8 +295,19 @@ export class FlowPresentation {
     return true;
   }
   afterDialogue(block: string) {
-    const action = this.actions.find((a) => a.dialogue === block);
+    const action = this.actions.find(
+      (a) =>
+        a.dialogue === block || a.variants?.some((v) => v.dialogue === block),
+    );
     if (!action) return false;
+    this.inspection = undefined;
+    if (action.constellation && action.effect !== "restore") {
+      const key = `${this.scope(action).id}/${action.id}`;
+      if (!this.state.steps[key]) {
+        this.state.steps[key] = 1;
+        this.celebration = { count: action.constellation, elapsed: 0 };
+      }
+    }
     if (this.state.side) {
       this.completeAction(action);
       return true;
@@ -289,23 +389,69 @@ export class FlowPresentation {
     this.markers.clear();
     this.clearExtras();
     const scene = this.host.scene;
+    const dialogue = this.p.runtime.dialogue;
+    if (dialogue) {
+      const action = this.actions.find(
+        (a) =>
+          a.dialogue === dialogue.block ||
+          a.variants?.some((v) => v.dialogue === dialogue.block),
+      );
+      if (action) this.inspect(action);
+    }
+    const follower = this.host.script.flow?.follower,
+      stored = follower && this.state.followers?.[follower.actor];
+    if (
+      follower &&
+      stored &&
+      stored.room === scene.state.room &&
+      this.p.sceneIndex >= follower.from &&
+      this.p.sceneIndex <= follower.until
+    ) {
+      const logical = scene.living.get(follower.actor),
+        safe =
+          scene.living.environments.get(stored.room)?.nearestFree(stored) ??
+          stored;
+      if (logical) {
+        logical.position = { x: safe.x, y: safe.y };
+        scene.npcs
+          .find((n) => n.id === follower.actor)
+          ?.image.setPosition(safe.x, safe.y);
+      }
+    }
     for (const a of this.host.script.flow?.actors ?? []) {
       const location =
         [...(a.scenePoints ?? [])]
           .reverse()
           .find((p) => p.from <= this.p.sceneIndex)?.point ?? a.point;
+      const native = a.appearance === "basile" || a.appearance === "emile";
+      if (a.appearance === "basile" && scene.npcs.some((n) => n.id === "oscar"))
+        continue;
+      if (a.appearance === "emile" && scene.npcs.some((n) => n.id === "emile"))
+        continue;
       if (
         location.room !== scene.state.room ||
-        !scene.textures.exists("production-" + a.appearance)
+        (!native && !scene.textures.exists("production-" + a.appearance))
       )
         continue;
-      const p = flowAnchor(scene, location, true);
-      const image = scene.add
-        .sprite(p.x, p.y, "production-" + a.appearance, 16)
-        .setOrigin(0.5, 0.96)
-        .setScale(52 / 224)
-        .setDepth(p.y)
-        .setName("narrative:actor:" + a.id);
+      const stored = this.state.followers?.[a.id],
+        f = this.host.script.flow?.follower;
+      const p =
+        stored &&
+        f?.actor === a.id &&
+        this.p.sceneIndex >= f.from &&
+        this.p.sceneIndex <= f.until &&
+        stored.room === scene.state.room
+          ? stored
+          : flowAnchor(scene, location, true);
+      const image = native
+        ? actor(scene, a.appearance as "basile" | "emile", p.x, p.y)
+        : scene.add
+            .sprite(p.x, p.y, "production-" + a.appearance, 16)
+            .setOrigin(0.5, 0.96)
+            .setScale(52 / 224)
+            .setDepth(p.y)
+            .setName("narrative:actor:" + a.id);
+      image.setName("narrative:actor:" + a.id);
       this.extras.push(image);
       if (a.projection && location.room === a.point.room) {
         const fixtures = scene.children.list.filter((child) =>
@@ -341,20 +487,133 @@ export class FlowPresentation {
     }
   }
   update(delta: number) {
+    this.followerAnimation = undefined;
     const scene = this.host.scene;
+    const follower = this.host.script.flow?.follower;
+    if (
+      follower &&
+      this.p.sceneIndex >= follower.from &&
+      this.p.sceneIndex <= follower.until &&
+      this.p.objectives.includes(follower.requires) &&
+      !controls.paused &&
+      !this.p.runtime.dialogue
+    ) {
+      const image =
+        this.extras.find(
+          (s) => s.name === "narrative:actor:" + follower.actor,
+        ) ?? scene.npcs.find((n) => n.id === follower.actor)?.image;
+      if (image && scene.state.room === follower.destination.room) {
+        const destination = flowAnchor(scene, follower.destination),
+          nearDestination =
+            Math.hypot(
+              scene.player.x - destination.x,
+              scene.player.y - destination.y,
+            ) < 65;
+        const distance = Math.hypot(
+          scene.player.x - image.x,
+          scene.player.y - image.y,
+        );
+        if (distance < 240 && (nearDestination || distance > 45)) {
+          const old = { x: image.x, y: image.y };
+          this.host.walk(
+            "follower:" + follower.actor,
+            scene.living.get(follower.actor)?.position ?? image,
+            scene.living.environments.get(scene.state.room)?.nearestFree(
+              nearDestination
+                ? destination
+                : {
+                    x:
+                      scene.player.x +
+                      ((image.x - scene.player.x) * 32) / Math.max(1, distance),
+                    y:
+                      scene.player.y +
+                      ((image.y - scene.player.y) * 32) / Math.max(1, distance),
+                  },
+              [scene.player],
+            ) ?? destination,
+            delta,
+            48,
+            scene.state.room,
+          );
+          const logical = scene.living.get(follower.actor)?.position;
+          if (logical) image.setPosition(logical.x, logical.y);
+          if (image.getData("actor")) {
+            const dx = image.x - old.x,
+              dy = image.y - old.y;
+            if (Math.hypot(dx, dy) > 0.08) {
+              const direction =
+                Math.abs(dx) > Math.abs(dy)
+                  ? dx > 0
+                    ? "droite"
+                    : "gauche"
+                  : dy > 0
+                    ? "bas"
+                    : "haut";
+              this.followerAnimation = {
+                sprite: image,
+                key: `${image.getData("actor")}-${direction}`,
+              };
+            }
+          } else if (
+            !this.host.reduced() &&
+            Math.hypot(old.x - image.x, old.y - image.y) > 0.1
+          ) {
+            const dx = image.x - old.x,
+              dy = image.y - old.y;
+            const row =
+              Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 3 : 2) : dy > 0 ? 0 : 1;
+            image.setFrame(row * 4 + (Math.floor(scene.time.now / 180) % 4));
+          }
+        }
+        image.setDepth(image.y);
+        if (!image.getData("actor") && (distance <= 45 || distance >= 240))
+          image.setFrame(
+            this.host.reduced()
+              ? 16
+              : 16 + (Math.floor(scene.time.now / 700) % 4),
+          );
+        this.state.followers ??= {};
+        this.state.followers[follower.actor] = {
+          room: scene.state.room,
+          x: image.x,
+          y: image.y,
+        };
+        this.followerSave += delta;
+        if (this.followerSave > 4000) {
+          this.followerSave = 0;
+          this.host.save();
+        }
+      }
+    }
+    const weather = this.host.script.flow?.weather;
+    if (scene.ambience)
+      scene.ambience.storyStorm =
+        !!weather &&
+        this.p.sceneIndex >= weather.from &&
+        this.p.sceneIndex <= weather.until;
     if (this.celebration) {
       const c = this.celebration;
       c.elapsed += Math.min(200, delta);
       if (scene.tree && this.host.stars() >= c.count && !c.lines) {
         // Measured centers of the first six *existing* atlas stars, not new stars.
-        const centers = [
-          [112, 161],
-          [74, 152.5],
-          [149.5, 153.5],
-          [55, 143],
-          [168.5, 143],
-          [88.5, 138],
-        ];
+        const centers =
+          c.count === 12
+            ? [
+                [129.5, 133.5],
+                [65.5, 123],
+                [152.5, 120.5],
+                [109, 115.5],
+                [84.5, 105.5],
+                [137.5, 103.5],
+              ]
+            : [
+                [112, 161],
+                [74, 152.5],
+                [149.5, 153.5],
+                [55, 143],
+                [168.5, 143],
+                [88.5, 138],
+              ];
         c.lines = scene.add
           .graphics()
           .setDepth(scene.tree.depth + 1)
@@ -392,6 +651,36 @@ export class FlowPresentation {
           scene.narrativeRegions.add(area);
       }
       const lights = { ...this.host.context.lights };
+      const inheritedTint = Object.values(lights)[0]?.tint ?? 0xffc178;
+      for (const n of this.host.script.flow?.network ?? [])
+        lights[n.point] = {
+          ...(lights[n.point] ?? { tint: inheritedTint }),
+          on: !n.requires || this.p.objectives.includes(n.requires),
+        };
+      if (scene.state.room === "village")
+        for (const n of this.host.script.flow?.network ?? []) {
+          if (!n.visual) continue; // Existing lantern fixtures already consume the coordinator.
+          let image = this.networkImages.get(n.point);
+          const p = flowAnchor(
+            scene,
+            { room: "village", anchor: "world:" + n.point },
+            true,
+          );
+          if (!image?.active) {
+            image = scene.add
+              .image(p.x + 12, p.y, "production-lantern-off")
+              .setOrigin(0.5, 1)
+              .setDepth(p.y)
+              .setName("narrative:network:" + n.point);
+            this.networkImages.set(n.point, image);
+          }
+          image.setTexture(
+            lights[n.point].on
+              ? "production-lantern-on"
+              : "production-lantern-off",
+          );
+          image.setScale(28 / image.height);
+        }
       const config = this.host.script.flow?.lights;
       if (config) {
         const style = config.styles[this.p.choices[config.choice]] ?? {
@@ -404,7 +693,10 @@ export class FlowPresentation {
           };
       }
       scene.living.lanterns.configureNarrative(lights);
-      for (const item of this.host.script.flow?.placements ?? []) {
+      for (const item of [
+        ...(this.host.context.placements ?? []),
+        ...(this.host.script.flow?.placements ?? []),
+      ]) {
         const eligible =
           item.point.room === scene.state.room &&
           (!item.requires ||
@@ -421,7 +713,11 @@ export class FlowPresentation {
         if (!scene.textures.exists(item.texture))
           throw Error("Décor narratif requis absent");
         const p = flowAnchor(scene, item.point, true),
-          image = scene.add.image(0, 0, item.texture).setOrigin(0.5, 1);
+          image = scene.add
+            .image(0, 0, item.texture)
+            .setOrigin(0.5, 1)
+            .setFlipY(item.mirror ?? false)
+            .setAlpha(item.mirror ? 0.55 : 1);
         image.setScale(item.width / image.width);
         const children: Phaser.GameObjects.GameObject[] = [image];
         if (item.caption)
@@ -453,7 +749,14 @@ export class FlowPresentation {
       return;
     for (const image of this.extras)
       if (image.active && !this.host.reduced())
-        image.setFrame(16 + (Math.floor(scene.time.now / 700) % 4));
+        if (image.getData("actor")) animateActor(image);
+        else if (
+          !follower ||
+          image.name !== "narrative:actor:" + follower.actor ||
+          this.p.sceneIndex < follower.from ||
+          this.p.sceneIndex > follower.until
+        )
+          image.setFrame(16 + (Math.floor(scene.time.now / 700) % 4));
     if (this.state.fx) {
       this.state.fx.elapsed += Math.min(200, delta);
       const action = this.actions.find((a) => a.id === this.state.fx?.action);
@@ -514,6 +817,12 @@ export class FlowPresentation {
     this.host.advance();
   }
   stop() {
+    this.inspection = undefined;
+    delete this.host.scene.game.canvas.dataset.followerAnimation;
+    delete this.host.scene.game.canvas.dataset.followerFrame;
+    for (const image of this.networkImages.values()) image.destroy();
+    this.networkImages.clear();
+    if (this.host.scene.ambience) this.host.scene.ambience.storyStorm = false;
     for (const decoration of this.decorations.values()) decoration.destroy();
     this.celebration?.lines?.destroy();
     if (
@@ -531,6 +840,9 @@ export class FlowPresentation {
     this.clearExtras();
     this.flight?.destroy();
     this.markers.clear();
+    for (const m of this.host.script.flow?.media ?? [])
+      if (this.host.scene.textures.exists(m.key))
+        this.host.scene.textures.remove(m.key);
   }
   private clearExtras() {
     for (const image of this.foregrounds) if (image.active) image.destroy();

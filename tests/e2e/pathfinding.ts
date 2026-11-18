@@ -4,7 +4,11 @@ import { facadeBounds } from "../../src/art/village34";
 import { roomDimensions } from "../../src/art/rooms33";
 import type { WorldRoom } from "../../src/domain";
 /** Independent A* over read-only actual colliders. Movement uses real keyboard events. */
-export async function navigateTo(page: Page, target: Point) {
+export async function navigateTo(
+  page: Page,
+  target: Point,
+  following?: string,
+) {
   await expect(page.locator(".dialogue")).toHaveCount(0);
   const state = await page.locator("canvas").evaluate((el) => ({
     x: Number((el as HTMLElement).dataset.playerX),
@@ -117,93 +121,128 @@ export async function navigateTo(page: Page, target: Point) {
       p.x - path[i - 1].x !== path[i + 1].x - p.x ||
       p.y - path[i - 1].y !== path[i + 1].y - p.y,
   );
-  await page.evaluate(async (points) => {
-    const keys: { [key: string]: number } = {
-      ArrowRight: 39,
-      ArrowLeft: 37,
-      ArrowUp: 38,
-      ArrowDown: 40,
-    };
-    let held = "";
-    const set = (key: string) => {
-      if (held === key) return;
-      if (held)
-        window.dispatchEvent(
-          new KeyboardEvent("keyup", {
-            key: held,
-            code: held,
-            keyCode: keys[held],
-            bubbles: true,
-          }),
-        );
-      held = key;
-      if (key)
-        window.dispatchEvent(
-          new KeyboardEvent("keydown", {
-            key,
-            code: key,
-            keyCode: keys[key],
-            bubbles: true,
-          }),
-        );
-    };
-    try {
-      await new Promise<void>((resolve, reject) => {
-        let i = 0,
-          last = performance.now(),
-          lastX = NaN,
-          lastY = NaN;
-        function frame() {
-          const c = document.querySelector("canvas")!,
-            x = Number(c.dataset.playerX),
-            y = Number(c.dataset.playerY);
-          if (!Number.isFinite(lastX) || Math.hypot(x - lastX, y - lastY) > 1) {
-            last = performance.now();
-            lastX = x;
-            lastY = y;
-          }
-          if (performance.now() - last > 3500) {
-            reject(
-              Error(
-                "Navigation bloquée près de " +
-                  x +
-                  "," +
-                  y +
-                  " → " +
-                  JSON.stringify(points[i]),
-              ),
-            );
-            return;
-          }
-          while (
-            i < points.length &&
-            Math.hypot(points[i].x - x, points[i].y - y) < 3
-          )
-            i++;
-          if (i === points.length) {
-            resolve();
-            return;
-          }
-          const p = points[i],
-            dx = p.x - x,
-            dy = p.y - y;
-          set(
-            Math.abs(dx) > Math.abs(dy)
-              ? dx > 0
-                ? "ArrowRight"
-                : "ArrowLeft"
-              : dy > 0
-                ? "ArrowDown"
-                : "ArrowUp",
+  await page.evaluate(
+    async ({ points, following }) => {
+      const keys: { [key: string]: number } = {
+        ArrowRight: 39,
+        ArrowLeft: 37,
+        ArrowUp: 38,
+        ArrowDown: 40,
+      };
+      let held = "";
+      const set = (key: string) => {
+        if (held === key) return;
+        if (held)
+          window.dispatchEvent(
+            new KeyboardEvent("keyup", {
+              key: held,
+              code: held,
+              keyCode: keys[held],
+              bubbles: true,
+            }),
           );
+        held = key;
+        if (key)
+          window.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key,
+              code: key,
+              keyCode: keys[key],
+              bubbles: true,
+            }),
+          );
+      };
+      try {
+        await new Promise<void>((resolve, reject) => {
+          let i = 0,
+            last = performance.now(),
+            lastX = NaN,
+            lastY = NaN,
+            waiting = false,
+            waitStart = 0;
+          function frame() {
+            const c = document.querySelector("canvas")!,
+              x = Number(c.dataset.playerX),
+              y = Number(c.dataset.playerY);
+            if (following) {
+              const companion = JSON.parse(c.dataset.narrative ?? "null")
+                ?.runtime?.flow?.followers?.[following];
+              if (companion) {
+                const gap = Math.hypot(x - companion.x, y - companion.y);
+                if (gap > 130 && !waiting) {
+                  waiting = true;
+                  waitStart = performance.now();
+                }
+                if (gap < 70) waiting = false;
+                if (waiting) {
+                  last = performance.now();
+                  set("");
+                  if (performance.now() - waitStart > 30000) {
+                    reject(
+                      Error(
+                        "Le compagnon ne rejoint pas le joueur : " +
+                          JSON.stringify({ player: { x, y }, companion }),
+                      ),
+                    );
+                    return;
+                  }
+                  requestAnimationFrame(frame);
+                  return;
+                }
+              }
+            }
+            if (
+              !Number.isFinite(lastX) ||
+              Math.hypot(x - lastX, y - lastY) > 1
+            ) {
+              last = performance.now();
+              lastX = x;
+              lastY = y;
+            }
+            if (performance.now() - last > 3500) {
+              reject(
+                Error(
+                  "Navigation bloquée près de " +
+                    x +
+                    "," +
+                    y +
+                    " → " +
+                    JSON.stringify(points[i]),
+                ),
+              );
+              return;
+            }
+            while (
+              i < points.length &&
+              Math.hypot(points[i].x - x, points[i].y - y) < 3
+            )
+              i++;
+            if (i === points.length) {
+              resolve();
+              return;
+            }
+            const p = points[i],
+              dx = p.x - x,
+              dy = p.y - y;
+            set(
+              Math.abs(dx) > Math.abs(dy)
+                ? dx > 0
+                  ? "ArrowRight"
+                  : "ArrowLeft"
+                : dy > 0
+                  ? "ArrowDown"
+                  : "ArrowUp",
+            );
+            requestAnimationFrame(frame);
+          }
           requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      });
-    } finally {
-      set("");
-    }
-  }, compressed);
+        });
+      } finally {
+        set("");
+      }
+    },
+    { points: compressed, following },
+  );
   const p = await page.locator("canvas").evaluate((el) => ({
     x: Number(el.dataset.playerX),
     y: Number(el.dataset.playerY),

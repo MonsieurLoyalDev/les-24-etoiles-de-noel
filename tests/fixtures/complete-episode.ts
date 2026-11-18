@@ -24,7 +24,7 @@ function solve(p: Puzzle) {
   if (p.kind === "matching")
     for (const [id, value] of Object.entries(p.matches!))
       d = puzzleMove(p, d, { type: "match", id, value });
-  if (p.kind === "order") d.order = [...p.answer!];
+  if (p.kind === "order" || p.kind === "dial") d.order = [...p.answer!];
   if (p.kind === "sequence")
     for (const id of p.answer!) d = puzzleMove(p, d, { type: "sequence", id });
   if (p.kind === "selection")

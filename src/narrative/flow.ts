@@ -1,7 +1,17 @@
 import type { WorldRoom, Point } from "../domain";
 export type AnchorRef = { room: WorldRoom; anchor: string; offset?: Point };
 export type Puzzle = {
-  kind: "circuit" | "matching" | "order" | "sequence" | "selection" | "cooking";
+  kind:
+    | "circuit"
+    | "matching"
+    | "order"
+    | "sequence"
+    | "selection"
+    | "cooking"
+    | "dial";
+  unique?: boolean;
+  illustrations?: Record<string, { real: string; reflection: string }>;
+  feedback?: { speaker: string; text: string };
   title: string;
   prompt: string;
   hint: string;
@@ -44,7 +54,11 @@ export type FlowAction = {
   icon?: "letter" | "blue-letter" | "book" | "stone";
   gesture?: "assist" | "uncover" | "move";
   effect?: "restore" | "reveal" | "celebrate";
-  constellation?: 6;
+  constellation?: 6 | 12;
+  variants?: { fact: string; value: string | boolean; dialogue: string }[];
+  when?: { fact: string; value: string | boolean };
+  waitForFollower?: string;
+  inspect?: string;
   waitForGather?: boolean;
   optional?: boolean;
   replayable?: boolean;
@@ -58,6 +72,7 @@ export type FlowLights = {
   styles: Record<string, { tint: number; shimmer?: boolean }>;
 };
 export type FlowDefinition = {
+  media?: { key: string; day: number; path: string }[];
   placements?: {
     id: string;
     texture: string;
@@ -65,17 +80,22 @@ export type FlowDefinition = {
     width: number;
     caption?: string;
     requires?: string;
+    persistent?: boolean;
+    mirror?: boolean;
     choice?: { key: string; option: string };
   }[];
   schema: 1;
-  portals: ("forest" | "bakery")[];
+  portals: ("forest" | "bakery" | "lake" | "hamlet" | "clockshop")[];
   portalAccess?: Partial<
-    Record<"forest" | "bakery", { label: string; after: number }>
+    Record<
+      "forest" | "bakery" | "lake" | "hamlet" | "clockshop",
+      { label: string; after: number }
+    >
   >;
   actors?: {
     id: string;
     name: string;
-    appearance: "baker";
+    appearance: "baker" | "clockmaker" | "basile" | "emile";
     point: AnchorRef;
     scenePoints?: { from: number; point: AnchorRef }[];
     projection?: { fixture: string; foregroundFrom: number };
@@ -92,6 +112,16 @@ export type FlowDefinition = {
   >;
   bookExtras?: { title: string; text: string; requires?: string }[];
   lights?: FlowLights;
+  network?: { point: string; requires?: string; visual?: boolean }[];
+  weather?: { from: number; until: number };
+  follower?: {
+    actor: string;
+    from: number;
+    until: number;
+    requires: string;
+    destination: AnchorRef;
+  };
+  audio?: Record<string, string>;
 };
 export type FlowRuntime = {
   drafts: Record<string, PuzzleDraft>;
@@ -101,6 +131,7 @@ export type FlowRuntime = {
   seen: string[];
   side: string | null;
   sideChoices: Record<string, string>;
+  followers?: Record<string, { room: WorldRoom; x: number; y: number }>;
 };
 export const newFlowRuntime = (): FlowRuntime => ({
   drafts: {},
@@ -179,7 +210,7 @@ export function puzzleSolved(p: Puzzle, d: PuzzleDraft) {
       !!p.matches &&
       Object.entries(p.matches).every(([k, v]) => d.values[k] === v)
     );
-  if (p.kind === "order")
+  if (p.kind === "order" || p.kind === "dial")
     return JSON.stringify(d.order) === JSON.stringify(p.answer);
   if (p.kind === "sequence")
     return JSON.stringify(d.sequence) === JSON.stringify(p.answer);
@@ -229,13 +260,17 @@ export function puzzleMove(
     p.kind === "matching" &&
     index >= 0 &&
     p.options?.some((o) => o.id === move.value)
-  )
+  ) {
+    if (p.unique)
+      for (const key of Object.keys(d.values))
+        if (key !== id && d.values[key] === move.value) delete d.values[key];
     d.values[id] = String(move.value);
+  }
   if (move.type === "toggle" && p.kind === "selection" && index >= 0)
     d.values[id] = !d.values[id];
   if (
     move.type === "swap" &&
-    p.kind === "order" &&
+    (p.kind === "order" || p.kind === "dial") &&
     index >= 0 &&
     [-1, 1].includes(Number(move.value))
   ) {
@@ -244,6 +279,8 @@ export function puzzleMove(
     if (i >= 0 && j >= 0 && j < d.order.length)
       [d.order[i], d.order[j]] = [d.order[j], d.order[i]];
   }
+  if (move.type === "rotate" && p.kind === "dial")
+    d.order.push(d.order.shift()!);
   if (move.type === "sequence" && index >= 0) {
     d.sequence.push(id);
     if (
@@ -293,9 +330,28 @@ export function puzzleMove(
 }
 export function validateFlowDefinition(f: FlowDefinition) {
   if (
+    f.media &&
+    (!Array.isArray(f.media) ||
+      f.media.length > 10 ||
+      f.media.some(
+        (v) =>
+          !v ||
+          !/^private-[a-z0-9-]{1,70}$/.test(v.key) ||
+          !Number.isSafeInteger(v.day) ||
+          v.day < 1 ||
+          v.day > 24 ||
+          !new RegExp("^" + v.day + "/[a-zA-Z0-9_-]+\\.(png|webp|jpg)$").test(
+            v.path,
+          ),
+      ))
+  )
+    throw Error("Média privé invalide");
+  if (
     f.schema !== 1 ||
     !Array.isArray(f.portals) ||
-    f.portals.some((v) => !["forest", "bakery"].includes(v))
+    f.portals.some(
+      (v) => !["forest", "bakery", "lake", "hamlet", "clockshop"].includes(v),
+    )
   )
     throw Error("Régions narratives invalides");
   const id = (v: unknown) =>
@@ -310,6 +366,9 @@ export function validateFlowDefinition(f: FlowDefinition) {
       "inn",
       "forest",
       "bakery",
+      "lake",
+      "hamlet",
+      "clockshop",
     ].includes(p.room) &&
     typeof p.anchor === "string" &&
     p.anchor.length > 0 &&
@@ -318,11 +377,43 @@ export function validateFlowDefinition(f: FlowDefinition) {
       [p.offset.x, p.offset.y].every(
         (n) => Number.isFinite(n) && Math.abs(n) <= 512,
       ));
+  const range = (v: { from: number; until: number }) =>
+    Number.isSafeInteger(v.from) &&
+    Number.isSafeInteger(v.until) &&
+    v.from >= 0 &&
+    v.until >= v.from &&
+    v.until <= 99;
+  const objective = (v: string) =>
+    /^[a-z][a-z0-9-]{0,79}\/[a-z][a-z0-9-]{0,79}$/.test(v);
+  if (f.weather && !range(f.weather)) throw Error("Période météo invalide");
+  if (
+    f.follower &&
+    (!range(f.follower) ||
+      !id(f.follower.actor) ||
+      !objective(f.follower.requires) ||
+      !anchor(f.follower.destination))
+  )
+    throw Error("Accompagnement invalide");
+  if (
+    f.network &&
+    (!Array.isArray(f.network) ||
+      f.network.length > 20 ||
+      new Set(f.network.map((v) => v.point)).size !== f.network.length ||
+      f.network.some(
+        (v) =>
+          !id(v.point) ||
+          (v.visual !== undefined && typeof v.visual !== "boolean") ||
+          (v.requires !== undefined && !objective(v.requires)),
+      ))
+  )
+    throw Error("Réseau lumineux invalide");
   if (
     new Set(f.portals).size !== f.portals.length ||
     Object.entries(f.portalAccess ?? {}).some(
       ([key, value]) =>
-        !f.portals.includes(key as "forest" | "bakery") ||
+        !f.portals.includes(
+          key as "forest" | "bakery" | "lake" | "hamlet" | "clockshop",
+        ) ||
         !value ||
         !Number.isSafeInteger(value.after) ||
         value.after < 0 ||
@@ -344,7 +435,7 @@ export function validateFlowDefinition(f: FlowDefinition) {
           typeof a.name !== "string" ||
           !a.name.length ||
           a.name.length > 80 ||
-          a.appearance !== "baker" ||
+          !["baker", "clockmaker", "basile", "emile"].includes(a.appearance) ||
           !anchor(a.point),
       ))
   )
@@ -395,7 +486,9 @@ export function validateFlowDefinition(f: FlowDefinition) {
           !id(p.id) ||
           !anchor(p.point) ||
           typeof p.texture !== "string" ||
-          !/^(production|d35|life|d31)-[a-z0-9-]{1,80}$/.test(p.texture) ||
+          !/^(production|private|d35|life|d31)-[a-z0-9-]{1,80}$/.test(
+            p.texture,
+          ) ||
           !Number.isFinite(p.width) ||
           p.width < 4 ||
           p.width > 200 ||
@@ -442,8 +535,25 @@ export function validateFlowDefinition(f: FlowDefinition) {
     throw Error("Style lumineux invalide");
 }
 export function validatePuzzle(p: Puzzle) {
+  if (p.unique !== undefined && typeof p.unique !== "boolean")
+    throw Error("Unicité invalide");
+  if (
+    p.illustrations &&
+    (typeof p.illustrations !== "object" ||
+      Object.values(p.illustrations).some(
+        (v) =>
+          !v ||
+          ![v.real, v.reflection].every(
+            (s) =>
+              typeof s === "string" &&
+              (s === "" || /^\/assets\/[a-zA-Z0-9_\-/]+\.png$/.test(s)),
+          ),
+      ))
+  )
+    throw Error("Illustration locale invalide");
   if (
     ![
+      "dial",
       "circuit",
       "matching",
       "order",
@@ -507,19 +617,19 @@ export function validatePuzzle(p: Puzzle) {
     )
       throw Error("Bornes du circuit invalides");
   }
-  if (["order", "sequence", "selection"].includes(p.kind)) {
+  if (["order", "dial", "sequence", "selection"].includes(p.kind)) {
     if (
       !Array.isArray(p.answer) ||
       !p.answer.length ||
       p.answer.length > 36 ||
       p.answer.some((id) => !ids.includes(id)) ||
       new Set(p.answer).size !== p.answer.length ||
-      (p.kind === "order" && p.answer.length !== ids.length)
+      (["order", "dial"].includes(p.kind) && p.answer.length !== ids.length)
     )
       throw Error("Solution d’activité invalide");
   }
   if (
-    p.kind === "order" &&
+    ["order", "dial"].includes(p.kind) &&
     p.initial &&
     (p.initial.length !== ids.length ||
       new Set(p.initial).size !== ids.length ||
@@ -567,6 +677,34 @@ export function validatePuzzle(p: Puzzle) {
 
 /** Shape checks are also required at the server boundary; this is never an authorization decision. */
 export function validateFlowRuntime(r: FlowRuntime) {
+  if (
+    r?.followers !== undefined &&
+    (!r.followers ||
+      Array.isArray(r.followers) ||
+      typeof r.followers !== "object" ||
+      Object.entries(r.followers).length > 4 ||
+      Object.entries(r.followers).some(
+        ([id, p]) =>
+          !/^[-a-z0-9]{1,80}$/.test(id) ||
+          !p ||
+          ![p.x, p.y].every((n) => Number.isFinite(n) && n >= 0) ||
+          p.x > 1920 ||
+          p.y > 1408 ||
+          ![
+            "village",
+            "house",
+            "library",
+            "workshop",
+            "inn",
+            "forest",
+            "bakery",
+            "lake",
+            "hamlet",
+            "clockshop",
+          ].includes(p.room),
+      ))
+  )
+    throw Error("Position de compagnon invalide");
   const object = (v: unknown): v is Record<string, unknown> =>
     !!v && typeof v === "object" && !Array.isArray(v);
   const key = (s: string) =>

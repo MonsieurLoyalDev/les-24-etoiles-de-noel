@@ -85,9 +85,11 @@ export class NarrativeDirector implements NarrativeBridge {
   private restingBench?: Phaser.GameObjects.Image;
   private flow?: FlowPresentation;
   private pose = () => {
-    if (this.flow && !controls.paused && !this.dialogueActive && !this.busy)
+    if (this.flow && !controls.paused && !this.dialogueActive && !this.busy) {
+      this.flow.presentFollower();
       for (const npc of this.scene.npcs)
         if (this.paths.get(npc.id)?.points.length) animateActor(npc.image);
+    }
     if (
       this.scene.time.now > this.momentUntil ||
       !this.momentStart ||
@@ -141,6 +143,8 @@ export class NarrativeDirector implements NarrativeBridge {
         reduced: () => this.reduced,
         stars: () => this.view.restored,
         gatherReady: () => this.gatherReady(),
+        walk: (id, sprite, target, delta, speed, room) =>
+          this.walk(id, sprite, target, delta, speed, room),
       });
     this.originalProfile = scene.living.get("mira")!.profile;
     this.oldDialogue = { active: scene.activeDialogue, line: scene.dialogue };
@@ -271,6 +275,13 @@ export class NarrativeDirector implements NarrativeBridge {
   }
   get reservedActors(): ReadonlySet<string> {
     const ids = this.runtime.escort ? ["mira"] : [];
+    const follower = this.script.flow?.follower;
+    if (
+      follower &&
+      this.progress.sceneIndex >= follower.from &&
+      this.progress.sceneIndex <= follower.until
+    )
+      ids.push(follower.actor);
     const gather = this.script.flow?.gather;
     if (
       gather &&
@@ -365,6 +376,7 @@ export class NarrativeDirector implements NarrativeBridge {
       actions: this.actions(),
       audioCue: this.cue,
       task: this.flow?.task,
+      inspection: this.flow?.inspection,
       chosenReplies: this.script.scenes.flatMap((s) =>
         s.choices.flatMap((c) =>
           c.options
@@ -441,6 +453,9 @@ export class NarrativeDirector implements NarrativeBridge {
           label: target.name,
         });
     return actions;
+  }
+  dismissInspection() {
+    this.flow?.dismissInspection();
   }
   private optional(id: string) {
     const p = presentation(this.progress);
@@ -1345,11 +1360,13 @@ export class NarrativeDirector implements NarrativeBridge {
     this.scene.game.canvas.dataset.narrative = JSON.stringify({
       ...this.view,
       book: !!this.view.book,
+      inspection: !!this.view.inspection,
       runtime: this.runtime,
       sceneIndex: this.progress.sceneIndex,
       objectives: this.progress.objectives,
       choices: this.progress.choices,
       targets: this.candidates(),
+      availableActions: this.flow?.availableActions,
       treeFrame: this.scene.tree?.frame.name ?? null,
     });
   }
@@ -1388,6 +1405,14 @@ export class NarrativeDirector implements NarrativeBridge {
     );
     this.scene.game.canvas.dataset.gesture = this.polish.gesture ?? "";
     if (this.dialogueActive || controls.paused) this.polish.resetFox();
+    if (!this.disposed && !this.error && !controls.paused && !document.hidden) {
+      const audioCue =
+        this.script.flow?.audio?.[this.current.id] ?? this.current.kind;
+      if (this.cue !== audioCue) {
+        this.cue = audioCue;
+        playSceneAudio(this.cue);
+      }
+    }
     if (this.flow) {
       this.updateFlow(delta);
       return;
@@ -1396,10 +1421,6 @@ export class NarrativeDirector implements NarrativeBridge {
     if (this.lastPlayer !== this.scene.player) this.roomRendered();
     if (controls.paused && !this.busy) return;
     if (this.scene.dialogue && !this.dialogueActive) return;
-    if (this.cue !== this.current.kind) {
-      this.cue = this.current.kind;
-      playSceneAudio(this.cue);
-    }
     const stage = presentation(this.progress);
     if (stage.introRemaining > 0) {
       stage.introRemaining = Math.max(0, stage.introRemaining - delta);
@@ -1563,6 +1584,7 @@ export class NarrativeDirector implements NarrativeBridge {
     this.scene.game.canvas.dataset.narrative = JSON.stringify({
       ...this.view,
       book: !!this.view.book,
+      inspection: !!this.view.inspection,
       runtime: r,
       sceneIndex: this.progress.sceneIndex,
       objectives: this.progress.objectives,

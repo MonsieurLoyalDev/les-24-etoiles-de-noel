@@ -1,5 +1,7 @@
+import { validateFlowDefinition, type FlowDefinition } from "./flow";
 export type EpisodeContext = {
-  regions?: ("forest" | "bakery")[];
+  placements?: NonNullable<FlowDefinition["placements"]>;
+  regions?: ("forest" | "bakery" | "lake" | "hamlet" | "clockshop")[];
   pages: { day: number; title: string; text: string }[];
   choices: Record<string, string>;
   facts: Record<string, string | boolean>;
@@ -14,10 +16,18 @@ export const emptyEpisodeContext = (): EpisodeContext => ({
 export function validateEpisodeContext(input: unknown): EpisodeContext {
   if (input === undefined) return emptyEpisodeContext();
   const c = input as EpisodeContext;
+  if (c?.placements)
+    validateFlowDefinition({
+      schema: 1,
+      portals: [],
+      placements: c.placements,
+    });
   if (
     c?.regions &&
     (!Array.isArray(c.regions) ||
-      c.regions.some((r) => !["forest", "bakery"].includes(r)))
+      c.regions.some(
+        (r) => !["forest", "bakery", "lake", "hamlet", "clockshop"].includes(r),
+      ))
   )
     throw Error("Régions autorisées invalides");
   const object = (v: unknown): v is Record<string, unknown> =>

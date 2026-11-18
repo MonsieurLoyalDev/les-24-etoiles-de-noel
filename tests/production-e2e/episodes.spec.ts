@@ -14,10 +14,15 @@ import type { WorldRoom } from "../../src/domain";
 const source = process.env.ETB_PRODUCTION_SOURCE_DIR;
 if (source && process.env.CI)
   throw Error("Recette des scénarios privés réservée au poste local.");
-const days = source ? [2, 3, 4, 5, 6] : [2];
+const canonicalDay = Number(process.env.ETB_PRODUCTION_LAST_DAY ?? 6);
+const days = process.env.ETB_PRODUCTION_DAYS
+  ? process.env.ETB_PRODUCTION_DAYS.split(",").map(Number)
+  : source
+    ? [2, 3, 4, 5, 6]
+    : [2];
 for (const { day, canonical } of [
   ...days.map((day) => ({ day, canonical: false })),
-  { day: 6, canonical: true },
+  { day: canonicalDay, canonical: true },
 ])
   test(`épisode ${day} ${canonical ? "canonique" : "aperçu"} : parcours réel, activité et sauvegarde`, async ({
     page,
@@ -56,7 +61,15 @@ for (const { day, canonical } of [
     const backend = await installNarrativeFixture(page, script, {
       admin: !canonical,
       previous,
-      date: "2026-12-06T10:00:00Z",
+      media: source
+        ? Object.fromEntries(
+            (script.flow?.media ?? []).map((m) => [
+              m.path,
+              readFileSync(join(source, "media", m.path.split("/").at(-1)!)),
+            ]),
+          )
+        : undefined,
+      date: `2026-12-${String(canonicalDay).padStart(2, "0")}T10:00:00Z`,
     });
     const state = () =>
       page
@@ -65,7 +78,8 @@ for (const { day, canonical } of [
     const browserErrors: string[] = [];
     page.on("pageerror", (e) => browserErrors.push(e.message));
     const room = () => page.locator("canvas").getAttribute("data-room");
-    let puzzleReloaded = false;
+    let puzzleReloaded = false,
+      followerReloaded = false;
     async function interact() {
       if (info.project.name === "mobile")
         await page.locator("button.interaction").tap();
@@ -112,41 +126,60 @@ for (const { day, canonical } of [
       expect((await state()).choices).toEqual(before.choices);
     }
     async function walk(p: { x: number; y: number }) {
+      const f = script.flow?.follower,
+        s = await state();
+      const following =
+        f &&
+        s?.sceneIndex >= f.from &&
+        s.sceneIndex <= f.until &&
+        s.objectives.includes(f.requires)
+          ? f.actor
+          : undefined;
       try {
-        await navigateTo(page, p);
+        await navigateTo(page, p, following);
       } catch (e) {
         if (!String(e).includes("Navigation bloquée")) throw e;
-        await navigateTo(page, p);
+        await navigateTo(page, p, following);
       }
     }
-    async function moveRoom(target: WorldRoom) {
+    async function moveRoom(target: WorldRoom): Promise<void> {
       if ((await room()) === target) return;
-      if ((await room()) !== "village") {
-        const current = await room();
+      const parent = (r: WorldRoom): WorldRoom =>
+        isExtraRoom(r) ? (areaPortals[r].from ?? "village") : "village";
+      const chain: WorldRoom[] = [target];
+      while (chain.at(-1) !== "village") chain.push(parent(chain.at(-1)!));
+      const current = (await room()) as WorldRoom;
+      if (!chain.includes(current)) {
         await walk(
-          isExtraRoom(current!)
-            ? areaPortals[current as "forest" | "bakery"].entry
+          isExtraRoom(current)
+            ? areaPortals[current].entry
             : { x: 240, y: 315 },
         );
+        await expect(page.locator("button.interaction")).toBeEnabled();
         await page.keyboard.press("e");
         await expect(page.locator("canvas")).toHaveAttribute(
           "data-room",
-          "village",
+          parent(current),
         );
+        return moveRoom(target);
       }
-      if (target === "village") return;
-      if (isExtraRoom(target)) {
+      const next = chain[chain.indexOf(current) - 1];
+      if (isExtraRoom(next)) {
         const t = (await state()).targets.find(
-          (t: { id: string }) => t.id === `narrative:portal:${target}`,
+          (v: { id: string }) => v.id === `narrative:portal:${next}`,
         );
         if (!t) throw Error("Portail autorisé manquant");
         await walk(t);
-      } else {
-        const id = target === "house" ? "loyal_house" : target;
-        await walk(plan.buildings.find((b) => b.id === id)!.returnPoint);
-      }
+      } else
+        await walk(
+          plan.buildings.find(
+            (b) => b.id === (next === "house" ? "loyal_house" : next),
+          )!.returnPoint,
+        );
+      await expect(page.locator("button.interaction")).toBeEnabled();
       await page.keyboard.press("e");
-      await expect(page.locator("canvas")).toHaveAttribute("data-room", target);
+      await expect(page.locator("canvas")).toHaveAttribute("data-room", next);
+      return moveRoom(target);
     }
     async function finishDialogue() {
       await expect(
@@ -205,6 +238,10 @@ for (const { day, canonical } of [
             })
             .selectOption(value);
         }
+        if (p.kind === "dial")
+          await dialog
+            .getByRole("button", { name: "Tourner le cadran", exact: true })
+            .click();
         if (p.kind === "order")
           await dialog
             .getByRole("button", {
@@ -267,7 +304,7 @@ for (const { day, canonical } of [
               exact: true,
             })
             .click();
-      if (p.kind === "order") {
+      if (p.kind === "order" || p.kind === "dial") {
         const order = [...draft.order];
         for (let i = 0; i < p.answer!.length; i++) {
           const id = p.answer![i];
@@ -405,7 +442,55 @@ for (const { day, canonical } of [
             (t: { id: string }) => t.id === `narrative:flow:${a.id}`,
           );
           if (!t) throw Error(`Objectif technique inaccessible ${index}`);
-          await walk(t);
+          if (a.waitForFollower && !followerReloaded) {
+            await expect
+              .poll(
+                async () =>
+                  !!(await state()).runtime.flow.followers?.[
+                    a.waitForFollower!
+                  ],
+              )
+              .toBe(true);
+            // The ordinary periodic checkpoint, not an injected progress write.
+            await page.waitForTimeout(4200);
+            const stored = (await state()).runtime.flow.followers[
+              a.waitForFollower
+            ];
+            await resumeInPlace();
+            const restored = (await state()).runtime.flow.followers[
+              a.waitForFollower
+            ];
+            expect(restored.room).toBe(stored.room);
+            expect(
+              Math.hypot(restored.x - stored.x, restored.y - stored.y),
+            ).toBeLessThan(40);
+            followerReloaded = true;
+          }
+          if (a.waitForFollower === "emile")
+            await Promise.all([
+              walk(t),
+              (async () => {
+                await expect
+                  .poll(
+                    () =>
+                      page
+                        .locator("canvas")
+                        .getAttribute("data-follower-animation"),
+                    { timeout: 30000 },
+                  )
+                  .toMatch(/^emile-(haut|bas|gauche|droite)$/);
+                const first = await page
+                  .locator("canvas")
+                  .getAttribute("data-follower-frame");
+                expect(first).toBeTruthy();
+                await expect
+                  .poll(() =>
+                    page.locator("canvas").getAttribute("data-follower-frame"),
+                  )
+                  .not.toBe(first);
+              })(),
+            ]);
+          else await walk(t);
           // A resident may finish a step while the player approaches. Check the
           // actual visible interaction, then approach its freshly measured point.
           for (let retry = 0; retry < 3; retry++) {
@@ -421,13 +506,34 @@ for (const { day, canonical } of [
                 (v: { id: string }) => v.id === `narrative:flow:${a.id}`,
               );
               if (!current)
-                throw Error("Interaction narrative momentanément inaccessible", { cause: error });
+                throw Error(
+                  "Interaction narrative momentanément inaccessible",
+                  { cause: error },
+                );
               await walk(current);
             }
           }
+          if (a.waitForFollower)
+            await expect
+              .poll(
+                async () =>
+                  (await state()).targets.find(
+                    (v: { id: string }) => v.id === `narrative:flow:${a.id}`,
+                  )?.ready,
+                { timeout: 90000 },
+              )
+              .toBe(true);
           await interact();
           if (a.gesture) await interact();
           if (a.puzzle) await solve(a.puzzle);
+          if (a.inspect) {
+            await expect(
+              page.getByRole("complementary", {
+                name: "Observation rapprochée",
+              }),
+            ).toBeVisible();
+            await capture(`observation-${index}`);
+          }
           if (a.dialogue) await finishDialogue();
           if (a.effect === "restore")
             await expect
@@ -449,15 +555,25 @@ for (const { day, canonical } of [
       await expect
         .poll(async () => (await state()).complete, { timeout: 10000 })
         .toBe(true);
+      const lastScene = script.scenes.at(-1)!;
+      await expect
+        .poll(async () => (await state()).audioCue)
+        .toBe(script.flow?.audio?.[lastScene.id] ?? lastScene.kind);
       const restored = (await state()).restored;
       const optional = script.scenes.at(-1)!;
       if (optional.flow?.optional)
         for (const action of optional.flow.actions) {
+          if (
+            action.when &&
+            !(await state()).availableActions?.includes(action.id)
+          )
+            continue;
           for (let repeat = 0; repeat < (action.replayable ? 2 : 1); repeat++) {
             if (!action.anyRoom) await moveRoom(action.point.room);
             const target = (await state()).targets.find(
               (t: { id: string }) => t.id === `narrative:flow:${action.id}`,
             );
+            if (!target && action.when) continue;
             if (!target) throw Error("Activité facultative inaccessible");
             await walk(target);
             await interact();

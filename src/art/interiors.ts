@@ -9,7 +9,7 @@ import {
 } from "./interior-layout";
 export type InteriorRoom = Exclude<
   Save["room"],
-  "village" | "forest" | "bakery"
+  "village" | "forest" | "bakery" | "lake" | "hamlet" | "clockshop"
 >;
 export const interiorAssets = Object.fromEntries(
   [

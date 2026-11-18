@@ -1,6 +1,12 @@
 import { transitionAmbience, type Sound } from "../art/audio";
 // Scene hooks only. No licensed music supplied: deliberately silent, no synthesis/network.
 export const sceneAudio: Record<string, Sound | null> = {
+  market: null,
+  lake: null,
+  archive: null,
+  craft: null,
+  storm: null,
+  clockwork: null,
   arrival: null,
   meet: null,
   tree: null,

@@ -16,6 +16,84 @@
   max-width: 480px;
   margin: 20px auto;
 }
+.flow-dial {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 420px;
+  margin: 20px auto;
+  border: 7px double #b98a55;
+  border-radius: 50%;
+  background: #352e27;
+  color: #fff2d2;
+}
+.flow-dial > div:not(.dial-hands) {
+  position: absolute;
+  translate: -50% -50%;
+  max-width: 28%;
+  text-align: center;
+}
+.flow-dial .dial-hands {
+  position: absolute;
+  left: 43%;
+  top: 29%;
+  font-size: 90px;
+  color: #edc974;
+}
+.flow-dial button {
+  position: absolute;
+  left: 25%;
+  bottom: 22%;
+  width: 50%;
+}
+.flow-observation {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+.narrative-inspection {
+  position: absolute;
+  z-index: 19;
+  top: 70px;
+  right: 30px;
+  max-width: 32%;
+  max-height: 44%;
+  padding: 8px;
+  background: #24313d;
+  border: 1px solid #c49461;
+  border-radius: 8px;
+  display: grid;
+}
+.narrative-inspection img {
+  max-height: 35svh;
+  max-width: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.narrative-inspection button {
+  min-height: 40px;
+}
+@media (max-width: 600px) {
+  .narrative-inspection {
+    right: 8px;
+    max-width: 55%;
+    top: 8px;
+  }
+  .narrative-inspection img {
+    max-height: 25svh;
+  }
+}
+.flow-observation img {
+  width: 80px;
+  height: 100px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.flow-clear-sky {
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(#21344d, #547b94);
+  border: 1px solid #8ea6ae;
+}
 .flow-circuit button {
   padding: 4px;
   min-height: 80px;

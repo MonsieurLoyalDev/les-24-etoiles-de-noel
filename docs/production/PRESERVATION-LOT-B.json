@@ -1,0 +1,29 @@
+{
+  "reason": "Additive regions, local storm through existing weather budgets, and expanded room types. Validated world geometry and resources unchanged.",
+  "files": [
+    {
+      "path": "src/art/ambience.ts",
+      "sha256": "ffa06413ed86357864fb514c9d50ad007d0824092ea60ff18e2b2c907af22df8"
+    },
+    {
+      "path": "src/art/interiors.ts",
+      "sha256": "02fcdb4487a6b1ba759b515f4ec6dd84de1ad5d34a413065fb8b528b72f7b212"
+    },
+    {
+      "path": "src/art/rooms33.ts",
+      "sha256": "95a91a67eb65f7ecd8a91a6c1b7f2de5ca40ad0fbd6b7344911ed73c40a6813b"
+    },
+    {
+      "path": "src/decor/model.ts",
+      "sha256": "caae9bc44d41cf5e238f2e0fcc86b6864bb880d1b6aa8887ca276dcfc0b26cc2"
+    },
+    {
+      "path": "src/domain.ts",
+      "sha256": "7eb0c244f2e8239e65c618b70716986d975188ff436bfc69751dc235474f2a33"
+    },
+    {
+      "path": "src/rpg/world.ts",
+      "sha256": "b6afdd6dd60dee6f99b20ece951356089d16b07f7f06a23b8aa58711a93a72a5"
+    }
+  ]
+}

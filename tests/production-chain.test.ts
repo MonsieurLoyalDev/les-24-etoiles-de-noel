@@ -6,7 +6,7 @@ import { technicalProductionEpisode } from "./fixtures/production";
 import { technicalEpisode } from "./fixtures/narrative";
 import { completedEpisodeSnapshots } from "./fixtures/complete-episode";
 import { validateScript } from "../src/narrative/script";
-it("enchaîne six épisodes par les vrais RPC, transporte le Livre et conserve le verrou du suivant", async () => {
+it("enchaîne douze épisodes par les vrais RPC, transporte le Livre et conserve le verrou du suivant", async () => {
   const source = process.env.ETB_PRODUCTION_SOURCE_DIR;
   if (source && process.env.CI)
     throw Error("Scénarios privés interdits dans la CI publique");
@@ -22,6 +22,7 @@ it("enchaîne six épisodes par les vrais RPC, transporte le Livre et conserve l
       "202611160001_narrative.sql",
       "202611160002_episode_calendar_contract.sql",
       "202611160003_production_activities.sql",
+      "202611180001_production_lot_b.sql",
     ])
       await pg.exec(readFileSync("supabase/migrations/" + file, "utf8"));
     await pg.query(
@@ -29,10 +30,10 @@ it("enchaîne six épisodes par les vrais RPC, transporte le Livre et conserve l
       [admin, player],
     );
     await pg.exec(
-      "create or replace function private.server_now() returns timestamptz language sql stable set search_path='' as $$select '2026-12-06T10:00:00Z'::timestamptz$$;",
+      "create or replace function private.server_now() returns timestamptz language sql stable set search_path='' as $$select '2026-12-12T10:00:00Z'::timestamptz$$;",
     );
     const finished: number[] = [];
-    for (let day = 1; day <= 6; day++) {
+    for (let day = 1; day <= 12; day++) {
       const c = source
         ? validateScript(
             JSON.parse(
@@ -101,10 +102,10 @@ it("enchaîne six épisodes par les vrais RPC, transporte le Livre et conserve l
         s: { day: number; restored: boolean; unlocked: boolean }[];
       }>("select public.advent_status(false) as s")
     ).rows[0].s;
-    expect(status.filter((s) => s.restored)).toHaveLength(6);
-    expect(status.find((s) => s.day === 7)?.unlocked).toBe(false);
+    expect(status.filter((s) => s.restored)).toHaveLength(12);
+    expect(status.find((s) => s.day === 13)?.unlocked).toBe(false);
     await expect(
-      pg.query("select public.episode_load(7,false,false,false)"),
+      pg.query("select public.episode_load(13,false,false,false)"),
     ).rejects.toThrow();
   } finally {
     await pg.close();

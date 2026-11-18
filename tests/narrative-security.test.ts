@@ -13,6 +13,7 @@ import { initialRuntime, type EpisodeProgress } from "../src/narrative/script";
 import { presentation } from "../src/narrative/orchestration";
 import { technicalProductionEpisode } from "./fixtures/production";
 import { newFlowRuntime, newPuzzle, puzzleMove } from "../src/narrative/flow";
+import { completedEpisodeSnapshots } from "./fixtures/complete-episode";
 const admin = "00000000-0000-4000-8000-000000000011",
   player = "00000000-0000-4000-8000-000000000012",
   outsider = "00000000-0000-4000-8000-000000000013";
@@ -44,6 +45,7 @@ beforeAll(async () => {
     "202611160001_narrative.sql",
     "202611160002_episode_calendar_contract.sql",
     "202611160003_production_activities.sql",
+    "202611180001_production_lot_b.sql",
   ]) {
     if (file === "202611160002_episode_calendar_contract.sql") {
       await pg.query(
@@ -66,6 +68,102 @@ beforeAll(async () => {
 }, 30000);
 afterAll(async () => {
   await pg?.close();
+});
+it("refuse un média futur ou externe même lors d'un import administrateur", async () => {
+  await user(admin);
+  for (const media of [
+    { key: "private-fixture", day: 3, path: "3/fixture.png" },
+    {
+      key: "private-fixture",
+      day: 2,
+      path: "https://example.test/fixture.png",
+    },
+    { key: "private-fixture", day: 2, path: "2/../3/fixture.png" },
+  ]) {
+    const c = technicalProductionEpisode(2);
+    c.version = 102;
+    c.flow!.media = [media];
+    await expect(
+      rpc("public.episode_admin_put($1::jsonb)", [JSON.stringify(c)]),
+    ).rejects.toThrow();
+  }
+});
+it("refuse une position de compagnon forgée et accepte le checkpoint déclaré", async () => {
+  await user(admin);
+  const c = technicalProductionEpisode(2);
+  c.version = 103;
+  c.flow!.follower = {
+    actor: "emile",
+    from: 0,
+    until: 0,
+    requires: "activity/check",
+    destination: { room: "village", anchor: "square" },
+  };
+  await rpc("public.episode_admin_put($1::jsonb)", [JSON.stringify(c)]);
+  const session = await rpc<{ runId: string }>(
+    "public.episode_load(2,true,false,false)",
+  );
+  const p = startEpisode(
+    c,
+    { day: 2, unlocked: true },
+    { world: initial, completedDays: [1] },
+  ) as EpisodeProgress;
+  p.runtime = initialRuntime();
+  p.runtime.flow = newFlowRuntime();
+  for (const followers of [
+    { stranger: { room: "village", x: 100, y: 100 } },
+    { emile: { room: "village", y: 100 } },
+    { emile: { room: "village", x: 100, y: 1500 } },
+  ]) {
+    await expect(
+      rpc("public.episode_save(2,true,$1::uuid,-1,$2::jsonb)", [
+        session.runId,
+        JSON.stringify({
+          ...p,
+          runtime: { ...p.runtime, flow: { ...p.runtime.flow, followers } },
+        }),
+      ]),
+    ).rejects.toThrow();
+  }
+  p.runtime.flow.followers = { emile: { room: "village", x: 100, y: 100 } };
+  await expect(
+    rpc("public.episode_save(2,true,$1::uuid,-1,$2::jsonb)", [
+      session.runId,
+      JSON.stringify(p),
+    ]),
+  ).resolves.toBeTruthy();
+});
+it("conserve une célébration déclarée sans accepter un marqueur arbitraire", async () => {
+  const isolated = "00000000-0000-4000-8000-000000000088";
+  await pg.exec("reset role");
+  await pg.query("insert into auth.users values($1)", [isolated]);
+  await pg.query("insert into public.app_members values($1,'admin')", [
+    isolated,
+  ]);
+  await user(isolated);
+  const c = technicalProductionEpisode(3);
+  c.version = 104;
+  c.scenes[2].flow!.actions[0].constellation = 12;
+  await rpc("public.episode_admin_put($1::jsonb)", [JSON.stringify(c)]);
+  const session = await rpc<{ runId: string }>(
+    "public.episode_load(3,true,false,false)",
+  );
+  const p = completedEpisodeSnapshots(c, [1, 2]).at(-1)!;
+  p.runtime.flow!.steps["extra/look"] = 1;
+  const invalid = structuredClone(p);
+  invalid.runtime.flow!.steps["extra/unknown"] = 1;
+  await expect(
+    rpc("public.episode_save(3,true,$1::uuid,-1,$2::jsonb)", [
+      session.runId,
+      JSON.stringify(invalid),
+    ]),
+  ).rejects.toThrow();
+  await expect(
+    rpc("public.episode_save(3,true,$1::uuid,-1,$2::jsonb)", [
+      session.runId,
+      JSON.stringify(p),
+    ]),
+  ).resolves.toBeTruthy();
 });
 it("reconstruit le Livre depuis les preuves canoniques du bon utilisateur et ne charge aucune page future", async () => {
   const id = "00000000-0000-4000-8000-000000000014";

@@ -233,5 +233,14 @@
   "public/assets/production/letter.png",
   "public/assets/production/oven.png",
   "public/assets/production/stone.png",
-  "public/assets/production/tree.png"
+  "public/assets/production/tree.png",
+  "public/assets/production/clockmaker.png",
+  "public/assets/production/clock.png",
+  "public/assets/production/music-box.png",
+  "public/assets/production/gears.png",
+  "public/assets/production/boat.png",
+  "public/assets/production/blossom.png",
+  "public/assets/production/lantern-off.png",
+  "public/assets/production/lantern-on.png",
+  "public/assets/production/lake.png"
 ]

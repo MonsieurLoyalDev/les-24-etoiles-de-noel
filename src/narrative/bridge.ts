@@ -23,6 +23,7 @@ export type NarrativeView = {
   completedAt: string | null;
   actions: { id: string; label: string }[];
   audioCue: string;
+  inspection?: { src: string; caption: string };
   task?: { puzzle: Puzzle; draft: PuzzleDraft };
 };
 export interface NarrativeBridge {
@@ -43,4 +44,5 @@ export interface NarrativeBridge {
   stop(): void;
   deactivate(): Promise<void>;
   puzzle?(move: PuzzleMove | null): void;
+  dismissInspection?(): void;
 }

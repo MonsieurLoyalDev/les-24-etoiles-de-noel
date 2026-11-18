@@ -60,6 +60,7 @@ const facades = {
   },
 };
 export class VillageAmbience {
+  storyStorm = false;
   private lights: Light[] = [];
   private smoke: Smoke[] = [];
   private flakes: Phaser.GameObjects.Image[] = [];
@@ -241,7 +242,7 @@ export class VillageAmbience {
         y > view.y - pad &&
         y < view.bottom + pad;
     const motion = quality !== "none",
-      flurry = Math.max(0, Math.sin(time / 7000));
+      flurry = this.storyStorm ? 1 : Math.max(0, Math.sin(time / 7000));
     let visibleLights = 0,
       visibleSmoke = 0,
       visibleSnow = 0,

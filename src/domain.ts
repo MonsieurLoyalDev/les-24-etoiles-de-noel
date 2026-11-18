@@ -2,7 +2,8 @@ export type Point = { x: number; y: number };
 export type Rect = Point & { w: number; h: number };
 export type Stage = 0 | 1 | 2 | 3 | 4;
 export type LegacyRoom = "village" | "house" | "library" | "workshop" | "inn";
-export type WorldRoom = LegacyRoom | "forest" | "bakery";
+export type WorldRoom =
+  LegacyRoom | "forest" | "bakery" | "lake" | "hamlet" | "clockshop";
 export type Save = {
   version: 2;
   stage: Stage;
@@ -120,6 +121,9 @@ export function decode(value: unknown): Save | null {
       "inn",
       "forest",
       "bakery",
+      "lake",
+      "hamlet",
+      "clockshop",
     ].includes(s.room) ||
     !Number.isFinite(s.position?.x) ||
     !Number.isFinite(s.position?.y)

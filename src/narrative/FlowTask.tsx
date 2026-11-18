@@ -94,6 +94,31 @@ export function FlowTask({
             <label key={item.id} className="flow-field">
               <strong>{item.label}</strong>
               <p>{item.detail}</p>
+              {p.illustrations?.[item.id] && (
+                <div className="flow-observation">
+                  <figure>
+                    {p.illustrations[item.id].real ? (
+                      <img
+                        src={p.illustrations[item.id].real}
+                        alt="Paysage réel"
+                      />
+                    ) : (
+                      <div
+                        className="flow-clear-sky"
+                        aria-label="Ciel sans étoile"
+                      />
+                    )}
+                    <figcaption>Paysage réel</figcaption>
+                  </figure>
+                  <figure>
+                    <img
+                      src={p.illustrations[item.id].reflection}
+                      alt="Reflet observé"
+                    />
+                    <figcaption>Reflet observé</figcaption>
+                  </figure>
+                </div>
+              )}
               <select
                 aria-label={item.label}
                 value={String(d.values[item.id] ?? "")}
@@ -110,7 +135,28 @@ export function FlowTask({
               </select>
             </label>
           ))}
-        {p.kind === "order" && (
+        {p.kind === "dial" && (
+          <div className="flow-dial" aria-label="Cadran circulaire">
+            <div className="dial-hands" aria-hidden="true">
+              ◷
+            </div>
+            {d.order.map((id, i) => (
+              <div
+                key={id}
+                style={{
+                  left: `${50 + 38 * Math.sin((i * Math.PI) / 2)}%`,
+                  top: `${50 - 38 * Math.cos((i * Math.PI) / 2)}%`,
+                }}
+              >
+                <strong>{p.items.find((v) => v.id === id)!.label}</strong>
+              </div>
+            ))}
+            <button onClick={() => move({ type: "rotate" })}>
+              Tourner le cadran
+            </button>
+          </div>
+        )}
+        {(p.kind === "order" || p.kind === "dial") && (
           <ol>
             {d.order.map((id, i) => {
               const item = p.items.find((v) => v.id === id)!;
@@ -247,7 +293,11 @@ export function FlowTask({
         </div>
         {hint && <p role="note">{p.hint}</p>}
         {d.attempts > 0 && !d.solved && (
-          <p role="status">Vous pouvez corriger et réessayer, sans pénalité.</p>
+          <p role="status">
+            {p.feedback
+              ? `${p.feedback.speaker} — ${p.feedback.text}`
+              : "Vous pouvez corriger et réessayer, sans pénalité."}
+          </p>
         )}
       </section>
     </div>
