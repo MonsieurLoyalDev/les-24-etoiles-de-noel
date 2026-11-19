@@ -2,7 +2,15 @@ import type { Save, Rect } from "../domain";
 import { homeSizes } from "./neighbourhood";
 export type DecorRoom = Exclude<
   Save["room"],
-  "village" | "forest" | "bakery" | "lake" | "hamlet" | "clockshop"
+  | "village"
+  | "forest"
+  | "bakery"
+  | "lake"
+  | "hamlet"
+  | "clockshop"
+  | "reserve"
+  | "glade"
+  | "keeper"
 >;
 export type DecorativeObject = {
   id: string;
@@ -243,7 +251,10 @@ export function decorationRects(room: Save["room"]): Rect[] {
     room === "bakery" ||
     room === "lake" ||
     room === "hamlet" ||
-    room === "clockshop"
+    room === "clockshop" ||
+    room === "reserve" ||
+    room === "glade" ||
+    room === "keeper"
   )
     return [];
   const consoleWidth = { house: 30, library: 40, workshop: 28, inn: 38 }[room];

@@ -1,3 +1,4 @@
+import { theatreKeepsake } from "./keepsakes";
 import { useEffect, useRef, useState } from "react";
 import "./polish.css";
 import "./flow.css";
@@ -58,6 +59,8 @@ export function NarrativeHub({
     const gen = ++generation.current;
     director.current?.stop();
     director.current = null;
+    scene.setTheatreKeepsake(undefined);
+    scene.narrativeRegions = new Set();
     setStatuses([]);
     setError("");
     setApi(null);
@@ -88,6 +91,36 @@ export function NarrativeHub({
             typeof intent === "number" ? false : intent.replay,
             true,
           );
+        else if (active && !intent && !api.preview) {
+          const idleGeneration = generation.current;
+          const statuses = await api.status();
+          const latest = statuses
+            .filter((s) => s.complete)
+            .sort((a, b) => b.day - a.day)[0];
+          if (latest) {
+            const session = await api.load(latest.day, false, false);
+            if (
+              active &&
+              idleGeneration === generation.current &&
+              !director.current &&
+              session.progress
+            ) {
+              scene.narrativeRegions = new Set(session.context?.regions ?? []);
+              for (const region of session.content.flow?.portals ?? []) {
+                const gate = session.content.flow?.portalAccess?.[region];
+                if (!gate || session.progress.sceneIndex >= gate.after)
+                  scene.narrativeRegions.add(region);
+              }
+              scene.setTheatreKeepsake(
+                theatreKeepsake(
+                  session.content,
+                  session.progress,
+                  session.context,
+                ),
+              );
+            }
+          }
+        }
       })
       .catch((e) => {
         if (active) setError(message(e));

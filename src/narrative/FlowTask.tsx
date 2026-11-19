@@ -9,11 +9,13 @@ import {
 export function FlowTask({
   puzzle: p,
   draft: d,
+  assemblyBackdrop,
   move,
   close,
 }: {
   puzzle: Puzzle;
   draft: PuzzleDraft;
+  assemblyBackdrop?: string;
   move: (m: PuzzleMove) => void;
   close: () => void;
 }) {
@@ -32,6 +34,35 @@ export function FlowTask({
         </button>
         <h2>{p.title}</h2>
         <p>{p.prompt}</p>
+        {p.assembly && (
+          <figure
+            className="flow-assembly"
+            aria-label="Construction progressive"
+          >
+            {assemblyBackdrop && d.sequence.length === p.answer?.length && (
+              <img
+                className="flow-assembly-backdrop"
+                src={assemblyBackdrop}
+                alt="Décor choisi"
+              />
+            )}
+            {p.assembly.layers
+              .filter((layer) => d.sequence.includes(layer.id))
+              .map((layer, index) => (
+                <img
+                  key={layer.id + index}
+                  style={{
+                    left: `${layer.x ?? 50}%`,
+                    bottom: `${100 - (layer.y ?? 100)}%`,
+                    width: `${layer.width ?? 100}%`,
+                  }}
+                  src={layer.src}
+                  alt={p.items.find((v) => v.id === layer.id)?.label ?? ""}
+                />
+              ))}
+          </figure>
+        )}
+
         {p.kind === "circuit" && p.circuit && (
           <>
             <p role="status">
@@ -162,6 +193,14 @@ export function FlowTask({
               const item = p.items.find((v) => v.id === id)!;
               return (
                 <li key={id} className="flow-field">
+                  {p.cards?.[id] && (
+                    <img
+                      src={p.cards[id]}
+                      alt=""
+                      width="100"
+                      style={{ imageRendering: "pixelated" }}
+                    />
+                  )}
                   <strong>{item.label}</strong>
                   <p>{item.detail}</p>
                   <button
@@ -191,6 +230,18 @@ export function FlowTask({
                 .map((id) => p.items.find((i) => i.id === id)?.label)
                 .join(" · ") || "—"}
             </p>
+            {p.assisted && (
+              <button
+                onClick={() => {
+                  move({ type: "reset" });
+                  for (const id of p.answer ?? [])
+                    move({ type: "sequence", id });
+                  move({ type: "check" });
+                }}
+              >
+                Répétition assistée
+              </button>
+            )}
             <div className="flow-buttons">
               {p.items.map((item) => (
                 <button
@@ -288,10 +339,17 @@ export function FlowTask({
           <button onClick={() => move({ type: "check" })}>
             {p.kind === "cooking" ? "Sortir les biscuits" : "Vérifier"}
           </button>
-          <button onClick={() => setHint(!hint)}>Indice</button>
+          <button
+            disabled={p.hintAfterAttempt && d.attempts === 0}
+            onClick={() => setHint(!hint)}
+          >
+            Indice
+          </button>
           <button onClick={() => move({ type: "reset" })}>Recommencer</button>
         </div>
-        {hint && <p role="note">{p.hint}</p>}
+        {hint && (!p.hintAfterAttempt || d.attempts > 0) && (
+          <p role="note">{p.hint}</p>
+        )}
         {d.attempts > 0 && !d.solved && (
           <p role="status">
             {p.feedback

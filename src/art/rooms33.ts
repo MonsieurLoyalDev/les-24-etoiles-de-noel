@@ -45,17 +45,21 @@ export const roomPlans: Record<
   },
 };
 export function roomDimensions(room: Save["room"]) {
-  return room === "village"
-    ? { width: 1920, height: 1408 }
-    : ["forest", "lake", "hamlet"].includes(room)
-      ? { width: 1024, height: 768 }
-      : roomPlans[
-          room === "bakery"
-            ? "inn"
-            : room === "clockshop"
-              ? "workshop"
-              : (room as Room33)
-        ];
+  return room === "reserve"
+    ? { width: 640, height: 352 }
+    : room === "village"
+      ? { width: 1920, height: 1408 }
+      : ["forest", "lake", "hamlet", "glade"].includes(room)
+        ? { width: 1024, height: 768 }
+        : roomPlans[
+            room === "bakery"
+              ? "inn"
+              : room === "clockshop"
+                ? "workshop"
+                : room === "keeper"
+                  ? "house"
+                  : (room as Room33)
+          ];
 }
 export function inFloor(room: Room33, x: number, y: number) {
   return roomPlans[room].volumes.some(

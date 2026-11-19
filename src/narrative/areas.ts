@@ -9,6 +9,7 @@ import { interiorCollisions } from "../art/rooms33";
 import { vegetationKey } from "../art/vegetation";
 import { plan } from "../art/village34";
 import type { WorldRoom, Point } from "../domain";
+import { regionAnchorsC, drawRegionC } from "./regions-c";
 import { regionAnchorsB, drawRegionB } from "./regions-b";
 export const extraRooms = [
   "forest",
@@ -16,6 +17,9 @@ export const extraRooms = [
   "lake",
   "hamlet",
   "clockshop",
+  "reserve",
+  "glade",
+  "keeper",
 ] as const;
 export type ExtraRoom = (typeof extraRooms)[number];
 export function isExtraRoom(room: string): room is ExtraRoom {
@@ -23,6 +27,7 @@ export function isExtraRoom(room: string): room is ExtraRoom {
 }
 export const areaAnchors = {
   ...regionAnchorsB,
+  ...regionAnchorsC,
   forest: {
     entry: { x: 512, y: 688 },
     track: { x: 420, y: 570 },
@@ -47,6 +52,20 @@ export const areaPortals: Record<
   ExtraRoom,
   { village: Point; entry: Point; from?: WorldRoom }
 > = {
+  reserve: {
+    from: "workshop",
+    village: { x: 110, y: 210 },
+    entry: regionAnchorsC.reserve.entry,
+  },
+  glade: {
+    from: "forest",
+    village: { x: 620, y: 310 },
+    entry: regionAnchorsC.glade.entry,
+  },
+  keeper: {
+    village: { ...plan.houses.find((h) => h.id === "H10")!.door },
+    entry: regionAnchorsC.keeper.entry,
+  },
   lake: {
     from: "forest",
     village: { x: 950, y: 500 },
@@ -70,6 +89,8 @@ export const areaPortals: Record<
 };
 /** Additional maps only. Validated village/room geometry is never moved or redrawn. */
 export function drawExtraRoom(scene: Phaser.Scene, room: ExtraRoom): Rect[] {
+  if (room === "reserve" || room === "glade" || room === "keeper")
+    return drawRegionC(scene, room);
   if (room === "lake" || room === "hamlet" || room === "clockshop")
     return drawRegionB(scene, room);
   if (room === "bakery") {

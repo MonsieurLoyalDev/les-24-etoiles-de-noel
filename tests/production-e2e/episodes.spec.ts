@@ -153,7 +153,7 @@ for (const { day, canonical } of [
         await walk(
           isExtraRoom(current)
             ? areaPortals[current].entry
-            : { x: 240, y: 315 },
+            : { x: 240, y: 325 },
         );
         await expect(page.locator("button.interaction")).toBeEnabled();
         await page.keyboard.press("e");
@@ -214,6 +214,24 @@ for (const { day, canonical } of [
         exact: true,
       });
       await expect(dialog).toBeVisible();
+      if (p.hintAfterAttempt) {
+        await expect(
+          dialog.getByRole("button", { name: "Indice", exact: true }),
+        ).toBeDisabled();
+        await dialog
+          .getByRole("button", { name: "Vérifier", exact: true })
+          .click();
+        await expect(
+          dialog.getByRole("button", { name: "Indice", exact: true }),
+        ).toBeEnabled();
+      }
+      if (p.assisted && info.project.name === "mobile") {
+        await dialog
+          .getByRole("button", { name: "Répétition assistée", exact: true })
+          .tap();
+        await expect(dialog).toBeHidden();
+        return;
+      }
       if (!puzzleReloaded) {
         const beforePartial = JSON.stringify(
           (await state()).runtime.flow.drafts,
@@ -353,6 +371,7 @@ for (const { day, canonical } of [
             })
             .click();
       }
+      if (p.assembly) await capture("assembly-complete");
       const confirm = dialog.getByRole("button", {
         name: p.kind === "cooking" ? "Sortir les biscuits" : "Vérifier",
         exact: true,
@@ -417,6 +436,22 @@ for (const { day, canonical } of [
       for (let index = 0; index < script.scenes.length; index++) {
         const s = script.scenes[index];
         if (s.flow?.optional) break;
+        if (day === 15 && index === 8) {
+          const optional = script.scenes
+            .at(-1)!
+            .flow!.actions.find((a) => a.id === "stage-09-moment")!;
+          await moveRoom(optional.point.room);
+          const target = (await state()).targets.find(
+            (t: { id: string }) => t.id === `narrative:flow:${optional.id}`,
+          );
+          expect(target).toBeTruthy();
+          await walk(target);
+          await interact();
+          await finishDialogue();
+          expect((await state()).sceneIndex).toBe(8);
+          expect((await state()).complete).toBe(false);
+          await capture("early-optional");
+        }
         for (const a of s.flow!.actions) {
           if (!a.anyRoom) await moveRoom(a.point.room);
           await expect
@@ -425,7 +460,7 @@ for (const { day, canonical } of [
                 (await state()).targets?.some(
                   (t: { id: string }) => t.id === `narrative:flow:${a.id}`,
                 ),
-              { timeout: a.waitForGather ? 90000 : 15000 },
+              { timeout: a.waitForGather ? 90000 : a.actor ? 60000 : 15000 },
             )
             .toBe(true);
           if (a.waitForGather)
@@ -525,6 +560,62 @@ for (const { day, canonical } of [
               .toBe(true);
           await interact();
           if (a.gesture) await interact();
+          if (a.performance) {
+            await expect
+              .poll(async () => !!(await state()).runtime.flow.performance)
+              .toBe(true);
+            if (canonical && day === 16 && index === 6) {
+              expect((await state()).restored).toBe(15);
+              expect((await state()).treeFrame).toBe("sapin_15");
+              expect(
+                JSON.parse(
+                  (await page
+                    .locator("canvas")
+                    .getAttribute("data-theatre-keepsake")) ?? "null",
+                ),
+              ).toMatchObject({ style: "option-1", built: true });
+            }
+            await page.waitForTimeout(3000);
+            await capture(`performance-${index}`);
+            await resumeInPlace();
+            if (
+              a.performance.kind === "fireflies" &&
+              a.performance.shape === "flower-tree-star"
+            ) {
+              const count = Number(
+                await page
+                  .locator("canvas")
+                  .getAttribute("data-performance-particles"),
+              );
+              expect(count).toBeLessThanOrEqual(
+                info.project.name === "mobile" ? 12 : 36,
+              );
+              for (const [fraction, name] of [
+                [0.5, "tree"],
+                [0.85, "star"],
+              ] as const) {
+                await expect
+                  .poll(
+                    async () =>
+                      (await state()).runtime.flow.performance?.elapsed ??
+                      a.performance!.duration,
+                    { timeout: 30000 },
+                  )
+                  .toBeGreaterThanOrEqual(a.performance.duration * fraction);
+                await capture(`performance-${index}-${name}`);
+              }
+            }
+            await expect
+              .poll(
+                async () => {
+                  const s = await state();
+                  if (s.error) throw Error(s.error);
+                  return !!s.runtime.flow.performance;
+                },
+                { timeout: 130000 },
+              )
+              .toBe(false);
+          }
           if (a.puzzle) await solve(a.puzzle);
           if (a.inspect) {
             await expect(
@@ -534,7 +625,10 @@ for (const { day, canonical } of [
             ).toBeVisible();
             await capture(`observation-${index}`);
           }
-          if (a.dialogue) await finishDialogue();
+          if (a.dialogue) {
+            await capture(`dialogue-${index}`);
+            await finishDialogue();
+          }
           if (a.effect === "restore")
             await expect
               .poll(async () => (await state()).runtime.restored, {
@@ -559,7 +653,32 @@ for (const { day, canonical } of [
       await expect
         .poll(async () => (await state()).audioCue)
         .toBe(script.flow?.audio?.[lastScene.id] ?? lastScene.kind);
+      expect(
+        (await state()).bookPages.some(
+          (p: { day: number; text: string }) =>
+            p.day === day && p.text === script.book.text,
+        ),
+      ).toBe(true);
       const restored = (await state()).restored;
+      if (day === 16 && process.env.ETB_CHECK_DISCOVERY_MAP) {
+        await page
+          .getByRole("button", { name: "Livre des Étoiles", exact: true })
+          .click();
+        const journal = page.getByRole("dialog", {
+          name: "Journal des étoiles",
+          exact: true,
+        });
+        await expect(journal).toBeVisible();
+        const note = journal.locator(".narrative-map-note");
+        await expect(note).toBeVisible();
+        await note.scrollIntoViewIfNeeded();
+        await capture("map");
+        await journal
+          .getByRole("button", { name: "Fermer ×", exact: true })
+          .click();
+        expect((await state()).restored).toBe(restored);
+      }
+
       const optional = script.scenes.at(-1)!;
       if (optional.flow?.optional)
         for (const action of optional.flow.actions) {
@@ -578,6 +697,18 @@ for (const { day, canonical } of [
             await walk(target);
             await interact();
             if (action.gesture) await interact();
+            if (action.performance) {
+              await expect
+                .poll(async () => !!(await state()).runtime.flow.performance)
+                .toBe(true);
+              await page.waitForTimeout(1200);
+              await capture(`optional-performance-${action.id}`);
+              await expect
+                .poll(async () => !!(await state()).runtime.flow.performance, {
+                  timeout: 130000,
+                })
+                .toBe(false);
+            }
             if (action.puzzle) await solve(action.puzzle);
             if (action.dialogue) await finishDialogue();
             await expect
@@ -622,6 +753,24 @@ for (const { day, canonical } of [
           JSON.stringify(performanceSample),
         );
       await backend.verify();
+    } catch (error) {
+      const dir = process.env.ETB_PRODUCTION_CAPTURE_DIR;
+      if (dir) {
+        await capture("failure").catch(() => undefined);
+        writeFileSync(
+          join(
+            dir,
+            `${info.project.name}-${canonical ? "canonical-" : ""}day-${day}-failure.json`,
+          ),
+          JSON.stringify(
+            await page
+              .locator("canvas")
+              .evaluate((c) => ({ ...c.dataset }))
+              .catch(() => null),
+          ),
+        );
+      }
+      throw error;
     } finally {
       await backend.close();
     }

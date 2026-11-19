@@ -1,0 +1,45 @@
+{
+  "reason": "Additive region types/dimensions, bounded exterior shade through the existing palette, independent optional audio channels and a read-only Book map inset. Narrative cinematics do not pause their own clock. Original village, four interior plans, characters, snow assets, saves and calendar rules are preserved.",
+  "files": [
+    {
+      "path": "src/advent/Hub.tsx",
+      "sha256": "331cdda205902600d71f75de007ddca2ade5d496455575ce0c646e11ea454162"
+    },
+    {
+      "path": "src/art/ambience.ts",
+      "sha256": "d4dec4d1564b70aa654bf27a7656e0b451e2abeb2d04591245f0770cabdfe612"
+    },
+    {
+      "path": "src/art/audio-slots.json",
+      "sha256": "261f857e1b6d657cb24abbb0c57b2a029193e60aa7ddf3f6ba2a1cf0abef011b"
+    },
+    {
+      "path": "src/art/audio.ts",
+      "sha256": "38e534a9a0644a8c74e3eeb25c8c20e5f082020c413f9314f15bfb09339ea20d"
+    },
+    {
+      "path": "src/art/interiors.ts",
+      "sha256": "f832af6e94ab71b619e28a185507c04a0c094ad274a544a1606c0d534a0d77f5"
+    },
+    {
+      "path": "src/art/rooms33.ts",
+      "sha256": "81e4b5e496e970e0d84842edca8a89b3874428c6e12842805e730a5c62bc2e64"
+    },
+    {
+      "path": "src/decor/model.ts",
+      "sha256": "676ddb58536b8c3ecc477da556486c06854aca86ced0f90652fe5255dc7a6b59"
+    },
+    {
+      "path": "src/domain.ts",
+      "sha256": "e47043ab43a1697bd995db722bf0eac857eb9749761cb3b2e42e215d6a23089c"
+    },
+    {
+      "path": "src/main.tsx",
+      "sha256": "69a2040c4c6c18aa9744f47bc745b1ea9febac4e4bb10c2bfd41dc2c7312f504"
+    },
+    {
+      "path": "src/rpg/world.ts",
+      "sha256": "5ac0ea01a83237874be66ef16bd2cda058caf92184220a3025c5bd6a76ea5589"
+    }
+  ]
+}

@@ -31,6 +31,7 @@ export async function installNarrativeFixture(
       "202611160002_episode_calendar_contract.sql",
       "202611160003_production_activities.sql",
       "202611180001_production_lot_b.sql",
+      "202611180002_production_lot_c.sql",
     ])
       await pg.exec(readFileSync(`supabase/migrations/${file}`, "utf8"));
     await pg.exec(

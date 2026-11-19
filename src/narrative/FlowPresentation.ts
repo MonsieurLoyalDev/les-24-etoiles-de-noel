@@ -1,3 +1,6 @@
+import { readGraphics } from "../art/graphics";
+import { theatreKeepsake, type TheatreKeepsake } from "./keepsakes";
+import { NarrativePerformance } from "./performance";
 import Phaser from "phaser";
 import type { Village } from "../game/Game";
 import { controls } from "../game/Game";
@@ -5,6 +8,7 @@ import type { EpisodeProgress, EpisodeScript, ScriptScene } from "./script";
 import type { GameEvent } from "../rpg/quests";
 import {
   newFlowRuntime,
+  residentAnchorAvailable,
   newPuzzle,
   puzzleMove,
   type FlowAction,
@@ -30,6 +34,7 @@ type Host = {
   reduced: () => boolean;
   stars: () => number;
   gatherReady: () => boolean;
+  moment: (kind: "hands" | "hug" | "glasses") => void;
   walk: (
     id: string,
     sprite: Point & { setPosition?: (x: number, y: number) => unknown },
@@ -61,6 +66,10 @@ export class FlowPresentation {
       caption: action.label,
     };
   }
+  private previousTheatre?: TheatreKeepsake;
+  private performanceView?: NarrativePerformance;
+  private performanceSave = 0;
+  private performanceCamera?: { zoom: number };
   private markers = new Map<string, Phaser.GameObjects.Image>();
   private extras: Phaser.GameObjects.Sprite[] = [];
   private foregrounds: Phaser.GameObjects.Image[] = [];
@@ -99,6 +108,7 @@ export class FlowPresentation {
   };
   constructor(private host: Host) {
     host.progress().runtime.flow ??= newFlowRuntime();
+    this.previousTheatre = host.scene.theatreKeepsake;
   }
   private get p() {
     return this.host.progress();
@@ -137,7 +147,7 @@ export class FlowPresentation {
       : undefined;
   }
   get busy() {
-    return !!this.state.fx;
+    return !!this.state.fx || !!this.state.performance;
   }
   private done(action: FlowAction) {
     if (action.replayable) return false;
@@ -145,6 +155,14 @@ export class FlowPresentation {
     return this.p.objectives.includes(key) || this.state.seen.includes(key);
   }
   private enabled(action: FlowAction) {
+    if (
+      !residentAnchorAvailable(
+        action,
+        this.host.scene.state.room,
+        this.host.scene.npcs.map((n) => n.id),
+      )
+    )
+      return false;
     if (action.when && this.factValue(action.when.fact) !== action.when.value)
       return false;
     if (action.waitForGather && !this.host.gatherReady()) return false;
@@ -181,7 +199,16 @@ export class FlowPresentation {
     const action = this.actions.find((a) => a.id === this.state.active);
     if (!action?.puzzle) return undefined;
     const draft = this.state.drafts[`${this.scope(action).id}/${action.id}`];
-    return draft ? { puzzle: action.puzzle, draft } : undefined;
+    return draft
+      ? {
+          puzzle: action.puzzle,
+          draft,
+          assemblyBackdrop:
+            action.puzzle.assembly?.backdrops?.[
+              this.p.choices[action.puzzle.assembly?.choice ?? ""]
+            ],
+        }
+      : undefined;
   }
   get availableActions() {
     return this.actions
@@ -273,6 +300,12 @@ export class FlowPresentation {
       this.markers.get(key)?.setAlpha(0.4);
       return true;
     }
+    if (action.performance && (!this.state.steps[key] || action.replayable)) {
+      this.state.performance = { action: action.id, elapsed: 0 };
+      this.host.save();
+      scene.emit();
+      return true;
+    }
     if (action.puzzle) {
       if (action.replayable && this.state.drafts[key]?.solved)
         this.state.drafts[key] = newPuzzle(action.puzzle);
@@ -309,6 +342,12 @@ export class FlowPresentation {
       }
     }
     if (this.state.side) {
+      const scope = this.scope(action);
+      const choice = scope.choices[0];
+      const selected =
+        choice && this.state.sideChoices[`${scope.id}/${choice.id}`];
+      const moment = selected && action.moments?.[selected];
+      if (moment) this.host.moment(moment);
       this.completeAction(action);
       return true;
     }
@@ -320,7 +359,7 @@ export class FlowPresentation {
   }
   selectSideChoice(id: string, option: string) {
     if (this.sideScene)
-      this.state.sideChoices[`${this.sideScene.id}/${id}`] = option;
+      this.state.sideChoices[`${this.sideScene.id}/${id}`] ??= option;
   }
   private completeAction(action: FlowAction) {
     const scope = this.scope(action);
@@ -384,6 +423,9 @@ export class FlowPresentation {
       if (decoration.active) decoration.destroy();
     this.decorations.clear();
     this.lightRevision = -1;
+
+    this.performanceView?.destroy();
+    this.performanceView = undefined;
     for (const marker of this.markers.values())
       if (marker.active) marker.destroy();
     this.markers.clear();
@@ -585,6 +627,11 @@ export class FlowPresentation {
         }
       }
     }
+    if (scene.ambience)
+      scene.ambience.storyExterior =
+        scene.state.room === "glade" ||
+        (this.host.script.flow?.period !== undefined &&
+          scene.state.room === "forest");
     const weather = this.host.script.flow?.weather;
     if (scene.ambience)
       scene.ambience.storyStorm =
@@ -649,6 +696,43 @@ export class FlowPresentation {
         const access = this.host.script.flow!.portalAccess?.[area];
         if (!access || this.p.sceneIndex >= access.after)
           scene.narrativeRegions.add(area);
+      }
+      scene.setTheatreKeepsake(
+        theatreKeepsake(this.host.script, this.p, this.host.context),
+      );
+      for (const [index, path] of (
+        this.host.script.flow?.paths ?? []
+      ).entries()) {
+        const key = "path-" + index;
+        if (
+          path.room !== scene.state.room ||
+          this.p.sceneIndex < path.from ||
+          this.decorations.get(key)?.active
+        )
+          continue;
+        const patches: Phaser.GameObjects.Image[] = [];
+        path.points.slice(1).forEach((to, i) => {
+          const from = path.points[i],
+            length = Math.hypot(to.x - from.x, to.y - from.y),
+            steps = Math.ceil(length / 24);
+          for (let step = 0; step < steps; step++) {
+            const t = step / steps;
+            patches.push(
+              scene.add
+                .image(
+                  from.x + (to.x - from.x) * t,
+                  from.y + (to.y - from.y) * t,
+                  "ground-d3-packed-a",
+                )
+                .setDisplaySize(40, 30)
+                .setAlpha(0.6),
+            );
+          }
+        });
+        this.decorations.set(
+          key,
+          scene.add.container(0, 0, patches).setDepth(-94),
+        );
       }
       const lights = { ...this.host.context.lights };
       const inheritedTint = Object.values(lights)[0]?.tint ?? 0xffc178;
@@ -720,6 +804,16 @@ export class FlowPresentation {
             .setAlpha(item.mirror ? 0.55 : 1);
         image.setScale(item.width / image.width);
         const children: Phaser.GameObjects.GameObject[] = [image];
+        if (item.inscription)
+          children.push(
+            scene.add
+              .text(0, -image.displayHeight * 0.32, item.inscription, {
+                fontFamily: "serif",
+                fontSize: "6px",
+                color: "#673b24",
+              })
+              .setOrigin(0.5),
+          );
         if (item.caption)
           children.push(
             scene.add
@@ -740,6 +834,85 @@ export class FlowPresentation {
             .setName("narrative:decoration:" + item.id),
         );
       }
+    }
+    const period = this.host.script.flow?.period;
+    if (
+      period !== undefined &&
+      this.p.sceneIndex >= (this.host.script.flow?.periodFrom ?? 0) &&
+      !controls.paused &&
+      !document.hidden
+    ) {
+      this.state.previousClock ??= scene.state.clock;
+      scene.state.clock =
+        period * 45000 + Math.min(35000, scene.state.clock % 45000);
+    }
+    if (this.state.performance) {
+      if (controls.paused || document.hidden || this.p.runtime.dialogue) return;
+      const current = this.state.performance;
+      const action = this.actions.find((a) => a.id === current.action);
+      if (!action?.performance) throw Error("Spectacle sans action déclarée");
+      const config = action.performance;
+      current.elapsed = Math.min(
+        config.duration,
+        current.elapsed + Math.min(200, delta),
+      );
+      if (!this.performanceCamera && (config.origin || config.destination)) {
+        const camera = scene.cameras.main,
+          focus = flowAnchor(scene, config.destination ?? config.origin!, true);
+        this.performanceCamera = { zoom: camera.zoom };
+        const focal = {
+          x: focus.x,
+          y: focus.y - (config.destination ? 20 : 60),
+        };
+        const center = {
+          x: (scene.player.x + focal.x) / 2,
+          y: (scene.player.y + focal.y) / 2,
+        };
+        const zoom = Math.min(
+          camera.zoom,
+          camera.width / (Math.abs(focal.x - scene.player.x) + 220),
+        );
+        camera.stopFollow();
+        camera.pan(center.x, center.y, this.host.reduced() ? 0 : 250);
+        camera.zoomTo(Math.max(0.9, zoom), this.host.reduced() ? 0 : 250);
+      }
+      this.performanceView ??= new NarrativePerformance(scene);
+      this.performanceView.update(
+        config,
+        current.elapsed,
+        flowAnchor(scene, action.point),
+        this.host.reduced(),
+        config.destination ? flowAnchor(scene, config.destination) : undefined,
+      );
+      scene.theatrePresentation?.update(
+        current.elapsed,
+        config.kind !== "fireflies",
+        this.host.reduced() || readGraphics() === "none",
+      );
+      scene.game.canvas.dataset.performance = JSON.stringify({
+        kind: config.kind,
+        elapsed: current.elapsed,
+        duration: config.duration,
+      });
+      this.performanceSave += delta;
+      if (this.performanceSave > 2000) {
+        this.performanceSave = 0;
+        this.host.save();
+      }
+      if (current.elapsed >= config.duration) {
+        this.state.performance = null;
+        this.state.steps[`${this.scope(action).id}/${action.id}`] = 1;
+        this.restorePerformanceCamera();
+        this.performanceView.destroy();
+        this.performanceView = undefined;
+        delete scene.game.canvas.dataset.performance;
+        if (action.dialogue)
+          this.host.dialogue(action.dialogue, action.actor ?? null);
+        else this.completeAction(action);
+        this.host.save();
+        scene.emit();
+      }
+      return;
     }
     if (
       (controls.paused && !this.state.fx) ||
@@ -816,13 +989,42 @@ export class FlowPresentation {
       }
     this.host.advance();
   }
+  private restorePerformanceCamera() {
+    if (!this.performanceCamera) return;
+    const scene = this.host.scene;
+    scene.cameras.main.zoomTo(
+      this.performanceCamera.zoom,
+      this.host.reduced() ? 0 : 250,
+    );
+    scene.cameras.main.startFollow(
+      scene.player,
+      true,
+      this.host.reduced() ? 1 : 0.12,
+      this.host.reduced() ? 1 : 0.12,
+    );
+    this.performanceCamera = undefined;
+  }
   stop() {
+    this.restorePerformanceCamera();
     this.inspection = undefined;
+    this.performanceView?.destroy();
+    if (
+      this.host.scene.narrative?.view.preview ||
+      this.host.scene.narrative?.view.replay
+    )
+      this.host.scene.setTheatreKeepsake(this.previousTheatre);
+    delete this.host.scene.game.canvas.dataset.performance;
+    if (this.state.previousClock !== undefined)
+      this.host.scene.state.clock = this.state.previousClock;
     delete this.host.scene.game.canvas.dataset.followerAnimation;
     delete this.host.scene.game.canvas.dataset.followerFrame;
     for (const image of this.networkImages.values()) image.destroy();
     this.networkImages.clear();
-    if (this.host.scene.ambience) this.host.scene.ambience.storyStorm = false;
+    if (this.host.scene.ambience) {
+      this.host.scene.ambience.storyStorm = false;
+      this.host.scene.ambience.storyExterior =
+        this.host.scene.state.room === "glade";
+    }
     for (const decoration of this.decorations.values()) decoration.destroy();
     this.celebration?.lines?.destroy();
     if (

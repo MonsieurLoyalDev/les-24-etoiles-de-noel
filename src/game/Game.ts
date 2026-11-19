@@ -1,3 +1,6 @@
+import { TheatrePresentation } from "../narrative/theatre";
+import type { TheatreKeepsake } from "../narrative/keepsakes";
+import { flowAnchor } from "../narrative/flow-bindings";
 import { preloadActivities } from "../world/activity-presentation";
 import { preloadNarrativePolish } from "../narrative/polish";
 import { preloadProductionAssets } from "../narrative/production-assets";
@@ -116,8 +119,37 @@ export const controls = {
   run: false,
 };
 export class Village extends Phaser.Scene {
+  theatreKeepsake?: TheatreKeepsake;
+  theatrePresentation?: TheatrePresentation;
+  setTheatreKeepsake(value?: TheatreKeepsake) {
+    if (JSON.stringify(this.theatreKeepsake) === JSON.stringify(value)) return;
+    this.theatreKeepsake = value ? structuredClone(value) : undefined;
+    if (this.game?.canvas)
+      this.game.canvas.dataset.theatreKeepsake = JSON.stringify(value ?? null);
+    this.renderTheatreKeepsake();
+  }
+  private renderTheatreKeepsake() {
+    this.theatrePresentation?.destroy();
+    this.theatrePresentation = undefined;
+    const value = this.theatreKeepsake;
+    if (value?.point.room === this.state.room && this.player) {
+      this.theatrePresentation = new TheatrePresentation(this);
+      this.theatrePresentation.render(
+        flowAnchor(this, value.point, true),
+        value.style,
+        value.built,
+      );
+    }
+  }
   narrativeRegions = new Set<
-    "forest" | "bakery" | "lake" | "hamlet" | "clockshop"
+    | "forest"
+    | "bakery"
+    | "lake"
+    | "hamlet"
+    | "clockshop"
+    | "reserve"
+    | "glade"
+    | "keeper"
   >();
   state: Save;
   publish: (view: View) => void;
@@ -493,11 +525,13 @@ export class Village extends Phaser.Scene {
       this.state.room === "village",
       this.living.lanterns,
     );
+    this.ambience.storyExterior = this.state.room === "glade";
     if (this.state.room !== "village" && !isExtraRoom(this.state.room))
       this.interiorLight = new InteriorLight(this, this.state.room);
     else if (this.state.room === "village")
       this.neighbourhood = new NeighbourhoodLife(this);
     this.refreshAdvent();
+    this.renderTheatreKeepsake();
     this.narrative?.roomRendered();
     this.game.canvas.dataset.missingTextures = JSON.stringify(
       this.children.list

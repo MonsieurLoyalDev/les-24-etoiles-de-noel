@@ -20,6 +20,49 @@ const admin = "00000000-0000-4000-8000-000000000011",
 let pg: PGlite;
 let legacyRecord: unknown;
 const content = technicalEpisode();
+it("Lot C : refuse un spectacle forgé et le corps d’une confidence privée", async () => {
+  await pg.exec("reset role");
+  const script = technicalProductionEpisode(13);
+  script.flow!.portals = ["reserve", "glade", "keeper"];
+  const action = script.scenes[0].flow!.actions[0];
+  action.performance = { kind: "theatre", duration: 10000 };
+  const valid = async (value: unknown) =>
+    (
+      await pg.query<{ v: boolean }>(
+        "select private.episode_content_valid($1::jsonb) as v",
+        [JSON.stringify(value)],
+      )
+    ).rows[0].v;
+  expect(await valid(script)).toBe(true);
+  script.flow!.confidences = [
+    {
+      id: "secret",
+      author: "Fixture",
+      status: "private",
+      requires: "activity/check",
+      text: "Contenu refusé",
+    },
+  ];
+  expect(await valid(script)).toBe(false);
+  delete script.flow!.confidences;
+  const progress = completedEpisodeSnapshots(
+    script,
+    Array.from({ length: 12 }, (_, i) => i + 1),
+  )[0];
+  progress.runtime.flow!.performance = { action: "check", elapsed: 4000 };
+  const accepts = async () =>
+    (
+      await pg.query<{ v: boolean }>(
+        "select private.episode_progress_valid($1::jsonb,$2::jsonb) as v",
+        [JSON.stringify(script), JSON.stringify(progress)],
+      )
+    ).rows[0].v;
+  expect(await accepts()).toBe(true);
+  progress.runtime.flow!.performance.elapsed = 10001;
+  expect(await accepts()).toBe(false);
+  progress.runtime.flow!.performance = { action: "unknown", elapsed: 0 };
+  expect(await accepts()).toBe(false);
+});
 async function user(id: string, role = "authenticated") {
   await pg.exec("reset role");
   await pg.query("select set_config('request.jwt.claim.sub',$1,false)", [id]);
@@ -46,6 +89,7 @@ beforeAll(async () => {
     "202611160002_episode_calendar_contract.sql",
     "202611160003_production_activities.sql",
     "202611180001_production_lot_b.sql",
+    "202611180002_production_lot_c.sql",
   ]) {
     if (file === "202611160002_episode_calendar_contract.sql") {
       await pg.query(

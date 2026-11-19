@@ -1,3 +1,4 @@
+import { validatePerformance } from "./performance";
 import {
   validateDefinition,
   type EpisodeDefinition,
@@ -146,6 +147,9 @@ export function validateScript(input: unknown): EpisodeScript {
             "lake",
             "hamlet",
             "clockshop",
+            "reserve",
+            "glade",
+            "keeper",
           ].includes(action.point.room) ||
           !text(action.point.anchor, 100)
         )
@@ -180,7 +184,19 @@ export function validateScript(input: unknown): EpisodeScript {
             ))
         )
           throw Error("Variante contextuelle invalide");
+        if (
+          action.moments &&
+          (!scene.flow.optional ||
+            Object.entries(action.moments).some(
+              ([key, value]) =>
+                !scene.choices.some((c) =>
+                  c.options.some((v) => v.id === key),
+                ) || !["hands", "hug", "glasses"].includes(value),
+            ))
+        )
+          throw Error("Geste optionnel invalide");
         if (action.puzzle) validatePuzzle(action.puzzle);
+        if (action.performance) validatePerformance(action.performance);
       }
     }
     if (
@@ -251,6 +267,9 @@ export function validateRuntime(r: EpisodeRuntime) {
     "lake",
     "hamlet",
     "clockshop",
+    "reserve",
+    "glade",
+    "keeper",
     "village",
     "house",
     "library",
@@ -307,7 +326,7 @@ export function validateRuntime(r: EpisodeRuntime) {
       (b) => typeof b !== "boolean",
     ) ||
     !Array.isArray(r.visited) ||
-    r.visited.length > 10 ||
+    r.visited.length > 13 ||
     r.visited.some((room) => !rooms.includes(room)) ||
     new Set(r.visited).size !== r.visited.length ||
     (r.origin !== null &&

@@ -1,1 +1,11 @@
-{ "step": null, "wind": null, "fire": null, "click": null, "star": null }
+{
+  "step": null,
+  "wind": null,
+  "fire": null,
+  "click": null,
+  "star": null,
+  "theatre": null,
+  "fireflies": null,
+  "confidences": null,
+  "concert": null
+}

@@ -129,17 +129,20 @@ export function AdventHub({
     };
   }, []);
   useEffect(() => {
-    const paused = !!panel || view.cinematic || narrativeBusy;
+    // Narrative cinematics already lock movement through the director. They must
+    // not pause their own presentation clock; actual panels still pause it.
+    const paused =
+      !!panel || narrativeBusy || (view.cinematic && !view.narrative);
     controls.paused = paused;
     controls.x = 0;
     controls.y = 0;
     scene.input.keyboard?.resetKeys();
-    onBusy(paused);
+    onBusy(paused || view.cinematic);
     if (panel)
       root.current
         ?.querySelector<HTMLElement>("button,input,textarea")
         ?.focus({ preventScroll: true });
-  }, [panel, view.cinematic, narrativeBusy, scene, onBusy]);
+  }, [panel, view.cinematic, !!view.narrative, narrativeBusy, scene, onBusy]);
   useEffect(() => {
     if (!openRequest) return;
     setPanel(api ? "calendar" : privateMode ? "auth" : "calendar");

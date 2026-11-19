@@ -1,6 +1,32 @@
+export type MapNote = { from: string; to: string; locked: true };
+export function isMapNote(value: unknown): value is MapNote {
+  const note = value as MapNote;
+  return (
+    !!note &&
+    note.locked === true &&
+    [note.from, note.to].every(
+      (v) => typeof v === "string" && v.length > 0 && v.length <= 100,
+    )
+  );
+}
 import type { WorldRoom, Point } from "../domain";
 export type AnchorRef = { room: WorldRoom; anchor: string; offset?: Point };
 export type Puzzle = {
+  hintAfterAttempt?: boolean;
+  assisted?: boolean;
+  cards?: Record<string, string>;
+  assembly?: {
+    base: string;
+    layers: {
+      id: string;
+      src: string;
+      x?: number;
+      y?: number;
+      width?: number;
+    }[];
+    choice?: string;
+    backdrops?: Record<string, string>;
+  };
   kind:
     | "circuit"
     | "matching"
@@ -44,6 +70,8 @@ export type PuzzleDraft = {
   solved: boolean;
 };
 export type FlowAction = {
+  moments?: Record<string, "hands" | "hug" | "glasses">;
+  performance?: PerformanceDefinition;
   id: string;
   label: string;
   point: AnchorRef;
@@ -65,6 +93,19 @@ export type FlowAction = {
   availableAfter?: number;
 };
 export type FlowScene = { actions: FlowAction[]; optional?: boolean };
+/** A resident may still be walking between rooms. Do not invent an anchor or
+ * crash room entry while its real sprite is absent. */
+export function residentAnchorAvailable(
+  action: FlowAction,
+  room: WorldRoom,
+  residents: readonly string[],
+) {
+  return (
+    action.point.room !== room ||
+    !action.point.anchor.startsWith("resident:") ||
+    residents.includes(action.point.anchor.slice(9))
+  );
+}
 export type FlowLights = {
   points: string[];
   requires: string;
@@ -72,6 +113,25 @@ export type FlowLights = {
   styles: Record<string, { tint: number; shimmer?: boolean }>;
 };
 export type FlowDefinition = {
+  period?: 0 | 1 | 2 | 3;
+  periodFrom?: number;
+  paths?: { room: WorldRoom; points: Point[]; from: number }[];
+  theatre?: {
+    style?: string;
+    inherited?: string;
+    built: string;
+    point: AnchorRef;
+    persistentPoint?: AnchorRef;
+    requires?: string;
+  };
+  confidences?: {
+    id: string;
+    author: string;
+    status: "shared" | "private" | "draft";
+    privateAfter?: string;
+    requires: string;
+    text?: string;
+  }[];
   media?: { key: string; day: number; path: string }[];
   placements?: {
     id: string;
@@ -79,16 +139,33 @@ export type FlowDefinition = {
     point: AnchorRef;
     width: number;
     caption?: string;
+    inscription?: string;
     requires?: string;
     persistent?: boolean;
     mirror?: boolean;
     choice?: { key: string; option: string };
   }[];
   schema: 1;
-  portals: ("forest" | "bakery" | "lake" | "hamlet" | "clockshop")[];
+  portals: (
+    | "forest"
+    | "bakery"
+    | "lake"
+    | "hamlet"
+    | "clockshop"
+    | "reserve"
+    | "glade"
+    | "keeper"
+  )[];
   portalAccess?: Partial<
     Record<
-      "forest" | "bakery" | "lake" | "hamlet" | "clockshop",
+      | "forest"
+      | "bakery"
+      | "lake"
+      | "hamlet"
+      | "clockshop"
+      | "reserve"
+      | "glade"
+      | "keeper",
       { label: string; after: number }
     >
   >;
@@ -110,7 +187,12 @@ export type FlowDefinition = {
     string,
     { scene: string; choice?: string; objective?: string }
   >;
-  bookExtras?: { title: string; text: string; requires?: string }[];
+  bookExtras?: {
+    title: string;
+    text: string;
+    requires?: string;
+    mapNote?: MapNote;
+  }[];
   lights?: FlowLights;
   network?: { point: string; requires?: string; visual?: boolean }[];
   weather?: { from: number; until: number };
@@ -124,6 +206,8 @@ export type FlowDefinition = {
   audio?: Record<string, string>;
 };
 export type FlowRuntime = {
+  performance?: { action: string; elapsed: number } | null;
+  previousClock?: number;
   drafts: Record<string, PuzzleDraft>;
   active: string | null;
   steps: Record<string, number>;
@@ -132,6 +216,14 @@ export type FlowRuntime = {
   side: string | null;
   sideChoices: Record<string, string>;
   followers?: Record<string, { room: WorldRoom; x: number; y: number }>;
+};
+export type PerformanceDefinition = {
+  kind: "theatre" | "fireflies" | "concert";
+  duration: number;
+  shape?: "trail" | "flower-tree-star";
+  subtitles?: string[];
+  destination?: AnchorRef;
+  origin?: AnchorRef;
 };
 export const newFlowRuntime = (): FlowRuntime => ({
   drafts: {},
@@ -329,6 +421,30 @@ export function puzzleMove(
   return d;
 }
 export function validateFlowDefinition(f: FlowDefinition) {
+  if (f.period !== undefined && ![0, 1, 2, 3].includes(f.period))
+    throw Error("Période de présentation invalide");
+  if (
+    f.confidences &&
+    (!Array.isArray(f.confidences) ||
+      f.confidences.length > 20 ||
+      new Set(f.confidences.map((v) => v.id)).size !== f.confidences.length ||
+      f.confidences.some(
+        (v) =>
+          !v ||
+          !/^[a-z][a-z0-9-]{0,79}$/.test(v.id) ||
+          typeof v.author !== "string" ||
+          !v.author.length ||
+          v.author.length > 80 ||
+          !["shared", "private", "draft"].includes(v.status) ||
+          !/^[a-z][a-z0-9-]{0,79}\/[a-z][a-z0-9-]{0,79}$/.test(v.requires) ||
+          (v.status !== "shared" && v.text !== undefined) ||
+          (v.status === "shared" &&
+            (typeof v.text !== "string" ||
+              !v.text.length ||
+              v.text.length > 4000)),
+      ))
+  )
+    throw Error("Confidences incompatibles avec le consentement");
   if (
     f.media &&
     (!Array.isArray(f.media) ||
@@ -350,7 +466,17 @@ export function validateFlowDefinition(f: FlowDefinition) {
     f.schema !== 1 ||
     !Array.isArray(f.portals) ||
     f.portals.some(
-      (v) => !["forest", "bakery", "lake", "hamlet", "clockshop"].includes(v),
+      (v) =>
+        ![
+          "forest",
+          "bakery",
+          "lake",
+          "hamlet",
+          "clockshop",
+          "reserve",
+          "glade",
+          "keeper",
+        ].includes(v),
     )
   )
     throw Error("Régions narratives invalides");
@@ -369,6 +495,9 @@ export function validateFlowDefinition(f: FlowDefinition) {
       "lake",
       "hamlet",
       "clockshop",
+      "reserve",
+      "glade",
+      "keeper",
     ].includes(p.room) &&
     typeof p.anchor === "string" &&
     p.anchor.length > 0 &&
@@ -377,12 +506,64 @@ export function validateFlowDefinition(f: FlowDefinition) {
       [p.offset.x, p.offset.y].every(
         (n) => Number.isFinite(n) && Math.abs(n) <= 512,
       ));
+  if (
+    f.theatre &&
+    (!anchor(f.theatre.point) ||
+      typeof f.theatre.built !== "string" ||
+      f.theatre.built.length > 200 ||
+      (f.theatre.style !== undefined &&
+        (typeof f.theatre.style !== "string" ||
+          f.theatre.style.length > 200)) ||
+      (f.theatre.inherited !== undefined &&
+        !/^episode-[0-9]{2}\/[a-z][a-z0-9-]{0,79}$/.test(f.theatre.inherited)))
+  )
+    throw Error("Objet personnalisable invalide");
   const range = (v: { from: number; until: number }) =>
     Number.isSafeInteger(v.from) &&
     Number.isSafeInteger(v.until) &&
     v.from >= 0 &&
     v.until >= v.from &&
     v.until <= 99;
+  if (
+    f.periodFrom !== undefined &&
+    (!Number.isSafeInteger(f.periodFrom) ||
+      f.periodFrom < 0 ||
+      f.periodFrom > 99)
+  )
+    throw Error("Début d’ambiance invalide");
+  if (
+    f.paths &&
+    (!Array.isArray(f.paths) ||
+      f.paths.length > 8 ||
+      f.paths.some(
+        (path) =>
+          !anchor({ room: path.room, anchor: "point:0,0" }) ||
+          !Number.isSafeInteger(path.from) ||
+          path.from < 0 ||
+          path.from > 99 ||
+          !Array.isArray(path.points) ||
+          path.points.length < 2 ||
+          path.points.length > 20 ||
+          path.points.some(
+            (p) =>
+              !p ||
+              !Number.isFinite(p.x + p.y) ||
+              p.x < 0 ||
+              p.x > 1920 ||
+              p.y < 0 ||
+              p.y > 1408,
+          ) ||
+          path.points
+            .slice(1)
+            .reduce(
+              (length, p, i) =>
+                length +
+                Math.hypot(p.x - path.points[i].x, p.y - path.points[i].y),
+              0,
+            ) > 2000,
+      ))
+  )
+    throw Error("Sentier de présentation invalide");
   const objective = (v: string) =>
     /^[a-z][a-z0-9-]{0,79}\/[a-z][a-z0-9-]{0,79}$/.test(v);
   if (f.weather && !range(f.weather)) throw Error("Période météo invalide");
@@ -412,7 +593,15 @@ export function validateFlowDefinition(f: FlowDefinition) {
     Object.entries(f.portalAccess ?? {}).some(
       ([key, value]) =>
         !f.portals.includes(
-          key as "forest" | "bakery" | "lake" | "hamlet" | "clockshop",
+          key as
+            | "forest"
+            | "bakery"
+            | "lake"
+            | "hamlet"
+            | "clockshop"
+            | "reserve"
+            | "glade"
+            | "keeper",
         ) ||
         !value ||
         !Number.isSafeInteger(value.after) ||
@@ -483,6 +672,10 @@ export function validateFlowDefinition(f: FlowDefinition) {
       new Set(f.placements.map((p) => p.id)).size !== f.placements.length ||
       f.placements.some(
         (p) =>
+          (p.inscription !== undefined &&
+            (typeof p.inscription !== "string" ||
+              !p.inscription.length ||
+              p.inscription.length > 20)) ||
           !id(p.id) ||
           !anchor(p.point) ||
           typeof p.texture !== "string" ||
@@ -504,6 +697,7 @@ export function validateFlowDefinition(f: FlowDefinition) {
       f.bookExtras.some(
         (p) =>
           !p ||
+          (p.mapNote !== undefined && !isMapNote(p.mapNote)) ||
           typeof p.title !== "string" ||
           !p.title.length ||
           p.title.length > 200 ||
@@ -535,6 +729,45 @@ export function validateFlowDefinition(f: FlowDefinition) {
     throw Error("Style lumineux invalide");
 }
 export function validatePuzzle(p: Puzzle) {
+  const image = (v: unknown) =>
+    typeof v === "string" && /^\/assets\/[a-zA-Z0-9_\-/]+\.png$/.test(v);
+  if (
+    (p.hintAfterAttempt !== undefined &&
+      typeof p.hintAfterAttempt !== "boolean") ||
+    (p.assisted !== undefined &&
+      (typeof p.assisted !== "boolean" || p.kind !== "sequence")) ||
+    (p.cards &&
+      (Object.keys(p.cards).length > 36 ||
+        Object.entries(p.cards).some(
+          ([id, src]) => !p.items.some((v) => v.id === id) || !image(src),
+        ))) ||
+    (p.assembly &&
+      (p.kind !== "sequence" ||
+        !image(p.assembly.base) ||
+        !Array.isArray(p.assembly.layers) ||
+        p.assembly.layers.length > 12 ||
+        p.assembly.layers.some(
+          (v) => !p.items.some((i) => i.id === v.id) || !image(v.src),
+        )))
+  )
+    throw Error("Présentation d’activité invalide");
+  if (
+    p.assembly &&
+    ((p.assembly.backdrops &&
+      (Object.keys(p.assembly.backdrops).length > 3 ||
+        Object.values(p.assembly.backdrops).some((src) => !image(src)))) ||
+      (p.assembly.choice !== undefined &&
+        (typeof p.assembly.choice !== "string" ||
+          p.assembly.choice.length > 200)) ||
+      p.assembly.layers.some((layer) =>
+        [layer.x, layer.y, layer.width].some(
+          (value) =>
+            value !== undefined &&
+            (!Number.isFinite(value) || value < 0 || value > 100),
+        ),
+      ))
+  )
+    throw Error("Calques de construction invalides");
   if (p.unique !== undefined && typeof p.unique !== "boolean")
     throw Error("Unicité invalide");
   if (
@@ -678,6 +911,20 @@ export function validatePuzzle(p: Puzzle) {
 /** Shape checks are also required at the server boundary; this is never an authorization decision. */
 export function validateFlowRuntime(r: FlowRuntime) {
   if (
+    (r.performance !== undefined &&
+      r.performance !== null &&
+      (!r.performance ||
+        !/^[a-z][a-z0-9-]{0,79}$/.test(r.performance.action) ||
+        !Number.isFinite(r.performance.elapsed) ||
+        r.performance.elapsed < 0 ||
+        r.performance.elapsed > 120000)) ||
+    (r.previousClock !== undefined &&
+      (!Number.isFinite(r.previousClock) ||
+        r.previousClock < 0 ||
+        r.previousClock >= 180000))
+  )
+    throw Error("Reprise de spectacle invalide");
+  if (
     r?.followers !== undefined &&
     (!r.followers ||
       Array.isArray(r.followers) ||
@@ -701,6 +948,9 @@ export function validateFlowRuntime(r: FlowRuntime) {
             "lake",
             "hamlet",
             "clockshop",
+            "reserve",
+            "glade",
+            "keeper",
           ].includes(p.room),
       ))
   )

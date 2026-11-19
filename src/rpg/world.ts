@@ -10,6 +10,9 @@ export const roomNames: Record<Room, string> = {
   lake: "Lac",
   hamlet: "Hameau",
   clockshop: "Horlogerie",
+  reserve: "Réserve de l’atelier",
+  glade: "Clairière",
+  keeper: "Maison du gardien",
   forest: "Forêt",
   bakery: "Fournil",
 };

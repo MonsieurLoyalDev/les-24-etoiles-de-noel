@@ -211,7 +211,9 @@ export async function installPrivateFixture(
       return reply(403, {
         message: "Fixture media denied; no signed URL issued",
       });
-    const rpc = url.pathname.match(/^\/rest\/v1\/rpc\/(advent_[a-z_]+)$/)?.[1];
+    const rpc = url.pathname.match(
+      /^\/rest\/v1\/rpc\/(advent_[a-z_]+|episode_status)$/,
+    )?.[1];
     if (!rpc || req.method() !== "POST") {
       violations.push(
         "Unexpected fixture endpoint: " + req.method() + " " + url.pathname,
@@ -221,6 +223,7 @@ export async function installPrivateFixture(
     const body = req.postDataJSON(),
       preview = body.p_preview ?? false;
     const rpcArgs: Record<string, string[]> = {
+      episode_status: ["p_preview"],
       advent_status: ["p_preview"],
       advent_day: ["p_day", "p_preview"],
       advent_start: ["p_day", "p_preview", "p_replay"],
@@ -237,6 +240,9 @@ export async function installPrivateFixture(
     }
     if (typeof preview !== "boolean" || (preview && role !== "admin"))
       return reply(403, { message: "Fixture admin preview required" });
+    // This legacy fixture contains no narrative episode. The real narrative/RLS
+    // fixture tests completed-history loading; never invent one here.
+    if (rpc === "episode_status") return reply(200, []);
     if (rpc.startsWith("advent_admin_")) {
       if (role !== "admin")
         return reply(403, { message: "Fixture admin required" });

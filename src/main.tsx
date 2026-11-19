@@ -1,3 +1,4 @@
+import { DiscoveryMap } from "./narrative/DiscoveryMap";
 import { Dialogue } from "./art/Dialogue";
 import { GraphicsSettings } from "./art/GraphicsSettings";
 import "./art/ambience.css";
@@ -377,6 +378,33 @@ function App() {
                     }
                   />
                 </label>
+                {(["music", "voices", "ambience"] as const).map(
+                  (channel, i) => (
+                    <label key={channel}>
+                      {["Musique", "Voix", "Ambiances"][i]}
+                      <input
+                        aria-label={`Volume ${["musique", "voix", "ambiances"][i]}`}
+                        type="range"
+                        min="0"
+                        max="1"
+                        step=".05"
+                        value={audioPreferences.channels?.[channel] ?? 1}
+                        onChange={(e) =>
+                          setAudioPreferences((p) => ({
+                            ...p,
+                            channels: {
+                              music: 1,
+                              voices: 1,
+                              ambience: 1,
+                              ...p.channels,
+                              [channel]: Number(e.target.value),
+                            },
+                          }))
+                        }
+                      />
+                    </label>
+                  ),
+                )}
               </div>
             )}
             {journal && (
@@ -400,6 +428,7 @@ function App() {
                       <article key={index}>
                         <h4>{page.title}</h4>
                         <p>{page.text}</p>
+                        {page.mapNote && <DiscoveryMap note={page.mapNote} />}
                       </article>
                     ))}
                     <p>

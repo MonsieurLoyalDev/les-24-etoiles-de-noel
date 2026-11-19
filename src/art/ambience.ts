@@ -61,6 +61,7 @@ const facades = {
 };
 export class VillageAmbience {
   storyStorm = false;
+  storyExterior = false;
   private lights: Light[] = [];
   private smoke: Smoke[] = [];
   private flakes: Phaser.GameObjects.Image[] = [];
@@ -233,7 +234,7 @@ export class VillageAmbience {
       .setPosition(sx, sy)
       .setSize(cam.width / cam.zoom, cam.height / cam.zoom)
       .setFillStyle(palette.color)
-      .setAlpha(this.village ? palette.alpha : 0.03);
+      .setAlpha(this.village || this.storyExterior ? palette.alpha : 0.03);
     if (!this.village || document.hidden) return;
     const view = cam.worldView,
       onscreen = (x: number, y: number, pad = 45) =>

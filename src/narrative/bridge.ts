@@ -1,3 +1,5 @@
+import type { MapNote } from "./flow";
+export type BookEntry = { title: string; text: string; mapNote?: MapNote };
 import type { Point } from "../domain";
 import type { Puzzle, PuzzleDraft, PuzzleMove } from "./flow";
 export type NarrativeView = {
@@ -13,8 +15,8 @@ export type NarrativeView = {
   hintLevel: number;
   saving: boolean;
   error: string;
-  book: { title: string; text: string } | null;
-  bookPages?: { day: number; title: string; text: string }[];
+  book: BookEntry | null;
+  bookPages?: (BookEntry & { day: number })[];
   bookRequest: number;
   characters: string[];
   places: string[];
@@ -24,7 +26,7 @@ export type NarrativeView = {
   actions: { id: string; label: string }[];
   audioCue: string;
   inspection?: { src: string; caption: string };
-  task?: { puzzle: Puzzle; draft: PuzzleDraft };
+  task?: { puzzle: Puzzle; draft: PuzzleDraft; assemblyBackdrop?: string };
 };
 export interface NarrativeBridge {
   readonly dialogueActive: boolean;

@@ -1,3 +1,5 @@
+import { advanceAlongRoute } from "./route-motion";
+import { visibleConfidences } from "./confidences";
 import Phaser from "phaser";
 import { emptyEpisodeContext, type EpisodeContext } from "./context";
 import { controls, type Village } from "../game/Game";
@@ -8,7 +10,7 @@ import { anchors, plan, villageMap } from "../art/village34";
 import { roomDimensions, interiorCollisions } from "../art/rooms33";
 import { decorationRects } from "../decor/model";
 import { readGraphics } from "../art/graphics";
-import { move, type Point } from "../domain";
+import { type Point } from "../domain";
 import type { GameEvent } from "../rpg/quests";
 import {
   finishScene,
@@ -143,6 +145,7 @@ export class NarrativeDirector implements NarrativeBridge {
         reduced: () => this.reduced,
         stars: () => this.view.restored,
         gatherReady: () => this.gatherReady(),
+        moment: (kind) => this.polish.start(kind, scene.player, scene.loyal),
         walk: (id, sprite, target, delta, speed, room) =>
           this.walk(id, sprite, target, delta, speed, room),
       });
@@ -352,6 +355,13 @@ export class NarrativeDirector implements NarrativeBridge {
         : (this.context.pages.at(-1) ?? null),
       bookPages: [
         ...this.context.pages,
+        ...visibleConfidences(this.script.flow, this.progress.objectives)
+          .filter((v) => v.status === "shared" && v.text)
+          .map((v) => ({
+            day: this.script.day,
+            title: v.author,
+            text: v.text!,
+          })),
         ...(this.runtime.restored
           ? [
               { day: this.script.day, ...this.script.book },
@@ -366,6 +376,7 @@ export class NarrativeDirector implements NarrativeBridge {
                   day: this.script.day,
                   title: page.title,
                   text: page.text,
+                  mapNote: page.mapNote,
                 })),
             ]
           : []),
@@ -902,42 +913,22 @@ export class NarrativeDirector implements NarrativeBridge {
       this.paths.set(id, { goal, points: path, retry: 500 });
     }
     const route = this.paths.get(id)!;
-    let budget = (speed * Math.min(delta, 200)) / 1000;
-    while (budget > 0 && route.points.length) {
-      const point = route.points[0],
-        length = distance(sprite, point);
-      if (length < 1) {
-        route.points.shift();
-        continue;
-      }
-      const amount = Math.min(length, budget);
-      const next = move(
-        sprite,
-        ((point.x - sprite.x) / length) * amount,
-        ((point.y - sprite.y) / length) * amount,
-        nav.rects,
-        nav.width,
-        nav.height,
-      );
-      if (
-        room === this.scene.state.room &&
-        id !== "loyal" &&
-        distance(next, this.scene.player) < 18
-      ) {
-        this.paths.delete(id);
-        break;
-      }
-      if (distance(sprite, next) < 0.01) {
-        this.paths.delete(id);
-        break;
-      }
-      if (sprite.setPosition) sprite.setPosition(next.x, next.y);
-      else {
-        sprite.x = next.x;
-        sprite.y = next.y;
-      }
-      budget -= amount;
+    const result = advanceAlongRoute(
+      sprite,
+      route.points,
+      nav,
+      (speed * Math.min(delta, 200)) / 1000,
+      room === this.scene.state.room && id !== "loyal"
+        ? this.scene.player
+        : undefined,
+    );
+    if (sprite.setPosition)
+      sprite.setPosition(result.position.x, result.position.y);
+    else {
+      sprite.x = result.position.x;
+      sprite.y = result.position.y;
     }
+    if (result.blocked) this.paths.delete(id);
     return distance(sprite, goal) < 4;
   }
   private startEffect(kind: "scatter" | "restore") {
@@ -1144,7 +1135,10 @@ export class NarrativeDirector implements NarrativeBridge {
     };
     let target: Point;
     if (escort.phase === "out") target = bindings.libraryDoor;
-    else if (escort.phase === "place") target = { x: 1015, y: 795 };
+    else if (escort.phase === "place")
+      target = this.script.flow?.gather?.destinations?.mira
+        ? flowAnchor(this.scene, this.script.flow.gather.destinations.mira)
+        : { x: 1015, y: 795 };
     else if (escort.phase === "return") target = door;
     else target = { x: 240, y: 280 };
     const arrived = this.walk(
@@ -1347,6 +1341,14 @@ export class NarrativeDirector implements NarrativeBridge {
       }
     }
     this.flow?.update(delta);
+    if (
+      this.runtime.flow?.performance &&
+      this.flocon &&
+      !controls.paused &&
+      !this.dialogueActive
+    ) {
+      this.polish.fox(this.flocon, delta, "discovery", this.reduced);
+    }
     this.renderDialogue();
     if (this.scene.tree && !this.busy)
       this.scene.tree.setFrame(
@@ -1377,24 +1379,24 @@ export class NarrativeDirector implements NarrativeBridge {
       if (id === "mira")
         return (
           this.runtime.escort?.room === "village" &&
-          distance(this.runtime.escort.position, { x: 1015, y: 795 }) < 45
+          distance(
+            this.runtime.escort.position,
+            g.destinations?.mira
+              ? flowAnchor(this.scene, g.destinations.mira)
+              : { x: 1015, y: 795 },
+          ) < 45
         );
       const target = g.destinations?.[id]
         ? flowAnchor(this.scene, g.destinations[id])
-        : {
+        : this.safe({
             x:
               anchors.advent.x -
               60 +
               g.actors.filter((a) => a !== "mira").indexOf(id) * 120,
             y: anchors.advent.y + 35,
-          };
+          });
       const actor = this.scene.living.get(g.actors[index]);
-      return (
-        !!actor &&
-        (distance(actor.position, target) < 10 ||
-          (distance(actor.position, target) < 45 &&
-            distance(actor.position, this.scene.player) < 40))
-      );
+      return !!actor && distance(actor.position, target) < 26;
     });
   }
   update(delta: number) {
