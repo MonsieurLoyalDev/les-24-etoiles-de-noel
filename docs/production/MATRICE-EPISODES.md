@@ -9,15 +9,15 @@ La matrice détaillée (scènes, personnages, lieux, énigmes, choix et dépenda
 | 4 | 31–39 | 8 | A | Lot A validé artistiquement par le créateur |
 | 5 | 40–48 | 8 | A | Lot A validé artistiquement par le créateur |
 | 6 | 49–60 | 9 | A | Lot A validé artistiquement par le créateur |
-| 7 | 61–70 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 8 | 71–79 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 9 | 80–89 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 10 | 90–99 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 11 | 100–109 | 9 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 12 | 110–121 | 10 | B | Jouable et testé localement ; validation artistique du Lot B attendue |
-| 13 | 122–131 | 10 | C | Non commencé |
-| 14 | 132–142 | 10 | C | Non commencé |
-| 15 | 143–153 | 10 | C | Non commencé |
-| 16 | 154–165 | 10 | C | Non commencé |
+| 7 | 61–70 | 9 | B | Lot B validé artistiquement par le créateur |
+| 8 | 71–79 | 9 | B | Lot B validé artistiquement par le créateur |
+| 9 | 80–89 | 9 | B | Lot B validé artistiquement par le créateur |
+| 10 | 90–99 | 9 | B | Lot B validé artistiquement par le créateur |
+| 11 | 100–109 | 9 | B | Lot B validé artistiquement par le créateur |
+| 12 | 110–121 | 10 | B | Lot B validé artistiquement par le créateur |
+| 13 | 122–131 | 10 | C | Implémenté ; recette et réserves dans RAPPORT-LOT-C.md |
+| 14 | 132–142 | 10 | C | Implémenté ; recette et réserves dans RAPPORT-LOT-C.md |
+| 15 | 143–153 | 10 | C | Implémenté ; recette et réserves dans RAPPORT-LOT-C.md |
+| 16 | 154–165 | 10 | C | Implémenté ; recette et réserves dans RAPPORT-LOT-C.md |
 
 L'achèvement d'un épisode implique des interactions réelles, des choix sauvegardés, une récompense unique et une page confirmée par le serveur. Une extraction du PDF ou un écran de dialogue ne constitue pas une intégration terminée. Les épilogues facultatifs ne doivent pas conditionner la journée suivante.

@@ -39,3 +39,20 @@ La session du Lot B commence le 18 novembre à 17:14 (Paris, reflog de création
 Pour les Jours 13–24, **aucune implémentation n'est commencée**. Sans audit autorisé de leurs cahiers et sans mesurer les futures animations, prévoir une fourchette de **35 à 65 heures de travail**, plus **8 à 16 heures de recette/configuration distante** : intégration et tests des épisodes, ressources réellement manquantes, continuité et conclusion. Incertitude élevée ; prévoir 20 à 30 % de marge pour les retours et les problèmes d'infrastructure. Il ne s'agit pas d'un engagement de livraison ni d'une raison de réduire les énigmes.
 
 Après accord sur le Lot B, une cadence possible est : 19–22 novembre pour un prochain lot autorisé, 23–26 pour la suite autorisée et la conclusion, 27–28 pour la recette canonique transversale, 29 pour les corrections, 30 pour la recette de lancement. Une nouvelle autorisation est nécessaire avant d'entamer chaque périmètre. La préparation Supabase/VPS doit être planifiée assez tôt sur staging ; ne pas reporter les invitations, Storage privé, dates Paris, HTTPS et restauration de sauvegarde au soir du 30. Aucun de ces contrôles distants n'est acquis par les tests locaux.
+
+
+## Actualisation Lot C — 19 novembre 2026
+
+Les Lots A et B sont validés artistiquement. Le Lot C est implémenté sur sa branche dédiée, depuis le Lot B ; sa recette exacte et ses réserves sont livrées séparément. Les estimations historiques ci-dessus ne constituent plus l’état d’avancement courant.
+
+Après validation du Lot C, prévoir pour les Jours 17–24 et la conclusion **24 à 45 heures de production/test**, puis **8 à 16 heures de recette de lancement et configuration distante**, avec 20–30 % de marge. Incertitude élevée : ces cahiers ne sont pas développés dans le Lot C ; les besoins en ressources, les retours artistiques et l’accès au staging peuvent déplacer la charge. Ce ne sont pas des heures garanties déduites de la seule vitesse de génération.
+
+| Date cible | Périmètre soumis à autorisation | Priorité |
+|---|---|---|
+| 19–20 novembre | Validation Lot C et audit du prochain lot | P0 |
+| 20–25 novembre | Épisodes restants et conclusion, par lots autorisés | P0 |
+| 26–27 novembre | Chaîne canonique complète, reprise, compatibilité et confidentialité | P0 |
+| 28–29 novembre | Staging réel autorisé : invitations, Storage, dates Paris, HTTPS, restauration | P0 |
+| 30 novembre | Corrections bloquantes, sauvegarde et accord explicite d’ouverture | P0 |
+
+P1 : retours narratifs et visuels, confort mobile et conclusion. P2 : nouvelles animations spécialisées, voix/musiques non fournies, décorations secondaires. Réduire les ajouts facultatifs avant de sacrifier une énigme, une sauvegarde ou un contrôle d’accès. Aucun test local ne dispense de la validation distante avant l’ouverture privée du 1er décembre.
