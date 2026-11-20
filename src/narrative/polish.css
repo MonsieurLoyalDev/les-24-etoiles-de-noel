@@ -16,10 +16,22 @@
 .game-shell:has(.narrative-session) .dialogue .dialogue-choices button {
   min-height: 44px;
   touch-action: manipulation;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
-.game-shell:has(.narrative-session) .dialogue button:focus-visible {
+.game-shell:has(.narrative-session) .dialogue :is(button, p):focus-visible {
   outline: 2px solid #79521e;
   outline-offset: 3px;
+}
+@media (max-width: 440px) {
+  .game-shell:has(.narrative-session) .dialogue .dialogue-choices {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .game-shell:has(.narrative-session) .dialogue .dialogue-choices button {
+    width: 100%;
+    min-width: 0;
+  }
 }
 .game-shell:has(canvas[data-gesture]:not([data-gesture=""])) .narrative-tracker {
   visibility: hidden;

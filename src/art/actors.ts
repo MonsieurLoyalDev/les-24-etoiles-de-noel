@@ -22,8 +22,10 @@ export const residentActors: Record<string, Actor> = {
 };
 const previous = new WeakMap<
   Phaser.GameObjects.Sprite,
-  { x: number; y: number; direction: string }
+  { x: number; y: number; direction: string; idleSince: number; variation: number }
 >();
+let reducedMotion: MediaQueryList | undefined;
+
 export function preloadActors(scene: Phaser.Scene) {
   for (const key of Object.values(actorKeys)) {
     const atlas = catalog.atlases[key];
@@ -93,6 +95,40 @@ export function animateActor(sprite: Phaser.GameObjects.Sprite) {
         ? "bas"
         : "haut"
     : (old?.direction ?? "bas");
+  const now = sprite.scene.time.now;
+  const idleSince = moving ? now : (old?.idleSince ?? now);
+  const variation = moving && old?.idleSince !== now
+    ? Math.floor(now / 550) % 3
+    : (old?.variation ?? 0);
+  if (name === "loyal" && !moving) {
+    reducedMotion ??= window.matchMedia("(prefers-reduced-motion: reduce)");
+    const t = (now - idleSince) % 7800;
+    const blink = 1750 + variation * 630;
+    let frame = 1;
+    if (!reducedMotion.matches) {
+      if (t >= blink && t < blink + 160) frame = 3;
+      else if (t >= 4700 && t < 5080) frame = 4;
+      else if (t >= 650 && t < 1020) frame = 2;
+    }
+    const texture = actorKeys.loyal;
+    const id = `loyal_attente_0${frame}`;
+    if (
+      sprite.texture.key !== texture ||
+      sprite.frame.name !== id ||
+      sprite.anims.isPlaying
+    ) {
+      const metric = actorMetric(sprite.scene, texture);
+      sprite
+        .stop()
+        .setTexture(texture, id)
+        .setFlipX(false)
+        .setAngle(0)
+        .setOrigin(0.5, metric.foot)
+        .setScale(52 / metric.height);
+    }
+    previous.set(sprite, { x: sprite.x, y: sprite.y, direction, idleSince, variation });
+    return;
+  }
   const profile =
     name === "loyal" &&
     moving &&
@@ -111,5 +147,5 @@ export function animateActor(sprite: Phaser.GameObjects.Sprite) {
   sprite
     .setOrigin(0.5, metric.foot)
     .setScale((name === "flocon" ? 31 : 52) / metric.height);
-  previous.set(sprite, { x: sprite.x, y: sprite.y, direction });
+  previous.set(sprite, { x: sprite.x, y: sprite.y, direction, idleSince, variation });
 }

@@ -153,7 +153,7 @@ it("D42 conversation au fauteuil : livre fermé et pose assise conservée", () =
   d.update([a], 93000, 16, l);
   expect(d.get("mira")?.frame).toBe(13);
 });
-it("D42 salutation facultative : arrêt bref, délai de repos et priorité au dialogue", () => {
+it("Salutation facultative : hors écran et scènes réservées exclues, geste orienté", () => {
   const w = new LivingWorld();
   w.attach("village", 1920, 1408, []);
   const a = w.get("emile")!,
@@ -167,10 +167,15 @@ it("D42 salutation facultative : arrêt bref, délai de repos et priorité au di
     p.pathIndex = 0;
   }
   a.position = { x: 700, y: 700 };
-  b.position = { x: 730, y: 700 };
+  b.position = { x: 670, y: 700 };
+  w.update(45000, 20, "village", { x: 1900, y: 1350 }, null, () => false);
+  expect(a.reaction).toBeNull();
+  w.update(45000, 20, "village", { x: 1900, y: 1350 }, null, () => true, new Set(["noe"]));
+  expect(a.reaction).toBeNull();
   const before = { ...a.position };
   w.update(45000, 100, "village", { x: 1900, y: 1350 }, null, () => true);
   expect(a.reaction?.clip).toBe("greet");
+  expect(w.activities.get("emile")?.flip).toBe(true);
   expect(a.position).toEqual(before);
   expect(a.reactionCooldown).toBeGreaterThan(0);
   w.update(45100, 100, "village", { x: 1900, y: 1350 }, "emile", () => true);

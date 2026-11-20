@@ -79,6 +79,7 @@ export class VillageAmbience {
     private shade: Phaser.GameObjects.Rectangle,
     private village: boolean,
     private lanterns?: LanternCoordinator,
+    regionalSnow = false,
   ) {
     if (!scene.textures.exists("ambient-soft")) {
       const tex = scene.textures.createCanvas("ambient-soft", 48, 48)!;
@@ -90,6 +91,12 @@ export class VillageAmbience {
       tex.context.fillRect(0, 0, 48, 48);
       tex.refresh();
     }
+    this.storyExterior = regionalSnow;
+    this.flakes = Array.from(
+      { length: village ? 40 : regionalSnow ? 10 : 0 },
+      () => scene.add.image(0, 0, "ambient-soft")
+        .setScrollFactor(0).setDepth(9010).setVisible(false),
+    );
     if (!village) {
       scene.game.canvas.dataset.ambience = JSON.stringify({
         quality: "none",
@@ -170,9 +177,6 @@ export class VillageAmbience {
         light(p.x, p.y, 22, 0.22, image.depth + 1);
       }
     }
-    this.flakes = Array.from({ length: 40 }, () =>
-      scene.add.image(0, 0, "ambient-soft").setScrollFactor(0).setDepth(9010),
-    );
     this.wind = Array.from({ length: 6 }, () =>
       scene.add.image(0, 0, "ambient-soft").setDepth(8000).setTint(0xe3ebfa),
     );
@@ -235,7 +239,7 @@ export class VillageAmbience {
       .setSize(cam.width / cam.zoom, cam.height / cam.zoom)
       .setFillStyle(palette.color)
       .setAlpha(this.village || this.storyExterior ? palette.alpha : 0.03);
-    if (!this.village || document.hidden) return;
+    if ((!this.village && !this.flakes.length) || document.hidden) return;
     const view = cam.worldView,
       onscreen = (x: number, y: number, pad = 45) =>
         x > view.x - pad &&
@@ -243,7 +247,16 @@ export class VillageAmbience {
         y > view.y - pad &&
         y < view.bottom + pad;
     const motion = quality !== "none",
-      flurry = this.storyStorm ? 1 : Math.max(0, Math.sin(time / 7000));
+      flurry = this.storyStorm
+        ? 1
+        : this.village
+          ? Math.max(0, Math.sin(time / 7000))
+          : this.storyExterior
+            ? 0.33 + Math.sin(time / 8600) * 0.15
+            : 0;
+    const snowLimit = this.village
+      ? budget.snow
+      : Math.min(this.flakes.length, Math.floor(budget.snow / 3));
     let visibleLights = 0,
       visibleSmoke = 0,
       visibleSnow = 0,
@@ -298,7 +311,7 @@ export class VillageAmbience {
       visibleSmoke++;
     });
     this.flakes.forEach((f, i) => {
-      const visible = i < budget.snow && flurry > 0.04;
+      const visible = i < snowLimit && flurry > 0.04;
       f.setVisible(visible);
       if (!visible) return;
       const span = cam.width / cam.zoom,
@@ -393,7 +406,9 @@ export class VillageAmbience {
         visibleStars,
         visibleLights,
         swaying,
-        particleLimit: budget.snow + budget.smoke + budget.wind + budget.stars,
+        particleLimit: this.village
+          ? budget.snow + budget.smoke + budget.wind + budget.stars
+          : snowLimit,
         cpuP95: sorted[Math.floor(sorted.length * 0.95)] ?? 0,
         engineFps: this.scene.game.loop.actualFps,
         meanFrameMs:

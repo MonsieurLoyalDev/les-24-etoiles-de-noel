@@ -3,12 +3,24 @@ import { technicalEpisode } from "../fixtures/narrative";
 import { loginFixture } from "./fixtures";
 import { navigateTo } from "../e2e/pathfinding";
 import { installNarrativeFixture } from "./narrative-fixture";
-test("narration du build privé : calendrier, choix et reprise", async ({
+test("narration du build privé : calendrier, quatre choix lisibles et reprise", async ({
   page,
 }) => {
   test.setTimeout(180000);
-  const content = technicalEpisode(),
-    fixture = await installNarrativeFixture(page, content);
+  const content = technicalEpisode();
+  const welcome = content.scenes[0];
+  welcome.dialogues.welcome[0].text =
+    "Cette réplique de contrôle doit rester lisible et défiler au clavier. "
+      .repeat(24)
+      .trimEnd();
+  welcome.choices[0].options.push(
+    { id: "three", label: "Option technique C" },
+    {
+      id: "four",
+      label: "Une quatrième option pour exercer le retour à la ligne sur un petit écran",
+    },
+  );
+  const fixture = await installNarrativeFixture(page, content);
   try {
     await page.addInitScript("window.__name=f=>f");
     await page.goto("/");
@@ -38,9 +50,19 @@ test("narration du build privé : calendrier, choix et reprise", async ({
       )
       .toBe(true);
     await page.keyboard.press("e");
-    await expect(page.locator(".dialogue-content p")).toHaveText(
-      content.scenes[0].dialogues.welcome[0].text,
+    const text = page.locator(".dialogue-content p");
+    await expect(text).toHaveText(welcome.dialogues.welcome[0].text);
+    const choices = page.locator(".dialogue-choices");
+    await expect(choices.getByRole("button")).toHaveCount(4);
+    expect(await choices.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(
+      true,
     );
+    await text.focus();
+    await expect(text).toBeFocused();
+    await page.keyboard.press("PageDown");
+    await expect
+      .poll(() => text.evaluate((el) => el.scrollTop))
+      .toBeGreaterThan(0);
     await page
       .getByRole("button", {
         name: content.scenes[0].choices[0].options[1].label,

@@ -1,4 +1,5 @@
 import { readGraphics } from "../art/graphics";
+import { winterTrailRooms } from "./regional-trails";
 import { theatreKeepsake, type TheatreKeepsake } from "./keepsakes";
 import { NarrativePerformance } from "./performance";
 import Phaser from "phaser";
@@ -628,10 +629,7 @@ export class FlowPresentation {
       }
     }
     if (scene.ambience)
-      scene.ambience.storyExterior =
-        scene.state.room === "glade" ||
-        (this.host.script.flow?.period !== undefined &&
-          scene.state.room === "forest");
+      scene.ambience.storyExterior = winterTrailRooms.includes(scene.state.room);
     const weather = this.host.script.flow?.weather;
     if (scene.ambience)
       scene.ambience.storyStorm =
@@ -871,10 +869,11 @@ export class FlowPresentation {
         const zoom = Math.min(
           camera.zoom,
           camera.width / (Math.abs(focal.x - scene.player.x) + 220),
+          (camera.height * 0.8) / (Math.abs(focal.y - scene.player.y) + 130),
         );
         camera.stopFollow();
         camera.pan(center.x, center.y, this.host.reduced() ? 0 : 250);
-        camera.zoomTo(Math.max(0.9, zoom), this.host.reduced() ? 0 : 250);
+        camera.zoomTo(Math.max(0.65, zoom), this.host.reduced() ? 0 : 250);
       }
       this.performanceView ??= new NarrativePerformance(scene);
       this.performanceView.update(
@@ -992,6 +991,7 @@ export class FlowPresentation {
   private restorePerformanceCamera() {
     if (!this.performanceCamera) return;
     const scene = this.host.scene;
+    scene.cameras.main.panEffect.reset();
     scene.cameras.main.zoomTo(
       this.performanceCamera.zoom,
       this.host.reduced() ? 0 : 250,
@@ -1022,8 +1022,9 @@ export class FlowPresentation {
     this.networkImages.clear();
     if (this.host.scene.ambience) {
       this.host.scene.ambience.storyStorm = false;
-      this.host.scene.ambience.storyExterior =
-        this.host.scene.state.room === "glade";
+      this.host.scene.ambience.storyExterior = winterTrailRooms.includes(
+        this.host.scene.state.room,
+      );
     }
     for (const decoration of this.decorations.values()) decoration.destroy();
     this.celebration?.lines?.destroy();

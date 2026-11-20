@@ -86,6 +86,12 @@ export class NarrativeDirector implements NarrativeBridge {
   private polish: DayOnePolish;
   private restingBench?: Phaser.GameObjects.Image;
   private flow?: FlowPresentation;
+  private pendingCouple?: {
+    kind: Gesture;
+    at: Point;
+    room: Village["state"]["room"];
+    until: number;
+  };
   private pose = () => {
     if (this.flow && !controls.paused && !this.dialogueActive && !this.busy) {
       this.flow.presentFollower();
@@ -476,7 +482,7 @@ export class NarrativeDirector implements NarrativeBridge {
     } else {
       if (!p.optional.includes(id)) p.optional.push(id);
       if (id === "hands" || id === "hug" || id === "glasses")
-        this.companionMoment(id);
+        this.queueCoupleMoment(id);
       else if (id === "bench" && this.restingBench)
         this.polish.start(
           "sit",
@@ -497,6 +503,15 @@ export class NarrativeDirector implements NarrativeBridge {
     }
     this.checkpoint();
     this.scene.emit();
+  }
+  private queueCoupleMoment(kind: Gesture) {
+    const { player, state, time } = this.scene;
+    this.pendingCouple = {
+      kind,
+      at: { x: player.x, y: player.y },
+      room: state.room,
+      until: time.now + 5000,
+    };
   }
   private companionMoment(kind?: Gesture) {
     clearReaction(this.scene);
@@ -1400,6 +1415,26 @@ export class NarrativeDirector implements NarrativeBridge {
     });
   }
   update(delta: number) {
+    const moment = this.pendingCouple;
+    if (moment) {
+      const { player, loyal, state, time } = this.scene;
+      if (
+        state.room !== moment.room ||
+        time.now > moment.until ||
+        distance(player, moment.at) > 4 ||
+        this.dialogueActive
+      ) {
+        this.pendingCouple = undefined;
+      } else if (
+        !this.busy &&
+        !controls.paused &&
+        !document.hidden &&
+        distance(player, loyal) <= 65
+      ) {
+        this.pendingCouple = undefined;
+        this.companionMoment(moment.kind);
+      }
+    }
     this.polish.update(
       delta,
       this.dialogueActive || this.busy || controls.paused || document.hidden,
