@@ -119,17 +119,6 @@ export function drawRegionB(
       .setDisplaySize(70, 100)
       .setDepth(390);
     rects.push({ x: 485, y: 375, w: 50, h: 15 });
-    for (const [x, y] of [
-      [512, 620],
-      [510, 510],
-      [580, 440],
-      [650, 400],
-      [720, 365],
-      [280, 450],
-    ]) {
-      const im = scene.add.image(x, y, "ground-d3-packed-a").setDepth(-95);
-      im.setScale(85 / im.width).setAlpha(0.8);
-    }
   }
   return rects;
 }

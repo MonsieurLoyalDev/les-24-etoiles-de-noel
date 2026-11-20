@@ -65,7 +65,7 @@ export class ActivityDirector {
         this.states.set(a.id, {
           ...state,
           ...sample,
-          flip: false,
+          flip: a.reaction.flip,
           age: a.reaction.age,
           total: a.reaction.duration,
         });

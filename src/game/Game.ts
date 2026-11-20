@@ -5,6 +5,7 @@ import { preloadActivities } from "../world/activity-presentation";
 import { preloadNarrativePolish } from "../narrative/polish";
 import { preloadProductionAssets } from "../narrative/production-assets";
 import { drawExtraRoom, isExtraRoom, areaPortals } from "../narrative/areas";
+import { drawRegionalTrail, winterTrailRooms } from "../narrative/regional-trails";
 import type { NarrativeBridge, NarrativeView } from "../narrative/bridge";
 import { environmentKey } from "../art/assets35";
 import catalog from "../art/catalog.json";
@@ -320,6 +321,7 @@ export class Village extends Phaser.Scene {
     if (isExtraRoom(this.state.room)) {
       ({ width: w, height: h } = roomDimensions(this.state.room));
       this.rects = drawExtraRoom(this, this.state.room);
+      drawRegionalTrail(this, this.state.room);
     } else if (this.state.room === "village") {
       urbanGround(this);
       drawGround(this);
@@ -524,8 +526,8 @@ export class Village extends Phaser.Scene {
       this.shade,
       this.state.room === "village",
       this.living.lanterns,
+      winterTrailRooms.includes(this.state.room),
     );
-    this.ambience.storyExterior = this.state.room === "glade";
     if (this.state.room !== "village" && !isExtraRoom(this.state.room))
       this.interiorLight = new InteriorLight(this, this.state.room);
     else if (this.state.room === "village")

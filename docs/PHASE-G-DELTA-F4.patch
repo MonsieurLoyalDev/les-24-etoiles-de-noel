@@ -1,0 +1,543 @@
+diff --git a/src/art/Dialogue.tsx b/src/art/Dialogue.tsx
+index c3a15d8..f022746 100644
+--- a/src/art/Dialogue.tsx
++++ b/src/art/Dialogue.tsx
+@@ -59 +59,3 @@ export function Dialogue({
+-          <p>{text}</p>
++          <p key={line} tabIndex={0}>
++            {text}
++          </p>
+diff --git a/src/art/actors.ts b/src/art/actors.ts
+index 148139b..028435a 100644
+--- a/src/art/actors.ts
++++ b/src/art/actors.ts
+@@ -126,0 +127,29 @@ export function animateActor(sprite: Phaser.GameObjects.Sprite) {
++  if (name === "loyal" && !moving) {
++    reducedMotion ??= window.matchMedia("(prefers-reduced-motion: reduce)");
++    const t = (now - idleSince) % 7800;
++    const blink = 1750 + variation * 630;
++    let frame = 1;
++    if (!reducedMotion.matches) {
++      if (t >= blink && t < blink + 160) frame = 3;
++      else if (t >= 4700 && t < 5080) frame = 4;
++      else if (t >= 650 && t < 1020) frame = 2;
++    }
++    const texture = actorKeys.loyal;
++    const id = `loyal_attente_0${frame}`;
++    if (
++      sprite.texture.key !== texture ||
++      sprite.frame.name !== id ||
++      sprite.anims.isPlaying
++    ) {
++      const metric = actorMetric(sprite.scene, texture);
++      sprite
++        .stop()
++        .setTexture(texture, id)
++        .setFlipX(false)
++        .setAngle(0)
++        .setOrigin(0.5, metric.foot)
++        .setScale(52 / metric.height);
++    }
++    previous.set(sprite, { x: sprite.x, y: sprite.y, direction, idleSince, variation });
++    return;
++  }
+diff --git a/src/art/ambience.ts b/src/art/ambience.ts
+index aa799d6..1996976 100644
+--- a/src/art/ambience.ts
++++ b/src/art/ambience.ts
+@@ -81,0 +82 @@ export class VillageAmbience {
++    regionalSnow = false,
+@@ -92,0 +94,6 @@ export class VillageAmbience {
++    this.storyExterior = regionalSnow;
++    this.flakes = Array.from(
++      { length: village ? 40 : regionalSnow ? 10 : 0 },
++      () => scene.add.image(0, 0, "ambient-soft")
++        .setScrollFactor(0).setDepth(9010).setVisible(false),
++    );
+@@ -173,3 +179,0 @@ export class VillageAmbience {
+-    this.flakes = Array.from({ length: 40 }, () =>
+-      scene.add.image(0, 0, "ambient-soft").setScrollFactor(0).setDepth(9010),
+-    );
+@@ -238 +242 @@ export class VillageAmbience {
+-    if (!this.village || document.hidden) return;
++    if ((!this.village && !this.flakes.length) || document.hidden) return;
+@@ -246 +250,10 @@ export class VillageAmbience {
+-      flurry = this.storyStorm ? 1 : Math.max(0, Math.sin(time / 7000));
++      flurry = this.storyStorm
++        ? 1
++        : this.village
++          ? Math.max(0, Math.sin(time / 7000))
++          : this.storyExterior
++            ? 0.33 + Math.sin(time / 8600) * 0.15
++            : 0;
++    const snowLimit = this.village
++      ? budget.snow
++      : Math.min(this.flakes.length, Math.floor(budget.snow / 3));
+@@ -301 +314 @@ export class VillageAmbience {
+-      const visible = i < budget.snow && flurry > 0.04;
++      const visible = i < snowLimit && flurry > 0.04;
+@@ -396 +409,3 @@ export class VillageAmbience {
+-        particleLimit: budget.snow + budget.smoke + budget.wind + budget.stars,
++        particleLimit: this.village
++          ? budget.snow + budget.smoke + budget.wind + budget.stars
++          : snowLimit,
+diff --git a/src/game/Game.ts b/src/game/Game.ts
+index d153246..5d2e8f5 100644
+--- a/src/game/Game.ts
++++ b/src/game/Game.ts
+@@ -584,0 +585 @@ export class Village extends Phaser.Scene {
++      winterExteriors.includes(this.state.room),
+@@ -586 +586,0 @@ export class Village extends Phaser.Scene {
+-    this.ambience.storyExterior = winterExteriors.includes(this.state.room);
+diff --git a/src/narrative/Director.ts b/src/narrative/Director.ts
+index 5f2329a..2076f03 100644
+--- a/src/narrative/Director.ts
++++ b/src/narrative/Director.ts
+@@ -157,8 +157 @@ export class NarrativeDirector implements NarrativeBridge {
+-        moment: (kind) => {
+-          this.pendingCouple = {
+-            kind,
+-            at: { x: scene.player.x, y: scene.player.y },
+-            room: scene.state.room,
+-            until: scene.time.now + 5000,
+-          };
+-        },
++        moment: (kind) => this.queueCoupleMoment(kind),
+@@ -497 +490 @@ export class NarrativeDirector implements NarrativeBridge {
+-        this.companionMoment(id);
++        this.queueCoupleMoment(id);
+@@ -518,0 +512,9 @@ export class NarrativeDirector implements NarrativeBridge {
++  private queueCoupleMoment(kind: Gesture) {
++    const { player, state, time } = this.scene;
++    this.pendingCouple = {
++      kind,
++      at: { x: player.x, y: player.y },
++      room: state.room,
++      until: time.now + 5000,
++    };
++  }
+diff --git a/src/narrative/FlowPresentation.ts b/src/narrative/FlowPresentation.ts
+index 60c3031..69d63d7 100644
+--- a/src/narrative/FlowPresentation.ts
++++ b/src/narrative/FlowPresentation.ts
+@@ -974,0 +975 @@ export class FlowPresentation {
++          (camera.height * 0.8) / (Math.abs(focal.y - scene.player.y) + 130),
+@@ -978 +979 @@ export class FlowPresentation {
+-        camera.zoomTo(Math.max(0.9, zoom), this.host.reduced() ? 0 : 250);
++        camera.zoomTo(Math.max(0.65, zoom), this.host.reduced() ? 0 : 250);
+@@ -1101,0 +1103 @@ export class FlowPresentation {
++    scene.cameras.main.panEffect.reset();
+diff --git a/src/narrative/areas.ts b/src/narrative/areas.ts
+index a50ef21..5f7f5a2 100644
+--- a/src/narrative/areas.ts
++++ b/src/narrative/areas.ts
+@@ -179,13 +178,0 @@ export function drawExtraRoom(scene: Phaser.Scene, room: ExtraRoom): Rect[] {
+-  for (const [x, y] of [
+-    [512, 650],
+-    [500, 570],
+-    [560, 480],
+-    [510, 410],
+-    [560, 330],
+-  ]) {
+-    const patch = scene.add
+-      .image(x, y, "ground-d3-packed-a")
+-      .setOrigin(0.5)
+-      .setDepth(-90);
+-    patch.setScale(75 / patch.width).setAlpha(0.75);
+-  }
+diff --git a/src/narrative/polish.css b/src/narrative/polish.css
+index a75dfde..ec16ca0 100644
+--- a/src/narrative/polish.css
++++ b/src/narrative/polish.css
+@@ -29,0 +30,2 @@
++  white-space: normal;
++  overflow-wrap: anywhere;
+@@ -31 +33 @@
+-.game-shell:has(.narrative-session) .dialogue button:focus-visible {
++.game-shell:has(.narrative-session) .dialogue :is(button, p):focus-visible {
+@@ -34,0 +37,10 @@
++@media (max-width: 440px) {
++  .game-shell:has(.narrative-session) .dialogue .dialogue-choices {
++    display: grid;
++    grid-template-columns: minmax(0, 1fr);
++  }
++  .game-shell:has(.narrative-session) .dialogue .dialogue-choices button {
++    width: 100%;
++    min-width: 0;
++  }
++}
+diff --git a/src/narrative/regional-trails.ts b/src/narrative/regional-trails.ts
+new file mode 100644
+index 0000000..4b4eb44
+--- /dev/null
++++ b/src/narrative/regional-trails.ts
+@@ -0,0 +1,205 @@
++import type Phaser from "phaser";
++import type { Point, WorldRoom } from "../domain";
++import { edgeVariation } from "../art/ground35";
++import { distanceToSegment, roundedRoute } from "../art/village34";
++
++type Trail = { width: number; points: number[][] };
++const trails: Partial<Record<WorldRoom, Trail[]>> = {
++  forest: [
++    {
++      width: 21,
++      points: [
++        [512, 688],
++        [493, 614],
++        [512, 541],
++        [550, 479],
++        [534, 418],
++        [560, 372],
++        [557, 239],
++      ],
++    },
++    {
++      width: 11,
++      points: [
++        [548, 479],
++        [427, 470],
++        [333, 484],
++        [220, 463],
++      ],
++    },
++  ],
++  lake: [
++    {
++      width: 24,
++      points: [
++        [100, 650],
++        [108, 574],
++        [92, 499],
++        [133, 441],
++        [207, 412],
++        [250, 394],
++        [269, 383],
++      ],
++    },
++    {
++      width: 12,
++      points: [
++        [133, 441],
++        [112, 381],
++        [133, 327],
++        [168, 302],
++      ],
++    },
++  ],
++  hamlet: [
++    {
++      width: 31,
++      points: [
++        [512, 680],
++        [488, 590],
++        [510, 507],
++        [555, 453],
++        [632, 416],
++        [720, 337],
++      ],
++    },
++    {
++      width: 22,
++      points: [
++        [555, 453],
++        [451, 431],
++        [379, 451],
++        [280, 430],
++      ],
++    },
++    {
++      width: 17,
++      points: [
++        [451, 431],
++        [402, 389],
++        [357, 335],
++        [272, 307],
++      ],
++    },
++  ],
++  mountain: [
++    {
++      width: 21,
++      points: [
++        [130, 680],
++        [220, 590],
++        [310, 550],
++        [410, 490],
++        [482, 450],
++        [560, 400],
++        [640, 336],
++      ],
++    },
++  ],
++  garden: [
++    {
++      width: 20,
++      points: [
++        [512, 690],
++        [512, 608],
++        [490, 550],
++        [425, 503],
++        [401, 450],
++        [440, 384],
++        [510, 312],
++      ],
++    },
++    {
++      width: 14,
++      points: [
++        [425, 503],
++        [365, 472],
++        [280, 470],
++      ],
++    },
++    {
++      width: 16,
++      points: [
++        [490, 550],
++        [601, 525],
++        [690, 490],
++        [760, 460],
++      ],
++    },
++  ],
++};
++
++const mirror = (p: number) => {
++  const tile = p % 224;
++  return tile < 112 ? tile : 223 - tile;
++};
++
++/** Render the village's packed-snow material at world-pixel resolution, once per region. */
++export function drawRegionalTrail(scene: Phaser.Scene, room: WorldRoom) {
++  const paths = trails[room];
++  if (!paths) return;
++  const points = paths.flatMap(({ points }) => points);
++  const left = Math.min(...points.map(([x]) => x)) - 24;
++  const top = Math.min(...points.map(([, y]) => y)) - 24;
++  const width = Math.max(...points.map(([x]) => x)) + 24 - left;
++  const height = Math.max(...points.map(([, y]) => y)) + 24 - top;
++  const key = `regional-trail:${room}`;
++  if (!scene.textures.exists(key)) {
++    const surface = scene.textures.createCanvas(key, width, height)!;
++    const context = surface.context;
++    const source = scene.textures
++      .get("source-d35-paths")
++      .getSourceImage() as HTMLImageElement;
++    context.drawImage(source, 112, 0, 112, 112, 0, 0, 112, 112);
++    const material = context.getImageData(0, 0, 112, 112).data;
++    const pixels = context.createImageData(width, height);
++    const field = new Float32Array(width * height).fill(Infinity);
++    for (const path of paths) {
++      const route = roundedRoute(path.points.map(([x, y]) => ({ x, y })));
++      const margin = Math.ceil(path.width / 2) + 7;
++      for (let i = 1; i < route.length; i++) {
++        const a = route[i - 1],
++          b = route[i];
++        const point: Point = { x: 0, y: 0 };
++        for (
++          let y = Math.floor(Math.min(a.y, b.y)) - margin;
++          y <= Math.ceil(Math.max(a.y, b.y)) + margin;
++          y++
++        )
++          for (
++            let x = Math.floor(Math.min(a.x, b.x)) - margin;
++            x <= Math.ceil(Math.max(a.x, b.x)) + margin;
++            x++
++          ) {
++            point.x = x;
++            point.y = y;
++            const index = (y - top) * width + x - left;
++            field[index] = Math.min(
++              field[index],
++              distanceToSegment(point, a, b) - path.width / 2,
++            );
++          }
++      }
++    }
++    for (let y = 0; y < height; y++)
++      for (let x = 0; x < width; x++) {
++        const distance = field[y * width + x];
++        if (distance > 7) continue;
++        const wx = x + left,
++          wy = y + top;
++        const edge = distance + edgeVariation(wx, wy) * 1.45;
++        if (edge > 2) continue;
++        const weather = Math.sin(wx * 0.059 + wy * 0.047) * 0.13;
++        const alpha = (edge > -1 ? 0.25 : edge > -3 ? 0.48 : 0.66) + weather;
++        const from = (mirror(wy) * 112 + mirror(wx)) * 4;
++        const to = (y * width + x) * 4;
++        pixels.data[to] = material[from];
++        pixels.data[to + 1] = material[from + 1];
++        pixels.data[to + 2] = material[from + 2];
++        pixels.data[to + 3] = Math.round(255 * alpha);
++      }
++    context.putImageData(pixels, 0, 0);
++    surface.refresh();
++  }
++  scene.add.image(left, top, key).setOrigin(0).setDepth(-96);
++}
+diff --git a/src/narrative/regional-vignettes.ts b/src/narrative/regional-vignettes.ts
+index 246a180..3423d69 100644
+--- a/src/narrative/regional-vignettes.ts
++++ b/src/narrative/regional-vignettes.ts
+@@ -2,0 +3 @@ import type { WorldRoom } from "../domain";
++import { drawRegionalTrail } from "./regional-trails";
+@@ -62,0 +64 @@ export function decorateRegionalVignettes(
++  drawRegionalTrail(scene, room);
+diff --git a/src/narrative/regions-b.ts b/src/narrative/regions-b.ts
+index b0784d8..c09425b 100644
+--- a/src/narrative/regions-b.ts
++++ b/src/narrative/regions-b.ts
+@@ -122,11 +121,0 @@ export function drawRegionB(
+-    for (const [x, y] of [
+-      [512, 620],
+-      [510, 510],
+-      [580, 440],
+-      [650, 400],
+-      [720, 365],
+-      [280, 450],
+-    ]) {
+-      const im = scene.add.image(x, y, "ground-d3-packed-a").setDepth(-95);
+-      im.setScale(85 / im.width).setAlpha(0.8);
+-    }
+diff --git a/src/narrative/regions-d.ts b/src/narrative/regions-d.ts
+index 18984a8..d15ea6f 100644
+--- a/src/narrative/regions-d.ts
++++ b/src/narrative/regions-d.ts
+@@ -88,20 +87,0 @@ export function drawRegionD(
+-    const route =
+-      room === "mountain"
+-        ? [
+-            [130, 650],
+-            [220, 590],
+-            [310, 550],
+-            [410, 490],
+-            [480, 440],
+-            [560, 400],
+-            [640, 370],
+-          ]
+-        : [
+-            [512, 650],
+-            [490, 550],
+-            [400, 480],
+-            [450, 380],
+-            [510, 320],
+-          ];
+-    for (const [x, y] of route)
+-      prop("ground-d3-packed-a", x, y, 85, false).setDepth(-90).setAlpha(0.7);
+diff --git a/src/world/activities.ts b/src/world/activities.ts
+index 8ee11c3..d873e4e 100644
+--- a/src/world/activities.ts
++++ b/src/world/activities.ts
+@@ -68 +68 @@ export class ActivityDirector {
+-          flip: false,
++          flip: a.reaction.flip,
+diff --git a/src/world/runtime.ts b/src/world/runtime.ts
+index 0569292..40dc0d1 100644
+--- a/src/world/runtime.ts
++++ b/src/world/runtime.ts
+@@ -38 +38 @@ export type LivingActor = {
+-    other: string;
++    flip: boolean;
+@@ -237,0 +238 @@ export class LivingWorld {
++      const active = a.profile.room === room && visible(a.position);
+@@ -256,0 +258 @@ export class LivingWorld {
++        active &&
+@@ -263,0 +266,2 @@ export class LivingWorld {
++            b.id !== talking &&
++            !reserved.has(b.id) &&
+@@ -264,0 +269 @@ export class LivingWorld {
++            visible(b.position) &&
+@@ -273 +278 @@ export class LivingWorld {
+-            other: peer.id,
++            flip: peer.position.x < a.position.x,
+@@ -281 +285,0 @@ export class LivingWorld {
+-      const active = a.profile.room === room && visible(a.position);
+diff --git a/tests/activities-d42.test.ts b/tests/activities-d42.test.ts
+index 5d5e50e..d14aadc 100644
+--- a/tests/activities-d42.test.ts
++++ b/tests/activities-d42.test.ts
+@@ -156 +156 @@ it("D42 conversation au fauteuil : livre fermé et pose assise conservée", () =
+-it("D42 salutation facultative : arrêt bref, délai de repos et priorité au dialogue", () => {
++it("Salutation facultative : hors écran et scènes réservées exclues, geste orienté", () => {
+@@ -170 +170,5 @@ it("D42 salutation facultative : arrêt bref, délai de repos et priorité au di
+-  b.position = { x: 730, y: 700 };
++  b.position = { x: 670, y: 700 };
++  w.update(45000, 20, "village", { x: 1900, y: 1350 }, null, () => false);
++  expect(a.reaction).toBeNull();
++  w.update(45000, 20, "village", { x: 1900, y: 1350 }, null, () => true, new Set(["noe"]));
++  expect(a.reaction).toBeNull();
+@@ -173,0 +178 @@ it("D42 salutation facultative : arrêt bref, délai de repos et priorité au di
++  expect(w.activities.get("emile")?.flip).toBe(true);
+diff --git a/tests/environment-d35.test.ts b/tests/environment-d35.test.ts
+index 0260be1..4ee5621 100644
+--- a/tests/environment-d35.test.ts
++++ b/tests/environment-d35.test.ts
+@@ -83,3 +83,6 @@ it("D35 préserve les fichiers publics et sources validés protégés", () => {
+-          ? // Phase F.1 adds directional Debby idle while retaining legacy atlases.
+-            "ef433bad78689d5f7b983e84059f7138d6c2a6c8560e082181a033e8e010b059"
+-          : undefined) ??
++          ? // F.1 adds Debby's directional idle. G changes Loyal's cadence using his existing frames.
++            "4a7659b0eb518f4bad915606ca9dcf9235ae7466fd2564edf358fbda7e9ee717"
++          : f.path === "src/art/ambience.ts"
++            ? // G adds a small regional snow pool without replacing the village textures.
++              "1add4dfde4b8e07d791d9adc289058a1fce4472676a47b2faa50f403f0609060"
++            : undefined) ??
+diff --git a/tests/private-e2e/narrative.spec.ts b/tests/private-e2e/narrative.spec.ts
+index ee59cbf..8fcb143 100644
+--- a/tests/private-e2e/narrative.spec.ts
++++ b/tests/private-e2e/narrative.spec.ts
+@@ -6 +6 @@ import { installNarrativeFixture } from "./narrative-fixture";
+-test("narration du build privé : calendrier, choix et reprise", async ({
++test("narration du build privé : calendrier, quatre choix lisibles et reprise", async ({
+@@ -10,2 +10,14 @@ test("narration du build privé : calendrier, choix et reprise", async ({
+-  const content = technicalEpisode(),
+-    fixture = await installNarrativeFixture(page, content);
++  const content = technicalEpisode();
++  const welcome = content.scenes[0];
++  welcome.dialogues.welcome[0].text =
++    "Cette réplique de contrôle doit rester lisible et défiler au clavier. "
++      .repeat(24)
++      .trimEnd();
++  welcome.choices[0].options.push(
++    { id: "three", label: "Option technique C" },
++    {
++      id: "four",
++      label: "Une quatrième option pour exercer le retour à la ligne sur un petit écran",
++    },
++  );
++  const fixture = await installNarrativeFixture(page, content);
+@@ -41,2 +53,6 @@ test("narration du build privé : calendrier, choix et reprise", async ({
+-    await expect(page.locator(".dialogue-content p")).toHaveText(
+-      content.scenes[0].dialogues.welcome[0].text,
++    const text = page.locator(".dialogue-content p");
++    await expect(text).toHaveText(welcome.dialogues.welcome[0].text);
++    const choices = page.locator(".dialogue-choices");
++    await expect(choices.getByRole("button")).toHaveCount(4);
++    expect(await choices.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(
++      true,
+@@ -43,0 +60,6 @@ test("narration du build privé : calendrier, choix et reprise", async ({
++    await text.focus();
++    await expect(text).toBeFocused();
++    await page.keyboard.press("PageDown");
++    await expect
++      .poll(() => text.evaluate((el) => el.scrollTop))
++      .toBeGreaterThan(0);
+diff --git a/vite.config.ts b/vite.config.ts
+index 7330519..4a96253 100644
+--- a/vite.config.ts
++++ b/vite.config.ts
+@@ -4 +4 @@ import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+-import { dirname } from "node:path";
++import { dirname, join } from "node:path";
+@@ -47 +47,2 @@ export default defineConfig(({ command, mode }) => {
+-              closeBundle() {
++              writeBundle(options: OutputOptions) {
++                if (!options.dir) throw Error("Private build requires an output directory");
+@@ -61 +62 @@ export default defineConfig(({ command, mode }) => {
+-                  const dest = asset.replace(/^public\//, "dist/");
++                  const dest = join(options.dir, asset.slice("public/".length));
+@@ -65 +66 @@ export default defineConfig(({ command, mode }) => {
+-                writeFileSync("dist/build-info.json", JSON.stringify(info));
++                writeFileSync(join(options.dir, "build-info.json"), JSON.stringify(info));

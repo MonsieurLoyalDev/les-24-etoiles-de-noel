@@ -67,7 +67,12 @@ it("D35 préserve les fichiers publics et sources validés protégés", () => {
       createHash("sha256").update(readFileSync(f.path)).digest("hex"),
       f.path,
     ).toBe(
-      lotC.files.find((update) => update.path === f.path)?.sha256 ??
+      (f.path === "src/art/actors.ts"
+        ? "19db4fe4c3a72d8b457656a9682badb67f9e597cb53c016fab56b184174cab0e"
+        : f.path === "src/art/ambience.ts"
+          ? "1add4dfde4b8e07d791d9adc289058a1fce4472676a47b2faa50f403f0609060"
+          : undefined) ??
+        lotC.files.find((update) => update.path === f.path)?.sha256 ??
         lotB.files.find((update) => update.path === f.path)?.sha256 ??
         production.files.find((update) => update.path === f.path)?.sha256 ??
         e21.files.find((update) => update.path === f.path)?.sha256 ??

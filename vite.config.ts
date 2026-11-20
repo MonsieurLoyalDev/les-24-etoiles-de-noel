@@ -1,7 +1,7 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 import type { OutputOptions, OutputBundle } from "rollup";
 // @ts-expect-error Build-only JavaScript module, not part of the browser.
 import { publicConfig } from "./ops/lib/public-config.mjs";
@@ -44,7 +44,8 @@ export default defineConfig(({ command, mode }) => {
                         );
                     }
               },
-              closeBundle() {
+              writeBundle(options: OutputOptions) {
+                if (!options.dir) throw Error("Private build requires an output directory");
                 const assets = assertPublicAssets(
                   process.cwd(),
                   JSON.parse(readFileSync("ops/public-assets.json", "utf8")),
@@ -58,11 +59,11 @@ export default defineConfig(({ command, mode }) => {
                     asset.includes("..")
                   )
                     throw Error("Invalid public asset allowlist");
-                  const dest = asset.replace(/^public\//, "dist/");
+                  const dest = join(options.dir, asset.slice("public/".length));
                   mkdirSync(dirname(dest), { recursive: true });
                   copyFileSync(asset, dest);
                 }
-                writeFileSync("dist/build-info.json", JSON.stringify(info));
+                writeFileSync(join(options.dir, "build-info.json"), JSON.stringify(info));
               },
             },
           ]

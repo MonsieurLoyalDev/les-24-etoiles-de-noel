@@ -148,19 +148,6 @@ export function drawExtraRoom(scene: Phaser.Scene, room: ExtraRoom): Rect[] {
     image.setScale((55 + ((x + y) % 35)) / image.width);
     rects.push({ x: x - 9, y: y - 10, w: 18, h: 12 });
   }
-  for (const [x, y] of [
-    [512, 650],
-    [500, 570],
-    [560, 480],
-    [510, 410],
-    [560, 330],
-  ]) {
-    const patch = scene.add
-      .image(x, y, "ground-d3-packed-a")
-      .setOrigin(0.5)
-      .setDepth(-90);
-    patch.setScale(75 / patch.width).setAlpha(0.75);
-  }
   scene.add
     .image(220, 455, "d35-bench-garden")
     .setOrigin(0.5, 1)

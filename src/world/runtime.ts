@@ -35,7 +35,7 @@ export type LivingActor = {
     clip: string;
     age: number;
     duration: number;
-    other: string;
+    flip: boolean;
   } | null;
   reactionCooldown: number;
 };
@@ -194,6 +194,7 @@ export class LivingWorld {
       if (a.phase !== phase) this.choose(a, phase);
       const nav = this.environments.get(a.profile.room);
       if (!nav) continue;
+      const active = a.profile.room === room && visible(a.position);
       const close =
         a.profile.room === room &&
         dist(a.position, player) < (a.nearPlayer ? 52 : 43) &&
@@ -213,6 +214,7 @@ export class LivingWorld {
       }
       if (
         a.profile.greetingClip &&
+        active &&
         a.state === "WALKING" &&
         a.reactionCooldown === 0
       ) {
@@ -220,7 +222,10 @@ export class LivingWorld {
           (b) =>
             b.id !== a.id &&
             b.profile.room === a.profile.room &&
+            b.id !== talking &&
+            !reserved.has(b.id) &&
             b.state !== "TALKING_TO_PLAYER" &&
+            visible(b.position) &&
             dist(a.position, b.position) < 45 &&
             nav.clear(a.position, b.position),
         );
@@ -229,7 +234,7 @@ export class LivingWorld {
             clip: a.profile.greetingClip,
             age: 0,
             duration: 1300,
-            other: peer.id,
+            flip: peer.position.x < a.position.x,
           };
           a.reactionCooldown = 45000;
           a.accumulator = 0;
@@ -237,7 +242,6 @@ export class LivingWorld {
         }
       }
       a.retryIn = Math.max(0, a.retryIn - delta);
-      const active = a.profile.room === room && visible(a.position);
       a.accumulator += delta;
       if (a.state === "WALKING" && !active && a.accumulator < 250) continue;
       const elapsed = a.state === "WALKING" ? a.accumulator : delta;

@@ -56,7 +56,9 @@ export function Dialogue({
         )}
         <div className="dialogue-content">
           <strong className="speaker">{name}</strong>
-          <p>{text}</p>
+          <p key={line} tabIndex={0}>
+            {text}
+          </p>
           <div className="dialogue-choices">
             {choices.length ? (
               choices.slice(0, 4).map((choice, i) => (
